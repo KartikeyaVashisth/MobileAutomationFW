@@ -27,5 +27,28 @@ public class Verify {
 		}
 		
 	}
+	
+	public static boolean waitForObject (MobileElement me, Integer wttime) throws Exception{
+		
+		Integer iCount = 0;
+		
+		
+		while (iCount < wttime){
+			
+			if (! objExists(me))
+				Thread.sleep(10000);
+			else
+				return true;
+				
+			
+			iCount++;		
+			
+		}
+		
+		return false;
+		
+		
+		
+	}
 
 }

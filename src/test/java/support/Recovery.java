@@ -1,10 +1,13 @@
 package support;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.internal.Utils;
@@ -21,30 +24,42 @@ public class Recovery {
 	
 	
 	@BeforeSuite
-	public static void testPlanEnter(){
+	public static void testPlanEnter() throws Exception{
 		
 		System.out.println("....Initializing Reports....");
 		
 		ExtentManager em = new ExtentManager();
 		em.initializeRepObject();
 		
+		System.out.println("....Loading Properties....");
+		// Load properties
+		Helper h = new Helper();
+		h.loadProperties();
+		
+		System.out.println("....Setting up Mobile Engine....");
+		// test
+		Engine.setDriver();
+		System.out.println("Mobile Engine on...");
+		
 		
 	}
 	
 	@BeforeMethod
 	public static void testCaseEnter(Method method) throws Exception{
+		System.out.println("Before Method started...........");
+		
 		
 		// reset errors
 		ErrorUtil.resetTestErrors();
 		
 		// Load properties
-		Helper h = new Helper();
-		h.loadProperties();
+		/*Helper h = new Helper();
+		h.loadProperties();*/
 		
 		
 		// start test logs
-		System.out.println(method);
-		String methodName = method.toString().replace("public", "").replace("void","");
+		String methodName = method.toString();//.replace("public", "").replace("void","").trim();
+		methodName = methodName.replace("public", "").replace("void","").replace(" throws java.lang.Exception", "").trim();
 		methodName=methodName.substring(methodName.lastIndexOf(".") + 1).trim();
 		System.out.println(methodName);
 		
@@ -52,13 +67,27 @@ public class Recovery {
 		//em.quickenTest = em.initializeRepObject().startTest(methodName);
 		quickenTest = em.initializeRepObject().startTest(methodName);
 		
+		quickenTest.log(LogStatus.INFO,"StartTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		
 		// set driver
-		Engine.setDriver();
+		//Engine.setDriver();
+		if (Engine.ad != null)
+			Engine.ad.launchApp();
+		else
+			Engine.iosd.launchApp();
+		
+		
+		Thread.sleep(5000);
+		System.out.println("app launched.....");
+		System.out.println("Before Method end...........");
 			
 	}
 	
 	@AfterMethod
-	public static void testCaseExit(ITestResult result, Method method){
+	public static void testCaseExit(ITestResult result, Method method) throws InterruptedException{
+		
+		System.out.println("After Method started...........");
+		ExtentTest quickenTest = Recovery.quickenTest;
 		ExtentManager em = new ExtentManager();
 		
 		List<String> softFails = ErrorUtil.getTestErrors();
@@ -67,9 +96,15 @@ public class Recovery {
 		   } 
 		
 	
-		
+		System.out.println("softFails size...."+softFails.size());
+		System.out.println("softFails size...."+softFails.size());
+		if (softFails.size() != 0){
+			System.out.println("TRUEEEEEEEEEE");
+		}
+		System.out.println(softFails.size() != 0);
 		if (softFails.size() != 0){
 			result.setStatus(ITestResult.FAILURE);
+			System.out.println("set the status to failure......!");
 			
 			
 			int size = softFails.size();
@@ -78,6 +113,7 @@ public class Recovery {
 				
 				 quickenTest.log(LogStatus.FAIL, softFails.get(0));
 				 Throwable t = new Exception(softFails.get(0));
+				 System.out.println("Throwable is settt...........!"+softFails.get(0));
 				result.setThrowable(t);
 			} else {
 				//create a failure message with all failures and stack traces (except last failure)
@@ -113,10 +149,49 @@ public class Recovery {
 			
 		em.initializeRepObject().endTest(quickenTest);
 		em.initializeRepObject().flush();
+		Thread.sleep(3000);
+		
+		if (Engine.ad != null){
+			//Engine.ad.closeApp();
+			Engine.ad.resetApp();
+			Thread.sleep(2000);
+			System.out.println("reset done....");
+		}
+		else{
+			Engine.iosd.closeApp();
+			//Engine.iosd.resetApp();
+			Thread.sleep(2000);
+		}
+			
+		
+		
+		System.out.println("After Method end...........");
+		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		
+		
+		
+		
+		
+	}
+	
+	@AfterSuite
+	public void TestPlanExit(){
+		
+		System.out.println("aftersuitessssssss--------------");
 		
 		// close driver
-		if (Engine.mobilePlay != null)
-			Engine.mobilePlay.quit();
+		if (Engine.ad != null){
+			//Engine.ad.close();
+			Engine.ad.quit();
+			System.out.println("iffffffffffff");
+		}
+		else{
+			Engine.iosd.close();
+		}
+		
+		System.out.println("tttttttttttttttttttttt--------------");
+		
+		
 		
 	}
 	

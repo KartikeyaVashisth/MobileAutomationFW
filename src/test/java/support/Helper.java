@@ -39,9 +39,7 @@ public class Helper {
 			String key = (String) readProps.nextElement();
 			String value = properties.getProperty(key);
 			globals.testProperty.put(key, value);
-			System.out.println("************");
-			System.out.println(key +"   :  "+globals.testProperty.get(key));
-			System.out.println("************");
+			
 			
 		}
 	} catch (FileNotFoundException e) {
@@ -51,9 +49,7 @@ public class Helper {
 	
 	}
 		catch(Exception e){
-			System.out.println("FAIL************");
-			System.out.println(e.getMessage());
-			System.out.println("FAIL************");
+			System.out.println(e.getMessage());	
 		}
 		
 		
@@ -80,6 +76,14 @@ public class Helper {
 		
 		Globals globals = new Globals();
 		return globals.testProperty.get("password");
+		
+	}
+	
+	public String getDatasetName(){
+		
+		Globals globals = new Globals();
+		
+		return globals.testProperty.get("dataset");
 		
 	}
 	public String getEngine(){
@@ -119,8 +123,8 @@ public class Helper {
 				capabilities.setCapability("autoWebView", "true");
 				capabilities.setCapability("newCommandTimeout", 1120);
 				capabilities.setCapability("app", "sauce-storage:Quicken.apk");
-				capabilities.setCapability("appPackage","com.quicken.qm2014");
-				capabilities.setCapability("appActivity","com.mint.core.overview.RouterActivity");
+				capabilities.setCapability("appPackage","com.quicken.qm2014_1");
+				capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
 				String USERNAME = "kalyan_grandhi";
 				String ACCESS_KEY = "10fde941-0bec-4273-bca6-c7c827f36234";
 				url = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
@@ -129,6 +133,7 @@ public class Helper {
 			
 			// local
 			else{
+				System.out.println("hhhhhhhheiii");
 				capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 				capabilities.setCapability("deviceName","emulator-5554");
 				capabilities.setCapability("platformVersion","6.0");
@@ -136,7 +141,7 @@ public class Helper {
 				capabilities.setCapability("platformName","Android");
 				capabilities.setCapability("newCommandTimeout", 1120);
 				capabilities.setCapability("appPackage","com.quicken.qm2014");
-				capabilities.setCapability("appActivity","com.mint.core.overview.RouterActivity");
+				capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
 				capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 				url = "http://127.0.0.1:4723/wd/hub";
 			}
@@ -174,9 +179,10 @@ public class Helper {
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
-			capabilities.setCapability("appActivity","com.mint.core.overview.RouterActivity");
+			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
 		}
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
@@ -187,6 +193,7 @@ public class Helper {
 		    capabilities.setCapability("appiumVersion", "1.5.3");
 		    capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("app", "sauce-storage:Quicken.zip");
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","appium");
@@ -203,8 +210,11 @@ public class Helper {
 		if (getEngine().equals("android")){
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
+			//capabilities.setCapability("deviceName","emulator-5556");
 			capabilities.setCapability("deviceName","emulator-5554");
 			capabilities.setCapability("platformVersion","6.0");
+			//capabilities.setCapability("platformVersion","7.0");
+			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("newCommandTimeout", 1120);
@@ -216,21 +226,33 @@ public class Helper {
 		else if(getEngine().equals("ios")){
 			
 			// ios local capabilities needs to be updated
-			System.out.println("*****Local Capabilities for IOS are inCorrect********");
-			if (true)
-				throw new Exception("*****Local Capabilities for IOS are inCorrect********");
+			//System.out.println("*****Local Capabilities for IOS are inCorrect********");
+			/*if (true)
+				throw new Exception("*****Local Capabilities for IOS are inCorrect********");*/
 			
 			capabilities.setCapability("platformName", "iOS");
-		    capabilities.setCapability("deviceName", "iPhone 6 Simulator");
+		    //capabilities.setCapability("deviceName", "iPhone6s_9.3");
+			capabilities.setCapability("deviceName", "iPhone 6");
 		    capabilities.setCapability("platformVersion", "9.3");
+		    capabilities.setCapability("noResetValue", true);
+		    capabilities.setCapability("fullReset", false);
+		    //
 		    capabilities.setCapability("browserName", "");
+		    //capabilities.setCapability("udid", "09252A1B-BEA7-4090-8B9E-8D0AB08E739D");
+		    capabilities.setCapability("udid", "9A809FC5-BCEF-40A5-BE56-7369513227C8");
+		    
+		    //09252A1B-BEA7-4090-8B9E-8D0AB08E739D
 		    capabilities.setCapability("deviceOrientation", "portrait");
-		    capabilities.setCapability("appiumVersion", "1.5.3");
+		    capabilities.setCapability("appiumVersion", "1.6.4");
 		    capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("app", "sauce-storage:Quicken.zip"); 
-			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
-			capabilities.setCapability("automationName","appium");
+			// capabilities.setCapability("app", "sauce-storage:Quicken.zip"); 
+			// native app com.intuit.quickencompanion.ios
+			//capabilities.setCapability("bundleId","com.intuit.quicken.ios");
+			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
+			capabilities.setCapability("automationName","XCUITest");
+			//capabilities.setCapability("automationName","appium");
+			capabilities.setCapability("app", "/Users/kgrandhi/Documents/Quicken_apk/QuickenRN_IOS.zip"); 
 			
 		}
 		
@@ -255,6 +277,11 @@ public class Helper {
 			return getCloudCapabilities();
 		else
 			return getLocalCapabilities();	
+		
+	}
+	
+	public void waitForRefresh (int millisec) throws InterruptedException{
+		Thread.sleep(millisec);
 		
 	}
 		

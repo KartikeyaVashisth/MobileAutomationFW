@@ -10,11 +10,15 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.ios.IOSDriver;
+import warroom.kEngine;
 
 public class Engine {
 	
-	public static MobileDriver<MobileElement> mobilePlay;
+	//public static MobileDriver<MobileElement> mobilePlay;
 	public static URL serverURL;
+	public static AndroidDriver ad;
+	public static MobileDriver me;
+	public static IOSDriver iosd;
 	
 	public static void setDriver() throws Exception{
 		
@@ -22,21 +26,30 @@ public class Engine {
 		
 		serverURL = new URL(h.getAppiumURL());
 		if (h.getEngine().equals("android"))
-			mobilePlay = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
+			//mobilePlay = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
+			ad = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
 		else
-			mobilePlay = new IOSDriver<MobileElement>(serverURL, h.getCapabilities());
+			iosd = new IOSDriver<MobileElement>(serverURL, h.getCapabilities());
 				
-		mobilePlay.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		//mobilePlay.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		
 			
 	}
 	
-	public static MobileDriver<MobileElement> getDriver() throws Exception{
+	public static MobileDriver getDriver() throws Exception{
 		
-		if (mobilePlay==null)
+		if (kEngine.ad==null && kEngine.id==null)
 			setDriver();
 		
-		return mobilePlay;
+		if (kEngine.ad != null)
+			return kEngine.ad;
+		else
+			return kEngine.id;
+		
+		
+		
+		
 		
 	}
 

@@ -3,14 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="tournament.pract_1">
+      <class name="tournament.pract2_Test">
         <methods>
           <include name="testPlanEnter"/>
-          <include name="testCaseExit"/>
-          <include name="testCaseEnter"/>
-          <include name="tt3"/>
+          <include name="verifyAccountTest1"/>
         </methods>
-      </class> <!-- tournament.pract_1 -->
+      </class> <!-- tournament.pract2_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

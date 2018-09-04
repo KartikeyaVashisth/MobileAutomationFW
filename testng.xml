@@ -6,7 +6,7 @@
 	</listeners>
   <test name="Test">
     <classes>
-      <class name="tournament.Stadium"/>
+      <class name="tournament.pract2_Test"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
