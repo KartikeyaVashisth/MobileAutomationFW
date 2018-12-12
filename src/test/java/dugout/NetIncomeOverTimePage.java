@@ -9,9 +9,9 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 import support.Engine;
 import support.Helper;
 
-public class AllAccountsPage {
+public class NetIncomeOverTimePage {
 	
-	public AllAccountsPage () {
+	public NetIncomeOverTimePage () {
 		try {
 			Helper h = new Helper();
 			if (h.getEngine().equals("android"))
@@ -24,18 +24,29 @@ public class AllAccountsPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//*[contains(@name,'All Transactions')]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='All Transactions']")
-	public MobileElement textAllTransactions;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back']")
+	
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
+	public MobileElement netIncomeOverTimeHeader;
+	
+	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
-	public MobileElement backButton;
+	public MobileElement backButtonOnHeader;
 	
-	public void navigateBackToDashboard() throws Exception {
+	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@AndroidFindBy(xpath="//*[@resource-id='com.quicken.qm2014:id/listView']")
+	public MobileElement transactionList;
+	
+	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Net Income: ')]")
+	public MobileElement netIncomeCurrentMonth;
+	
+	public void navigateBackToDashboard() throws Exception{
 		
-		backButton.click();
+		backButtonOnHeader.click();
 		Thread.sleep(10000);
+		
+		
 	}
 
 }

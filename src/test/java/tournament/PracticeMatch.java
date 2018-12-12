@@ -3,10 +3,16 @@ package tournament;
 import java.io.IOException;
 import support.Recovery;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.Assert;
 import org.testng.IInvokedMethod;
 import org.testng.ITestResult;
@@ -32,6 +38,16 @@ public class PracticeMatch extends Recovery  {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		/*DateFormat date =  new SimpleDateFormat("MMM");
+		Date date1 = new Date();
+		System.out.println(date.format(date1).toString());*/
+		
+		/*JavascriptExecutor js = (JavascriptExecutor) driver;
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("direction", "down");
+		scrollObject.put("element", ((RemoteWebElement) element).getId());
+		js.executeScript("mobile: scroll", scrollObject);*/
 		
 		
 		

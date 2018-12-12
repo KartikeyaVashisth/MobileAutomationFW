@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -15,8 +16,10 @@ import org.testng.internal.Utils;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileElement;
 import referee.ErrorUtil;
 import referee.ExtentManager;
+import referee.Verify;
 
 public class Recovery {
 	
@@ -40,6 +43,11 @@ public class Recovery {
 		// test
 		Engine.setDriver();
 		System.out.println("Mobile Engine on...");
+		
+		if (h.getEngine().equals("android"))
+			Engine.ad.launchApp();
+		else
+			Engine.iosd.launchApp();
 		
 		
 	}
@@ -71,15 +79,20 @@ public class Recovery {
 		
 		// set driver
 		//Engine.setDriver();
-		if (Engine.ad != null)
-			Engine.ad.launchApp();
+		if (Engine.ad != null) {
+			//Engine.ad.launchApp();
+			Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+			//System.out.println(".....waiting for spinner icon to disappear.....");
+			//Verify.waitForObjectToDisappear((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.ProgressBar")), 30)	;
+			Thread.sleep(12000);
+		}
 		else
 			Engine.iosd.launchApp();
 		
 		
 		Thread.sleep(5000);
-		System.out.println("app launched.....");
-		System.out.println("Before Method end...........");
+		//System.out.println("app launched.....");
+		//System.out.println("Before Method end...........");
 			
 	}
 	
@@ -152,8 +165,10 @@ public class Recovery {
 		Thread.sleep(3000);
 		
 		if (Engine.ad != null){
-			//Engine.ad.closeApp();
-			Engine.ad.resetApp();
+			Engine.ad.closeApp();
+			//Engine.ad.resetApp();
+			Thread.sleep(2000);
+			//Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
 			Thread.sleep(2000);
 			System.out.println("reset done....");
 		}

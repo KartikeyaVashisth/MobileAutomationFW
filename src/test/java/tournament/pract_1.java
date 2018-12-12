@@ -1,10 +1,13 @@
 package tournament;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
@@ -29,6 +32,7 @@ import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import referee.ErrorUtil;
@@ -74,22 +78,17 @@ public class pract_1 extends Recovery {
 	public void verifyAccount() throws Exception {
 		
 		//ExtentTest quickenTest = Recovery.quickenTest;
-		String acctToVerify = "Checking";
+		String acctToVerify = "AllReconciledTransactions";
 		Helper helper = new Helper();
 		
 		WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
 		
 		SignInPage signIn = new SignInPage();
 		signIn.signIn();
-		/*quickenTest.log(LogStatus.INFO,"SignIn Successful");
-		quickenTest.log(LogStatus.INFO,"MFA - Enter manually, UAA wrapper not deployed :-(");
-		System.out.println("get MFA...");
-		helper.waitForRefresh(5000);*/
 	    
 	    OverviewPage op = new OverviewPage();
 	    op.accountsCard.click();
-	    helper.waitForRefresh(2000);
+	    helper.waitForRefresh(3000);
 	    
 	   
 	    
@@ -102,7 +101,8 @@ public class pract_1 extends Recovery {
 			quickenTest.log(LogStatus.FAIL,"Checking account verification failed");
 		
 		// tap on the account
-	   	acctListPage.getAccount("Checking").click();
+	   	acctListPage.getAccount(acctToVerify).click();
+	   	Thread.sleep(2000);
 	   	
 	   	// verify account name on the transactionsPage
 	   	TransactionsPage txnPage = new TransactionsPage();
@@ -123,9 +123,14 @@ public class pract_1 extends Recovery {
 	public void settingsPage() throws Exception{
 		
 		//ExtentTest quickenTest = Recovery.quickenTest;
-		String userID = "stage++test@qa.com";
-		String cloudName="KF83";
+		String userID = "kalyan.grandhi@quicken.com";
+		String cloudName="Transaction_Status";
 		Helper helper = new Helper();
+		
+		WelcomePage w = new WelcomePage();
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
 		
 		
 		OverviewPage op = new OverviewPage();
@@ -165,6 +170,38 @@ public class pract_1 extends Recovery {
 		else
 			quickenTest.log(LogStatus.FAIL,"logout verification Failed.");
 		
+	}
+	
+	@Test
+	public void RecentTransactions() throws Exception{
+		
+		/*WelcomePage w = new WelcomePage();
+		w.setEnvironment("stage");*/
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
+		
+		
+		// overview screen
+		OverviewPage o = new OverviewPage();
+		//Thread.sleep(12000);
+		
+		o.tapOnRecentTransactionsCard();
+		//o.recentTransactionsCard.click();
+		//Thread.sleep(5000);
+		
+		AllAccountsPage aap = new AllAccountsPage();
+		if (Verify.objExists(aap.textAllTransactions))
+			quickenTest.log(LogStatus.INFO,"RecentTransactions card tap > All transactions screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"RecentTransactions card tap > All transactions screen did not appear.");
+		
+		aap.navigateBackToDashboard();
+		
+		if (Verify.objExists(o.hambergerIcon))
+			quickenTest.log(LogStatus.INFO,"RecentTransactions card, back button tap > Overview screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"RecentTransactions card, back button tap > Overview screen did not appear.");	
 	}
 	
 	/*@Test
@@ -260,6 +297,77 @@ public class pract_1 extends Recovery {
 	}*/
 	
 	@Test
+	public void TrendingCategories() throws Exception{
+		
+		/*WelcomePage w = new WelcomePage();
+		w.setEnvironment("stage");*/
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
+		
+		
+		// overview screen
+		OverviewPage o = new OverviewPage();
+		o.tapOnTrendingCard();
+		/*Dimension size = Engine.ad.manage().window().getSize();
+		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Thread.sleep(3000);
+		
+		o.topTrendingCard.click();
+		Thread.sleep(5000);*/
+		
+		SpendingTrendPage st = new SpendingTrendPage();
+		if (Verify.objExists(st.spendingTrendHeader))
+			quickenTest.log(LogStatus.INFO,"SpendingTrend card tap >SpendingTrend screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"SpendingTrend card tap > SpendingTrend screen did not appear.");
+		
+		st.navigateBackToDashboard();
+		
+		if (Verify.objExists(o.hambergerIcon))
+			quickenTest.log(LogStatus.INFO,"SpendingTrend card, back button tap > Overview screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"SpendingTrend card, back button tap > Overview screen did not appear.");	
+	}
+	
+	@Test
+	public void TransactionwSummary() throws Exception{
+		
+		/*WelcomePage w = new WelcomePage();
+		w.setEnvironment("stage");*/
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
+		
+		
+		// overview screen
+		OverviewPage o = new OverviewPage();
+		o.tapOnTransactionSummaryCard();
+		/*Thread.sleep(12000);
+		Dimension size = Engine.ad.manage().window().getSize();
+		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Thread.sleep(3000);
+		
+		o.transactionSummaryCard.click();
+		Thread.sleep(5000);*/
+		
+		TransactionSummaryPage cashflow = new TransactionSummaryPage();
+		
+		if (Verify.objExists(cashflow.transactionSummaryHeader))
+			quickenTest.log(LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
+		
+		cashflow.navigateBackToDashboard();
+		
+		if (Verify.objExists(o.hambergerIcon))
+			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+		else
+			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+			
+	}
+	
+	@Test
 	public void verifyOverviewScreen() throws Exception{
 		
 		SignInPage signIn = new SignInPage();
@@ -284,117 +392,65 @@ public class pract_1 extends Recovery {
 		
 	}
 	
-	@Test
-	public void RecentTransactions() throws Exception{
-		
-		WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
-		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
-		
-		
-		// overview screen
-		OverviewPage o = new OverviewPage();
-		Thread.sleep(12000);
-		
-		o.recentTransactionsCard.click();
-		Thread.sleep(5000);
-		
-		AllAccountsPage aap = new AllAccountsPage();
-		if (Verify.objExists(aap.textAllAccounts))
-			quickenTest.log(LogStatus.INFO,"RecentTransactions card tap > All accounts screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"RecentTransactions card tap > All accounts screen did not appear.");
-		
-		aap.backButton.click();
-		Thread.sleep(8000);
-		
-		if (Verify.objExists(o.recentTransactionsCard))
-			quickenTest.log(LogStatus.INFO,"RecentTransactions card, back button tap > Overview screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"RecentTransactions card, back button tap > Overview screen did not appear.");	
-	}
-	
 	
 	@Test
-	public void TrendingCategories() throws Exception{
+	public void tt() throws Exception{
 		
-		WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
+		System.out.println("ssssss");
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
-		
-		
-		// overview screen
-		OverviewPage o = new OverviewPage();
-		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Thread.sleep(3000);
-		
-		o.topTrendingCard.click();
-		Thread.sleep(5000);
-		
-		SpendingTrendPage st = new SpendingTrendPage();
-		if (Verify.objExists(st.spendingTrendHeader))
-			quickenTest.log(LogStatus.INFO,"SpendingTrend card tap >SpendingTrend screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"SpendingTrend card tap > SpendingTrend screen did not appear.");
-		
-		st.backButtonOnHeader.click();
-		Thread.sleep(8000);
-		
-		if (Verify.objExists(o.accountsCard))
-			quickenTest.log(LogStatus.INFO,"SpendingTrend card, back button tap > Overview screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"SpendingTrend card, back button tap > Overview screen did not appear.");	
-	}
-	
-	
-	@Test
-	public void cashflow() throws Exception{
-		
-		WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
-		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
-		
-		
-		// overview screen
-		OverviewPage o = new OverviewPage();
-		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Thread.sleep(3000);
-		
-		o.transactionSummaryCard.click();
-		Thread.sleep(5000);
-		
-		TransactionSummaryPage cashflow = new TransactionSummaryPage();
-		
-		if (Verify.objExists(cashflow.transactionSummaryHeader))
-			quickenTest.log(LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
-		
-		cashflow.backButtonOnHeader.click();
-		Thread.sleep(5000);
-		
-		if (Verify.objExists(o.accountsCard))
-			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
-		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		try {
 			
+			Engine.ad.close();
+			
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		Thread.sleep(8000);
+		
+		
+		/*Engine.ad.pressKeyCode(187);
+		Thread.sleep(8000);*/
+		
+		/*SignInPage signIn = new SignInPage();
+		signIn.signIn();*/
+		
+		/*JavascriptExecutor js = (JavascriptExecutor) Engine.ad;
+		
+		Map<String, Object> params = new HashMap();
+		params.put("bundleId", "com.quicken.qm2014");
+		try {
+			final boolean wasRunningBefore = (Boolean)js.executeScript("mobile: TERMINATE_APP", params);
+			//teerminateApp
+		}
+		catch (Exception e) {
+			
+			System.out.println("^^^^^^^^^^^^^^^");
+			System.out.println(e.getMessage().toString());
+			System.out.println("^^^^^^^^^^^^^^^");
+			
+		}*/
+		
+		
+		System.out.println("tttttttt");
+
+		
+		
+		
 	}
+	
+	
+	
+	
+	
+	
 	
 	@Test
 	public void Investing() throws Exception{
 		
-		WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
+		/*WelcomePage w = new WelcomePage();
+		w.setEnvironment("stage");*/
 		
 		SignInPage signIn = new SignInPage();
 		signIn.signIn();
@@ -410,6 +466,7 @@ public class pract_1 extends Recovery {
 		
 		o.investingCard.click();
 		Thread.sleep(5000);
+		
 		
 		InvestingPage inv = new InvestingPage();
 		

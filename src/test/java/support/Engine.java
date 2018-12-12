@@ -25,9 +25,16 @@ public class Engine {
 		Helper h = new Helper();
 		
 		serverURL = new URL(h.getAppiumURL());
-		if (h.getEngine().equals("android"))
+		
+		System.out.println(h.getEngine());
+		
+		
+		if (h.getEngine().equals("android")) {
+			
 			//mobilePlay = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
 			ad = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
+			
+		}
 		else
 			iosd = new IOSDriver<MobileElement>(serverURL, h.getCapabilities());
 				

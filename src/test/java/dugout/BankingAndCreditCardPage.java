@@ -35,14 +35,32 @@ public class BankingAndCreditCardPage {
 	// coded for android. IOS behavior not clearly known
 	public MobileElement getAccount(String acctName) throws Exception{
 		
-		String xPathForAcct = "//android.widget.ScrollView//android.view.ViewGroup//android.widget.TextView[normalize-space(@text)='"+acctName+"']";
+		String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
+		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='"+acctName+"']";
+		//"//android.widget.ScrollView//android.view.ViewGroup//android.widget.TextView[normalize-space(@text)='"+acctName+"']";
 		
-		try{
-			return (MobileElement) Engine.ad.findElementByXPath(xPathForAcct);
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android")){
+			try{
+				return (MobileElement) Engine.ad.findElementByXPath(xPathForAcct);
+			}
+			catch(Exception E){
+				return null;
+			}
+			
 		}
-		catch(Exception E){
-			return null;
+		else {
+			try{
+				return (MobileElement) Engine.iosd.findElementByXPath(xPathForAcct_IOS);
+			}
+			catch(Exception E){
+				return null;
+			}
+			
+			
 		}
+		
 		
 	}
 	

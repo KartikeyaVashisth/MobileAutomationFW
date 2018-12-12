@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 public class Helper {
 	
@@ -60,7 +61,10 @@ public class Helper {
 		
 		Globals globals = new Globals();
 		
-		return globals.testProperty.get("host");
+		if (System.getProperty("host") == null)
+			return globals.testProperty.get("host");
+		
+		return System.getProperty("host");
 		
 	}
 	
@@ -90,7 +94,13 @@ public class Helper {
 		
 		Globals globals = new Globals();
 		
-		return globals.testProperty.get("engine");
+		
+		
+		if (System.getProperty("engine") == null) 
+			return globals.testProperty.get("engine");
+		
+		
+		return System.getProperty("engine");
 		
 	}
 	
@@ -172,14 +182,18 @@ public class Helper {
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
 			capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("deviceName","Android Emulator");
+			//capabilities.setCapability("deviceName","Android Emulator");
+			capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
+			
 			capabilities.setCapability("deviceOrientation", "portrait");
 			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("platformVersion","6.0");//5.1
+			//capabilities.setCapability("platformVersion","6.0");//5.1
+			capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
+			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
@@ -209,10 +223,10 @@ public class Helper {
 		
 		if (getEngine().equals("android")){
 			
-			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
+			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
 			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","6.0");
+			capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("autoWebView", "true");
@@ -230,7 +244,7 @@ public class Helper {
 			/*if (true)
 				throw new Exception("*****Local Capabilities for IOS are inCorrect********");*/
 			
-			capabilities.setCapability("platformName", "iOS");
+			/*capabilities.setCapability("platformName", "iOS");
 		    //capabilities.setCapability("deviceName", "iPhone6s_9.3");
 			capabilities.setCapability("deviceName", "iPhone 6");
 		    capabilities.setCapability("platformVersion", "9.3");
@@ -252,7 +266,22 @@ public class Helper {
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","XCUITest");
 			//capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("app", "/Users/kgrandhi/Documents/Quicken_apk/QuickenRN_IOS.zip"); 
+			capabilities.setCapability("app", "/Users/kgrandhi/Documents/Quicken_apk/QuickenRN_IOS.zip"); */
+			
+			System.out.println("IOS Capppppppppppppppppppppppppp");
+			
+			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+			capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
+			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
+	        capabilities.setCapability("automationName","XCUITest");
+	        capabilities.setCapability("noReset", true);
+	        capabilities.setCapability("autoWebView", "true");
+	        capabilities.setCapability("autoAcceptAlerts", true);
+	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
+	        capabilities.setCapability("browserName", "");
+	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
+	        
 			
 		}
 		

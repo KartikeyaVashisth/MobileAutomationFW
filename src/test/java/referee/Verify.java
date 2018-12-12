@@ -10,12 +10,32 @@ import support.Recovery;
 
 public class Verify {
 	
-	public static boolean objExists (MobileElement me){
+	/*public static boolean objExists (MobileElement me){
 		ExtentTest quickenTest = Recovery.quickenTest;
 		
 		try{	
 			me.isDisplayed();
+			System.out.println(me.isDisplayed());
 			return true;	
+		}
+		catch (NoSuchElementException n){
+			return false;	
+		}
+		catch (Throwable e){
+			System.out.println("****Error Occured****: Method->objExists");
+			quickenTest.log(LogStatus.ERROR,e.getMessage());
+			return false;	
+		}
+		
+	}*/
+	
+	public static boolean objExists (MobileElement me){
+		ExtentTest quickenTest = Recovery.quickenTest;
+		
+		try{
+			boolean b = me.isDisplayed();
+			
+			return b;	
 		}
 		catch (NoSuchElementException n){
 			return false;	
@@ -28,6 +48,23 @@ public class Verify {
 		
 	}
 	
+	public static boolean objExists_check (MobileElement me){
+		ExtentTest quickenTest = Recovery.quickenTest;
+		
+		try{	
+			me.isDisplayed();
+			return true;	
+		}
+		catch (NoSuchElementException n){
+			return false;	
+		}
+		catch (Throwable e){
+			
+			return false;	
+		}
+		
+	}
+	
 	public static boolean waitForObject (MobileElement me, Integer wttime) throws Exception{
 		
 		Integer iCount = 0;
@@ -35,7 +72,29 @@ public class Verify {
 		
 		while (iCount < wttime){
 			
-			if (! objExists(me))
+			if (! objExists_check(me))
+				Thread.sleep(12000);
+			else
+				return true;
+				
+			
+			System.out.println("12secs * "+iCount);
+			iCount++;
+			
+			
+		}
+		
+		return false;	
+		
+	}
+	
+	public static boolean waitForObjectToDisappear (MobileElement me, Integer wttime) throws Exception{
+		
+		Integer iCount = 0;
+		
+		while (iCount < wttime){
+			
+			if (objExists_check(me))
 				Thread.sleep(10000);
 			else
 				return true;
@@ -45,9 +104,7 @@ public class Verify {
 			
 		}
 		
-		return false;
-		
-		
+		return false;	
 		
 	}
 

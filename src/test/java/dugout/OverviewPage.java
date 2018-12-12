@@ -1,13 +1,19 @@
 package dugout;
 
 
+import org.apache.bcel.verifier.VerifierFactoryObserver;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
+
+import com.relevantcodes.extentreports.LogStatus;
+
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Verify;
 import support.Engine;
 import support.Helper;
 import warroom.kEngine;
@@ -41,11 +47,11 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@content-desc='More options']")
 	MobileElement SettingsOrMoreOptions;*/
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Banking and Credit Account') and not(contains(@name, 'Recent Transactions'))]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking and Credit Account\"]")
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']")
 	public MobileElement accountsCard;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Recent Transactions')]/XCUIElementTypeOther[starts-with(@name, 'Recent Transactions')]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']")
 	public MobileElement recentTransactionsCard;
 	
@@ -58,12 +64,12 @@ public class OverviewPage {
 	public MobileElement hambergerIcon;*/
 	
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Top Trending Categories Last 30 days')]/XCUIElementTypeOther[starts-with(@name, 'Top Trending Categories Last 30 days')]")
-	@AndroidFindBy(xpath="//*[@text='Top Trending Categories']/..")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Top Trending Categories\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Top Trending Categories']/..")
 	public MobileElement topTrendingCard;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Transaction Summary')]/XCUIElementTypeOther[starts-with(@name, 'Transaction Summary')]")
-	@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../../*[@class='android.view.ViewGroup']")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,'Summary')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]")
 	public MobileElement transactionSummaryCard;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Investing Securities & Cash')]/XCUIElementTypeOther[starts-with(@name, 'Investing Securities & Cash')]")
@@ -141,12 +147,29 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@text='Track your investing accounts and holdings on your phone.']")
 	public MobileElement invCard_zeroDataState;
 	
-	@iOSFindBy(xpath="//*[@name='navigationMenu']")
+	//(//XCUIElementTypeOther[@name="navigationMenu"])[3]
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
 	@AndroidFindBy(xpath="//*[@content-desc='navigationMenu']//*[@class='android.widget.ImageView']")
 	public MobileElement hambergerIcon;
 	
+	
+	@iOSFindBy(xpath="//XCUIElementTypeOther[starts-with(@name,'Progress halted Banking')]/XCUIElementTypeScrollView")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ScrollView']")
 	public MobileElement scrollView;
+	
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Spending Over Time\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
+	public MobileElement spendingOverTimeCard;
+	
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Net Income Over Time\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
+	public MobileElement netIncomeOverTimeCard;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
+	@AndroidFindBy(xpath="//android.widget.ProgressBar")
+	public MobileElement refreshSpinnerIcon;
 	
 	public void scrollUptoAccountsCard() throws Exception {
 		
@@ -157,6 +180,195 @@ public class OverviewPage {
 		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
 		Thread.sleep(7000);
 		
+	}
+	
+	public void tapOnRecentTransactionsCard() throws Exception {
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		if (!Verify.objExists(recentTransactionsCard)) {
+			scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
+			Thread.sleep(1000);	
+		}
+		
+		//scrollView.swipe(SwipeElementDirection.UP, 10, 10, 1000);
+		//Thread.sleep(1000);
+		
+		recentTransactionsCard.click();
+		Thread.sleep(3000);
+		
+	}
+	
+	public void tapOnTrendingCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("ios")){
+			if (topTrendingCard.getAttribute("visible").equals("false")) {
+				
+				Dimension size = Engine.iosd.manage().window().getSize();
+				Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+				Thread.sleep(3000);
+				
+			}
+				
+			
+		}
+		else {
+		if (!Verify.objExists(topTrendingCard)) {
+			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+			Thread.sleep(1000);	
+		}
+		}
+		
+		topTrendingCard.click();
+		Thread.sleep(3000);
+	}
+	
+	public void quicken_scroll() throws InterruptedException {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android")) {
+			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+			Thread.sleep(2000);		
+		}
+		else {
+			
+			Dimension size = Engine.iosd.manage().window().getSize();
+			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+			Thread.sleep(3000);
+			
+			
+		}
+	}
+	
+	public void tapOnTransactionSummaryCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Integer iCount = 0;
+		
+		while (iCount < 4) {
+			
+			quicken_scroll();
+			
+			iCount++;	
+			
+			if (Verify.objExists(transactionSummaryCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(transactionSummaryCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [transactionSummaryCard] did not appear");
+		}
+		transactionSummaryCard.click();
+		Thread.sleep(3000);
+	}
+	
+	/*public void tapOnTransactionSummaryCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Integer iCount = 0;
+		
+		while (iCount < 3) {
+			
+			if (!Verify.objExists(transactionSummaryCard)) {
+				scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+				Thread.sleep(2000);	
+			}
+			
+			iCount++;	
+			
+			if (Verify.objExists(transactionSummaryCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(transactionSummaryCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [transactionSummaryCard] did not appear");
+		}
+		transactionSummaryCard.click();
+		Thread.sleep(3000);
+	}*/
+	
+	public void navigateToAcctList() throws Exception{
+		
+		accountsCard.click();
+	   Thread.sleep(3000);
+	}
+	
+	public void tapOnSpendingOverTimeCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		
+		Integer iCount = 0;
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		while (iCount < 3) {
+			
+			if (!Verify.objExists(spendingOverTimeCard)) {
+				scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+				Thread.sleep(4000);	
+			}
+			
+			iCount++;	
+			
+			if (Verify.objExists(spendingOverTimeCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(spendingOverTimeCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [spendingOverTimeCard] did not appear");
+		}
+		spendingOverTimeCard.click();
+		Thread.sleep(10000);
+	}
+	
+	public void tapOnNetIncomeOverTimeCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		
+		Integer iCount = 0;
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		while (iCount < 3) {
+			
+			System.out.println(Verify.objExists(netIncomeOverTimeCard));
+			
+			if (!Verify.objExists(netIncomeOverTimeCard)) {
+				/*scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
+				Thread.sleep(2000);	*/
+				
+				Dimension size = Engine.ad.manage().window().getSize();
+				Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+				Thread.sleep(3000);
+			}
+			
+			iCount++;	
+			
+			if (Verify.objExists(netIncomeOverTimeCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(netIncomeOverTimeCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [netIncomeOverTimeCard] did not appear");
+		}
+		netIncomeOverTimeCard.click();
+		Thread.sleep(5000);
 	}
 	
 	

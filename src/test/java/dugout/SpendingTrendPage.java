@@ -7,6 +7,7 @@ import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Verify;
 import support.Engine;
 import support.Helper;
 
@@ -26,25 +27,29 @@ public class SpendingTrendPage {
 	}
 	
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Recent Transactions')]")
-	@AndroidFindBy(xpath="//*[@text='Spending Trend']")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending Trend\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Trend']")
 	public MobileElement spendingTrendHeader;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Recent Transactions')]")
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
 	@AndroidFindBy(xpath="//*[@text='Spending Trend']/../*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
 	public void navigateBackToDashboard() throws Exception {
 		
-		backButtonOnHeader.click();
-		Thread.sleep(5000);
 		
-		OverviewPage op = new OverviewPage();
+		System.out.println(Verify.objExists(backButtonOnHeader)+" eeeeeeeeeee");
+		this.backButtonOnHeader.click();
+		Thread.sleep(10000);
+		
+		/*OverviewPage op = new OverviewPage();
 		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
 		Thread.sleep(3000);
 		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(7000);
+		Thread.sleep(7000);*/
 		
 	}
+	
+	
 
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
+<suite name="BAT tests">
     <listeners>
 		<listener class-name="referee.CustomListener"/>
 	</listeners>
-  <test name="Test">
+  <test name="Only_Smoke_Test">
     <classes>
-      <class name="tournament.pract2_Test"/>
+      <class name="tournament.Smoke_test"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

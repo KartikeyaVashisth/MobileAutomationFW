@@ -39,7 +39,7 @@ public class SettingsPage {
 	public MobileElement accounts;
 	
 	@iOSFindBy(xpath="//*[@name='SIGN IN']")
-	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Log Out']")
+	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Logout']")
 	public MobileElement logout;
 	
 	@iOSFindBy(xpath="//*[@name='SIGN IN']")
@@ -61,7 +61,7 @@ public class SettingsPage {
 	public boolean verifyCloudAccountName(String cloudName){
 		 
 		
-		String xPathForControl = "//android.widget.TextView[@text='Cloud Account Name: "+cloudName+"']";
+		String xPathForControl = "//android.widget.TextView[@text='"+cloudName+"']";
 		
 		//String xPathForControl = "//android.widget.TextView[starts-with(@text,'Cloud Account Name:')]";
 		

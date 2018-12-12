@@ -33,28 +33,54 @@ public class TransactionsPage {
 	public Boolean verifyAccount(String acctName) throws Exception{
 			
 			String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
+			String xPathForAcct_IOS ="//XCUIElementTypeNavigationBar/XCUIElementTypeOther[normalize-space(@name)='"+acctName+"']";
 			
-			try{
+			Helper h = new Helper();
+			
+			if (h.getEngine().equals("android")){
+				try{
+					Engine.ad.findElementByXPath(xPathForAcct).isDisplayed();
+					return true;
+				}
+				catch(Exception E){
+					return false;
+				}
+				
+			}
+			else {
+				try{
+					Engine.iosd.findElementByXPath(xPathForAcct_IOS).isDisplayed();
+					return true;
+				}
+				catch(Exception E){
+					return false;
+				}
+				
+				
+			}
+			
+			
+			/*try{
 				 Engine.ad.findElementByXPath(xPathForAcct).isDisplayed();
 				 return true;
 			}
 			catch(Exception E){
 				return false;
-			}
+			}*/
 			
 		}
 	
 	public void navigateBackToDashboard() throws Exception{
 		
 		backButton.click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		
 		AllAccountsPage ap = new AllAccountsPage();
 		ap.navigateBackToDashboard();
 		
 	}
 	
-	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	

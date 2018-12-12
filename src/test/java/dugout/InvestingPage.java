@@ -26,48 +26,52 @@ public class InvestingPage {
 	}
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Investing']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investingHeader;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Recent Transactions')]")
-	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@class='android.widget.ImageButton']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']/../*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@content-desc3333='Securities']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities']")
 	public MobileElement securitiesTab;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Accounts']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
 	public MobileElement accountsTab;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Watch List']")
+	public MobileElement watchlistTab;
+	
+	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
 	//@AndroidFindBy(xpath="//*[@text='Today\'s Change']")
-	@AndroidFindBy(xpath="//*[@text=concat('Today',\"'\",'s Change')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=concat('Today',\"'\",'s Change')]")
 	public MobileElement todaysChangeLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Total Value']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Total Value']")
 	public MobileElement totalValueLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Cash Balances']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cash Balances']")
 	public MobileElement cashbalancesLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Securities by Company Name']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities by Company Name']")
 	public MobileElement securitiesByCompanyNameLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Brokerage']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Brokerage1']")
 	public MobileElement brokerageAccountNameLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[@text='Brokerage']/../*[@text='5 holdings']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Brokerage']/../android.widget.TextViewe[@text='1 holding']")
 	public MobileElement fiveHoldingsNameLabel;
 	
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
-	@AndroidFindBy(xpath="//*[starts-with(@text,'Last synced from Quicken Desktop')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Last synced from Quicken Desktop')]")
 	public MobileElement lastSyncedFooter;
 	
 	public void navigateBackToDashboard() throws Exception{
