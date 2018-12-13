@@ -246,6 +246,25 @@ public class OverviewPage {
 		}
 	}
 	
+	public void quicken_scroll_mobile() throws InterruptedException {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android")) {
+			Dimension size = Engine.ad.manage().window().getSize();
+			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+			Thread.sleep(3000);	
+		}
+		else {
+			
+			Dimension size = Engine.iosd.manage().window().getSize();
+			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+			Thread.sleep(3000);
+			
+			
+		}
+	}
+	
 	public void tapOnTransactionSummaryCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
@@ -270,6 +289,65 @@ public class OverviewPage {
 		}
 		transactionSummaryCard.click();
 		Thread.sleep(3000);
+	}
+	
+	public void tapOnSpendingOverTimeCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		
+		Integer iCount = 0;
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		while (iCount < 4) {
+			
+			quicken_scroll();
+			
+			iCount++;	
+			
+			if (Verify.objExists(spendingOverTimeCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(spendingOverTimeCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [spendingOverTimeCard] did not appear");
+		}
+		spendingOverTimeCard.click();
+		Thread.sleep(10000);
+	}
+	
+	public void tapOnNetIncomeOverTimeCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		
+		Integer iCount = 0;
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		while (iCount < 5) {
+			
+			System.out.println(Verify.objExists(netIncomeOverTimeCard));
+			
+			if (!Verify.objExists(netIncomeOverTimeCard)) {
+				/*scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
+				Thread.sleep(2000);	*/
+				
+				quicken_scroll_mobile();
+			}
+			
+			iCount++;	
+			
+			if (Verify.objExists(netIncomeOverTimeCard))
+				break;
+			
+		}
+		
+		
+		if (!Verify.objExists(netIncomeOverTimeCard)) {
+			throw new Exception ("Errr ********** Looks like scroll issue, [netIncomeOverTimeCard] did not appear");
+		}
+		netIncomeOverTimeCard.click();
+		Thread.sleep(5000);
 	}
 	
 	/*public void tapOnTransactionSummaryCard() throws Exception{
@@ -307,7 +385,7 @@ public class OverviewPage {
 	   Thread.sleep(3000);
 	}
 	
-	public void tapOnSpendingOverTimeCard() throws Exception{
+	/*public void tapOnSpendingOverTimeCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
@@ -334,9 +412,9 @@ public class OverviewPage {
 		}
 		spendingOverTimeCard.click();
 		Thread.sleep(10000);
-	}
+	}*/
 	
-	public void tapOnNetIncomeOverTimeCard() throws Exception{
+	/*public void tapOnNetIncomeOverTimeCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
@@ -351,7 +429,7 @@ public class OverviewPage {
 				/*scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
 				Thread.sleep(2000);	*/
 				
-				Dimension size = Engine.ad.manage().window().getSize();
+			/*	Dimension size = Engine.ad.manage().window().getSize();
 				Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
 				Thread.sleep(3000);
 			}
@@ -369,7 +447,7 @@ public class OverviewPage {
 		}
 		netIncomeOverTimeCard.click();
 		Thread.sleep(5000);
-	}
+	}*/
 	
 	
 	

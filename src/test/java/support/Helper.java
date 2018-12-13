@@ -270,6 +270,7 @@ public class Helper {
 			
 			System.out.println("IOS Capppppppppppppppppppppppppp");
 			
+			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
 			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
@@ -280,6 +281,7 @@ public class Helper {
 	        capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
 	        capabilities.setCapability("browserName", "");
+	        //capabilities.setCapability("newCommandTimeout",0);
 	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
 	        
 			

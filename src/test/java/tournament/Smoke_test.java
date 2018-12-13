@@ -140,8 +140,8 @@ public class Smoke_test extends Recovery {
 		/*WelcomePage w = new WelcomePage();
 		w.setEnvironment("stage");*/
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
+		/*SignInPage signIn = new SignInPage();
+		signIn.signIn();*/
 		
 		
 		// overview screen
@@ -286,8 +286,8 @@ public class Smoke_test extends Recovery {
 		
 		String currentMonthIncome = "Net Income: "+date.format(date1).toString();
 		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
 		
 		
 		// overview screen

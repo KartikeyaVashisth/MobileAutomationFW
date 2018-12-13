@@ -51,6 +51,10 @@ public class SignInPage {
 	@iOSFindBy(xpath="//*[@name='Quicken ID or Email']")
 	public MobileElement emailID;
 	
+	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Quicken\"]/XCUIElementTypeOther/XCUIElementTypeTextField")
+	public MobileElement userName;
+	
 	@AndroidFindBy(xpath="//*[@content-desc ='Password']")
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
 	public MobileElement lblPassword;
@@ -96,6 +100,13 @@ public class SignInPage {
 		
 		if (!Verify.objExists(emailID))
 			quickenTest.log(LogStatus.ERROR,"emailID not identified");
+		
+		emailID.click();
+		Thread.sleep(1000);
+		userName.clear();
+		
+		
+		
 			
 		
 		emailID.sendKeys(support.getUsername());

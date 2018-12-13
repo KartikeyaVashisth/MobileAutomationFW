@@ -49,6 +49,8 @@ public class Recovery {
 		else
 			Engine.iosd.launchApp();
 		
+		System.out.println("launch done...");
+		
 		
 	}
 	
@@ -86,8 +88,12 @@ public class Recovery {
 			//Verify.waitForObjectToDisappear((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.ProgressBar")), 30)	;
 			Thread.sleep(12000);
 		}
-		else
+		else {
+			System.out.println("app launch start beforemethod.....");
 			Engine.iosd.launchApp();
+			System.out.println("app launch end beforemethod.....");
+		}
+			
 		
 		
 		Thread.sleep(5000);
@@ -192,10 +198,12 @@ public class Recovery {
 	@AfterSuite
 	public void TestPlanExit(){
 		
-		System.out.println("aftersuitessssssss--------------");
+		
+		Helper h = new Helper();
+		
 		
 		// close driver
-		if (Engine.ad != null){
+		if (h.getEngine().equals("android")){
 			//Engine.ad.close();
 			Engine.ad.quit();
 			System.out.println("iffffffffffff");
@@ -204,7 +212,6 @@ public class Recovery {
 			Engine.iosd.close();
 		}
 		
-		System.out.println("tttttttttttttttttttttt--------------");
 		
 		
 		

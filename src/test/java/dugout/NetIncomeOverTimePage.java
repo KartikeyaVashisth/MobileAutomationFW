@@ -25,7 +25,7 @@ public class NetIncomeOverTimePage {
 	}
 	
 	
-	
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Net Income Over Time\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
 	public MobileElement netIncomeOverTimeHeader;
 	
@@ -33,11 +33,11 @@ public class NetIncomeOverTimePage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
-	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@iOSFindBy(xpath="//XCUIElementTypeOther")
 	@AndroidFindBy(xpath="//*[@resource-id='com.quicken.qm2014:id/listView']")
 	public MobileElement transactionList;
 	
-	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[starts-with(@name,'Net Income: ')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Net Income: ')]")
 	public MobileElement netIncomeCurrentMonth;
 	

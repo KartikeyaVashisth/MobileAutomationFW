@@ -29,10 +29,12 @@ public class SpendingOverTimePage {
 			}	
 		}
 		
+		//XCUIElementTypeOther[@name="Spending Over Time"]
+		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending Over Time\"]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
 		public MobileElement spendingOverTimeHeader;
 		
-		@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+		@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
 		@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 		public MobileElement backButtonOnHeader;
 		
@@ -40,7 +42,7 @@ public class SpendingOverTimePage {
 		@AndroidFindBy(xpath="//*[@resource-id='com.quicken.qm2014:id/list_row']")
 		public MobileElement transactionList;
 		
-		@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+		@iOSFindBy(xpath="//XCUIElementTypeStaticText[starts-with(@name,'Total Spending: ')]")
 		@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Total Spending: ')]")
 		public MobileElement totalSpendingCurrentMonth;
 		
