@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
+import com.saucelabs.saucerest.SauceREST;
 
 import dugout.AllAccountsPage;
 import dugout.BankingAndCreditCardPage;
@@ -286,8 +287,8 @@ public class Smoke_test extends Recovery {
 		
 		String currentMonthIncome = "Net Income: "+date.format(date1).toString();
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
+		/*SignInPage signIn = new SignInPage();
+		signIn.signIn();*/
 		
 		
 		// overview screen
@@ -319,6 +320,7 @@ public class Smoke_test extends Recovery {
 			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
 			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		
 			
 	}
 	

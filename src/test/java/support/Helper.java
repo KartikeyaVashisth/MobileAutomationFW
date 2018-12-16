@@ -183,12 +183,13 @@ public class Helper {
 			capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
 			capabilities.setCapability("automationName","appium");
 			//capabilities.setCapability("deviceName","Android Emulator");
-			capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
+			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
+			capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
 			
 			capabilities.setCapability("deviceOrientation", "portrait");
 			capabilities.setCapability("browserName", "");
-			//capabilities.setCapability("platformVersion","6.0");//5.1
-			capabilities.setCapability("platformVersion","7.0");
+			capabilities.setCapability("platformVersion","6.0");//5.1
+			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("newCommandTimeout", 1120);
