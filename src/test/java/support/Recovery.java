@@ -1,5 +1,6 @@
 package support;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +16,7 @@ import org.testng.internal.Utils;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.saucelabs.saucerest.SauceREST;
 
 import io.appium.java_client.MobileElement;
 import referee.ErrorUtil;
@@ -28,6 +30,18 @@ public class Recovery {
 	
 	@BeforeSuite
 	public static void testPlanEnter() throws Exception{
+		
+		
+		System.out.println("uploading build to SAUCE storage");
+		
+		String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
+		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f = new File(appPath);
+		String response = r.uploadFile(f, "Quicken.5.8.0.11928.debug.apk", true);
+		System.out.println("Sauce Upload Response -->> "+response);
+		System.out.println("Completed..uploading build to SAUCE storage");
+		
+		//Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk
 		
 		System.out.println("....Initializing Reports....");
 		
