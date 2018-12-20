@@ -60,7 +60,7 @@
       	<suiteXmlFile>testng.xml</suiteXmlFile>
       	</suiteXmlFiles>
       	<systemPropertyVariables>
-         <buildnumber>${env.BUILD}</buildnumber>
+         <buildpath>${env.BUILD}</buildpath>
          <engine>${env.ENGINE}</engine>
          <host>${env.HOST}</host>
       	</systemPropertyVariables>  

@@ -34,7 +34,10 @@ public class Recovery {
 		
 		System.out.println("uploading build to SAUCE storage");
 		
-		String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
+		System.out.println("build path... "+System.getProperty("buildpath"));
+		String appPath = System.getProperty("buildpath");
+		
+		//String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
 		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
 		File f = new File(appPath);
 		String response = r.uploadFile(f, "Quicken.5.8.0.11928.debug.apk", true);
