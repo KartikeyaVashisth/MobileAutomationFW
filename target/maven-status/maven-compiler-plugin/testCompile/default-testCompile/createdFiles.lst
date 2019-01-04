@@ -18,6 +18,7 @@ dugout/WelcomePage.class
 dugout/SpendingOverTimePage.class
 referee/Commentary.class
 referee/CustomListener.class
+tournament/Mav_Test.class
 dugout/BankingAndCreditCardPage.class
 dugout/SignInPage.class
 referee/Commentary$1.class

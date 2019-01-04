@@ -1,5 +1,7 @@
 package dugout;
 
+import java.util.HashMap;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -10,6 +12,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -160,6 +163,7 @@ public class SignInPage {
 		return true;
 	}
 	
+	/* the below method doesn't scroll for the dataset
 	public boolean selectDataset(String bundle) throws Exception{
 		ExtentTest quickenTest = Recovery.quickenTest;
 		String xpath;
@@ -201,14 +205,69 @@ public class SignInPage {
 					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
 				return true;
 				
+			}		
+		
+		
+	}*/
+	
+	public boolean selectDataset(String bundle) throws Exception{
+		ExtentTest quickenTest = Recovery.quickenTest;
+		String xpath;
+		Integer iCount;
+		MobileElement txtDataSet;
+		
+		if (! Verify.waitForObject(txtYouHaveSynced, 4))
+		{
+			quickenTest.log(LogStatus.ERROR,"Dataset Selection Screen Did not appear");
+			return false;
+		}
+		
+		// verify whether dataset screen appeared or not
+		
+		quickenTest.log(LogStatus.INFO,"Dataset selection screen appeared");
+		
+			if (support.getEngine().equals("android")){
+				
+				Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ bundle + "\").instance(0))"));
+				xpath = "//android.view.ViewGroup[@content-desc='"+bundle+"']";
+				txtDataSet = (MobileElement) Engine.ad.findElement(By.xpath(xpath));
+				Thread.sleep(1000);
+				
+				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed());
+				Engine.ad.findElement(By.xpath(xpath)).click();
+				
+				btnDone.click();
+				Thread.sleep(10000);
+				OverviewPage o = new OverviewPage();
+				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
+				
+				if (! Verify.waitForObject(o.hambergerIcon, 8))
+					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
+				
+				return true;
 			}
 		
-		
-		
-		
-		
-		
-			
+			else{
+				
+				MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeScrollView"));
+				String me_id = me.getId();
+				HashMap<String, String> scrollObject = new HashMap<String, String>();
+				scrollObject.put("element", me_id);
+				scrollObject.put("predicateString", "label == '"+bundle+"'");
+				Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+				Thread.sleep(1000);
+				
+				xpath = "//XCUIElementTypeOther[@name='"+bundle+"']";
+				Engine.iosd.findElement(By.xpath(xpath)).click();
+				btnDone.click();
+				Thread.sleep(5000);
+				OverviewPage o = new OverviewPage();
+				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
+				if (! Verify.waitForObject(o.hambergerIcon, 8))
+					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
+				return true;
+				
+			}		
 		
 		
 	}

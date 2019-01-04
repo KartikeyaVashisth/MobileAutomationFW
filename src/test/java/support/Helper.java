@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
@@ -315,6 +316,24 @@ public class Helper {
 	public void waitForRefresh (int millisec) throws InterruptedException{
 		Thread.sleep(millisec);
 		
+	}
+	
+	public void quicken_scroll_mobile() throws InterruptedException {
+		
+		if (this.getEngine().equals("android")) {
+			Dimension size = Engine.ad.manage().window().getSize();
+			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+			Thread.sleep(3000);	
+			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+		}
+		else {
+			
+			Dimension size = Engine.iosd.manage().window().getSize();
+			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+			Thread.sleep(3000);
+			
+			
+		}
 	}
 		
 		

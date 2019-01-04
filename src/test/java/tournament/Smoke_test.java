@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -25,6 +26,7 @@ import dugout.SpendingTrendPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import referee.ExtentManager;
 import referee.Verify;
@@ -323,8 +325,6 @@ public class Smoke_test extends Recovery {
 		
 			
 	}
-	
-	
 	
 
 }
