@@ -231,6 +231,9 @@ public class Recovery {
 		
 		
 		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		System.out.println("");
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("");
 		
 		
 		
@@ -252,7 +255,7 @@ public class Recovery {
 			System.out.println("TestPlanExit.. Executed");
 		}
 		else{
-			Engine.iosd.close();
+			Engine.iosd.quit();
 		}
 		
 		
