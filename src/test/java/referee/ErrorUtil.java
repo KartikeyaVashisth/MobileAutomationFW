@@ -44,6 +44,11 @@ public class ErrorUtil {
 			  
 		  }
 		  
+		  public static void addSoftFailure(String message) {
+			  
+			  lsErrors.add(message);
+		  }
+		  
 		 
 		 
 		  

@@ -203,11 +203,13 @@ public class Helper {
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
 		    capabilities.setCapability("deviceName", "iPhone 6 Simulator");
-		    capabilities.setCapability("platformVersion", "9.3");
+		    capabilities.setCapability("platformVersion", "12.0"); //9.3
 		    capabilities.setCapability("browserName", "");
 		    capabilities.setCapability("deviceOrientation", "portrait");
-		    capabilities.setCapability("appiumVersion", "1.5.3");
+		    capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
 		    capabilities.setCapability("autoWebView", "true");
+		    capabilities.setCapability("autoAcceptAlerts", true);
+	        capabilities.setCapability("autoGrantPermissions", true);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("app", "sauce-storage:Quicken.zip");

@@ -10,6 +10,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
@@ -28,6 +29,7 @@ import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import referee.Commentary;
 import referee.ExtentManager;
 import referee.Verify;
 import support.Engine;
@@ -45,6 +47,7 @@ public class Smoke_test extends Recovery {
 		//ExtentTest quickenTest = Recovery.quickenTest;
 		String acctToVerify = "AllReconciledTransactions";
 		Helper helper = new Helper();
+		SoftAssert sa = new SoftAssert();
 		
 		WelcomePage w = new WelcomePage();
 		
@@ -60,9 +63,9 @@ public class Smoke_test extends Recovery {
 	    BankingAndCreditCardPage acctListPage = new BankingAndCreditCardPage();
 		
 		if (acctListPage.getAccount(acctToVerify).getText().trim().equals(acctToVerify))
-			quickenTest.log(LogStatus.INFO,"Checking account exists");
+			Commentary.log(sa, LogStatus.INFO,"Checking account exists");
 		else
-			quickenTest.log(LogStatus.FAIL,"Checking account verification failed");
+			Commentary.log(sa, LogStatus.FAIL,"Checking account verification failed");
 		
 		// tap on the account
 	   	acctListPage.getAccount(acctToVerify).click();
@@ -71,15 +74,16 @@ public class Smoke_test extends Recovery {
 	   	// verify account name on the transactionsPage
 	   	TransactionsPage txnPage = new TransactionsPage();
 	   	if (txnPage.verifyAccount(acctToVerify) == true)
-	   		quickenTest.log(LogStatus.INFO,"Account name verification on Transaction page Pass.");
+	   		Commentary.log(sa, LogStatus.INFO,"Account name verification on Transaction page Pass.");
 	   	else
-	   		quickenTest.log(LogStatus.FAIL,"Account name verification on Transaction page failed.");
+	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
 	   	
 	   	// get back to overview screen
 	   	/*Engine.ad.navigate().back();
 	   	helper.waitForRefresh(2000);
 	   	acctListPage.backButton.click();*/
 	   	txnPage.navigateBackToDashboard();
+	   	sa.assertAll();
 	   	
 	    
 	}
@@ -90,6 +94,7 @@ public class Smoke_test extends Recovery {
 		//ExtentTest quickenTest = Recovery.quickenTest;
 		String userID = support.getUsername();//"kalyan.grandhi@quicken.com";
 		String cloudName= support.getDatasetName();//"Transaction_Status";
+		SoftAssert sa = new SoftAssert();
 		
 		
 		WelcomePage w = new WelcomePage();
@@ -105,35 +110,59 @@ public class Smoke_test extends Recovery {
 		SettingsPage settingsPage = new SettingsPage();
 		
 		if (settingsPage.verifyQuickenID(userID))
-			quickenTest.log(LogStatus.INFO,"PASS: QuickenID ["+userID+"] verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"PASS: QuickenID ["+userID+"] verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"FAIL: QuickenID ["+userID+"] verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: QuickenID ["+userID+"] verification Failed.");
 		
 		if (settingsPage.verifyCloudAccountName(cloudName))
-			quickenTest.log(LogStatus.INFO,"PASS: QuickenID ["+cloudName+"] verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"PASS: CloudName ["+cloudName+"] verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"FAIL: QuickenID ["+cloudName+"] verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: CloudName ["+cloudName+"] verification Failed.");
 		
+		/*
+		try {
+			System.out.println("1*******");
+			System.out.println(settingsPage.passcode.getText());
+			System.out.println("1*******");
+			System.out.println("");
+		}
+		catch (Exception e) {
+			System.out.println("tttttttttttttt "+e.getMessage());
+		}
+		
+		try {
+			System.out.println("*******");
+			System.out.println(Engine.ad.findElement(By.xpath("//android.widget.TextView[normalize-space(@text)='Passcode']")).getText());
+			System.out.println("*******");
+		}
+		catch (Exception e) {
+			System.out.println("uuuuuuuuuuuu "+e.getMessage());
+		}
+		
+		
+			
 		// verify other options on settings page
 		if (Verify.objExists(settingsPage.passcode))
-			quickenTest.log(LogStatus.INFO,"Passcode verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"Passcode verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"Passcode verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"Passcode verification Failed.");
 		
 		if (Verify.objExists(settingsPage.helpAndLegal))
-			quickenTest.log(LogStatus.INFO,"help verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"help verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"help verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"help verification Failed.");
 		
 		if (Verify.objExists(settingsPage.accounts))
-			quickenTest.log(LogStatus.INFO,"accounts verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"accounts verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"accounts verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"accounts verification Failed.");
 		
 		if (Verify.objExists(settingsPage.logout))
-			quickenTest.log(LogStatus.INFO,"logout verified successfully!");
+			Commentary.log(sa, LogStatus.INFO,"logout verified successfully!");
 		else
-			quickenTest.log(LogStatus.FAIL,"logout verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL,"logout verification Failed.");*/
+		
+		sa.assertAll();
 		
 	}
 	
@@ -145,6 +174,7 @@ public class Smoke_test extends Recovery {
 		
 		/*SignInPage signIn = new SignInPage();
 		signIn.signIn();*/
+		SoftAssert sa = new SoftAssert();
 		
 		
 		// overview screen
@@ -154,16 +184,18 @@ public class Smoke_test extends Recovery {
 		
 		AllAccountsPage aap = new AllAccountsPage();
 		if (Verify.objExists(aap.textAllTransactions))
-			quickenTest.log(LogStatus.INFO,"RecentTransactions card tap > All transactions screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"RecentTransactions card tap > All transactions screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"RecentTransactions card tap > All transactions screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"RecentTransactions card tap > All transactions screen did not appear.");
 		
 		aap.navigateBackToDashboard();
 		
 		if (Verify.objExists(o.hambergerIcon))
-			quickenTest.log(LogStatus.INFO,"RecentTransactions card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"RecentTransactions card, back button tap > Overview screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"RecentTransactions card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"RecentTransactions card, back button tap > Overview screen did not appear.");
+		
+		sa.assertAll();
 	}
 	
 	@Test(priority = 3)
@@ -174,6 +206,7 @@ public class Smoke_test extends Recovery {
 		
 		SignInPage signIn = new SignInPage();
 		signIn.signIn();*/
+		SoftAssert sa = new SoftAssert();
 		
 		
 		// overview screen
@@ -182,16 +215,18 @@ public class Smoke_test extends Recovery {
 		
 		SpendingTrendPage st = new SpendingTrendPage();
 		if (Verify.objExists(st.spendingTrendHeader))
-			quickenTest.log(LogStatus.INFO,"SpendingTrend card tap >SpendingTrend screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"SpendingTrend card tap >SpendingTrend screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"SpendingTrend card tap > SpendingTrend screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"SpendingTrend card tap > SpendingTrend screen did not appear.");
 		
 		st.navigateBackToDashboard();
 		
 		if (Verify.objExists(o.hambergerIcon))
-			quickenTest.log(LogStatus.INFO,"SpendingTrend card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"SpendingTrend card, back button tap > Overview screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"SpendingTrend card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"SpendingTrend card, back button tap > Overview screen did not appear.");	
+		
+		sa.assertAll();
 	}
 	
 	@Test(priority = 4)
@@ -202,7 +237,7 @@ public class Smoke_test extends Recovery {
 		
 		/*SignInPage signIn = new SignInPage();
 		signIn.signIn();*/
-		
+		SoftAssert sa = new SoftAssert();
 		
 		// overview screen
 		OverviewPage o = new OverviewPage();
@@ -211,18 +246,19 @@ public class Smoke_test extends Recovery {
 		TransactionSummaryPage cashflow = new TransactionSummaryPage();
 		
 		if (Verify.objExists(cashflow.transactionSummaryHeader))
-			quickenTest.log(LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
 		
 		cashflow.navigateBackToDashboard();
 		
 		System.out.println("back doneeeeeeee");
 		
 		if (Verify.objExists(o.hambergerIcon))
-			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		sa.assertAll();
 			
 	}
 	
@@ -231,6 +267,7 @@ public class Smoke_test extends Recovery {
 		
 		/*WelcomePage w = new WelcomePage();
 		w.setEnvironment("stage");*/
+		SoftAssert sa = new SoftAssert();
 		
 		DateFormat date =  new SimpleDateFormat("MMM");
 		Date date1 = new Date();
@@ -251,28 +288,30 @@ public class Smoke_test extends Recovery {
 		SpendingOverTimePage sot = new SpendingOverTimePage();
 		
 		if (Verify.objExists(sot.spendingOverTimeHeader))
-			quickenTest.log(LogStatus.INFO,"SpendingOverTimeCard card tap >SpendingOverTime screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"SpendingOverTimeCard card tap >SpendingOverTime screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"SpendingOverTimeCard tap > SpendingOverTimeCard screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"SpendingOverTimeCard tap > SpendingOverTimeCard screen did not appear.");
 		
 		if (Verify.objExists(sot.totalSpendingCurrentMonth))
-			quickenTest.log(LogStatus.INFO,"Total Spending text got displayed on SpendingOverTimeCard.");
+			Commentary.log(sa, LogStatus.INFO,"Total Spending text got displayed on SpendingOverTimeCard.");
 		else
-			quickenTest.log(LogStatus.FAIL,"Total Spending text did not get displayed on SpendingOverTimeCard.");
+			Commentary.log(sa, LogStatus.FAIL,"Total Spending text did not get displayed on SpendingOverTimeCard.");
 		
 		if (sot.totalSpendingCurrentMonth.getText().equals(currentMonthSpending))
-			quickenTest.log(LogStatus.INFO,"Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
+			Commentary.log(sa, LogStatus.INFO,"Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
 		else
-			quickenTest.log(LogStatus.INFO,"Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
+			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
 		
 		
 		sot.navigateBackToDashboard();
 		
 		
 		if (Verify.objExists(o.hambergerIcon))
-			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		
+		sa.assertAll();
 			
 	}
 	
@@ -282,6 +321,7 @@ public class Smoke_test extends Recovery {
 		
 		/*WelcomePage w = new WelcomePage();
 		w.setEnvironment("stage");*/
+		SoftAssert sa = new SoftAssert();
 		
 		DateFormat date =  new SimpleDateFormat("MMM");
 		Date date1 = new Date();
@@ -301,30 +341,33 @@ public class Smoke_test extends Recovery {
 		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
 		
 		if (Verify.objExists(not.netIncomeOverTimeHeader))
-			quickenTest.log(LogStatus.INFO,"NetIncomeOverTimeCard card tap >NetIncomeOverTime screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"NetIncomeOverTimeCard card tap >NetIncomeOverTime screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"NetIncomeOverTimeCard tap > NetIncomeOverTime screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"NetIncomeOverTimeCard tap > NetIncomeOverTime screen did not appear.");
 		
 		if (Verify.objExists(not.netIncomeCurrentMonth))
-			quickenTest.log(LogStatus.INFO,"Net Income text got displayed on NetIncomeOverTime screen.");
+			Commentary.log(sa, LogStatus.INFO,"Net Income text got displayed on NetIncomeOverTime screen.");
 		else
-			quickenTest.log(LogStatus.FAIL,"Net Income text did not appear on NetIncomeOverTime screen.");
+			Commentary.log(sa, LogStatus.FAIL,"Net Income text did not appear on NetIncomeOverTime screen.");
 		
 		if (not.netIncomeCurrentMonth.getText().equals(currentMonthIncome))
-			quickenTest.log(LogStatus.INFO,"Net Income text for the current month ["+currentMonthIncome+"] got displayed on NetIncomeOverTimeCard.");
+			Commentary.log(sa, LogStatus.INFO,"Net Income text for the current month ["+currentMonthIncome+"] got displayed on NetIncomeOverTimeCard.");
 		else
-			quickenTest.log(LogStatus.INFO,"Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
+			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
 		
 		
 		not.navigateBackToDashboard();
 			
 		if (Verify.objExists(o.hambergerIcon))
-			quickenTest.log(LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		
+		sa.assertAll();
 		
 			
 	}
+	
 	
 
 }

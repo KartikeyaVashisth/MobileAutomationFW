@@ -65,7 +65,7 @@ public class pract2_Test extends Recovery {
 	    helper.waitForRefresh(2000);
 	    
 	   
-	    
+	    /*
 	    // verify if checking account Exists or not
 	    BankingAndCreditCardPage acctListPage = new BankingAndCreditCardPage();
 		
@@ -90,12 +90,12 @@ public class pract2_Test extends Recovery {
 	   	helper.waitForRefresh(2000);
 	   	acctListPage.backButton.click();
 		helper.waitForRefresh(2000);*/
-	   	txnPage.navigateBackToDashboard();
+	   //	txnPage.navigateBackToDashboard();
 	   	
 	    
 	}
 	
-	
+	/*
 	@Test(priority = 1)
 	public void settingsPageTest() throws Exception{
 		
@@ -155,7 +155,7 @@ public class pract2_Test extends Recovery {
 		settingsPage.close.click();
 		Thread.sleep(1000);
 		
-	}
+	}*/
 	/*
 	@Test(priority = 2)
 	public void verifyOverviewScreen() throws Exception{
@@ -236,7 +236,7 @@ public class pract2_Test extends Recovery {
 		
 	}*/
 	
-	
+	/*
 	@Test(priority = 3)
 	public void TrendingCategoriesTest() throws Exception{
 		ExtentTest quickenTest = Recovery.quickenTest;
@@ -321,8 +321,8 @@ public class pract2_Test extends Recovery {
 		else
 			quickenTest.log(LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
 			
-	}
-	
+	}*/
+	/*
 	@Test(priority = 5)
 	public void InvestingTest() throws Exception{
 		
@@ -406,8 +406,8 @@ public class pract2_Test extends Recovery {
 			Commentary.log(LogStatus.INFO,"Investing card, back button tap > Overview screen got dispalyed.");
 		else
 			Commentary.log(LogStatus.FAIL,"Investing card, back button tap > Overview screen did not appear.");	
-	}
-	
+	}*/
+	/*
 	@Test(priority = 6)
 	public void accountsCardLabelWithNoCashVerifyTest() throws Exception{
 		
@@ -462,7 +462,7 @@ public class pract2_Test extends Recovery {
 			quickenTest.log(LogStatus.INFO,"Accounts card > Cash label is not present, no cash accts for the user.");
 				
 		
-	}
+	}*/
 	/*
 	@Test(priority = 7)
 	public void accountsCardLabelWithCashAcctVerifyTest() throws Exception{

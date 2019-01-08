@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.asserts.SoftAssert;
 import org.testng.internal.Utils;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -28,24 +30,41 @@ public class Recovery {
 	public static ExtentTest quickenTest;
 	
 	
+	
 	@BeforeSuite
 	public static void testPlanEnter() throws Exception{
 		
+		System.out.println("....Loading Properties....");
+		// Load properties
+		Helper h = new Helper();
+		h.loadProperties();
+		
 		
 		System.out.println("uploading build to SAUCE storage");
-		
 		System.out.println("build path... "+System.getProperty("buildpath"));
 		String appPath = System.getProperty("buildpath");
-		
 		String [] a = appPath.split("/");
 		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
 		
+		
 		//String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
-		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-		File f = new File(appPath);
-		String response = r.uploadFile(f, "Quicken.apk", true);
-		System.out.println("Sauce Upload Response -->> "+response);
-		System.out.println("Completed..uploading build to SAUCE storage");
+		if (h.getEngine().equals("android")) {
+			SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+			File f = new File(appPath);
+			String response = r.uploadFile(f, "Quicken.apk", true);
+			System.out.println("Sauce Upload Response -->> "+response);
+			System.out.println("Completed..uploading build to SAUCE storage");
+			
+		}
+		else {
+			SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+			File f = new File(appPath);
+			String response = r.uploadFile(f, "Quicken.zip", true);
+			System.out.println("Sauce Upload Response -->> "+response);
+			System.out.println("Completed..uploading build to SAUCE storage");
+			
+		}
+		
 		
 		//Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk
 		
@@ -54,10 +73,7 @@ public class Recovery {
 		ExtentManager em = new ExtentManager();
 		em.initializeRepObject();
 		
-		System.out.println("....Loading Properties....");
-		// Load properties
-		Helper h = new Helper();
-		h.loadProperties();
+		
 		
 		System.out.println("....Setting up Mobile Engine....");
 		// test
@@ -109,9 +125,9 @@ public class Recovery {
 			Thread.sleep(12000);
 		}
 		else {
-			System.out.println("app launch start beforemethod.....");
+			
 			Engine.iosd.launchApp();
-			System.out.println("app launch end beforemethod.....");
+			
 		}
 			
 		
@@ -125,7 +141,8 @@ public class Recovery {
 	@AfterMethod
 	public static void testCaseExit(ITestResult result, Method method) throws InterruptedException{
 		
-		System.out.println("After Method started...........");
+		
+		
 		ExtentTest quickenTest = Recovery.quickenTest;
 		ExtentManager em = new ExtentManager();
 		
@@ -135,14 +152,18 @@ public class Recovery {
 		   } 
 		
 	
-		System.out.println("softFails size...."+softFails.size());
+		/*System.out.println("softFails size...."+softFails.size());
 		System.out.println("softFails size...."+softFails.size());
 		if (softFails.size() != 0){
 			System.out.println("TRUEEEEEEEEEE");
 		}
-		System.out.println(softFails.size() != 0);
-		if (softFails.size() != 0){
-			result.setStatus(ITestResult.FAILURE);
+		System.out.println("getttt status...................");
+		System.out.println(quickenTest.getRunStatus());
+		System.out.println("getttt status...................");
+		System.out.println(softFails.size() != 0);*/
+		if ((softFails.size() != 0)){
+			quickenTest.log(LogStatus.FAIL,method.getName());
+			/*result.setStatus(ITestResult.FAILURE);
 			System.out.println("set the status to failure......!");
 			
 			
@@ -154,6 +175,8 @@ public class Recovery {
 				 Throwable t = new Exception(softFails.get(0));
 				 System.out.println("Throwable is settt...........!"+softFails.get(0));
 				result.setThrowable(t);
+				
+				
 			} else {
 				//create a failure message with all failures and stack traces (except last failure)
 				StringBuffer failureMessage = new StringBuffer("Multiple failures (").append(size).append("):nn");
@@ -176,7 +199,7 @@ public class Recovery {
 				result.setThrowable(merged);
 				quickenTest.log(LogStatus.FAIL, result.getThrowable());
 				
-			}
+			}*/
 			
 		}
 		else{
@@ -190,13 +213,13 @@ public class Recovery {
 		em.initializeRepObject().flush();
 		Thread.sleep(3000);
 		
+		
+		
 		if (Engine.ad != null){
 			Engine.ad.closeApp();
 			//Engine.ad.resetApp();
 			Thread.sleep(2000);
-			//Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
-			Thread.sleep(2000);
-			System.out.println("reset done....");
+			
 		}
 		else{
 			Engine.iosd.closeApp();
@@ -206,7 +229,7 @@ public class Recovery {
 			
 		
 		
-		System.out.println("After Method end...........");
+		
 		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
 		
 		
@@ -226,7 +249,7 @@ public class Recovery {
 		if (h.getEngine().equals("android")){
 			//Engine.ad.close();
 			Engine.ad.quit();
-			System.out.println("iffffffffffff");
+			System.out.println("TestPlanExit.. Executed");
 		}
 		else{
 			Engine.iosd.close();

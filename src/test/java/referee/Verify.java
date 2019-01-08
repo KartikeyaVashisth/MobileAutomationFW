@@ -38,6 +38,7 @@ public class Verify {
 			return b;	
 		}
 		catch (NoSuchElementException n){
+			System.out.println("obj Exists***** > NoSuchElement");
 			return false;	
 		}
 		catch (Throwable e){
@@ -78,7 +79,7 @@ public class Verify {
 				return true;
 				
 			
-			System.out.println("12secs * "+iCount);
+			System.out.println("12secs * "+iCount+1);
 			iCount++;
 			
 			
