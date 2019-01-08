@@ -38,7 +38,6 @@ public class Verify {
 			return b;	
 		}
 		catch (NoSuchElementException n){
-			System.out.println("obj Exists***** > NoSuchElement");
 			return false;	
 		}
 		catch (Throwable e){
