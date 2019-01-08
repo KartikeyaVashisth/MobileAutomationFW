@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.SwipeElementDirection;
@@ -182,6 +183,7 @@ public class OverviewPage {
 		
 	}
 	
+	/*
 	public void tapOnRecentTransactionsCard() throws Exception {
 		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
@@ -190,6 +192,31 @@ public class OverviewPage {
 			scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
 			Thread.sleep(1000);	
 		}
+		
+		//scrollView.swipe(SwipeElementDirection.UP, 10, 10, 1000);
+		//Thread.sleep(1000);
+		
+		recentTransactionsCard.click();
+		Thread.sleep(3000);
+		
+	}*/
+	
+	public void tapOnRecentTransactionsCard() throws Exception {
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		String sCard = "Recent Transactions";
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+			
+		}
+		
+		/*if (!Verify.objExists(recentTransactionsCard)) {
+			scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
+			Thread.sleep(1000);	
+		}*/
 		
 		//scrollView.swipe(SwipeElementDirection.UP, 10, 10, 1000);
 		//Thread.sleep(1000);

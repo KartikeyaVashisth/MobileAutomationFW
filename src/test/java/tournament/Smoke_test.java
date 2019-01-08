@@ -109,6 +109,7 @@ public class Smoke_test extends Recovery {
 		
 		SettingsPage settingsPage = new SettingsPage();
 		
+		/*
 		if (settingsPage.verifyQuickenID(userID))
 			Commentary.log(sa, LogStatus.INFO,"PASS: QuickenID ["+userID+"] verified successfully!");
 		else
@@ -119,7 +120,7 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: CloudName ["+cloudName+"] verification Failed.");
 		
-		/*
+		
 		try {
 			System.out.println("1*******");
 			System.out.println(settingsPage.passcode.getText());

@@ -78,7 +78,7 @@ public class Verify {
 				return true;
 				
 			
-			System.out.println("12secs * "+iCount+1);
+			System.out.println("12secs * "+iCount);
 			iCount++;
 			
 			
