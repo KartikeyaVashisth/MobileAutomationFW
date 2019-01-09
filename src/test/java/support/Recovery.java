@@ -226,9 +226,6 @@ public class Recovery {
 			//Engine.iosd.resetApp();
 			Thread.sleep(2000);
 		}
-			
-		
-		
 		
 		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
 		System.out.println("");

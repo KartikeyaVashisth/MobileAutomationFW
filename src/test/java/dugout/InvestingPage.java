@@ -25,36 +25,36 @@ public class InvestingPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Investing\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investingHeader;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Recent Transactions')]")
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']/../*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Securities\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities']")
 	public MobileElement securitiesTab;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Accounts\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
 	public MobileElement accountsTab;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Watch List\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Watch List']")
 	public MobileElement watchlistTab;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Today's Change\"]")
 	//@AndroidFindBy(xpath="//*[@text='Today\'s Change']")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=concat('Today',\"'\",'s Change')]")
 	public MobileElement todaysChangeLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Total Value\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Total Value']")
 	public MobileElement totalValueLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Cash Balances\"]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cash Balances']")
 	public MobileElement cashbalancesLabel;
 	
@@ -78,14 +78,6 @@ public class InvestingPage {
 		
 		backButtonOnHeader.click();
 		Thread.sleep(5000);
-		
-		OverviewPage op = new OverviewPage();
-		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);
-		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);
-		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(7000);
 		
 	}
 

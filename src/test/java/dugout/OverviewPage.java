@@ -1,7 +1,13 @@
 package dugout;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+
 import org.apache.bcel.verifier.VerifierFactoryObserver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 
@@ -475,6 +481,70 @@ public class OverviewPage {
 		netIncomeOverTimeCard.click();
 		Thread.sleep(5000);
 	}*/
+	
+	public void tapOnBudgetCard() throws Exception {
+		
+		DateFormat date =  new SimpleDateFormat("MMMM");
+		Date date1 = new Date();
+		String sCard = date.format(date1).toString();
+		//System.out.println(date.format(date1).toString());
+		sCard = sCard +" "+"Budget";
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='"+sCard+"']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		
+		}
+		else {
+			String sXpath="//*[@name='"+sCard+"']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == '"+sCard+"'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name(sCard)).click();
+			Thread.sleep(1000);
+		}
+		
+	}
+	
+	public void tapOnInvestingCard() throws Exception {
+		
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Investing']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Investing\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		
+		}
+		else {
+			String sXpath="//*[@name='Investing']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == 'Investing'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Investing")).click();
+			Thread.sleep(1000);
+		}
+		
+	}
 	
 	
 	

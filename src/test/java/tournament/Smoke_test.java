@@ -18,6 +18,8 @@ import com.saucelabs.saucerest.SauceREST;
 
 import dugout.AllAccountsPage;
 import dugout.BankingAndCreditCardPage;
+import dugout.BudgetsPage;
+import dugout.InvestingPage;
 import dugout.NetIncomeOverTimePage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
@@ -367,6 +369,82 @@ public class Smoke_test extends Recovery {
 		sa.assertAll();
 		
 			
+	}
+	
+	@Test(priority = 7)
+	public void BudgetTest() throws Exception{
+	
+		SoftAssert sa = new SoftAssert();
+		
+		/*SignInPage signIn = new SignInPage();
+		signIn.signIn();*/
+		
+		// overview screen
+		OverviewPage o = new OverviewPage();
+		o.tapOnBudgetCard();
+		
+		BudgetsPage b = new BudgetsPage();
+		
+		if (b.verify_budgetHeader())
+			Commentary.log(sa, LogStatus.INFO,"Budgets card tap >Budgets screen got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Budgets card tap >Budgets screen did not appear.");
+		
+		if (Verify.objExists(b.personalExpenses))
+			Commentary.log(sa, LogStatus.INFO,"Budgets card, Personal Expenses group got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Budgets card, Personal Expenses group did not appear.");
+		
+		sa.assertAll();
+		
+	}
+	
+	@Test(priority = 8)
+	public void InvestingTest() throws Exception{
+	
+		SoftAssert sa = new SoftAssert();
+		
+		/*SignInPage signIn = new SignInPage();
+		signIn.signIn();*/
+		
+		// overview screen
+		OverviewPage o = new OverviewPage();
+		o.tapOnInvestingCard();
+		
+		InvestingPage i = new InvestingPage();
+		
+		if (Verify.objExists(i.investingHeader))
+			Commentary.log(sa, LogStatus.INFO,"Investing card tap >Investments screen got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Investing card tap >Investing screen did not appear.");
+		
+		if (Verify.objExists(i.accountsTab))
+			Commentary.log(sa, LogStatus.INFO,"Investing card > Accounts Tab got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Investing card > Accounts Tab did not appear.");
+		
+		if (Verify.objExists(i.securitiesTab))
+			Commentary.log(sa, LogStatus.INFO,"Investing card > Securities Tab got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Investing card > Securities Tab did not appear.");
+		
+		if (Verify.objExists(i.watchlistTab))
+			Commentary.log(sa, LogStatus.INFO,"Investing card > Watchlist Tab got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Investing card > Watchlist Tab did not appear.");
+		
+		
+		i.navigateBackToDashboard();
+		
+		if (Verify.objExists(o.hambergerIcon))
+			Commentary.log(sa, LogStatus.INFO,"Investing card, back button tap > Overview screen got dispalyed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"Investing card, back button tap > Overview screen did not appear.");	
+		
+		
+		
+		sa.assertAll();
+		
 	}
 	
 	
