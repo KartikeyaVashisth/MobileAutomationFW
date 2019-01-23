@@ -58,6 +58,10 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']")
 	public MobileElement accountsCard;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
+	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
+	public MobileElement addTransaction;
+	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']")
 	public MobileElement recentTransactionsCard;
@@ -324,6 +328,7 @@ public class OverviewPage {
 		Thread.sleep(3000);
 	}
 	
+	/*
 	public void tapOnSpendingOverTimeCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
@@ -348,6 +353,34 @@ public class OverviewPage {
 		}
 		spendingOverTimeCard.click();
 		Thread.sleep(10000);
+	}*/
+	
+	public void tapOnSpendingOverTimeCard() throws Exception{
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Spending Over Time']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		
+		}
+		else {
+			String sXpath="//*[@name='Spending Over Time']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == 'Spending Over Time'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Investing")).click();
+			Thread.sleep(1000);
+		}
 	}
 	
 	public void tapOnNetIncomeOverTimeCard() throws Exception{
