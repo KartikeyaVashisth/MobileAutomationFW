@@ -53,9 +53,21 @@ public class Commentary extends Recovery  {
 			eu.addSoftFailure(msg);
 			sa.assertTrue(1>2, msg+"\n");
 			//sa.assertTrue(false, msg);
-		}
+		}	
+		
+	}
+	
+	public static void log (LogStatus ls, String msg ) {
+		
+		quickenTest.log(ls, msg);
+		System.out.println(msg);
 		
 		
+		if (ls == LogStatus.FAIL) {
+			ErrorUtil eu = new ErrorUtil();
+			eu.addSoftFailure(msg);
+			//sa.assertTrue(false, msg);
+		}	
 		
 	}
 

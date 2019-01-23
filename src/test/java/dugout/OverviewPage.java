@@ -378,7 +378,7 @@ public class OverviewPage {
 			scrollObject.put("predicateString", "label == 'Spending Over Time'");
 			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Investing")).click();
+			Engine.iosd.findElement(By.name("Spending Over Time")).click();
 			Thread.sleep(1000);
 		}
 	}
