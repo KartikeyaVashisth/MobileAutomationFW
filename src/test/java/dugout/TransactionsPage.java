@@ -73,7 +73,7 @@ public class TransactionsPage {
 	public void navigateBackToDashboard() throws Exception{
 		
 		backButton.click();
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		
 		AllAccountsPage ap = new AllAccountsPage();
 		ap.navigateBackToDashboard();

@@ -41,7 +41,7 @@ public class Verify {
 			return false;	
 		}
 		catch (Throwable e){
-			System.out.println("****Error Occured****: Method->objExists");
+			System.out.println("****Error Occured****: Method->objExists"+e.getMessage());
 			quickenTest.log(LogStatus.ERROR,e.getMessage());
 			return false;	
 		}

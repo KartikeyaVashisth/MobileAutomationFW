@@ -19,6 +19,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -93,8 +94,11 @@ public class SignInPage {
 		//((JavascriptExecutor)Engine.ad).executeScript("sauce: break"); 
 		
 		if (! Verify.waitForObject(emailID, 8))
-			quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
-		System.out.println("SignInWidget appeared");
+			Commentary.log(LogStatus.ERROR, "SignIn widget not loaded");
+			//quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
+		//System.out.println("SignInWidget appeared");
+		Commentary.log(LogStatus.INFO, "SignInWidget appeared");
+		
 		
 		/*Thread.sleep(75000);
 		System.out.println("tttttt");
@@ -140,8 +144,11 @@ public class SignInPage {
 		if (! Verify.waitForObject(emailID, 8))
 			quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 		
-		emailID.sendKeys(Keys.CONTROL+"a");
-		emailID.sendKeys(Keys.DELETE);
+		Commentary.log(LogStatus.INFO, "SignInWidget appeared");
+		
+		emailID.click();
+		Thread.sleep(1000);
+		userName.clear();
 		emailID.sendKeys(username);
 		lblPassword.click();
 		Thread.sleep(1000);
@@ -155,8 +162,8 @@ public class SignInPage {
 		quickenTest.log(LogStatus.INFO,"Clicked on SignIn button");
 		Thread.sleep(5000);
 		
-		if (!dataset.equals(""))
-			selectDataset(dataset);
+		
+		selectDataset(dataset);
 		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
 			
@@ -233,8 +240,10 @@ public class SignInPage {
 				txtDataSet = (MobileElement) Engine.ad.findElement(By.xpath(xpath));
 				Thread.sleep(1000);
 				
+				Commentary.log(LogStatus.INFO, Engine.ad.findElement(By.xpath(xpath)).isDisplayed()+" "+bundle);
 				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed());
 				Engine.ad.findElement(By.xpath(xpath)).click();
+				Commentary.log(LogStatus.INFO, "Clicked on Dataset name "+bundle);
 				
 				btnDone.click();
 				Thread.sleep(10000);

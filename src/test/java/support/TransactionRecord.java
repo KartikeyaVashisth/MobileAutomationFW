@@ -7,8 +7,10 @@ public class TransactionRecord {
 	String account;
 	String payee;
 	String category;
-	String tags;
+	String[] tags;
 	String note;
+	String transactionType;
+	String mddyyyy;
 	
 	public void setCategoryType(String category) {
 		
@@ -35,7 +37,7 @@ public class TransactionRecord {
 		this.category = Category;
 	}
 	
-	public void setTags(String Tags) {
+	public void setTags(String[] Tags) {
 		
 		this.tags = Tags;
 	}
@@ -45,9 +47,29 @@ public class TransactionRecord {
 		this.note = Note;
 	}
 	
+	public void setTransactionType(String transactionType) {
+		
+		this.transactionType = transactionType;
+	}
+	
+	public void setDate(String mddyyyy) {
+		
+		this.mddyyyy = mddyyyy;
+	}
+	
 	public String getCategoryType() {
 		
 		return categoryType;
+	}
+	
+	public String getDate() {
+		
+		return mddyyyy;
+	}
+	
+	public String getTransactionType() {
+		
+		return transactionType;
 	}
 	
 	public String getAmount() {
@@ -70,7 +92,7 @@ public class TransactionRecord {
 		return this.category;
 	}
 	
-	public String getTag() {
+	public String[] getTags() {
 		
 		return this.tags;
 	}

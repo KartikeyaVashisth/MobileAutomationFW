@@ -2,10 +2,13 @@ package dugout;
 
 import org.openqa.selenium.support.PageFactory;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Commentary;
 import support.Engine;
 import support.Helper;
 
@@ -24,7 +27,7 @@ public class BankingAndCreditCardPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+	@iOSFindBy(xpath="//XCUIElementTypeNavigationBar/XCUIElementTypeButton")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
@@ -32,13 +35,33 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//*[@text='Checking']")
 	public MobileElement checkingAccount;
 	
-	// coded for android. IOS behavior not clearly known
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 0\"]")
+	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 0\"]")
+	public MobileElement select_todaysBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 1\"]")
+	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 1\"]")
+	public MobileElement select_OnlineBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"TODAY'S BALANCE\"]")
+	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
+	public MobileElement txtTodaysBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 2\"]")
+	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 2\"]")
+	public MobileElement select_ProjectedBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
+	public MobileElement addTransaction;
+	
+	
 	public MobileElement getAccount(String acctName) throws Exception{
 		
 		String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
 		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='"+acctName+"']";
 		//"//android.widget.ScrollView//android.view.ViewGroup//android.widget.TextView[normalize-space(@text)='"+acctName+"']";
-		
+		Commentary.log(LogStatus.INFO, "Finding Account ["+acctName+"]");
 		Helper h = new Helper();
 		
 		if (h.getEngine().equals("android")){
@@ -72,5 +95,36 @@ public class BankingAndCreditCardPage {
 		}
 		
 	}*/
+	
+	public void invokeTransactionDetailsFromAccountListBalanceHeader() throws Exception {
+		
+		txtTodaysBalance.click();
+		Thread.sleep(2000);
+		
+		AllAccountsPage aap = new AllAccountsPage();
+		aap.addTransaction.click();
+		Thread.sleep(1000);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		td.buttonDone.click();
+		Thread.sleep(1000);
+		
+	}
+	
+	public void invokeTransactionDetails() throws Exception{
+		
+		AllAccountsPage aap = new AllAccountsPage();
+		aap.addTransaction.click();
+		Thread.sleep(1000);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		td.buttonDone.click();
+		Thread.sleep(1000);
+		
+	}
+	
+	
+	
+	
 
 }
