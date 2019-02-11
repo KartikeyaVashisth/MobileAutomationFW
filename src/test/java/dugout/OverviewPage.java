@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.apache.bcel.verifier.VerifierFactoryObserver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -20,6 +21,7 @@ import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -53,7 +55,6 @@ public class OverviewPage {
 	@iOSFindBy(xpath="//*[normalize-space(@name)='Settings']")
 	@AndroidFindBy(xpath="//*[@content-desc='More options']")
 	MobileElement SettingsOrMoreOptions;*/
-	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking and Credit Account\"]")
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']")
 	public MobileElement accountsCard;
@@ -445,10 +446,41 @@ public class OverviewPage {
 		Thread.sleep(3000);
 	}*/
 	
+	public void swipeFromBottomToUp() 
+    {       
+      try  {
+             
+              
+              Helper h = new Helper();
+              
+              if (h.getEngine().equals("android")) {
+            	  scrollView.swipe(SwipeElementDirection.DOWN, 2, 2, 1000);  
+              }
+              else
+              {
+            	  /*
+            	  String elementID = this.accountsCard.getId();
+            	  HashMap<String, String> scrollObject = new HashMap<String, String>();
+            	  scrollObject.put("direction", "down");
+            	  scrollObject.put("element", elementID);
+            	  Engine.iosd.executeScript("mobile: swipe", scrollObject); 
+            	  */ 
+              }
+            	  
+              
+        }
+           catch (Exception e) 
+            {
+                Commentary.log(LogStatus.FAIL, "Swipe down Failed "+e.getMessage());
+            }   
+                         
+    }
+	
 	public void navigateToAcctList() throws Exception{
 		
+		swipeFromBottomToUp();	
 		accountsCard.click();
-	   Thread.sleep(3000);
+		Thread.sleep(3000);
 	}
 	
 	/*public void tapOnSpendingOverTimeCard() throws Exception{

@@ -4,11 +4,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import referee.Commentary;
+import referee.Verify;
 import support.Engine;
 import support.Helper;
 
@@ -66,6 +68,8 @@ public class BankingAndCreditCardPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
+				Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctName + "\").instance(0))"));
+				Thread.sleep(1000);
 				return (MobileElement) Engine.ad.findElementByXPath(xPathForAcct);
 			}
 			catch(Exception E){
@@ -118,6 +122,12 @@ public class BankingAndCreditCardPage {
 		Thread.sleep(1000);
 		
 		TransactionDetailPage td = new TransactionDetailPage();
+		
+		if (Verify.objExists(td.allowButton)) {
+			td.allowButton.click();
+			Thread.sleep(1000);
+		}
+		
 		td.buttonDone.click();
 		Thread.sleep(1000);
 		

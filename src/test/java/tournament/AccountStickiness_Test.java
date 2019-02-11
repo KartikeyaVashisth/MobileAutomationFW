@@ -324,6 +324,7 @@ public class AccountStickiness_Test extends Recovery {
 		else
 			Engine.iosd.getContext();
 		
+		
 		TransactionRecord tRec = new TransactionRecord();
 		tRec.setAccount(sOnlineCreditCard);
 		tRec.setAmount("2.34");
@@ -334,7 +335,9 @@ public class AccountStickiness_Test extends Recovery {
 		op.navigateToAcctList();
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.getAccount(sOnlineCreditCard).click();
-		bcc.addTransaction.click();
+		
+		AllAccountsPage aap = new AllAccountsPage();
+		aap.addTransaction.click();
 		Thread.sleep(1000);
 		
 		
@@ -342,14 +345,16 @@ public class AccountStickiness_Test extends Recovery {
 		td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+sOnlineCreditCard+"]");
 		
-		
-		
+		/*
 		bcc.backButton.click();
-		Thread.sleep(2000);
+		Thread.sleep(2000); 
+		*/
+		aap.navigateBackToDashboard();
+		op.navigateToAcctList();
+		
 		bcc.txtTodaysBalance.click();
 		Thread.sleep(1000);
 		
-		AllAccountsPage aap = new AllAccountsPage();
 		aap.addTransaction.click();
 		Thread.sleep(1000);
 		td.buttonDone.click();

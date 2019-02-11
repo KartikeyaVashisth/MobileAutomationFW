@@ -35,7 +35,7 @@ public class AllAccountsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='All Transactions']")
 	public MobileElement textAllTransactions;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back']")
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back' or @name=\"Banking & Credit\"]")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
@@ -71,6 +71,13 @@ public class AllAccountsPage {
 		
 		backButton.click();
 		Thread.sleep(3000);
+		
+		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		if (Verify.objExists(bcc.backButton)) {
+			bcc.backButton.click();
+			Thread.sleep(2000);
+		}
+		
 	}
 	
 	public void searchTransaction(String searchString) throws Exception{

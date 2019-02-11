@@ -181,7 +181,8 @@ public class Helper {
 		if (getEngine().equals("android")){
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-			capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
+			//capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
+			capabilities.setCapability("appiumVersion", "1.7.1");
 			capabilities.setCapability("automationName","appium");
 			//capabilities.setCapability("deviceName","Android Emulator");
 			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
@@ -336,6 +337,17 @@ public class Helper {
 			
 			
 		}
+	}
+	
+	public void hideKeyBoard() throws Exception {
+		
+		if (this.getEngine().equals("android")) 
+			Engine.ad.hideKeyboard();
+		else
+			Engine.iosd.hideKeyboard();
+		
+		Thread.sleep(1000);
+		
 	}
 		
 		
