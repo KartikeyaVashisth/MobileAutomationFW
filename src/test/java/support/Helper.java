@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -348,6 +351,41 @@ public class Helper {
 		
 		Thread.sleep(1000);
 		
+	}
+	
+	public void getContext() throws Exception {
+		
+		if (this.getEngine().equals("android")) 
+			Engine.ad.getContext();
+		else
+			Engine.iosd.getContext();
+		
+		Thread.sleep(1000);	
+	}
+	
+	public Double processBalanceAmount(String sBalance) {
+		
+		String a[] = sBalance.split("");
+		int i;
+		String temp="";
+		
+		for(i=0; i<a.length; i++) {
+			if (a[i].equals("$"))
+				//ignore
+				;
+			else
+				temp = temp+a[i];		
+		}
+		
+		return Double.parseDouble(temp);
+	}
+	
+	public String getYesterdaysDate() {
+		
+		Date date = DateUtils.addDays(new Date(), -1);
+		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy");
+		
+		return sdf.format(date);
 	}
 		
 		

@@ -59,6 +59,30 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']")
 	public MobileElement accountsCard;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[3]")
+	public MobileElement checkingBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Cash']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[5]")
+	public MobileElement cashBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Credit']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[7]")
+	public MobileElement creditBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Savings']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[9]")
+	public MobileElement savingsBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Other']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[11]")
+	public MobileElement otherBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[13]")
+	public MobileElement totalBalance;
+	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
 	public MobileElement addTransaction;

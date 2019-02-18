@@ -4,6 +4,7 @@ import java.text.DateFormatSymbols;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 
@@ -409,7 +410,7 @@ public class TransactionDetailPage {
 			
 			this.buttonSave.click();
 			
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			
 		}
 			
@@ -487,7 +488,7 @@ public class TransactionDetailPage {
 		
 	}
 	
-	public void enterDate(String mddyyyy) throws InterruptedException {
+	public void enterDate(String mddyyyy) throws Exception {
 		
 		Helper h = new Helper();
 		
@@ -517,32 +518,34 @@ public class TransactionDetailPage {
 		touch.longPress(this.enterMonth,1000).release();
 		Engine.ad.performTouchAction(touch);
 		Engine.ad.getKeyboard().pressKey(month);
-		Thread.sleep(2000);
-		System.out.println(Engine.ad.getContext());
+		Thread.sleep(500);
+		Engine.ad.getContext();
+		
 		
 		TouchAction touch2 = new TouchAction(Engine.ad);
 		touch2.longPress(this.enterDate,1000).release();
 		Engine.ad.performTouchAction(touch2);
 		Engine.ad.getKeyboard().pressKey(date);
-		Thread.sleep(2000);
-		System.out.println(Engine.ad.getContext());
+		Thread.sleep(500);
+		
 		
 		TouchAction touch3 = new TouchAction(Engine.ad);
 		touch3.longPress(this.enterYear,1000).release();
 		Engine.ad.performTouchAction(touch3);
 		Engine.ad.getKeyboard().pressKey(year);
-		Thread.sleep(2000);
-		System.out.println(Engine.ad.getContext());
+		Thread.sleep(1000);
 		
 		this.buttonOK.click();
-		Thread.sleep(2000);	
-		System.out.println(Engine.ad.getContext());
+		Thread.sleep(1000);	
+		Engine.ad.getContext();
 		
 	}
 	
-	public void enterDate_IOS(String mddyyyy) throws InterruptedException {
+	public void enterDate_IOS(String mddyyyy) throws Exception {
 		
 		String[] a = mddyyyy.split("/");
+		
+		Helper h = new Helper();
 		
 		String month = new DateFormatSymbols().getShortMonths()[Integer.parseInt(a[0])-1].toString();
 		String date = a[1];
@@ -550,25 +553,28 @@ public class TransactionDetailPage {
 		
 		if (! Verify.objExists(this.datePicker)) {
 			this.dateLabel.click();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
+		
+		
 		
 		int iCount;
 		
 		for (iCount=0; iCount < 3; iCount++)
 			enterMonth.sendKeys(month);
-		Thread.sleep(2000);
+		Thread.sleep(500);
+		h.getContext();
 		
 		for (iCount=0; iCount < 3; iCount++)
 			enterDate.sendKeys(date);
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		
-		for (iCount=0; iCount < 3; iCount++)
+		for (iCount=0; iCount < 2; iCount++)
 			enterYear.sendKeys(year);
-		Thread.sleep(2000);
+		h.getContext();
 		
 		this.buttonOK.click();
-		Thread.sleep(2000);	
+		Thread.sleep(500);	
 		
 	}
 	
@@ -576,12 +582,7 @@ public class TransactionDetailPage {
 	public void selectAccount (String acct) throws Exception {
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android")) 
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
-		
-		
+		h.getContext();
 		
 		this.account.click();
 		
@@ -589,7 +590,8 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")) {
 			String xpath = "//android.widget.TextView[@text='"+acct+"']";
-			
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
+			Thread.sleep(1000);
 			if (! Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] not found on choose account");
 				throw new Exception("Error****** Account ["+acct+"] not found on choose account");
@@ -597,19 +599,52 @@ public class TransactionDetailPage {
 			
 			Engine.ad.findElement(By.xpath(xpath)).click();
 			
-			Thread.sleep(2000);
+			Thread.sleep(500);
 			
 		}
 		else {
 			String xpath = "//XCUIElementTypeOther[@name='"+acct+"']";
+			MobileElement me = (MobileElement)Engine.iosd.findElement(By.name(acct));
+			/*
+			MobileElement element = (MobileElement) Engine.iosd.findElement(By.name(acct));
+			String elementID = element.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", elementID);
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);
+			Thread.sleep(1000);
 			if (! Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] not found on choose account");
 				throw new Exception("Error****** Account ["+acct+"] not found on choose account");
 			}
+			*/
 			
-			Engine.iosd.findElement(By.xpath(xpath)).click();
+			/*
+			MobileElement element = (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeOther[contains(@name,'Choose an Account')]//XCUIElementTypeScrollView"));
+			String parentID = element.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", parentID);
+			scrollObject.put("name", acct);
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);*/
 			
-			Thread.sleep(2000);
+			if (! Verify.objExists(me)) {
+				
+				try {
+					JavascriptExecutor js = (JavascriptExecutor) Engine.iosd; 
+					HashMap<String, String> scrollObject = new HashMap(); 
+					scrollObject.put("direction", "up"); 
+					scrollObject.put("xpath", xpath); 
+					js.executeScript("mobile: swipe", scrollObject);
+					Thread.sleep(500);	
+				}
+				catch (Exception e) {
+					Commentary.log(LogStatus.FAIL, e.getMessage());
+				}
+					
+			}
+			
+			
+			me.click();
 			
 		}
 		
@@ -620,7 +655,7 @@ public class TransactionDetailPage {
 		// verify if the account got selected or not
 		if (Verify.objExists(this.closeChooseAccount)) {
 			this.closeChooseAccount.click();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 			//Commentary.log(LogStatus.FAIL,"Error****** Transaction Detail > Choose Account screen > tapping on Account ["+acct+"] did not close Choose Account screen");
 		
@@ -688,7 +723,7 @@ public class TransactionDetailPage {
 		
 		Thread.sleep(1000);
 		Engine.ad.findElement(By.xpath(sXpath)).click();
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 		
 		if (Verify.objExists(this.closeCategory)) {
 			this.closeCategory.click();
@@ -704,11 +739,11 @@ public class TransactionDetailPage {
 		
 		this.searchCategory(category);
 		Engine.iosd.findElement(By.xpath(sXpath)).click();
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 		
 		if (Verify.objExists(this.closeCategory)) {
 			this.closeCategory.click();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 	}
 	
@@ -716,7 +751,7 @@ public class TransactionDetailPage {
 		
 		if (! Verify.objExists(this.closeCategory)) {
 			this.category.click();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 		
 		this.searchCategoryTextField.click();
@@ -774,14 +809,14 @@ public class TransactionDetailPage {
 		Integer iCount;
 		
 		this.tags.click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		Engine.iosd.getContext();
 		
 		for (iCount=0; iCount<sTag.length; iCount++) {
 			
 			String sXpath = "//XCUIElementTypeOther[@name='"+sTag[iCount]+"']";
 			Engine.iosd.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);	
+			Thread.sleep(500);	
 			Engine.iosd.getContext();
 		}
 		
