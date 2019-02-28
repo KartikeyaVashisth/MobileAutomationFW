@@ -210,11 +210,11 @@ public class OverviewPage {
 	public void scrollUptoAccountsCard() throws Exception {
 		
 		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(7000);
+		Thread.sleep(2000);
 		
 	}
 	
@@ -257,7 +257,7 @@ public class OverviewPage {
 		//Thread.sleep(1000);
 		
 		recentTransactionsCard.click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 	}
 	
@@ -273,7 +273,7 @@ public class OverviewPage {
 				
 				Dimension size = Engine.iosd.manage().window().getSize();
 				Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				
 			}
 				
@@ -302,7 +302,7 @@ public class OverviewPage {
 			
 			Dimension size = Engine.iosd.manage().window().getSize();
 			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			
 			
 		}
@@ -315,13 +315,13 @@ public class OverviewPage {
 		if (h.getEngine().equals("android")) {
 			Dimension size = Engine.ad.manage().window().getSize();
 			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(3000);	
+			Thread.sleep(1000);	
 		}
 		else {
 			
 			Dimension size = Engine.iosd.manage().window().getSize();
 			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			
 			
 		}
@@ -504,7 +504,7 @@ public class OverviewPage {
 		
 		swipeFromBottomToUp();	
 		accountsCard.click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 	
 	/*public void tapOnSpendingOverTimeCard() throws Exception{

@@ -80,10 +80,27 @@ public class Recovery {
 		Engine.setDriver();
 		System.out.println("Mobile Engine on...");
 		
-		if (h.getEngine().equals("android"))
-			Engine.ad.launchApp();
-		else
-			Engine.iosd.launchApp();
+		if (h.getEngine().equals("android")) {
+			try {
+				Engine.ad.findElement(By.xpath("//*[@text='Quicken']")).click();
+				Thread.sleep(1000);
+				Engine.ad.findElement(By.xpath("//android.widget.Switch[@text='OFF']")).click();
+				Thread.sleep(1000);
+				}
+			catch (Exception e) {
+					
+				}	
+		}
+		
+		else {
+			try {
+				Engine.iosd.switchTo().alert().accept();
+				}
+			catch (Exception e) {
+					
+				}
+		}
+		
 		
 		System.out.println("launch done...");
 		
@@ -151,7 +168,8 @@ public class Recovery {
 		      quickenTest.log(LogStatus.FAIL, result.getThrowable());
 		   } 
 		
-	
+		
+		
 		/*System.out.println("softFails size...."+softFails.size());
 		System.out.println("softFails size...."+softFails.size());
 		if (softFails.size() != 0){
@@ -163,6 +181,7 @@ public class Recovery {
 		System.out.println(softFails.size() != 0);*/
 		if ((softFails.size() != 0)){
 			quickenTest.log(LogStatus.FAIL,method.getName());
+			
 			/*result.setStatus(ITestResult.FAILURE);
 			System.out.println("set the status to failure......!");
 			

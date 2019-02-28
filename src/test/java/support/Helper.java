@@ -208,10 +208,12 @@ public class Helper {
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
 		    capabilities.setCapability("deviceName", "iPhone 6 Simulator");
-		    capabilities.setCapability("platformVersion", "12.0"); //9.3
+		    //capabilities.setCapability("platformVersion", "12.0"); //9.3
+		    capabilities.setCapability("platformVersion", "11.2");
 		    capabilities.setCapability("browserName", "");
 		    capabilities.setCapability("deviceOrientation", "portrait");
-		    capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
+		    //capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
+		    capabilities.setCapability("appiumVersion", "1.8.0");// 1.5.3
 		    capabilities.setCapability("autoWebView", "true");
 		    capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true);
@@ -239,11 +241,14 @@ public class Helper {
 			capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noResetValue", true);
+			capabilities.setCapability("autoGrantPermissions", true);
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("appPackage","com.quicken.qm2014");
+			//capabilities.setCapability("appWaitActivity","com.android.settings.Settings$OverlaySettingsActivity, com.quicken.qm2014.MainActivity");
+			//capabilities.setCapability("appWaitPackage","com.android.settings, com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
+			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 			
 		}
@@ -282,7 +287,9 @@ public class Helper {
 			
 			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-			capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
+			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
+			capabilities.setCapability("platformVersion", "11.2");
+			 capabilities.setCapability("appiumVersion", "1.8.0");
 			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
