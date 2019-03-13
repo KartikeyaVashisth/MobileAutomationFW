@@ -84,6 +84,18 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
+	public MobileElement addTransaction;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"TODAY'S BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
+	public MobileElement txtTodaysBalanceAmount;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]")
+	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
+	public MobileElement txtTodaysBalance;
+	
 	
 
 }

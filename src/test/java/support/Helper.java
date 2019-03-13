@@ -197,7 +197,7 @@ public class Helper {
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("maxDuration", 3250);
+			capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
 			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
@@ -217,7 +217,7 @@ public class Helper {
 		    capabilities.setCapability("autoWebView", "true");
 		    capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true);
-	        capabilities.setCapability("maxDuration", 3250);
+	        capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("app", "sauce-storage:Quicken.zip");
@@ -369,7 +369,7 @@ public class Helper {
 		else
 			Engine.iosd.getContext();
 		
-		Thread.sleep(1000);	
+		Thread.sleep(500);	
 	}
 	
 	public Double processBalanceAmount(String sBalance) {
@@ -395,6 +395,15 @@ public class Helper {
 		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy");
 		
 		return sdf.format(date);
+	}
+	
+	public String getFutureDaysDate(Integer daysFromToday) {
+		
+		Date date = DateUtils.addDays(new Date(), daysFromToday);
+		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy");
+		
+		return sdf.format(date);
+		
 	}
 		
 		

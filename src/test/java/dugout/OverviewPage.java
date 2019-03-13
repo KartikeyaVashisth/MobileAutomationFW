@@ -502,7 +502,15 @@ public class OverviewPage {
 	
 	public void navigateToAcctList() throws Exception{
 		
-		swipeFromBottomToUp();	
+		System.out.println("Debug statement..Checking accounts...card...");
+		
+		if (!Verify.objExists(accountsCard)) {
+			swipeFromBottomToUp();	
+			Verify.waitForObjectToDisappear(refreshSpinnerIcon, 5);
+		}
+		
+		System.out.println("Debug statement..Checking accounts...card...Done");
+		
 		accountsCard.click();
 		Thread.sleep(2000);
 	}

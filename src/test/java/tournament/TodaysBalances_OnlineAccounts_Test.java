@@ -68,27 +68,27 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (sOverviewChecking.equals(sChecking))
 			Commentary.log(LogStatus.INFO, "Checking balance on accounts card ["+sOverviewChecking+"]  matches with account list screen balance ["+sChecking+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Checking balance on accounts card ["+sOverviewChecking+"], Checking balance on account list screen ["+sChecking+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance on accounts card ["+sOverviewChecking+"], Checking balance on account list screen ["+sChecking+"]");
 		
 		if (sOverviewCash.equals(sCash))
 			Commentary.log(LogStatus.INFO, "Cash balance on accounts card ["+sOverviewCash+"]  matches with account list screen balance ["+sCash+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Cash balance on accounts card ["+sOverviewCash+"], Cash balance on account list screen ["+sCash+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cash balance on accounts card ["+sOverviewCash+"], Cash balance on account list screen ["+sCash+"]");
 		
 		if (sOverviewCC.equals(sCC))
 			Commentary.log(LogStatus.INFO, "CreditCard balance on accounts card ["+sOverviewCC+"]  matches with account list screen balance ["+sCC+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: CreditCard balance on accounts card ["+sOverviewCC+"], CreditCard balance on account list screen ["+sCC+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard balance on accounts card ["+sOverviewCC+"], CreditCard balance on account list screen ["+sCC+"]");
 		
 		if (sOverviewSavingsBalance.equals(sSavings))
 			Commentary.log(LogStatus.INFO, "Savings balance on accounts card ["+sOverviewSavingsBalance+"]  matches with account list screen balance ["+sSavings+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Savings balance on accounts card ["+sOverviewSavingsBalance+"], Savings balance on account list screen ["+sSavings+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance on accounts card ["+sOverviewSavingsBalance+"], Savings balance on account list screen ["+sSavings+"]");
 		
 		if (sTotal.equals(sTodays))
 			Commentary.log(LogStatus.INFO, "Total balance on accounts card ["+sTotal+"]  matches with account list screen balance ["+sTodays+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance on accounts card ["+sTotal+"], Today's balance on account list screen ["+sTodays+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance on accounts card ["+sTotal+"], Today's balance on account list screen ["+sTodays+"]");
 		
 		sa.assertAll();	
 		
@@ -133,12 +133,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dChecking_before-d==dChecking_after)
 			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before-d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -185,12 +185,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dChecking_before+d==dChecking_after)
 			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added income transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added income transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added income transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before+d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -236,12 +236,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dCC_before-d==dCC_after)
 			Commentary.log(LogStatus.INFO, "CC balance was ["+dCC_before+"], added expense transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added expense transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added expense transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		
 		if (dTotal_before-d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -291,12 +291,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dCC_before+d==dCC_after)
 			Commentary.log(LogStatus.INFO, "CC balance was ["+dCC_before+"], added income transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added income transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added income transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		
 		if (dTotal_before+d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -341,12 +341,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dBefore-d==dAfter)
 			Commentary.log(LogStatus.INFO, "Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now CASH balance shows ["+dAfter+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now CASH balance shows ["+dAfter+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now CASH balance shows ["+dAfter+"]");
 		
 		if (dTotal_before-d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -393,12 +393,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dBefore+d==dAfter)
 			Commentary.log(LogStatus.INFO, "CASH balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the CASH balance shows ["+dAfter+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: CASH balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the CASH balance shows ["+dAfter+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: CASH balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the CASH balance shows ["+dAfter+"]");
 		
 		if (dTotal_before+d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -443,12 +443,12 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dBefore-d==dAfter)
 			Commentary.log(LogStatus.INFO, "Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now SAVINGS balance shows ["+dAfter+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now SAVINGS balance shows ["+dAfter+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now SAVINGS balance shows ["+dAfter+"]");
 		
 		if (dTotal_before-d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
@@ -464,7 +464,7 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		String sBefore, sTotal_before, sAfter, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
-		tRec.setAccount(sOnlineCash);
+		tRec.setAccount(sOnlineSaving);
 		tRec.setAmount("5.00");
 		tRec.setTransactionType("income");
 		tRec.setDate(h.getYesterdaysDate());
@@ -495,15 +495,19 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		if (dBefore+d==dAfter)
 			Commentary.log(LogStatus.INFO, "SAVINGS balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the SAVINGS balance shows ["+dAfter+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: SAVINGS balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the SAVINGS balance shows ["+dAfter+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: SAVINGS balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the SAVINGS balance shows ["+dAfter+"]");
 		
 		if (dTotal_before+d==dTotal_after)
 			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
 		
 	}
+	
+	
+	
+	
 
 }

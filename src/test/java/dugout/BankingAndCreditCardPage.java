@@ -113,6 +113,9 @@ public class BankingAndCreditCardPage {
 		}
 		else {
 			try{
+				
+				if (!Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(xPathForAcct_IOS))))
+					scrollToAccount(acctName);
 				return (MobileElement) Engine.iosd.findElementByXPath(xPathForAcct_IOS);
 			}
 			catch(Exception E){

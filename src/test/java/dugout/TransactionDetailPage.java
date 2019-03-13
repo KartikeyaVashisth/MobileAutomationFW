@@ -410,7 +410,7 @@ public class TransactionDetailPage {
 			
 			this.buttonSave.click();
 			
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			
 		}
 			
