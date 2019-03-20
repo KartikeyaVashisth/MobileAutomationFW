@@ -1,5 +1,6 @@
 package dugout;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -84,6 +85,10 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
+	@iOSFindBy(xpath="//*[@name='All Transactions']")
+	@AndroidFindBy(xpath="//*[@text='All Transactions']")
+	public MobileElement txtAllTransactions;
+	
 	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
@@ -95,6 +100,10 @@ public class TransactionsPage {
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]")
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
 	public MobileElement txtTodaysBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
+	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
+	public MobileElement txtProjectedBalanceAmount;
 	
 	
 

@@ -3,12 +3,14 @@ package dugout;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.events.api.general.AlertEventListener;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -56,6 +58,14 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//*[@text=\"ONLINE BALANCE\"]")
 	public MobileElement txtOnlineBalance;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]")
+	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]")
+	public MobileElement txtProjectedBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
+	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
+	public MobileElement txtProjectedBalanceAmount;
+	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"CHECKING\"]/../XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CHECKING\"]/../android.widget.TextView[2]")
 	public MobileElement checkingBalance;
@@ -79,7 +89,7 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"TODAY'S BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
 	public MobileElement txtTodaysBalanceAmount;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"ONLINE BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
 	public MobileElement txtActualBalance;
 	
@@ -206,6 +216,38 @@ public class BankingAndCreditCardPage {
 	
 	}
 	
+	public String getAccountBalance_android (String acct) throws Exception {
+		
+		String xpath = "//*[@text='"+acct+"']/../*[contains(@text, '$')]";
+		
+		this.scrollToAccount(acct);
+		
+		return Engine.ad.findElement(By.xpath(xpath)).getText();
+		
+	}
+	
+	public String getAccountBalance_IOS (String acct) throws Exception {
+		
+		String xpath = "//*[@name='"+acct+"']/../*[contains(@name, '$')]";
+		
+		this.scrollToAccount(acct);
+		
+		return Engine.iosd.findElement(By.xpath(xpath)).getText();
+		
+	}
+	
+	public String getAccountBalance(String acct) throws Exception {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android"))
+			return getAccountBalance_android (acct);
+		else
+			return getAccountBalance_IOS (acct);
+			
+		
+	}
+	
 	public void scrollToAccount(String acctType) throws Exception {
 		
 		Helper h = new Helper();
@@ -226,5 +268,85 @@ public class BankingAndCreditCardPage {
 			Thread.sleep(1000);
 	}
 	
+	}
+	
+	
+	
+	/* swipes from todaysbalance to projected balance
+	 make sure the screen stays on todaysbalance before calling this method */
+	
+	public void scrollToProjectedBalance() throws Exception {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android"))
+			scrollToProjectedBalance_android();
+		else
+			scrollToProjectedBalance_ios();
+			
+			
+	}
+	
+	public void scrollToProjectedBalance_android() throws Exception{
+		
+		Dimension size = this.txtTodaysBalanceAmount.getSize();
+		
+		int x_start=(int)(size.width*0.90);
+        int x_end=(int)(size.width*0.10);
+        int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
+		
+		Integer i;
+        for (i = 0; i<2; i++) {
+        	Engine.ad.swipe(x_start,y,x_end,y,4000);
+        	Thread.sleep(1000);
+        }	
+	}
+	
+	public void scrollToProjectedBalance_ios() throws Exception{
+		
+		    
+		 	MobileElement element = this.txtTodaysBalance;
+	        String elementID = element.getId();
+	        HashMap<String, String> scrollObject = new HashMap<String, String>();
+	        scrollObject.put("element", elementID); // Only for ‘scroll in element’
+	        scrollObject.put("direction", "right");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject);
+	        Thread.sleep(1000);
+	        
+	        MobileElement element1 = this.txtOnlineBalance;
+	        String elementID1 = element1.getId();
+	        HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+	        scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
+	        scrollObject1.put("direction", "right");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
+	        Thread.sleep(1000);
+	        
+	        Helper h = new Helper();
+	        h.getContext();
+	        
+	        TransactionsPage tp = new TransactionsPage();
+	        System.out.println("eeeee....");
+	        tp.backButton.click();
+        	Thread.sleep(1000);
+	        
+	        
+	        
+	        
+	        
+		    /*
+			MobileElement element = (MobileElement)Engine.iosd.findElement(By.name("TODAY'S BALANCE"));
+	        String elementID = element.getId();
+	        HashMap<String, String> scrollObject = new HashMap<String, String>();
+	        scrollObject.put("element", elementID); // Only for ‘scroll in element’
+	        scrollObject.put("direction", "right");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject);
+	        
+	        MobileElement element1 = (MobileElement)Engine.iosd.findElement(By.name("ONLINE BALANCE"));
+	        String elementID1 = element1.getId();
+	        HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+	        scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
+	        scrollObject1.put("direction", "right");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
+	        */
 	}
 }
