@@ -51,20 +51,25 @@ public class SignInPage {
 	
 	
 	
-	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
-	@iOSFindBy(xpath="//*[@name='Quicken ID or Email']")
+	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
+	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID']") 
+	@iOSFindBy(xpath="//*[@name='Quicken ID']")
 	public MobileElement emailID;
 	
-	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Quicken\"]/XCUIElementTypeOther/XCUIElementTypeTextField")
+	
+	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
+	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
+	@iOSFindBy(xpath="//XCUIElementTypeTextField")
 	public MobileElement userName;
 	
 	@AndroidFindBy(xpath="//*[@content-desc ='Password']")
+	//@AndroidFindBy(xpath="//*[@text='Password']")
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
 	public MobileElement lblPassword;
 	
-	@AndroidFindBy(xpath="//input[@id='ius-password']")
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
+	//@AndroidFindBy(xpath="//input[@id='ius-password']")
+	@AndroidFindBy(xpath="//android.widget.EditText[@password='true']")
+	@iOSFindBy(xpath="//XCUIElementTypeSecureTextField")
 	public MobileElement password;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN']")
