@@ -241,14 +241,17 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
 			
 		}
-		
-		/*if (!Verify.objExists(recentTransactionsCard)) {
-			scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
-			Thread.sleep(1000);	
-		}*/
-		
-		//scrollView.swipe(SwipeElementDirection.UP, 10, 10, 1000);
-		//Thread.sleep(1000);
+		else {
+			String sXpath="//*[@name='Recent Transactions']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == 'Recent Transactions'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			
+		}
 		
 		recentTransactionsCard.click();
 		Thread.sleep(2000);
