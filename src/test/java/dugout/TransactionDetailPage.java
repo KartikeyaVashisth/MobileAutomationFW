@@ -190,7 +190,7 @@ public class TransactionDetailPage {
 	
 	// ------------------ Category SCREEN ------------------
 	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closeCategory\"]/XCUIElementTypeImage")
-	@AndroidFindBy(xpath="//*[@content-desc='closeCategory']/android.widget.ImageView")
+	@AndroidFindBy(xpath="//*[@content-desc='closeCategories']/android.widget.ImageView")
 	public MobileElement closeCategory;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeTextField[@value=\"Search Category\"]")
@@ -547,7 +547,8 @@ public class TransactionDetailPage {
 		
 		Helper h = new Helper();
 		
-		String month = new DateFormatSymbols().getShortMonths()[Integer.parseInt(a[0])-1].toString();
+		String month = new DateFormatSymbols().getMonths()[Integer.parseInt(a[0])-1].toString();
+		//new DateFormatSymbols().getShortMonths()[Integer.parseInt(a[0])-1].toString();
 		String date = a[1];
 		String year = a[2];
 		
@@ -735,7 +736,7 @@ public class TransactionDetailPage {
 	
 	public void selectCategory_ios (String category) throws Exception {
 		
-		String sXpath = "//XCUIElementTypeOther[@name='"+category+"']";
+		String sXpath = "//XCUIElementTypeScrollView//XCUIElementTypeOther[@name='"+category+"']";
 		
 		this.searchCategory(category);
 		Engine.iosd.findElement(By.xpath(sXpath)).click();

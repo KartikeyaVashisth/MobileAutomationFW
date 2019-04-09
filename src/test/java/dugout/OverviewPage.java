@@ -209,32 +209,26 @@ public class OverviewPage {
 	
 	public void scrollUptoAccountsCard() throws Exception {
 		
-		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(1000);
-		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(1000);
-		scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(2000);
+		Integer iCount;
+		
+		for (iCount=0; iCount<3; iCount++) {
+			
+			scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000); 
+			
+			if (Verify.objExists_check(this.refreshSpinnerIcon))
+				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+			
+			if (Verify.objExists_check(this.accountsCard))
+				return;
+			
+		}
+		
+		
+		
 		
 	}
 	
-	/*
-	public void tapOnRecentTransactionsCard() throws Exception {
-		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		
-		if (!Verify.objExists(recentTransactionsCard)) {
-			scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
-			Thread.sleep(1000);	
-		}
-		
-		//scrollView.swipe(SwipeElementDirection.UP, 10, 10, 1000);
-		//Thread.sleep(1000);
-		
-		recentTransactionsCard.click();
-		Thread.sleep(3000);
-		
-	}*/
+	
 	
 	public void tapOnRecentTransactionsCard() throws Exception {
 		
@@ -274,6 +268,8 @@ public class OverviewPage {
 				Dimension size = Engine.iosd.manage().window().getSize();
 				Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
 				Thread.sleep(1000);
+				topTrendingCard.click();
+				Thread.sleep(1000);
 				
 			}
 				
@@ -281,13 +277,19 @@ public class OverviewPage {
 		}
 		else {
 		if (!Verify.objExists(topTrendingCard)) {
+			/*
 			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
 			Thread.sleep(1000);	
+			*/
+			String sXpath="//android.widget.TextView[@text='Top Trending Categories']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Top Trending Categories\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
 		}
 		}
 		
-		topTrendingCard.click();
-		Thread.sleep(3000);
+		
 	}
 	
 	public void quicken_scroll() throws InterruptedException {
@@ -353,32 +355,7 @@ public class OverviewPage {
 		Thread.sleep(3000);
 	}
 	
-	/*
-	public void tapOnSpendingOverTimeCard() throws Exception{
-		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		
-		Integer iCount = 0;
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		while (iCount < 4) {
-			
-			quicken_scroll();
-			
-			iCount++;	
-			
-			if (Verify.objExists(spendingOverTimeCard))
-				break;
-			
-		}
-		
-		
-		if (!Verify.objExists(spendingOverTimeCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [spendingOverTimeCard] did not appear");
-		}
-		spendingOverTimeCard.click();
-		Thread.sleep(10000);
-	}*/
+	
 	
 	public void tapOnSpendingOverTimeCard() throws Exception{
 		
@@ -441,34 +418,7 @@ public class OverviewPage {
 		Thread.sleep(5000);
 	}
 	
-	/*public void tapOnTransactionSummaryCard() throws Exception{
-		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		Integer iCount = 0;
-		
-		while (iCount < 3) {
-			
-			if (!Verify.objExists(transactionSummaryCard)) {
-				scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
-				Thread.sleep(2000);	
-			}
-			
-			iCount++;	
-			
-			if (Verify.objExists(transactionSummaryCard))
-				break;
-			
-		}
-		
-		
-		if (!Verify.objExists(transactionSummaryCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [transactionSummaryCard] did not appear");
-		}
-		transactionSummaryCard.click();
-		Thread.sleep(3000);
-	}*/
+	
 	
 	public void swipeFromBottomToUp() 
     {       
@@ -502,82 +452,20 @@ public class OverviewPage {
 	
 	public void navigateToAcctList() throws Exception{
 		
-		System.out.println("Debug statement..Checking accounts...card...");
+		
 		
 		if (!Verify.objExists(accountsCard)) {
 			swipeFromBottomToUp();	
 			Verify.waitForObjectToDisappear(refreshSpinnerIcon, 5);
 		}
 		
-		System.out.println("Debug statement..Checking accounts...card...Done");
+		
 		
 		accountsCard.click();
 		Thread.sleep(2000);
 	}
 	
-	/*public void tapOnSpendingOverTimeCard() throws Exception{
-		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		
-		Integer iCount = 0;
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		while (iCount < 3) {
-			
-			if (!Verify.objExists(spendingOverTimeCard)) {
-				scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
-				Thread.sleep(4000);	
-			}
-			
-			iCount++;	
-			
-			if (Verify.objExists(spendingOverTimeCard))
-				break;
-			
-		}
-		
-		
-		if (!Verify.objExists(spendingOverTimeCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [spendingOverTimeCard] did not appear");
-		}
-		spendingOverTimeCard.click();
-		Thread.sleep(10000);
-	}*/
 	
-	/*public void tapOnNetIncomeOverTimeCard() throws Exception{
-		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		
-		Integer iCount = 0;
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		while (iCount < 3) {
-			
-			System.out.println(Verify.objExists(netIncomeOverTimeCard));
-			
-			if (!Verify.objExists(netIncomeOverTimeCard)) {
-				/*scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
-				Thread.sleep(2000);	*/
-				
-			/*	Dimension size = Engine.ad.manage().window().getSize();
-				Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-				Thread.sleep(3000);
-			}
-			
-			iCount++;	
-			
-			if (Verify.objExists(netIncomeOverTimeCard))
-				break;
-			
-		}
-		
-		
-		if (!Verify.objExists(netIncomeOverTimeCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [netIncomeOverTimeCard] did not appear");
-		}
-		netIncomeOverTimeCard.click();
-		Thread.sleep(5000);
-	}*/
 	
 	public void tapOnBudgetCard() throws Exception {
 		
@@ -644,7 +532,38 @@ public class OverviewPage {
 	}
 	
 	
+	public void scrollToTop() throws Exception{
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android"))
+			scrollUptoAccountsCard();
+		else
+			scrollToTop_IOS();
+			
+		
+	}
 	
+	public void scrollToTop_IOS() throws Exception{
+		
+		Integer iCount;
+		
+		for (iCount=0; iCount<3; iCount++) {
+			
+			Dimension size = Engine.iosd.manage().window().getSize();
+			System.out.println(size.height);
+			System.out.println(size.height/4);
+			Engine.iosd.swipe(size.width - 10, size.height/4, size.width - 10, size.height-50, 500);
+			
+			if (Verify.objExists(this.refreshSpinnerIcon))
+				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+			
+			if (Verify.objExists(this.accountsCard))
+				return;
+			
+		}
+		
+		
+	}
 	
 	
 	

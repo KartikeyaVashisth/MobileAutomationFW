@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -185,7 +187,8 @@ public class Helper {
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
-			capabilities.setCapability("appiumVersion", "1.7.1");
+			//capabilities.setCapability("appiumVersion", "1.7.1");
+			capabilities.setCapability("appiumVersion", "1.9.1");
 			capabilities.setCapability("automationName","appium");
 			//capabilities.setCapability("deviceName","Android Emulator");
 			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
@@ -289,7 +292,7 @@ public class Helper {
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
 			capabilities.setCapability("platformVersion", "11.2");
-			 capabilities.setCapability("appiumVersion", "1.8.0");
+			 capabilities.setCapability("appiumVersion", "1.8.0"); //1.8.0
 			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
@@ -298,6 +301,8 @@ public class Helper {
 	        capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
 	        capabilities.setCapability("browserName", "");
+	        
+	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
 	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
 	        
@@ -379,7 +384,7 @@ public class Helper {
 		String temp="";
 		
 		for(i=0; i<a.length; i++) {
-			if (a[i].equals("$"))
+			if (a[i].equals("$") || a[i].equals(","))
 				//ignore
 				;
 			else
@@ -404,6 +409,24 @@ public class Helper {
 		
 		return sdf.format(date);
 		
+	}
+	
+	public String getPastDaysDate (Integer daysFromToday) {
+		
+		
+		daysFromToday = daysFromToday*-1;
+		Date date = DateUtils.addDays(new Date(), daysFromToday);
+		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		
+		return sdf.format(date);
+		
+	}
+	
+	public String getLastMonthsDate() {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");  
+       return formatter.format(LocalDate.now().minusMonths(1));
+       
 	}
 		
 		

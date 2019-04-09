@@ -293,7 +293,9 @@ public class BankingAndCreditCardPage {
 		
 		int x_start=(int)(size.width*0.90);
         int x_end=(int)(size.width*0.10);
-        int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
+        
+        int y=this.txtTodaysBalanceAmount.getRect().getY();
+        //int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
 		
 		Integer i;
         for (i = 0; i<2; i++) {
