@@ -266,16 +266,18 @@ public class OverviewPage {
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
-			if (topTrendingCard.getAttribute("visible").equals("false")) {
-				
-				Dimension size = Engine.iosd.manage().window().getSize();
-				Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-				Thread.sleep(1000);
-				topTrendingCard.click();
-				Thread.sleep(1000);
-				
-			}
-				
+			
+			String sXpath="//*[@name ='Top Trending Categories']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			System.out.println(me_id);
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
+			Thread.sleep(1000);	
 			
 		}
 		else {
