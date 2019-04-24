@@ -58,7 +58,7 @@ public class InvestingPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cash Balances']")
 	public MobileElement cashbalancesLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//*[starts-with(@name, 'Securities by Company Name')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities by Company Name']")
 	public MobileElement securitiesByCompanyNameLabel;
 	
@@ -70,7 +70,7 @@ public class InvestingPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Brokerage']/../android.widget.TextViewe[@text='1 holding']")
 	public MobileElement fiveHoldingsNameLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSFindBy(xpath="//*[starts-with(@name, 'Last synced from Quicken Desktop')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Last synced from Quicken Desktop')]")
 	public MobileElement lastSyncedFooter;
 	

@@ -183,7 +183,6 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@text='Track your investing accounts and holdings on your phone.']")
 	public MobileElement invCard_zeroDataState;
 	
-	//(//XCUIElementTypeOther[@name="navigationMenu"])[3]
 	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
 	@AndroidFindBy(xpath="//*[@content-desc='navigationMenu']//*[@class='android.widget.ImageView']")
 	public MobileElement hambergerIcon;
@@ -207,6 +206,10 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Investing\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
+	public MobileElement investmentCard;
+	
 	public void scrollUptoAccountsCard() throws Exception {
 		
 		Integer iCount;
@@ -223,11 +226,7 @@ public class OverviewPage {
 			
 		}
 		
-		
-		
-		
 	}
-	
 	
 	
 	public void tapOnRecentTransactionsCard() throws Exception {
@@ -258,7 +257,7 @@ public class OverviewPage {
 		
 	}
 	
-	public void tapOnTrendingCard() throws Exception{
+public void tapOnTrendingCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
@@ -361,7 +360,6 @@ public class OverviewPage {
 	}
 	
 	
-	
 	public void tapOnSpendingOverTimeCard() throws Exception{
 		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
@@ -424,7 +422,6 @@ public class OverviewPage {
 	}
 	
 	
-	
 	public void swipeFromBottomToUp() 
     {       
       try  {
@@ -458,18 +455,14 @@ public class OverviewPage {
 	public void navigateToAcctList() throws Exception{
 		
 		
-		
 		if (!Verify.objExists(accountsCard)) {
 			swipeFromBottomToUp();	
 			Verify.waitForObjectToDisappear(refreshSpinnerIcon, 5);
 		}
-		
-		
-		
+				
 		accountsCard.click();
 		Thread.sleep(2000);
 	}
-	
 	
 	
 	public void tapOnBudgetCard() throws Exception {
@@ -535,8 +528,6 @@ public class OverviewPage {
 		}
 		
 	}
-	
-	
 	public void scrollToTop() throws Exception{
 		
 		Helper h = new Helper();
@@ -569,9 +560,32 @@ public class OverviewPage {
 		
 		
 	}
+
+	public void scroll_down() {
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			
+			Dimension size = Engine.ad.manage().window().getSize();
+			int y_start = (int) (size.width * 1.20);
+			int y_end = (int) (size.width * 0.03);
+			int x = 380;
+			Engine.ad.swipe(x, y_start, x, y_end, 3000);
+		} else {
+			JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd ;
+		    HashMap scrollObject = new HashMap();
+		    scrollObject.put("direction", "down");
+		    js1.executeScript("mobile: scroll", scrollObject);
+		}
+		
+	}
 	
 	
-	
-	
+	public void tapOnAddTransaction() throws Exception {
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		addTransaction.click();
+		Thread.sleep(1000);
+	}
 
 }
