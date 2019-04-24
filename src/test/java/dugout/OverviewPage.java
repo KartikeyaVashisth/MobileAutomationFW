@@ -270,7 +270,6 @@ public class OverviewPage {
 			String sXpath="//*[@name ='Top Trending Categories']";
 			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
 			String me_id = me.getId();
-			System.out.println(me_id);
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
@@ -566,6 +565,94 @@ public class OverviewPage {
 				return;
 			
 		}
+		
+		
+	}
+	
+	public void scrollToSpendingCard() throws Exception {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android"))
+			spendingOverTime_Visible_Android();
+		else
+			spendingOverTime_Visible_IOS();	
+		
+	}
+	
+	protected void spendingOverTime_Visible_IOS() throws Exception {
+		
+		Helper h = new Helper();
+		
+		String shortMonth = h.getLastSixMonths()[0];
+		
+		String sXpath = construct_SOTmonth(shortMonth);
+		System.out.println(sXpath);
+		sXpath = "//XCUIElementTypeOther[contains(@name,'Spending Over Time')]//XCUIElementTypeStaticText[@name ='APR']";
+		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		String me_id = me.getId();
+		System.out.println(me_id);
+		me.click();
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("element", me_id);
+		scrollObject.put("predicateString", "label == '"+shortMonth.toUpperCase()+"'");
+		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		Thread.sleep(1000);
+		
+		
+	}
+	
+	protected void spendingOverTime_Visible_Android() throws Exception {
+		
+		Helper h = new Helper();
+		
+		String shortMonth = h.getLastSixMonths()[0];
+		
+		String sXpath = construct_SOTmonth(shortMonth);
+		//Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
+		//Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"APR\").instance(0))"));
+		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+shortMonth.toUpperCase()+"\").instance(1))"));
+		Thread.sleep(1000);
+		System.out.println(Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath))));
+		Thread.sleep(1000);
+		
+		
+	}
+	
+	protected String construct_SOTmonth(String shortMonth) {
+		
+		Helper h = new Helper();
+		
+		String xpath;
+		
+		if (h.getEngine().equals("android"))
+			
+			xpath = "//*[@text='Spending Over Time']/..//*[@text='"+shortMonth.toUpperCase()+"']";
+		
+		else
+			xpath = "//*[@name='Spending Over Time']/..//*[@name='"+shortMonth.toUpperCase()+"']";
+			
+		return xpath;
+		
+	}
+	
+	public Boolean verifyMonthOnSpendingOverTime(String sMonth) {
+		
+		Helper h = new Helper();
+		String [] shortMonths = h.getLastSixMonths();
+		
+		Integer iCount;
+		String sXpath;
+		MobileElement me;
+		
+		
+		sXpath=construct_SOTmonth(sMonth);
+		
+		if (h.getEngine().equals("android"))
+			return Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath)));
+			
+		else
+			return Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(sXpath)));
 		
 		
 	}

@@ -190,7 +190,7 @@ public class TransactionDetailPage {
 	
 	// ------------------ Category SCREEN ------------------
 	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closeCategory\"]/XCUIElementTypeImage")
-	@AndroidFindBy(xpath="//*[@content-desc='closeCategories']/android.widget.ImageView")
+	@AndroidFindBy(xpath="//*[@content-desc='closeCategory']/android.widget.ImageView")
 	public MobileElement closeCategory;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeTextField[@value=\"Search Category\"]")
