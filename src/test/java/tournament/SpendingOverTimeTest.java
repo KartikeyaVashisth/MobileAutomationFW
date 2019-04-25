@@ -30,7 +30,7 @@ public class SpendingOverTimeTest extends Recovery {
 		Helper h = new Helper();
 		String sMonth = h.getLastSixMonths()[0];
 		String sActual;
-		Commentary.log(LogStatus.INFO, "Verify past six months names appear on the Spending Over Time screen");
+		Commentary.log(LogStatus.INFO, "Verify by default current month is highlighted/selected on the graph");
 		
 		SignInPage signIn = new SignInPage();
 		signIn.signIn(sUserName, sPassword, sDataset);
@@ -124,7 +124,7 @@ public class SpendingOverTimeTest extends Recovery {
 		Integer iCount;
 		String sMonth, sActualTxnMonth;
 		Helper h = new Helper();
-		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
+		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's transactions");
 		
 		SignInPage signIn = new SignInPage();
 		//signIn.signIn(sUserName, sPassword, sDataset);

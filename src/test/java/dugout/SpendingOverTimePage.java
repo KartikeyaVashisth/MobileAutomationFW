@@ -67,7 +67,7 @@ public class SpendingOverTimePage {
 		public void navigateBackToDashboard() throws Exception{
 			
 			backButtonOnHeader.click();
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 			
 			
 		}
