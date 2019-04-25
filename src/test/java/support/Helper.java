@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -204,6 +207,7 @@ public class Helper {
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
 			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
+			//capabilities.setCapability("app", "sauce-storage:QuickenRelease.apk");
 			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
@@ -215,8 +219,8 @@ public class Helper {
 		    capabilities.setCapability("platformVersion", "11.2");
 		    capabilities.setCapability("browserName", "");
 		    capabilities.setCapability("deviceOrientation", "portrait");
-		    //capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
-		    capabilities.setCapability("appiumVersion", "1.8.0");// 1.5.3
+		    capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
+		    //capabilities.setCapability("appiumVersion", "1.8.0");// 1.5.3
 		    capabilities.setCapability("autoWebView", "true");
 		    capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true);
@@ -224,6 +228,7 @@ public class Helper {
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
 			capabilities.setCapability("app", "sauce-storage:Quicken.zip");
+			//capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","appium");
 			
@@ -286,7 +291,7 @@ public class Helper {
 			//capabilities.setCapability("automationName","appium");
 			capabilities.setCapability("app", "/Users/kgrandhi/Documents/Quicken_apk/QuickenRN_IOS.zip"); */
 			
-			System.out.println("IOS Capppppppppppppppppppppppppp");
+			
 			
 			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -427,6 +432,19 @@ public class Helper {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");  
        return formatter.format(LocalDate.now().minusMonths(1));
        
+	}
+	
+	public String[] getLastSixMonths() {
+		
+		String[] s = new String[6];
+		 for (int i = 0; i < 6; i++) {
+		        YearMonth date = YearMonth.now().minusMonths(i);
+		        String monthName = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+		        s[i]=monthName;
+		        
+		    }
+		 
+		 return s;
 	}
 		
 		
