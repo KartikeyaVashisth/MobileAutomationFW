@@ -51,7 +51,9 @@ public class RegressionCases extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 	String backButton1_ios = "Banking & Credit";
+	String s;
 
+	
 	// Add Transaction
 	@Test(priority = 0)
 	public void TC1_ValidateAddTransaction() throws Exception {
@@ -63,8 +65,8 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 		
 		Commentary.log(LogStatus.INFO, "Add an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
-
-		String time = h.getCurrentTime();
+		//[Kcommented]
+		String time = "";//h.getCurrentTime();
 		
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -73,7 +75,9 @@ public class RegressionCases extends Recovery {
 		tRec.setCategory("Internet");
 		tRec.setPayee(time);
 		tRec.setTransactionType("expense");
-		tRec.setDate(h.getTodayDate());
+		//[Kcommented]
+		//h.getTodayDate()
+		tRec.setDate("");
 		h.getContext();
 		
 		OverviewPage op = new OverviewPage();
@@ -199,7 +203,7 @@ public class RegressionCases extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
-		String payeeName = h.getCurrentTime();
+		String payeeName = "";//h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -258,7 +262,8 @@ public class RegressionCases extends Recovery {
 		TransactionRecord tRec = new TransactionRecord();
 		SoftAssert sa = new SoftAssert();
 		//Helper h = new Helper();
-		String payeeName = h.getCurrentTime();
+		//[Kcommented]
+		String payeeName = "";//h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -319,7 +324,7 @@ public class RegressionCases extends Recovery {
 		TransactionRecord tRec = new TransactionRecord();
 		SoftAssert sa = new SoftAssert();
 		//Helper h = new Helper();
-		String payeeName = h.getCurrentTime();
+		String payeeName = "";//h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -819,7 +824,8 @@ public class RegressionCases extends Recovery {
 			
 		sa.assertAll();
 		
-		ts.payeeButton.click();
+		// [KCommented]
+		//ts.payeeButton.click();
 		
 		
 		
