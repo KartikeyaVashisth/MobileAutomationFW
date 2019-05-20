@@ -315,23 +315,23 @@ public class TransactionsPage {
 	public MobileElement searchTransactionTxtField;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
-	@AndroidFindBy(xpath="")//TBD
+	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement btnCategory;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[2]")
-	@AndroidFindBy(xpath="")//TBD
+	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement btnSplit;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[3]")
-	@AndroidFindBy(xpath="")//TBD
+	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement btnDelete;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='No Results Found']")
-	@AndroidFindBy(xpath="")//TBD
+	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement txtNoResultFound;
 	
 	@iOSFindBy(id="Save")
-	@AndroidFindBy(id="")
+	@AndroidFindBy(id="@text='NotTaken'")//TBD
 	public MobileElement buttonSave;
 	
 	@iOSFindBy(id="sort icon")
