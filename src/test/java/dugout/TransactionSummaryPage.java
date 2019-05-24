@@ -46,6 +46,14 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Payee']")
 		public MobileElement payeeTab;
 		
+		@iOSFindBy(xpath="//XCUIElementTypeOther[contains(@name,\"walmart\")]/../XCUIElementTypeOther[contains(@name,\"walmart -$\")]")
+		@AndroidFindBy(xpath="//android.widget.TextView[@text='walmart']/../android.widget.TextView[contains(@text,'$')]")
+		public MobileElement payeeTile;
+		
+		@iOSFindBy(xpath="//XCUIElementTypeOther[starts-with(@name, \"Internet\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
+		@AndroidFindBy(xpath="//android.widget.TextView[@text='Internet']/../android.widget.TextView[contains(@text,'$')]")
+		public MobileElement categoryTile;
+		
 		public void navigateBackToDashboard() throws Exception{
 			
 			backButtonOnHeader.click();

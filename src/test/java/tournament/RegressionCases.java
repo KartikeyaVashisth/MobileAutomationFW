@@ -23,6 +23,7 @@ import dugout.InvestingPage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
 import dugout.SignInPage;
+import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
@@ -198,7 +199,8 @@ public class RegressionCases extends Recovery {
 		op.navigateToAcctList();
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		bcc.txtTodaysBalance.click();
+		//bcc.txtTodaysBalance.click();
+		bcc.allTransactionButton.click();
 		
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -255,7 +257,8 @@ public class RegressionCases extends Recovery {
 		o.navigateToAcctList();
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		bcc.txtTodaysBalance.click();
+		//bcc.txtTodaysBalance.click();
+		bcc.allTransactionButton.click();
 		
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -317,8 +320,8 @@ public class RegressionCases extends Recovery {
 		Commentary.log(LogStatus.INFO, "Validating Delete tranction from swipe gesture options");
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		bcc.txtTodaysBalance.click();
-		
+		//bcc.txtTodaysBalance.click();
+		bcc.allTransactionButton.click();
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -780,13 +783,7 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 
 	}
-	@Test
-	public void TC15_VerifyTransactionSummaryCard() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating Transaction Summary Card Details");
-		OverviewPage op = new OverviewPage();
-		//op.scrollUntilCard(op.investmentCard);
-		op.tapOnSpendingOverTimeCard();
-	}
+	
 	
 	@Test (priority=13)
 	public void TC15_VerifyTransactionSummary() throws Exception {
@@ -824,14 +821,192 @@ public class RegressionCases extends Recovery {
 			
 		sa.assertAll();
 		
-		// [KCommented]
-		//ts.payeeButton.click();
-		
-		
 		
 	}
-	
 	@Test (priority=14)
+	public void TC15_VerifyTransactionSummary_PayeeScreen() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating Transaction Summary");
+		OverviewPage op = new OverviewPage();
+		Helper h = new Helper();
+		op.tapOnTransactionSummaryCard();
+		SoftAssert sa = new SoftAssert();
+		
+		TransactionSummaryPage ts = new TransactionSummaryPage();
+		ts.payeeTab.click();
+		
+		String sCategoryAmount_before = ts.payeeTile.getText();
+		System.out.println("----->>> "+ts.payeeTile.getText());
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before);
+		System.out.println("Category amount is "+dCategoryAmount_before);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setAmount("5.00");
+		tRec.setAccount(sManualChecking);
+		tRec.setPayee("walmart");
+		tRec.setTransactionType("expense");
+		h.getContext();
+		
+		ts.backButtonOnHeader.click();
+		
+		op.scrollToTop();
+		op.addTransaction.click();
+		td.addTransaction(tRec);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+		
+		op.tapOnTransactionSummaryCard();
+		ts.payeeTab.click();
+		
+		String sCategoryAmount_after = ts.payeeTile.getText();
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after);
+		Double d = Double.parseDouble(tRec.getAmount());
+		System.out.println("Category amount is "+dCategoryAmount_after);
+		
+		if (dCategoryAmount_after-d==dCategoryAmount_before)
+			Commentary.log(LogStatus.INFO, "Payee tile is updated after adding expense transaction for selected payee");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee");
+		
+		sa.assertAll();
+		
+	}
+	@Test (priority=15)
+	public void TC15_VerifyTransactionSummary_CategoryScreen() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating Transaction Summary");
+		OverviewPage op = new OverviewPage();
+		Helper h = new Helper();
+		op.tapOnTransactionSummaryCard();
+		SoftAssert sa = new SoftAssert();
+		
+		TransactionSummaryPage ts = new TransactionSummaryPage();
+		ts.categoryTab.click();
+		
+		String sCategoryAmount_before = ts.categoryTile.getText();
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before);
+		System.out.println("Category amount is "+dCategoryAmount_before);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setAmount("10.00");
+		tRec.setAccount(sManualChecking);
+		//tRec.setPayee("walmart");
+		tRec.setCategory("Internet");
+		tRec.setTransactionType("expense");
+		h.getContext();
+		
+		ts.backButtonOnHeader.click();
+		
+		op.scrollToTop();
+		op.addTransaction.click();
+		td.addTransaction(tRec);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+		
+		op.tapOnTransactionSummaryCard();
+		ts.categoryTab.click();
+		
+		String sCategoryAmount_after = ts.categoryTile.getText();
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after);
+		Double d = Double.parseDouble(tRec.getAmount());
+		System.out.println("Category amount is "+dCategoryAmount_after);
+		
+		if (dCategoryAmount_after-d==dCategoryAmount_before)
+			Commentary.log(LogStatus.INFO, "Category tile is updated after adding expense transaction for selected payee");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+		
+		sa.assertAll();
+		
+	}
+	@Test (priority=16)
+	public void TC15_SpendingTrendCard() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Commentary.log(LogStatus.INFO, "Verify Category amounts on trending screen should appear in descending order");
+			
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnTrendingCard();
+		
+		SpendingTrendPage st = new SpendingTrendPage();
+		
+		Double d1 = st.getAmount();
+		st.scrollCategory();
+		Double d2 = st.getAmount();
+		
+		st.scrollCategory();
+		Double d3 = st.getAmount();
+		
+		st.scrollCategory();
+		Double d4 = st.getAmount();
+				
+		if (d1 >= d2 )
+			Commentary.log(LogStatus.INFO, "PASS: Total for First Category  ["+d1+"]  is greater than or equal to second category ["+d2+"]");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Total for First Category  ["+d1+"]  should be greater than or equal to second category ["+d2+"]");
+		
+		
+		if (d2 >= d3)
+			Commentary.log(LogStatus.INFO, "PASS: Total for second Category  ["+d2+"]  is greater than or equal to third category ["+d3+"]");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Total for second Category  ["+d2+"]  should be greater than or equal to third category ["+d3+"]");
+		
+		if (d3 >= d4)
+			Commentary.log(LogStatus.INFO, "PASS: Total for second Category  ["+d3+"]  is greater than or equal to third category ["+d4+"]");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Total for second Category  ["+d3+"]  should be greater than or equal to third category ["+d4+"]");
+		
+		sa.assertAll();
+			
+	}
+	@Test(priority=17)
+	public void TC16_VerifyFilterForSpendingTrendCard() throws Exception {
+		SoftAssert sa = new SoftAssert();
+		Commentary.log(LogStatus.INFO, "Verify filter chips on trending screen should appear and selecting it reflects the category");
+			
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnTrendingCard();
+		
+		SpendingTrendPage st = new SpendingTrendPage();
+		
+		if (Verify.objExists(st.last30Days))
+			Commentary.log(sa, LogStatus.INFO, "Pass: Last 30 days filter chip is displayed");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Fail: Last 30 days filter chip is Not displayed");
+		st.last30Days.click();
+		
+		if (Verify.objExists(st.thisMonth))
+			Commentary.log(sa, LogStatus.INFO, "Pass: This month filter chip is displayed");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Fail: This month filter chip is Not displayed");
+		st.thisMonth.click();
+		
+		if (Verify.objExists(st.lastMonth))
+			Commentary.log(sa, LogStatus.INFO, "Pass: Last month filter chip is displayed");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Fail: Last month filter chip is Not displayed");
+		st.lastMonth.click();
+		
+		if (Verify.objExists(st.monthToDate))
+			Commentary.log(sa, LogStatus.INFO, "Pass: Month to date filter chip is displayed");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Fail: Month to date filter chip is Not displayed");
+		st.monthToDate.click();
+		
+		st.scrollFilter();
+		
+		if (Verify.objExists(st.yearToDate))
+			Commentary.log(sa, LogStatus.INFO, "Pass: Year to date filter chip is displayed");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Fail: Year to date filter chip is Not displayed");
+		st.yearToDate.click();
+		
+		sa.assertAll();
+	}
+	
+	@Test (priority=18)
 	public void TC14_ValidateInvestmentCard() throws Exception {
 		Commentary.log(LogStatus.INFO, "Validating Investment Card details");
 		OverviewPage op = new OverviewPage();

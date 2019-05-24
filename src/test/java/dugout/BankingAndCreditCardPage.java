@@ -82,6 +82,10 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"SAVINGS\"]/../android.widget.TextView[2]")
 	public MobileElement savingsBalance;
 	
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"All Transactions\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"All Transactions\"]")
+	public MobileElement allTransactionButton;
+	
 	//ONLINE BALANCE
 	//\"TODAY'S BALANCE\
 	
