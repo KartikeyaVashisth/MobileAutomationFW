@@ -150,8 +150,8 @@ public class RegressionCases extends Recovery {
 		Double dChecking_before = h.processBalanceAmount(sChecking_before);
 		Double dTotal_before = h.processBalanceAmount(sTotal_before);
 		
-		Double d_After = d-txnAmount_before;
-		//System.out.println("actual amount"+ d_After);
+		Double d_After = d+txnAmount_before;
+		//System.out.println("D_AFTER "+ d_After);
 		
 		td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount "+ tRec.getAmount());
@@ -168,7 +168,7 @@ public class RegressionCases extends Recovery {
 		
 		System.out.println("CHECKING BEFORE "+dChecking_before);
 		System.out.println("CHECKING AFTER "+dChecking_after);
-		System.out.println("EXPECTED  "+(dChecking_before-d));
+		//System.out.println("EXPECTED  "+(dChecking_before-d_After));
 		
 		
 		
@@ -858,7 +858,7 @@ public class RegressionCases extends Recovery {
 		Double d = Double.parseDouble(tRec.getAmount());
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
-		if (dCategoryAmount_after-d==dCategoryAmount_before)
+		if (dCategoryAmount_after+d==dCategoryAmount_before)
 			Commentary.log(LogStatus.INFO, "Payee tile is updated after adding expense transaction for selected payee");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee");
@@ -906,7 +906,7 @@ public class RegressionCases extends Recovery {
 		Double d = Double.parseDouble(tRec.getAmount());
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
-		if (dCategoryAmount_after-d==dCategoryAmount_before)
+		if (dCategoryAmount_after+d==dCategoryAmount_before)
 			Commentary.log(LogStatus.INFO, "Category tile is updated after adding expense transaction for selected payee");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");

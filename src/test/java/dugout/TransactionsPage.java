@@ -103,7 +103,7 @@ public class TransactionsPage {
 		o.navigateToAcctList();
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		bcc.txtTodaysBalance.click();
+		bcc.allTransactionButton.click();
 		
 		
 		searchTransactionTxtField.clear();
@@ -327,7 +327,7 @@ public class TransactionsPage {
 	public MobileElement btnDelete;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='No Results Found']")
-	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='No Results Found']")
 	public MobileElement txtNoResultFound;
 	
 	@iOSFindBy(id="Save")
