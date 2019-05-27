@@ -389,35 +389,30 @@ public void tapOnTrendingCard() throws Exception{
 	
 	public void tapOnNetIncomeOverTimeCard() throws Exception{
 		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		
-		Integer iCount = 0;
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		while (iCount < 5) {
-			
-			System.out.println(Verify.objExists(netIncomeOverTimeCard));
-			
-			if (!Verify.objExists(netIncomeOverTimeCard)) {
-				/*scrollView.swipe(SwipeElementDirection.UP, 1, 1, 1000);
-				Thread.sleep(2000);	*/
-				
-				quicken_scroll_mobile();
-			}
-			
-			iCount++;	
-			
-			if (Verify.objExists(netIncomeOverTimeCard))
-				break;
-			
-		}
 		
 		
-		if (!Verify.objExists(netIncomeOverTimeCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [netIncomeOverTimeCard] did not appear");
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Net Income Over Time']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income Over Time\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		
 		}
-		netIncomeOverTimeCard.click();
-		Thread.sleep(5000);
+		else {
+			String sXpath="//*[@name='Net Income Over Time']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == 'Net Income Over Time'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Net Income Over Time")).click();
+			Thread.sleep(1000);
+		}
 	}
 	
 	

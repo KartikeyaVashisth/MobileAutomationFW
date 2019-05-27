@@ -20,9 +20,11 @@ import com.saucelabs.saucerest.SauceREST;
 
 import dugout.BankingAndCreditCardPage;
 import dugout.InvestingPage;
+import dugout.NetIncomeOverTimePage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
 import dugout.SignInPage;
+import dugout.SpendingOverTimePage;
 import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
@@ -1002,6 +1004,188 @@ public class RegressionCases extends Recovery {
 	}
 	
 	@Test (priority=18)
+	public void VerifySpendingOverTimeCard () throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		String sMonth = h.getLastSixMonths()[0];
+		String sActual;
+		Commentary.log(LogStatus.INFO, "Verify by default current month is highlighted/selected on the graph");
+		
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnSpendingOverTimeCard();
+		
+		SpendingOverTimePage sot = new SpendingOverTimePage();
+		sActual = sot.getSelectedMonth();
+		
+		if (sActual.equals(sMonth))
+			Commentary.log(LogStatus.INFO, "PASS: Spending OverTime screen, by default current month "+sMonth+" is selected on the graph");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Spending OverTime screen by default current month ["+sMonth+"] should be selected but "+sActual +" was seen");	
+		
+		sa.assertAll();
+		
+	}
+	
+	@Test(priority = 19)
+	public void VerifySpendingOverTimeCard_LastSixMonth() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		Commentary.log(LogStatus.INFO, "Verify past six months names appear on the Spending Over Time screen");
+		
+		SignInPage signIn = new SignInPage();
+		//signIn.signIn(sUserName, sPassword, sDataset);
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnSpendingOverTimeCard();
+		
+		String [] lastSixMonths = h.getLastSixMonths();
+		
+		Integer iCount;
+		
+		SpendingOverTimePage sot = new SpendingOverTimePage();
+		
+		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
+			if (sot.verifyMonth(lastSixMonths[iCount]))
+				Commentary.log(LogStatus.INFO, "PASS: Spending OverTime ["+lastSixMonths[iCount]+"] month appeared on the screen");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Spending OverTime Card ["+lastSixMonths[iCount]+"] didn't appear on the screen");	
+			
+		}
+		
+		sa.assertAll();
+		
+	}
+	
+	@Test(priority = 20)
+	public void VerifySpendingOverTimeCard_MonthlyDisplay() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
+		
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnSpendingOverTimeCard();
+		
+		String [] lastSixMonths = h.getLastSixMonths();
+		
+		Integer iCount;
+		
+		SpendingOverTimePage sot = new SpendingOverTimePage();
+		
+		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
+			
+			sot.tapOnTheMonth(lastSixMonths[iCount]);
+			
+			if (sot.verifyMonth(lastSixMonths[iCount]))
+				Commentary.log(LogStatus.INFO, "PASS: Spending OverTime > tapping on the month ["+lastSixMonths[iCount]+"] displayed the month's name in total spending");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Spending OverTime Card > tapping on the month ["+lastSixMonths[iCount]+"] didn't display the month's name in total spending");	
+			
+		}
+		
+		sa.assertAll();	
+	}
+	
+	
+	
+	@Test(priority = 21)
+	public void VerifyNetIncomeOverTimeCard() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		String sMonth = h.getLastSixMonths()[0];
+		String sActual;
+		Commentary.log(LogStatus.INFO, "Verify by default current month is highlighted/selected on the graph");
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnNetIncomeOverTimeCard();
+		
+		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+		sActual = not.getSelectedMonth();
+		
+		if (sActual.equals(sMonth))
+			Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime screen, by default current month "+sMonth+" is selected on the graph");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NetIncome OverTime screen by default current month ["+sMonth+"] should be selected but "+sActual +" was seen");	
+		
+		sa.assertAll();
+		
+	}
+	
+	@Test(priority = 22)
+	public void VerifyNetIncomeOverTimeCard_LastSixMonth() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		Commentary.log(LogStatus.INFO, "Verify past six months names appear on the NetIncome Over Time screen");
+		
+		SignInPage signIn = new SignInPage();
+		//signIn.signIn(sUserName, sPassword, sDataset);
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnNetIncomeOverTimeCard();
+		
+		String [] lastSixMonths = h.getLastSixMonths();
+		
+		Integer iCount;
+		
+		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+		
+		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
+			if (not.verifyMonth(lastSixMonths[iCount]))
+				Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime ["+lastSixMonths[iCount]+"] month appeared on the screen");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: NetIncome OverTime Card ["+lastSixMonths[iCount]+"] didn't appear on the screen");	
+			
+		}
+		
+		sa.assertAll();
+		
+	}
+	
+	@Test(priority = 23)
+	public void VerifyNetIncomeOverTimeCard_MonthlyDisplay() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
+		
+		SignInPage signIn = new SignInPage();
+		//signIn.signIn(sUserName, sPassword, sDataset);
+		
+		// get balances from accounts card
+		OverviewPage op = new OverviewPage();
+		op.tapOnNetIncomeOverTimeCard();
+		
+		String [] lastSixMonths = h.getLastSixMonths();
+		
+		Integer iCount;
+		
+		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+		
+		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
+			
+			not.tapOnTheMonth(lastSixMonths[iCount]);
+			
+			if (not.verifyMonth(lastSixMonths[iCount]))
+				Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime > tapping on the month ["+lastSixMonths[iCount]+"] displayed the month's name in total spending");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: NetIncome OverTime Card > tapping on the month ["+lastSixMonths[iCount]+"] didn't display the month's name in total spending");	
+			
+		}
+		
+		sa.assertAll();	
+	}
+	@Test (priority=24)
 	public void TC14_ValidateInvestmentCard() throws Exception {
 		Commentary.log(LogStatus.INFO, "Validating Investment Card details");
 		OverviewPage op = new OverviewPage();
@@ -1067,7 +1251,6 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
-	
 	
 /*	
 	public void buildUpload () throws IOException {
