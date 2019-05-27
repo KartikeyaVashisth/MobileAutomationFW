@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -121,7 +122,7 @@ public class Helper {
 		
 	}
 	
-	public void initAppiumDriver(){
+/*	public void initAppiumDriver(){
 		
 		try{
 			String url;
@@ -180,7 +181,7 @@ public class Helper {
 			// TODO: handle exception
 		}
 	}
-	
+	*/
 	
 	public DesiredCapabilities getCloudCapabilities(){
 		
@@ -248,7 +249,7 @@ public class Helper {
 			capabilities.setCapability("deviceName","emulator-5554");
 			capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
-			capabilities.setCapability("noResetValue", true);
+			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
@@ -447,7 +448,13 @@ public class Helper {
 		 return s;
 	}
 		
+	public String getCurrentTime () {
+		Calendar c = Calendar.getInstance();
+		long time = c.getTimeInMillis();
+		String timeAsString = String.valueOf(time);		 
+		return timeAsString;
 		
+	}	
 	
 	
 	

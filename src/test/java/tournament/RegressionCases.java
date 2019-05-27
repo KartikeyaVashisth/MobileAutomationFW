@@ -66,8 +66,8 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 		
 		Commentary.log(LogStatus.INFO, "Add an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
-		//[Kcommented]
-		String time = "";//h.getCurrentTime();
+		String time = h.getCurrentTime();
+		
 		
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -76,9 +76,7 @@ public class RegressionCases extends Recovery {
 		tRec.setCategory("Internet");
 		tRec.setPayee(time);
 		tRec.setTransactionType("expense");
-		//[Kcommented]
-		//h.getTodayDate()
-		tRec.setDate("");
+		tRec.setDate(h.getFutureDaysDate(0));
 		h.getContext();
 		
 		OverviewPage op = new OverviewPage();
@@ -102,12 +100,12 @@ public class RegressionCases extends Recovery {
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
 		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
@@ -175,12 +173,12 @@ public class RegressionCases extends Recovery {
 		
 		
 		if (dChecking_before-d_After==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before-d_After==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		
@@ -205,7 +203,7 @@ public class RegressionCases extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
-		String payeeName = "";//h.getCurrentTime();
+		String payeeName = h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -239,7 +237,7 @@ public class RegressionCases extends Recovery {
 		tp.searchTransactionTxtField.sendKeys(payeeName);
 		
 		if (Verify.objExists(tp.txtNoResultFound))
-			Commentary.log(LogStatus.INFO, "Successfully Deleted the selected transaction");
+			Commentary.log(LogStatus.INFO, "PASS: Successfully Deleted the selected transaction");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Unable to Delete the selected transaction");
 		
@@ -264,9 +262,7 @@ public class RegressionCases extends Recovery {
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
 		SoftAssert sa = new SoftAssert();
-		//Helper h = new Helper();
-		//[Kcommented]
-		String payeeName = "";//h.getCurrentTime();
+		String payeeName = h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -299,7 +295,7 @@ public class RegressionCases extends Recovery {
 		tp.tapOnFirstTransation();
 		
 		if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
-			Commentary.log(sa, LogStatus.PASS, "Successfully updated the category");
+			Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Unable to update the category");
 		
@@ -326,8 +322,7 @@ public class RegressionCases extends Recovery {
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
 		SoftAssert sa = new SoftAssert();
-		//Helper h = new Helper();
-		String payeeName = "";//h.getCurrentTime();
+		String payeeName = h.getCurrentTime();
 		
 		tRec.setAmount("5.00");
 		tRec.setAccount(sManualChecking);
@@ -360,7 +355,7 @@ public class RegressionCases extends Recovery {
 		Thread.sleep(2000);
 		
 		if (Verify.objExists(tp.txtNoResultFound))
-			Commentary.log(LogStatus.INFO, "Successfully deleted the transaction");
+			Commentary.log(LogStatus.INFO, "PASS: Successfully deleted the transaction");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
 		

@@ -80,7 +80,7 @@ public class OverviewPage {
 	public MobileElement otherBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[13]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[9]")
 	public MobileElement totalBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
