@@ -453,7 +453,7 @@ public class RegressionCases extends Recovery {
 	@Test(priority = 8)
 	public void TC8_ValidateAccountMenu() throws Exception {
 		
-		Commentary.log(LogStatus.INFO, "Validating Account menu options");
+		Commentary.log(LogStatus.INFO, "Validating Account menu options and also verifying the details on selecting all user accounts");
 		
 		OverviewPage op = new OverviewPage();
 		op.hambergerIcon.click();
@@ -562,8 +562,7 @@ public class RegressionCases extends Recovery {
 	}
 	@Test(priority = 9)
 	public void TC9_ValidatePasscodeFingerprintMenu() throws Exception {
-	//	SignInPage si = new SignInPage();
-	//	si.signIn(sUserName, sPassword, sDataset);
+	
 		Commentary.log(LogStatus.INFO, "Validating menu options for Passcode and Fingerprint menu");
 		OverviewPage op = new OverviewPage();
 		op.hambergerIcon.click();
@@ -784,7 +783,7 @@ public class RegressionCases extends Recovery {
 	
 	@Test (priority=13)
 	public void TC15_VerifyTransactionSummary() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating Transaction Summary");
+		Commentary.log(LogStatus.INFO, "Validating Transaction Summary details");
 		OverviewPage op = new OverviewPage();
 		op.tapOnTransactionSummaryCard();
 		SoftAssert sa = new SoftAssert();
@@ -822,7 +821,7 @@ public class RegressionCases extends Recovery {
 	}
 	@Test (priority=14)
 	public void TC15_VerifyTransactionSummary_PayeeScreen() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating Transaction Summary");
+		Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Payee details are updated on Transaction Summary page");
 		OverviewPage op = new OverviewPage();
 		Helper h = new Helper();
 		op.tapOnTransactionSummaryCard();
@@ -870,7 +869,7 @@ public class RegressionCases extends Recovery {
 	}
 	@Test (priority=15)
 	public void TC15_VerifyTransactionSummary_CategoryScreen() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating Transaction Summary");
+		Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
 		OverviewPage op = new OverviewPage();
 		Helper h = new Helper();
 		op.tapOnTransactionSummaryCard();
@@ -1036,9 +1035,6 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 		Commentary.log(LogStatus.INFO, "Verify past six months names appear on the Spending Over Time screen");
 		
-		SignInPage signIn = new SignInPage();
-		//signIn.signIn(sUserName, sPassword, sDataset);
-		
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();
 		op.tapOnSpendingOverTimeCard();
@@ -1185,7 +1181,54 @@ public class RegressionCases extends Recovery {
 		
 		sa.assertAll();	
 	}
-	@Test (priority=24)
+	
+	@Test(priority=24)
+	public void ValidateBalancesOnAccountCard() throws Exception{
+		String sChecking, sCredit, sSaving, sTotal;
+		Commentary.log(LogStatus.INFO, "Verify balances on accounts card");
+		OverviewPage op = new OverviewPage();
+		sChecking = op.checkingBalance.getText();
+		sCredit = op.creditBalance.getText();
+		sSaving = op.savingsBalance.getText();
+		sTotal = op.totalBalance.getText();
+		
+		Helper h = new Helper();
+		SoftAssert sa = new SoftAssert();
+		Double dChecking = h.processBalanceAmount(sChecking);
+		Double dCredit = h.processBalanceAmount(sCredit);
+		Double dSaving = h.processBalanceAmount(sSaving);
+		Double dTotal = h.processBalanceAmount(sTotal);
+		
+		
+		if ((dChecking+dCredit+dSaving)==dTotal)
+			Commentary.log(LogStatus.INFO, "PASS: Overview Page > Balances and Total amount are correct");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Overview Page > Balances and Total amount is incorrect");
+		
+		//Navigate to Account cards
+		op.navigateToAcctList();
+		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		
+		
+		sChecking = bcc.checkingBalance.getText();
+		sCredit = bcc.creditCardBalance.getText();
+		sSaving = bcc.savingsBalance.getText();
+		sTotal = bcc.txtTodaysBalanceAmount.getText();
+		
+		dChecking = h.processBalanceAmount(sChecking);
+		dCredit = h.processBalanceAmount(sCredit);
+		dSaving = h.processBalanceAmount(sSaving);
+		dTotal = h.processBalanceAmount(sTotal);
+
+		if ((dChecking+dCredit+dSaving)==dTotal)
+			Commentary.log(LogStatus.INFO, "PASS: Account card Page > Balances and Total amount are correct");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account card Page > Balances and Total amount is incorrect");
+		
+		sa.assertAll();
+	}
+	
+	@Test (priority=25)
 	public void TC14_ValidateInvestmentCard() throws Exception {
 		Commentary.log(LogStatus.INFO, "Validating Investment Card details");
 		OverviewPage op = new OverviewPage();
@@ -1251,6 +1294,46 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
+	@Test (priority=26)
+	public void TC14_ValidateForZeroDatset_RecentTxnCard() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating message displayed for all Card in case of zero dataset");
+		OverviewPage op = new OverviewPage();
+		SoftAssert sa = new SoftAssert();
+		//String sChecking_amount = op.checkingBalance.getText();
+		
+		op.hambergerIcon.click();
+		Thread.sleep(1000);
+		
+		SettingsPage sp = new SettingsPage();
+		sp.datasetDDButton.click();
+		MobileElement investmentDataset = sp.getTextView("ZeroDataSet");
+		investmentDataset.click();
+		Thread.sleep(3000);
+		
+		op.scrollTillCard("Top Trending Categories");
+		
+		String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvaialable.getText();
+		
+		if (actText_TxnOverviewPage.equals("No Transaction available"))
+			Commentary.log(LogStatus.INFO, "PASS: OverviewPage RecentTransaction card > Correct message is displayed in case user has no recent transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "OverviewPage RecentTransaction card > Message is not displayed in case user has no recent transactions");
+		//Navigate to Recent Transaction card
+		op.tapOnRecentTransactionsCard();
+		
+		TransactionsPage tp = new TransactionsPage();
+		String actText_txnDetailsScreen = tp.noTransactionText.getText();
+				
+		if (actText_txnDetailsScreen.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Recent Transaction page > Correct message is displayed in case user has no recent transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Recent Transaction page > Message is not displayed in case user has no recent transactions");
+		
+		
+		sa.assertAll();
+		
+	}
+	
 	
 /*	
 	public void buildUpload () throws IOException {

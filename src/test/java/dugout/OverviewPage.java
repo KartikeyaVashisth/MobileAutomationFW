@@ -68,11 +68,11 @@ public class OverviewPage {
 	public MobileElement cashBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Credit']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[7]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[5]")
 	public MobileElement creditBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Savings']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[9]")
+	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[7]")
 	public MobileElement savingsBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Other']/../XCUIElementTypeStaticText[2]")
@@ -159,13 +159,17 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/..//*[@text='Cash']")
 	public MobileElement accountsCard_cashLabel;
 	
-	@iOSFindBy(xpath="//*[@name ='Recent Transactions No Transaction available')]")
+	@iOSFindBy(xpath="//*[@name ='No Transaction available']")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']/../*[@text='No Transaction available']")
 	public MobileElement recentTxns_NoTxnsAvaialable;
 	
 	@iOSFindBy(xpath="//*[@name=concat('Top Trending Categories Last 30 days You don',\"'\",'t have any transactions.')]")
 	@AndroidFindBy(xpath="//*[@text='Top Trending Categories']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
 	public MobileElement tredningCard_YoudontHaveAnyTxn;
+	
+	@iOSFindBy(xpath="//*[@name=concat('Spending Over Time You don',\"'\",'t have any transactions.')]")
+	@AndroidFindBy(xpath="//*[@text='Spending Over Time']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
+	public MobileElement spendingOverTimeCard_YoudontHaveAnyTxn;
 	
 	@iOSFindBy(xpath="//*[@name='Transaction Summary $0 Earned $0 Spent $0']")
 	@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@text='$0 Earned']")
@@ -292,6 +296,32 @@ public void tapOnTrendingCard() throws Exception{
 		}
 		}
 		
+		
+	}
+
+	public void scrollTillCard(String cardName) throws Exception {
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("ios")){
+			
+			String sXpath="//*[@name ='"+cardName+"']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			
+			
+		}
+		else {
+			
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ cardName + "\").instance(0))"));
+			Thread.sleep(1000);
+		}
 		
 	}
 	
