@@ -54,7 +54,7 @@ public class NetIncomeOverTimePage {
 	public MobileElement firstTransactionDate;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@name=\"You don't have any transactions.\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"You don't have any transactions.\"]")
 	public MobileElement youDontHaveAnyTxns;
 	
 	public void navigateBackToDashboard() throws Exception{

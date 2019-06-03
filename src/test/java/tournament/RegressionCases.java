@@ -144,7 +144,7 @@ public class RegressionCases extends Recovery {
 		tRec.setPayee("shop");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		
+		td.addTransaction(tRec);
 		Double txnAmount_before = h.processBalanceAmount(td.getTransactionAmount());
 		System.out.println("Actual trans amount "+txnAmount_before);
 		
@@ -155,7 +155,7 @@ public class RegressionCases extends Recovery {
 		Double d_After = d+txnAmount_before;
 		//System.out.println("D_AFTER "+ d_After);
 		
-		td.addTransaction(tRec);
+		//td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount "+ tRec.getAmount());
 		
 		SettingsPage sp = new SettingsPage();
@@ -190,11 +190,10 @@ public class RegressionCases extends Recovery {
 	//Verify Delete Transaction
 	@Test(priority = 3)
 	public void TC3_ValidateDeleteTransaction() throws Exception {
+		Commentary.log(LogStatus.INFO, "Delete an expense transaction for an manual savings account, verify checking & total balance on overview screen accounts card");
 		
 		Helper h = new Helper();
 		SoftAssert sa = new SoftAssert();
-		Commentary.log(LogStatus.INFO, "Delete an expense transaction for an manual savings account, verify checking & total balance on overview screen accounts card");
-
 		OverviewPage op = new OverviewPage();
 		op.navigateToAcctList();
 		
@@ -398,53 +397,53 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 			
 				if(sp.verifyQuickenID(sUserName))
-					Commentary.log(LogStatus.INFO, "Quicken ID is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Quicken ID is NOT displayed");
 				
 				if (Verify.objExists(sp.closeButton))
-					Commentary.log(LogStatus.INFO, "Close button is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Close button is displayed");
 				else 
 					Commentary.log(sa, LogStatus.FAIL, "Close button is NOT displayed");
 				
 				if (Verify.objExists(sp.datasetDDButton))
-					Commentary.log(LogStatus.INFO, "Dataset DD button button is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Dataset DD button button is NOT displayed");
 				
 				if (Verify.objExists(sp.accountTxt))
-					Commentary.log(LogStatus.INFO, "Account Text is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Account Text is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Account Text is NOT displayed");
 				
 				if (Verify.objExists(sp.PasscodeTxt))
-					Commentary.log(LogStatus.INFO, "Passcode text is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Passcode text is NOT displayed");
 				
 				if (Verify.objExists(sp.ManageAlertsTxt))
-					Commentary.log(LogStatus.INFO, "Manage Alert text is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Manage Alert text is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Manage Alert text is NOT displayed");
 				
 				if (Verify.objExists(sp.HelpLegalTxt))
-					Commentary.log(LogStatus.INFO, "Help & Legal text is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Help & Legal text is NOT displayed");
 
 				
 				if (Verify.objExists(sp.logout))
-					Commentary.log(LogStatus.INFO, "Logout button is displayed");
+					Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Logout button is NOT displayed");
 				
 				if (h.getEngine().equalsIgnoreCase("Android")) {
 					if (Verify.objExists(sp.FeedbackTxt))
-						Commentary.log(LogStatus.INFO, "Feedback Text is displayed");
+						Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed");
 					else
 						Commentary.log(sa, LogStatus.FAIL, "Feedback Text is NOT displayed");
 					} else {
-						Commentary.log(LogStatus.INFO, "Feedback options is not supported for IOS Simulator");
+						Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator");
 					}
 			
 		sa.assertAll();
@@ -468,17 +467,17 @@ public class RegressionCases extends Recovery {
 		
 		SoftAssert sa = new SoftAssert();
 		if (Verify.objExists(manualCheckingAccount))
-			Commentary.log(LogStatus.INFO, "Manual Checking account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual Checking account is NOT displayed");
 
 		if (Verify.objExists(manualCCAccount))
-			Commentary.log(LogStatus.INFO, "Manual CC account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC account is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual CC account is NOT displayed");
 
 		if (Verify.objExists(manualSavingsAccount))
-			Commentary.log(LogStatus.INFO, "Manual Savings account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Savings account is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual Savings account is NOT displayed");
 
@@ -491,19 +490,19 @@ public class RegressionCases extends Recovery {
 		MobileElement accountStatus = sp.getTextView("Active");
 	
 		if (Verify.objExists(manualCheckingAccount1))
-			Commentary.log(LogStatus.INFO, "Manual Checking account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual Checking account details are NOT displayed");
 
 
 		if (Verify.objExists(accountType))
-			Commentary.log(LogStatus.INFO, "Manual Checking Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Type details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual Checking Account Type details are NOT displayed");
 
 
 		if (Verify.objExists(accountStatus))
-			Commentary.log(LogStatus.INFO, "Manual Checking Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Status is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual Checking Account Status is NOT displayed");
 
@@ -517,17 +516,17 @@ public class RegressionCases extends Recovery {
 		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
 		MobileElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
-			Commentary.log(LogStatus.INFO, "Manual CC account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manual CC account details are NOT displayed");
 		
 		if (Verify.objExists(accountType_manual))
-			Commentary.log(LogStatus.INFO, "Manaul CC Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manaul CC Account Type details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manaul CC Account Type details are NOT displayed");
 
 		if (Verify.objExists(accountStatus1))
-			Commentary.log(LogStatus.INFO, "Manaul CC Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manaul CC Account Status is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Manaul CC Account Status is NOT displayed");
 
@@ -542,17 +541,17 @@ public class RegressionCases extends Recovery {
 
 		
 		if (Verify.objExists(manualSavingsAccount1))
-			Commentary.log(LogStatus.INFO, "Savings account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings account details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Savings account details are NOT displayed");
 		
 		if (Verify.objExists(accountType_savings))
-			Commentary.log(LogStatus.INFO, "Savings Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings Account Type details are displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Savings Account Type details are NOT displayed");
 		
 		if (Verify.objExists(accountStatus2))
-			Commentary.log(LogStatus.INFO, "Savings Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings Account Status is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Savings Account Status is NOT displayed");
 		
@@ -576,17 +575,17 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 		
 		if (Verify.objExists(sp.PasscodeHeaderTxt))
-			Commentary.log(LogStatus.INFO, "Header text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Header text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Header text is NOT displayed");
 		if (Verify.objExists(sp.getAccountElement("Use Quicken Passcode")))
-			Commentary.log(LogStatus.INFO, "Passcode text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Passcode text is NOT displayed");
 		
 		if (h.getEngine().equalsIgnoreCase("ios")){
 			if (Verify.objExists(sp.getTextView("Use Touch ID")))
-				Commentary.log(LogStatus.INFO, "Touch ID text is displayed");
+				Commentary.log(LogStatus.INFO, "PASS: Touch ID text is displayed");
 			else
 				Commentary.log(sa, LogStatus.FAIL, "Touch ID text is NOT displayed");
 			
@@ -606,17 +605,17 @@ public class RegressionCases extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		if (Verify.objExists(sp.ManageAlertsHeaderTxt))
-			Commentary.log(LogStatus.INFO, "Manage Alert Header text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manage Alert Header text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Header Alert header text is NOT displayed");
 		
 		if (Verify.objExists(sp.getTextView("New Charge - Quicken Card (Mobile Only)")))
-			Commentary.log(LogStatus.INFO, "New charge message text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: New charge message text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "New charge message text is NOT displayed");
 		
 		if (Verify.objExists(sp.getTextView("Push Notification")))
-			Commentary.log(LogStatus.INFO, "Push Notification text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Push Notification text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Push Notification text is NOT displayed");
 		
@@ -644,37 +643,37 @@ public class RegressionCases extends Recovery {
 		MobileElement link_Privacy = sp.getTextView("Privacy");
 		
 		if (Verify.objExists(sp.HelpLegalHeaderTxt))
-			Commentary.log(LogStatus.INFO, "Help Legal text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Help Legal text is NOT displayed");
 		
 		if (Verify.objExists(help))
-			Commentary.log(LogStatus.INFO, "Help text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Help text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Help text is NOT displayed");
 		
 		if (Verify.objExists(link_SupportWebsite))
-			Commentary.log(LogStatus.INFO, "Support Website Link is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Support Website Link is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Support Website Link is NOT displayed");
 		
 		if (Verify.objExists(sp.getTextView("Legal")))
-			Commentary.log(LogStatus.INFO, "Legal text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Legal text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Legal text is NOT displayed");
 		
 		if (Verify.objExists(link_Acknowledgements))
-			Commentary.log(LogStatus.INFO, "Acknowledgements link is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Acknowledgements link is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Acknowledgements link is NOT displayed");
 		
 		if (Verify.objExists(link_LicenseAgreement))
-			Commentary.log(LogStatus.INFO, "License Agreement link is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: License Agreement link is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "License Agreement link is NOT displayed");
 		
 		if (Verify.objExists(link_Privacy))
-			Commentary.log(LogStatus.INFO, "Privacy link is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Privacy link is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Privacy link is NOT displayed");
 		
@@ -726,33 +725,33 @@ public class RegressionCases extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		if (Verify.objExists(dataset1))
-			Commentary.log(LogStatus.INFO, "Dataset1 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset1 is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Dataset1 is NOT displayed");
 		
 		if (Verify.objExists(dataset2))
-			Commentary.log(LogStatus.INFO, "Dataset2 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset2 is displayed");
 		else
 			
 			Commentary.log(sa, LogStatus.FAIL, "Dataset2 is NOT displayed");
 		
 		if (Verify.objExists(dataset3))
-			Commentary.log(LogStatus.INFO, "Dataset3 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset3 is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Dataset3 is NOT displayed");
 		
 		if (Verify.objExists(dataset4))
-			Commentary.log(LogStatus.INFO, "Dataset4 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset4 is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Dataset4 is NOT displayed");
 		
 		if (Verify.objExists(dataset5))
-			Commentary.log(LogStatus.INFO, "Dataset5 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset5 is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Dataset5 is NOT displayed");
 		
 		if (Verify.objExists(dataset6))
-			Commentary.log(LogStatus.INFO, "Dataset6 is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset6 is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Dataset6 is NOT displayed");
 		
@@ -791,27 +790,27 @@ public class RegressionCases extends Recovery {
 		TransactionSummaryPage ts = new TransactionSummaryPage();
 		
 		if (Verify.objExists(ts.backButtonOnHeader))
-			Commentary.log(LogStatus.INFO, "Back button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Back button is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Back button is not displayed");
 		
 		if (Verify.objExists(ts.transactionSummaryHeader))
-			Commentary.log(LogStatus.INFO, "Transaction Summary header is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary header is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary is not displayed");
 
 		if (Verify.objExists(ts.categoryTab))
-			Commentary.log(LogStatus.INFO, "Category button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Category button is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Category button is not displayed");
 		
 		if (Verify.objExists(ts.payeeTab))
-			Commentary.log(LogStatus.INFO, "Payee button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Payee button is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Payee button is not displayed");
 		
 		if (Verify.objExists(ts.getCurrentMonthYear()))
-			Commentary.log(LogStatus.INFO, "Current month and year text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Current month and year text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Current month and year text is Not displayed");
 			
@@ -860,7 +859,7 @@ public class RegressionCases extends Recovery {
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
 		if (dCategoryAmount_after+d==dCategoryAmount_before)
-			Commentary.log(LogStatus.INFO, "Payee tile is updated after adding expense transaction for selected payee");
+			Commentary.log(LogStatus.INFO, "PASS: Payee tile is updated after adding expense transaction for selected payee");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee");
 		
@@ -908,7 +907,7 @@ public class RegressionCases extends Recovery {
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
 		if (dCategoryAmount_after+d==dCategoryAmount_before)
-			Commentary.log(LogStatus.INFO, "Category tile is updated after adding expense transaction for selected payee");
+			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
 		
@@ -1123,9 +1122,6 @@ public class RegressionCases extends Recovery {
 		Helper h = new Helper();
 		Commentary.log(LogStatus.INFO, "Verify past six months names appear on the NetIncome Over Time screen");
 		
-		SignInPage signIn = new SignInPage();
-		//signIn.signIn(sUserName, sPassword, sDataset);
-		
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();
 		op.tapOnNetIncomeOverTimeCard();
@@ -1154,9 +1150,6 @@ public class RegressionCases extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
-		
-		SignInPage signIn = new SignInPage();
-		//signIn.signIn(sUserName, sPassword, sDataset);
 		
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();
@@ -1299,7 +1292,6 @@ public class RegressionCases extends Recovery {
 		Commentary.log(LogStatus.INFO, "Validating message displayed for all Card in case of zero dataset");
 		OverviewPage op = new OverviewPage();
 		SoftAssert sa = new SoftAssert();
-		//String sChecking_amount = op.checkingBalance.getText();
 		
 		op.hambergerIcon.click();
 		Thread.sleep(1000);
@@ -1333,8 +1325,127 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
-	
-	
+	@Test (priority=27)
+	public void TC14_ValidateForZeroDatset_TrendingCard() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating message displayed on Trending Card in case of no transactions");
+		SoftAssert sa = new SoftAssert();
+		
+		OverviewPage op = new OverviewPage();
+		Helper h = new Helper();
+		if (h.getEngine().equalsIgnoreCase("android")){
+			op.scrollTillCard("Top Trending Categories");
+			}
+		else {
+			op.scrollTillCard("Spending Over Time");
+			}
+		String actText_TxnTrendingPage = op.tredningCard_YoudontHaveAnyTxn.getText();
+		
+		if (actText_TxnTrendingPage.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Trending card > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Trending card > Message is not displayed in case user has no transactions");
+		
+		//Navigate to Trending card
+		op.tapOnTrendingCard();
+		
+		SpendingTrendPage stp = new SpendingTrendPage();
+
+		String actText_trendindDetailScreen = stp.youDontHaveAnyTxns.getText();
+				
+		if (actText_trendindDetailScreen.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Trending page > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Trending page > Message is not displayed in case user has no transactions");
+		
+		
+		sa.assertAll();
+		
+	}
+	@Test (priority=28)
+	public void TC14_ValidateForZeroDatset_SpendingOverTimeCard() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating message displayed on Spending Over Time Card in case of no transactions");
+		SoftAssert sa = new SoftAssert();
+		
+		OverviewPage op = new OverviewPage();
+		op.scrollTillCard("Net Income Over Time");
+		
+		String actText_SpendingOverTimePage = op.spendingOverTimeCard_YoudontHaveAnyTxn.getText();
+		
+		if (actText_SpendingOverTimePage.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time card > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time card > Message is not displayed in case user has no transactions");
+		
+		//Navigate to Trending card
+		op.tapOnSpendingOverTimeCard();
+		
+		SpendingOverTimePage sot = new SpendingOverTimePage();
+
+		String actText_sotDetailsScreen = sot.youDontHaveAnyTxns.getText();
+				
+		if (actText_sotDetailsScreen.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time page > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time page > Message is not displayed in case user has no transactions");
+		
+		
+		sa.assertAll();
+		
+	}
+	@Test (priority=29)
+	public void TC14_ValidateForZeroDatset_NetIncomeOverTimeCard() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating message displayed on Net Income Over Time Card in case of no transactions");
+		SoftAssert sa = new SoftAssert();
+		
+		OverviewPage op = new OverviewPage();
+			
+		//Navigate to Trending card
+		op.tapOnNetIncomeOverTimeCard();
+		
+		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+
+		String actText_notDetailsScreen = not.youDontHaveAnyTxns.getText();
+				
+		if (actText_notDetailsScreen.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Net Income Over Time page > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Net Income Over Time page > Message is not displayed in case user has no transactions");
+		
+		
+		sa.assertAll();
+		
+	}
+	@Test (priority=30)
+	public void TC14_ValidateForZeroDatset_TransactionSummaryCard() throws Exception {
+		Commentary.log(LogStatus.INFO, "Validating message displayed on Transaction Summary Card in case of no transactions");
+		SoftAssert sa = new SoftAssert();
+		
+		OverviewPage op = new OverviewPage();
+			
+		//Navigate to Transaction Summary card
+		op.tapOnTransactionSummaryCard();
+		
+		TransactionSummaryPage ts = new TransactionSummaryPage();
+
+		String actText_summaryDetailsScreen = ts.noTransactionCategory.getText();
+				
+		if (actText_summaryDetailsScreen.equals("No Transactions by Category"))
+			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary page > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary page > Message is not displayed in case user has no transactions");
+		
+		ts.payeeTab.click();
+		
+		String actText_noTxnPayee = ts.noTransactionPayee.getText();
+		
+		if (actText_noTxnPayee.equals("No Transactions by Payee"))
+			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary page > Correct message is displayed in case user has no transactions");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary page > Message is not displayed in case user has no transactions");
+		
+		sa.assertAll();
+		
+	}
 /*	
 	public void buildUpload () throws IOException {
 	SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");

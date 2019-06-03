@@ -163,13 +163,19 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']/../*[@text='No Transaction available']")
 	public MobileElement recentTxns_NoTxnsAvaialable;
 	
-	@iOSFindBy(xpath="//*[@name=concat('Top Trending Categories Last 30 days You don',\"'\",'t have any transactions.')]")
+	//@iOSFindBy(xpath="//*[@name=concat('Top Trending Categories Last 30 days You don',\"'\",'t have any transactions.')]")
+	@iOSFindBy(xpath="//*[starts-with(@name,'Top Trending Categories Last 30 day')]/XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
 	@AndroidFindBy(xpath="//*[@text='Top Trending Categories']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
 	public MobileElement tredningCard_YoudontHaveAnyTxn;
 	
-	@iOSFindBy(xpath="//*[@name=concat('Spending Over Time You don',\"'\",'t have any transactions.')]")
+	//@iOSFindBy(xpath="//*[@name=concat('Spending Over Time You don',\"'\",'t have any transactions.')]")
+	@iOSFindBy(xpath="//*[starts-with(@name,'Spending Over Time')]/XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
 	@AndroidFindBy(xpath="//*[@text='Spending Over Time']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
 	public MobileElement spendingOverTimeCard_YoudontHaveAnyTxn;
+	
+	@iOSFindBy(xpath="//*[starts-with(@name,'Net Income Over Time')]/XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
+	@AndroidFindBy(xpath="//*[@text='Net Income Over Time']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
+	public MobileElement netIncomeOverTimeCard_YoudontHaveAnyTxn;
 	
 	@iOSFindBy(xpath="//*[@name='Transaction Summary $0 Earned $0 Spent $0']")
 	@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@text='$0 Earned']")
@@ -283,7 +289,7 @@ public void tapOnTrendingCard() throws Exception{
 			
 		}
 		else {
-		if (!Verify.objExists(topTrendingCard)) {
+		//if (!Verify.objExists(topTrendingCard)) {
 			/*
 			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
 			Thread.sleep(1000);	
@@ -293,7 +299,7 @@ public void tapOnTrendingCard() throws Exception{
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
-		}
+		//}
 		}
 		
 		
@@ -318,7 +324,7 @@ public void tapOnTrendingCard() throws Exception{
 			
 		}
 		else {
-			
+
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ cardName + "\").instance(0))"));
 			Thread.sleep(1000);
 		}

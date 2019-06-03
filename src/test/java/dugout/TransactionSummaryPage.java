@@ -54,6 +54,14 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Internet']/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement categoryTile;
 		
+		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Category\"]")
+		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Category']")
+		public MobileElement noTransactionCategory;
+		
+		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Payee\"]")
+		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Payee']")
+		public MobileElement noTransactionPayee;
+		
 		public void navigateBackToDashboard() throws Exception{
 			
 			backButtonOnHeader.click();
