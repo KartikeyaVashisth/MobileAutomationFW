@@ -52,8 +52,8 @@ public class SignInPage {
 	
 	
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
-	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID']") 
-	@iOSFindBy(xpath="//*[@name='Quicken ID']")
+	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)']") 
+	@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
 	public MobileElement emailID;
 	
 	
