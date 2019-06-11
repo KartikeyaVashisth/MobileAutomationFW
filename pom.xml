@@ -51,6 +51,25 @@
 
 
 <build>
+
+<plugins>
+      <plugin>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <configuration>
+       <suiteXmlFiles>
+              <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+            </suiteXmlFiles>
+      	<systemPropertyVariables>
+         <buildpath>${env.BUILD}</buildpath>
+         <engine>${env.ENGINE}</engine>
+         <host>${env.HOST}</host>
+          
+      	</systemPropertyVariables>  
+      </configuration>
+      </plugin>
+    </plugins>
+    
+<!--
 <plugins>
   
       <plugin>
@@ -63,10 +82,12 @@
          <buildpath>${env.BUILD}</buildpath>
          <engine>${env.ENGINE}</engine>
          <host>${env.HOST}</host>
+          
       	</systemPropertyVariables>  
       </configuration>
       </plugin>
     </plugins>
+ -->  
 </build>
 
 

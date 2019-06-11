@@ -42,28 +42,33 @@ public class Recovery {
 		
 		System.out.println("uploading build to SAUCE storage");
 		System.out.println("build path... "+System.getProperty("buildpath"));
-		String appPath = System.getProperty("buildpath");
-		String [] a = appPath.split("/");
-		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
-		
-		
-		//String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
-		if (h.getEngine().equals("android")) {
-			SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-			File f = new File(appPath);
-			String response = r.uploadFile(f, "Quicken.apk", true);
-			System.out.println("Sauce Upload Response -->> "+response);
-			System.out.println("Completed..uploading build to SAUCE storage");
+		String appPath = "DoNotUpload"; //System.getProperty("buildpath");
+		if (! appPath.equalsIgnoreCase("DoNotUpload")){
+			String [] a = appPath.split("/");
+			System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+			
+			
+			//String appPath = "/Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk";
+			if (h.getEngine().equals("android")) {
+				SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+				File f = new File(appPath);
+				String response = r.uploadFile(f, "Quicken.apk", true);
+				System.out.println("Sauce Upload Response -->> "+response);
+				System.out.println("Completed..uploading build to SAUCE storage");
+				
+			}
+			else {
+				SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+				File f = new File(appPath);
+				String response = r.uploadFile(f, "Quicken.zip", true);
+				System.out.println("Sauce Upload Response -->> "+response);
+				System.out.println("Completed..uploading build to SAUCE storage");
+				
+			}
 			
 		}
-		else {
-			SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-			File f = new File(appPath);
-			String response = r.uploadFile(f, "Quicken.zip", true);
-			System.out.println("Sauce Upload Response -->> "+response);
-			System.out.println("Completed..uploading build to SAUCE storage");
-			
-		}
+		
+		
 		
 		
 		//Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk
