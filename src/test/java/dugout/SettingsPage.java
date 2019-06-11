@@ -102,11 +102,11 @@ public class SettingsPage {
 		public MobileElement FeedbackTxt;
 		
 		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Use Quicken Passcode\"]")
-		@AndroidFindBy(xpath="")
+		@AndroidFindBy(xpath="TBD")
 		public MobileElement quickenPasscodeTxt;
 		
 		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Use Touch ID\"]")
-		@AndroidFindBy(xpath="")
+		@AndroidFindBy(xpath="TBD")
 		public MobileElement useTouchIDTxt;
 		
 		
