@@ -702,82 +702,82 @@ public class RegressionCases extends Recovery {
 		//referee.Verify.waitForObject(me, wttime)
 	*/
 	}
-	@Test(priority = 12)
-	public void TC12_ValidateDatasetPicker  () throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating by changing existing Dataset after login and verify that account are loaded");
-
-		OverviewPage op = new OverviewPage();
-		op.hambergerIcon.click();
-		Thread.sleep(1000);
-		
-		SettingsPage sp = new SettingsPage();		
-		sp.datasetDDButton.click();
-		Thread.sleep(1000);
-		
-		MobileElement dataset1 = sp.getTextView("Appium_TodaysBalanceTest");
-		MobileElement dataset2 = sp.getTextView("TodaysBalancesTest");
-		MobileElement dataset3 = sp.getTextView("budgets");
-		MobileElement dataset4 = sp.getTextView("account_stickiness");
-		MobileElement dataset5 = sp.getTextView("lab2_1_yuv");
-		MobileElement dataset6 = sp.getTextView("yuv_123");
-		
-		
-		SoftAssert sa = new SoftAssert();
-		
-		if (Verify.objExists(dataset1))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset1 is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Dataset1 is NOT displayed");
-		
-		if (Verify.objExists(dataset2))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset2 is displayed");
-		else
-			
-			Commentary.log(sa, LogStatus.FAIL, "Dataset2 is NOT displayed");
-		
-		if (Verify.objExists(dataset3))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset3 is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Dataset3 is NOT displayed");
-		
-		if (Verify.objExists(dataset4))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset4 is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Dataset4 is NOT displayed");
-		
-		if (Verify.objExists(dataset5))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset5 is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Dataset5 is NOT displayed");
-		
-		if (Verify.objExists(dataset6))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset6 is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Dataset6 is NOT displayed");
-		
-		dataset1.click();
-		Thread.sleep(2000);
-		
-		referee.Verify.waitForObject(op.hambergerIcon, 3000);
-		op.hambergerIcon.click();
-		Thread.sleep(1000);
-		
-		
-		sa.assertTrue(sp.verifyCloudAccountName("Appium_TodaysBalanceTest"), "Incorrect dataset is selected");
-		sp.datasetDDButton.click();
-		MobileElement dataset7 = sp.getTextView("ProjectedBalances");
-
-		Thread.sleep(2000);	
-
-		dataset7.click();
-		Thread.sleep(2000);
-		op.hambergerIcon.click();
-		Thread.sleep(1000);
-		
-		sa.assertTrue(sp.verifyCloudAccountName("ProjectedBalances"), "Incorrect dataset is selected");
-		sa.assertAll();
-
-	}
+//	@Test(priority = 12)
+//	public void TC12_ValidateDatasetPicker  () throws Exception {
+//		Commentary.log(LogStatus.INFO, "Validating by changing existing Dataset after login and verify that account are loaded");
+//
+//		OverviewPage op = new OverviewPage();
+//		op.hambergerIcon.click();
+//		Thread.sleep(1000);
+//		
+//		SettingsPage sp = new SettingsPage();		
+//		sp.datasetDDButton.click();
+//		Thread.sleep(1000);
+//		
+//		MobileElement dataset1 = sp.getTextView("Appium_TodaysBalanceTest");
+//		MobileElement dataset2 = sp.getTextView("TodaysBalancesTest");
+//		MobileElement dataset3 = sp.getTextView("budgets");
+//		MobileElement dataset4 = sp.getTextView("account_stickiness");
+//		MobileElement dataset5 = sp.getTextView("lab2_1_yuv");
+//		MobileElement dataset6 = sp.getTextView("yuv_123");
+//		
+//		
+//		SoftAssert sa = new SoftAssert();
+//		
+//		if (Verify.objExists(dataset1))
+//			Commentary.log(LogStatus.INFO, "PASS: Dataset1 is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Dataset1 is NOT displayed");
+//		
+//		if (Verify.objExists(dataset2))
+//			Commentary.log(LogStatus.INFO, "PASS: Dataset2 is displayed");
+//		else
+//			
+//			Commentary.log(sa, LogStatus.FAIL, "Dataset2 is NOT displayed");
+//		
+//		if (Verify.objExists(dataset3))
+//			Commentary.log(LogStatus.INFO, "PASS: Dataset3 is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Dataset3 is NOT displayed");
+//		
+//		if (Verify.objExists(dataset4))
+//			Commentary.log(LogStatus.INFO, "PASS: Dataset4 is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Dataset4 is NOT displayed");
+//		
+//		if (Verify.objExists(dataset5))
+//			Commentary.log(LogStatus.INFO, "PASS: Dataset5 is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Dataset5 is NOT displayed");
+//		
+////		if (Verify.objExists(dataset6))
+////			Commentary.log(LogStatus.INFO, "PASS: Dataset6 is displayed");
+////		else
+////			Commentary.log(sa, LogStatus.FAIL, "Dataset6 is NOT displayed");
+//		
+//		dataset1.click();
+//		Thread.sleep(2000);
+//		
+//		referee.Verify.waitForObject(op.hambergerIcon, 3000);
+//		op.hambergerIcon.click();
+//		Thread.sleep(1000);
+//		
+//		
+//		sa.assertTrue(sp.verifyCloudAccountName("Appium_TodaysBalanceTest"), "Incorrect dataset is selected");
+//		sp.datasetDDButton.click();
+//		MobileElement dataset7 = sp.getTextView("ProjectedBalances");
+//
+//		Thread.sleep(2000);	
+//
+//		dataset7.click();
+//		Thread.sleep(2000);
+//		op.hambergerIcon.click();
+//		Thread.sleep(1000);
+//		
+//		sa.assertTrue(sp.verifyCloudAccountName("ProjectedBalances"), "Incorrect dataset is selected");
+//		sa.assertAll();
+//
+//	}
 	
 	
 	@Test (priority=13)
@@ -1144,36 +1144,36 @@ public class RegressionCases extends Recovery {
 		
 	}
 	
-	@Test(priority = 23)
-	public void VerifyNetIncomeOverTimeCard_MonthlyDisplay() throws Exception {
-		
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
-		
-		// get balances from accounts card
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetIncomeOverTimeCard();
-		
-		String [] lastSixMonths = h.getLastSixMonths();
-		
-		Integer iCount;
-		
-		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
-		
-		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
-			
-			not.tapOnTheMonth(lastSixMonths[iCount]);
-			
-			if (not.verifyMonth(lastSixMonths[iCount]))
-				Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime > tapping on the month ["+lastSixMonths[iCount]+"] displayed the month's name in total spending");
-			else
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: NetIncome OverTime Card > tapping on the month ["+lastSixMonths[iCount]+"] didn't display the month's name in total spending");	
-			
-		}
-		
-		sa.assertAll();	
-	}
+//	@Test(priority = 23)
+//	public void VerifyNetIncomeOverTimeCard_MonthlyDisplay() throws Exception {
+//		
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		Commentary.log(LogStatus.INFO, "Verify tapping on the month's graph display the particular month's data");
+//		
+//		// get balances from accounts card
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetIncomeOverTimeCard();
+//		
+//		String [] lastSixMonths = h.getLastSixMonths();
+//		
+//		Integer iCount;
+//		
+//		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+//		
+//		for (iCount=0; iCount<lastSixMonths.length; iCount++) {
+//			
+//			not.tapOnTheMonth(lastSixMonths[iCount]);
+//			
+//			if (not.verifyMonth(lastSixMonths[iCount]))
+//				Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime > tapping on the month ["+lastSixMonths[iCount]+"] displayed the month's name in total spending");
+//			else
+//				Commentary.log(sa, LogStatus.FAIL, "FAIL: NetIncome OverTime Card > tapping on the month ["+lastSixMonths[iCount]+"] didn't display the month's name in total spending");	
+//			
+//		}
+//		
+//		sa.assertAll();	
+//	}
 	
 	@Test(priority=24)
 	public void ValidateBalancesOnAccountCard() throws Exception{
@@ -1325,73 +1325,73 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
-	@Test (priority=27)
-	public void TC14_ValidateForZeroDatset_TrendingCard() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating message displayed on Trending Card in case of no transactions");
-		SoftAssert sa = new SoftAssert();
-		
-		OverviewPage op = new OverviewPage();
-		Helper h = new Helper();
-		if (h.getEngine().equalsIgnoreCase("android")){
-			op.scrollTillCard("Top Trending Categories");
-			}
-		else {
-			op.scrollTillCard("Spending Over Time");
-			}
-		String actText_TxnTrendingPage = op.tredningCard_YoudontHaveAnyTxn.getText();
-		
-		if (actText_TxnTrendingPage.equals("You don't have any transactions."))
-			Commentary.log(LogStatus.INFO, "PASS: Trending card > Correct message is displayed in case user has no transactions");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Trending card > Message is not displayed in case user has no transactions");
-		
-		//Navigate to Trending card
-		op.tapOnTrendingCard();
-		
-		SpendingTrendPage stp = new SpendingTrendPage();
-
-		String actText_trendindDetailScreen = stp.youDontHaveAnyTxns.getText();
-				
-		if (actText_trendindDetailScreen.equals("You don't have any transactions."))
-			Commentary.log(LogStatus.INFO, "PASS: Trending page > Correct message is displayed in case user has no transactions");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Trending page > Message is not displayed in case user has no transactions");
-		
-		
-		sa.assertAll();
-		
-	}
-	@Test (priority=28)
-	public void TC14_ValidateForZeroDatset_SpendingOverTimeCard() throws Exception {
-		Commentary.log(LogStatus.INFO, "Validating message displayed on Spending Over Time Card in case of no transactions");
-		SoftAssert sa = new SoftAssert();
-		
-		OverviewPage op = new OverviewPage();
-		op.scrollTillCard("Net Income Over Time");
-		
-		String actText_SpendingOverTimePage = op.spendingOverTimeCard_YoudontHaveAnyTxn.getText();
-		
-		if (actText_SpendingOverTimePage.equals("You don't have any transactions."))
-			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time card > Correct message is displayed in case user has no transactions");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time card > Message is not displayed in case user has no transactions");
-		
-		//Navigate to Trending card
-		op.tapOnSpendingOverTimeCard();
-		
-		SpendingOverTimePage sot = new SpendingOverTimePage();
-
-		String actText_sotDetailsScreen = sot.youDontHaveAnyTxns.getText();
-				
-		if (actText_sotDetailsScreen.equals("You don't have any transactions."))
-			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time page > Correct message is displayed in case user has no transactions");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time page > Message is not displayed in case user has no transactions");
-		
-		
-		sa.assertAll();
-		
-	}
+//	@Test (priority=27)
+//	public void TC14_ValidateForZeroDatset_TrendingCard() throws Exception {
+//		Commentary.log(LogStatus.INFO, "Validating message displayed on Trending Card in case of no transactions");
+//		SoftAssert sa = new SoftAssert();
+//		
+//		OverviewPage op = new OverviewPage();
+//		Helper h = new Helper();
+//		if (h.getEngine().equalsIgnoreCase("android")){
+//			op.scrollTillCard("Top Trending Categories");
+//			}
+//		else {
+//			op.scrollTillCard("Spending Over Time");
+//			}
+//		String actText_TxnTrendingPage = op.tredningCard_YoudontHaveAnyTxn.getText();
+//		
+//		if (actText_TxnTrendingPage.equals("You don't have any transactions."))
+//			Commentary.log(LogStatus.INFO, "PASS: Trending card > Correct message is displayed in case user has no transactions");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Trending card > Message is not displayed in case user has no transactions");
+//		
+//		//Navigate to Trending card
+//		op.tapOnTrendingCard();
+//		
+//		SpendingTrendPage stp = new SpendingTrendPage();
+//
+//		String actText_trendindDetailScreen = stp.youDontHaveAnyTxns.getText();
+//				
+//		if (actText_trendindDetailScreen.equals("You don't have any transactions."))
+//			Commentary.log(LogStatus.INFO, "PASS: Trending page > Correct message is displayed in case user has no transactions");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Trending page > Message is not displayed in case user has no transactions");
+//		
+//		
+//		sa.assertAll();
+//		
+//	}
+//	@Test (priority=28)
+//	public void TC14_ValidateForZeroDatset_SpendingOverTimeCard() throws Exception {
+//		Commentary.log(LogStatus.INFO, "Validating message displayed on Spending Over Time Card in case of no transactions");
+//		SoftAssert sa = new SoftAssert();
+//		
+//		OverviewPage op = new OverviewPage();
+//		op.scrollTillCard("Net Income Over Time");
+//		
+//		String actText_SpendingOverTimePage = op.spendingOverTimeCard_YoudontHaveAnyTxn.getText();
+//		
+//		if (actText_SpendingOverTimePage.equals("You don't have any transactions."))
+//			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time card > Correct message is displayed in case user has no transactions");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time card > Message is not displayed in case user has no transactions");
+//		
+//		//Navigate to Trending card
+//		op.tapOnSpendingOverTimeCard();
+//		
+//		SpendingOverTimePage sot = new SpendingOverTimePage();
+//
+//		String actText_sotDetailsScreen = sot.youDontHaveAnyTxns.getText();
+//				
+//		if (actText_sotDetailsScreen.equals("You don't have any transactions."))
+//			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time page > Correct message is displayed in case user has no transactions");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "Spending Over Time page > Message is not displayed in case user has no transactions");
+//		
+//		
+//		sa.assertAll();
+//		
+//	}
 	@Test (priority=29)
 	public void TC14_ValidateForZeroDatset_NetIncomeOverTimeCard() throws Exception {
 		Commentary.log(LogStatus.INFO, "Validating message displayed on Net Income Over Time Card in case of no transactions");
