@@ -55,8 +55,8 @@ public class OverviewPage {
 	@iOSFindBy(xpath="//*[normalize-space(@name)='Settings']")
 	@AndroidFindBy(xpath="//*[@content-desc='More options']")
 	MobileElement SettingsOrMoreOptions;*/
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking and Credit Account\"]")
-	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']")
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking & Credit\"]")
+	@AndroidFindBy(xpath="//*[@text='Banking & Credit']")
 	public MobileElement accountsCard;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
@@ -82,6 +82,18 @@ public class OverviewPage {
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/../android.widget.TextView[9]")
 	public MobileElement totalBalance;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property and Debt Account\"]")
+	@AndroidFindBy(xpath="//*[@text='Property and Debt Account']")
+	public MobileElement propertyAndDebt;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property\"]")
+	@AndroidFindBy(xpath="//*[@text='Property']")
+	public MobileElement propertyText;
+	
+	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Debt\"]")
+	@AndroidFindBy(xpath="//*[@text='Debt']")
+	public MobileElement debtText;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
@@ -267,7 +279,43 @@ public class OverviewPage {
 		
 	}
 	
-public void tapOnTrendingCard() throws Exception{
+	public void tapOnPropertyDebtCard() throws Exception{
+		
+		//Dimension size = Engine.ad.manage().window().getSize();
+		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("ios")){
+			
+			String sXpath="//*[@name ='Property and Debt Account']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
+			Thread.sleep(1000);	
+			
+		}
+		else {
+		//if (!Verify.objExists(topTrendingCard)) {
+			/*
+			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+			Thread.sleep(1000);	
+			*/
+			String sXpath="//android.widget.TextView[@text='Property and Debt Account']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Property and Debt Account\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		//}
+		}
+	}
+	
+	public void tapOnTrendingCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
