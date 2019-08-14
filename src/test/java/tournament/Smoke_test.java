@@ -64,7 +64,7 @@ public class Smoke_test extends Recovery {
 	    // verify if checking account Exists or not
 	    BankingAndCreditCardPage acctListPage = new BankingAndCreditCardPage();
 		
-		if (acctListPage.getAccount(acctToVerify).getText().trim().equals(acctToVerify))
+		if (acctListPage.getAccount(acctToVerify).getText().replace("Account Name: ", "").trim().equals(acctToVerify))
 			Commentary.log(sa, LogStatus.INFO,"Checking account exists");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"Checking account verification failed");
@@ -84,7 +84,7 @@ public class Smoke_test extends Recovery {
 	   	/*Engine.ad.navigate().back();
 	   	helper.waitForRefresh(2000);
 	   	acctListPage.backButton.click();*/
-	   	txnPage.navigateBackToDashboard();
+	   	//txnPage.navigateBackToDashboard();
 	   	sa.assertAll();
 	   	
 	    
@@ -446,6 +446,8 @@ public class Smoke_test extends Recovery {
 		sa.assertAll();
 		
 	}
+	
+	
 	
 	
 

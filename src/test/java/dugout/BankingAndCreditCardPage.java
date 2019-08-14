@@ -109,7 +109,7 @@ public class BankingAndCreditCardPage {
 	public MobileElement getAccount(String acctName) throws Exception{
 		
 		String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
-		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='"+acctName+"']";
+		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='Account Name: "+acctName+"']";
 		//"//android.widget.ScrollView//android.view.ViewGroup//android.widget.TextView[normalize-space(@text)='"+acctName+"']";
 		Commentary.log(LogStatus.INFO, "Finding Account ["+acctName+"]");
 		Helper h = new Helper();
