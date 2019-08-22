@@ -144,8 +144,10 @@ public class RegressionCases extends Recovery {
 		tRec.setPayee("shop");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		td.addTransaction(tRec);
 		Double txnAmount_before = h.processBalanceAmount(td.getTransactionAmount());
+		td.addTransaction(tRec);
+		h.getContext();
+		
 		System.out.println("Actual trans amount "+txnAmount_before);
 		
 		Double d = Double.parseDouble(tRec.getAmount());
@@ -1446,15 +1448,18 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
-/*	
-	public void buildUpload () throws IOException {
+	
+/*	public static void buildUpload () throws IOException {
 	SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
     File f = new File("/Users/vgupta/Downloads/Quicken.5.13.0.13068.google.apk");
     String response = r.uploadFile(f, "QuickenRelease.apk", true);
     System.out.println("Sauce Upload Response -->> "+response);
     System.out.println("Completed..uploading build to SAUCE storage");
 	} 
-*/
+
+	public static void main(String[] args) throws IOException {
+		buildUpload();
+    } */
 	
 }
 
