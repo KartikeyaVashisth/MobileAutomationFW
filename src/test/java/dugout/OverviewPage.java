@@ -478,23 +478,23 @@ public class OverviewPage {
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
-			String sXpath="//android.widget.TextView[@text='Net Income Over Time']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income Over Time\").instance(0))"));
+			String sXpath="//android.widget.TextView[@text='Net Income by Month']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income by Month\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		
 		}
 		else {
-			String sXpath="//*[@name='Net Income Over Time']";
+			String sXpath="//*[@name='Net Income by Month']";
 			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
-			scrollObject.put("predicateString", "label == 'Net Income Over Time'");
+			scrollObject.put("predicateString", "label == 'Net Income by Month'");
 			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Net Income Over Time")).click();
+			Engine.iosd.findElement(By.name("Net Income by Month")).click();
 			Thread.sleep(1000);
 		}
 	}

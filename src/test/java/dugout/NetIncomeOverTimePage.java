@@ -29,8 +29,8 @@ public class NetIncomeOverTimePage {
 	}
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Net Income Over Time\"]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Net Income by Month\"]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income by Month']")
 	public MobileElement netIncomeOverTimeHeader;
 	
 	@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")

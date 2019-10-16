@@ -358,14 +358,14 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
 		
-		
+		/*
 		not.navigateBackToDashboard();
 			
 		if (Verify.objExists(o.hambergerIcon))
 			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
-		
+		*/
 		sa.assertAll();
 		
 			
