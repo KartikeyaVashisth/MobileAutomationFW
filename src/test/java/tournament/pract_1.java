@@ -32,7 +32,6 @@ import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import referee.ErrorUtil;
@@ -460,8 +459,8 @@ public class pract_1 extends Recovery {
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
 		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
+//		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
+//		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 		Thread.sleep(3000);
 		
 		o.investingCard.click();
@@ -669,7 +668,7 @@ public class pract_1 extends Recovery {
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
 		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+	//	Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Thread.sleep(3000);
 		
 		if (Verify.objExists(o.topTrendingCard))
@@ -698,7 +697,7 @@ public class pract_1 extends Recovery {
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
 		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+	//	Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Thread.sleep(3000);
 		
 		if (Verify.objExists(o.transactionSummaryCard))
@@ -738,8 +737,8 @@ public class pract_1 extends Recovery {
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
 		Dimension size = Engine.ad.manage().window().getSize();
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
-		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
+//		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
+//		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 		Thread.sleep(3000);
 		
 		if (Verify.objExists(o.invCard_zeroDataState))

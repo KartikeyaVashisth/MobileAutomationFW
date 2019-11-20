@@ -1,5 +1,9 @@
 package dugout;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
@@ -10,7 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.events.api.general.AlertEventListener;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -187,7 +191,8 @@ public class BankingAndCreditCardPage {
 	public String getCheckingBalance() throws Exception {
 		
 		// scroll to the account
-		this.scrollToAccount("CHECKING");
+		//this.scrollToAccount("CHECKING");
+		this.scrollToAccount("Account Type: Checking");
 		
 		return this.checkingBalance.getText();
 	
@@ -301,11 +306,15 @@ public class BankingAndCreditCardPage {
         int y=this.txtTodaysBalanceAmount.getRect().getY();
         //int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
 		
-		Integer i;
-        for (i = 0; i<2; i++) {
-        	Engine.ad.swipe(x_start,y,x_end,y,4000);
-        	Thread.sleep(1000);
-        }	
+//		Integer i;
+//        for (i = 0; i<2; i++) {
+//        	Engine.ad.swipe(x_start,y,x_end,y,4000);
+//        	Thread.sleep(1000);
+//        }	
+        TouchAction touchAction = new TouchAction(Engine.getDriver());
+        
+        
+        touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
 	}
 	
 	public void scrollToProjectedBalance_ios() throws Exception{

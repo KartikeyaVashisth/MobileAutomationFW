@@ -1,16 +1,18 @@
 package dugout;
 
-import org.eclipse.jetty.util.annotation.ManagedObject;
+//import org.eclipse.jetty.util.annotation.ManagedObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import support.Engine;
 import support.Helper;
@@ -47,7 +49,8 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Manage Alerts']")
 	public MobileElement manageAlerts;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"logOutButton\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"logOutButton\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='logOutButton'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Sign Out']")
 	public MobileElement logout;
 	
@@ -56,32 +59,39 @@ public class SettingsPage {
 	public MobileElement close;
 	
 	//Hamburger menu options
-		@iOSFindBy(xpath="//*[@name='closeButton']")
+		//@iOSFindBy(xpath="//*[@name='closeButton']")
+		@iOSXCUITFindBy(iOSNsPredicate= "name == 'closeButton'")
 		@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='closeButton']")
 		public MobileElement closeButton;
 		
-		@iOSFindBy(id="logOutButton")
+		//@iOSFindBy(id="logOutButton")
+		@iOSXCUITFindBy(iOSNsPredicate= "name == 'logOutButton'")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Logout']")
 		public MobileElement logoutButton;
 		
-		@iOSFindBy(id="dataSetArrow")
+		//@iOSFindBy(id="dataSetArrow")
+		@iOSXCUITFindBy(accessibility= "dataSetArrow")
 		//@iOSFindBy(xpath="//XCUIElementTypeImage[@name=\"dataSetArrow\"]")
 		@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='dataSetArrow']")
 		public MobileElement datasetDDButton;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Accounts\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Accounts\"]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Accounts'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
 		public MobileElement accountTxt;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Fingerprint'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeTxt;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Fingerprint'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeHeaderTxt;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Manage Alerts\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Manage Alerts\"]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Manage Alerts'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
 		public MobileElement ManageAlertsTxt;
 		
@@ -89,7 +99,8 @@ public class SettingsPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
 		public MobileElement ManageAlertsHeaderTxt;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Help & Legal\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Help & Legal\"]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Help & Legal'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Help & Legal']")
 		public MobileElement HelpLegalTxt;
 		
@@ -201,7 +212,7 @@ public class SettingsPage {
 	public MobileElement getAccountElement (String accountName) {
 		
 		String xpath_Android = "//android.widget.TextView[@text='"+accountName+"']";
-		String xpath_IOS = "//XCUIElementTypeStaticText[@name='"+accountName+"']" ;
+		String xpath_IOS = "**/XCUIElementTypeStaticText[`name=='"+accountName+"'`]" ;
 		
 		Helper h = new Helper();
 		
@@ -217,8 +228,8 @@ public class SettingsPage {
 		}
 		else {
 			try{
-				MobileElement me = (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
-				return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(xpath_IOS));
+				return (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(xpath_IOS));
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());

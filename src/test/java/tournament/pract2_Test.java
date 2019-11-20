@@ -20,7 +20,6 @@ import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import referee.Commentary;
 import referee.ExtentManager;

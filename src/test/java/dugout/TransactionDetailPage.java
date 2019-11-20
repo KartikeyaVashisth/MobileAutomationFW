@@ -1,5 +1,9 @@
 package dugout;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static java.time.Duration.ofSeconds;
+
 import java.awt.RenderingHints.Key;
 import java.text.DateFormatSymbols;
 import java.util.Arrays;
@@ -11,6 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,6 +26,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import junit.framework.Protectable;
 import referee.Commentary;
 import referee.Verify;
@@ -55,7 +61,8 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
 	public MobileElement addTransactionTxt;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeNavigationBar[@name=\"View Transaction\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeNavigationBar[@name=\"View Transaction\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'View Transaction'")
 	@AndroidFindBy(xpath="//*[@text='View Transaction']")
 	public MobileElement viewTransactionTxt;
 	
@@ -64,17 +71,21 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton")
 	public MobileElement backButton;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In\"]")
+	@iOSXCUITFindBy(iOSNsPredicate= "name = 'Money In'")
 	@AndroidFindBy(xpath="//*[@text='Money In']")
 	public MobileElement moneyIn;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money Out\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money Out\"]")
+	@iOSXCUITFindBy(iOSNsPredicate= "name = 'Money Out'")
 	@AndroidFindBy(xpath="//*[@text='Money Out']")
 	public MobileElement moneyOut;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In Money Out\"]/../XCUIElementTypeOther[contains(@name,'$')]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In Money Out\"]/../XCUIElementTypeOther[contains(@name,'$')]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Money In Money Out'`]/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
+
 	//@AndroidFindBy(xpath="//*[@content-desc='-$0.00']//android.widget.TextView")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '-$')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '$')]")
 	public MobileElement amount;
 	
 	
@@ -88,19 +99,23 @@ public class TransactionDetailPage {
 	
 	// -------------- Date picker --------------
 	
-	@iOSFindBy(xpath="//XCUIElementTypeDatePicker")
+	//@iOSFindBy(xpath="//XCUIElementTypeDatePicker")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeDatePicker")
 	@AndroidFindBy(xpath="//android.widget.DatePicker")
 	public MobileElement datePicker;
 	
-	@iOSFindBy(xpath="//XCUIElementTypePickerWheel[1]")
+	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[1]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[1]")
 	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=0]/android.widget.EditText")
 	public MobileElement enterMonth;
 	
-	@iOSFindBy(xpath="//XCUIElementTypePickerWheel[2]")
+	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[2]")
 	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=1]/android.widget.EditText")
 	public MobileElement enterDate;
 	
-	@iOSFindBy(xpath="//XCUIElementTypePickerWheel[3]")
+	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[3]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[3]")
 	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=2]/android.widget.EditText")
 	public MobileElement enterYear;
 	
@@ -108,7 +123,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Cancel']")
 	public MobileElement buttonCancel;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"OK\"]")
+	@iOSFindBy(xpath="//*[@name=\"OK\"]")
 	@AndroidFindBy(xpath="//*[@text='OK']")
 	public MobileElement buttonOK;
 	
@@ -138,7 +153,8 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Check Number']/../android.widget.EditText")
 	public MobileElement enteredCheckNumber;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Done\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Done\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Done'")
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	//@AndroidFindBy(xpath="//*[@content-desc='Done']/android.widget.TextView")
 	public MobileElement buttonDone;
@@ -154,11 +170,13 @@ public class TransactionDetailPage {
 	
 	// ------------------ Payee SCREEN ------------------
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closePayee\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closePayee\"]")
+	@iOSXCUITFindBy(accessibility="closePayee")
 	@AndroidFindBy(xpath="//*[@content-desc='closePayee']/android.widget.ImageView")
 	public MobileElement closePayee;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTextField[@name='search payee']")
+	//@iOSFindBy(xpath="//XCUIElementTypeTextField[@name='search payee']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeTextField[`name == 'search payee'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Payee']")
 	public MobileElement searchPayee;
 	
@@ -202,11 +220,13 @@ public class TransactionDetailPage {
 	
 	// ------------------ Category SCREEN ------------------
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closeCategory\"]/XCUIElementTypeImage")
-	@iOSFindBy(id="closeCategories")
+	//@iOSFindBy(id="closeCategories")
+	@iOSXCUITFindBy(accessibility="closeCategory")
 	@AndroidFindBy(xpath="//*[@content-desc='closeCategory']/android.widget.ImageView")
 	public MobileElement closeCategory;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTextField[@value=\"Search Category\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeTextField[@value=\"Search Category\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Category']")
 	public MobileElement searchCategoryTextField;
 	/*
@@ -258,13 +278,18 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave1;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Delete Transaction\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Delete Transaction\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Delete Transaction'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Delete Transaction']")
 	public MobileElement deleteTransaction;
 	
 	@iOSFindBy(id="Delete")
 	@AndroidFindBy(id="android:id/button1")
 	public MobileElement deleteTransactionAlertButton;
+	
+	@iOSFindBy(id="TBD")
+	@AndroidFindBy(id="android:id/alertTitle")
+	public MobileElement deleteTransferTransactionWarning;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeOther[contains(@name,'Hotel Tags Add Note Add Note')]/../XCUIElementTypeOther[contains(@name,'$')]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@index='1']/android.widget.TextView")
@@ -574,7 +599,7 @@ public class TransactionDetailPage {
 				// ignore
 			}
 			else
-				Engine.iosd.findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+s[iCount]+"']")).click();	
+				Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
 		}
 		
 		this.buttonDone.click();
@@ -609,26 +634,69 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		
-		TouchAction touch = new TouchAction(Engine.ad);
-		touch.longPress(this.enterMonth,1000).release();
-		Engine.ad.performTouchAction(touch);
-		Engine.ad.getKeyboard().pressKey(month);
-		Thread.sleep(500);
-		Engine.ad.getContext();
+//		TouchAction touch = new TouchAction(Engine.ad);
+//		touch.longPress(this.enterMonth,1000).release();
+//		Engine.ad.performTouchAction(touch);
+//		Engine.ad.getKeyboard().pressKey(month);
+//		Thread.sleep(500);
+//		Engine.ad.getContext();
+//		
+//		
+//		TouchAction touch2 = new TouchAction(Engine.ad);
+//		touch2.longPress(this.enterDate,1000).release();
+//		Engine.ad.performTouchAction(touch2);
+//		Engine.ad.getKeyboard().pressKey(date);
+//		Thread.sleep(500);
+//		
+//		
+//		TouchAction touch3 = new TouchAction(Engine.ad);
+//		touch3.longPress(this.enterYear,1000).release();
+//		Engine.ad.performTouchAction(touch3);
+//		Engine.ad.getKeyboard().pressKey(year);
+//		Thread.sleep(1000);
 		
+		/////////////////////////////////////////
+		try {
+			
+			TouchAction touchAction = new TouchAction(Engine.getDriver());
+			touchAction
+			 .press(element(this.enterMonth))
+	         .waitAction(waitOptions(ofSeconds(1000)))
+	         .release()
+	         .perform();
+			((RemoteWebDriver) Engine.getDriver()).getKeyboard().pressKey(month);
+			
+			
+			TouchAction touch2 = new TouchAction(Engine.getDriver());
+			touch2
+			 .press(element(this.enterDate))
+	        .waitAction(waitOptions(ofSeconds(1000)))
+	        .release()
+	        .perform();
+			((RemoteWebDriver) Engine.getDriver()).getKeyboard().pressKey(date);
+			
+			
+			
+			TouchAction touch3 = new TouchAction(Engine.getDriver());
+			/*
+			touch3.longPress(this.enterYear,1000).release();
+			Engine.getDriver().performTouchAction(touch3);
+			Engine.getDriver().getKeyboard().pressKey(year);
+			Thread.sleep(1000);
+			*/
+			touch3
+			 .press(element(this.enterDate))
+	       .waitAction(waitOptions(ofSeconds(1000)))
+	       .release()
+	       .perform();
+			((RemoteWebDriver) Engine.getDriver()).getKeyboard().pressKey(year);
+			Thread.sleep(1000);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		TouchAction touch2 = new TouchAction(Engine.ad);
-		touch2.longPress(this.enterDate,1000).release();
-		Engine.ad.performTouchAction(touch2);
-		Engine.ad.getKeyboard().pressKey(date);
-		Thread.sleep(500);
-		
-		
-		TouchAction touch3 = new TouchAction(Engine.ad);
-		touch3.longPress(this.enterYear,1000).release();
-		Engine.ad.performTouchAction(touch3);
-		Engine.ad.getKeyboard().pressKey(year);
-		Thread.sleep(1000);
+		/////////////////////////////////////////
 		
 		this.buttonOK.click();
 		Thread.sleep(1000);	
@@ -1080,9 +1148,9 @@ public class TransactionDetailPage {
 		
 		public void selectPayee_ios (String payees) throws Exception {
 			
-			String sXpath = "//XCUIElementTypeScrollView//XCUIElementTypeOther[@name='"+payees+"']";
+			String sXpath = "**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '"+payees+"'`]";
 			//String sTemp = "\""+payees+"\"";
-			String createPayee_xpath="//XCUIElementTypeOther[@name='create payee']";
+			String createPayee_xpath="**/XCUIElementTypeOther[`name='create payee'`]";
 			
 			this.payee.click();
 			Thread.sleep(1000);
@@ -1099,14 +1167,14 @@ public class TransactionDetailPage {
 			
 			try {
 				
-				Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(createPayee_xpath)));
-				Engine.iosd.findElement(By.xpath(createPayee_xpath)).click();
+				Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)));
+				Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Payee .. "+payees);
 				
 			}
 			catch (NoSuchElementException e){
 				
-				Engine.iosd.findElement(By.xpath(sXpath)).click();
+				Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
 				Commentary.log(LogStatus.INFO,"Selecting Payee .. "+payees);
 				
 				

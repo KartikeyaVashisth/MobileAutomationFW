@@ -1,5 +1,9 @@
 package dugout;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +27,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -135,7 +140,7 @@ public class TransactionsPage {
 		
 	} 
 	
-	public void swipe_left() {
+	public void swipe_left() throws Exception {
 		Helper h = new Helper();
 
 		if (h.getEngine().equalsIgnoreCase("android")) {
@@ -156,13 +161,21 @@ public class TransactionsPage {
 
 	}
 
-	public void swipe_android() {
+	public void swipe_android() throws Exception {
 		Dimension size = Engine.ad.manage().window().getSize();
 		System.out.println(size);
 		int startx = (int) (size.width * 0.80);
 		int endx = (int) (size.width * 0.20);
 		int starty = size.height / 2;
-		Engine.ad.swipe(startx, starty, endx, starty, 2000);
+		
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+ 
+		touchAction
+                .press(point(startx, starty))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(startx, starty))
+                .release().perform();
+		//Engine.ad.swipe(startx, starty, endx, starty, 2000);
 	}
 	
 	public void selectCategorySwipe (String category) throws Exception {
@@ -294,7 +307,8 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//*[@text='All Transactions']")
 	public MobileElement txtAllTransactions;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	@iOSXCUITFindBy(iOSNsPredicate= "name = 'fab'")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
 	
@@ -311,10 +325,12 @@ public class TransactionsPage {
 	public MobileElement txtProjectedBalanceAmount;
 	
 	@AndroidFindBy(id="android:id/search_src_text")
-	@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name='Search Transactions']")
+	@iOSXCUITFindBy(iOSNsPredicate= "name = 'Search Transactions'")
+	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name='Search Transactions']")
 	public MobileElement searchTransactionTxtField;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
+	//@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
 	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement btnCategory;
 	

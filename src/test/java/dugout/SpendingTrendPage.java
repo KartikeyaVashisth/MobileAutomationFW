@@ -1,15 +1,22 @@
 package dugout;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+
 import java.util.HashMap;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
+import io.appium.java_client.TouchAction;
+//import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -40,7 +47,8 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//*[@text='Spending Trend']/../*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
-	@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
+	//@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
+	@iOSXCUITFindBy(iOSNsPredicate="'You don't have any transactions.'")
 	@AndroidFindBy(xpath="//*[@text=\"You don't have any transactions.\"]")
 	public MobileElement youDontHaveAnyTxns;
 	
@@ -76,6 +84,7 @@ public class SpendingTrendPage {
 	public MobileElement categoryName;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@name, '$')]")
+	//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText[`name BEGINSWITH '$'`]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView//android.widget.TextView[contains(@text, '$')]")
 	public MobileElement amount;
 	
@@ -103,15 +112,24 @@ public class SpendingTrendPage {
 	public void scrollCategory_android() throws Exception{
 		
 		Dimension size = this.scrollCategory.getSize();
-		
-		int x_start=(int)(size.width*0.90);
-        int x_end=(int)(size.width*0.10);
+		System.out.println("Size is "+size);
+		int y_start=(int)(size.width*0.90);        
+        int x_start=(int)(size.width*0.46);//668
         
-        int y=this.amount.getRect().getY();
+        int x_end=5;
+       
+//      Engine.ad.swipe(x_start,y,x_end,y,4000);
+//    	Thread.sleep(1000);
+    	TouchAction touchAction = new TouchAction(Engine.ad);
+ 
 		
-        Engine.ad.swipe(x_start,y,x_end,y,4000);
-    	Thread.sleep(1000);
+		touchAction
+                .press(point(x_start, y_start))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(x_end, y_start))
+                .release().perform();
 			
+
 	}
 	
 	public void scrollCategory_ios() throws Exception{
@@ -136,27 +154,27 @@ public class SpendingTrendPage {
 		
 	}
 	
-	public boolean scrollToCategory(String sCategory) throws Exception{
-		
-		if (Verify.objExists_check(this.youDontHaveAnyTxns))
-			return false;
-		
-		if (getCategory().equals(sCategory))
-			return true;
-		
-		Integer iCount;
-		
-		// restricted scroll to only 4 times
-		for (iCount=0; iCount<4; iCount++) {
-			scrollCategory();
-			
-			if (getCategory().equals(sCategory))
-				return true;	
-		}	
-		
-		return false;
-		
-	}
+//	public boolean scrollToCategory(String sCategory) throws Exception{
+//		
+//		if (Verify.objExists_check(this.youDontHaveAnyTxns))
+//			return false;
+//		
+//		if (getCategory().equals(sCategory))
+//			return true;
+//		
+//		Integer iCount;
+//		
+//		// restricted scroll to only 4 times
+//		for (iCount=0; iCount<4; iCount++) {
+//			scrollCategory();
+//			
+//			if (getCategory().equals(sCategory))
+//				return true;	
+//		}	
+//		
+//		return false;
+//		
+//	}
 	
 	
 	public String getCategory() throws Exception{
@@ -191,16 +209,19 @@ public class SpendingTrendPage {
 	}
 	
 	public void scrollFilter_android() throws Exception{
-		
-		Dimension size = this.lastMonth.getSize();
-		
-		int x_start=(int)(size.width*0.99);
-        int x_end=(int)(size.width*0.01);
-        
-        int y=this.lastMonth.getRect().getY();
-		
-        Engine.ad.swipe(x_start,y,x_end,y,4000);
-    	Thread.sleep(1000);		
+    	
+    	Dimension size = this.lastMonth.getSize();
+    	int x_start=(int)(size.width*0.99);
+    	int x_end=(int)(size.width*0.01);
+    	int y=this.lastMonth.getRect().getY();
+    	
+  		TouchAction touchAction = new TouchAction(Engine.getDriver());
+   	
+  		touchAction
+                  .press(point(x_start, y))
+                  .waitAction(waitOptions(ofMillis(1000)))
+                  .moveTo(point(x_end, y))
+                  .release().perform();
 	}
 	
 	public void scrollFilter() throws Exception{
@@ -212,6 +233,6 @@ public class SpendingTrendPage {
 			scrollFilter_IOS();	
 		
 	}
-	
+
 
 }

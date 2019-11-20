@@ -19,6 +19,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -53,31 +54,37 @@ public class SignInPage {
 	
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)']") 
-	@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
+	//@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Quicken ID (email address)'`]")
 	public MobileElement emailID;
 	
 	
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
-	@iOSFindBy(xpath="//XCUIElementTypeTextField")
+	//@iOSFindBy(xpath="//XCUIElementTypeTextField")
+	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
 	public MobileElement userName;
 	
 	@AndroidFindBy(xpath="//*[@content-desc ='Password']")
 	//@AndroidFindBy(xpath="//*[@text='Password']")
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name=='Password'$]")
 	public MobileElement lblPassword;
 	
 	//@AndroidFindBy(xpath="//input[@id='ius-password']")
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='true']")
-	@iOSFindBy(xpath="//XCUIElementTypeSecureTextField")
+	//@iOSFindBy(xpath="//XCUIElementTypeSecureTextField")
+	@iOSXCUITFindBy(iOSClassChain = "**/*[$type=='XCUIElementTypeSecureTextField'$]")
 	public MobileElement password;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN']")
-	@iOSFindBy(xpath="//*[@name='SIGN IN']")
+	//@iOSFindBy(xpath="//*[@name='SIGN IN']")
+	@iOSXCUITFindBy(iOSClassChain = "**/*[$name=='SIGN IN'$]")
 	public MobileElement btnSignIn;
 	
 	@AndroidFindBy(xpath="//*[@text='DONE']")
 	@iOSFindBy(xpath="//*[@name='doneButton']")
+	//@iOSXCUITFindBy(iOSClassChain = "**/*[$name=='doneButton'$]")
 	public MobileElement btnDone;
 	
 	@AndroidFindBy(xpath="//*[contains(@text,'synced more than one')]")

@@ -231,7 +231,7 @@ public class Helper {
 			capabilities.setCapability("app", "sauce-storage:Quicken.zip");
 			//capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
-			capabilities.setCapability("automationName","appium");
+			capabilities.setCapability("automationName","XCUITest");
 			
 		}
 		return capabilities;
@@ -344,23 +344,23 @@ public class Helper {
 		
 	}
 	
-	public void quicken_scroll_mobile() throws InterruptedException {
-		
-		if (this.getEngine().equals("android")) {
-			Dimension size = Engine.ad.manage().window().getSize();
-			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(3000);	
-			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-		}
-		else {
-			
-			Dimension size = Engine.iosd.manage().window().getSize();
-			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(3000);
-			
-			
-		}
-	}
+//	public void quicken_scroll_mobile() throws InterruptedException {
+//		
+//		if (this.getEngine().equals("android")) {
+//			Dimension size = Engine.ad.manage().window().getSize();
+//			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Thread.sleep(3000);	
+//			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//		}
+//		else {
+//			
+//			Dimension size = Engine.iosd.manage().window().getSize();
+//			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Thread.sleep(3000);
+//			
+//			
+//		}
+//	}
 	
 	public void hideKeyBoard() throws Exception {
 		
@@ -447,7 +447,7 @@ public class Helper {
 		 
 		 return s;
 	}
-		
+	
 	public String getCurrentTime () {
 		Calendar c = Calendar.getInstance();
 		long time = c.getTimeInMillis();
@@ -455,6 +455,16 @@ public class Helper {
 		return timeAsString;
 		
 	}	
+		
+	public static String getCurrentMonth () {
+		Calendar now = Calendar.getInstance();
+
+	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "Jun", "Jul", "August",
+	        "September", "October", "November", "December" };	
+	    String currentMonth = strMonths[now.get(Calendar.MONTH)];
+		return currentMonth;
+		
+	}		
 	
 	
 	

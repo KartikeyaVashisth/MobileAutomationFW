@@ -6,10 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
+//import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import support.Engine;
 import support.Helper;
 
@@ -30,23 +31,27 @@ public class TransactionSummaryPage {
 		}
 		
 
-		@iOSFindBy(xpath="//XCUIElementTypeOther[@name='Transaction Summary']")
+		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='Transaction Summary']")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Transaction Summary'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']")
 		public MobileElement transactionSummaryHeader;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back']")
+		//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back']")
+		@iOSXCUITFindBy(accessibility="Back")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']/../android.widget.ImageButton")
 		public MobileElement backButtonOnHeader;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Category']")
+		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Category']")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Category'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Category']")
 		public MobileElement categoryTab;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Payee']")
+		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Payee']")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Payee'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Payee']")
 		public MobileElement payeeTab;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeOther[contains(@name,\"walmart\")]/../XCUIElementTypeOther[contains(@name,\"walmart -$\")]")
+		@iOSFindBy(xpath="//XCUIElementTypeOther[starts-with(@name,\"walmart\")]/../XCUIElementTypeOther[contains(@name,\"-$\")]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='walmart']/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement payeeTile;
 		
@@ -54,11 +59,13 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Internet']/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement categoryTile;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Category\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Category\"]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='No Transactions by Category'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Category']")
 		public MobileElement noTransactionCategory;
 		
-		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Payee\"]")
+		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Payee\"]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='No Transactions by Payee'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Payee']")
 		public MobileElement noTransactionPayee;
 		

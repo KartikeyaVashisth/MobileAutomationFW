@@ -1,12 +1,15 @@
 package dugout;
 
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.bcel.verifier.VerifierFactoryObserver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,10 +20,11 @@ import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.SwipeElementDirection;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -55,11 +59,14 @@ public class OverviewPage {
 	@iOSFindBy(xpath="//*[normalize-space(@name)='Settings']")
 	@AndroidFindBy(xpath="//*[@content-desc='More options']")
 	MobileElement SettingsOrMoreOptions;*/
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking & Credit\"]")
+	
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking & Credit\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Banking & Credit'")
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']")
 	public MobileElement accountsCard;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[3]")
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[3]")
 	public MobileElement checkingBalance;
 	
@@ -79,27 +86,33 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[11]")
 	public MobileElement otherBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Total'`]/XCUIElementTypeStaticText[3]")
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[9]")
 	public MobileElement totalBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property and Debt Account\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property and Debt Account\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Property and Debt Account'")
 	@AndroidFindBy(xpath="//*[@text='Property and Debt Account']")
 	public MobileElement propertyAndDebt;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Property'")
 	@AndroidFindBy(xpath="//*[@text='Property']")
 	public MobileElement propertyText;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Debt\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Debt\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Debt'")
 	@AndroidFindBy(xpath="//*[@text='Debt']")
 	public MobileElement debtText;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
 	public MobileElement addTransaction;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Recent Transactions'")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']")
 	public MobileElement recentTransactionsCard;
 	
@@ -112,11 +125,13 @@ public class OverviewPage {
 	public MobileElement hambergerIcon;*/
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Top Trending Categories\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Top Trending Categories\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Top Trending Categories'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Top Trending Categories']/..")
 	public MobileElement topTrendingCard;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,'Summary')]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,'Summary')]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name CONTAINS 'Summary'$]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]")
 	public MobileElement transactionSummaryCard;
 	
@@ -205,7 +220,8 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@text='Track your investing accounts and holdings on your phone.']")
 	public MobileElement invCard_zeroDataState;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name=='navigationMenu'`]/XCUIElementTypeOther[`name=='navigationMenu'`]/XCUIElementTypeOther[`name=='navigationMenu'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='navigationMenu']//*[@class='android.widget.ImageView']")
 	public MobileElement hambergerIcon;
 	
@@ -224,7 +240,8 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
 	public MobileElement netIncomeOverTimeCard;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'In progress'")
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 	
@@ -232,23 +249,23 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investmentCard;
 	
-	public void scrollUptoAccountsCard() throws Exception {
-		
-		Integer iCount;
-		
-		for (iCount=0; iCount<3; iCount++) {
-			
-			scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000); 
-			
-			if (Verify.objExists_check(this.refreshSpinnerIcon))
-				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
-			
-			if (Verify.objExists_check(this.accountsCard))
-				return;
-			
-		}
-		
-	}
+//	public void scrollUptoAccountsCard() throws Exception {
+//		
+//		Integer iCount;
+//		
+//		for (iCount=0; iCount<3; iCount++) {
+//			
+//			scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000); 
+//			
+//			if (Verify.objExists_check(this.refreshSpinnerIcon))
+//				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+//			
+//			if (Verify.objExists_check(this.accountsCard))
+//				return;
+//			
+//		}
+//		
+//	}
 	
 	
 	public void tapOnRecentTransactionsCard() throws Exception {
@@ -379,42 +396,102 @@ public class OverviewPage {
 		
 	}
 	
-	public void quicken_scroll() throws InterruptedException {
-		
+	//Adding new method for scrolling----------------------------------------------------
+	
+	public void scroll_down() throws Exception {
 		Helper h = new Helper();
 		
-		if (h.getEngine().equals("android")) {
-			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
-			Thread.sleep(2000);		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			/*
+			Dimension size = Engine.getDriver().manage().window().getSize();
+			int y_start = (int) (size.width * 1.20);
+			int y_end = (int) (size.width * 0.03);
+			int x = 380;
+			Engine.getDriver().swipe(x, y_start, x, y_end, 3000);
+			*/
+			verticalScrollDownAndroid();
+		} else {
+			JavascriptExecutor js1 = (JavascriptExecutor) Engine.getDriver() ;
+		    HashMap scrollObject = new HashMap();
+		    scrollObject.put("direction", "down");
+		    js1.executeScript("mobile: scroll", scrollObject);
 		}
-		else {
-			
-			Dimension size = Engine.iosd.manage().window().getSize();
-			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(2000);
-			
-			
-		}
+		
 	}
 	
-	public void quicken_scroll_mobile() throws InterruptedException {
+	
+    public void verticalScrollDownAndroid() throws Exception {
+        Dimension size = Engine.getDriver().manage().window().getSize();
+        int y_start = (int) (size.width * 1.20);
+		int y_end = (int) (size.width * 0.03);
+		int x = 380;
 		
-		Helper h = new Helper();
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+ 
 		
-		if (h.getEngine().equals("android")) {
-			Dimension size = Engine.ad.manage().window().getSize();
-			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(1000);	
-		}
-		else {
-			
-			Dimension size = Engine.iosd.manage().window().getSize();
-			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-			Thread.sleep(1000);
-			
-			
-		}
-	}
+		touchAction
+                .press(point(x, y_start))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(x, y_end))
+                .release().perform();
+    }
+    
+    public void verticalScrollUpAndroid() throws Exception {
+    	
+        Dimension size = Engine.getDriver().manage().window().getSize();
+         
+        int y_start = (int) (size.height * 0.9);
+		int y_end = (int) (size.height * 0.4);
+		int x = (int) (size.width * 0.50);
+		
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+ 
+		
+		touchAction
+                .press(point(x, y_end))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(x, y_start))
+                .release().perform();
+    }
+	
+    //-------------------------------------------------------------------------------------
+	
+//	public void quicken_scroll() throws InterruptedException {
+//		
+//		Helper h = new Helper();
+//		
+//		if (h.getEngine().equals("android")) {
+//			scrollView.swipe(SwipeElementDirection.UP, 2, 2, 1000);
+//			Thread.sleep(2000);		
+//		}
+//		else {
+//			
+//			Dimension size = Engine.iosd.manage().window().getSize();
+//			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Thread.sleep(2000);
+//			
+//			
+//		}
+//	}
+//
+//	public void quicken_scroll_mobile() throws InterruptedException {
+//		
+//		Helper h = new Helper();
+//		
+//		if (h.getEngine().equals("android")) {
+//			Dimension size = Engine.ad.manage().window().getSize();
+//			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Thread.sleep(1000);	
+//		}
+//		else {
+//			
+//			Dimension size = Engine.iosd.manage().window().getSize();
+//			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Thread.sleep(1000);
+//			
+//			
+//		}
+//	}
 	
 	public void tapOnTransactionSummaryCard() throws Exception{
 		
@@ -423,23 +500,51 @@ public class OverviewPage {
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
 		Integer iCount = 0;
 		
-		while (iCount < 4) {
-			
-			quicken_scroll();
-			
-			iCount++;	
-			
-			if (Verify.objExists(transactionSummaryCard))
-				break;
+//		while (iCount < 4) {
+//			
+//			//quicken_scroll();
+//			scroll_down();
+//			
+//			iCount++;	
+//			
+//			if (Verify.objExists(transactionSummaryCard))
+//				break;
+//			
+//		}
+//		
+//		
+//		if (!Verify.objExists(transactionSummaryCard)) {
+//			throw new Exception ("Errr ********** Looks like scroll issue, [transactionSummaryCard] did not appear");
+//		}
+//		transactionSummaryCard.click();
+//		Thread.sleep(3000);
+		Helper h = new Helper();
+		String currentMonth = h.getCurrentMonth();
+		
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
+			System.out.println(sXpath);
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		
+		}
+		else {
+			String sXpath="//*[@name='"+currentMonth+" Summary']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			//Engine.iosd.findElement(By.name("'"+currentMonth+" Summary'")).click();
+			transactionSummaryCard.click();
+			Thread.sleep(1000);
 			
 		}
 		
-		
-		if (!Verify.objExists(transactionSummaryCard)) {
-			throw new Exception ("Errr ********** Looks like scroll issue, [transactionSummaryCard] did not appear");
-		}
-		transactionSummaryCard.click();
-		Thread.sleep(3000);
 	}
 	
 	
@@ -502,25 +607,37 @@ public class OverviewPage {
 	
 	public void swipeFromBottomToUp() 
     {       
-      try  {
-             
-              
-              Helper h = new Helper();
-              
-              if (h.getEngine().equals("android")) {
-            	  scrollView.swipe(SwipeElementDirection.DOWN, 2, 2, 1000);  
-              }
-              else
-              {
-            	  /*
-            	  String elementID = this.accountsCard.getId();
-            	  HashMap<String, String> scrollObject = new HashMap<String, String>();
-            	  scrollObject.put("direction", "down");
-            	  scrollObject.put("element", elementID);
-            	  Engine.iosd.executeScript("mobile: swipe", scrollObject); 
-            	  */ 
-              }
-            	  
+     try  {
+//             
+//              
+//              Helper h = new Helper();
+//              
+//              if (h.getEngine().equals("android")) {
+//            	  scrollView.swipe(SwipeElementDirection.DOWN, 2, 2, 1000);  
+//              }
+//              else
+//              {
+//            	  /*
+//            	  String elementID = this.accountsCard.getId();
+//            	  HashMap<String, String> scrollObject = new HashMap<String, String>();
+//            	  scrollObject.put("direction", "down");
+//            	  scrollObject.put("element", elementID);
+//            	  Engine.iosd.executeScript("mobile: swipe", scrollObject); 
+//            	  */ 
+//              }
+            Dimension size = Engine.getDriver().manage().window().getSize();
+            int y_start = (int) (size.width * 1.20);
+      		int y_end = (int) (size.width * 0.03);
+      		int x = 380;
+      		
+      		TouchAction touchAction = new TouchAction(Engine.getDriver());
+       
+      		
+      		touchAction
+                      .press(point(x, y_end))
+                      .waitAction(waitOptions(ofMillis(1000)))
+                      .moveTo(point(x, y_start))
+                      .release().perform(); 	  
               
         }
            catch (Exception e) 
@@ -609,55 +726,76 @@ public class OverviewPage {
 	public void scrollToTop() throws Exception{
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			scrollUptoAccountsCard();
-		else
-			scrollToTop_IOS();
-			
-		
-	}
-	
-	public void scrollToTop_IOS() throws Exception{
-		
-		Integer iCount;
-		
-		for (iCount=0; iCount<3; iCount++) {
-			
-			Dimension size = Engine.iosd.manage().window().getSize();
-			System.out.println(size.height);
-			System.out.println(size.height/4);
-			Engine.iosd.swipe(size.width - 10, size.height/4, size.width - 10, size.height-50, 500);
-			
-			if (Verify.objExists(this.refreshSpinnerIcon))
-				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
-			
-			if (Verify.objExists(this.accountsCard))
-				return;
-			
-		}
-		
-		
-	}
+//		if (h.getEngine().equals("android"))
+//			scrollUptoAccountsCard();
+//			
+//		else
+//			scrollToTop_IOS();
 
-	public void scroll_down() {
-		Helper h = new Helper();
-		
-		if (h.getEngine().equalsIgnoreCase("android")) {
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Banking & Credit']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Banking & Credit\").instance(0))"));
+			Thread.sleep(1000);
 			
-			Dimension size = Engine.ad.manage().window().getSize();
-			int y_start = (int) (size.width * 1.20);
-			int y_end = (int) (size.width * 0.03);
-			int x = 380;
-			Engine.ad.swipe(x, y_start, x, y_end, 3000);
-		} else {
-			JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd ;
-		    HashMap scrollObject = new HashMap();
-		    scrollObject.put("direction", "down");
-		    js1.executeScript("mobile: scroll", scrollObject);
+		
+		}
+		else {
+			String sXpath="//*[@name='Banking & Credit']";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			String me_id = me.getId();
+			System.out.println(me_id);
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("direction", "up");
+			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			
 		}
 		
 	}
 	
+//	public void scrollToTop_IOS() throws Exception{
+//		
+//		Integer iCount;
+//		
+//		for (iCount=0; iCount<3; iCount++) {
+//			
+//			Dimension size = Engine.iosd.manage().window().getSize();
+//			System.out.println(size.height);
+//			System.out.println(size.height/4);
+//			Engine.iosd.swipe(size.width - 10, size.height/4, size.width - 10, size.height-50, 500);
+//			
+//			if (Verify.objExists(this.refreshSpinnerIcon))
+//				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+//			
+//			if (Verify.objExists(this.accountsCard))
+//				return;
+//			
+//		}
+//		
+//		
+//	}
+
+//	public void scroll_down() {
+//		Helper h = new Helper();
+//		
+//		if (h.getEngine().equalsIgnoreCase("android")) {
+//			
+//			Dimension size = Engine.ad.manage().window().getSize();
+//			int y_start = (int) (size.width * 1.20);
+//			int y_end = (int) (size.width * 0.03);
+//			int x = 380;
+//			Engine.ad.swipe(x, y_start, x, y_end, 3000);
+//		} else {
+//			JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd ;
+//		    HashMap scrollObject = new HashMap();
+//		    scrollObject.put("direction", "down");
+//		    js1.executeScript("mobile: scroll", scrollObject);
+//		}
+//		
+//	}
+//	
 	public void scrollToSpendingCard() throws Exception {
 		
 		Helper h = new Helper();

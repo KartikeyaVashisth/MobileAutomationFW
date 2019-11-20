@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -119,6 +120,7 @@ public class RegressionCases extends Recovery {
 	
 	@Test(priority=1)
 	public void TC2_ValidateEditTrasaction() throws Exception {
+		
 		String sChecking_before, sTotal_before, sChecking_after,sTotal_after ;
 		Commentary.log(LogStatus.INFO, "EDIT an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
 
@@ -126,7 +128,7 @@ public class RegressionCases extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		TransactionRecord tRec = new TransactionRecord();
 		Helper h = new Helper();
-		
+	
 		OverviewPage op = new OverviewPage();
 		sChecking_before = op.checkingBalance.getText();
 		sTotal_before = op.totalBalance.getText();
@@ -145,6 +147,7 @@ public class RegressionCases extends Recovery {
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
 		Double txnAmount_before = h.processBalanceAmount(td.getTransactionAmount());
+		System.out.println(txnAmount_before);
 		td.addTransaction(tRec);
 		h.getContext();
 		
@@ -164,6 +167,7 @@ public class RegressionCases extends Recovery {
 		
 		sp.selectBack(backButton1_ios);
 		sp.selectBack("Back");
+		Thread.sleep(5000);
 		
 		sChecking_after = op.checkingBalance.getText();
 		sTotal_after = op.totalBalance.getText();
@@ -193,7 +197,6 @@ public class RegressionCases extends Recovery {
 	@Test(priority = 3)
 	public void TC3_ValidateDeleteTransaction() throws Exception {
 		Commentary.log(LogStatus.INFO, "Delete an expense transaction for an manual savings account, verify checking & total balance on overview screen accounts card");
-		
 		Helper h = new Helper();
 		SoftAssert sa = new SoftAssert();
 		OverviewPage op = new OverviewPage();
@@ -232,7 +235,7 @@ public class RegressionCases extends Recovery {
 		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
 		td.deleteTransactionAlertButton.click();
 		}
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		
 		
 		tp.searchTransactionTxtField.click();
@@ -393,7 +396,7 @@ public class RegressionCases extends Recovery {
 		Commentary.log(LogStatus.INFO, "Validating hamburger menu options");
 		
 		op.hambergerIcon.click();
-		Thread.sleep(20000);
+		//Thread.sleep(20000);
 		SoftAssert sa = new SoftAssert();
 		SettingsPage sp = new SettingsPage();
 		Helper h = new Helper();
@@ -511,6 +514,7 @@ public class RegressionCases extends Recovery {
 
 		
 		sp.selectBack("Accounts");
+		Thread.sleep(2000);
 		
 		manualCCAccount.click();
 		Thread.sleep(2000);
@@ -534,6 +538,7 @@ public class RegressionCases extends Recovery {
 
 
 		sp.selectBack("Accounts");
+		Thread.sleep(2000);
 		
 		manualSavingsAccount.click();
 		Thread.sleep(2000);
@@ -832,8 +837,8 @@ public class RegressionCases extends Recovery {
 		ts.payeeTab.click();
 		
 		String sCategoryAmount_before = ts.payeeTile.getText();
-		System.out.println("----->>> "+ts.payeeTile.getText());
-		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before);
+		System.out.println("sCategoryAmount_before----->>> "+sCategoryAmount_before);
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("walmart ", ""));
 		System.out.println("Category amount is "+dCategoryAmount_before);
 		
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -847,6 +852,8 @@ public class RegressionCases extends Recovery {
 		ts.backButtonOnHeader.click();
 		
 		op.scrollToTop();
+		Thread.sleep(5000);
+		System.out.println(op.addTransaction.isDisplayed());
 		op.addTransaction.click();
 		td.addTransaction(tRec);
 		
@@ -1451,16 +1458,17 @@ public class RegressionCases extends Recovery {
 	
 /*	public static void buildUpload () throws IOException {
 	SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-    File f = new File("/Users/vgupta/Downloads/Quicken.5.13.0.13068.google.apk");
-    String response = r.uploadFile(f, "QuickenRelease.apk", true);
+    File f = new File("/Users/vgupta/Downloads/Quicken(36.16645.4012)-Release.app.zip");
+    String response = r.uploadFile(f, "Quicken(36.16645.4012)-Release.app.zip", true);
     System.out.println("Sauce Upload Response -->> "+response);
     System.out.println("Completed..uploading build to SAUCE storage");
 	} 
 
 	public static void main(String[] args) throws IOException {
 		buildUpload();
-    } */
-	
+    } 
+*/
+
 }
 
 

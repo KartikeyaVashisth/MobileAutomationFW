@@ -21,6 +21,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.saucelabs.saucerest.SauceREST;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.Activity;
+import io.appium.java_client.android.AndroidDriver;
 import referee.ErrorUtil;
 import referee.ExtentManager;
 import referee.Verify;
@@ -112,6 +114,7 @@ public class Recovery {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@BeforeMethod
 	public static void testCaseEnter(Method method) throws Exception{
 		System.out.println("Before Method started...........");
@@ -140,8 +143,14 @@ public class Recovery {
 		// set driver
 		//Engine.setDriver();
 		if (Engine.ad != null) {
-			//Engine.ad.launchApp();
-			Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+			//Engine.ad.launchApp();]
+			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+            //()Engine.getDriver()).startActivity(activity);
+            
+			Engine.ad.startActivity(activity);
+//			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+			//((AndroidDriver<MobileElement>)Engine.getDriver()).startActivity(activity);
+			//Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
 			//System.out.println(".....waiting for spinner icon to disappear.....");
 			//Verify.waitForObjectToDisappear((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.ProgressBar")), 30)	;
 			Thread.sleep(12000);
