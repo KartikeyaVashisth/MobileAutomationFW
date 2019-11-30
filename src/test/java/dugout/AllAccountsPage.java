@@ -7,10 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -31,11 +34,14 @@ public class AllAccountsPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//*[contains(@name,'All Transactions')]")
+	//@iOSFindBy(xpath="//*[contains(@name,'All Transactions')]")
+	//@iOSXCUITBy(iOSClassChain = "**/XCUIElementTypeNavigationBar/XCUIElementTypeOther[`name == 'All Transactions'`]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'All Transactions'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='All Transactions']")
 	public MobileElement textAllTransactions;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back' or @name=\"Banking & Credit\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back' or @name=\"Banking & Credit\"]")
+	@iOSXCUITFindBy(accessibility="Back")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
@@ -72,11 +78,11 @@ public class AllAccountsPage {
 		backButton.click();
 		Thread.sleep(3000);
 		
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		if (Verify.objExists(bcc.backButton)) {
-			bcc.backButton.click();
-			Thread.sleep(2000);
-		}
+//		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//		if (Verify.objExists(bcc.backButton)) {
+//			bcc.backButton.click();
+//			Thread.sleep(2000);
+//		}
 		
 	}
 	
@@ -135,10 +141,10 @@ public class AllAccountsPage {
 		
 		
 	
-		String sXpath = "//XCUIElementTypeTable/XCUIElementTypeCell";
+		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
 		List <MobileElement> me = null;
 		Engine.iosd.getContext();
-		me = Engine.iosd.findElements(By.xpath(sXpath));
+		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
 		System.out.println(me.size());
 		
 		return me;

@@ -81,12 +81,12 @@ public class SettingsPage {
 		public MobileElement accountTxt;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Fingerprint'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Touch ID'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeTxt;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Fingerprint'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Passcode & Touch ID'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeHeaderTxt;
 		
@@ -126,7 +126,7 @@ public class SettingsPage {
 			if (h.getEngine().equalsIgnoreCase("ios")) {
 				try {
 					//MobileElement me =  (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+ele+"']"));
-					MobileElement me =  (MobileElement) Engine.iosd.findElement(By.xpath("//*[@name='"+ele+"']"));
+					MobileElement me =  (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/*[`name=='"+ele+"'`]"));
 					return me;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

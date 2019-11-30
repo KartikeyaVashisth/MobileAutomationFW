@@ -215,21 +215,21 @@ public class Helper {
 		}
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
-		    capabilities.setCapability("deviceName", "iPhone 6 Simulator");
-		    //capabilities.setCapability("platformVersion", "12.0"); //9.3
-		    capabilities.setCapability("platformVersion", "11.2");
-		    capabilities.setCapability("browserName", "");
-		    capabilities.setCapability("deviceOrientation", "portrait");
-		    capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
-		    //capabilities.setCapability("appiumVersion", "1.8.0");// 1.5.3
-		    capabilities.setCapability("autoWebView", "true");
-		    capabilities.setCapability("autoAcceptAlerts", true);
-	        capabilities.setCapability("autoGrantPermissions", true);
-	        capabilities.setCapability("maxDuration", 4000);
+			capabilities.setCapability("deviceName", "iPhone 8 Simulator");
+			capabilities.setCapability("platformVersion", "12.0"); //9.3
+			//capabilities.setCapability("platformVersion", "11.2");
+			capabilities.setCapability("browserName", "");
+			capabilities.setCapability("deviceOrientation", "portrait");
+			capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
+			//capabilities.setCapability("appiumVersion", "1.13.0");// 1.5.3
+			capabilities.setCapability("autoWebView", "true");
+			capabilities.setCapability("autoAcceptAlerts", true);
+		    capabilities.setCapability("autoGrantPermissions", true);
+		    capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
-			capabilities.setCapability("app", "sauce-storage:Quicken.zip");
-			//capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");
+			//capabilities.setCapability("app", "sauce-storage:Quicken(36.16645.4012)-Release.app.zip");
+			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","XCUITest");
 			
@@ -263,43 +263,11 @@ public class Helper {
 		}
 		else if(getEngine().equals("ios")){
 			
-			// ios local capabilities needs to be updated
-			//System.out.println("*****Local Capabilities for IOS are inCorrect********");
-			/*if (true)
-				throw new Exception("*****Local Capabilities for IOS are inCorrect********");*/
-			
-			/*capabilities.setCapability("platformName", "iOS");
-		    //capabilities.setCapability("deviceName", "iPhone6s_9.3");
-			capabilities.setCapability("deviceName", "iPhone 6");
-		    capabilities.setCapability("platformVersion", "9.3");
-		    capabilities.setCapability("noResetValue", true);
-		    capabilities.setCapability("fullReset", false);
-		    //
-		    capabilities.setCapability("browserName", "");
-		    //capabilities.setCapability("udid", "09252A1B-BEA7-4090-8B9E-8D0AB08E739D");
-		    capabilities.setCapability("udid", "9A809FC5-BCEF-40A5-BE56-7369513227C8");
-		    
-		    //09252A1B-BEA7-4090-8B9E-8D0AB08E739D
-		    capabilities.setCapability("deviceOrientation", "portrait");
-		    capabilities.setCapability("appiumVersion", "1.6.4");
-		    capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("newCommandTimeout", 1120);
-			// capabilities.setCapability("app", "sauce-storage:Quicken.zip"); 
-			// native app com.intuit.quickencompanion.ios
-			//capabilities.setCapability("bundleId","com.intuit.quicken.ios");
-			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
-			capabilities.setCapability("automationName","XCUITest");
-			//capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("app", "/Users/kgrandhi/Documents/Quicken_apk/QuickenRN_IOS.zip"); */
-			
-			
-			
-			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
-			capabilities.setCapability("platformVersion", "11.2");
-			 capabilities.setCapability("appiumVersion", "1.8.0"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
+			capabilities.setCapability("platformVersion", "12.0");
+			capabilities.setCapability("appiumVersion", "1.8.0"); //1.8.0
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
@@ -307,10 +275,10 @@ public class Helper {
 	        capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
 	        capabilities.setCapability("browserName", "");
-	        
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
-	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
+	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
+	        capabilities.setCapability("app", "/Users/vgupta/Downloads/Test_builds/Quicken(36.16367.4012)-Release.app.zip");
 	        
 			
 		}

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 //import io.appium.java_client.SwipeElementDirection;
@@ -52,23 +51,28 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//*[@text=\"You don't have any transactions.\"]")
 	public MobileElement youDontHaveAnyTxns;
 	
-	@iOSFindBy(xpath="//*[@name=\"Last 30 Days\"]")
+	//@iOSFindBy(xpath="//*[@name=\"Last 30 Days\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 30 Days'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last 30 Days\"]")
 	public MobileElement last30Days;
 	
-	@iOSFindBy(xpath="//*[@name=\"This Month\"]")
+	//@iOSFindBy(xpath="//*[@name=\"This Month\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'This Month'`]")
 	@AndroidFindBy(xpath="//*[@text=\"This Month\"]")
 	public MobileElement thisMonth;
 	
-	@iOSFindBy(xpath="//*[@name=\"Last Month\"]")
+	//@iOSFindBy(xpath="//*[@name=\"Last Month\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last Month'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last Month\"]")
 	public MobileElement lastMonth;
 	
-	@iOSFindBy(xpath="//*[@name=\"Month to Date\"]")
+	//@iOSFindBy(xpath="//*[@name=\"Month to Date\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Month to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Month to Date\"]")
 	public MobileElement monthToDate;
 	
-	@iOSFindBy(xpath="//*[@name=\"Year to Date\"]")
+	//@iOSFindBy(xpath="//*[@name=\"Year to Date\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Year to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Year to Date\"]")
 	public MobileElement yearToDate;
 	
@@ -83,8 +87,8 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
 	public MobileElement categoryName;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@name, '$')]")
-	//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText[`name BEGINSWITH '$'`]")
+	//@iOSFindBy(xpath="//XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@name, '$')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText[`name CONTAINS '$'  AND visible == 1`]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView//android.widget.TextView[contains(@text, '$')]")
 	public MobileElement amount;
 	

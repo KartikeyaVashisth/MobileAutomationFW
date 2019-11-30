@@ -4,17 +4,13 @@ import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static java.time.Duration.ofSeconds;
 
-import java.awt.RenderingHints.Key;
 import java.text.DateFormatSymbols;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -27,7 +23,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import junit.framework.Protectable;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -49,25 +44,25 @@ public class TransactionDetailPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//*[@name=\"Allow\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
 	public MobileElement allowButton;
 	
-	@iOSFindBy(xpath="//*[@name=\"Deny\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Deny'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='Deny']")
 	public MobileElement denyButton;
 
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Add Transaction\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Add Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
 	public MobileElement addTransactionTxt;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeNavigationBar[@name=\"View Transaction\"]")
-	@iOSXCUITFindBy(iOSNsPredicate = "name = 'View Transaction'")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='View Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='View Transaction']")
 	public MobileElement viewTransactionTxt;
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name==\"Banking & Credit\"`]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton")
 	public MobileElement backButton;
 	
@@ -287,7 +282,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(id="android:id/button1")
 	public MobileElement deleteTransactionAlertButton;
 	
-	@iOSFindBy(id="TBD")
+	@iOSFindBy(xpath="//XCUIElementTypeAlert[@name=\"Warning!\"]")
 	@AndroidFindBy(id="android:id/alertTitle")
 	public MobileElement deleteTransferTransactionWarning;
 	
@@ -426,7 +421,7 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		
-		if (Verify.objExists(this.buttonDone)||Verify.objExists(this.viewTransactionTxt)) {
+		if (Verify.objExists(this.buttonDone)||Verify.objExists(this.addTransactionTxt)) {
 			Commentary.log(LogStatus.INFO,"AddTransaction screen got dispalyed.");
 			
 
@@ -513,14 +508,14 @@ public class TransactionDetailPage {
 			if (tr.getNote() != null)
 				this.enterNotes(tr.getNote());
 			
-			this.buttonSave.click();
+			this.buttonSave1.click();
 			
 			Thread.sleep(6000);
 			
 		}
 			
 		else
-			Commentary.log(LogStatus.FAIL,"AddTransaction screen did not appear.");
+			Commentary.log(LogStatus.FAIL,"Edit Transaction screen did not appear.");
 
 	}
 	
@@ -587,7 +582,7 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		} else {
 			this.amount.click();
-			for (int i = 1; i < amount.length(); i++) {
+			for (int i = 0; i < amount.length(); i++) {
 			Engine.iosd.findElement(By.id("assets/Quicken/App/Images/keypadbutton_delete@2x.png")).click();
 			}
 			Thread.sleep(1000);

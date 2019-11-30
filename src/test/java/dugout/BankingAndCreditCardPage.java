@@ -18,6 +18,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -70,11 +71,11 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
 	public MobileElement txtProjectedBalanceAmount;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"CHECKING\"]/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CHECKING\"]/../android.widget.TextView[2]")
 	public MobileElement checkingBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"CREDIT CARDS\"]/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit Cards'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CREDIT CARDS\"]/../android.widget.TextView[2]")
 	public MobileElement creditCardBalance;
 	
@@ -82,11 +83,11 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CASH\"]/../android.widget.TextView[2]")
 	public MobileElement cashBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"SAVINGS\"]/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"SAVINGS\"]/../android.widget.TextView[2]")
 	public MobileElement savingsBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"All Transactions\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='All Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"All Transactions\"]")
 	public MobileElement allTransactionButton;
 	
@@ -201,7 +202,7 @@ public class BankingAndCreditCardPage {
 	public String getCreditCardsBalance() throws Exception {
 		
 		// scroll to the account
-		this.scrollToAccount("CREDIT CARDS");
+		this.scrollToAccount("Credit Cards");
 		
 		return this.creditCardBalance.getText();
 	
@@ -219,7 +220,7 @@ public class BankingAndCreditCardPage {
 	public String getSavingsBalance() throws Exception {
 		
 		// scroll to the account
-		this.scrollToAccount("SAVINGS");
+		this.scrollToAccount("Savings");
 		
 		return this.savingsBalance.getText();
 	
@@ -266,9 +267,9 @@ public class BankingAndCreditCardPage {
 			Thread.sleep(1000);
 		}
 		else {
-			String sXpath="//XCUIElementTypeStaticText[@name='"+acctType+"']";
+			String cc="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
 			String sLabel ="name == '"+acctType+"'";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);

@@ -30,6 +30,7 @@ import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -392,6 +393,7 @@ public class RegressionCases extends Recovery {
 	}*/
 	@Test (priority = 7)
 	public void TC7_ValidateHamburgerMenuOptions ()throws Exception {
+		
 		OverviewPage op = new OverviewPage();
 		Commentary.log(LogStatus.INFO, "Validating hamburger menu options");
 		
@@ -789,6 +791,7 @@ public class RegressionCases extends Recovery {
 	
 	@Test (priority=13)
 	public void TC15_VerifyTransactionSummary() throws Exception {
+		
 		Commentary.log(LogStatus.INFO, "Validating Transaction Summary details");
 		OverviewPage op = new OverviewPage();
 		op.tapOnTransactionSummaryCard();
@@ -851,9 +854,8 @@ public class RegressionCases extends Recovery {
 		
 		ts.backButtonOnHeader.click();
 		
-		op.scrollToTop();
-		Thread.sleep(5000);
-		System.out.println(op.addTransaction.isDisplayed());
+		op.scrollToTop();		
+		
 		op.addTransaction.click();
 		td.addTransaction(tRec);
 		
@@ -863,7 +865,7 @@ public class RegressionCases extends Recovery {
 		ts.payeeTab.click();
 		
 		String sCategoryAmount_after = ts.payeeTile.getText();
-		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after);
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("walmart ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
@@ -887,7 +889,7 @@ public class RegressionCases extends Recovery {
 		ts.categoryTab.click();
 		
 		String sCategoryAmount_before = ts.categoryTile.getText();
-		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before);
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
 		System.out.println("Category amount is "+dCategoryAmount_before);
 		
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -902,6 +904,7 @@ public class RegressionCases extends Recovery {
 		ts.backButtonOnHeader.click();
 		
 		op.scrollToTop();
+		
 		op.addTransaction.click();
 		td.addTransaction(tRec);
 		
@@ -911,7 +914,7 @@ public class RegressionCases extends Recovery {
 		ts.categoryTab.click();
 		
 		String sCategoryAmount_after = ts.categoryTile.getText();
-		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after);
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
 		System.out.println("Category amount is "+dCategoryAmount_after);
 		
@@ -1186,6 +1189,7 @@ public class RegressionCases extends Recovery {
 	
 	@Test(priority=24)
 	public void ValidateBalancesOnAccountCard() throws Exception{
+		
 		String sChecking, sCredit, sSaving, sTotal;
 		Commentary.log(LogStatus.INFO, "Verify balances on accounts card");
 		OverviewPage op = new OverviewPage();
@@ -1199,10 +1203,12 @@ public class RegressionCases extends Recovery {
 		Double dChecking = h.processBalanceAmount(sChecking);
 		Double dCredit = h.processBalanceAmount(sCredit);
 		Double dSaving = h.processBalanceAmount(sSaving);
-		Double dTotal = h.processBalanceAmount(sTotal);
+		double dTotal = h.processBalanceAmount(sTotal);
+
+		Double eTotal = (double) Math.round((dChecking+dCredit+dSaving)*100);
+		eTotal = eTotal/100;
 		
-		
-		if ((dChecking+dCredit+dSaving)==dTotal)
+		if (eTotal==dTotal)
 			Commentary.log(LogStatus.INFO, "PASS: Overview Page > Balances and Total amount are correct");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Overview Page > Balances and Total amount is incorrect");
@@ -1217,12 +1223,15 @@ public class RegressionCases extends Recovery {
 		sSaving = bcc.savingsBalance.getText();
 		sTotal = bcc.txtTodaysBalanceAmount.getText();
 		
-		dChecking = h.processBalanceAmount(sChecking);
-		dCredit = h.processBalanceAmount(sCredit);
-		dSaving = h.processBalanceAmount(sSaving);
+		dChecking = h.processBalanceAmount(sChecking.replace("SubTotal: ", ""));
+		dCredit = h.processBalanceAmount(sCredit.replace("SubTotal: ", ""));
+		dSaving = h.processBalanceAmount(sSaving.replace("SubTotal: ", ""));
 		dTotal = h.processBalanceAmount(sTotal);
+		
+		eTotal = (double) Math.round((dChecking+dCredit+dSaving)*100);
+		eTotal = eTotal/100;
 
-		if ((dChecking+dCredit+dSaving)==dTotal)
+		if (eTotal==dTotal)
 			Commentary.log(LogStatus.INFO, "PASS: Account card Page > Balances and Total amount are correct");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account card Page > Balances and Total amount is incorrect");
@@ -1455,8 +1464,8 @@ public class RegressionCases extends Recovery {
 		sa.assertAll();
 		
 	}
-	
-/*	public static void buildUpload () throws IOException {
+/*	
+	public static void buildUpload () throws IOException {
 	SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
     File f = new File("/Users/vgupta/Downloads/Quicken(36.16645.4012)-Release.app.zip");
     String response = r.uploadFile(f, "Quicken(36.16645.4012)-Release.app.zip", true);
@@ -1468,7 +1477,6 @@ public class RegressionCases extends Recovery {
 		buildUpload();
     } 
 */
-
 }
 
 

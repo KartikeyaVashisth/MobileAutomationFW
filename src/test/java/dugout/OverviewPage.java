@@ -18,7 +18,6 @@ import org.openqa.selenium.support.PageFactory;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -29,7 +28,6 @@ import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
-import warroom.kEngine;
 
 public class OverviewPage {
 	public OverviewPage () {
@@ -186,7 +184,8 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/..//*[@text='Cash']")
 	public MobileElement accountsCard_cashLabel;
 	
-	@iOSFindBy(xpath="//*[@name ='No Transaction available']")
+	//@iOSFindBy(xpath="//*[@name ='No Transaction available']")
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name =='No Transaction available'`]")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']/../*[@text='No Transaction available']")
 	public MobileElement recentTxns_NoTxnsAvaialable;
 	
@@ -280,8 +279,9 @@ public class OverviewPage {
 			
 		}
 		else {
-			String sXpath="//*[@name='Recent Transactions']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='Recent Transactions']";
+			String cc="**/*[`name=='Recent Transactions'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -305,8 +305,9 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
 			
-			String sXpath="//*[@name ='Property and Debt Account']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name ='Property and Debt Account']";
+			String cc="**/*[`name =='Property and Debt Account'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -341,8 +342,9 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
 			
-			String sXpath="//*[@name ='Top Trending Categories']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name ='Top Trending Categories']";
+			String cc="**/*[`name =='Top Trending Categories'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -377,8 +379,9 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
 			
-			String sXpath="//*[@name ='"+cardName+"']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name ='"+cardName+"']";
+			String cc="**/*[`name =='"+cardName+"'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -531,8 +534,9 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='"+currentMonth+" Summary']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='"+currentMonth+" Summary']";
+			String cc ="**/*[`name=='"+currentMonth+" Summary'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -563,8 +567,9 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='Spending Over Time']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='Spending Over Time']";
+			String cc="**/*[`name=='Spending Over Time'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -591,8 +596,9 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='Net Income by Month']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='Net Income by Month']";
+			String cc="**/*[`name=='Net Income by Month'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -680,8 +686,9 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='"+sCard+"']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='"+sCard+"']";
+			String cc="**/*[`name=='"+sCard+"'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -710,8 +717,9 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='Investing']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+			//String sXpath="//*[@name='Investing']";
+			String cc="**/*[`name=='Investing'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -740,15 +748,18 @@ public class OverviewPage {
 		
 		}
 		else {
-			String sXpath="//*[@name='Banking & Credit']";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
-			String me_id = me.getId();
-			System.out.println(me_id);
-			HashMap<String, String> scrollObject = new HashMap<String, String>();
-			scrollObject.put("element", me_id);
-			scrollObject.put("direction", "up");
-			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
+			me.click();
+			//String sXpath="//*[@name='Banking & Credit']";
+			//String cc="**/*[`name=='Banking & Credit'`]";
+//			String cc="**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]";
+//			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+//			String me_id = me.getId();
+//			HashMap<String, String> scrollObject = new HashMap<String, String>();
+//			scrollObject.put("element", me_id);
+//			scrollObject.put("direction", "up");
+//			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
+//			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 			
 		}
