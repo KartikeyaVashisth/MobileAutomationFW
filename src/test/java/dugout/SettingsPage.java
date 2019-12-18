@@ -8,6 +8,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -238,11 +239,13 @@ public class SettingsPage {
 	}
 
 	}
+	@SuppressWarnings("deprecation")
 	public void selectBack (String bckButton) {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("android")){
 			//MobileElement backButton_android = (MobileElement) Engine.ad.findElementByXPath("//android.widget.ImageButton[@index=0]");
-			Engine.ad.pressKeyCode(AndroidKeyCode.BACK);
+			//Engine.ad.pressKeyCode(AndroidKeyCode.BACK);
+			((AndroidDriver<MobileElement>) Engine.ad).pressKeyCode(AndroidKeyCode.BACK);
 			//backButton_android.click();
 		} else {
 			MobileElement backButton_ios = (MobileElement) Engine.iosd.findElementByAccessibilityId(bckButton);

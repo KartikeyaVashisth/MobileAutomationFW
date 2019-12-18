@@ -4,9 +4,11 @@
     <listeners>
 		<listener class-name="referee.CustomListener"/>
 	</listeners>
-  <test name="Only_Smoke_Test">
+	
+  <test name="Regression_Test">
     <classes>
-      <class name="tournament.RegressionCases"/>
+     <!--  <class name="tournament.RegressionCases"/> -->
+     <class name="tournament.Daily_Regression_Test"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

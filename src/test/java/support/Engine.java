@@ -33,10 +33,12 @@ public class Engine {
 			
 			//mobilePlay = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
 			ad = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
+			kEngine.ad = ad;
 			
 		}
 		else
 			iosd = new IOSDriver<MobileElement>(serverURL, h.getCapabilities());
+			kEngine.id = iosd;
 				
 		//mobilePlay.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		

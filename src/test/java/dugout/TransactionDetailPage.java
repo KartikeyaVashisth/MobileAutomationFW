@@ -4,13 +4,17 @@ import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static java.time.Duration.ofSeconds;
 
+import java.awt.RenderingHints.Key;
 import java.text.DateFormatSymbols;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -23,6 +27,9 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import junit.framework.Protectable;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -44,7 +51,8 @@ public class TransactionDetailPage {
 		}	
 	}
 	
-	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
+	//@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
+	@iOSFindBy(xpath="//*[@name=\"Always Allow\"]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
 	public MobileElement allowButton;
 	
@@ -62,7 +70,7 @@ public class TransactionDetailPage {
 	public MobileElement viewTransactionTxt;
 	
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name==\"Banking & Credit\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name=='All Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton")
 	public MobileElement backButton;
 	
@@ -77,14 +85,15 @@ public class TransactionDetailPage {
 	public MobileElement moneyOut;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In Money Out\"]/../XCUIElementTypeOther[contains(@name,'$')]")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Money In Money Out'`]/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
-
+	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Money In Money Out'`]/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
 	//@AndroidFindBy(xpath="//*[@content-desc='-$0.00']//android.widget.TextView")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, '$')]")
 	public MobileElement amount;
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Date\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Date\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='Date'`]")
 	@AndroidFindBy(xpath="//*[@text='Date']")
 	public MobileElement dateLabel;
 	
@@ -118,7 +127,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Cancel']")
 	public MobileElement buttonCancel;
 	
-	@iOSFindBy(xpath="//*[@name=\"OK\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='OK'`]")
 	@AndroidFindBy(xpath="//*[@text='OK']")
 	public MobileElement buttonOK;
 	
@@ -264,9 +273,9 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Cancel']")
 	public MobileElement cancel;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Save\"]")
+	@iOSFindBy(id="button Save")
 	//@AndroidFindBy(xpath="//*[@content-desc='button Save']//android.widget.TextView")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='SAVE']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave;
 	
 	@iOSFindBy(id="save")
@@ -274,7 +283,7 @@ public class TransactionDetailPage {
 	public MobileElement buttonSave1;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Delete Transaction\"]")
-	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Delete Transaction'")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Delete Transaction'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Delete Transaction']")
 	public MobileElement deleteTransaction;
 	
@@ -456,7 +465,7 @@ public class TransactionDetailPage {
 				this.buttonSave.click();
 			}
 			else {
-				this.buttonSave1.click(); 
+				this.buttonSave.click(); 
 			
 			} 
 				
@@ -629,29 +638,10 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		
-//		TouchAction touch = new TouchAction(Engine.ad);
-//		touch.longPress(this.enterMonth,1000).release();
-//		Engine.ad.performTouchAction(touch);
-//		Engine.ad.getKeyboard().pressKey(month);
-//		Thread.sleep(500);
-//		Engine.ad.getContext();
-//		
-//		
-//		TouchAction touch2 = new TouchAction(Engine.ad);
-//		touch2.longPress(this.enterDate,1000).release();
-//		Engine.ad.performTouchAction(touch2);
-//		Engine.ad.getKeyboard().pressKey(date);
-//		Thread.sleep(500);
-//		
-//		
-//		TouchAction touch3 = new TouchAction(Engine.ad);
-//		touch3.longPress(this.enterYear,1000).release();
-//		Engine.ad.performTouchAction(touch3);
-//		Engine.ad.getKeyboard().pressKey(year);
-//		Thread.sleep(1000);
 		
 		/////////////////////////////////////////
 		try {
+			
 			
 			TouchAction touchAction = new TouchAction(Engine.getDriver());
 			touchAction
@@ -688,6 +678,7 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		
@@ -709,6 +700,7 @@ public class TransactionDetailPage {
 
 		String date = a[1];
 		String year = a[2];
+		
 		
 		if (! Verify.objExists(this.datePicker)) {
 			this.dateLabel.click();
@@ -1149,7 +1141,7 @@ public class TransactionDetailPage {
 			
 			this.payee.click();
 			Thread.sleep(1000);
-			System.out.println(Engine.iosd.getContext());
+			//System.out.println(Engine.iosd.getContext());
 			
 			if (! Verify.objExists(this.closePayee))
 				Commentary.log(LogStatus.FAIL,"Error****** Transaction Detail > tapping on payee, did not open Payee selection screen");

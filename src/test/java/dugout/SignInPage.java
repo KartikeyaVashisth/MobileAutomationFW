@@ -53,7 +53,8 @@ public class SignInPage {
 	
 	
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
-	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)']") 
+	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)']") 
+	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)' or @text='Quicken ID (email address)']") 
 	//@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Quicken ID (email address)'`]")
 	public MobileElement emailID;
@@ -65,7 +66,7 @@ public class SignInPage {
 	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
 	public MobileElement userName;
 	
-	@AndroidFindBy(xpath="//*[@content-desc ='Password']")
+	@AndroidFindBy(xpath="//*[@content-desc ='Password' or @text ='Password']")
 	//@AndroidFindBy(xpath="//*[@text='Password']")
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name=='Password'$]")
@@ -77,7 +78,7 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/*[$type=='XCUIElementTypeSecureTextField'$]")
 	public MobileElement password;
 	
-	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN']")
+	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='SIGN IN']")
 	//@iOSFindBy(xpath="//*[@name='SIGN IN']")
 	@iOSXCUITFindBy(iOSClassChain = "**/*[$name=='SIGN IN'$]")
 	public MobileElement btnSignIn;
