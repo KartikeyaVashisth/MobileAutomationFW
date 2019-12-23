@@ -228,8 +228,7 @@ public class Helper {
 		    capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
-			//capabilities.setCapability("app", "sauce-storage:Quicken(36.16645.4012)-Release.app.zip");
-			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");
+			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","XCUITest");
 			
