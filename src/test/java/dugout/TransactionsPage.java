@@ -139,6 +139,15 @@ public class TransactionsPage {
 		
 		
 	} 
+	public int getTransactionListSize() throws Exception {
+		AllAccountsPage aa = new AllAccountsPage();
+		
+		List<MobileElement> li = aa.getAllSearchTransactions ();
+		Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
+		int listSize = li.size();
+		return listSize;
+		
+	}
 	
 	public void swipe_left() throws Exception {
 		Helper h = new Helper();

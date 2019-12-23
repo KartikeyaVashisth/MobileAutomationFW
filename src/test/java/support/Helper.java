@@ -223,7 +223,7 @@ public class Helper {
 			capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
 			//capabilities.setCapability("appiumVersion", "1.13.0");// 1.5.3
 			capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("autoAcceptAlerts", true);
+			//capabilities.setCapability("autoAcceptAlerts", true);
 		    capabilities.setCapability("autoGrantPermissions", true);
 		    capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
@@ -382,6 +382,11 @@ public class Helper {
 		
 		return sdf.format(date);
 		
+	}
+	public String getDateformat(Integer daysFromToday) {
+		Date date = DateUtils.addDays(new Date(), daysFromToday);
+		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yy");
+		return sdf.format(date);
 	}
 	
 	public String getPastDaysDate (Integer daysFromToday) {

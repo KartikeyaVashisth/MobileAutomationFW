@@ -15,6 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.events.api.general.AlertEventListener;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -63,12 +64,12 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//*[@text=\"ONLINE BALANCE\"]")
 	public MobileElement txtOnlineBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]")
-	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='PROJECTED BALANCE'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
 	public MobileElement txtProjectedBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
-	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[2]")
 	public MobileElement txtProjectedBalanceAmount;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[2]")
@@ -105,6 +106,7 @@ public class BankingAndCreditCardPage {
 	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 2\"]")
 	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 2\"]")
 	public MobileElement select_ProjectedBalance;
+	
 	
 	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
@@ -190,10 +192,14 @@ public class BankingAndCreditCardPage {
 	}
 	
 	public String getCheckingBalance() throws Exception {
-		
+		Helper h = new Helper();
 		// scroll to the account
-		//this.scrollToAccount("CHECKING");
-		this.scrollToAccount("Account Type: Checking");
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			this.scrollToAccount("CHECKING");
+		} else {
+			this.scrollToAccount("Account Type: Checking");
+		}
 		
 		return this.checkingBalance.getText();
 	
@@ -257,6 +263,22 @@ public class BankingAndCreditCardPage {
 			
 		
 	}
+	public String getTotalBalance() throws Exception{
+		
+		String totalBalance = txtTodaysBalanceAmount.getText();
+		
+		return totalBalance;
+		
+	}
+	
+	public String getProjectedBalance() throws Exception {
+		
+		scrollToProjectedBalance();
+		
+		String projectedBalance = txtProjectedBalanceAmount.getText();
+		
+		return projectedBalance;
+	}
 	
 	public void scrollToAccount(String acctType) throws Exception {
 		
@@ -267,9 +289,9 @@ public class BankingAndCreditCardPage {
 			Thread.sleep(1000);
 		}
 		else {
-			String cc="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
+			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
 			String sLabel ="name == '"+acctType+"'";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
@@ -299,12 +321,12 @@ public class BankingAndCreditCardPage {
 	
 	public void scrollToProjectedBalance_android() throws Exception{
 		
-		Dimension size = this.txtTodaysBalanceAmount.getSize();
+		Dimension size = this.txtActualBalance.getSize();
 		
 		int x_start=(int)(size.width*0.90);
         int x_end=(int)(size.width*0.10);
         
-        int y=this.txtTodaysBalanceAmount.getRect().getY();
+        int y=this.txtActualBalance.getRect().getY();
         //int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
 		
 //		Integer i;
@@ -314,8 +336,9 @@ public class BankingAndCreditCardPage {
 //        }	
         TouchAction touchAction = new TouchAction(Engine.getDriver());
         
-        
+        for(int i=1 ;i<=2;i++) { 
         touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+        }
 	}
 	
 	public void scrollToProjectedBalance_ios() throws Exception{
@@ -337,13 +360,21 @@ public class BankingAndCreditCardPage {
 	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
 	        Thread.sleep(1000);
 	        
-	        Helper h = new Helper();
-	        h.getContext();
+	        MobileElement element2 = this.txtProjectedBalance;
+	        String elementID2 = element2.getId();
+	        HashMap<String, String> scrollObject2 = new HashMap<String, String>();
+	        scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
+	        scrollObject2.put("direction", "right");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject2);
+	        Thread.sleep(1000);
 	        
-	        TransactionsPage tp = new TransactionsPage();
-	        System.out.println("eeeee....");
-	        tp.backButton.click();
-        	Thread.sleep(1000);
+//	        Helper h = new Helper();
+//	        h.getContext();
+	        
+//	        TransactionsPage tp = new TransactionsPage();
+//	        System.out.println("eeeee....");
+//	        tp.backButton.click();
+//        	Thread.sleep(1000);
 	        
 	        
 	        
