@@ -62,7 +62,7 @@ public class Recovery {
 			else {
 				SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
 				File f = new File(appPath);
-				String response = r.uploadFile(f, "Quicken.zip", true);
+				String response = r.uploadFile(f, "IOSRegression.zip", true);
 				System.out.println("Sauce Upload Response -->> "+response);
 				System.out.println("Completed..uploading build to SAUCE storage");
 				
