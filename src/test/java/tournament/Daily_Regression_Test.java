@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 	import com.relevantcodes.extentreports.LogStatus;
 
-	import dugout.BankingAndCreditCardPage;
+import dugout.AllAccountsPage;
+import dugout.BankingAndCreditCardPage;
 	import dugout.InvestingPage;
 	import dugout.NetIncomeOverTimePage;
 	import dugout.OverviewPage;
@@ -39,7 +40,10 @@ import org.testng.annotations.Test;
 		String sManualSaving = "Manual_Savings";
 		String sOnlineSaving = "onl_savings1";
 		String backButton1_ios = "Banking & Credit";
-		String s;
+		String statusCleared = "Cleared";
+		String statusUnCleared = "Uncleared";
+		String filterNewToOld = "Date New to Old";
+		String filterOldToNew = "Date Old to New";
 		
 		// Add Transaction
 			@Test(priority = 0)
@@ -179,7 +183,7 @@ import org.testng.annotations.Test;
 				
 			}
 			//Verify Delete Transaction
-			@Test(priority = 3)
+			@Test(priority = 2)
 			public void TC3_ValidateDeleteTransaction() throws Exception {
 				Commentary.log(LogStatus.INFO, "Delete an expense transaction for an manual savings account, verify checking & total balance on overview screen accounts card");
 				Helper h = new Helper();
@@ -236,8 +240,8 @@ import org.testng.annotations.Test;
 				
 			}	
 			
-			@Test (priority = 4)
-			public void TC15_VerifyTransactionSummary() throws Exception {
+			@Test (priority = 3)
+			public void TC4_VerifyTransactionSummary() throws Exception {
 				
 				Commentary.log(LogStatus.INFO, "Validating Transaction Summary details");
 				OverviewPage op = new OverviewPage();
@@ -276,7 +280,7 @@ import org.testng.annotations.Test;
 				
 			}
 			
-			@Test(priority=5)
+			@Test(priority=4)
 			public void TC5_VerifyFilterForSpendingTrendCard() throws Exception {
 				SoftAssert sa = new SoftAssert();
 				Commentary.log(LogStatus.INFO, "Verify filter chips on trending screen should appear and selecting it reflects the category");
@@ -321,8 +325,8 @@ import org.testng.annotations.Test;
 				
 				sa.assertAll();
 			}
-			@Test (priority=6)
-			public void VerifySpendingOverTimeCard () throws Exception {
+			@Test (priority=5)
+			public void TC6_VerifySpendingOverTimeCard () throws Exception {
 				
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
@@ -347,8 +351,8 @@ import org.testng.annotations.Test;
 				
 			}
 			
-			@Test(priority = 7)
-			public void VerifySpendingOverTimeCard_LastSixMonth() throws Exception {
+			@Test(priority = 6)
+			public void TC7_VerifySpendingOverTimeCard_LastSixMonth() throws Exception {
 				
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
@@ -375,8 +379,8 @@ import org.testng.annotations.Test;
 				sa.assertAll();
 				
 			}
-			@Test(priority = 8)
-			public void VerifyNetIncomeOverTimeCard() throws Exception {
+			@Test(priority = 7)
+			public void TC8_VerifyNetIncomeOverTimeCard() throws Exception {
 				
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
@@ -400,8 +404,8 @@ import org.testng.annotations.Test;
 				
 			}
 			
-			@Test(priority = 9)
-			public void VerifyNetIncomeOverTimeCard_LastSixMonth() throws Exception {
+			@Test(priority = 8)
+			public void TC9_VerifyNetIncomeOverTimeCard_LastSixMonth() throws Exception {
 				
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
@@ -428,8 +432,8 @@ import org.testng.annotations.Test;
 				sa.assertAll();
 				
 			}
-			@Test(priority=10)
-			public void ValidateBalancesOnAccountCard() throws Exception{
+			@Test(priority=9)
+			public void TC10_ValidateBalancesOnAccountCard() throws Exception{
 				
 				String sChecking, sCredit, sSaving, sTotal;
 				Commentary.log(LogStatus.INFO, "Verify balances on accounts card");
@@ -479,7 +483,195 @@ import org.testng.annotations.Test;
 				
 				sa.assertAll();
 			}
+			@Test (priority = 10)
+			public void TC11_ValidateTransferTranscation() throws Exception	{
+				String sChecking_before,sSaving_after, sSaving_before, sChecking_after ;
+
+				SoftAssert sa = new SoftAssert();
+				Helper h = new Helper();
+				
+				Commentary.log(LogStatus.INFO,	"Creating a transfer from Checking to Saving account and verifying balances");
+				String payeeName = "Payee_"+h.getCurrentTime();
+				
+				OverviewPage op = new OverviewPage();
+				op.navigateToAcctList();
+				
+				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+				sChecking_before = bcc.getCheckingBalance();
+				sSaving_before = bcc.getSavingsBalance();
+				Double dChecking_before = h.processBalanceAmount(sChecking_before.replace("SubTotal: ", ""));
+				Double dSaving_before = h.processBalanceAmount(sSaving_before.replace("SubTotal: ", ""));
+
+				bcc.allTransactionButton.click();
+				TransactionsPage tp = new TransactionsPage();
+				tp.addTransaction.click();
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				tRec.setAmount("20.00");
+				tRec.setPayee(payeeName);
+				tRec.setAccount(sManualChecking);
+				tRec.setCategory("Transfer [Manual_Savings]");
+				tRec.setTransactionType("expense");
+				h.getContext();
+				td.addTransaction(tRec);
+				
+				tp.backButton.click();
+				sChecking_after = bcc.getCheckingBalance();
+				sSaving_after = bcc.getSavingsBalance();
+				Double dChecking_after = h.processBalanceAmount(sChecking_after.replace("SubTotal: ", ""));
+				Double dSaving_after = h.processBalanceAmount(sSaving_after.replace("SubTotal: ", ""));
+				Double d = Double.parseDouble(tRec.getAmount());
+				
+				if (dChecking_after+d==dChecking_before)
+					Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+				
+				if (dSaving_after-d==dSaving_before)
+					Commentary.log(LogStatus.INFO, "PASS: Savings balance was ["+dSaving_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance was ["+dSaving_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
+				sa.assertAll();
+			}
 			
+			@Test(priority = 11)
+			public void TC12_ValidateRunningBalanceDefault() throws Exception { // Working only on IOS (Need to check for Android - second test)
+				SoftAssert sa = new SoftAssert();
+				
+				Commentary.log(LogStatus.INFO,	"Verify that by default the Show Running balance toggle should be ON and \"Date New to old\" should be selected.");
+				
+				OverviewPage op = new OverviewPage();
+				op.navigateToAcctList();
+				
+				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+				TransactionsPage tp = new TransactionsPage();
+				AllAccountsPage aa = new AllAccountsPage();
+				
+				bcc.selectAccount(sManualSaving);
+				Thread.sleep(1000);
+				
+				tp.buttonShowReminder.click();
+				
+				// Verify Show running balance options is displayed in Account detail screen.
+				
+				if (aa.isRunningBalanceEnabled()) {
+					Commentary.log(LogStatus.INFO, "PASS: Running Balance is enabled by default");
+					
+				} else {
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Running Balance is NOT enabled by default");
+				}
+				
+				tp.buttonClose.click();
+				tp.buttonSort.click();
+				Thread.sleep(1000);
+				
+				//Verify that default filter is set to Date New to Old
+				if (Verify.objExists(tp.defaultfilterSelected)) {
+					Commentary.log(LogStatus.INFO, "PASS: Filter for date New to old is selected by default");
+				} else {
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter for date New to old is NOT selected by default");
+				}
+				sa.assertAll();
+			}
+			
+			@Test(priority = 12)
+			public void TC13_ValidateRunningBalanceCalculation() throws Exception { 
+				Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
+				SoftAssert sa = new SoftAssert();
+				
+				Commentary.log(LogStatus.INFO,	"Verify Balance calculation for filter combination \"Date new to old\" + \"Show Running Balance\" set to ON");
+				
+				OverviewPage op = new OverviewPage();
+				op.navigateToAcctList();
+				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+				TransactionsPage tp = new TransactionsPage();
+				AllAccountsPage aa = new AllAccountsPage();
+				bcc.selectAccount(sManualSaving);
+				Thread.sleep(1000);
+				//sTotalBalance = h.processBalanceAmount(bcc.getTotalBalance().replace("$", ""));
+				tp.buttonSort.click();
+				Thread.sleep(1000);
+				tp.selectSortFilterOption(filterNewToOld);
+				
+				tp.buttonShowReminder.click();
+				if (aa.isRunningBalanceEnabled()) {
+					Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+					tp.buttonApply.click();
+					Thread.sleep(1000);
+					
+				} else {
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+					tp.buttonShowReminder.click();
+					tp.buttonApply.click();
+					Thread.sleep(1000);
+				}
+				
+				
+				dFirstRunningBalance= aa.getRunningBalancefromTransaction(1);
+				dFirstTxnAmount = aa.getTransactionAmount(1);
+				Double iFirstRunningBalance = Math.abs(dFirstRunningBalance);
+				Double iFirstTxnAmount = Math.abs(dFirstTxnAmount);
+				
+				dSecondRunningBalance= aa.getRunningBalancefromTransaction(2);
+				dSecondTxnAmount = aa.getTransactionAmount(2);
+				Double iSecondRunningBalance = Math.abs(dSecondRunningBalance);
+				Double iSecondTxnAmount = Math.abs(dSecondTxnAmount);
+				
+				dThirdRunningBalance= aa.getRunningBalancefromTransaction(3);
+				dThirdTxnAmount = aa.getTransactionAmount(3);
+				Double iThirdRunningBalance = Math.abs(dThirdRunningBalance);
+				Double iThirdTxnAmount = Math.abs(dThirdTxnAmount);
+				
+				dFourthRunningBalance= aa.getRunningBalancefromTransaction(4);
+				Double iFourthRunningBalance = Math.abs(dFourthRunningBalance);
+				
+				if (dThirdTxnAmount<0) {
+					if (iFourthRunningBalance-iThirdTxnAmount==iThirdRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dFourthRunningBalance+"] and transaction amount is ["+dThirdTxnAmount+"], calculated Running balance is ["+dThirdRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dFourthRunningBalance+"] and transaction amount is ["+dThirdTxnAmount+"], calculated Running balance is ["+dThirdRunningBalance+"]");
+					}
+				}
+				else {
+					if (iFourthRunningBalance+iThirdTxnAmount==iThirdRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dFourthRunningBalance+"] and transaction amount is ["+dThirdTxnAmount+"], calculated Running balance is ["+dThirdRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dFourthRunningBalance+"] and transaction amount is ["+dThirdTxnAmount+"], calculated Running balance is ["+dThirdRunningBalance+"]");
+					}
+				}
+				
+				if (dSecondTxnAmount<0) {
+					if (iThirdRunningBalance-iSecondTxnAmount==iSecondRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dThirdRunningBalance+"] and transaction amount is ["+dSecondTxnAmount+"], calculated Running balance is ["+dSecondRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dThirdRunningBalance+"] and transaction amount is ["+dSecondTxnAmount+"], calculated Running balance is ["+dSecondRunningBalance+"]");
+					}
+				}
+				else {
+					if (iThirdRunningBalance+iSecondTxnAmount==iSecondRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dThirdRunningBalance+"] and transaction amount is ["+dSecondTxnAmount+"], calculated Running balance is ["+dSecondRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dThirdRunningBalance+"] and transaction amount is ["+dSecondTxnAmount+"], calculated Running balance is ["+dSecondRunningBalance+"]");
+					}
+				}
+				
+				if (dFirstTxnAmount<0) {
+					if (iSecondRunningBalance-iFirstTxnAmount==iFirstRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
+					}
+				}
+				else {
+					if (iSecondRunningBalance+iFirstTxnAmount==iFirstRunningBalance) {
+						Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
+					} else {
+						Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
+					}
+				}
+				sa.assertAll();
+			}
 	}
 
 
