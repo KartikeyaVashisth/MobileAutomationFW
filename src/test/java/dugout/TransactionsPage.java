@@ -402,7 +402,7 @@ public class TransactionsPage {
 	public MobileElement buttonSort;
 	
 	@iOSFindBy(xpath="//*[@name='Apply']")
-	@AndroidFindBy(xpath="*//[text='Apply']")
+	@AndroidFindBy(xpath="//*[text='Apply']")
 	public MobileElement buttonApply;
 	
 	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeImage' AND visible = 1")
