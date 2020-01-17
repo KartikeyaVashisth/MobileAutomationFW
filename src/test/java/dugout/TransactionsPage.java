@@ -308,6 +308,44 @@ public class TransactionsPage {
 		
 	}
 	
+	public void selectSortFilterOption(String filterBy) throws InterruptedException {
+		Helper h = new Helper();
+		if (h.getEngine().equalsIgnoreCase("ios")) {
+			if (filterBy =="Pending to Cleared" ) {
+				String locater = "//XCUIElementTypeStaticText[@name=\"Pending to Cleared \"]";
+				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.xpath(locater));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(2000);
+			}
+			else {
+			//String sXpath = "name="+filterBy+" and type='XCUIElementTypeStaticText'";
+			String locater = "**/XCUIElementTypeStaticText[`name=="+"\""+filterBy+"\""+"`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locater));
+			me.click();
+			buttonApply.click();
+			Thread.sleep(2000);
+			}
+		} else {
+			if (filterBy == "Pending to Cleared") {
+				Thread.sleep(1000);
+				String sXpath = "//android.view.ViewGroup[5]//android.widget.TextView";
+				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(3000);
+			} else {
+				Thread.sleep(1000);
+				String sXpath = "//android.widget.TextView[@text="+"\""+filterBy+"\""+"]";
+				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(3000);
+			}
+		}
+		
+	}
+	
 	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
@@ -367,7 +405,62 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="*//[text='Apply']")
 	public MobileElement buttonApply;
 	
+	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeImage' AND visible = 1")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"close\"]/android.widget.ImageView")
+	public MobileElement buttonClose;
+	
 	@iOSFindBy(id="You don't have any transactions.")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_data']")
 	public MobileElement noTransactionText;
+	
+	@iOSXCUITFindBy(id = "transactionSettings")
+	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/reminderBtn']")
+	public MobileElement buttonShowReminder;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Transaction Detail'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Transaction Detail']")
+	public MobileElement headerTransactionDetail;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Show Running Balance'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Show Running Balance']")
+	public MobileElement switchShowRunningBalanceText;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeSwitch'")
+	@AndroidFindBy(xpath="//android.widget.Switch")
+	public MobileElement switchRunningBalance;
+	
+	//----------------- Filter & Sort --------------
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Not Reviewed' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
+	public MobileElement filterNotReviewed;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='NOT REVIEWED' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
+	public MobileElement filterNotReviewedHeader;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Clear filters' and type='XCUIElementTypeButton'")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Clear filters']")
+	public MobileElement buttonClearFilter;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Mark all as Reviewed' and type='XCUIElementTypeButton'")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Mark all as Reviewed']")
+	public MobileElement buttonMarkAllReviewed;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name BEGINSWITH 'Are you sure you want to mark' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, 'Are you sure you want to mark')]")
+	public MobileElement alertMarkAllReviewed;
+	
+	@iOSFindBy(xpath="//*[@name='Yes']")
+	@AndroidFindBy(xpath="//*[@text='Yes']")
+	public MobileElement buttonYes;
+	
+	@iOSFindBy(xpath="//*[@name='No']")
+	@AndroidFindBy(xpath="//*[@text='No']")
+	public MobileElement buttonNo;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Date New to Old CheckIcon'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text = 'Date New to Old']/../android.widget.ImageView[@content-desc = 'CheckIcon']")
+	public MobileElement defaultfilterSelected;
 }
+

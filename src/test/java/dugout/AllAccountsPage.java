@@ -73,6 +73,8 @@ public class AllAccountsPage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
 	
+	
+	
 	public void navigateBackToDashboard() throws Exception {
 		
 		backButton.click();
@@ -142,6 +144,7 @@ public class AllAccountsPage {
 		
 	
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
+		//String sXpath = "**/XCUIElementTypeTable";
 		List <MobileElement> me = null;
 		Engine.iosd.getContext();
 		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
@@ -175,6 +178,77 @@ public class AllAccountsPage {
 		
 		
 	}
-	
-
+	public Double getRunningBalancefromTransaction (int transactionNumber) {
+		Double dTransactionAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber+2;
+			String locator = "//android.widget.LinearLayout["+transactionNumber+"]//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']";
+			MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(locator));
+			String sTransactionAmount = me.getText();
+			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		} else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			String sTransactionAmount = me.getAttribute("value");
+			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		}
+		return dTransactionAmount;
+	}
+	public Double getTransactionAmount(int transactionNumber) {
+		Double dAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber+2;
+			String locator = "//android.widget.LinearLayout["+transactionNumber+"]//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_amount']";
+			MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(locator));
+			String sTransactionAmount = me.getText();
+			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		} else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='topRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			String sTransactionAmount = me.getAttribute("value");
+			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		}
+		return dAmount;
+		
+	}
+	public String getTransactionDate (int transactionNumber) {
+		String sTransactionAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber+2;
+			String locator = "//android.widget.LinearLayout["+transactionNumber+"]//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']";
+			MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(locator));
+			sTransactionAmount = me.getText();
+			
+		} else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			sTransactionAmount = me.getText();
+			
+		}
+		return sTransactionAmount;
+	}
+	public boolean isRunningBalanceEnabled() {
+		Helper h = new Helper();
+		TransactionsPage tp = new TransactionsPage();
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			
+			if (tp.switchRunningBalance.getText().equalsIgnoreCase("ON")) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (tp.switchRunningBalance.getAttribute("value").equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 }
