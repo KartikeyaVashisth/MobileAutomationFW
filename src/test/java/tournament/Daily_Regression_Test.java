@@ -711,7 +711,7 @@ import dugout.BankingAndCreditCardPage;
 				
 				td.backButton.click(); Thread.sleep(2000);
 				
-				tp.tapOnTransation(5);
+				tp.tapOnTransation(6);
 				Thread.sleep(2000);
 				td.VerifyTransactionCategory(categoryName);
 				
@@ -750,7 +750,7 @@ import dugout.BankingAndCreditCardPage;
 				
 				td.backButton.click(); Thread.sleep(1000);
 				
-				tp.tapOnTransation(5);
+				tp.tapOnTransation(6);
 				Thread.sleep(1000);
 				td.VerifyTransactionPayee(payeeName);
 				
