@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidBy;
 //import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -68,6 +69,14 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Payee']")
 		public MobileElement noTransactionPayee;
 		
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[15]")
+		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'$')]")
+		public MobileElement firstRecordInList;
+		
+		@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[contains(@name, '$')][2]")
+		@AndroidFindBy(xpath="//android.view.ViewGroup[@index=1][descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
+		public MobileElement transactionCategoryPayeeText;
+		
 		public void navigateBackToDashboard() throws Exception{
 			
 			backButtonOnHeader.click();
@@ -92,6 +101,10 @@ public class TransactionSummaryPage {
 				 MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(xPath_ANDROID));
 				 return me;
 			}
+			
+		}
+		public String getCategoryPayeeName () {
+			return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
 			
 		}
 }

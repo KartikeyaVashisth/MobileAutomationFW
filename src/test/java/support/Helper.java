@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -16,8 +18,10 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.hamcrest.Matcher;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -271,7 +275,7 @@ public class Helper {
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
 	        capabilities.setCapability("autoWebView", "true");
-	        capabilities.setCapability("autoAcceptAlerts", true);
+	        //capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
 	        capabilities.setCapability("browserName", "");
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
@@ -398,6 +402,29 @@ public class Helper {
 		
 		return sdf.format(date);
 		
+	}
+	
+	public String convertDateFormat(String sDate) throws ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy");
+		Date date = sdf.parse(sDate);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY");
+		String dateStr = dateFormat.format(date);
+		
+		return dateStr;
+	}
+	
+	public boolean isValidDateFormat (String date, String dateFormat) {
+		
+		if (dateFormat.equals("MMM dd, YYYY")) {
+			String regex = "^(?:(((Jan(uary)?|Ma(r(ch)?|y)|Jul(y)?|Aug(ust)?|Oct(ober)?|Dec(ember)?)\\ 31)|((Jan(uary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sept|Nov|Dec)(ember)?)\\ (0?[1-9]|([12]\\d)|30))|(Feb(ruary)?\\ (0?[1-9]|1\\d|2[0-8]|(29(?=,\\ ((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))))\\,\\ ((1[6-9]|[2-9]\\d)\\d{2}))";
+			Pattern pattern = Pattern.compile(regex); 
+	        java.util.regex.Matcher matcher = pattern.matcher((CharSequence)date);
+	        return matcher.matches(); 
+		} else {
+			// Use this for different date format validation if required
+			return false;
+		}
 	}
 	
 	public String getLastMonthsDate() {

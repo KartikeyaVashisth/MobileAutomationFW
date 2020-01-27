@@ -73,6 +73,8 @@ public class AllAccountsPage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
 	
+	
+	
 	public void navigateBackToDashboard() throws Exception {
 		
 		backButton.click();
@@ -132,7 +134,7 @@ public class AllAccountsPage {
 
 		Engine.ad.getContext();
 		me = Engine.ad.findElements(By.xpath(sXpath));
-		System.out.println(me.size());
+		//System.out.println(me.size());
 		
 		return me;
 	}
@@ -142,10 +144,11 @@ public class AllAccountsPage {
 		
 	
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
+		//String sXpath = "**/XCUIElementTypeTable";
 		List <MobileElement> me = null;
 		Engine.iosd.getContext();
 		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
-		System.out.println(me.size());
+		//System.out.println(me.size());
 		
 		return me;
 	}
@@ -175,6 +178,68 @@ public class AllAccountsPage {
 		
 		
 	}
-	
-
+	public Double getRunningBalancefromTransaction (int transactionNumber) {
+		Double dTransactionAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber-1;
+			List <MobileElement> me = null;
+			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
+			me = Engine.ad.findElements(By.xpath(locator));
+			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']"));
+			String sTransactionAmount = me1.getText();
+			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		} 
+		else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			String sTransactionAmount = me.getAttribute("value");
+			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		}
+		return dTransactionAmount;
+	}
+	public Double getTransactionAmount(int transactionNumber) {
+		Double dAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber-1;
+			List <MobileElement> me = null;
+			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
+			me = Engine.ad.findElements(By.xpath(locator));
+			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_amount']"));
+			String sTransactionAmount = me1.getText();
+			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		} 
+		else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='topRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			String sTransactionAmount = me.getAttribute("value");
+			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
+		}
+		return dAmount;
+		
+	}
+	public String getTransactionDate (int transactionNumber) {
+		String sTransactionAmount = null;
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			transactionNumber = transactionNumber-1;
+			List <MobileElement> me = null;
+			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
+			me = Engine.ad.findElements(By.xpath(locator));
+			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']"));
+			sTransactionAmount = me1.getText();
+			
+			
+		} else {
+			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			sTransactionAmount = me.getText();
+			
+		}
+		return sTransactionAmount;
+	}
 }

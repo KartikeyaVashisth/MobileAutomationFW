@@ -109,17 +109,21 @@ public class TransactionDetailPage {
 	
 	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[1]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[1]")
-	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=0]/android.widget.EditText")
+	//@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=0]/android.widget.EditText")
+	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=0]")
+
 	public MobileElement enterMonth;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[2]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[2]")
-	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=1]/android.widget.EditText")
+	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=1]")
+	//@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=1]/android.widget.EditText")
 	public MobileElement enterDate;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypePickerWheel[3]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypePickerWheel[3]")
-	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=2]/android.widget.EditText")
+	//@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=2]/android.widget.EditText")
+	@AndroidFindBy(xpath="//android.widget.DatePicker//android.widget.NumberPicker[@index=2]")
 	public MobileElement enterYear;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Cancel\"]")
@@ -681,19 +685,21 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		
-		
 		/////////////////////////////////////////
 		try {
 			
-			this.enterMonth.clear();
+			this.enterMonth.click();
+			//this.enterMonth.clear();
 			this.enterMonth.sendKeys(month);
 			Thread.sleep(1000);
 			
-			this.enterDate.clear();
+			this.enterDate.click();
+			//this.enterDate.clear();
 			this.enterDate.sendKeys(date);
 			Thread.sleep(1000);
 			
-			this.enterYear.clear();
+			this.enterYear.click();
+			//this.enterYear.clear();
 			this.enterYear.sendKeys(year);
 			Thread.sleep(1000);
 			
@@ -1513,7 +1519,7 @@ public class TransactionDetailPage {
 			return true;
 		}
 			
-		Commentary.log(LogStatus.INFO, "Payee verification failed. Expected ["+payee+"], Actual ["+sActual+"]");
+		Commentary.log(LogStatus.FAIL, "Payee verification failed. Expected ["+payee+"], Actual ["+sActual+"]");
  		
  		
  		return false;
@@ -1544,14 +1550,14 @@ public class TransactionDetailPage {
  		
 		
  		
-		sActual = this.getTransactionCheckNumber();
+		sActual = this.getTransactionCategory();
 		
 		if (sActual.equals(sCategory)) {
-			Commentary.log(LogStatus.INFO, "checkNumber verified successfully ["+sCategory+"]");
+			Commentary.log(LogStatus.INFO, "Category verified successfully ["+sCategory+"]");
 			return true;
 		}
 			
-		Commentary.log(LogStatus.INFO, "checkNumber verification failed. Expected ["+sCategory+"], Actual ["+sActual+"]");
+		Commentary.log(LogStatus.FAIL, "Category verification failed. Expected ["+sCategory+"], Actual ["+sActual+"]");
  		
  		
  		return false;

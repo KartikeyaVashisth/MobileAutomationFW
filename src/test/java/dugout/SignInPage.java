@@ -79,8 +79,7 @@ public class SignInPage {
 	public MobileElement password;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='SIGN IN']")
-	//@iOSFindBy(xpath="//*[@name='SIGN IN']")
-	@iOSXCUITFindBy(iOSClassChain = "**/*[$name=='SIGN IN'$]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[$name=='SIGN IN'$]")
 	public MobileElement btnSignIn;
 	
 	@AndroidFindBy(xpath="//*[@text='DONE']")

@@ -40,7 +40,7 @@ public class BankingAndCreditCardPage {
 		}	
 	}
 	
-	@iOSFindBy(xpath="//XCUIElementTypeNavigationBar/XCUIElementTypeButton")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar/XCUIElementTypeButton")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
@@ -395,5 +395,21 @@ public class BankingAndCreditCardPage {
 	        scrollObject1.put("direction", "right");
 	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
 	        */
+	}
+	public void selectAccount(String acctName) throws Exception {
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
+			Engine.ad.findElement(MobileBy.xpath(sXpath)).click();
+			Thread.sleep(1000);
+		}
+		else {
+			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctName+"'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath));
+			me.click();
+			Thread.sleep(1000);
+	}
+	
 	}
 }

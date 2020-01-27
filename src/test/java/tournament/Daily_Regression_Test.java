@@ -66,7 +66,7 @@ import dugout.BankingAndCreditCardPage;
 				tRec.setCategory("Internet");
 				tRec.setPayee(time);
 				tRec.setTransactionType("expense");
-				//tRec.setDate(h.getFutureDaysDate(30));
+				tRec.setDate(h.getFutureDaysDate(0));
 				h.getContext();
 				
 				OverviewPage op = new OverviewPage();
@@ -133,7 +133,7 @@ import dugout.BankingAndCreditCardPage;
 				tRec.setCategory("Hotel");
 				tRec.setPayee("shop");
 				tRec.setTransactionType("expense");
-				//tRec.setDate(h.getYesterdaysDate());
+				tRec.setDate(h.getYesterdaysDate());
 				Double txnAmount_before = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
 				System.out.println(txnAmount_before);
 				td.editTransaction(tRec);
@@ -550,12 +550,10 @@ import dugout.BankingAndCreditCardPage;
 				
 				bcc.selectAccount(sManualSaving);
 				Thread.sleep(1000);
-				
-				tp.buttonShowReminder.click();
-				
+							
 				// Verify Show running balance options is displayed in Account detail screen.
 				
-				if (aa.isRunningBalanceEnabled()) {
+				if (tp.isRunningBalanceEnabled()) {
 					Commentary.log(LogStatus.INFO, "PASS: Running Balance is enabled by default");
 					
 				} else {
@@ -594,15 +592,13 @@ import dugout.BankingAndCreditCardPage;
 				Thread.sleep(1000);
 				tp.selectSortFilterOption(filterNewToOld);
 				
-				tp.buttonShowReminder.click();
-				if (aa.isRunningBalanceEnabled()) {
+				if (tp.isRunningBalanceEnabled()) {
 					Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
 					tp.buttonApply.click();
 					Thread.sleep(1000);
 					
 				} else {
 					Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
-					tp.buttonShowReminder.click();
 					tp.buttonApply.click();
 					Thread.sleep(1000);
 				}
@@ -671,6 +667,97 @@ import dugout.BankingAndCreditCardPage;
 					}
 				}
 				sa.assertAll();
+			}
+			@Test (priority=13)
+			public void TC15_VerifyTransactionSummary_TransactionDetails() throws Exception {
+				Commentary.log(LogStatus.INFO, "Verify transaction are displayed under corect category and payee in Transaction summary card ");
+				OverviewPage op = new OverviewPage();
+				
+				op.tapOnTransactionSummaryCard();
+				SoftAssert sa = new SoftAssert();
+				
+				TransactionSummaryPage ts = new TransactionSummaryPage();
+				String categoryName = ts.getCategoryPayeeName();
+				
+				ts.transactionCategoryPayeeText.click();
+				Thread.sleep(2000);
+				
+				TransactionsPage tp = new TransactionsPage();
+				tp.tapOnTransation(1);
+				Thread.sleep(2000);
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				td.VerifyTransactionCategory(categoryName);
+				
+				td.backButton.click(); Thread.sleep(2000);
+				
+				
+				tp.tapOnTransation(2);
+				Thread.sleep(2000);
+				td.VerifyTransactionCategory(categoryName);
+				
+				td.backButton.click(); Thread.sleep(2000);
+				
+				
+				tp.tapOnTransation(3);
+				Thread.sleep(2000);
+				td.VerifyTransactionCategory(categoryName);
+				
+				td.backButton.click(); Thread.sleep(2000);
+				
+				tp.tapOnTransation(4);
+				Thread.sleep(2000);
+				td.VerifyTransactionCategory(categoryName);
+				
+				td.backButton.click(); Thread.sleep(2000);
+				
+				tp.tapOnTransation(5);
+				Thread.sleep(2000);
+				td.VerifyTransactionCategory(categoryName);
+				
+				td.backButton.click(); Thread.sleep(2000);
+				td.backButton.click(); Thread.sleep(2000);
+				
+				//Verifying for Payee
+				ts.payeeTab.click();
+				String payeeName = ts.getCategoryPayeeName();
+				
+				ts.transactionCategoryPayeeText.click();
+				Thread.sleep(1000);
+				
+				
+				tp.tapOnTransation(1);
+				Thread.sleep(1000);
+				td.VerifyTransactionPayee(payeeName);
+				
+				td.backButton.click(); Thread.sleep(1000);
+				
+				tp.tapOnTransation(2);
+				Thread.sleep(1000);
+				td.VerifyTransactionPayee(payeeName);
+				
+				td.backButton.click(); Thread.sleep(1000);
+				
+				tp.tapOnTransation(3);
+				Thread.sleep(1000);
+				td.VerifyTransactionPayee(payeeName);
+				
+				td.backButton.click(); Thread.sleep(1000);
+				
+				tp.tapOnTransation(4);
+				Thread.sleep(1000);
+				td.VerifyTransactionPayee(payeeName);
+				
+				td.backButton.click(); Thread.sleep(1000);
+				
+				tp.tapOnTransation(5);
+				Thread.sleep(1000);
+				td.VerifyTransactionPayee(payeeName);
+				
+				td.backButton.click(); Thread.sleep(1000);
+				
+				sa.assertAll();
+				
 			}
 	}
 

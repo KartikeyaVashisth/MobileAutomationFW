@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -139,6 +140,34 @@ public class TransactionsPage {
 		
 		
 	} 
+	public void tapOnTransation(int transactionNumber) throws Exception {
+
+		AllAccountsPage aa = new AllAccountsPage();
+				
+		List<MobileElement> li = aa.getAllSearchTransactions ();
+		//Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
+		
+		if (li.isEmpty())
+			Commentary.log(LogStatus.ERROR, "No Transactions available on Transaction list screen");
+		else
+			li.get(transactionNumber).click();
+		
+		Thread.sleep(1000);		
+	
+	} 
+	public void tapOnRandomTransation() throws Exception {
+		AllAccountsPage aa = new AllAccountsPage();
+				
+		List<MobileElement> li = aa.getAllSearchTransactions ();
+		Random random = new Random();
+		int randomInteger = 0;
+		if (li.isEmpty())
+			Commentary.log(LogStatus.ERROR, "No Transactions available on Transaction list screen");
+		else
+			randomInteger = random.nextInt(8);
+			li.get(randomInteger).click();
+		
+	} 
 	public int getTransactionListSize() throws Exception {
 		AllAccountsPage aa = new AllAccountsPage();
 		
@@ -233,6 +262,45 @@ public class TransactionsPage {
 		}
 	}
 	
+	public void swipe_right() throws Exception {
+		Helper h = new Helper();
+
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			swipe_right_android();
+		} else {
+			WebElement ele_ios = Engine.iosd.findElementByXPath("*//XCUIElementTypeCell[2]");
+			swipe_right_ios(ele_ios);
+		}
+	}
+	
+	public void swipe_right_ios(WebElement ele) {
+
+		JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd;
+		HashMap scrollObject = new HashMap();
+		scrollObject.put("direction", "right");
+		scrollObject.put("element", ele);
+		js1.executeScript("mobile: swipe", scrollObject);
+		js1.executeScript("mobile: swipe", scrollObject);
+
+	}
+
+	public void swipe_right_android() throws Exception {
+		Dimension size = Engine.ad.manage().window().getSize();
+		System.out.println(size);
+		int startx = (int) (size.width * 0.20);
+		int endx = (int) (size.width * 0.80);
+		int starty = size.height / 2;
+		
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+ 
+		touchAction
+                .press(point(startx, starty))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(endx, starty))
+                .release().perform();
+		//Engine.ad.swipe(startx, starty, endx, starty, 2000);
+	}
+	
 	public MobileElement getPayeeName() {
 		String xpath_IOS = "//XCUIElementTypeStaticText[@name='topLeftLabel']";
 		String xpath_Android = "//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_category']"; 
@@ -307,8 +375,95 @@ public class TransactionsPage {
 		return null;
 		
 	}
+	public void selectSortFilterOption(String filterBy) throws InterruptedException {
+		Helper h = new Helper();
+		if (h.getEngine().equalsIgnoreCase("ios")) {
+			if (filterBy =="Pending to Cleared" ) {
+				String locater = "//XCUIElementTypeStaticText[@name=\"Pending to Cleared \"]";
+				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.xpath(locater));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(2000);
+			}
+			else {
+			//String sXpath = "name="+filterBy+" and type='XCUIElementTypeStaticText'";
+			String locater = "**/XCUIElementTypeStaticText[`name=="+"\""+filterBy+"\""+"`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locater));
+			me.click();
+			buttonApply.click();
+			Thread.sleep(2000);
+			}
+		} else {
+			if (filterBy == "Pending to Cleared") {
+				Thread.sleep(1000);
+				String sXpath = "//android.view.ViewGroup[5]//android.widget.TextView";
+				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(3000);
+			} else {
+				Thread.sleep(1000);
+				String sXpath = "//android.widget.TextView[@text="+"\""+filterBy+"\""+"]";
+				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				me.click();
+				buttonApply.click();
+				Thread.sleep(3000);
+			}
+		}
+		
+	}
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
+	public boolean isRunningBalanceEnabled() {
+		Helper h = new Helper();
+		TransactionsPage tp = new TransactionsPage();
+		this.buttonShowReminder.click();
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			
+			if (tp.switchRunningBalance.getText().equalsIgnoreCase("ON")) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (tp.switchRunningBalance.getAttribute("value").equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public void EnableRunningBalance() throws InterruptedException {
+		
+		if (isRunningBalanceEnabled()) {
+			System.out.println("Running Balance is already enabled");
+			this.buttonApply.click();
+			Thread.sleep(2000);
+		} else {
+			
+			this.switchRunningBalance.click();
+			this.buttonApply.click();
+			Thread.sleep(2000);
+		}
+		
+	}
+	public void DisableRunningBalance() throws InterruptedException {
+		
+		if (isRunningBalanceEnabled()) {
+			
+			this.switchRunningBalance.click();
+			this.buttonApply.click();
+			Thread.sleep(2000);
+		} else {
+			System.out.println("Running Balance is already Disabled");
+			this.buttonApply.click();
+			Thread.sleep(2000);
+		}
+		
+	}
+	
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
@@ -338,8 +493,8 @@ public class TransactionsPage {
 	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name='Search Transactions']")
 	public MobileElement searchTransactionTxtField;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
+	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
+	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
 	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
 	public MobileElement btnCategory;
 	
@@ -363,11 +518,73 @@ public class TransactionsPage {
 	@AndroidFindBy(id="com.quicken.qm2014:id/sortBtn")
 	public MobileElement buttonSort;
 	
-	@iOSFindBy(xpath="//*[@name='Apply']")
-	@AndroidFindBy(xpath="*//[text='Apply']")
+	@iOSXCUITFindBy(iOSNsPredicate ="name='Apply'")
+	@AndroidFindBy(xpath="//*[@text='Apply']")
 	public MobileElement buttonApply;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeImage' AND visible = 1")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"close\"]/android.widget.ImageView")
+	public MobileElement buttonClose;
 	
 	@iOSFindBy(id="You don't have any transactions.")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_data']")
 	public MobileElement noTransactionText;
+	
+	@iOSXCUITFindBy(id = "transactionSettings")
+	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/reminderBtn']")
+	public MobileElement buttonShowReminder;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Transaction Detail'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Transaction Detail']")
+	public MobileElement headerTransactionDetail;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Show Running Balance'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Show Running Balance']")
+	public MobileElement switchShowRunningBalanceText;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeSwitch'")
+	@AndroidFindBy(xpath="//android.widget.Switch")
+	public MobileElement switchRunningBalance;
+	
+	//----------------- Filter & Sort --------------
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Not Reviewed' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
+	public MobileElement filterNotReviewed;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='NOT REVIEWED' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
+	public MobileElement filterNotReviewedHeader;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Clear filters' and type='XCUIElementTypeButton'")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Clear filters']")
+	public MobileElement buttonClearFilter;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name='Mark all as Reviewed' and type='XCUIElementTypeButton'")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Mark all as Reviewed']")
+	public MobileElement buttonMarkAllReviewed;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="name BEGINSWITH 'Are you sure you want to mark' and type='XCUIElementTypeStaticText'")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, 'Are you sure you want to mark')]")
+	public MobileElement alertMarkAllReviewed;
+	
+	@iOSFindBy(xpath="//*[@name='Yes']")
+	@AndroidFindBy(xpath="//*[@text='Yes']")
+	public MobileElement buttonYes;
+	
+	@iOSFindBy(xpath="//*[@name='No']")
+	@AndroidFindBy(xpath="//*[@text='No']")
+	public MobileElement buttonNo;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Date New to Old CheckIcon'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text = 'Date New to Old']/../android.widget.ImageView[@content-desc = 'CheckIcon']")
+	public MobileElement defaultfilterSelected;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeCell[1]/XCUIElementTypeStaticText")
+	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_banner_date_sub_header']")
+	public MobileElement firstBannerTransactionDate;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
+	public MobileElement allowButton;
 }
