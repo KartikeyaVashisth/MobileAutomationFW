@@ -330,6 +330,7 @@ import dugout.BankingAndCreditCardPage;
 				
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
+				
 				String sMonth = h.getLastSixMonths()[0];
 				String sActual;
 				Commentary.log(LogStatus.INFO, "Verify by default current month is highlighted/selected on the graph");
@@ -357,7 +358,7 @@ import dugout.BankingAndCreditCardPage;
 				SoftAssert sa = new SoftAssert();
 				Helper h = new Helper();
 				Commentary.log(LogStatus.INFO, "Verify past six months names appear on the Spending Over Time screen");
-				
+			
 				// get balances from accounts card
 				OverviewPage op = new OverviewPage();
 				op.tapOnSpendingOverTimeCard();
@@ -536,7 +537,7 @@ import dugout.BankingAndCreditCardPage;
 			}
 			
 			@Test(priority = 11)
-			public void TC12_ValidateRunningBalanceDefault() throws Exception { // Working only on IOS (Need to check for Android - second test)
+			public void TC12_ValidateRunningBalanceDefault() throws Exception { 
 				SoftAssert sa = new SoftAssert();
 				
 				Commentary.log(LogStatus.INFO,	"Verify that by default the Show Running balance toggle should be ON and \"Date New to old\" should be selected.");
@@ -669,7 +670,7 @@ import dugout.BankingAndCreditCardPage;
 				sa.assertAll();
 			}
 			@Test (priority=13)
-			public void TC15_VerifyTransactionSummary_TransactionDetails() throws Exception {
+			public void TC14_VerifyTransactionSummary_TransactionDetails() throws Exception {
 				Commentary.log(LogStatus.INFO, "Verify transaction are displayed under corect category and payee in Transaction summary card ");
 				OverviewPage op = new OverviewPage();
 				
@@ -755,6 +756,210 @@ import dugout.BankingAndCreditCardPage;
 				td.VerifyTransactionPayee(payeeName);
 				
 				td.backButton.click(); Thread.sleep(1000);
+				
+				sa.assertAll();
+				
+		}
+	
+			@Test (priority = 14)
+			public void TC15_VerifyTransactionSummary_PayeeScreen() throws Exception {
+				Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Payee details are updated on Transaction Summary page");
+				OverviewPage op = new OverviewPage();
+				Helper h = new Helper();
+				
+				op.tapOnTransactionSummaryCard();
+				SoftAssert sa = new SoftAssert();
+				
+				TransactionSummaryPage ts = new TransactionSummaryPage();
+				ts.payeeTab.click();
+				
+				String sCategoryAmount_before = ts.payeeTile.getText();
+				System.out.println("sCategoryAmount_before----->>> "+sCategoryAmount_before);
+				Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("walmart ", ""));
+				System.out.println("Category amount is "+dCategoryAmount_before);
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				tRec.setAmount("5.00");
+				tRec.setAccount(sManualChecking);
+				tRec.setPayee("walmart");
+				tRec.setTransactionType("expense");
+				h.getContext();
+				
+				ts.backButtonOnHeader.click();
+				
+				op.scrollToTop();		
+				
+				op.addTransaction.click();
+				td.addTransaction(tRec);
+				
+				Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+				
+				op.tapOnTransactionSummaryCard();
+				ts.payeeTab.click();
+				
+				String sCategoryAmount_after = ts.payeeTile.getText();
+				Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("walmart ", ""));
+				Double d = Double.parseDouble(tRec.getAmount());
+				System.out.println("Category amount is "+dCategoryAmount_after);
+				
+				if (dCategoryAmount_after+d==dCategoryAmount_before)
+					Commentary.log(LogStatus.INFO, "PASS: Payee tile is updated after adding expense transaction for selected payee");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee");
+				
+				sa.assertAll();
+				
+			}
+			@Test (priority=15)
+			public void TC16_VerifyTransactionSummary_CategoryScreen() throws Exception {
+				Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+				OverviewPage op = new OverviewPage();
+				Helper h = new Helper();
+				op.tapOnTransactionSummaryCard();
+				SoftAssert sa = new SoftAssert();
+				
+				TransactionSummaryPage ts = new TransactionSummaryPage();
+				ts.categoryTab.click();
+				
+				String sCategoryAmount_before = ts.categoryTile.getText();
+				Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+				System.out.println("Category amount is "+dCategoryAmount_before);
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				tRec.setAmount("10.00");
+				tRec.setAccount(sManualChecking);
+				//tRec.setPayee("walmart");
+				tRec.setCategory("Internet");
+				tRec.setTransactionType("expense");
+				h.getContext();
+				
+				ts.backButtonOnHeader.click();
+				
+				op.scrollToTop();
+				
+				op.addTransaction.click();
+				td.addTransaction(tRec);
+				
+				Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+				
+				op.tapOnTransactionSummaryCard();
+				ts.categoryTab.click();
+				
+				String sCategoryAmount_after = ts.categoryTile.getText();
+				Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+				Double d = Double.parseDouble(tRec.getAmount());
+				System.out.println("Category amount is "+dCategoryAmount_after);
+				
+				if (dCategoryAmount_after+d==dCategoryAmount_before)
+					Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+				
+				sa.assertAll();
+				
+			}
+			@Test (priority=16)
+			public void TC17_ValidateInvestmentCard() throws Exception {
+				Commentary.log(LogStatus.INFO, "Validating Investment Card details");
+				OverviewPage op = new OverviewPage();
+				op.hambergerIcon.click();
+				Thread.sleep(1000);
+				
+				SettingsPage sp = new SettingsPage();
+				sp.datasetDDButton.click();
+				MobileElement investmentDataset = sp.getTextView("investment_auto");
+				investmentDataset.click();
+				Thread.sleep(3000);
+				
+				op.tapOnInvestingCard();
+				SoftAssert sa = new SoftAssert();
+				
+				InvestingPage ip = new InvestingPage();
+				
+				if (Verify.objExists(ip.investingHeader))
+					Commentary.log(LogStatus.INFO, "Investment Header text is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Investment Header text is NOT displayed");
+				
+				if (Verify.objExists(ip.securitiesTab))
+					Commentary.log(LogStatus.INFO, "Security Tab is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Security Tab is NOT displayed");
+				
+				if (Verify.objExists(ip.accountsTab))
+					Commentary.log(LogStatus.INFO, "Accounts Tab is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Accounts Tab is NOT displayed");
+				
+				if (Verify.objExists(ip.watchlistTab))
+					Commentary.log(LogStatus.INFO, "Watchlist Tab is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Watchlist Tab is NOT displayed");
+				
+				if (Verify.objExists(ip.totalValueLabel))
+					Commentary.log(LogStatus.INFO, "Total Value label is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Total Value label is NOT displayed");
+				
+				if (Verify.objExists(ip.cashbalancesLabel))
+					Commentary.log(LogStatus.INFO, "Cash Balances label is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Cash Balances label is NOT displayed");
+				
+				if (Verify.objExists(ip.backButtonOnHeader))
+					Commentary.log(LogStatus.INFO, "Back Button is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Back Button is NOT displayed");
+				
+				if (Verify.objExists(ip.securitiesByCompanyNameLabel))
+					Commentary.log(LogStatus.INFO, "Security by company label is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Security by company label is NOT displayed");
+				
+				if (Verify.objExists(ip.lastSyncedFooter))
+					Commentary.log(LogStatus.INFO, "Last Synced Footer is displayed");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Last Synced Footer is NOT displayed");
+				
+				sa.assertAll();
+				
+			}
+			@Test (priority=17)
+			public void TC18_ValidateForZeroDatset_RecentTxnCard() throws Exception {
+				Commentary.log(LogStatus.INFO, "Validating message displayed for all Card in case of zero dataset");
+				OverviewPage op = new OverviewPage();
+				SoftAssert sa = new SoftAssert();
+				
+				op.hambergerIcon.click();
+				Thread.sleep(1000);
+				
+				SettingsPage sp = new SettingsPage();
+				sp.datasetDDButton.click();
+				MobileElement investmentDataset = sp.getTextView("ZeroDataSet");
+				investmentDataset.click();
+				Thread.sleep(3000);
+				
+				op.scrollTillCard("Top Trending Categories");
+				
+				String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvaialable.getText();
+				
+				if (actText_TxnOverviewPage.equals("No Transaction available"))
+					Commentary.log(LogStatus.INFO, "PASS: OverviewPage RecentTransaction card > Correct message is displayed in case user has no recent transactions");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "OverviewPage RecentTransaction card > Message is not displayed in case user has no recent transactions");
+				//Navigate to Recent Transaction card
+				op.tapOnRecentTransactionsCard();
+				
+				TransactionsPage tp = new TransactionsPage();
+				String actText_txnDetailsScreen = tp.noTransactionText.getText();
+						
+				if (actText_txnDetailsScreen.equals("You don't have any transactions."))
+					Commentary.log(LogStatus.INFO, "PASS: Recent Transaction page > Correct message is displayed in case user has no recent transactions");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Recent Transaction page > Message is not displayed in case user has no recent transactions");
+				
 				
 				sa.assertAll();
 				

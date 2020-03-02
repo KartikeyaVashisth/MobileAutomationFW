@@ -563,7 +563,7 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 		
 		}
 		else {
@@ -592,7 +592,7 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income by Month\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 		
 		}
 		else {
