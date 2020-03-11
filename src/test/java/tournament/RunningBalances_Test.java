@@ -302,16 +302,16 @@ public class RunningBalances_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		tp.selectSortFilterOption(filterNewToOld);
-		
+		tp.EnableRunningBalance();
 		//tp.buttonShowReminder.click();
-		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
-			tp.buttonApply.click();
-			Thread.sleep(1000);
-			
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
-		}
+//		if (tp.isRunningBalanceEnabled()) {
+//			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+//			tp.buttonApply.click();
+//			Thread.sleep(1000);
+//			
+//		} else {
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+//		}
 		
 		
 		dFirstRunningBalance= aa.getRunningBalancefromTransaction(1);
@@ -431,15 +431,16 @@ public class RunningBalances_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		tp.selectSortFilterOption(filterOldToNew);
+		tp.EnableRunningBalance();
 		
 		//tp.buttonShowReminder.click();
-		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
-			tp.buttonApply.click();
-			Thread.sleep(2000);
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
-		}
+//		if (tp.isRunningBalanceEnabled()) {
+//			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+//			tp.buttonApply.click();
+//			Thread.sleep(2000);
+//		} else {
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+//		}
 		
 		
 		dFirstRunningBalance= aa.getRunningBalancefromTransaction(1);
@@ -569,6 +570,8 @@ public class RunningBalances_Test extends Recovery {
 		
 		Thread.sleep(1000);
 		
+		tp.EnableRunningBalance();
+		
 		firstRowRunningBalance = aa.getTransactionDate(1);
 		secondRowRunningBalance= aa.getTransactionDate(2);
 		thirdRowRunningBalance= aa.getTransactionDate(3);
@@ -677,6 +680,8 @@ public class RunningBalances_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		tp.selectSortFilterOption(filterNotReviewed);
+		
+		tp.EnableRunningBalance();
 		
 		Thread.sleep(1000);
 		
@@ -888,6 +893,8 @@ public class RunningBalances_Test extends Recovery {
 		tp.buttonShowReminder.click();
 		tp.selectSortFilterOption(filter7days);
 		
+		tp.EnableRunningBalance();
+		
 		firstRowRunningBalance = aa.getTransactionDate(1);
 		
 		
@@ -1073,6 +1080,8 @@ public class RunningBalances_Test extends Recovery {
 		//Verify running balance for filter Date New to Old
 		tp.buttonSort.click();
 		tp.selectSortFilterOption(filterNewToOld);
+		
+		tp.EnableRunningBalance();
 				
 		firstRowRunningBalance = aa.getTransactionDate(1);
 		secondRowRunningBalance= aa.getTransactionDate(2);
@@ -1128,14 +1137,15 @@ public class RunningBalances_Test extends Recovery {
 		tp.selectSortFilterOption(filter90days);
 		
 		//tp.buttonShowReminder.click();
-		if (tp.isRunningBalanceEnabled()) {
-			System.out.println("Running Balance is enabled");
-			tp.buttonApply.click();
-			Thread.sleep(1000);
-		} else {
-			//Enable Running Balance
-			tp.EnableRunningBalance();
-		}
+		tp.EnableRunningBalance();
+//		if (tp.isRunningBalanceEnabled()) {
+//			System.out.println("Running Balance is enabled");
+//			tp.buttonApply.click();
+//			Thread.sleep(1000);
+//		} else {
+//			//Enable Running Balance
+//			tp.EnableRunningBalance();
+//		}
 				
 		firstRowRunningBalance = aa.getTransactionDate(1);
 		secondRowRunningBalance= aa.getTransactionDate(2);
@@ -1345,10 +1355,10 @@ public class RunningBalances_Test extends Recovery {
 		firstTransactionDate = aa.getTransactionDate(1);
 		
 		// Verify date format when running balance is disabled
-		if (h.isValidDateFormat(firstTransactionDate,"MMM dd, YYYY")) {
-			Commentary.log(LogStatus.INFO, "PASS: Running Balance is disabled > Expected date format MMM dd, YYYY and actual date is ["+dateLabel+"]");
+		if (h.isValidDateFormat(firstTransactionDate,"MMM dd, YYYY")|| firstTransactionDate.equals("Tomorrow")|| firstTransactionDate.equals("Yesterday")|| firstTransactionDate.equals("Today")) {
+			Commentary.log(LogStatus.INFO, "PASS: Running Balance is disabled > Expected date format MMM dd, YYYY and actual date is ["+firstTransactionDate+"]");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running Balance is disabled > Expected date format MMM dd, YYYY and actual date is ["+dateLabel+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running Balance is disabled > Expected date format MMM dd, YYYY and actual date is ["+firstTransactionDate+"]");
 		}
 		
 		sa.assertAll();
@@ -1361,8 +1371,7 @@ public class RunningBalances_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Commentary.log(LogStatus.INFO,	"Verify the running balance when amount of the transactions is modified.");
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		
 		OverviewPage op = new OverviewPage();
 		Helper h = new Helper();
 		op.navigateToAcctList();
@@ -1374,15 +1383,15 @@ public class RunningBalances_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		tp.selectSortFilterOption(filterNewToOld);
-		
-		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
-			tp.buttonApply.click();
-			Thread.sleep(1000);
-			
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
-		}
+		tp.EnableRunningBalance();
+//		if (tp.isRunningBalanceEnabled()) {
+//			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+//			tp.buttonApply.click();
+//			Thread.sleep(1000);
+//			
+//		} else {
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+//		}
 		
 		
 		dFirstRunningBalance= aa.getRunningBalancefromTransaction(1);

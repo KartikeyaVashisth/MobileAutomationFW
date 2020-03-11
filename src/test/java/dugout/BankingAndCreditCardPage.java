@@ -402,13 +402,13 @@ public class BankingAndCreditCardPage {
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
 			Engine.ad.findElement(MobileBy.xpath(sXpath)).click();
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 		}
 		else {
 			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctName+"'`]";
 			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath));
 			me.click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 	}
 	
 	}

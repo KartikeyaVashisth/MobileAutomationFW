@@ -413,10 +413,15 @@ public class TransactionsPage {
 		
 	}
 	
-	public boolean isRunningBalanceEnabled() {
+	public boolean isRunningBalanceEnabled() throws Exception {
 		Helper h = new Helper();
+		OverviewPage op = new OverviewPage();
 		TransactionsPage tp = new TransactionsPage();
 		this.buttonShowReminder.click();
+		Thread.sleep(2000);
+		if (!Verify.objExists(this.switchRunningBalance)) {
+			op.scroll_down();
+		}
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			
 			if (tp.switchRunningBalance.getText().equalsIgnoreCase("ON")) {
@@ -425,6 +430,7 @@ public class TransactionsPage {
 				return false;
 			}
 		} else {
+			
 			if (tp.switchRunningBalance.getAttribute("value").equals("1")) {
 				return true;
 			} else {
@@ -433,21 +439,21 @@ public class TransactionsPage {
 		}
 	}
 	
-	public void EnableRunningBalance() throws InterruptedException {
+	public void EnableRunningBalance() throws Exception {
 		
 		if (isRunningBalanceEnabled()) {
 			System.out.println("Running Balance is already enabled");
 			this.buttonApply.click();
 			Thread.sleep(2000);
 		} else {
-			
+
 			this.switchRunningBalance.click();
 			this.buttonApply.click();
 			Thread.sleep(2000);
 		}
 		
 	}
-	public void DisableRunningBalance() throws InterruptedException {
+	public void DisableRunningBalance() throws Exception {
 		
 		if (isRunningBalanceEnabled()) {
 			

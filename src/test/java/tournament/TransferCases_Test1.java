@@ -407,8 +407,10 @@ public class TransferCases_Test1 extends Recovery {
 		h.getContext();
 		td.addTransaction(tRec);
 		
-		
-		tp.searchTransaction(time);
+		tp.searchTransactionTxtField.click();
+		tp.searchTransactionTxtField.clear();
+		tp.searchTransactionTxtField.sendKeys(time);
+		//tp.searchTransaction(time);
 		tp.tapOnFirstTransation();		
 		
 		tRec = new TransactionRecord();
@@ -425,10 +427,10 @@ public class TransferCases_Test1 extends Recovery {
 		String actDate = td.getTransactionDate();
 		
 		if (date.equalsIgnoreCase(actDate)) {
-			Commentary.log(LogStatus.INFO, "PASS: Date is updated on first side of transfer");
+			Commentary.log(LogStatus.INFO, "PASS: Date expected ["+date+"] and actual is ["+actDate+"]");
 		}
 		else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date is NOT updated on first side of transfer");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date expected ["+date+"] and actual is ["+actDate+"]");
 		}
 		
 		op.scroll_down();
@@ -436,10 +438,10 @@ public class TransferCases_Test1 extends Recovery {
 		Thread.sleep(2000);
 	
 		if (date.equalsIgnoreCase(actDate)) {
-			Commentary.log(LogStatus.INFO, "PASS: Date is updated on second side of transfer");
+			Commentary.log(LogStatus.INFO, "PASS: Date expected ["+date+"] and actual is ["+actDate+"]");
 		}
 		else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date is NOT updated on second side of transfer");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date expected ["+date+"] and actual is ["+actDate+"]");
 		}
 		
 		sa.assertAll();

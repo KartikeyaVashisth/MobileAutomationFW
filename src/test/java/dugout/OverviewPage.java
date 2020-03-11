@@ -662,7 +662,7 @@ public class OverviewPage {
 		}
 				
 		accountsCard.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	}
 	
 	
