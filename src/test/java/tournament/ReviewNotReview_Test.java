@@ -55,6 +55,7 @@ public class ReviewNotReview_Test extends Recovery {
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
+		tp.DisableRunningBalance();
 		tp.addTransaction.click();
 		
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -66,7 +67,11 @@ public class ReviewNotReview_Test extends Recovery {
 		h.getContext();
 		td.addTransaction(tRec);
 		
-		tp.searchTransaction(payeeName);
+		tp.searchTransactionTxtField.click();
+		tp.searchTransactionTxtField.clear();
+		tp.searchTransactionTxtField.sendKeys(payeeName);
+		h.hideKeyBoard();
+		//tp.searchTransaction(payeeName);
 		
 		tp.tapOnFirstTransation();
 		
@@ -77,7 +82,7 @@ public class ReviewNotReview_Test extends Recovery {
 		tp.searchTransactionTxtField.click();
 		tp.searchTransactionTxtField.clear();
 		tp.searchTransactionTxtField.sendKeys(payeeName);
-//		h.hideKeyBoard();
+		//h.hideKeyBoard();
 		tp.tapOnFirstTransation();
 		
 		String actStatus = td.getTransactionStatus();
@@ -93,10 +98,12 @@ public class ReviewNotReview_Test extends Recovery {
 		
 		td.selectStatus(statusUnCleared);
 		
-		tp.searchTransaction(payeeName);
-//		tp.searchTransactionTxtField.click();
-//		tp.searchTransactionTxtField.clear();
-//		tp.searchTransactionTxtField.sendKeys(payeeName);
+	//	tp.searchTransaction(payeeName);
+		tp.searchTransactionTxtField.click();
+		tp.searchTransactionTxtField.clear();
+		tp.searchTransactionTxtField.sendKeys(payeeName);
+		//h.hideKeyBoard();
+		
 		tp.tapOnFirstTransation();
 		
 		actStatus = td.getTransactionStatus();
@@ -126,6 +133,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sManualSaving);
+			tp.DisableRunningBalance();
 			tp.addTransaction.click();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
@@ -137,20 +145,20 @@ public class ReviewNotReview_Test extends Recovery {
 			h.getContext();
 			td.addTransaction(tRec);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
-			//tp.searchTransactionTxtField.sendKeys(payeeName);
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			h.hideKeyBoard();
+		
 			tp.tapOnFirstTransation();
 			
 			td.selectStatus(statusReconciled);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.clear();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+	//		tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.clear();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			
 			tp.tapOnFirstTransation();
 			
 			String actStatus = td.getTransactionStatus();
@@ -166,11 +174,11 @@ public class ReviewNotReview_Test extends Recovery {
 			
 			td.selectStatus(statusUnCleared);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.clear();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.clear();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			
 			tp.tapOnFirstTransation();
 			
 			actStatus = td.getTransactionStatus();
@@ -200,6 +208,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sManualSaving);
+			tp.DisableRunningBalance();
 			tp.addTransaction.click();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
@@ -211,19 +220,20 @@ public class ReviewNotReview_Test extends Recovery {
 			h.getContext();
 			td.addTransaction(tRec);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			h.hideKeyBoard();
 			//tp.searchTransactionTxtField.sendKeys(payeeName);
 			tp.tapOnFirstTransation();
 			
 			td.selectStatus(statusReconciled);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.clear();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.clear();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			
 			tp.tapOnFirstTransation();
 			
 			String actStatus = td.getTransactionStatus();
@@ -239,11 +249,11 @@ public class ReviewNotReview_Test extends Recovery {
 			
 			td.selectStatus(statusCleared);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.clear();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.clear();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			
 			tp.tapOnFirstTransation();
 			
 			actStatus = td.getTransactionStatus();
@@ -272,6 +282,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sManualSaving);
+			tp.DisableRunningBalance();
 			tp.addTransaction.click();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
@@ -283,10 +294,10 @@ public class ReviewNotReview_Test extends Recovery {
 			h.getContext();
 			td.addTransaction(tRec);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			h.hideKeyBoard();
 			
 			tp.tapOnFirstTransation();
 			
@@ -316,6 +327,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sManualSaving);
+			tp.DisableRunningBalance();
 			tp.addTransaction.click();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
@@ -327,10 +339,10 @@ public class ReviewNotReview_Test extends Recovery {
 			h.getContext();
 			td.addTransaction(tRec);
 			
-			tp.searchTransaction(payeeName);
-//			tp.searchTransactionTxtField.click();
-//			tp.searchTransactionTxtField.sendKeys(payeeName);
-//			h.hideKeyBoard();
+//			tp.searchTransaction(payeeName);
+			tp.searchTransactionTxtField.click();
+			tp.searchTransactionTxtField.sendKeys(payeeName);
+			h.hideKeyBoard();
 			
 			tp.tapOnFirstTransation();
 			
@@ -358,6 +370,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sOnlineChecking);
+			tp.DisableRunningBalance();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
 			
@@ -407,6 +420,7 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sOnlineChecking);
+			tp.DisableRunningBalance();
 			
 			TransactionDetailPage td = new TransactionDetailPage();
 			
@@ -584,10 +598,12 @@ public class ReviewNotReview_Test extends Recovery {
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 			TransactionsPage tp = new TransactionsPage();
 			bcc.selectAccount(sOnlineChecking);
-			
+			tp.DisableRunningBalance();
+			Thread.sleep(2000);
 			TransactionDetailPage td = new TransactionDetailPage();
 			
-			tp.tapOnTransation(1);
+			tp.tapOnTransation(0);
+			Thread.sleep(2000);
 			
 			op.scroll_down();
 			
@@ -599,7 +615,8 @@ public class ReviewNotReview_Test extends Recovery {
 			tp.swipe_right();
 			Thread.sleep(1000);
 			
-			tp.tapOnTransation(1);
+			tp.tapOnTransation(0);
+			Thread.sleep(2000);
 			op.scroll_down();
 			
 			String actStatus = td.getTransactionReviewStatus();
@@ -611,6 +628,7 @@ public class ReviewNotReview_Test extends Recovery {
 			}
 			sa.assertAll();
 		}
+		
 		@Test(priority = 11)
 		public void TR12_Test() throws Exception {
 			

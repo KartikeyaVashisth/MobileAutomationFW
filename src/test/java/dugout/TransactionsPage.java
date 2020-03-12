@@ -268,7 +268,7 @@ public class TransactionsPage {
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			swipe_right_android();
 		} else {
-			WebElement ele_ios = Engine.iosd.findElementByXPath("*//XCUIElementTypeCell[2]");
+			WebElement ele_ios = Engine.iosd.findElementByXPath("*//XCUIElementTypeCell[1]");
 			swipe_right_ios(ele_ios);
 		}
 	}

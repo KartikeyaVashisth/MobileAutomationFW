@@ -146,7 +146,7 @@ public class AllAccountsPage {
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
 		//String sXpath = "**/XCUIElementTypeTable";
 		List <MobileElement> me = null;
-		Engine.iosd.getContext();
+		//Engine.iosd.getContext();
 		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
 		//System.out.println(me.size());
 		
