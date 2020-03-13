@@ -860,110 +860,638 @@ import dugout.BankingAndCreditCardPage;
 				sa.assertAll();
 				
 			}
-			@Test (priority=16)
-			public void TC17_ValidateInvestmentCard() throws Exception {
-				Commentary.log(LogStatus.INFO, "Validating Investment Card details");
-				OverviewPage op = new OverviewPage();
-				op.hambergerIcon.click();
-				Thread.sleep(1000);
-				
-				SettingsPage sp = new SettingsPage();
-				sp.datasetDDButton.click();
-				MobileElement investmentDataset = sp.getTextView("investment_auto");
-				investmentDataset.click();
-				Thread.sleep(3000);
-				
-				op.tapOnInvestingCard();
-				SoftAssert sa = new SoftAssert();
-				
-				InvestingPage ip = new InvestingPage();
-				
-				if (Verify.objExists(ip.investingHeader))
-					Commentary.log(LogStatus.INFO, "Investment Header text is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Investment Header text is NOT displayed");
-				
-				if (Verify.objExists(ip.securitiesTab))
-					Commentary.log(LogStatus.INFO, "Security Tab is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Security Tab is NOT displayed");
-				
-				if (Verify.objExists(ip.accountsTab))
-					Commentary.log(LogStatus.INFO, "Accounts Tab is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Accounts Tab is NOT displayed");
-				
-				if (Verify.objExists(ip.watchlistTab))
-					Commentary.log(LogStatus.INFO, "Watchlist Tab is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Watchlist Tab is NOT displayed");
-				
-				if (Verify.objExists(ip.totalValueLabel))
-					Commentary.log(LogStatus.INFO, "Total Value label is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Total Value label is NOT displayed");
-				
-				if (Verify.objExists(ip.cashbalancesLabel))
-					Commentary.log(LogStatus.INFO, "Cash Balances label is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Cash Balances label is NOT displayed");
-				
-				if (Verify.objExists(ip.backButtonOnHeader))
-					Commentary.log(LogStatus.INFO, "Back Button is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Back Button is NOT displayed");
-				
-				if (Verify.objExists(ip.securitiesByCompanyNameLabel))
-					Commentary.log(LogStatus.INFO, "Security by company label is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Security by company label is NOT displayed");
-				
-				if (Verify.objExists(ip.lastSyncedFooter))
-					Commentary.log(LogStatus.INFO, "Last Synced Footer is displayed");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Last Synced Footer is NOT displayed");
-				
-				sa.assertAll();
-				
+
+			@Test(priority = 16)
+			public void TC17_ValidateSwipe_Category() throws Exception {
+			Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and change the category and check the transaction details");
+			  Helper h = new Helper();
+			  
+			  if (h.getEngine().equalsIgnoreCase("ios")) {
+			  OverviewPage o = new OverviewPage();
+			  o.navigateToAcctList();
+			  
+			  BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+			  //bcc.txtTodaysBalance.click();
+			  bcc.allTransactionButton.click();
+			  
+			  TransactionsPage tp = new TransactionsPage();
+			  TransactionDetailPage td = new TransactionDetailPage();
+			  TransactionRecord tRec = new TransactionRecord();
+			  SoftAssert sa = new SoftAssert();
+			  String payeeName = h.getCurrentTime();
+			  
+			  tRec.setAmount("5.00");
+			  tRec.setAccount(sManualChecking);
+			  tRec.setCategory("Internet");
+			  tRec.setPayee(payeeName);
+			  tRec.setTransactionType("expense");
+			  h.getContext();
+			  
+			  tp.addTransaction.click();
+			  td.addTransaction(tRec);
+			  Thread.sleep(2000);
+			  
+			  tp.searchTransactionTxtField.click();
+			  tp.searchTransactionTxtField.sendKeys(payeeName);
+			  
+			  String afterPayeeName = tp.getPayeeName().getText();
+			  
+			  if (afterPayeeName.equals(payeeName)) 
+			    Commentary.log(LogStatus.INFO, "Payee is created and transaction is saved successfully");
+			   else 
+			    Commentary.log(LogStatus.INFO, "Payee is Not created");
+			  
+			  
+			  tp.swipe_left();
+			  tp.btnCategory.click();
+			  
+			  tp.selectCategorySwipe("Mobile Phone");
+			  Thread.sleep(3000);
+			  
+			  tp.tapOnFirstTransation();
+			  
+			  if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
+			    Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Unable to update the category");
+			  
+			  sa.assertAll();
+			  } else {
+			    Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+			  }
+			  
 			}
-			@Test (priority=17)
-			public void TC18_ValidateForZeroDatset_RecentTxnCard() throws Exception {
-				Commentary.log(LogStatus.INFO, "Validating message displayed for all Card in case of zero dataset");
-				OverviewPage op = new OverviewPage();
-				SoftAssert sa = new SoftAssert();
+			@Test(priority = 17)
+			public void TC18_ValidateSwipe_Delete() throws Exception {
+				Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and delete the transaction and check the transaction is deleted after searching");
+				Helper h = new Helper();
+				if (h.getEngine().equalsIgnoreCase("ios")) {
+				OverviewPage o = new OverviewPage();
+				o.navigateToAcctList();
 				
-				op.hambergerIcon.click();
-				Thread.sleep(1000);
+				Commentary.log(LogStatus.INFO, "Validating Delete tranction from swipe gesture options");
 				
-				SettingsPage sp = new SettingsPage();
-				sp.datasetDDButton.click();
-				MobileElement investmentDataset = sp.getTextView("ZeroDataSet");
-				investmentDataset.click();
-				Thread.sleep(3000);
-				
-				op.scrollTillCard("Top Trending Categories");
-				
-				String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvaialable.getText();
-				
-				if (actText_TxnOverviewPage.equals("No Transaction available"))
-					Commentary.log(LogStatus.INFO, "PASS: OverviewPage RecentTransaction card > Correct message is displayed in case user has no recent transactions");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "OverviewPage RecentTransaction card > Message is not displayed in case user has no recent transactions");
-				//Navigate to Recent Transaction card
-				op.tapOnRecentTransactionsCard();
-				
+				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+				//bcc.txtTodaysBalance.click();
+				bcc.allTransactionButton.click();
 				TransactionsPage tp = new TransactionsPage();
-				String actText_txnDetailsScreen = tp.noTransactionText.getText();
-						
-				if (actText_txnDetailsScreen.equals("You don't have any transactions."))
-					Commentary.log(LogStatus.INFO, "PASS: Recent Transaction page > Correct message is displayed in case user has no recent transactions");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Recent Transaction page > Message is not displayed in case user has no recent transactions");
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				SoftAssert sa = new SoftAssert();
+				String payeeName = h.getCurrentTime();
 				
+				tRec.setAmount("5.00");
+				tRec.setAccount(sManualChecking);
+				tRec.setCategory("Internet");
+				tRec.setPayee(payeeName);
+				tRec.setTransactionType("expense");
+				h.getContext();
+				
+				tp.addTransaction.click();
+				td.addTransaction(tRec);
+				Thread.sleep(2000);
+				
+				tp.searchTransactionTxtField.click();
+				tp.searchTransactionTxtField.sendKeys(payeeName);
+				h.hideKeyBoard();
+				
+				tp.swipe_left();
+				tp.btnDelete.click();
+				//td.deleteTransactionAlertButton.click();
+				Thread.sleep(3000);
+				
+				if (Verify.objExists(tp.txtNoResultFound))
+					Commentary.log(LogStatus.INFO, "Successfully deleted the transaction");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
+				
+				tp.searchTransactionTxtField.click();
+				tp.searchTransactionTxtField.clear();
+				tp.searchTransactionTxtField.sendKeys(payeeName);
+				Thread.sleep(2000);
+				
+				if (Verify.objExists(tp.txtNoResultFound))
+					Commentary.log(LogStatus.INFO, "PASS: Successfully deleted the transaction");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
 				
 				sa.assertAll();
-				
+				} else {
+					Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+				}
 			}
+			
+			@Test (priority = 18)
+			public void TC19_ValidateHamburgerMenuOptions ()throws Exception {
+			  
+			  OverviewPage op = new OverviewPage();
+			  Commentary.log(LogStatus.INFO, "Validating hamburger menu options");
+			  
+			  op.hambergerIcon.click();
+			  //Thread.sleep(20000);
+			  SoftAssert sa = new SoftAssert();
+			  SettingsPage sp = new SettingsPage();
+			  Helper h = new Helper();
+			    
+			      if(sp.verifyQuickenID(sUserName))
+			        Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Quicken ID is NOT displayed");
+			      
+			      if (Verify.objExists(sp.closeButton))
+			        Commentary.log(LogStatus.INFO, "PASS: Close button is displayed");
+			      else 
+			        Commentary.log(sa, LogStatus.FAIL, "Close button is NOT displayed");
+			      
+			      if (Verify.objExists(sp.datasetDDButton))
+			        Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Dataset DD button button is NOT displayed");
+			      
+			      if (Verify.objExists(sp.accountTxt))
+			        Commentary.log(LogStatus.INFO, "PASS: Account Text is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Account Text is NOT displayed");
+			      
+			      if (Verify.objExists(sp.PasscodeTxt))
+			        Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Passcode text is NOT displayed");
+			      
+			      if (Verify.objExists(sp.ManageAlertsTxt))
+			        Commentary.log(LogStatus.INFO, "PASS: Manage Alert text is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Manage Alert text is NOT displayed");
+			      
+			      if (Verify.objExists(sp.HelpLegalTxt))
+			        Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Help & Legal text is NOT displayed");
+
+			      
+			      if (Verify.objExists(sp.logout))
+			        Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed");
+			      else
+			        Commentary.log(sa, LogStatus.FAIL, "Logout button is NOT displayed");
+			      
+			      if (h.getEngine().equalsIgnoreCase("Android")) {
+			        if (Verify.objExists(sp.FeedbackTxt))
+			          Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed");
+			        else
+			          Commentary.log(sa, LogStatus.FAIL, "Feedback Text is NOT displayed");
+			        } else {
+			          Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator");
+			        }
+			    
+			  sa.assertAll();
+			  
+			}
+			
+			@Test(priority = 19)
+			public void TC20_ValidateAccountMenu() throws Exception {
+			  
+			  Commentary.log(LogStatus.INFO, "Validating Account menu options and also verifying the details on selecting all user accounts");
+			  
+			  OverviewPage op = new OverviewPage();
+			  op.hambergerIcon.click();
+			  
+			  SettingsPage sp = new SettingsPage();
+			  sp.accountTxt.click();
+			  Thread.sleep(2000);
+			  
+			  MobileElement manualCheckingAccount = sp.getAccountElement(sManualChecking);
+			  MobileElement manualCCAccount = sp.getAccountElement(sManualCreditCard);
+			  MobileElement manualSavingsAccount = sp.getAccountElement(sManualSaving);
+			  
+			  SoftAssert sa = new SoftAssert();
+			  if (Verify.objExists(manualCheckingAccount))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual Checking account is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual Checking account is NOT displayed");
+
+			  if (Verify.objExists(manualCCAccount))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual CC account is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual CC account is NOT displayed");
+
+			  if (Verify.objExists(manualSavingsAccount))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual Savings account is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual Savings account is NOT displayed");
+
+
+			  //Verify Account Details
+			  manualCheckingAccount.click();
+			  Thread.sleep(2000);
+			  MobileElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
+			  MobileElement accountType = sp.getAccountElement("CHECKING");
+			  MobileElement accountStatus = sp.getTextView("Active");
+
+			  if (Verify.objExists(manualCheckingAccount1))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual Checking account details are NOT displayed");
+
+
+			  if (Verify.objExists(accountType))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Type details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual Checking Account Type details are NOT displayed");
+
+
+			  if (Verify.objExists(accountStatus))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Status is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual Checking Account Status is NOT displayed");
+
+
+			  
+			  sp.selectBack("Accounts");
+			  Thread.sleep(2000);
+			  
+			  manualCCAccount.click();
+			  Thread.sleep(2000);
+			  MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
+			  MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
+			  MobileElement accountStatus1 = sp.getTextView("Active");
+			  if (Verify.objExists(manualCCAccount1))
+			    Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manual CC account details are NOT displayed");
+			  
+			  if (Verify.objExists(accountType_manual))
+			    Commentary.log(LogStatus.INFO, "PASS: Manaul CC Account Type details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manaul CC Account Type details are NOT displayed");
+
+			  if (Verify.objExists(accountStatus1))
+			    Commentary.log(LogStatus.INFO, "PASS: Manaul CC Account Status is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Manaul CC Account Status is NOT displayed");
+
+
+			  sp.selectBack("Accounts");
+			  Thread.sleep(2000);
+			  
+			  manualSavingsAccount.click();
+			  Thread.sleep(2000);
+			  MobileElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
+			  MobileElement accountType_savings = sp.getAccountElement("SAVINGS");
+			  MobileElement accountStatus2 = sp.getTextView("Active");
+
+			  
+			  if (Verify.objExists(manualSavingsAccount1))
+			    Commentary.log(LogStatus.INFO, "PASS: Savings account details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Savings account details are NOT displayed");
+			  
+			  if (Verify.objExists(accountType_savings))
+			    Commentary.log(LogStatus.INFO, "PASS: Savings Account Type details are displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Savings Account Type details are NOT displayed");
+			  
+			  if (Verify.objExists(accountStatus2))
+			    Commentary.log(LogStatus.INFO, "PASS: Savings Account Status is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Savings Account Status is NOT displayed");
+			  
+			  sa.assertAll();	
+
+			  
+			}
+			
+			@Test(priority = 20)
+			public void TC21_ValidatePasscodeFingerprintMenu() throws Exception {
+
+			  Commentary.log(LogStatus.INFO, "Validating menu options for Passcode and Fingerprint menu");
+			  OverviewPage op = new OverviewPage();
+			  op.hambergerIcon.click();
+			  Thread.sleep(4000);
+			  
+			  SettingsPage sp = new SettingsPage();
+			  sp.PasscodeTxt.click();
+			  Thread.sleep(2000);
+			  
+			  SoftAssert sa = new SoftAssert();
+			  Helper h = new Helper();
+			  
+			  if (Verify.objExists(sp.PasscodeHeaderTxt))
+			    Commentary.log(LogStatus.INFO, "PASS: Header text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Header text is NOT displayed");
+			  if (Verify.objExists(sp.getAccountElement("Use Quicken Passcode")))
+			    Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Passcode text is NOT displayed");
+			  
+			  if (h.getEngine().equalsIgnoreCase("ios")){
+			    if (Verify.objExists(sp.getTextView("Use Touch ID")))
+			      Commentary.log(LogStatus.INFO, "PASS: Touch ID text is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Touch ID text is NOT displayed");
+			    
+			    sa.assertAll();
+			  }	
+			}
+			
+			@Test(priority = 21)
+			public void TC22_ValidateManageAlerts() throws Exception {
+			  Commentary.log(LogStatus.INFO, "Validating menu options for Manage Alerts menu");
+
+			  OverviewPage op = new OverviewPage();
+			  op.hambergerIcon.click();
+			  
+			  SettingsPage sp = new SettingsPage();
+			  sp.ManageAlertsTxt.click();
+			  Thread.sleep(2000);
+			  SoftAssert sa = new SoftAssert();
+			  
+			  if (Verify.objExists(sp.ManageAlertsHeaderTxt))
+			    Commentary.log(LogStatus.INFO, "PASS: Manage Alert Header text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Header Alert header text is NOT displayed");
+			  
+			  if (Verify.objExists(sp.getTextView("New Charge - Quicken Card (Mobile Only)")))
+			    Commentary.log(LogStatus.INFO, "PASS: New charge message text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "New charge message text is NOT displayed");
+			  
+			  if (Verify.objExists(sp.getTextView("Push Notification")))
+			    Commentary.log(LogStatus.INFO, "PASS: Push Notification text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Push Notification text is NOT displayed");
+			  
+			  sa.assertAll();
+
+			  
+			}
+			
+			@Test(priority = 22)
+			public void TC23_ValidateHelpLegal() throws Exception {
+			  Commentary.log(LogStatus.INFO, "Validating menu options for Help and Legal menu");
+
+			  OverviewPage op = new OverviewPage();
+			  op.hambergerIcon.click();
+			  
+			  SettingsPage sp = new SettingsPage();
+			  sp.HelpLegalTxt.click();
+			  Thread.sleep(2000);
+			  
+			  SoftAssert sa = new SoftAssert();
+			  
+			  MobileElement help = sp.getTextView("Help");
+			  MobileElement link_SupportWebsite = sp.getTextView("Support Website");
+			  MobileElement link_Acknowledgements = sp.getTextView("Acknowledgements");
+			  MobileElement link_LicenseAgreement = sp.getTextView("License Agreement");
+			  MobileElement link_Privacy = sp.getTextView("Privacy");
+			  
+			  if (Verify.objExists(sp.HelpLegalHeaderTxt))
+			    Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Help Legal text is NOT displayed");
+			  
+			  if (Verify.objExists(help))
+			    Commentary.log(LogStatus.INFO, "PASS: Help text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Help text is NOT displayed");
+			  
+			  if (Verify.objExists(link_SupportWebsite))
+			    Commentary.log(LogStatus.INFO, "PASS: Support Website Link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Support Website Link is NOT displayed");
+			  
+			  if (Verify.objExists(sp.getTextView("Legal")))
+			    Commentary.log(LogStatus.INFO, "PASS: Legal text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Legal text is NOT displayed");
+			  
+			  if (Verify.objExists(link_Acknowledgements))
+			    Commentary.log(LogStatus.INFO, "PASS: Acknowledgements link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Acknowledgements link is NOT displayed");
+			  
+			  if (Verify.objExists(link_LicenseAgreement))
+			    Commentary.log(LogStatus.INFO, "PASS: License Agreement link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "License Agreement link is NOT displayed");
+			  
+			  if (Verify.objExists(link_Privacy))
+			    Commentary.log(LogStatus.INFO, "PASS: Privacy link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Privacy link is NOT displayed");
+			  
+			  sa.assertAll();
+			  }
+			
+				@Test (priority=23)
+				public void TC24_VerifyTransactionSummary_CategoryScreen() throws Exception {
+					Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+					OverviewPage op = new OverviewPage();
+					Helper h = new Helper();
+					op.tapOnTransactionSummaryCard();
+					SoftAssert sa = new SoftAssert();
+					
+					TransactionSummaryPage ts = new TransactionSummaryPage();
+					ts.categoryTab.click();
+					
+					String sCategoryAmount_before = ts.categoryTile.getText();
+					Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+					System.out.println("Category amount is "+dCategoryAmount_before);
+					
+					TransactionDetailPage td = new TransactionDetailPage();
+					TransactionRecord tRec = new TransactionRecord();
+					tRec.setAmount("10.00");
+					tRec.setAccount(sManualChecking);
+					//tRec.setPayee("walmart");
+					tRec.setCategory("Internet");
+					tRec.setTransactionType("expense");
+					h.getContext();
+					
+					ts.backButtonOnHeader.click();
+					
+					op.scrollToTop();
+					
+					op.addTransaction.click();
+					td.addTransaction(tRec);
+					
+					Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+					
+					op.tapOnTransactionSummaryCard();
+					ts.categoryTab.click();
+					
+					String sCategoryAmount_after = ts.categoryTile.getText();
+					Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+					Double d = Double.parseDouble(tRec.getAmount());
+					System.out.println("Category amount is "+dCategoryAmount_after);
+					
+					if (dCategoryAmount_after+d==dCategoryAmount_before)
+						Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+					else
+						Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+					
+					sa.assertAll();
+					
+				}
+				
+			  @Test (priority=24)
+			  public void TC25_ValidateInvestmentCard() throws Exception {
+			    Commentary.log(LogStatus.INFO, "Validating Investment Card details");
+			    OverviewPage op = new OverviewPage();
+			    op.hambergerIcon.click();
+			    Thread.sleep(1000);
+			    
+			    SettingsPage sp = new SettingsPage();
+			    sp.datasetDDButton.click();
+			    MobileElement investmentDataset = sp.getTextView("investment_auto");
+			    investmentDataset.click();
+			    Thread.sleep(3000);
+			    
+			    op.tapOnInvestingCard();
+			    SoftAssert sa = new SoftAssert();
+			    
+			    InvestingPage ip = new InvestingPage();
+			    
+			    if (Verify.objExists(ip.investingHeader))
+			      Commentary.log(LogStatus.INFO, "Investment Header text is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Investment Header text is NOT displayed");
+			    
+			    if (Verify.objExists(ip.securitiesTab))
+			      Commentary.log(LogStatus.INFO, "Security Tab is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Security Tab is NOT displayed");
+			    
+			    if (Verify.objExists(ip.accountsTab))
+			      Commentary.log(LogStatus.INFO, "Accounts Tab is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Accounts Tab is NOT displayed");
+			    
+			    if (Verify.objExists(ip.watchlistTab))
+			      Commentary.log(LogStatus.INFO, "Watchlist Tab is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Watchlist Tab is NOT displayed");
+			    
+			    if (Verify.objExists(ip.totalValueLabel))
+			      Commentary.log(LogStatus.INFO, "Total Value label is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Total Value label is NOT displayed");
+			    
+			    if (Verify.objExists(ip.cashbalancesLabel))
+			      Commentary.log(LogStatus.INFO, "Cash Balances label is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Cash Balances label is NOT displayed");
+			    
+			    if (Verify.objExists(ip.backButtonOnHeader))
+			      Commentary.log(LogStatus.INFO, "Back Button is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Back Button is NOT displayed");
+			    
+			    if (Verify.objExists(ip.securitiesByCompanyNameLabel))
+			      Commentary.log(LogStatus.INFO, "Security by company label is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Security by company label is NOT displayed");
+			    
+			    if (Verify.objExists(ip.lastSyncedFooter))
+			      Commentary.log(LogStatus.INFO, "Last Synced Footer is displayed");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Last Synced Footer is NOT displayed");
+			    
+			    sa.assertAll();
+			    
+			    
+			  }
+			  @Test (priority=25)
+			  public void TC26_ValidateForZeroDatset_RecentTxnCard() throws Exception {
+			    Commentary.log(LogStatus.INFO, "Validating message displayed for all Card in case of zero dataset");
+			    OverviewPage op = new OverviewPage();
+			    SoftAssert sa = new SoftAssert();
+			    
+			    op.hambergerIcon.click();
+			    Thread.sleep(1000);
+			    
+			    SettingsPage sp = new SettingsPage();
+			    sp.datasetDDButton.click();
+			    MobileElement investmentDataset = sp.getTextView("ZeroDataSet");
+			    investmentDataset.click();
+			    Thread.sleep(3000);
+			    
+			    op.scrollTillCard("Top Trending Categories");
+			    
+			    String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvaialable.getText();
+			    
+			    if (actText_TxnOverviewPage.equals("No Transaction available"))
+			      Commentary.log(LogStatus.INFO, "PASS: OverviewPage RecentTransaction card > Correct message is displayed in case user has no recent transactions");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "OverviewPage RecentTransaction card > Message is not displayed in case user has no recent transactions");
+			    //Navigate to Recent Transaction card
+			    op.tapOnRecentTransactionsCard();
+			    
+			    TransactionsPage tp = new TransactionsPage();
+			    String actText_txnDetailsScreen = tp.noTransactionText.getText();
+			        
+			    if (actText_txnDetailsScreen.equals("You don't have any transactions."))
+			      Commentary.log(LogStatus.INFO, "PASS: Recent Transaction page > Correct message is displayed in case user has no recent transactions");
+			    else
+			      Commentary.log(sa, LogStatus.FAIL, "Recent Transaction page > Message is not displayed in case user has no recent transactions");
+			    
+			    
+			    sa.assertAll();
+			    
+			  }
+			  @Test (priority=26)
+				public void TC27_ValidateForZeroDatset_NetIncomeOverTimeCard() throws Exception {
+					Commentary.log(LogStatus.INFO, "Validating message displayed on Net Income Over Time Card in case of no transactions");
+					SoftAssert sa = new SoftAssert();
+					
+					OverviewPage op = new OverviewPage();
+						
+					//Navigate to Trending card
+					op.tapOnNetIncomeOverTimeCard();
+					
+					NetIncomeOverTimePage not = new NetIncomeOverTimePage();
+
+					String actText_notDetailsScreen = not.youDontHaveAnyTxns.getText();
+							
+					if (actText_notDetailsScreen.equals("You don't have any transactions."))
+						Commentary.log(LogStatus.INFO, "PASS: Net Income Over Time page > Correct message is displayed in case user has no transactions");
+					else
+						Commentary.log(sa, LogStatus.FAIL, "Net Income Over Time page > Message is not displayed in case user has no transactions");
+					
+					
+					sa.assertAll();
+					
+				}
+				@Test (priority=27)
+				public void TC28_ValidateForZeroDatset_TransactionSummaryCard() throws Exception {
+					Commentary.log(LogStatus.INFO, "Validating message displayed on Transaction Summary Card in case of no transactions");
+					SoftAssert sa = new SoftAssert();
+					
+					OverviewPage op = new OverviewPage();
+						
+					//Navigate to Transaction Summary card
+					op.tapOnTransactionSummaryCard();
+					
+					TransactionSummaryPage ts = new TransactionSummaryPage();
+
+					String actText_summaryDetailsScreen = ts.noTransactionCategory.getText();
+							
+					if (actText_summaryDetailsScreen.equals("No Transactions by Category"))
+						Commentary.log(LogStatus.INFO, "PASS: Transaction Summary page > Correct message is displayed in case user has no transactions");
+					else
+						Commentary.log(sa, LogStatus.FAIL, "Transaction Summary page > Message is not displayed in case user has no transactions");
+					
+					ts.payeeTab.click();
+					
+					String actText_noTxnPayee = ts.noTransactionPayee.getText();
+					
+					if (actText_noTxnPayee.equals("No Transactions by Payee"))
+						Commentary.log(LogStatus.INFO, "PASS: Transaction Summary page > Correct message is displayed in case user has no transactions");
+					else
+						Commentary.log(sa, LogStatus.FAIL, "Transaction Summary page > Message is not displayed in case user has no transactions");
+					
+					sa.assertAll();
+					
+				}
 	}
 
 
