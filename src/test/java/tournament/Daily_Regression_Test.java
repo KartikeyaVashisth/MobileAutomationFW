@@ -861,125 +861,125 @@ import dugout.BankingAndCreditCardPage;
 				
 			}
 
-			@Test(priority = 16)
-			public void TC17_ValidateSwipe_Category() throws Exception {
-			Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and change the category and check the transaction details");
-			  Helper h = new Helper();
-			  
-			  if (h.getEngine().equalsIgnoreCase("ios")) {
-			  OverviewPage o = new OverviewPage();
-			  o.navigateToAcctList();
-			  
-			  BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-			  //bcc.txtTodaysBalance.click();
-			  bcc.allTransactionButton.click();
-			  
-			  TransactionsPage tp = new TransactionsPage();
-			  TransactionDetailPage td = new TransactionDetailPage();
-			  TransactionRecord tRec = new TransactionRecord();
-			  SoftAssert sa = new SoftAssert();
-			  String payeeName = h.getCurrentTime();
-			  
-			  tRec.setAmount("5.00");
-			  tRec.setAccount(sManualChecking);
-			  tRec.setCategory("Internet");
-			  tRec.setPayee(payeeName);
-			  tRec.setTransactionType("expense");
-			  h.getContext();
-			  
-			  tp.addTransaction.click();
-			  td.addTransaction(tRec);
-			  Thread.sleep(2000);
-			  
-			  tp.searchTransactionTxtField.click();
-			  tp.searchTransactionTxtField.sendKeys(payeeName);
-			  
-			  String afterPayeeName = tp.getPayeeName().getText();
-			  
-			  if (afterPayeeName.equals(payeeName)) 
-			    Commentary.log(LogStatus.INFO, "Payee is created and transaction is saved successfully");
-			   else 
-			    Commentary.log(LogStatus.INFO, "Payee is Not created");
-			  
-			  
-			  tp.swipe_left();
-			  tp.btnCategory.click();
-			  
-			  tp.selectCategorySwipe("Mobile Phone");
-			  Thread.sleep(3000);
-			  
-			  tp.tapOnFirstTransation();
-			  
-			  if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
-			    Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
-			  else
-			    Commentary.log(sa, LogStatus.FAIL, "Unable to update the category");
-			  
-			  sa.assertAll();
-			  } else {
-			    Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
-			  }
-			  
-			}
-			@Test(priority = 17)
-			public void TC18_ValidateSwipe_Delete() throws Exception {
-				Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and delete the transaction and check the transaction is deleted after searching");
-				Helper h = new Helper();
-				if (h.getEngine().equalsIgnoreCase("ios")) {
-				OverviewPage o = new OverviewPage();
-				o.navigateToAcctList();
-				
-				Commentary.log(LogStatus.INFO, "Validating Delete tranction from swipe gesture options");
-				
-				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-				//bcc.txtTodaysBalance.click();
-				bcc.allTransactionButton.click();
-				TransactionsPage tp = new TransactionsPage();
-				TransactionDetailPage td = new TransactionDetailPage();
-				TransactionRecord tRec = new TransactionRecord();
-				SoftAssert sa = new SoftAssert();
-				String payeeName = h.getCurrentTime();
-				
-				tRec.setAmount("5.00");
-				tRec.setAccount(sManualChecking);
-				tRec.setCategory("Internet");
-				tRec.setPayee(payeeName);
-				tRec.setTransactionType("expense");
-				h.getContext();
-				
-				tp.addTransaction.click();
-				td.addTransaction(tRec);
-				Thread.sleep(2000);
-				
-				tp.searchTransactionTxtField.click();
-				tp.searchTransactionTxtField.sendKeys(payeeName);
-				h.hideKeyBoard();
-				
-				tp.swipe_left();
-				tp.btnDelete.click();
-				//td.deleteTransactionAlertButton.click();
-				Thread.sleep(3000);
-				
-				if (Verify.objExists(tp.txtNoResultFound))
-					Commentary.log(LogStatus.INFO, "Successfully deleted the transaction");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
-				
-				tp.searchTransactionTxtField.click();
-				tp.searchTransactionTxtField.clear();
-				tp.searchTransactionTxtField.sendKeys(payeeName);
-				Thread.sleep(2000);
-				
-				if (Verify.objExists(tp.txtNoResultFound))
-					Commentary.log(LogStatus.INFO, "PASS: Successfully deleted the transaction");
-				else
-					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
-				
-				sa.assertAll();
-				} else {
-					Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
-				}
-			}
+//			@Test(priority = 16)
+//			public void TC17_ValidateSwipe_Category() throws Exception {
+//			Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and change the category and check the transaction details");
+//			  Helper h = new Helper();
+//			  
+//			  if (h.getEngine().equalsIgnoreCase("ios")) {
+//			  OverviewPage o = new OverviewPage();
+//			  o.navigateToAcctList();
+//			  
+//			  BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//			  //bcc.txtTodaysBalance.click();
+//			  bcc.allTransactionButton.click();
+//			  
+//			  TransactionsPage tp = new TransactionsPage();
+//			  TransactionDetailPage td = new TransactionDetailPage();
+//			  TransactionRecord tRec = new TransactionRecord();
+//			  SoftAssert sa = new SoftAssert();
+//			  String payeeName = h.getCurrentTime();
+//			  
+//			  tRec.setAmount("5.00");
+//			  tRec.setAccount(sManualChecking);
+//			  tRec.setCategory("Internet");
+//			  tRec.setPayee(payeeName);
+//			  tRec.setTransactionType("expense");
+//			  h.getContext();
+//			  
+//			  tp.addTransaction.click();
+//			  td.addTransaction(tRec);
+//			  Thread.sleep(2000);
+//			  
+//			  tp.searchTransactionTxtField.click();
+//			  tp.searchTransactionTxtField.sendKeys(payeeName);
+//			  
+//			  String afterPayeeName = tp.getPayeeName().getText();
+//			  
+//			  if (afterPayeeName.equals(payeeName)) 
+//			    Commentary.log(LogStatus.INFO, "Payee is created and transaction is saved successfully");
+//			   else 
+//			    Commentary.log(LogStatus.INFO, "Payee is Not created");
+//			  
+//			  
+//			  tp.swipe_left();
+//			  tp.btnCategory.click();
+//			  
+//			  tp.selectCategorySwipe("Mobile Phone");
+//			  Thread.sleep(3000);
+//			  
+//			  tp.tapOnFirstTransation();
+//			  
+//			  if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
+//			    Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
+//			  else
+//			    Commentary.log(sa, LogStatus.FAIL, "Unable to update the category");
+//			  
+//			  sa.assertAll();
+//			  } else {
+//			    Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+//			  }
+//			  
+//			}
+//			@Test(priority = 17)
+//			public void TC18_ValidateSwipe_Delete() throws Exception {
+//				Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and delete the transaction and check the transaction is deleted after searching");
+//				Helper h = new Helper();
+//				if (h.getEngine().equalsIgnoreCase("ios")) {
+//				OverviewPage o = new OverviewPage();
+//				o.navigateToAcctList();
+//				
+//				Commentary.log(LogStatus.INFO, "Validating Delete tranction from swipe gesture options");
+//				
+//				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//				//bcc.txtTodaysBalance.click();
+//				bcc.allTransactionButton.click();
+//				TransactionsPage tp = new TransactionsPage();
+//				TransactionDetailPage td = new TransactionDetailPage();
+//				TransactionRecord tRec = new TransactionRecord();
+//				SoftAssert sa = new SoftAssert();
+//				String payeeName = h.getCurrentTime();
+//				
+//				tRec.setAmount("5.00");
+//				tRec.setAccount(sManualChecking);
+//				tRec.setCategory("Internet");
+//				tRec.setPayee(payeeName);
+//				tRec.setTransactionType("expense");
+//				h.getContext();
+//				
+//				tp.addTransaction.click();
+//				td.addTransaction(tRec);
+//				Thread.sleep(2000);
+//				
+//				tp.searchTransactionTxtField.click();
+//				tp.searchTransactionTxtField.sendKeys(payeeName);
+//				h.hideKeyBoard();
+//				
+//				tp.swipe_left();
+//				tp.btnDelete.click();
+//				//td.deleteTransactionAlertButton.click();
+//				Thread.sleep(3000);
+//				
+//				if (Verify.objExists(tp.txtNoResultFound))
+//					Commentary.log(LogStatus.INFO, "Successfully deleted the transaction");
+//				else
+//					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
+//				
+//				tp.searchTransactionTxtField.click();
+//				tp.searchTransactionTxtField.clear();
+//				tp.searchTransactionTxtField.sendKeys(payeeName);
+//				Thread.sleep(2000);
+//				
+//				if (Verify.objExists(tp.txtNoResultFound))
+//					Commentary.log(LogStatus.INFO, "PASS: Successfully deleted the transaction");
+//				else
+//					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
+//				
+//				sa.assertAll();
+//				} else {
+//					Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+//				}
+//			}
 			
 			@Test (priority = 18)
 			public void TC19_ValidateHamburgerMenuOptions ()throws Exception {
@@ -1184,14 +1184,13 @@ import dugout.BankingAndCreditCardPage;
 			  else
 			    Commentary.log(sa, LogStatus.FAIL, "Passcode text is NOT displayed");
 			  
-			  if (h.getEngine().equalsIgnoreCase("ios")){
-			    if (Verify.objExists(sp.getTextView("Use Touch ID")))
-			      Commentary.log(LogStatus.INFO, "PASS: Touch ID text is displayed");
-			    else
-			      Commentary.log(sa, LogStatus.FAIL, "Touch ID text is NOT displayed");
-			    
-			    sa.assertAll();
-			  }	
+//			  if (h.getEngine().equalsIgnoreCase("ios")){
+//			    if (Verify.objExists(sp.getTextView("Use Touch ID")))
+//			      Commentary.log(LogStatus.INFO, "PASS: Touch ID text is displayed");
+//			    else
+//			      Commentary.log(sa, LogStatus.FAIL, "Touch ID text is NOT displayed");			   
+//			  }	
+			 sa.assertAll();
 			}
 			
 			@Test(priority = 21)
