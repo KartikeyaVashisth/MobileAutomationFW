@@ -82,12 +82,12 @@ public class SettingsPage {
 		public MobileElement accountTxt;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode & Touch ID'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeTxt;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Passcode & Touch ID'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Passcode'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeHeaderTxt;
 		
