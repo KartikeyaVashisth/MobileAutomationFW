@@ -75,7 +75,7 @@ public class NetIncomeOverTimePage {
 		String sAmount = this.netIncomeForSelectedMonth.getText();
 		
 		Helper h = new Helper();
-		return h.processBalanceAmount(sAmount);
+		return h.processBalanceAmount(sAmount.replace("Net Income Value: ", ""));
 		
 	}
 	

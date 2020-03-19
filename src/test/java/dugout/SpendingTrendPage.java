@@ -46,8 +46,8 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//*[@text='Spending Trend']/../*[@class='android.widget.ImageButton']")
 	public MobileElement backButtonOnHeader;
 	
-	//@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
-	@iOSXCUITFindBy(iOSNsPredicate="'You don't have any transactions.'")
+	@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
+	//@iOSXCUITFindBy(iOSNsPredicate="'You don't have any transactions.'")
 	@AndroidFindBy(xpath="//*[@text=\"You don't have any transactions.\"]")
 	public MobileElement youDontHaveAnyTxns;
 	
@@ -83,7 +83,8 @@ public class SpendingTrendPage {
 	
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeScrollView[descendant::XCUIElementTypeStaticText[contains(@name,'$')]]//XCUIElementTypeStaticText[not(contains(@name, '$'))]")
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='horizontalScrollView']//XCUIElementTypeStaticText[not(contains(@name, '$')) and @visible='true']")
+	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='horizontalScrollView']//XCUIElementTypeStaticText[not(contains(@name, '$')) and @visible='true']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name== 'bottomLeftLabel'`][1]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
 	public MobileElement categoryName;
 	
@@ -116,7 +117,7 @@ public class SpendingTrendPage {
 	public void scrollCategory_android() throws Exception{
 		
 		Dimension size = this.scrollCategory.getSize();
-		System.out.println("Size is "+size);
+	//	System.out.println("Size is "+size);
 		int y_start=(int)(size.width*0.90);        
         int x_start=(int)(size.width*0.46);//668
         
@@ -182,12 +183,15 @@ public class SpendingTrendPage {
 	
 	
 	public String getCategory() throws Exception{
-		
-		String sCategory = this.categoryName.getText();
-		
-		sCategory = sCategory.split("Total for")[1].trim();
-		
-		return sCategory;
+		Helper h = new Helper();
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			String sCategory = this.categoryName.getText();
+			sCategory = sCategory.split("Total for")[1].trim();
+			return sCategory;
+		} else {
+			String sCategory = this.categoryName.getAttribute("value");
+			return sCategory;
+		}
 	}
 	
 	public Double getAmount() throws Exception{

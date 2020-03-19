@@ -18,9 +18,10 @@ public class SpendingOverTimeTest extends Recovery {
 	
 	String sUserName = "mobileautomation1@quicken.com";
 	String sPassword = "Quicken@01";
-	//String sDataset = "TodaysBalancesTest";
-	String sDataset = "SpendingOverTime";
-	String sManualChecking = "Checking_manual";
+	String sDataset = "OnlineAcc_Automation";
+	//String sDataset = "SpendingOverTime";
+	//String sManualChecking = "Checking_manual";
+	String sManualChecking = "Manual_Savings";
 	
 	
 	@Test(priority = 0)

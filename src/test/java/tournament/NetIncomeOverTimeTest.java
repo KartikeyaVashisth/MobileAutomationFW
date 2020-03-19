@@ -19,8 +19,9 @@ public class NetIncomeOverTimeTest extends Recovery {
 	
 	String sUserName = "mobileautomation1@quicken.com";
 	String sPassword = "Quicken@01";
-	String sDataset = "NetIncomeOverTime";
-	String sManualChecking = "Checking_manual";
+	//String sDataset = "NetIncomeOverTime";
+	String sDataset = "OnlineAcc_Automation";
+	String sManualChecking = "Manual_Savings";
 	
 	@Test(priority = 0)
 	public void NIOT1_test() throws Exception {
@@ -180,8 +181,8 @@ public class NetIncomeOverTimeTest extends Recovery {
 		h.getContext();
 		dAmount=h.processBalanceAmount(tRec.getAmount());
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+//		SignInPage signIn = new SignInPage();
+//		signIn.signIn(sUserName, sPassword, sDataset);
 		
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();
@@ -235,8 +236,8 @@ public class NetIncomeOverTimeTest extends Recovery {
 		h.getContext();
 		dAmount=h.processBalanceAmount(tRec.getAmount());
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+//		SignInPage signIn = new SignInPage();
+//		signIn.signIn(sUserName, sPassword, sDataset);
 		
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();

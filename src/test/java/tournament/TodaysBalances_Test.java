@@ -55,7 +55,7 @@ public class TodaysBalances_Test extends Recovery {
 		sOverviewCash = op.cashBalance.getText();
 		sOverviewCC = op.creditBalance.getText();
 		sOverviewSavingsBalance = op.savingsBalance.getText();
-		sOverviewOtherBalance = op.otherBalance.getText();
+		//sOverviewOtherBalance = op.otherBalance.getText();
 		sTotal = op.totalBalance.getText();
 		
 		op.navigateToAcctList();
@@ -75,27 +75,27 @@ public class TodaysBalances_Test extends Recovery {
 		if (sOverviewChecking.equals(sChecking))
 			Commentary.log(LogStatus.INFO, "Checking balance on accounts card ["+sOverviewChecking+"]  matches with account list screen balance ["+sChecking+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Checking balance on accounts card ["+sOverviewChecking+"], Checking balance on account list screen ["+sChecking+"]");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Checking balance on accounts card ["+sOverviewChecking+"], Checking balance on account list screen ["+sChecking+"]");
 		
 		if (sOverviewCash.equals(sCash))
 			Commentary.log(LogStatus.INFO, "Cash balance on accounts card ["+sOverviewCash+"]  matches with account list screen balance ["+sCash+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Cash balance on accounts card ["+sOverviewCash+"], Cash balance on account list screen ["+sCash+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cash balance on accounts card ["+sOverviewCash+"], Cash balance on account list screen ["+sCash+"]");
 		
 		if (sOverviewCC.equals(sCC))
 			Commentary.log(LogStatus.INFO, "CreditCard balance on accounts card ["+sOverviewCC+"]  matches with account list screen balance ["+sCC+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: CreditCard balance on accounts card ["+sOverviewCC+"], CreditCard balance on account list screen ["+sCC+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard balance on accounts card ["+sOverviewCC+"], CreditCard balance on account list screen ["+sCC+"]");
 		
 		if (sOverviewSavingsBalance.equals(sSavings))
 			Commentary.log(LogStatus.INFO, "Savings balance on accounts card ["+sOverviewSavingsBalance+"]  matches with account list screen balance ["+sSavings+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Savings balance on accounts card ["+sOverviewSavingsBalance+"], Savings balance on account list screen ["+sSavings+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance on accounts card ["+sOverviewSavingsBalance+"], Savings balance on account list screen ["+sSavings+"]");
 		
 		if (sTotal.equals(sTodays))
 			Commentary.log(LogStatus.INFO, "Total balance on accounts card ["+sTotal+"]  matches with account list screen balance ["+sTodays+"]");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Total balance on accounts card ["+sTotal+"], Today's balance on account list screen ["+sTodays+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance on accounts card ["+sTotal+"], Today's balance on account list screen ["+sTodays+"]");
 		
 		sa.assertAll();	
 		

@@ -80,7 +80,7 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CREDIT CARDS\"]/../android.widget.TextView[2]")
 	public MobileElement creditCardBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"CASH\"]/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CASH\"]/../android.widget.TextView[2]")
 	public MobileElement cashBalance;
 	
@@ -201,7 +201,7 @@ public class BankingAndCreditCardPage {
 			this.scrollToAccount("Account Type: Checking");
 		}
 		
-		return this.checkingBalance.getText();
+		return this.checkingBalance.getText().replace("SubTotal: ", "");
 	
 	}
 	
@@ -210,16 +210,16 @@ public class BankingAndCreditCardPage {
 		// scroll to the account
 		this.scrollToAccount("Credit Cards");
 		
-		return this.creditCardBalance.getText();
+		return this.creditCardBalance.getText().replace("SubTotal: ", "");
 	
 	}
 	
 	public String getCashBalance() throws Exception {
 		
 		// scroll to the account
-		this.scrollToAccount("CASH");
+		this.scrollToAccount("Cash");
 		
-		return this.cashBalance.getText();
+		return this.cashBalance.getText().replace("SubTotal: ", "");
 	
 	}
 	
@@ -228,7 +228,7 @@ public class BankingAndCreditCardPage {
 		// scroll to the account
 		this.scrollToAccount("Savings");
 		
-		return this.savingsBalance.getText();
+		return this.savingsBalance.getText().replace("SubTotal: ", "");
 	
 	}
 	
