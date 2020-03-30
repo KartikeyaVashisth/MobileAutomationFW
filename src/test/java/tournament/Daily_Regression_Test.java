@@ -19,42 +19,61 @@ import dugout.BankingAndCreditCardPage;
 	import dugout.TransactionDetailPage;
 	import dugout.TransactionSummaryPage;
 	import dugout.TransactionsPage;
-	import io.appium.java_client.MobileElement;
+import dugout.WelcomePage;
+import io.appium.java_client.MobileElement;
 	import referee.Commentary;
 	import referee.Verify;
 	import support.Helper;
 	import support.Recovery;
 	import support.TransactionRecord;
+import support.UserName;
 
 	public class Daily_Regression_Test extends Recovery {
 		String sUserName = "yuvaraju.boligorla@quicken.com";
 		String sPassword = "Intuit!1";
+		String sPassword1 = "Quicken@01";
 		//String sDataset = "TodaysBalancesTest";
 		String sDataset = "ProjectedBalances";
+		//String sDataset = "Regression";
 		String sManualChecking = "Manual_Checking";
-		String sOnlineChecking ="onl_checking1";
+		//String sOnlineChecking ="onl_checking1";
 		String sManualCreditCard = "Manual_CC";
-		String sOnlineCreditCard ="onl_cc";
-		String sManualCash="Manual_cash";
-		String sOnlineCash="onl_cash";
+		//String sOnlineCreditCard ="onl_cc";
+		//String sManualCash="Manual_cash";
+		//String sOnlineCash="onl_cash";
 		String sManualSaving = "Manual_Savings";
-		String sOnlineSaving = "onl_savings1";
+		//String sOnlineSaving = "onl_savings1";
 		String backButton1_ios = "Banking & Credit";
 		String statusCleared = "Cleared";
 		String statusUnCleared = "Uncleared";
 		String filterNewToOld = "Date New to Old";
 		String filterOldToNew = "Date Old to New";
+	
+		
+		
+		public String getUsername_basedOnEnv() throws Exception{
+			
+			UserName r = new UserName();
+			r.stage_ios = "c.ios++@mailinator.com";
+			r.stage_android = "c.android++@mailinator.com";
+			r.prod_ios = "yuvaraju.boligorla@quicken.com";
+			r.prod_android = "yuvaraju.boligorla@quicken.com";
+			return r.getUserName();	
+		}
 		
 		// Add Transaction
 			@Test(priority = 0)
 			public void TC1_ValidateAddTransaction() throws Exception {
 				String sChecking_before, sTotal_before, sChecking_after,sTotal_after ;
-				SignInPage si = new SignInPage();
-				si.signIn(sUserName, sPassword, sDataset);
-				SoftAssert sa = new SoftAssert();
-
 				Helper h = new Helper();
 				
+				WelcomePage w = new WelcomePage();
+				w.setEnvironment(h.getEnv());
+			
+				SignInPage si = new SignInPage();
+				si.signIn(getUsername_basedOnEnv(), sPassword, sDataset);
+				SoftAssert sa = new SoftAssert();
+
 				Commentary.log(LogStatus.INFO, "Add an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
 				String time = h.getCurrentTime();
 				
@@ -812,7 +831,7 @@ import dugout.BankingAndCreditCardPage;
 				
 			}
 			@Test (priority=15)
-			public void TC16_VerifyTransactionSummary_CategoryScreen() throws Exception {
+			public void TC15_VerifyTransactionSummary_CategoryScreen() throws Exception {
 				Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
 				OverviewPage op = new OverviewPage();
 				Helper h = new Helper();
@@ -993,7 +1012,7 @@ import dugout.BankingAndCreditCardPage;
 			  SettingsPage sp = new SettingsPage();
 			  Helper h = new Helper();
 			    
-			      if(sp.verifyQuickenID(sUserName))
+			      if(sp.verifyQuickenID(getUsername_basedOnEnv()))
 			        Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed");
 			      else
 			        Commentary.log(sa, LogStatus.FAIL, "Quicken ID is NOT displayed");
@@ -1282,55 +1301,55 @@ import dugout.BankingAndCreditCardPage;
 			  sa.assertAll();
 			  }
 			
-				@Test (priority=23)
-				public void TC24_VerifyTransactionSummary_CategoryScreen() throws Exception {
-					Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
-					OverviewPage op = new OverviewPage();
-					Helper h = new Helper();
-					op.tapOnTransactionSummaryCard();
-					SoftAssert sa = new SoftAssert();
-					
-					TransactionSummaryPage ts = new TransactionSummaryPage();
-					ts.categoryTab.click();
-					
-					String sCategoryAmount_before = ts.categoryTile.getText();
-					Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
-					System.out.println("Category amount is "+dCategoryAmount_before);
-					
-					TransactionDetailPage td = new TransactionDetailPage();
-					TransactionRecord tRec = new TransactionRecord();
-					tRec.setAmount("10.00");
-					tRec.setAccount(sManualChecking);
-					//tRec.setPayee("walmart");
-					tRec.setCategory("Internet");
-					tRec.setTransactionType("expense");
-					h.getContext();
-					
-					ts.backButtonOnHeader.click();
-					
-					op.scrollToTop();
-					
-					op.addTransaction.click();
-					td.addTransaction(tRec);
-					
-					Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
-					
-					op.tapOnTransactionSummaryCard();
-					ts.categoryTab.click();
-					
-					String sCategoryAmount_after = ts.categoryTile.getText();
-					Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
-					Double d = Double.parseDouble(tRec.getAmount());
-					System.out.println("Category amount is "+dCategoryAmount_after);
-					
-					if (dCategoryAmount_after+d==dCategoryAmount_before)
-						Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
-					else
-						Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
-					
-					sa.assertAll();
-					
-				}
+//				@Test (priority=23)
+//				public void TC24_VerifyTransactionSummary_CategoryScreen() throws Exception {
+//					Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+//					OverviewPage op = new OverviewPage();
+//					Helper h = new Helper();
+//					op.tapOnTransactionSummaryCard();
+//					SoftAssert sa = new SoftAssert();
+//					
+//					TransactionSummaryPage ts = new TransactionSummaryPage();
+//					ts.categoryTab.click();
+//					
+//					String sCategoryAmount_before = ts.categoryTile.getText();
+//					Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+//					System.out.println("Category amount is "+dCategoryAmount_before);
+//					
+//					TransactionDetailPage td = new TransactionDetailPage();
+//					TransactionRecord tRec = new TransactionRecord();
+//					tRec.setAmount("10.00");
+//					tRec.setAccount(sManualChecking);
+//					tRec.setPayee("walmart");
+//					tRec.setCategory("Internet");
+//					tRec.setTransactionType("expense");
+//					h.getContext();
+//					
+//					ts.backButtonOnHeader.click();
+//					
+//					op.scrollToTop();
+//					
+//					op.addTransaction.click();
+//					td.addTransaction(tRec);
+//					
+//					Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+//					
+//					op.tapOnTransactionSummaryCard();
+//					ts.categoryTab.click();
+//					
+//					String sCategoryAmount_after = ts.categoryTile.getText();
+//					Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+//					Double d = Double.parseDouble(tRec.getAmount());
+//					System.out.println("Category amount is "+dCategoryAmount_after);
+//					
+//					if (dCategoryAmount_after+d==dCategoryAmount_before)
+//						Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+//					else
+//						Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+//					
+//					sa.assertAll();
+//					
+//				}
 				
 			  @Test (priority=24)
 			  public void TC25_ValidateInvestmentCard() throws Exception {

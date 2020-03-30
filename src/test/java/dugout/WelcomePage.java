@@ -2,10 +2,13 @@ package dugout;
 
 import org.openqa.selenium.support.PageFactory;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -59,14 +62,19 @@ public class WelcomePage {
 	
 	public void setEnvironment(String preprod) throws InterruptedException{
 		
-		Thread.sleep(5000);
+		Commentary.log(LogStatus.INFO, "Setting Environment to "+preprod);
+		
+		if (preprod.equals("prod"))
+			return;
 		
 		this.xpath_Environment.click();
 		
 		if (preprod.equals("stage")){
 			this.xpath_chkboxStageEnvironment.click();
 			
-			if (Verify.objExists(this.linkAppConfigDone))
+			Helper h = new Helper();
+			
+			if (h.getEngine().equals("ios"))
 				this.linkAppConfigDone.click();
 			
 		}
@@ -74,11 +82,12 @@ public class WelcomePage {
 			System.out.println(preprod+" is not been handled in the appium API setEnvironment.");
 		
 		// confirm if the environment dialog got disappeared or not
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
+		/*
 		if (! Verify.objExists(this.xpath_btnWelcomeSignIn))
 			Engine.ad.navigate().back();
-		
+		*/
 		System.out.println("Environment set to "+preprod);
 		Thread.sleep(500);	
 		

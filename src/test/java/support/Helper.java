@@ -118,6 +118,12 @@ public class Helper {
 		
 	}
 	
+	public String getEnv() {
+		Globals globals = new Globals();
+		return globals.testProperty.get("env");
+		
+	}
+	
 	public String getDeviceName(){
 		
 		Globals globals = new Globals();
@@ -281,7 +287,7 @@ public class Helper {
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
 	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
-	        capabilities.setCapability("app", "/Users/vgupta/Downloads/Test_builds/Quicken(36.16367.4012)-Release.app.zip");
+	        capabilities.setCapability("app", "/Users/vgupta/Downloads/Quicken(36.18056.4012)-Release.app.zip");
 	        
 			
 		}
@@ -335,8 +341,13 @@ public class Helper {
 	
 	public void hideKeyBoard() throws Exception {
 		
-		if (this.getEngine().equals("android")) 
-			Engine.ad.hideKeyboard();
+		if (this.getEngine().equals("android"))
+			try {
+				Engine.ad.hideKeyboard();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		else
 			Engine.iosd.hideKeyboard();
 		
