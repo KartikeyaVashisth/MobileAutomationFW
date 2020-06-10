@@ -550,7 +550,7 @@ public class Helper {
 	public static String getCurrentMonth () {
 		Calendar now = Calendar.getInstance();
 
-	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "June", "July", "August",
+	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "JUNE", "JULY", "August",
 	        "September", "October", "November", "December" };	
 	    String currentMonth = strMonths[now.get(Calendar.MONTH)];
 		return currentMonth;
