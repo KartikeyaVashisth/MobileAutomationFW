@@ -312,9 +312,10 @@ public class Helper {
 			
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
-			
-			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","6.0");//6.0
+			capabilities.setCapability("deviceName","emulator-5556");
+			capabilities.setCapability("platformVersion","8.1");//6.0
+			//capabilities.setCapability("deviceName","emulator-5554");
+			//capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
@@ -550,7 +551,7 @@ public class Helper {
 	public static String getCurrentMonth () {
 		Calendar now = Calendar.getInstance();
 
-	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "JUNE", "JULY", "August",
+	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "June", "July", "August",
 	        "September", "October", "November", "December" };	
 	    String currentMonth = strMonths[now.get(Calendar.MONTH)];
 		return currentMonth;
