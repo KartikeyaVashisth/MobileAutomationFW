@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -30,9 +31,7 @@ public class SignInPage {
 	ExtentTest quickenTest;
 	Helper support = new Helper();
 	AndroidDriver ad;
-	
-	
-	
+
 	public SignInPage () {
 		quickenTest = Recovery.quickenTest;
 		//PageFactory.initElements(Engine.getDriver(),this);
@@ -43,14 +42,9 @@ public class SignInPage {
 			else
 				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		
-		
+		}		
 	}
-	
-	
 	
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)']") 
@@ -63,7 +57,8 @@ public class SignInPage {
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
 	//@iOSFindBy(xpath="//XCUIElementTypeTextField")
-	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
+	//@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
 	public MobileElement userName;
 	
 	@AndroidFindBy(xpath="//*[@content-desc ='Password' or @text ='Password']")
@@ -75,7 +70,8 @@ public class SignInPage {
 	//@AndroidFindBy(xpath="//input[@id='ius-password']")
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='true']")
 	//@iOSFindBy(xpath="//XCUIElementTypeSecureTextField")
-	@iOSXCUITFindBy(iOSClassChain = "**/*[$type=='XCUIElementTypeSecureTextField'$]")
+	//@iOSXCUITFindBy(iOSClassChain = "**/*[$type=='XCUIElementTypeSecureTextField'$]")
+	@iOSXCUITFindBy(className = "XCUIElementTypeSecureTextField")
 	public MobileElement password;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='SIGN IN']")
@@ -83,8 +79,8 @@ public class SignInPage {
 	public MobileElement btnSignIn;
 	
 	@AndroidFindBy(xpath="//*[@text='DONE']")
-	@iOSFindBy(xpath="//*[@name='doneButton']")
-	//@iOSXCUITFindBy(iOSClassChain = "**/*[$name=='doneButton'$]")
+//	@iOSFindBy(xpath="//*[@name='doneButton']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
 	public MobileElement btnDone;
 	
 	@AndroidFindBy(xpath="//*[contains(@text,'synced more than one')]")
@@ -95,6 +91,14 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='dataSetArrow'`]")
+	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc=\"dataSetArrow\"]")
+	public MobileElement dataSetArrow;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
+	public MobileElement navigationMenu;
+	
 	public boolean signIn() throws Exception{
 		
 		ExtentTest quickenTest = Recovery.quickenTest;
@@ -102,7 +106,7 @@ public class SignInPage {
 		
 		Thread.sleep(5000);
 		w.xpath_btnWelcomeSignIn.click();
-		System.out.println("Waiting for SignInWidget");
+		//System.out.println("Waiting for SignInWidget");
 		//((JavascriptExecutor)Engine.ad).executeScript("sauce: break"); 
 		
 		if (! Verify.waitForObject(emailID, 8))
@@ -110,7 +114,6 @@ public class SignInPage {
 			//quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 		//System.out.println("SignInWidget appeared");
 		Commentary.log(LogStatus.INFO, "SignInWidget appeared");
-		
 		
 		/*Thread.sleep(75000);
 		System.out.println("tttttt");
@@ -123,10 +126,6 @@ public class SignInPage {
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
-		
-		
-		
-			
 		
 		emailID.sendKeys(support.getUsername());
 		lblPassword.click();
@@ -150,34 +149,34 @@ public class SignInPage {
 		ExtentTest quickenTest = Recovery.quickenTest;
 		WelcomePage w = new WelcomePage();
 		
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		w.xpath_btnWelcomeSignIn.click();
 		
-		if (! Verify.waitForObject(emailID, 8))
+		if (! Verify.waitForObject(emailID, 3))
 			quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 		
-		Commentary.log(LogStatus.INFO, "SignInWidget appeared");
+		//Commentary.log(LogStatus.INFO, "SignInWidget appeared");
 		
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
-		emailID.sendKeys(username);
+		userName.sendKeys(username);//Runtime.getRuntime().exec("adb shell input text "+username+"");
 		lblPassword.click();
 		Thread.sleep(1000);
 		
-		lblPassword.sendKeys(password);
+		this.password.sendKeys(password); //this keyword used to differentiate between local and global variable.
+		//lbl.sendKeys(password);
 		if (support.getEngine().equals("android"))
 			Engine.ad.hideKeyboard();
 		Thread.sleep(1000);
 		
 		btnSignIn.click();
-		quickenTest.log(LogStatus.INFO,"Clicked on SignIn button");
+		//quickenTest.log(LogStatus.INFO,"Clicked on SignIn button");
 		Thread.sleep(5000);
-		
 		
 		selectDataset(dataset);
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2)	;
 			
 		return true;
 	}
@@ -224,12 +223,11 @@ public class SignInPage {
 					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
 				return true;
 				
-			}		
-		
-		
+			}			
 	}*/
 	
-	public boolean selectDataset(String bundle) throws Exception{
+//	OLD Method for Signing In before Recently used Dataset.
+/*	public boolean selectDataset(String bundle) throws Exception{
 		ExtentTest quickenTest = Recovery.quickenTest;
 		String xpath;
 		Integer iCount;
@@ -252,8 +250,8 @@ public class SignInPage {
 				txtDataSet = (MobileElement) Engine.ad.findElement(By.xpath(xpath));
 				Thread.sleep(1000);
 				
-				Commentary.log(LogStatus.INFO, Engine.ad.findElement(By.xpath(xpath)).isDisplayed()+" "+bundle);
-				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed());
+				Commentary.log(LogStatus.INFO, Engine.ad.findElement(By.xpath(xpath)).isDisplayed()+" "+bundle); //true ProjectedBalances will be printed.
+				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed()); //true
 				Engine.ad.findElement(By.xpath(xpath)).click();
 				Commentary.log(LogStatus.INFO, "Clicked on Dataset name "+bundle);
 				
@@ -262,14 +260,13 @@ public class SignInPage {
 				OverviewPage o = new OverviewPage();
 				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
 				
-				if (! Verify.waitForObject(o.hambergerIcon, 8))
-					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
+				if (! Verify.waitForObject(o.hambergerIcon, 3))
+					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
 				
 				return true;
 			}
 		
 			else{
-				
 				MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeScrollView"));
 				String me_id = me.getId();
 				HashMap<String, String> scrollObject = new HashMap<String, String>();
@@ -283,14 +280,66 @@ public class SignInPage {
 				btnDone.click();
 				Thread.sleep(5000);
 				OverviewPage o = new OverviewPage();
-				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 30)	;
-				if (! Verify.waitForObject(o.hambergerIcon, 8))
+				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2)	;
+				if (! Verify.waitForObject(o.hambergerIcon, 2))
 					quickenTest.log(LogStatus.ERROR,"Overview Screen Did not appear after dataset selection.");
-				return true;
-				
+				return true;	
 			}		
+	} */
+	
+	public boolean selectDataset(String bundle) throws Exception {
 		
+		ExtentTest quickenTest = Recovery.quickenTest;
 		
-	}
+		if (support.getEngine().equals("android")) {
+			OverviewPage op = new OverviewPage();
+			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+			
+			String datasetNameOverviewPage = Engine.ad.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")).getText();
 
+			if(!datasetNameOverviewPage.equals(bundle)) {
+				Verify.waitForObject(navigationMenu, 2);
+				navigationMenu.click();
+				Verify.waitForObject(dataSetArrow, 2);
+				dataSetArrow.click();
+				Thread.sleep(2000);
+				MobileElement xpath_Android = (MobileElement) Engine.ad.findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
+				xpath_Android.click();
+				Thread.sleep(500);
+				btnDone.click();
+
+				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+
+				if (! Verify.waitForObject(op.hambergerIcon, 2))
+					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
+			}
+			return true;
+		} 
+		
+		else {
+			OverviewPage op = new OverviewPage();
+			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+			
+			String datasetNameOverviewPage = Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
+			
+			if(!datasetNameOverviewPage.equals(bundle)) {
+				Verify.waitForObject(navigationMenu, 2);
+				navigationMenu.click();
+				Verify.waitForObject(dataSetArrow, 2);
+				dataSetArrow.click();
+				Thread.sleep(2000);
+				MobileElement xpath_ios = (MobileElement) Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name='"+bundle+"'`][2]");
+				xpath_ios.click();
+				Thread.sleep(500);
+				btnDone.click();
+
+				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+
+				if (! Verify.waitForObject(op.hambergerIcon, 2))
+					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
+			}
+			return true;
+		}
+					
+	}
 }

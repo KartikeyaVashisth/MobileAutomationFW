@@ -138,7 +138,7 @@ public class RegressionCases extends Recovery {
 		
 		TransactionDetailPage td = new TransactionDetailPage();
 		tp.searchTransaction("Internet");
-		tp.tapOnFirstTransation();		
+		tp.tapOnFirstTransaction();		
 		SoftAssert sa = new SoftAssert();
 
 		tRec.setAmount("10.00");
@@ -228,7 +228,7 @@ public class RegressionCases extends Recovery {
 		
 		
 		//assertTrue(tp.getPayeeName().getText().equals(payeeName), "Created Transaction is not displayed");	
-		tp.tapOnFirstTransation();
+		tp.tapOnFirstTransaction();
 		Thread.sleep(2000);
 		
 		op.scroll_down();
@@ -294,12 +294,12 @@ public class RegressionCases extends Recovery {
 		
 		
 		tp.swipe_left();
-		tp.btnCategory.click();
+		tp.btnCategorize.click();
 		
 		tp.selectCategorySwipe("Mobile Phone");
 		Thread.sleep(3000);
 		
-		tp.tapOnFirstTransation();
+		tp.tapOnFirstTransaction();
 		
 		if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
 			Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
@@ -1322,7 +1322,7 @@ public class RegressionCases extends Recovery {
 		
 		op.scrollTillCard("Top Trending Categories");
 		
-		String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvaialable.getText();
+		String actText_TxnOverviewPage = op.recentTxns_NoTxnsAvailable.getText();
 		
 		if (actText_TxnOverviewPage.equals("No Transaction available"))
 			Commentary.log(LogStatus.INFO, "PASS: OverviewPage RecentTransaction card > Correct message is displayed in case user has no recent transactions");

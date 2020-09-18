@@ -16,7 +16,6 @@ import support.Helper;
 
 public class TransactionSummaryPage {
 	
-	
 		public TransactionSummaryPage () {
 			try {
 				Helper h = new Helper();
@@ -25,12 +24,10 @@ public class TransactionSummaryPage {
 				else
 					PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
 		
-
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='Transaction Summary']")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Transaction Summary'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']")
@@ -51,12 +48,17 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Payee']")
 		public MobileElement payeeTab;
 		
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'walmart'`]")
-		@AndroidFindBy(xpath="//android.widget.TextView[@text='walmart']/../android.widget.TextView[contains(@text,'$')]")
+		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'shop'`]/XCUIElementTypeOther[1]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
+		@AndroidFindBy(xpath="//android.widget.TextView[@text='shop']/../android.widget.TextView[contains(@text,'$')]")
+		//@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement payeeTile;
 		
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Internet'`]/XCUIElementTypeOther[1]")
+		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Internet'`]/XCUIElementTypeOther[1]")
+		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[3]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[`name CONTAINS 'Internet'`][2]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Internet']/../android.widget.TextView[contains(@text,'$')]")
+		//@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement categoryTile;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Category\"]")
@@ -73,8 +75,8 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'$')]")
 		public MobileElement firstRecordInList;
 		
-		@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[contains(@name, '$')][2]")
-		@AndroidFindBy(xpath="//android.view.ViewGroup[@index=1][descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
+		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement transactionCategoryPayeeText;
 		
 		public void navigateBackToDashboard() throws Exception{
@@ -105,6 +107,6 @@ public class TransactionSummaryPage {
 		}
 		public String getCategoryPayeeName () {
 			return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
-			
+			//return this.transactionCategoryPayeeText.getText();
 		}
 }

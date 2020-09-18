@@ -35,17 +35,17 @@ public class InvestingPage {
 	public MobileElement backButtonOnHeader;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Securities\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name==\"button Securities\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Securities\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities']")
 	public MobileElement securitiesTab;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Accounts\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name==\"button Accounts\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Accounts\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
 	public MobileElement accountsTab;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Watch List\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name==\"button Watch List\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Watch List\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Watch List']")
 	public MobileElement watchlistTab;
 	
@@ -65,19 +65,23 @@ public class InvestingPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cash Balances']")
 	public MobileElement cashbalancesLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Securities by Company Name')]")
+	//@iOSFindBy(xpath="//*[starts-with(@name, 'Securities by Company Name')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name==\"Securities by Company Name\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities by Company Name']")
 	public MobileElement securitiesByCompanyNameLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+//	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name BEGINSWITH 'Bank Account Balances Checking Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Brokerage1']")
 	public MobileElement brokerageAccountNameLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+//	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name BEGINSWITH 'Bank Account Balances Checking Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Brokerage']/../android.widget.TextViewe[@text='1 holding']")
 	public MobileElement fiveHoldingsNameLabel;
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Last synced from Quicken Desktop')]")
+//	@iOSFindBy(xpath="//*[starts-with(@name, 'Last synced from Quicken Desktop')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name BEGINSWITH 'Last synced from Quicken Desktop'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Last synced from Quicken Desktop')]")
 	public MobileElement lastSyncedFooter;
 	

@@ -65,28 +65,36 @@ public class BankingAndCreditCardPage {
 	public MobileElement txtOnlineBalance;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='PROJECTED BALANCE'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]")
 	public MobileElement txtProjectedBalance;
 	
 	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[contains(@text,'$')]") //android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[2]
 	public MobileElement txtProjectedBalanceAmount;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CHECKING\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Checking\"]/../android.widget.TextView[2]")
 	public MobileElement checkingBalance;
 	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking Account Balance'`]/XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Checking\"]/../android.widget.TextView[2]")
+	public MobileElement checkingAccountBalance;
+	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit Cards'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CREDIT CARDS\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Credit Cards\"]/../android.widget.TextView[2]")
 	public MobileElement creditCardBalance;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CASH\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Cash\"]/../android.widget.TextView[2]")
 	public MobileElement cashBalance;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"SAVINGS\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Savings\"]/../android.widget.TextView[2]")
 	public MobileElement savingsBalance;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings Account Balance'`]/XCUIElementTypeStaticText[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Savings\"]/../android.widget.TextView[2]")
+	public MobileElement savingsAccountBalance;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='All Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"All Transactions\"]")
@@ -170,7 +178,6 @@ public class BankingAndCreditCardPage {
 		TransactionDetailPage td = new TransactionDetailPage();
 		td.buttonDone.click();
 		Thread.sleep(1000);
-		
 	}
 	
 	public void invokeTransactionDetails() throws Exception{
@@ -188,7 +195,6 @@ public class BankingAndCreditCardPage {
 		
 		td.buttonDone.click();
 		Thread.sleep(1000);
-		
 	}
 	
 	public String getCheckingBalance() throws Exception {
@@ -202,7 +208,19 @@ public class BankingAndCreditCardPage {
 		}
 		
 		return this.checkingBalance.getText().replace("SubTotal: ", "");
+	}
 	
+	public String getCheckingAccountBalance() throws Exception {
+		Helper h = new Helper();
+		// scroll to the account
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			this.scrollToAccount("CHECKING");
+		} else {
+			this.scrollToAccount("Account Name: Checking");
+		}
+		
+		return this.checkingAccountBalance.getText().replace("Account Balance: ", "");
 	}
 	
 	public String getCreditCardsBalance() throws Exception {
@@ -211,7 +229,6 @@ public class BankingAndCreditCardPage {
 		this.scrollToAccount("Credit Cards");
 		
 		return this.creditCardBalance.getText().replace("SubTotal: ", "");
-	
 	}
 	
 	public String getCashBalance() throws Exception {
@@ -220,7 +237,6 @@ public class BankingAndCreditCardPage {
 		this.scrollToAccount("Cash");
 		
 		return this.cashBalance.getText().replace("SubTotal: ", "");
-	
 	}
 	
 	public String getSavingsBalance() throws Exception {
@@ -229,7 +245,14 @@ public class BankingAndCreditCardPage {
 		this.scrollToAccount("Savings");
 		
 		return this.savingsBalance.getText().replace("SubTotal: ", "");
+	}
 	
+	public String getSavingsAccountBalance() throws Exception {
+		
+		// scroll to the account
+		this.scrollToAccount("Savings");
+		
+		return this.savingsAccountBalance.getText().replace("Account Balance: ", "");
 	}
 	
 	public String getAccountBalance_android (String acct) throws Exception {
@@ -239,17 +262,17 @@ public class BankingAndCreditCardPage {
 		this.scrollToAccount(acct);
 		
 		return Engine.ad.findElement(By.xpath(xpath)).getText();
-		
 	}
 	
 	public String getAccountBalance_IOS (String acct) throws Exception {
 		
-		String xpath = "//*[@name='"+acct+"']/../*[contains(@name, '$')]";
+//		String xpath = "//XCUIElementTypeStaticText[@name='Account Name: "+acct+"']/../*[contains(@name, '$')]";
+		String xpath = "**/XCUIElementTypeOther[`name contains 'Account Name: "+acct+"'`]/XCUIElementTypeStaticText[`name contains 'Account Balance: '`]";
 		
 		this.scrollToAccount(acct);
 		
-		return Engine.iosd.findElement(By.xpath(xpath)).getText();
-		
+//		return Engine.iosd.findElement(By.xpath(xpath)).getText();
+		return Engine.iosd.findElement(MobileBy.iOSClassChain(xpath)).getText();
 	}
 	
 	public String getAccountBalance(String acct) throws Exception {
@@ -260,21 +283,21 @@ public class BankingAndCreditCardPage {
 			return getAccountBalance_android (acct);
 		else
 			return getAccountBalance_IOS (acct);
-			
-		
 	}
+	
 	public String getTotalBalance() throws Exception{
 		
+		Verify.waitForObject(txtTodaysBalanceAmount, 2);
 		String totalBalance = txtTodaysBalanceAmount.getText();
 		
 		return totalBalance;
-		
 	}
 	
 	public String getProjectedBalance() throws Exception {
 		
 		scrollToProjectedBalance();
 		
+		Verify.waitForObject(txtProjectedBalanceAmount, 2);
 		String projectedBalance = txtProjectedBalanceAmount.getText();
 		
 		return projectedBalance;
@@ -301,9 +324,7 @@ public class BankingAndCreditCardPage {
 	}
 	
 	}
-	
-	
-	
+		
 	/* swipes from todaysbalance to projected balance
 	 make sure the screen stays on todaysbalance before calling this method */
 	
@@ -314,9 +335,7 @@ public class BankingAndCreditCardPage {
 		if (h.getEngine().equals("android"))
 			scrollToProjectedBalance_android();
 		else
-			scrollToProjectedBalance_ios();
-			
-			
+			scrollToProjectedBalance_ios();		
 	}
 	
 	public void scrollToProjectedBalance_android() throws Exception{
@@ -342,8 +361,7 @@ public class BankingAndCreditCardPage {
 	}
 	
 	public void scrollToProjectedBalance_ios() throws Exception{
-		
-		    
+
 		 	MobileElement element = this.txtTodaysBalance;
 	        String elementID = element.getId();
 	        HashMap<String, String> scrollObject = new HashMap<String, String>();
@@ -375,11 +393,7 @@ public class BankingAndCreditCardPage {
 //	        System.out.println("eeeee....");
 //	        tp.backButton.click();
 //        	Thread.sleep(1000);
-	        
-	        
-	        
-	        
-	        
+	     
 		    /*
 			MobileElement element = (MobileElement)Engine.iosd.findElement(By.name("TODAY'S BALANCE"));
 	        String elementID = element.getId();
@@ -396,11 +410,66 @@ public class BankingAndCreditCardPage {
 	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
 	        */
 	}
+	
+	public void scrollToTotalBalance() throws Exception {
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("android"))
+			scrollToTotalBalance_android();
+		else
+			scrollToTotalBalance_ios();		
+	}
+	
+	public void scrollToTotalBalance_android() throws Exception{
+
+		Dimension size = this.txtProjectedBalance.getSize();
+
+		int x_start=(int)(size.width*0.10);
+		int x_end=(int)(size.width*0.90);
+
+		int y=this.txtProjectedBalance.getRect().getY();
+
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+
+		for(int i=1 ;i<=2;i++) { 
+			touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+		}
+	}
+	
+	public void scrollToTotalBalance_ios() throws Exception{		
+		    
+		 	MobileElement element = this.txtProjectedBalance;
+	        String elementID = element.getId();
+	        HashMap<String, String> scrollObject = new HashMap<String, String>();
+	        scrollObject.put("element", elementID); // Only for ‘scroll in element’
+	        scrollObject.put("direction", "left");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject);
+	        Thread.sleep(1000);
+	        
+	        MobileElement element1 = this.txtOnlineBalance;
+	        String elementID1 = element1.getId();
+	        HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+	        scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
+	        scrollObject1.put("direction", "left");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject1);
+	        Thread.sleep(1000);
+	        
+	        MobileElement element2 = this.txtActualBalance;
+	        String elementID2 = element2.getId();
+	        HashMap<String, String> scrollObject2 = new HashMap<String, String>();
+	        scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
+	        scrollObject2.put("direction", "left");
+	        Engine.iosd.executeScript("mobile:scroll", scrollObject2);
+	        Thread.sleep(1000);
+	}
+	
 	public void selectAccount(String acctName) throws Exception {
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
+			Verify.waitForObject((MobileElement) Engine.ad.findElement(MobileBy.xpath(sXpath)), 2);
 			Engine.ad.findElement(MobileBy.xpath(sXpath)).click();
 			Thread.sleep(5000);
 		}

@@ -38,7 +38,6 @@ public class OverviewPage {
 			else
 				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -58,58 +57,68 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@content-desc='More options']")
 	MobileElement SettingsOrMoreOptions;*/
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking & Credit\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Banking & Credit\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Banking & Credit'")
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']")
 	public MobileElement accountsCard;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[3]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[3]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[3]")
+	@AndroidFindBy(xpath="//*[@text='Checking']/following-sibling::android.widget.TextView[1]")
 	public MobileElement checkingBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Cash']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Cash']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[3]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
+	@AndroidFindBy(xpath="//*[@text='Cash']/following-sibling::android.widget.TextView[1]")
 	public MobileElement cashBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Credit']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Credit']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit'`]/XCUIElementTypeStaticText[-1]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
+	@AndroidFindBy(xpath="//*[@text='Credit']/following-sibling::android.widget.TextView[1]")
 	public MobileElement creditBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Savings']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[7]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Savings']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[3]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[7]")
+	@AndroidFindBy(xpath="//*[@text='Savings']/following-sibling::android.widget.TextView[1]")
 	public MobileElement savingsBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Other']/../XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[11]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Other']/../XCUIElementTypeStaticText[2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Other'`]/XCUIElementTypeStaticText[3]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[11]")
+	@AndroidFindBy(xpath="//*[@text='Other']/following-sibling::android.widget.TextView[1]")
 	public MobileElement otherBalance;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Total'`]/XCUIElementTypeStaticText[3]")
-	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[9]")
+//	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[9]")
+	@AndroidFindBy(xpath="//*[@text='Total']/following-sibling::android.widget.TextView[1]")
 	public MobileElement totalBalance;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property and Debt Account\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property and Debt Account\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Property and Debt Account'")
 	@AndroidFindBy(xpath="//*[@text='Property and Debt Account']")
 	public MobileElement propertyAndDebt;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Property\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Property'")
 	@AndroidFindBy(xpath="//*[@text='Property']")
 	public MobileElement propertyText;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Debt\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Debt\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Debt'")
 	@AndroidFindBy(xpath="//*[@text='Debt']")
 	public MobileElement debtText;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
 	public MobileElement addTransaction;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Recent Transactions'")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']")
 	public MobileElement recentTransactionsCard;
@@ -123,12 +132,12 @@ public class OverviewPage {
 	public MobileElement hambergerIcon;*/
 	
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Top Trending Categories\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Top Trending Categories\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Top Trending Categories'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Top Trending Categories']/..")
 	public MobileElement topTrendingCard;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,'Summary')]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,'Summary')]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name CONTAINS 'Summary'$]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]")
 	public MobileElement transactionSummaryCard;
@@ -184,17 +193,17 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking and Credit Account']/..//*[@text='Cash']")
 	public MobileElement accountsCard_cashLabel;
 	
-	//@iOSFindBy(xpath="//*[@name ='No Transaction available']")
+//	@iOSFindBy(xpath="//*[@name ='No Transaction available']")
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name =='No Transaction available'`]")
-	@AndroidFindBy(xpath="//*[@text='Recent Transactions']/../*[@text='No Transaction available']")
-	public MobileElement recentTxns_NoTxnsAvaialable;
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Recent Transactions']/../android.widget.TextView[@text='No Transaction available']")
+	public MobileElement recentTxns_NoTxnsAvailable;
 	
-	//@iOSFindBy(xpath="//*[@name=concat('Top Trending Categories Last 30 days You don',\"'\",'t have any transactions.')]")
+//	@iOSFindBy(xpath="//*[@name=concat('Top Trending Categories Last 30 days You don',\"'\",'t have any transactions.')]")
 	@iOSFindBy(xpath="//*[starts-with(@name,'Top Trending Categories Last 30 day')]/XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
 	@AndroidFindBy(xpath="//*[@text='Top Trending Categories']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
 	public MobileElement tredningCard_YoudontHaveAnyTxn;
 	
-	//@iOSFindBy(xpath="//*[@name=concat('Spending Over Time You don',\"'\",'t have any transactions.')]")
+//	@iOSFindBy(xpath="//*[@name=concat('Spending Over Time You don',\"'\",'t have any transactions.')]")
 	@iOSFindBy(xpath="//*[starts-with(@name,'Spending Over Time')]/XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
 	@AndroidFindBy(xpath="//*[@text='Spending Over Time']/../*[@text=concat('You don',\"'\",'t have any transactions.')]")
 	public MobileElement spendingOverTimeCard_YoudontHaveAnyTxn;
@@ -219,8 +228,8 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@text='Track your investing accounts and holdings on your phone.']")
 	public MobileElement invCard_zeroDataState;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name=='navigationMenu'`]/XCUIElementTypeOther[`name=='navigationMenu'`]/XCUIElementTypeOther[`name=='navigationMenu'`]")
+//	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']/XCUIElementTypeOther[@name='navigationMenu']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='navigationMenu']//*[@class='android.widget.ImageView']")
 	public MobileElement hambergerIcon;
 	
@@ -230,21 +239,24 @@ public class OverviewPage {
 	public MobileElement scrollView;
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Spending Over Time\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Spending Over Time\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Spending Over Time'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
 	public MobileElement spendingOverTimeCard;
 	
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Net Income Over Time\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Net Income Over Time\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Net Income by Month'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income Over Time']")
 	public MobileElement netIncomeOverTimeCard;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'In progress'")
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Investing\"]")
+//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Investing\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investing'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investmentCard;
 	
@@ -269,7 +281,7 @@ public class OverviewPage {
 	
 	public void tapOnRecentTransactionsCard() throws Exception {
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		String sCard = "Recent Transactions";
 		
 		Helper h = new Helper();
@@ -288,19 +300,16 @@ public class OverviewPage {
 			scrollObject.put("predicateString", "label == 'Recent Transactions'");
 			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			
 		}
-		
 		recentTransactionsCard.click();
 		Thread.sleep(2000);
-		
 	}
 	
 	public void tapOnPropertyDebtCard() throws Exception{
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
@@ -316,7 +325,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(1000);	
-			
 		}
 		else {
 		//if (!Verify.objExists(topTrendingCard)) {
@@ -337,7 +345,7 @@ public class OverviewPage {
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
@@ -352,7 +360,7 @@ public class OverviewPage {
 			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
-			Thread.sleep(1000);	
+			Thread.sleep(2000);	
 			
 		}
 		else {
@@ -365,16 +373,16 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Top Trending Categories\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		//}
 		}
 		
-		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 	}
 
 	public void scrollTillCard(String cardName) throws Exception {
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
@@ -388,11 +396,9 @@ public class OverviewPage {
 			scrollObject.put("toVisible", "not an empty string");
 			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			
-			
 		}
+		
 		else {
-
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ cardName + "\").instance(0))"));
 			Thread.sleep(1000);
 		}
@@ -422,7 +428,6 @@ public class OverviewPage {
 		
 	}
 	
-	
     public void verticalScrollDownAndroid() throws Exception {
         Dimension size = Engine.getDriver().manage().window().getSize();
         int y_start = (int) (size.width * 1.20);
@@ -431,10 +436,9 @@ public class OverviewPage {
 		
 		TouchAction touchAction = new TouchAction(Engine.getDriver());
  
-		
 		touchAction
                 .press(point(x, y_start))
-                .waitAction(waitOptions(ofMillis(1000)))
+                .waitAction(waitOptions(ofMillis(2000)))
                 .moveTo(point(x, y_end))
                 .release().perform();
     }
@@ -449,7 +453,6 @@ public class OverviewPage {
 		
 		TouchAction touchAction = new TouchAction(Engine.getDriver());
  
-		
 		touchAction
                 .press(point(x, y_end))
                 .waitAction(waitOptions(ofMillis(1000)))
@@ -500,7 +503,7 @@ public class OverviewPage {
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		Integer iCount = 0;
 		
 //		while (iCount < 4) {
@@ -526,11 +529,11 @@ public class OverviewPage {
 		
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
-			System.out.println(sXpath);
+			//System.out.println(sXpath);
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		
 		}
 		else {
@@ -551,12 +554,10 @@ public class OverviewPage {
 		
 	}
 	
-	
 	public void tapOnSpendingOverTimeCard() throws Exception{
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		
-		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Spending Over Time']";
@@ -564,7 +565,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(10000);
-		
 		}
 		else {
 			//String sXpath="//*[@name='Spending Over Time']";
@@ -583,9 +583,8 @@ public class OverviewPage {
 	
 	public void tapOnNetIncomeOverTimeCard() throws Exception{
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		
-		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Net Income by Month']";
@@ -593,7 +592,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(10000);
-		
 		}
 		else {
 			//String sXpath="//*[@name='Net Income by Month']";
@@ -609,7 +607,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 		}
 	}
-	
 	
 	public void swipeFromBottomToUp() 
     {       
@@ -638,7 +635,6 @@ public class OverviewPage {
       		
       		TouchAction touchAction = new TouchAction(Engine.getDriver());
        
-      		
       		touchAction
                       .press(point(x, y_end))
                       .waitAction(waitOptions(ofMillis(1000)))
@@ -655,16 +651,13 @@ public class OverviewPage {
 	
 	public void navigateToAcctList() throws Exception{
 		
-		
 		if (!Verify.objExists(accountsCard)) {
 			swipeFromBottomToUp();	
-			Verify.waitForObjectToDisappear(refreshSpinnerIcon, 5);
-		}
-				
+			Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+		}	
 		accountsCard.click();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 	}
-	
 	
 	public void tapOnBudgetCard() throws Exception {
 		
@@ -673,8 +666,7 @@ public class OverviewPage {
 		String sCard = date.format(date1).toString();
 		//System.out.println(date.format(date1).toString());
 		sCard = sCard +" "+"Budget";
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
@@ -683,7 +675,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
-		
 		}
 		else {
 			//String sXpath="//*[@name='"+sCard+"']";
@@ -703,9 +694,7 @@ public class OverviewPage {
 	
 	public void tapOnInvestingCard() throws Exception {
 		
-		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
-		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
@@ -714,7 +703,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
-		
 		}
 		else {
 			//String sXpath="//*[@name='Investing']";
@@ -744,8 +732,6 @@ public class OverviewPage {
 			String sXpath="//android.widget.TextView[@text='Banking & Credit']";
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Banking & Credit\").instance(0))"));
 			Thread.sleep(1000);
-			
-		
 		}
 		else {
 			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
@@ -763,7 +749,6 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			
 		}
-		
 	}
 	
 //	public void scrollToTop_IOS() throws Exception{
@@ -783,9 +768,7 @@ public class OverviewPage {
 //			if (Verify.objExists(this.accountsCard))
 //				return;
 //			
-//		}
-//		
-//		
+//		}		
 //	}
 
 //	public void scroll_down() {
@@ -815,7 +798,6 @@ public class OverviewPage {
 			spendingOverTime_Visible_Android();
 		else
 			spendingOverTime_Visible_IOS();	
-		
 	}
 	
 	protected void spendingOverTime_Visible_IOS() throws Exception {
@@ -823,9 +805,8 @@ public class OverviewPage {
 		Helper h = new Helper();
 		
 		String shortMonth = h.getLastSixMonths()[0];
-		
 		String sXpath = construct_SOTmonth(shortMonth);
-		System.out.println(sXpath);
+		//System.out.println(sXpath);
 		sXpath = "//XCUIElementTypeOther[contains(@name,'Spending Over Time')]//XCUIElementTypeStaticText[@name ='APR']";
 		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
 		String me_id = me.getId();
@@ -835,9 +816,7 @@ public class OverviewPage {
 		scrollObject.put("element", me_id);
 		scrollObject.put("predicateString", "label == '"+shortMonth.toUpperCase()+"'");
 		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
-		Thread.sleep(1000);
-		
-		
+		Thread.sleep(1000);	
 	}
 	
 	protected void spendingOverTime_Visible_Android() throws Exception {
@@ -851,27 +830,21 @@ public class OverviewPage {
 		//Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"APR\").instance(0))"));
 		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+shortMonth.toUpperCase()+"\").instance(1))"));
 		Thread.sleep(1000);
-		System.out.println(Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath))));
-		Thread.sleep(1000);
-		
-		
+		//System.out.println(Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath))));
+		Thread.sleep(1000);	
 	}
 	
 	protected String construct_SOTmonth(String shortMonth) {
 		
 		Helper h = new Helper();
-		
 		String xpath;
 		
 		if (h.getEngine().equals("android"))
-			
 			xpath = "//*[@text='Spending Over Time']/..//*[@text='"+shortMonth.toUpperCase()+"']";
-		
 		else
 			xpath = "//*[@name='Spending Over Time']/..//*[@name='"+shortMonth.toUpperCase()+"']";
 			
 		return xpath;
-		
 	}
 	
 	public Boolean verifyMonthOnSpendingOverTime(String sMonth) {
@@ -883,18 +856,13 @@ public class OverviewPage {
 		String sXpath;
 		MobileElement me;
 		
-		
 		sXpath=construct_SOTmonth(sMonth);
 		
 		if (h.getEngine().equals("android"))
 			return Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath)));
-			
 		else
 			return Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(sXpath)));
-		
-		
 	}
-	
 	
 	public void tapOnAddTransaction() throws Exception {
 		

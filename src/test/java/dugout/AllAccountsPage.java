@@ -12,7 +12,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
@@ -29,7 +28,6 @@ public class AllAccountsPage {
 			else
 				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -45,34 +43,38 @@ public class AllAccountsPage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
 	public MobileElement backButton;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name=\"Search Transactions\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name=\"Search Transactions\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSearchField[`name='Search Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Transactions']")
 	public MobileElement searchTransactionTxtField;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"sort icon\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"sort icon\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='sort icon'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[contains(@resource-id,'sortBtn')]")
 	public MobileElement sortTransaction;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Clear text\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Clear text\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Clear text'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[contains(@resource-id,'search_close_btn')]")
 	public MobileElement closeSearch;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Results Found\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Results Found\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='No Results Found'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='No Results Found']")
 	public MobileElement noResultsFound;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Add Transaction\"]")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
-	public MobileElement allowButton;
+//	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Add Transaction\"]")
+//	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
+//	public MobileElement allowButton;
+//	
+//	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Add Transaction\"]")
+//	@AndroidFindBy(xpath="//android.widget.Button[@text='Deny']")
+//	public MobileElement denyButton;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Add Transaction\"]")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='Deny']")
-	public MobileElement denyButton;
-	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='fab'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
-	
 	
 	
 	public void navigateBackToDashboard() throws Exception {
@@ -85,7 +87,6 @@ public class AllAccountsPage {
 //			bcc.backButton.click();
 //			Thread.sleep(2000);
 //		}
-		
 	}
 	
 	public void searchTransaction(String searchString) throws Exception{
@@ -99,7 +100,6 @@ public class AllAccountsPage {
 		Helper h = new Helper();
 		h.hideKeyBoard();
 		Thread.sleep(1000);
-	
 	}
 	
 	public boolean verifyTransaction (String searchString) throws Exception{
@@ -114,8 +114,6 @@ public class AllAccountsPage {
 			return false;
 		else
 			return true;
-		
-		
 	}
 	
 	public List<MobileElement> getAllSearchTransactions() throws Exception{
@@ -134,30 +132,20 @@ public class AllAccountsPage {
 
 		Engine.ad.getContext();
 		me = Engine.ad.findElements(By.xpath(sXpath));
-		//System.out.println(me.size());
 		
 		return me;
 	}
 	
 	public List<MobileElement> getAllSearchTransactions_ios () throws Exception{
 		
-		
-	
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
-		//String sXpath = "**/XCUIElementTypeTable";
 		List <MobileElement> me = null;
-		//Engine.iosd.getContext();
 		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
-		//System.out.println(me.size());
 		
 		return me;
 	}
 	
-	
-	
 	public void tapOnFirstTransactionFromSearchResult() throws Exception{
-		
-		
 		
 		List<MobileElement> li = getAllSearchTransactions ();
 		Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
@@ -176,8 +164,8 @@ public class AllAccountsPage {
 			Thread.sleep(1000);
 		}
 		
-		
 	}
+	
 	public Double getRunningBalancefromTransaction (int transactionNumber) {
 		Double dTransactionAmount = null;
 		Helper h = new Helper();
@@ -199,6 +187,7 @@ public class AllAccountsPage {
 		}
 		return dTransactionAmount;
 	}
+	
 	public Double getTransactionAmount(int transactionNumber) {
 		Double dAmount = null;
 		Helper h = new Helper();
@@ -218,9 +207,9 @@ public class AllAccountsPage {
 			String sTransactionAmount = me.getAttribute("value");
 			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
 		}
-		return dAmount;
-		
+		return dAmount;	
 	}
+	
 	public String getTransactionDate (int transactionNumber) {
 		String sTransactionAmount = null;
 		Helper h = new Helper();
@@ -232,13 +221,11 @@ public class AllAccountsPage {
 			me = Engine.ad.findElements(By.xpath(locator));
 			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']"));
 			sTransactionAmount = me1.getText();
-			
-			
-		} else {
+		} 
+		else {
 			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
 			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
 			sTransactionAmount = me.getText();
-			
 		}
 		return sTransactionAmount;
 	}

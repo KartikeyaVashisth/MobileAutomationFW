@@ -30,25 +30,24 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 
-	
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	public void TBM1_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] expense transactions for an online checking account, verify checking & total balance on overview screen accounts card");
-		String sChecking_before, sTotal_before, sChecking_after, sTotal_after;
-		
 		SignInPage signIn = new SignInPage();
 		signIn.signIn(sUserName, sPassword, sDataset);
+		
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] expense transactions for an online checking account, verify checking & total balance on overview screen accounts card.");
+		
+		String sChecking_before, sTotal_before, sChecking_after, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
 		tRec.setAccount(sOnlineChecking);
 		tRec.setAmount("5.00");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sOnlineChecking);
@@ -57,6 +56,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec1.setDate(h.getYesterdaysDate());
 		
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		sChecking_before = op.checkingBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
@@ -67,52 +67,50 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		op.addTransaction.click();
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount"+tRec.getAmount());
-		h.getContext();
+		
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		op.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount"+tRec1.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount: "+tRec1.getAmount());
 		
 		sChecking_after = op.checkingBalance.getText();
 		sTotal_after = op.totalBalance.getText();
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-
 		double p = dChecking_before-d;
-		p = dChecking_before-d;
-		
 		System.out.println("***Expected - "+p);
 		
 		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
-		
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	public void TBM2_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] income transactions for a manual checking account, verify checking & total balance on overview screen accounts card");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] income transactions for a manual checking account, verify checking & total balance on overview screen accounts card.");
+		
 		String sChecking_before, sTotal_before, sChecking_after, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -120,7 +118,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("4.00");
 		tRec.setTransactionType("income");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sManualChecking);
@@ -129,6 +126,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec1.setDate(h.getYesterdaysDate());
 		
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		sChecking_before = op.checkingBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
@@ -139,19 +137,20 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		op.addTransaction.click();
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount"+tRec.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount: "+tRec.getAmount());
 		
 		op.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type income, amount"+tRec1.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type income, amount: "+tRec1.getAmount());
 		
 		sChecking_after = op.checkingBalance.getText();
 		sTotal_after = op.totalBalance.getText();
@@ -159,16 +158,15 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
 		double p = dChecking_before+d;
-		
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dChecking_before+d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added incomje transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before+d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
@@ -176,13 +174,14 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 	}
 	
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
 	public void TBM3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] expense transactions for an online credit card account, verify credit card & total balance on overview screen accounts card");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] expense transactions for an online credit card account, verify credit card & total balance on overview screen accounts card.");
+		
 		String sBefore, sTotal_before, sAfter, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -190,7 +189,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("3.00");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sOnlineCreditCard);
@@ -199,6 +197,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec1.setDate(h.getYesterdaysDate());
 		
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		sBefore = op.creditBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "CreditCard balance before adding the transaction ["+sBefore+"]");
@@ -209,18 +208,20 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		op.addTransaction.click();
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount"+tRec.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		op.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount"+tRec1.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount: "+tRec1.getAmount());
 		
 		sAfter = op.creditBalance.getText();
 		sTotal_after = op.totalBalance.getText();
@@ -228,30 +229,29 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
 		double p = dBefore-d;
-		
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dBefore-d==dAfter)
-			Commentary.log(LogStatus.INFO, "CC balance was ["+dBefore+"], added expense transactions for ["+d+"], now the Credit card balance shows ["+dAfter+"]");
+			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dBefore+"], added expense transactions for ["+d+"], now the Credit card balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dBefore+"], added expense transactions for ["+d+"], now the Credit card balance shows ["+dAfter+"]");
 		
 		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
-		sa.assertAll();	
-		
+		sa.assertAll();		
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 4, enabled = false)
 	public void TBM4_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] income transactions for an online credit card account, verify credit card & total balance on overview screen accounts card");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] income transactions for an online credit card account, verify credit card & total balance on overview screen accounts card.");
+		
 		String sBefore, sTotal_before, sAfter, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -259,7 +259,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("3.00");
 		tRec.setTransactionType("income");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sOnlineCreditCard);
@@ -268,6 +267,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec1.setDate(h.getYesterdaysDate());
 		
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		sBefore = op.creditBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "CreditCard balance before adding the transaction ["+sBefore+"]");
@@ -278,18 +278,20 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		op.addTransaction.click();
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type Income, amount"+tRec.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type Income, amount: "+tRec.getAmount());
 		
 		op.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(op.addTransaction, 5);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type Income, amount"+tRec1.getAmount());
-		h.getContext();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type Income, amount: "+tRec1.getAmount());
 		
 		sAfter = op.creditBalance.getText();
 		sTotal_after = op.totalBalance.getText();
@@ -297,30 +299,29 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
 		double p = dBefore+d;
-		
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dBefore+d==dAfter)
-			Commentary.log(LogStatus.INFO, "CC balance was ["+dBefore+"], added income transactions for ["+d+"], now the Creditcard balance shows ["+dAfter+"]");
+			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dBefore+"], added income transactions for ["+d+"], now the Creditcard balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dBefore+"], added income transactions for ["+d+"], now the creditcard balance shows ["+dAfter+"]");
 		
 		if (dTotal_before+d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added Income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added Income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added Income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
-		
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 5, enabled = false)
 	public void TBM5_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] expense transactions for an online checking account, verify account, category checking & total balance on Banking and Credit Screen");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] expense transactions for an online checking account, verify account, category checking & total balance on Banking and Credit Screen.");
+		
 		String sChecking_before, sTotal_before, sChecking_after, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -328,7 +329,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("5.00");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sOnlineChecking);
@@ -348,7 +348,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dChecking_before = h.processBalanceAmount(sChecking_before);
 		Double dTotal_before = h.processBalanceAmount(sTotal_before);
 		
-		// tap on the account
 		bcc.getAccount(tRec.getAccount()).click();
 	   	Thread.sleep(2000);
 	   
@@ -359,63 +358,61 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	   	txnPage.addTransaction.click();
 	   	
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
 		if (txnPage.verifyAccount(tRec.getAccount()) == false)
 	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount"+tRec.getAmount());
-		h.getContext();
+			Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		txnPage.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
 		if (txnPage.verifyAccount(tRec.getAccount()) == false)
 	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount"+tRec1.getAmount());
-		h.getContext();
+			Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount: "+tRec1.getAmount());
 		
 		String sAccountBalance_after = txnPage.txtTodaysBalanceAmount.getText();
 		Double dAccountBalance_after = h.processBalanceAmount(sAccountBalance_after);
 		
 		txnPage.backButton.click();
 		Thread.sleep(2000);
+		
 		sTotal_after = bcc.txtTodaysBalanceAmount.getText();
 		sChecking_after = bcc.getCheckingBalance();
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-
 		double p = dChecking_before-d;
-		p = dChecking_before-d;
-		
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dAccountBalance_before-d==dAccountBalance_after)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
-		
 		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 6)
+	@Test(priority = 6, enabled = false)
 	public void TBM6_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] Income transactions for an online checking account, verify account, category checking & total balance on Banking and Credit Screen");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] Income transactions for an online checking account, verify account, category checking & total balance on Banking and Credit Screen.");
+		
 		String sChecking_before, sTotal_before, sChecking_after, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -423,7 +420,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("5.00");
 		tRec.setTransactionType("income");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sOnlineChecking);
@@ -433,6 +429,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		OverviewPage op = new OverviewPage();
 		op.navigateToAcctList();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		sChecking_before = bcc.getCheckingBalance();
@@ -443,7 +440,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dChecking_before = h.processBalanceAmount(sChecking_before);
 		Double dTotal_before = h.processBalanceAmount(sTotal_before);
 		
-		// tap on the account
 		bcc.getAccount(tRec.getAccount()).click();
 	   	Thread.sleep(2000);
 	   
@@ -454,20 +450,23 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	   	txnPage.addTransaction.click();
 	   	
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
 		if (txnPage.verifyAccount(tRec.getAccount()) == false)
 	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount"+tRec.getAmount());
-		h.getContext();
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount: "+tRec.getAmount());
+		
 		
 		txnPage.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
 		if (txnPage.verifyAccount(tRec.getAccount()) == false)
 	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type Income, amount"+tRec1.getAmount());
-		h.getContext();
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type Income, amount: "+tRec1.getAmount());
 		
 		String sAccountBalance_after = txnPage.txtTodaysBalanceAmount.getText();
 		Double dAccountBalance_after = h.processBalanceAmount(sAccountBalance_after);
@@ -478,10 +477,9 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sChecking_after = bcc.getCheckingBalance();
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
-		
 
 		double p = dAccountBalance_before+d;
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dAccountBalance_before+d==dAccountBalance_after)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
@@ -489,31 +487,30 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
 		p = dChecking_before+d;
-		System.out.println("***Expected - "+p);
 		
 		if (dChecking_before+d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		p = dTotal_before+d;
-		System.out.println("***Expected - "+p);
+
 		if (dTotal_before+d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
-		
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 7, enabled = false)
 	public void TBM7_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO, "Add multiple[two] expense transactions for an online creditcard account, verify account, category credit & total balance on Banking and Credit Screen");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] expense transactions for an online creditcard account, verify account, category credit & total balance on Banking and Credit Screen.");
+		
 		String sCCtype_before, sTotal_before, sChecking_after, sTotal_after;
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -521,7 +518,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		tRec.setAmount("5.00");
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getYesterdaysDate());
-		h.getContext();
 		
 		TransactionRecord tRec1 = new TransactionRecord();
 		tRec1.setAccount(sManualCreditCard);
@@ -531,7 +527,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 		OverviewPage op = new OverviewPage();
 		op.navigateToAcctList();
-		System.out.println("****navigated to acctLIST****");
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		sTotal_before = bcc.txtTodaysBalanceAmount.getText();
@@ -542,7 +538,6 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dChecking_before = h.processBalanceAmount(sCCtype_before);
 		Double dTotal_before = h.processBalanceAmount(sTotal_before);
 		
-		// tap on the account
 		bcc.getAccount(tRec.getAccount()).click();
 	   	Thread.sleep(2000);
 	   
@@ -553,16 +548,18 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	   	txnPage.addTransaction.click();
 	   	
 		TransactionDetailPage td = new TransactionDetailPage();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount"+tRec.getAmount());
-		h.getContext();
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		txnPage.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
-		Verify.waitForObject(txnPage.txtTodaysBalance, 5);
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount"+tRec1.getAmount());
-		h.getContext();
+		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
+		
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount: "+tRec1.getAmount());
 		
 		String sAccountBalance_after = txnPage.txtTodaysBalanceAmount.getText();
 		Double dAccountBalance_after = h.processBalanceAmount(sAccountBalance_after);
@@ -575,9 +572,8 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-
 		double p = dAccountBalance_before-d;
-		System.out.println("***Expected - "+p);
+		System.out.println("***Expected -> "+p);
 		
 		if (dAccountBalance_before-d==dAccountBalance_after)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
@@ -585,23 +581,20 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
 		p = dChecking_before-d;
-		System.out.println("***Expected - "+p);
 		
 		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "CreditCard balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: CreditCard balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		p = dTotal_before-d;
-		System.out.println("***Expected - "+p);
+
 		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
 		sa.assertAll();	
-		
 	}
-	
 	
 }
