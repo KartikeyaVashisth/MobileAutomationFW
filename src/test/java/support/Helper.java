@@ -90,6 +90,8 @@ public class Helper {
 		
 	}
 	
+	
+	
 	public String getPassword(){
 		
 		Globals globals = new Globals();
@@ -115,6 +117,12 @@ public class Helper {
 		
 		
 		return System.getProperty("engine");
+		
+	}
+	
+	public String getEnv() {
+		Globals globals = new Globals();
+		return globals.testProperty.get("env");
 		
 	}
 	
@@ -187,6 +195,61 @@ public class Helper {
 	}
 	*/
 	
+	public DesiredCapabilities getTabCloudCapabilities(){
+		
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		
+		if (getEngine().equals("android")){
+			
+			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
+			//capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
+			//capabilities.setCapability("appiumVersion", "1.7.1");
+			capabilities.setCapability("appiumVersion", "1.13.0");
+			capabilities.setCapability("automationName","appium");
+			//capabilities.setCapability("deviceName","Android Emulator");
+			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
+			capabilities.setCapability("deviceName","Samsung Galaxy Tab A 10 GoogleAPI Emulator");
+			
+			capabilities.setCapability("deviceOrientation", "portrait");
+			capabilities.setCapability("browserName", "");
+			capabilities.setCapability("platformVersion","8.1");//5.1
+			//capabilities.setCapability("platformVersion","7.0");
+			capabilities.setCapability("platformName","Android");
+			capabilities.setCapability("autoWebView", "true");
+			capabilities.setCapability("maxDuration", 4000);
+			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("noResetValue", true);
+			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
+			//capabilities.setCapability("app", "sauce-storage:QuickenRelease.apk");
+			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
+			capabilities.setCapability("appPackage","com.quicken.qm2014");
+			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
+		}
+		else if(getEngine().equals("ios")){
+			capabilities.setCapability("platformName", "iOS");
+			capabilities.setCapability("deviceName","iPad Simulator");
+			capabilities.setCapability("platformVersion","12.2"); //9.3
+			//capabilities.setCapability("platformVersion", "11.2");
+			capabilities.setCapability("browserName", "");
+			capabilities.setCapability("deviceOrientation", "portrait");
+			//capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
+			capabilities.setCapability("appiumVersion", "1.13.0");// 1.5.3
+			capabilities.setCapability("autoWebView", "true");
+			//capabilities.setCapability("autoAcceptAlerts", true);
+		    capabilities.setCapability("autoGrantPermissions", true);
+		    capabilities.setCapability("maxDuration", 4000);
+			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("noResetValue", true);
+			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
+			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
+			capabilities.setCapability("automationName","XCUITest");
+			
+		}
+		return capabilities;
+		
+	}
+	
+	
 	public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -249,8 +312,10 @@ public class Helper {
 			
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
-			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","6.0");//6.0
+			capabilities.setCapability("deviceName","emulator-5556");
+			capabilities.setCapability("platformVersion","8.1");//6.0
+			//capabilities.setCapability("deviceName","emulator-5554");
+			//capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
@@ -263,6 +328,22 @@ public class Helper {
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 			
+			/*
+			capabilities.setCapability("deviceName","emulator-5556");
+			capabilities.setCapability("platformVersion","8.1");//6.0
+			//capabilities.setCapability("platformVersion","7.0");
+			capabilities.setCapability("noReset", true);
+			capabilities.setCapability("autoGrantPermissions", true);
+			//capabilities.setCapability("automationName","UiAutomator2");
+			//capabilities.setCapability("automationName","appium");
+			capabilities.setCapability("autoWebView", "true");
+			capabilities.setCapability("platformName","Android");
+			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
+			capabilities.setCapability("appPackage","com.quicken.acme");
+			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Downloads/chromedriver-2");
+			*/
+			
 		}
 		else if(getEngine().equals("ios")){
 			
@@ -271,6 +352,13 @@ public class Helper {
 			capabilities.setCapability("platformVersion", "12.0");
 			capabilities.setCapability("appiumVersion", "1.8.0"); //1.8.0
 			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
+
+			/*
+			capabilities.setCapability("platformVersion", "12.1");
+			capabilities.setCapability("appiumVersion", "1.15.1"); //1.8.0
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
+			*/
+			//capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
@@ -281,7 +369,7 @@ public class Helper {
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
 	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
-	        capabilities.setCapability("app", "/Users/vgupta/Downloads/Test_builds/Quicken(36.16367.4012)-Release.app.zip");
+	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/AcmeQuicken.zip");
 	        
 			
 		}
@@ -335,8 +423,13 @@ public class Helper {
 	
 	public void hideKeyBoard() throws Exception {
 		
-		if (this.getEngine().equals("android")) 
-			Engine.ad.hideKeyboard();
+		if (this.getEngine().equals("android"))
+			try {
+				Engine.ad.hideKeyboard();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		else
 			Engine.iosd.hideKeyboard();
 		
@@ -458,7 +551,7 @@ public class Helper {
 	public static String getCurrentMonth () {
 		Calendar now = Calendar.getInstance();
 
-	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "Jun", "Jul", "August",
+	    String[] strMonths = new String[] { "January", "February", "March", "April", "May", "June", "July", "August",
 	        "September", "October", "November", "December" };	
 	    String currentMonth = strMonths[now.get(Calendar.MONTH)];
 		return currentMonth;

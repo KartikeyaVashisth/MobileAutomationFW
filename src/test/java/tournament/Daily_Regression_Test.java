@@ -12,16 +12,16 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import dugout.AllAccountsPage;
 import dugout.BankingAndCreditCardPage;
-import dugout.InvestingPage;
-import dugout.NetIncomeOverTimePage;
-import dugout.OverviewPage;
-import dugout.SettingsPage;
-import dugout.SignInPage;
-import dugout.SpendingOverTimePage;
-import dugout.SpendingTrendPage;
-import dugout.TransactionDetailPage;
-import dugout.TransactionSummaryPage;
-import dugout.TransactionsPage;
+	import dugout.InvestingPage;
+	import dugout.NetIncomeOverTimePage;
+	import dugout.OverviewPage;
+	import dugout.SettingsPage;
+	import dugout.SignInPage;
+	import dugout.SpendingOverTimePage;
+	import dugout.SpendingTrendPage;
+	import dugout.TransactionDetailPage;
+	import dugout.TransactionSummaryPage;
+	import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileElement;
 import referee.Commentary;
@@ -33,34 +33,16 @@ import support.Recovery;
 import support.TransactionRecord;
 import support.UserName;
 
-public class Daily_Regression_Test extends Recovery {
-	//String sUserName = "yuvaraju.boligorla@quicken.com";
-	String sPassword = "Intuit!1";
-	String sDataset = "ProjectedBalances";
-	String sManualChecking = "Manual_Checking";
-	String sOnlineChecking ="onl_checking1";
-	String sManualCreditCard = "Manual_CC";
-	String sOnlineCreditCard ="onl_cc";
-	String sManualCash="Manual_cash";
-	String sOnlineCash="onl_cash";
-	String sManualSaving = "Manual_Savings";
-	String sOnlineSaving = "onl_savings1";
-	String backButton1_ios = "Banking & Credit";
-	String statusCleared = "Cleared";
-	String statusUnCleared = "Uncleared";
-	String filterNewToOld = "Date New to Old";
-	String filterOldToNew = "Date Old to New";
-
-	public String getUsername_basedOnEnv() throws Exception{
-		
-		UserName un = new UserName();
-		un.stage_ios = "";
-		un.stage_android = "";
-		un.prod_ios = "yuvaraju.boligorla@quicken.com";
-		un.prod_android = "yuvaraju.boligorla@quicken.com";
-		return un.getUserName();	
-	}
-	
+	public class Daily_Regression_Test extends Recovery {
+		String sUserName = "yuvaraju.boligorla@quicken.com";
+		String sPassword = "Intuit!1";
+		String sPassword1 = "Quicken@01";
+		//String sDataset = "Regression";
+		//String sOnlineChecking ="onl_checking1";
+		//String sOnlineCreditCard ="onl_cc";
+		//String sManualCash="Manual_cash";
+		//String sOnlineCash="onl_cash";
+		//String sOnlineSaving = "onl_savings1";
 	@Test(priority = 0, enabled = false)
 	public void TC1_ValidateAddTransaction() throws Exception {
 		
@@ -636,42 +618,84 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Balance calculation for filter combination \"Date new to old\" + \"Show Running Balance\" set to ON");
-
-		Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
-
-		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		TransactionsPage tp = new TransactionsPage();
-		AllAccountsPage aa = new AllAccountsPage();
-		bcc.selectAccount(sManualSaving);
-		Verify.waitForObject(tp.buttonSort, 2);
-		//Thread.sleep(1000);
-		//sTotalBalance = h.processBalanceAmount(bcc.getTotalBalance().replace("$", ""));
-		tp.buttonSort.click();
-		Thread.sleep(1000);
-		tp.selectSortFilterOption(filterNewToOld);
-
-		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
-			tp.buttonApply.click();
-			Thread.sleep(1000);
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
-			tp.buttonApply.click();
-			Thread.sleep(1000);
+		public String getUsername_basedOnEnv() throws Exception{
+			
+			UserName r = new UserName();
+			r.stage_ios = "c.ios++@mailinator.com";
+			r.stage_android = "c.android++@mailinator.com";
+			r.prod_ios = "yuvaraju.boligorla@quicken.com";
+			r.prod_android = "yuvaraju.boligorla@quicken.com";
+			return r.getUserName();	
 		}
+		
+		// Add Transaction
+			@Test(priority = 0)
+			public void TC1_ValidateAddTransaction() throws Exception {
+				String sChecking_before, sTotal_before, sChecking_after,sTotal_after ;
+				Helper h = new Helper();
+				
+				WelcomePage w = new WelcomePage();
+				w.setEnvironment(h.getEnv());
+			
+				SignInPage si = new SignInPage();
+				si.signIn(getUsername_basedOnEnv(), sPassword, sDataset);
+				SoftAssert sa = new SoftAssert();
 
-		dFirstRunningBalance= aa.getRunningBalancefromTransaction(1);
-		dFirstTxnAmount = aa.getTransactionAmount(1);
-		//Double iFirstRunningBalance = Math.abs(dFirstRunningBalance);
-		Double iFirstTxnAmount = Math.abs(dFirstTxnAmount);
-
-		dSecondRunningBalance= aa.getRunningBalancefromTransaction(2);
-		dSecondTxnAmount = aa.getTransactionAmount(2);
-		//Double iSecondRunningBalance = Math.abs(dSecondRunningBalance);
-		Double iSecondTxnAmount = Math.abs(dSecondTxnAmount);
+				Commentary.log(LogStatus.INFO, "Add an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
+				String time = h.getCurrentTime();
+				
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				tRec.setAmount("5.00");
+				tRec.setAccount(sManualChecking);
+				tRec.setCategory("Internet");
+				tRec.setPayee(time);
+				tRec.setTransactionType("expense");
+				tRec.setDate(h.getFutureDaysDate(0));
+				h.getContext();
+				
+				OverviewPage op = new OverviewPage();
+				sChecking_before = op.checkingBalance.getText();
+				sTotal_before = op.totalBalance.getText();
+				Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
+				Commentary.log(LogStatus.INFO, "Total balance before adding the transaction ["+sTotal_before+"]");
+				Double d = Double.parseDouble(tRec.getAmount());
+				Double dChecking_before = h.processBalanceAmount(sChecking_before);
+				Double dTotal_before = h.processBalanceAmount(sTotal_before);
+				
+				op.addTransaction.click();
+				td.addTransaction(tRec);
+				Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+				
+				
+				h.getContext();
+				sChecking_after = op.checkingBalance.getText();
+				sTotal_after = op.totalBalance.getText();
+				Double dChecking_after = h.processBalanceAmount(sChecking_after);
+				Double dTotal_after = h.processBalanceAmount(sTotal_after);
+				
+				if (dChecking_before-d==dChecking_after)
+					Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+				
+				if (dTotal_before-d==dTotal_after)
+					Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+				
+				sa.assertAll();	
+			
+				
+			}
+			// Edit Transaction
+			
+			@Test(priority=1)
+			public void TC2_ValidateEditTrasaction() throws Exception {
+				
+				String sChecking_before, sTotal_before, sChecking_after,sTotal_after ;
+				Commentary.log(LogStatus.INFO, "EDIT an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
 
 		dThirdRunningBalance= aa.getRunningBalancefromTransaction(3);
 		dThirdTxnAmount = aa.getTransactionAmount(3);
@@ -817,25 +841,190 @@ public class Daily_Regression_Test extends Recovery {
 			} else {
 				Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dThirdRunningBalance+"] and transaction amount is ["+dSecondTxnAmount+"], calculated Running balance is ["+dSecondRunningBalance+"]");
 			}
-		}
-
-		if (dFirstTxnAmount<0) {
-			if (iSecondRunningBalance-iFirstTxnAmount==iFirstRunningBalance) {
-				Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
-			} else {
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
+			@Test (priority=15)
+			public void TC15_VerifyTransactionSummary_CategoryScreen() throws Exception {
+				Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+				OverviewPage op = new OverviewPage();
+				Helper h = new Helper();
+				op.tapOnTransactionSummaryCard();
+				SoftAssert sa = new SoftAssert();
+				
+				TransactionSummaryPage ts = new TransactionSummaryPage();
+				ts.categoryTab.click();
+				
+				String sCategoryAmount_before = ts.categoryTile.getText();
+				Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+				System.out.println("Category amount is "+dCategoryAmount_before);
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				TransactionRecord tRec = new TransactionRecord();
+				tRec.setAmount("10.00");
+				tRec.setAccount(sManualChecking);
+				//tRec.setPayee("walmart");
+				tRec.setCategory("Internet");
+				tRec.setTransactionType("expense");
+				h.getContext();
+				
+				ts.backButtonOnHeader.click();
+				
+				op.scrollToTop();
+				
+				op.addTransaction.click();
+				td.addTransaction(tRec);
+				
+				Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+				
+				op.tapOnTransactionSummaryCard();
+				ts.categoryTab.click();
+				
+				String sCategoryAmount_after = ts.categoryTile.getText();
+				Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+				Double d = Double.parseDouble(tRec.getAmount());
+				System.out.println("Category amount is "+dCategoryAmount_after);
+				
+				if (dCategoryAmount_after+d==dCategoryAmount_before)
+					Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+				else
+					Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+				
+				sa.assertAll();
+				
 			}
 		}
-		else {
-			if (iSecondRunningBalance+iFirstTxnAmount==iFirstRunningBalance) {
-				Commentary.log(LogStatus.INFO, "PASS: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
-			} else {
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is ["+dSecondRunningBalance+"] and transaction amount is ["+dFirstTxnAmount+"], calculated Running balance is ["+dFirstRunningBalance+"]");
-			}
-		}
 
-		sa.assertAll();
-	}
+//			@Test(priority = 16)
+//			public void TC17_ValidateSwipe_Category() throws Exception {
+//			Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and change the category and check the transaction details");
+//			  Helper h = new Helper();
+//			  
+//			  if (h.getEngine().equalsIgnoreCase("ios")) {
+//			  OverviewPage o = new OverviewPage();
+//			  o.navigateToAcctList();
+//			  
+//			  BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//			  //bcc.txtTodaysBalance.click();
+//			  bcc.allTransactionButton.click();
+//			  
+//			  TransactionsPage tp = new TransactionsPage();
+//			  TransactionDetailPage td = new TransactionDetailPage();
+//			  TransactionRecord tRec = new TransactionRecord();
+//			  SoftAssert sa = new SoftAssert();
+//			  String payeeName = h.getCurrentTime();
+//			  
+//			  tRec.setAmount("5.00");
+//			  tRec.setAccount(sManualChecking);
+//			  tRec.setCategory("Internet");
+//			  tRec.setPayee(payeeName);
+//			  tRec.setTransactionType("expense");
+//			  h.getContext();
+//			  
+//			  tp.addTransaction.click();
+//			  td.addTransaction(tRec);
+//			  Thread.sleep(2000);
+//			  
+//			  tp.searchTransactionTxtField.click();
+//			  tp.searchTransactionTxtField.sendKeys(payeeName);
+//			  
+//			  String afterPayeeName = tp.getPayeeName().getText();
+//			  
+//			  if (afterPayeeName.equals(payeeName)) 
+//			    Commentary.log(LogStatus.INFO, "Payee is created and transaction is saved successfully");
+//			   else 
+//			    Commentary.log(LogStatus.INFO, "Payee is Not created");
+//			  
+//			  
+//			  tp.swipe_left();
+//			  tp.btnCategory.click();
+//			  
+//			  tp.selectCategorySwipe("Mobile Phone");
+//			  Thread.sleep(3000);
+//			  
+//			  tp.tapOnFirstTransation();
+//			  
+//			  if ((td.getCategory("Mobile Phone").getText()).equals("Mobile Phone"))
+//			    Commentary.log(sa, LogStatus.PASS, "PASS: Successfully updated the category");
+//			  else
+//			    Commentary.log(sa, LogStatus.FAIL, "Unable to update the category");
+//			  
+//			  sa.assertAll();
+//			  } else {
+//			    Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+//			  }
+//			  
+//			}
+//			@Test(priority = 17)
+//			public void TC18_ValidateSwipe_Delete() throws Exception {
+//				Commentary.log(LogStatus.INFO, "Verify Swipe gesture on transaction and delete the transaction and check the transaction is deleted after searching");
+//				Helper h = new Helper();
+//				if (h.getEngine().equalsIgnoreCase("ios")) {
+//				OverviewPage o = new OverviewPage();
+//				o.navigateToAcctList();
+//				
+//				Commentary.log(LogStatus.INFO, "Validating Delete tranction from swipe gesture options");
+//				
+//				BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//				//bcc.txtTodaysBalance.click();
+//				bcc.allTransactionButton.click();
+//				TransactionsPage tp = new TransactionsPage();
+//				TransactionDetailPage td = new TransactionDetailPage();
+//				TransactionRecord tRec = new TransactionRecord();
+//				SoftAssert sa = new SoftAssert();
+//				String payeeName = h.getCurrentTime();
+//				
+//				tRec.setAmount("5.00");
+//				tRec.setAccount(sManualChecking);
+//				tRec.setCategory("Internet");
+//				tRec.setPayee(payeeName);
+//				tRec.setTransactionType("expense");
+//				h.getContext();
+//				
+//				tp.addTransaction.click();
+//				td.addTransaction(tRec);
+//				Thread.sleep(2000);
+//				
+//				tp.searchTransactionTxtField.click();
+//				tp.searchTransactionTxtField.sendKeys(payeeName);
+//				h.hideKeyBoard();
+//				
+//				tp.swipe_left();
+//				tp.btnDelete.click();
+//				//td.deleteTransactionAlertButton.click();
+//				Thread.sleep(3000);
+//				
+//				if (Verify.objExists(tp.txtNoResultFound))
+//					Commentary.log(LogStatus.INFO, "Successfully deleted the transaction");
+//				else
+//					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
+//				
+//				tp.searchTransactionTxtField.click();
+//				tp.searchTransactionTxtField.clear();
+//				tp.searchTransactionTxtField.sendKeys(payeeName);
+//				Thread.sleep(2000);
+//				
+//				if (Verify.objExists(tp.txtNoResultFound))
+//					Commentary.log(LogStatus.INFO, "PASS: Successfully deleted the transaction");
+//				else
+//					Commentary.log(sa, LogStatus.FAIL, "Unable to delete the selected transaction");
+//				
+//				sa.assertAll();
+//				} else {
+//					Commentary.log(LogStatus.INFO, "Automation blocked for Android for Swipe feature");
+//				}
+//			}
+			
+			@Test (priority = 18)
+			public void TC19_ValidateHamburgerMenuOptions ()throws Exception {
+			  
+			  OverviewPage op = new OverviewPage();
+			  Commentary.log(LogStatus.INFO, "Validating hamburger menu options");
+			  
+			  op.hambergerIcon.click();
+			  //Thread.sleep(20000);
+			  SoftAssert sa = new SoftAssert();
+			  SettingsPage sp = new SettingsPage();
+			  Helper h = new Helper();
+			    
+			      if(sp.verifyQuickenID(getUsername_basedOnEnv()))
 
 	@Test (priority=14, enabled = false)
 	public void TC15_VerifyTransactionSummary_TransactionDetails() throws Exception {
@@ -931,7 +1120,108 @@ public class Daily_Regression_Test extends Recovery {
 
 		sa.assertAll();
 
-	}
+			  OverviewPage op = new OverviewPage();
+			  op.hambergerIcon.click();
+			  
+			  SettingsPage sp = new SettingsPage();
+			  sp.HelpLegalTxt.click();
+			  Thread.sleep(2000);
+			  
+			  SoftAssert sa = new SoftAssert();
+			  
+			  MobileElement help = sp.getTextView("Help");
+			  MobileElement link_SupportWebsite = sp.getTextView("Support Website");
+			  MobileElement link_Acknowledgements = sp.getTextView("Acknowledgements");
+			  MobileElement link_LicenseAgreement = sp.getTextView("License Agreement");
+			  MobileElement link_Privacy = sp.getTextView("Privacy");
+			  
+			  if (Verify.objExists(sp.HelpLegalHeaderTxt))
+			    Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Help Legal text is NOT displayed");
+			  
+			  if (Verify.objExists(help))
+			    Commentary.log(LogStatus.INFO, "PASS: Help text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Help text is NOT displayed");
+			  
+			  if (Verify.objExists(link_SupportWebsite))
+			    Commentary.log(LogStatus.INFO, "PASS: Support Website Link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Support Website Link is NOT displayed");
+			  
+			  if (Verify.objExists(sp.getTextView("Legal")))
+			    Commentary.log(LogStatus.INFO, "PASS: Legal text is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Legal text is NOT displayed");
+			  
+			  if (Verify.objExists(link_Acknowledgements))
+			    Commentary.log(LogStatus.INFO, "PASS: Acknowledgements link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Acknowledgements link is NOT displayed");
+			  
+			  if (Verify.objExists(link_LicenseAgreement))
+			    Commentary.log(LogStatus.INFO, "PASS: License Agreement link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "License Agreement link is NOT displayed");
+			  
+			  if (Verify.objExists(link_Privacy))
+			    Commentary.log(LogStatus.INFO, "PASS: Privacy link is displayed");
+			  else
+			    Commentary.log(sa, LogStatus.FAIL, "Privacy link is NOT displayed");
+			  
+			  sa.assertAll();
+			  }
+			
+//				@Test (priority=23)
+//				public void TC24_VerifyTransactionSummary_CategoryScreen() throws Exception {
+//					Commentary.log(LogStatus.INFO, "Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+//					OverviewPage op = new OverviewPage();
+//					Helper h = new Helper();
+//					op.tapOnTransactionSummaryCard();
+//					SoftAssert sa = new SoftAssert();
+//					
+//					TransactionSummaryPage ts = new TransactionSummaryPage();
+//					ts.categoryTab.click();
+//					
+//					String sCategoryAmount_before = ts.categoryTile.getText();
+//					Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+//					System.out.println("Category amount is "+dCategoryAmount_before);
+//					
+//					TransactionDetailPage td = new TransactionDetailPage();
+//					TransactionRecord tRec = new TransactionRecord();
+//					tRec.setAmount("10.00");
+//					tRec.setAccount(sManualChecking);
+//					tRec.setPayee("walmart");
+//					tRec.setCategory("Internet");
+//					tRec.setTransactionType("expense");
+//					h.getContext();
+//					
+//					ts.backButtonOnHeader.click();
+//					
+//					op.scrollToTop();
+//					
+//					op.addTransaction.click();
+//					td.addTransaction(tRec);
+//					
+//					Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+//					
+//					op.tapOnTransactionSummaryCard();
+//					ts.categoryTab.click();
+//					
+//					String sCategoryAmount_after = ts.categoryTile.getText();
+//					Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+//					Double d = Double.parseDouble(tRec.getAmount());
+//					System.out.println("Category amount is "+dCategoryAmount_after);
+//					
+//					if (dCategoryAmount_after+d==dCategoryAmount_before)
+//						Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+//					else
+//						Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+//					
+//					sa.assertAll();
+//					
+//				}
 
 	@Test (priority = 15, enabled = false)
 	public void TC16_VerifyTransactionSummary_PayeeScreen() throws Exception {
