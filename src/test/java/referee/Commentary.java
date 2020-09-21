@@ -12,8 +12,7 @@ public class Commentary extends Recovery  {
 	
 	/* public static void log (LogStatus ls, String msg){
 		  ExtentTest quickenTest = Recovery.quickenTest;
-		  
-		  
+		   
 		  //quickenTest.log(ls, msg);
 		 // System.out.println(ls);
 		  
@@ -36,16 +35,13 @@ public class Commentary extends Recovery  {
 			default:
 				System.out.println("Invalid logstatus "+ls);
 			  
-		  }
-		  
-		  
+		  }  
 	  }*/
 	
 	public static void log (SoftAssert sa, LogStatus ls, String msg ) {
 		
 		quickenTest.log(ls, msg);
 		System.out.println(msg);
-		
 		
 		if (ls == LogStatus.FAIL) {
 			//ErrorUtil.addVerificationFailure(msg);
@@ -61,7 +57,6 @@ public class Commentary extends Recovery  {
 		
 		quickenTest.log(ls, msg);
 		System.out.println(msg);
-		
 		
 		if (ls == LogStatus.FAIL) {
 			ErrorUtil eu = new ErrorUtil();

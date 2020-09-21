@@ -647,7 +647,7 @@ public class pract_1 extends Recovery {
 		else
 			quickenTest.log(LogStatus.FAIL,"RecentTransactions card did not appear on overview screen.");
 		
-		if (Verify.objExists(o.recentTxns_NoTxnsAvaialable))
+		if (Verify.objExists(o.recentTxns_NoTxnsAvailable))
 			quickenTest.log(LogStatus.INFO,"RecentTransactions card, [No Transactions available] got dispalyed");
 		else
 			quickenTest.log(LogStatus.FAIL,"RecentTransactions card [No Transactions available] did not appear");	

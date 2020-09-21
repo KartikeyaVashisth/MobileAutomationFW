@@ -65,28 +65,17 @@ public class WelcomePage {
 	
 	public void setEnvironment(String preprod) throws Exception{
 	
-	
-	public void setEnvironment(String preprod) throws InterruptedException{
-		
-		Commentary.log(LogStatus.INFO, "Setting Environment to "+preprod);
-		
-		if (preprod.equals("prod"))
-			return;
-		
+//		if (preprod.equals("prod"))
+//			return;
+
 		this.xpath_Environment.click();
 
 		if (preprod.equals("stage")) {
 			this.xpath_chkboxStageEnvironment.click();
 		}
 		
-		if (preprod.equals("stage")){
-			this.xpath_chkboxStageEnvironment.click();
-			
-			Helper h = new Helper();
-			
-			if (h.getEngine().equals("ios"))
-				this.linkAppConfigDone.click();
-			
+		else if (preprod.equals("prod")) {
+			this.xpath_chkboxProductionEnvironment.click();
 		}
 		else
 			Commentary.log(LogStatus.INFO, preprod+" is not been handled in the appium API setEnvironment.");
@@ -98,12 +87,11 @@ public class WelcomePage {
 		
 		// confirm if the environment dialog got disappeared or not
 		Thread.sleep(1000);
-		
-		/*
-		if (! Verify.objExists(this.xpath_btnWelcomeSignIn))
-			Engine.ad.navigate().back();
-		*/
-		System.out.println("Environment set to "+preprod);
+
+		if (Verify.objExists(this.xpath_chkboxStageEnvironment))
+			Engine.getDriver().navigate().back();
+
+		//System.out.println("Environment set to "+preprod);
 		Thread.sleep(500);	
 	}
 }

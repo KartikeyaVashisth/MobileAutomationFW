@@ -1,5 +1,6 @@
 package tournament;
 
+import java.io.File;
 import java.io.IOException;
 import support.Recovery;
 import java.lang.reflect.Method;
@@ -23,10 +24,9 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.saucelabs.saucerest.SauceREST;
 
 import referee.ErrorUtil;
-
-
 
 public class PracticeMatch extends Recovery  {
 	
@@ -37,21 +37,30 @@ public class PracticeMatch extends Recovery  {
 	ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("/users/kgrandhi/extent.html");*/
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
-		/*DateFormat date =  new SimpleDateFormat("MMM");
-		Date date1 = new Date();
-		System.out.println(date.format(date1).toString());*/
+		// To upload Release build to Sauce, Run this main block.
+//		String appPath ="/Users/kvashisth/Downloads/CompanionApk/Quicken.5.22.0.19923.google.apk";
+//		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+//		File f = new File(appPath);
+//		try {
+//			String response = r.uploadFile(f, "Quicken.apk", true);
+//			System.out.println("Sauce Upload Response -->>" +response);
+//			System.out.println("Completed..uploading build to SAUCE storage");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
-		/*JavascriptExecutor js = (JavascriptExecutor) driver;
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("direction", "down");
-		scrollObject.put("element", ((RemoteWebElement) element).getId());
-		js.executeScript("mobile: scroll", scrollObject);*/
-		
-		
-		
-
+		//For iOS.
+		String appPath1 ="/Users/kvashisth/Downloads/companion.zip";
+		SauceREST r1 = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f1 = new File(appPath1);
+		try {
+			String response = r1.uploadFile(f1, "IOSRegression.zip", true);
+			System.out.println("Sauce Upload Response -->>" +response);
+			System.out.println("Completed..uploading build to SAUCE storage");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*@Test
@@ -60,9 +69,6 @@ public class PracticeMatch extends Recovery  {
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 		test = extent.createTest("MyFirstTest", "Sample description");
-
-		
-		
 		
 		// log(Status, details)
         test.log(Status.INFO, "This step shows usage of log(status, details)");
@@ -96,10 +102,7 @@ public class PracticeMatch extends Recovery  {
 	public void Over2()  {
 		
 		try{
-			
 			Assert.assertEquals(true, false);
-			
-			
 		}
 		catch (Throwable t){
 			System.out.println("ddddddddddddddddd");
@@ -109,10 +112,7 @@ public class PracticeMatch extends Recovery  {
 		System.out.println("ddddddddddddddddd");
 		
 		try{
-			
-			Assert.assertEquals(true, false);
-			
-			
+			Assert.assertEquals(true, false);	
 		}
 		catch (Throwable t){
 			System.out.println("ddddddddddddddddd");
@@ -120,19 +120,14 @@ public class PracticeMatch extends Recovery  {
 			ErrorUtil.addVerificationFailure(t);
 		}
 		System.out.println("ddddddddddddddddd");
-		
-		
 	}
 	
 	@Test
 	public void Over3()  {
 		
 		try{
-			
 			Assert.assertEquals(true, false);
 			System.out.println("nnnnnn");
-			
-			
 		}
 		catch (Throwable t){
 			System.out.println("ddddddddddddddddd");
@@ -140,8 +135,6 @@ public class PracticeMatch extends Recovery  {
 			ErrorUtil.addVerificationFailure(t);
 		}
 		System.out.println("ddddddddddddddddd");
-		
-		
 	}
 	
 	@Test
@@ -151,7 +144,6 @@ public class PracticeMatch extends Recovery  {
 
         // creates a toggle for the given test, adds all log events under it    
         ExtentTest test = extent.startTest("Extent Report Test", "Sample description");
-     
 
         // log(LogStatus, details)
         test.log(LogStatus.INFO, "Logging info...(logStatus, details)");
@@ -161,10 +153,7 @@ public class PracticeMatch extends Recovery  {
        
         
         try{
-			
-			Assert.assertEquals(true, false);
-			
-			
+			Assert.assertEquals(true, false);	
 		}
 		catch (Throwable t){
 			System.out.println("ddddddddddddddddd");
@@ -173,15 +162,11 @@ public class PracticeMatch extends Recovery  {
 			//test.log(LogStatus.ERROR, t);
 			test.log(LogStatus.INFO, "......text after error ........");
 		}
-        
-        
-        
         // end test
         extent.endTest(test);
         
         // calling flush writes everything to the log file
         extent.flush();
-		
 	}
 	
 	@Test
@@ -202,12 +187,8 @@ public class PracticeMatch extends Recovery  {
 			result.setStatus(ITestResult.FAILURE);
 			System.out.println("111111111111111111111111111111111111111");
 			System.out.println(result.getThrowable());
-			System.out.println("111111111111111111111111111111111111111");
-			
-			
-		
+			System.out.println("111111111111111111111111111111111111111");	
 	}
-	
-	
+
 	}*/
 	}

@@ -21,7 +21,6 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.hamcrest.Matcher;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -54,8 +53,7 @@ public class Helper {
 			String key = (String) readProps.nextElement();
 			String value = properties.getProperty(key);
 			globals.testProperty.put(key, value);
-			
-			
+					
 		}
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
@@ -67,19 +65,17 @@ public class Helper {
 			System.out.println(e.getMessage());	
 		}
 		
-		
-		
 }
 	
 	public String getHost(){
 		
 		Globals globals = new Globals();
 		
-		if (System.getProperty("host") == null)
-			return globals.testProperty.get("host");
-		
+		if (System.getProperty("host") == null) {
+			//return globals.testProperty.get("host");
+			return Recovery.sHost.get();
+		}
 		return System.getProperty("host");
-		
 	}
 	
 	public String getUsername(){
@@ -87,51 +83,48 @@ public class Helper {
 		Globals globals = new Globals();
 		
 		return globals.testProperty.get("username");
-		
 	}
-	
-	
 	
 	public String getPassword(){
 		
 		Globals globals = new Globals();
 		return globals.testProperty.get("password");
-		
 	}
 	
 	public String getDatasetName(){
 		
 		Globals globals = new Globals();
-		
 		return globals.testProperty.get("dataset");
-		
 	}
+	
 	public String getEngine(){
 		
 		Globals globals = new Globals();
 		
-		
-		
-		if (System.getProperty("engine") == null) 
-			return globals.testProperty.get("engine");
-		
-		
+		if (System.getProperty("engine") == null) {
+			//return globals.testProperty.get("engine");
+			return Recovery.sEngine.get();
+		}
 		return System.getProperty("engine");
-		
 	}
 	
 	public String getEnv() {
 		Globals globals = new Globals();
-		return globals.testProperty.get("env");
-		
+
+		// return globals.testProperty.get("env");
+		return Recovery.sEnv.get();
 	}
 	
+	public String getTestName(){
+
+		return Recovery.sTestName.get();
+	}
+
 	public String getDeviceName(){
 		
 		Globals globals = new Globals();
 		
 		return globals.testProperty.get("deviceName");
-		
 	}
 	
 /*	public void initAppiumDriver(){
@@ -195,61 +188,6 @@ public class Helper {
 	}
 	*/
 	
-	public DesiredCapabilities getTabCloudCapabilities(){
-		
-		DesiredCapabilities capabilities = new DesiredCapabilities();
-		
-		if (getEngine().equals("android")){
-			
-			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-			//capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
-			//capabilities.setCapability("appiumVersion", "1.7.1");
-			capabilities.setCapability("appiumVersion", "1.13.0");
-			capabilities.setCapability("automationName","appium");
-			//capabilities.setCapability("deviceName","Android Emulator");
-			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
-			capabilities.setCapability("deviceName","Samsung Galaxy Tab A 10 GoogleAPI Emulator");
-			
-			capabilities.setCapability("deviceOrientation", "portrait");
-			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("platformVersion","8.1");//5.1
-			//capabilities.setCapability("platformVersion","7.0");
-			capabilities.setCapability("platformName","Android");
-			capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("maxDuration", 4000);
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("noResetValue", true);
-			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
-			//capabilities.setCapability("app", "sauce-storage:QuickenRelease.apk");
-			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
-			capabilities.setCapability("appPackage","com.quicken.qm2014");
-			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-		}
-		else if(getEngine().equals("ios")){
-			capabilities.setCapability("platformName", "iOS");
-			capabilities.setCapability("deviceName","iPad Simulator");
-			capabilities.setCapability("platformVersion","12.2"); //9.3
-			//capabilities.setCapability("platformVersion", "11.2");
-			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("deviceOrientation", "portrait");
-			//capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
-			capabilities.setCapability("appiumVersion", "1.13.0");// 1.5.3
-			capabilities.setCapability("autoWebView", "true");
-			//capabilities.setCapability("autoAcceptAlerts", true);
-		    capabilities.setCapability("autoGrantPermissions", true);
-		    capabilities.setCapability("maxDuration", 4000);
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("noResetValue", true);
-			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
-			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
-			capabilities.setCapability("automationName","XCUITest");
-			
-		}
-		return capabilities;
-		
-	}
-	
-	
 	public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -257,17 +195,15 @@ public class Helper {
 		if (getEngine().equals("android")){
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-			//capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
-			//capabilities.setCapability("appiumVersion", "1.7.1");
 			capabilities.setCapability("appiumVersion", "1.9.1");
 			capabilities.setCapability("automationName","appium");
 			//capabilities.setCapability("deviceName","Android Emulator");
-			//capabilities.setCapability("deviceName","Samsung Galaxy S8 Plus HD GoogleAPI Emulator");
-			capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
+			capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
+			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
 			
 			capabilities.setCapability("deviceOrientation", "portrait");
 			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("platformVersion","6.0");//5.1
+			capabilities.setCapability("platformVersion","8.1"); 
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
@@ -312,53 +248,29 @@ public class Helper {
 			
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
-			capabilities.setCapability("deviceName","emulator-5556");
+			capabilities.setCapability("deviceName","emulator-5554");
 			capabilities.setCapability("platformVersion","8.1");//6.0
-			//capabilities.setCapability("deviceName","emulator-5554");
-			//capabilities.setCapability("platformVersion","6.0");//6.0
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("newCommandTimeout", 1120);
+			capabilities.setCapability("automationName", "Appium");
 			//capabilities.setCapability("appWaitActivity","com.android.settings.Settings$OverlaySettingsActivity, com.quicken.qm2014.MainActivity");
 			//capabilities.setCapability("appWaitPackage","com.android.settings, com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 			
-			/*
-			capabilities.setCapability("deviceName","emulator-5556");
-			capabilities.setCapability("platformVersion","8.1");//6.0
-			//capabilities.setCapability("platformVersion","7.0");
-			capabilities.setCapability("noReset", true);
-			capabilities.setCapability("autoGrantPermissions", true);
-			//capabilities.setCapability("automationName","UiAutomator2");
-			//capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("platformName","Android");
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-			capabilities.setCapability("appPackage","com.quicken.acme");
-			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Downloads/chromedriver-2");
-			*/
-			
 		}
 		else if(getEngine().equals("ios")){
 			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
-			capabilities.setCapability("platformVersion", "12.0");
-			capabilities.setCapability("appiumVersion", "1.8.0"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
-
-			/*
 			capabilities.setCapability("platformVersion", "12.1");
 			capabilities.setCapability("appiumVersion", "1.15.1"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Simulator");
-			*/
-			//capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 8");
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
@@ -369,9 +281,8 @@ public class Helper {
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
 	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
-	        capabilities.setCapability("app", "/Users/kgrandhi/Downloads/AcmeQuicken.zip");
-	        
-			
+	        capabilities.setCapability("app", "/Users/kvashisth/Downloads/companion.zip");
+	        	
 		}
 		
 		return capabilities;
@@ -399,8 +310,7 @@ public class Helper {
 	}
 	
 	public void waitForRefresh (int millisec) throws InterruptedException{
-		Thread.sleep(millisec);
-		
+		Thread.sleep(millisec);	
 	}
 	
 //	public void quicken_scroll_mobile() throws InterruptedException {
@@ -415,21 +325,14 @@ public class Helper {
 //			
 //			Dimension size = Engine.iosd.manage().window().getSize();
 //			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
-//			Thread.sleep(3000);
-//			
-//			
+//			Thread.sleep(3000);	
 //		}
 //	}
 	
 	public void hideKeyBoard() throws Exception {
 		
-		if (this.getEngine().equals("android"))
-			try {
-				Engine.ad.hideKeyboard();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (this.getEngine().equals("android")) 
+			Engine.ad.hideKeyboard();
 		else
 			Engine.iosd.hideKeyboard();
 		
@@ -474,10 +377,9 @@ public class Helper {
 	
 	public String getFutureDaysDate(Integer daysFromToday) {
 		
-		Date date = DateUtils.addDays(new Date(), daysFromToday);
-		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy");
-		
-		return sdf.format(date);
+		Date date = DateUtils.addDays(new Date(), daysFromToday); //Date object and it will select today's date as we are passing 0.
+		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy"); //SimpleDateFormat class will return date object in any date format we need.
+		return sdf.format(date); //It will return today's date as today's date (eg 4/08/2020)
 		
 	}
 	public String getDateformat(Integer daysFromToday) {
@@ -523,8 +425,7 @@ public class Helper {
 	public String getLastMonthsDate() {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");  
-       return formatter.format(LocalDate.now().minusMonths(1));
-       
+       return formatter.format(LocalDate.now().minusMonths(1)); 
 	}
 	
 	public String[] getLastSixMonths() {
@@ -534,7 +435,6 @@ public class Helper {
 		        YearMonth date = YearMonth.now().minusMonths(i);
 		        String monthName = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
 		        s[i]=monthName;
-		        
 		    }
 		 
 		 return s;
@@ -545,7 +445,6 @@ public class Helper {
 		long time = c.getTimeInMillis();
 		String timeAsString = String.valueOf(time);		 
 		return timeAsString;
-		
 	}	
 		
 	public static String getCurrentMonth () {
@@ -557,9 +456,5 @@ public class Helper {
 		return currentMonth;
 		
 	}		
-	
-	
-	
-	
 
 }

@@ -37,8 +37,6 @@ public class AccountStickiness_Test extends Recovery {
 		
 		TransactionDetailPage td = new TransactionDetailPage();
 		
-		 
-		
 	}
 	
 	

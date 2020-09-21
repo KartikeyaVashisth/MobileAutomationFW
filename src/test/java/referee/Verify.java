@@ -41,7 +41,7 @@ public class Verify {
 			return false;	
 		}
 		catch (Throwable e){
-			System.out.println("****Error Occured****: Method->objExists"+e.getMessage());
+			//System.out.println("****Error Occurred****: Method->objExists"+e.getMessage());
 			quickenTest.log(LogStatus.ERROR,e.getMessage());
 			return false;	
 		}
@@ -69,7 +69,6 @@ public class Verify {
 		
 		Integer iCount = 0;
 		
-		
 		while (iCount < wttime){
 			
 			if (! objExists_check(me))
@@ -77,11 +76,9 @@ public class Verify {
 			else
 				return true;
 				
-			
-			System.out.println("12secs * "+iCount);
-			iCount++;
-			
-			
+			//System.out.println("12secs * "+iCount);
+			Commentary.log(LogStatus.INFO, "12secs * "+iCount);
+			iCount++;	
 		}
 		
 		return false;	
@@ -99,7 +96,6 @@ public class Verify {
 			else
 				return true;
 				
-			
 			iCount++;		
 			
 		}

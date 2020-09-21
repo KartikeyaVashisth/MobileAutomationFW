@@ -13,6 +13,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 import org.testng.internal.Utils;
 
@@ -31,20 +34,49 @@ public class Recovery {
 	
 	public static ExtentTest quickenTest;
 	
+	public static ThreadLocal<String> sEngine = new ThreadLocal<String>();
+	public static ThreadLocal<String> sHost= new ThreadLocal<String>();
+	public static ThreadLocal<String> sTestName= new ThreadLocal<String>();
+	public static ThreadLocal<String> sEnv= new ThreadLocal<String>();
 	
+	public Boolean wannaUploadTheBuild(){
+		
+		String uploadBuild = System.getProperty("buildpath");
+		
+		if (uploadBuild == null)
+			return false;
+		
+		System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
+		return true;
+	}
 	
 	@BeforeSuite
-	public static void testPlanEnter() throws Exception{
+	@Parameters({"host","engine","test","env"})
+	public static void testPlanEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env) throws Exception{
 		
 		System.out.println("....Loading Properties....");
 		// Load properties
 		Helper h = new Helper();
-		h.loadProperties();
-		
+		//h.loadProperties();
+		// load engine and host
+		if (host.equals("readFromPropertiesFile")) {
+			Globals g = new Globals();
+			h.loadProperties();
+			sEngine.set(g.testProperty.get("engine"));
+			sHost.set(g.testProperty.get("host"));
+			sTestName.set("LOCAL_" + g.testProperty.get("engine"));
+			sEnv.set(g.testProperty.get("env"));
+		} 
+		else {
+			sEngine.set(engine);
+			sHost.set(host);
+			sTestName.set(testName);
+			sEnv.set(env);
+		}
 		
 		System.out.println("uploading build to SAUCE storage");
 		System.out.println("build path... "+System.getProperty("buildpath"));
-		String appPath = System.getProperty("buildpath");
+		String appPath = "DoNotUpload"; //System.getProperty("buildpath");
 		if (! appPath.equalsIgnoreCase("DoNotUpload")){
 			String [] a = appPath.split("/");
 			System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
@@ -70,17 +102,12 @@ public class Recovery {
 			
 		}
 		
-		
-		
-		
 		//Users/jenkins/workspace/Quicken_ReactNative_Develop/develop/android/Quicken.5.8.0.11928.debug.apk
 		
 		System.out.println("....Initializing Reports....");
 		
 		ExtentManager em = new ExtentManager();
 		em.initializeRepObject();
-		
-		
 		
 		System.out.println("....Setting up Mobile Engine....");
 		// test
@@ -93,41 +120,35 @@ public class Recovery {
 				Thread.sleep(1000);
 				Engine.ad.findElement(By.xpath("//android.widget.Switch[@text='OFF']")).click();
 				Thread.sleep(1000);
-				}
+			}
 			catch (Exception e) {
-					
-				}	
+
+			}	
 		}
-		
+
 		else {
 			try {
 				Engine.iosd.switchTo().alert().accept();
-				}
+			}
 			catch (Exception e) {
-					
-				}
+
+			}
 		}
-		
-		
 		System.out.println("launch done...");
-		
-		
 	}
 	
 	@SuppressWarnings("unchecked")
 	@BeforeMethod
 	public static void testCaseEnter(Method method) throws Exception{
 		System.out.println("Before Method started...........");
-		
-		
+	
 		// reset errors
 		ErrorUtil.resetTestErrors();
 		
 		// Load properties
 		/*Helper h = new Helper();
 		h.loadProperties();*/
-		
-		
+	
 		// start test logs
 		String methodName = method.toString();//.replace("public", "").replace("void","").trim();
 		methodName = methodName.replace("public", "").replace("void","").replace(" throws java.lang.Exception", "").trim();
@@ -156,24 +177,16 @@ public class Recovery {
 			Thread.sleep(12000);
 		}
 		else {
-			
 			Engine.iosd.launchApp();
-			
 		}
-			
-		
-		
 		Thread.sleep(5000);
 		//System.out.println("app launched.....");
-		//System.out.println("Before Method end...........");
-			
+		//System.out.println("Before Method end...........");	
 	}
 	
 	@AfterMethod
 	public static void testCaseExit(ITestResult result, Method method) throws InterruptedException{
-		
-		
-		
+
 		ExtentTest quickenTest = Recovery.quickenTest;
 		ExtentManager em = new ExtentManager();
 		
@@ -181,8 +194,6 @@ public class Recovery {
 		if (result.getStatus() == ITestResult.FAILURE) {
 		      quickenTest.log(LogStatus.FAIL, result.getThrowable());
 		   } 
-		
-		
 		
 		/*System.out.println("softFails size...."+softFails.size());
 		System.out.println("softFails size...."+softFails.size());
@@ -198,8 +209,7 @@ public class Recovery {
 			
 			/*result.setStatus(ITestResult.FAILURE);
 			System.out.println("set the status to failure......!");
-			
-			
+	
 			int size = softFails.size();
 			//if there's only one failure just set that
 			if (size == 1) {
@@ -231,28 +241,20 @@ public class Recovery {
 
 				result.setThrowable(merged);
 				quickenTest.log(LogStatus.FAIL, result.getThrowable());
-				
 			}*/
-			
 		}
 		else{
-			
 			quickenTest.log(LogStatus.PASS,method.getName());
-			
-			
 		}
 			
 		em.initializeRepObject().endTest(quickenTest);
 		em.initializeRepObject().flush();
 		Thread.sleep(3000);
 		
-		
-		
 		if (Engine.ad != null){
 			Engine.ad.closeApp();
 			//Engine.ad.resetApp();
-			Thread.sleep(2000);
-			
+			Thread.sleep(2000);	
 		}
 		else{
 			Engine.iosd.closeApp();
@@ -263,21 +265,13 @@ public class Recovery {
 		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
 		System.out.println("");
 		System.out.println("-----------------------------------------------------------------");
-		System.out.println("");
-		
-		
-		
-		
-		
+		System.out.println("");	
 	}
 	
 	@AfterSuite
 	public void TestPlanExit(){
 		
-		
 		Helper h = new Helper();
-		
-		
 		// close driver
 		if (h.getEngine().equals("android")){
 			//Engine.ad.close();
@@ -288,11 +282,6 @@ public class Recovery {
 			Engine.iosd.quit();
 		}
 		
-		
-		
-		
 	}
 	
-	
-
 }

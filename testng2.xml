@@ -9,6 +9,7 @@
     <classes>
      <!--  <class name="tournament.RegressionCases"/> -->
      <class name="tournament.Daily_Regression_Test"/>
+     <class name="tournament.Daily_Regression_Test2"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

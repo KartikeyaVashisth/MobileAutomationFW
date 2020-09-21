@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -37,11 +38,66 @@ import referee.Verify;
 import support.Engine;
 import support.Helper;
 import support.Recovery;
+import support.Recovery;
+import support.UserName;
 
-public class Smoke_test extends Recovery {
+public class Smoke_test1 extends Recovery { //Used this class to test the stage environment.
 	
 	ExtentReports rep = ExtentManager.initializeRepObject();
 	Helper support = new Helper();
+	
+	String sPassword = "Quicken@01";
+	String sDataset ="";
+
+	public String getUsername_basedOnEnv() throws Exception{
+		
+		UserName r = new UserName();
+		r.stage_ios = "newuserautomation_ios++@quicken.com";
+		r.stage_android = "newuserautomation_android++@quicken.com";
+		r.prod_ios = "ios2_automation@mailinator.com";
+		r.prod_android = "android2_automation@mailinator.com";
+		return r.getUserName();	
+	}
+	
+	@Test(priority = 0, enabled = false)
+	public void NUF_Test1() throws Exception{
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+	
+		String sUsername = getUsername_basedOnEnv();
+		String sAcct= "auto_"+new SimpleDateFormat("HH-mm-ss").format(new Date());
+		
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn(sUsername, sPassword, sDataset);
+	
+	}
+	
+	@Test(priority = 1, enabled = false)
+	public void verifyAccountTest1() throws Exception {
+		
+		//ExtentTest quickenTest = Recovery.quickenTest;
+		String acctToVerify = "AllReconciledTransactions";
+		Helper helper = new Helper();
+		SoftAssert sa = new SoftAssert();
+		
+		WelcomePage w = new WelcomePage();
+		
+		SignInPage signIn = new SignInPage();
+		signIn.signIn();
+		Thread.sleep(10000);
+		//Engine.ad.rotate(ScreenOrientation.LANDSCAPE);
+		Engine.iosd.rotate(ScreenOrientation.LANDSCAPE);
+	    
+		Thread.sleep(4000);
+	    OverviewPage op = new OverviewPage();
+	    op.navigateToAcctList();
+	    
+	   	sa.assertAll(); 
+	}
 	
 	@Test(priority = 0)
 	public void verifyAccountTest() throws Exception {
@@ -83,8 +139,7 @@ public class Smoke_test extends Recovery {
 	   	helper.waitForRefresh(2000);
 	   	acctListPage.backButton.click();*/
 	   	//txnPage.navigateBackToDashboard();
-	   	sa.assertAll();
-	   	 
+	   	sa.assertAll(); 
 	}
 	
 	@Test(priority = 1)
@@ -94,7 +149,7 @@ public class Smoke_test extends Recovery {
 		String userID = support.getUsername();//"kalyan.grandhi@quicken.com";
 		String cloudName= support.getDatasetName();//"Transaction_Status";
 		SoftAssert sa = new SoftAssert();
-		
+	
 		WelcomePage w = new WelcomePage();
 		
 		/*SignInPage signIn = new SignInPage();
@@ -117,7 +172,6 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: CloudName ["+cloudName+"] verification Failed.");
 		
-		
 		try {
 			System.out.println("1*******");
 			System.out.println(settingsPage.passcode.getText());
@@ -137,8 +191,6 @@ public class Smoke_test extends Recovery {
 			System.out.println("uuuuuuuuuuuu "+e.getMessage());
 		}
 		
-		
-			
 		// verify other options on settings page
 		if (Verify.objExists(settingsPage.passcode))
 			Commentary.log(sa, LogStatus.INFO,"Passcode verified successfully!");
@@ -160,7 +212,7 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"logout verification Failed.");*/
 		
-		sa.assertAll();
+		sa.assertAll();	
 	}
 	
 	@Test(priority = 2)
@@ -204,6 +256,7 @@ public class Smoke_test extends Recovery {
 		signIn.signIn();*/
 		SoftAssert sa = new SoftAssert();
 		
+		
 		// overview screen
 		OverviewPage o = new OverviewPage();
 		o.tapOnTrendingCard();
@@ -241,7 +294,8 @@ public class Smoke_test extends Recovery {
 		TransactionSummaryPage cashflow = new TransactionSummaryPage();
 		
 		if (Verify.objExists(cashflow.transactionSummaryHeader))
-			Commentary.log(sa, LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
+			System.out.println("pass");
+			//Commentary.log(sa, LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
 		
@@ -253,7 +307,8 @@ public class Smoke_test extends Recovery {
 			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
-		sa.assertAll();	
+		sa.assertAll();
+			
 	}
 	
 	@Test(priority = 5)
@@ -300,7 +355,8 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
 		
-		sa.assertAll();		
+		sa.assertAll();
+			
 	}
 	
 	@Test(priority = 6)
@@ -376,7 +432,8 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"Budgets card, Personal Expenses group did not appear.");
 		
-		sa.assertAll();	
+		sa.assertAll();
+		
 	}
 	
 	@Test(priority = 8)
@@ -422,4 +479,5 @@ public class Smoke_test extends Recovery {
 	
 		sa.assertAll();	
 	}
+	
 }
