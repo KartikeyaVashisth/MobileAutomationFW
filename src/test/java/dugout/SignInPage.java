@@ -54,11 +54,8 @@ public class SignInPage {
 	public MobileElement emailID;
 	
 	
-	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
-	//@iOSFindBy(xpath="//XCUIElementTypeTextField")
-	//@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
 	public MobileElement userName;
 	
 	@AndroidFindBy(xpath="//*[@content-desc ='Password' or @text ='Password']")
@@ -67,11 +64,8 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name=='Password'$]")
 	public MobileElement lblPassword;
 	
-	//@AndroidFindBy(xpath="//input[@id='ius-password']")
-	@AndroidFindBy(xpath="//android.widget.EditText[@password='true']")
-	//@iOSFindBy(xpath="//XCUIElementTypeSecureTextField")
-	//@iOSXCUITFindBy(iOSClassChain = "**/*[$type=='XCUIElementTypeSecureTextField'$]")
-	@iOSXCUITFindBy(className = "XCUIElementTypeSecureTextField")
+	@AndroidFindBy(xpath="//android.widget.EditText[2]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField")
 	public MobileElement password;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='SIGN IN']")
@@ -126,11 +120,11 @@ public class SignInPage {
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
-		
-		emailID.sendKeys(support.getUsername());
+		System.out.println("Username: "+support.getUsername());
+		userName.sendKeys(support.getUsername());
 		lblPassword.click();
 		Thread.sleep(1000);
-		lblPassword.sendKeys(support.getPassword());
+		this.password.sendKeys(support.getPassword());
 		if (support.getEngine().equals("android"))
 			Engine.ad.hideKeyboard();
 		Thread.sleep(1000);
