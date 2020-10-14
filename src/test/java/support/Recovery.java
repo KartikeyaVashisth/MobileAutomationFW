@@ -57,7 +57,7 @@ public class Recovery {
 		System.out.println("....Loading Properties....");
 		// Load properties
 		Helper h = new Helper();
-		//h.loadProperties();
+		h.loadProperties();
 		// load engine and host
 		if (host.equals("readFromPropertiesFile")) {
 			Globals g = new Globals();
@@ -76,7 +76,7 @@ public class Recovery {
 		
 		System.out.println("uploading build to SAUCE storage");
 		System.out.println("build path... "+System.getProperty("buildpath"));
-		String appPath = "DoNotUpload"; //System.getProperty("buildpath");
+		String appPath = System.getProperty("buildpath");
 		if (! appPath.equalsIgnoreCase("DoNotUpload")){
 			String [] a = appPath.split("/");
 			System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
