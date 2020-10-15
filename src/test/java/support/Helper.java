@@ -32,12 +32,35 @@ import io.appium.java_client.remote.MobileCapabilityType;
 
 public class Helper {
 	
+	
+	public void getFileNames() throws Exception{
+		
+		//Creating a File object for directory
+	      File directoryPath = new File(this.getClass().getClassLoader().getResource("").getPath());
+	      //List of all files and directories
+	      String contents[] = directoryPath.list();
+	      System.out.println("List of files and directories in the specified directory:");
+	      for(int i=0; i<contents.length; i++) {
+	         System.out.println(contents[i]);
+	      }
+	      
+	      
+	      System.out.println("********* under**********");
+	      File f = new File(this.getClass().getClassLoader().getResource("").getPath()+"/props");
+	      System.out.println(f.exists());
+	      System.out.println(f.isDirectory());
+	      System.out.println("********* under**********");
+	}
 	public void loadProperties(){
 		
 		try{
+		
+		getFileNames();
 		Enumeration readProps;
 		
 		String propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
+		
+		System.out.println("Path: "+propFilePath);
 		
 		File file = new File(propFilePath);
 		FileInputStream fileInput = new FileInputStream(file);
