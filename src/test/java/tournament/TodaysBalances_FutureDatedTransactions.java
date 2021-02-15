@@ -28,7 +28,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TBFT1_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -87,7 +87,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TBFT2_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -142,7 +142,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TBFT3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -211,7 +211,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TBFT4_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -235,6 +235,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		
 		OverviewPage op = new OverviewPage();
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		Thread.sleep(2000);
 		sChecking_before = op.checkingBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
@@ -252,6 +253,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		Commentary.log(LogStatus.INFO, "FutureDated Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount: "+tRec.getAmount());
 
 		op.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec1);
 		Verify.waitForObject(op.addTransaction, 2);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
@@ -281,7 +283,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TBFT5_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -349,7 +351,7 @@ public class TodaysBalances_FutureDatedTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TBFT6_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();

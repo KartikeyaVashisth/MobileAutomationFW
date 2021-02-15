@@ -266,6 +266,14 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.EditText']")
 	public MobileElement getTagSearchText;
 	
+	@iOSXCUITFindBy(id="create tag")
+	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create tag\"]")
+	public MobileElement createTag;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][-1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Apply']")
+	public MobileElement tagsApplyButton;
+	
 	// ------------------ TAG SCREEN ------------------
 	
 	// ------------------ Category SCREEN ------------------
@@ -968,8 +976,7 @@ public class TransactionDetailPage {
 			this.categories.click();
 		}
 		
-		Thread.sleep(1000);
-		Engine.ad.getContext();
+		Verify.waitForObject(this.closeCategory, 1);
 		
 		if (! Verify.objExists(this.closeCategory))
 			Commentary.log(LogStatus.FAIL,"Error****** Transaction Detail > tapping on payee, did not open Payee selection screen");
@@ -1012,8 +1019,7 @@ public class TransactionDetailPage {
 			this.categories.click();
 		}
 		
-		Thread.sleep(1000);
-		Engine.iosd.getContext();
+		Verify.waitForObject(this.closeCategory, 1);
 		
 		this.searchCategory(category);
 		Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
@@ -1041,7 +1047,7 @@ public class TransactionDetailPage {
 		
 	}
 	
-	public void selectTags (String[] sTag) throws Exception {
+	public void selectTags (String sTag) throws Exception {
 		
 		Helper h = new Helper();
 		
@@ -1051,54 +1057,61 @@ public class TransactionDetailPage {
 			this.selectTags_ios(sTag);
 	}
 	
-	public void selectTags_android (String[] sTag) throws Exception {
+	public void selectTags_android (String sTag) throws Exception {
 		
-		//String sXpath;// = "//android.widget.TextView[@text='"+category+"']";
-		Integer iCount;
-		
-		this.tags.click();
+		String sXpath="//android.view.ViewGroup[@content-desc='Tags']";
+		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Verify.waitForObject(this.searchTags, 1);
+		this.searchTags.sendKeys(sTag);
+		Helper h = new Helper();
+		h.hideKeyBoard();
 		Thread.sleep(1000);
-		//System.out.println(Engine.ad.getContext());
+
+		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
 		
-		for (iCount=0; iCount<sTag.length; iCount++) {
-			
-			String sXpath = "//android.widget.TextView[@text='"+sTag[iCount]+"']";
-			//System.out.println(Engine.ad.getContext());
-			
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sTag[iCount] + "\").instance(0))"));
-			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);	
-			//System.out.println(Engine.ad.getContext());
+		if (Verify.objExists(createPayee)) {
+				Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(createTag_xpath)));
+				Engine.ad.findElement(By.xpath(createTag_xpath)).click();
+				Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
 		}
-		
-		
-		this.closeTags.click();
+		else {
+			String cc = "//android.widget.TextView[@text='"+sTag+"']";
+			Engine.ad.findElement(By.xpath(cc)).click();
+			Thread.sleep(500);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
+		}
 		Thread.sleep(1000);
-		//System.out.println(Engine.ad.getContext());	
-	
+
+		this.tagsApplyButton.click();
+		Thread.sleep(1000);	
 	}
 	
-	public void selectTags_ios (String[] sTag) throws Exception {
+	public void selectTags_ios (String sTag) throws Exception {
 		
-		//String sXpath;// = "//android.widget.TextView[@text='"+category+"']";
-		Integer iCount;
+		Engine.iosd.findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
+		Verify.waitForObject(this.searchTags, 1);
+		this.searchTags.sendKeys(sTag);
+		Helper h = new Helper();
+		h.hideKeyBoard();
+		Thread.sleep(1000);
+
+		String createTag_xpath="**/XCUIElementTypeOther[`name=‘create tag’`]";
 		
-		this.tags.click();
-		Thread.sleep(500);
-		Engine.iosd.getContext();
-		
-		for (iCount=0; iCount<sTag.length; iCount++) {
-			
-			String sXpath = "//XCUIElementTypeOther[@name='"+sTag[iCount]+"']";
-			Engine.iosd.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(500);	
-			Engine.iosd.getContext();
+		if (Verify.objExists(createTag)) {
+			Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)));
+				Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+				Commentary.log(LogStatus.INFO,"Creating Tag... "+sTag);	
 		}
+		else {
+			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
+			Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+			Thread.sleep(500);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
+		}
+		Thread.sleep(1000);
 		
-		this.closeTags.click();
+		this.tagsApplyButton.click();
 		Thread.sleep(1000);	
-	
 	}
 	
 	public void enterNotes (String sNote) throws Exception {
@@ -1120,8 +1133,9 @@ public class TransactionDetailPage {
 		this.note.click();
 		this.note.clear();
 		this.note.sendKeys(sNote);
-		this.buttonDone_OSKeyBoard.click();
 		
+		Helper h = new Helper();
+		h.hideKeyBoard();
 	}
 	
 	public void enterNotes_ios (String sNote) throws Exception {
@@ -1138,15 +1152,18 @@ public class TransactionDetailPage {
 		this.note.click();
 		this.note.clear();
 		this.note.sendKeys(sNote);
-		this.buttonDone_OSKeyBoard.click();
 		
+		Helper h = new Helper();
+		h.hideKeyBoard();
 	}
 	
-		public void enterCheckNumber (String sCheck) {
+		public void enterCheckNumber (String sCheck) throws Exception {
 		
 			this.addCheckNumber.click();
 			this.addCheckNumber.sendKeys(sCheck);
-			this.buttonDone_OSKeyBoard.click();
+			
+			Helper h = new Helper();
+			h.hideKeyBoard();
 		
 		}
 	
@@ -1228,7 +1245,7 @@ public class TransactionDetailPage {
 				}
 				else {
 					Engine.ad.findElement(By.xpath(allPayees_Xpath)).click();
-					Thread.sleep(500);
+					Thread.sleep(1500);
 					Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 				}
 			}
@@ -1294,7 +1311,7 @@ public class TransactionDetailPage {
 					//String cc = "**/XCUIElementTypeOther[$name='All Payees'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
 					String cc = "**/XCUIElementTypeStaticText[`name='"+payees+"'`]";
 					Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
-					Thread.sleep(500);
+					Thread.sleep(1500);
 					Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 				}
 			}
@@ -1570,7 +1587,7 @@ public class TransactionDetailPage {
 			return true;
 		}
 			
-		Commentary.log(sa, LogStatus.FAIL, "Payee verification failed. Expected ["+payee+"], Actual ["+sActual+"]");
+		Commentary.log(sa, LogStatus.FAIL, "FAIL: Payee verification failed. Expected ["+payee+"], Actual ["+sActual+"]");
  		
  		return false;
  	}

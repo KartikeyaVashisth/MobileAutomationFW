@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BAT tests">
+    <listeners>
+		<listener class-name="referee.CustomListener"/>
+	</listeners>
+	
+  <test name="ScheduledTransactions_Test">
+    <classes>
+     <!--  <class name="tournament.RegressionCases"/> -->
+     <class name="tournament.ScheduledTransactionsTest_1"/>
+     <class name="tournament.ScheduledTransactionsTest_2"/>
+     <class name="tournament.ScheduledTransactionsTest_3"/>
+     <class name="tournament.ScheduledTransactionsTest_4"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -549,9 +549,61 @@ public class OverviewPage {
 			//Engine.iosd.findElement(By.name("'"+currentMonth+" Summary'")).click();
 			transactionSummaryCard.click();
 			Thread.sleep(1000);
-			
 		}
-		
+	}
+	
+	public void tapOnBillsAndIncomeCard() throws Exception{
+
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Bills & Income']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Bills & Income\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(2000);
+		}
+		else {
+			String cc="**/*[`name=='Bills & Income'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+//			scrollObject.put("predicateString", "label == 'Bills & Income'");
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Bills & Income")).click();
+			Thread.sleep(2000);
+		}
+	}
+	
+	public void tapOnNetWorthCard() throws Exception{
+
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='Net Worth']";
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Worth\").instance(0))"));
+			Thread.sleep(1000);
+			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Thread.sleep(2000);
+		}
+		else {
+			String cc="**/*[`name=='Net Worth'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+//			scrollObject.put("predicateString", "label == 'Net Worth'");
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			Engine.iosd.findElement(By.name("Net Worth")).click();
+			Thread.sleep(2000);
+		}
 	}
 	
 	public void tapOnSpendingOverTimeCard() throws Exception{
@@ -564,7 +616,7 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 		}
 		else {
 			//String sXpath="//*[@name='Spending Over Time']";
@@ -591,7 +643,7 @@ public class OverviewPage {
 			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income by Month\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 		}
 		else {
 			//String sXpath="//*[@name='Net Income by Month']";
@@ -717,8 +769,8 @@ public class OverviewPage {
 			Engine.iosd.findElement(By.name("Investing")).click();
 			Thread.sleep(1000);
 		}
-		
 	}
+	
 	public void scrollToTop() throws Exception{
 		
 		Helper h = new Helper();

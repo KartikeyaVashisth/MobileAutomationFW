@@ -33,7 +33,7 @@ public class TransferCases_Test1 extends Recovery {
 	String sSaving = "Saving XX3867";
 	String sManualSavings = "Manual_Savings";
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void TR1_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -112,7 +112,7 @@ public class TransferCases_Test1 extends Recovery {
 	
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TR2_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -201,7 +201,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TR3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -264,7 +264,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TR4_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -353,7 +353,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 		
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TR5_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -422,7 +422,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TR6_test() throws Exception{
 	
 		SoftAssert sa = new SoftAssert();
@@ -487,7 +487,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TR7_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -535,7 +535,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TR8_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -601,7 +601,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void TR9_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -680,7 +680,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void TR10_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -730,7 +730,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void TR11_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -804,7 +804,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 11, enabled = true)
 	public void TR12_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -870,7 +870,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 12, enabled = false)
+	@Test(priority = 12, enabled = true)
 	public void TR13_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -950,7 +950,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 13, enabled = false)
+	@Test(priority = 13, enabled = true)
 	public void TR14_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -1017,7 +1017,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 14, enabled = false)
+	@Test(priority = 14, enabled = true)
 	public void TR15_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -1083,7 +1083,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 15, enabled = false)
+	@Test(priority = 15, enabled = true)
 	public void TR16_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -1136,6 +1136,7 @@ public class TransferCases_Test1 extends Recovery {
 		
 		Verify.waitForObject(tp.backButton, 2);
 		tp.backButton.click();
+		Thread.sleep(4000);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
 		bcc.scrollToTotalBalance();
@@ -1159,7 +1160,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test (priority=16, enabled = false)
+	@Test (priority=16, enabled = true)
 	public void TC17_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -1223,6 +1224,7 @@ public class TransferCases_Test1 extends Recovery {
 		Thread.sleep(2000);
 		bcc.selectAccount(sSaving);
 		Thread.sleep(2000);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Thread.sleep(2000);
 		
@@ -1263,7 +1265,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test (priority=17, enabled = false)
+	@Test (priority=17, enabled = true)
 	public void TC18_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -1328,7 +1330,7 @@ public class TransferCases_Test1 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test (priority=18, enabled = false)
+	@Test (priority=18, enabled = true)
 	public void TC19_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();

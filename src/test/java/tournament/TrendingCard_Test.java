@@ -22,7 +22,7 @@ public class TrendingCard_Test extends Recovery {
 	String sDataset = "Budget_RollOver_Income";
 	String sManualChecking = "Checking";
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TC1_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -92,7 +92,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TC2_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -159,7 +159,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TC3_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -211,7 +211,7 @@ public class TrendingCard_Test extends Recovery {
 		op.tapOnTrendingCard();
 		Verify.waitForObject(st.lastMonth, 2);
 		st.lastMonth.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		after = st.getAmount();
 		amount = h.processBalanceAmount(tRec.getAmount());
@@ -226,7 +226,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TC4_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -293,7 +293,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TC5_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -362,7 +362,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();		
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TC6_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -430,7 +430,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TC7_test() throws Exception {
 
 		/*This Testcase handles two scenarios
@@ -521,7 +521,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void TC8_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -544,12 +544,12 @@ public class TrendingCard_Test extends Recovery {
 		if (d1 >= d2 )
 			Commentary.log(LogStatus.INFO, "PASS: Total for First Category  ["+d1+"]  is greater than or equal to second category ["+d2+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Total for First Category  ["+d1+"]  should be greater than or equal to second category ["+d2+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total for First Category  ["+d1+"]  should be greater than or equal to second category ["+d2+"]");
 
 		if (d2 >= d3)
 			Commentary.log(LogStatus.INFO, "PASS: Total for second Category  ["+d2+"]  is greater than or equal to third category ["+d3+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Total for second Category  ["+d2+"]  should be greater than or equal to third category ["+d3+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total for second Category  ["+d2+"]  should be greater than or equal to third category ["+d3+"]");
 
 		sa.assertAll();	
 	}

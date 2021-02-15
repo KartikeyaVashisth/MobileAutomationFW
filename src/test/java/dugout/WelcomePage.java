@@ -44,6 +44,10 @@ public class WelcomePage {
 	@AndroidFindBy(xpath="//*[@text='Sign In']")
 	public MobileElement xpath_btnWelcomeSignIn;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='signupTutorialImage 0 See everything in one place Connect your banks to see transactions and balances for all your accounts.'`]")
+	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='signupTutorialImage 0']/../android.widget.TextView[@text='See everything in one place']/following-sibling::android.widget.TextView[@text='Connect your banks to see transactions and balances for all your accounts.']")
+	public MobileElement welcomePageText;
+			
 	//@iOSFindBy(xpath="//*[normalize-space(@name)='testEnvironment']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='testEnvironment'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='testEnvironment']")
@@ -92,6 +96,7 @@ public class WelcomePage {
 			Engine.getDriver().navigate().back();
 
 		//System.out.println("Environment set to "+preprod);
+		Commentary.log(LogStatus.INFO, "Environment set to "+preprod);
 		Thread.sleep(500);	
 	}
 }

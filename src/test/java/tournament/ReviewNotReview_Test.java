@@ -39,7 +39,7 @@ public class ReviewNotReview_Test extends Recovery {
 	String statusReviewed = "Reviewed";
 	String statusNotReviewed = "Not Reviewed";
 
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void TR1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -108,7 +108,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TR2_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -174,7 +174,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TR3_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -240,7 +240,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TR4_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -285,7 +285,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TR5_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -330,7 +330,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TR6_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -379,7 +379,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TR7_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -424,7 +424,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TR8_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -451,7 +451,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void TR9_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -499,7 +499,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void TR10_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -562,7 +562,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void TR11_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -609,7 +609,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 11, enabled = true)
 	public void TR12_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -644,7 +644,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 12, enabled = false)
+	@Test(priority = 12, enabled = true)
 	public void TR13_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
