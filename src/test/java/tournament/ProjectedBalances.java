@@ -30,7 +30,7 @@ public class ProjectedBalances extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void PB1_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -79,7 +79,8 @@ public class ProjectedBalances extends Recovery {
 		
 		tp.backButton.click();
 		Thread.sleep(1000);
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		sProjectedChecking_after = bcc.getCheckingBalance();
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
@@ -98,7 +99,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void PB2_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -145,7 +146,8 @@ public class ProjectedBalances extends Recovery {
 		
 		tp.backButton.click();
 		Thread.sleep(1000);
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		sProjectedChecking_after = bcc.getCheckingBalance();
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
@@ -164,7 +166,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void PB3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -186,6 +188,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sChecking_before = bcc.getCheckingBalance();
 		Commentary.log(LogStatus.INFO, "Checking Projected balance before adding the transaction ["+sChecking_before+"]");
@@ -210,7 +214,8 @@ public class ProjectedBalances extends Recovery {
 		
 		tp.backButton.click();
 		Thread.sleep(1000);
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		sProjectedChecking_after = bcc.getCheckingBalance();
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
@@ -229,7 +234,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void PB4_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -251,6 +256,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sChecking_before = bcc.getCheckingBalance();
 		
@@ -295,7 +302,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void PB5_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -317,6 +324,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sCC_before = bcc.getCreditCardsBalance();
 		Commentary.log(LogStatus.INFO, "CreditCard Projected balance before adding the transaction ["+sCC_before+"]");
@@ -345,7 +354,7 @@ public class ProjectedBalances extends Recovery {
 		Thread.sleep(1000);
 		op.navigateToAcctList();
 		
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
@@ -363,7 +372,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void PB6_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -385,6 +394,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sCC_before = bcc.getCreditCardsBalance();
 		Commentary.log(LogStatus.INFO, "CreditCard Projected balance before adding the transaction ["+sCC_before+"]");
@@ -412,7 +423,8 @@ public class ProjectedBalances extends Recovery {
 		bcc.backButton.click();
 		Thread.sleep(1000);
 		op.navigateToAcctList();
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
@@ -431,7 +443,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void PB7_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -453,6 +465,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sCC_before = bcc.getCreditCardsBalance();
 		Commentary.log(LogStatus.INFO, "CreditCard Projected balance before adding the transaction ["+sCC_before+"]");
@@ -481,7 +495,8 @@ public class ProjectedBalances extends Recovery {
 		bcc.backButton.click();
 		Thread.sleep(1000);
 		op.navigateToAcctList();
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
@@ -499,7 +514,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void PB8_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -521,6 +536,8 @@ public class ProjectedBalances extends Recovery {
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		bcc.scrollToProjectedBalance();
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjected_before = bcc.txtProjectedBalanceAmount.getText();
 		sCC_before = bcc.getCreditCardsBalance();
 		Commentary.log(LogStatus.INFO, "CreditCard Projected balance before adding the transaction ["+sCC_before+"]");
@@ -549,7 +566,8 @@ public class ProjectedBalances extends Recovery {
 		bcc.backButton.click();
 		Thread.sleep(1000);
 		op.navigateToAcctList();
-		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 2);
+		
+		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
@@ -568,7 +586,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void PB9_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -598,7 +616,7 @@ public class ProjectedBalances extends Recovery {
 		Thread.sleep(2000);
 		
 		TransactionsPage tp = new TransactionsPage();
-		Verify.waitForObject(tp.txtProjectedBalanceAmount, 2);
+		Verify.waitForObject(tp.txtProjectedBalanceAmount, 1);
 		sProjected_AcctBalance_AccountTxnScreen = tp.txtProjectedBalanceAmount.getText();
 		Commentary.log(LogStatus.INFO, "CheckingAccount's transactions page > Projected balance before adding the transaction on ["+sProjected_AcctBalance_AccountTxnScreen+"]");
 		
@@ -637,7 +655,7 @@ public class ProjectedBalances extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void PB10_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -667,7 +685,7 @@ public class ProjectedBalances extends Recovery {
 		Thread.sleep(2000);
 		
 		TransactionsPage tp = new TransactionsPage();
-		Verify.waitForObject(tp.txtProjectedBalanceAmount, 2);
+		Verify.waitForObject(tp.txtProjectedBalanceAmount, 1);
 		sProjected_AcctBalance_AccountTxnScreen = tp.txtProjectedBalanceAmount.getText();
 		Commentary.log(LogStatus.INFO, "Credit Card Account's Projected balance before adding the transaction on account's transactions page ["+sProjected_AcctBalance_AccountTxnScreen+"]");
 		

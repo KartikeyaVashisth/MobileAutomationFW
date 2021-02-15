@@ -399,6 +399,7 @@ public class Smoke_test extends Recovery {
 		o.tapOnInvestingCard();
 		
 		InvestingPage i = new InvestingPage();
+		Verify.waitForObject(i.securitiesTab, 2);
 		
 		if (Verify.objExists(i.investingHeader))
 			Commentary.log(sa, LogStatus.INFO,"Investing card tap >Investments screen got dispalyed.");

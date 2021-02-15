@@ -24,7 +24,7 @@ public class SpendingOverTimeTest extends Recovery {
 	//String sManualChecking = "Checking_manual";
 	String sManualSavings = "Manual_Savings";
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void SOT1_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -53,7 +53,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void SOT2_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -80,7 +80,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void SOT3_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -109,7 +109,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void SOT4_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -151,7 +151,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void SOT5_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -208,7 +208,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void SOT6_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -266,7 +266,7 @@ public class SpendingOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void SOT7_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();

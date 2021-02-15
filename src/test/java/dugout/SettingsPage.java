@@ -58,6 +58,14 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Sign Out']")
 	public MobileElement logout;
 	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Sign Out'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Sign Out']")
+	public MobileElement signOutConfirmationBtn;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Cancel'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Cancel']")
+	public MobileElement cancelBtn;
+	
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"closeButton\"])[2]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='closeButton'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='backButton']//*[@class='android.widget.ImageView']")

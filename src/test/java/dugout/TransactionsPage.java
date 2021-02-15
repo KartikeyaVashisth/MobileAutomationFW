@@ -117,7 +117,8 @@ public class TransactionsPage {
 		Thread.sleep(1000);
 	}
 	
-	public void searchRecentTransaction(String searchString) throws Exception{
+	public void searchRecentTransaction(String searchString) throws Exception {
+		
 		Verify.waitForObject(searchTransactionTxtField, 2);
 		searchTransactionTxtField.click();
 		searchTransactionTxtField.clear();
@@ -393,13 +394,14 @@ public class TransactionsPage {
 		return null;	
 	}
 	
-	public void selectSortFilterOption(String filterBy) throws InterruptedException {
+	public void selectSortFilterOption(String filterBy) throws Exception {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("ios")) {
 			if (filterBy =="Pending to Cleared" ) {
 				Thread.sleep(1000);
 				String locator = "//XCUIElementTypeStaticText[@name=\"Pending to Cleared \"]";
 				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.xpath(locator));
+				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
 				buttonApply.click();
@@ -410,6 +412,7 @@ public class TransactionsPage {
 				//String locator = "**/XCUIElementTypeOther[`name=="+"\"RadioButton "+filterBy+"\""+"`]";
 				String locator = "**/XCUIElementTypeStaticText[`name=="+"\""+filterBy+"\""+"`]";
 				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
 				buttonApply.click();
@@ -420,6 +423,7 @@ public class TransactionsPage {
 				Thread.sleep(1000);
 				String sXpath = "//android.view.ViewGroup[5]//android.widget.TextView";
 				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
 				buttonApply.click();
@@ -428,6 +432,7 @@ public class TransactionsPage {
 				Thread.sleep(1000);
 				String sXpath = "//android.widget.TextView[@text="+"\""+filterBy+"\""+"]";
 				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
 				buttonApply.click();
@@ -578,6 +583,30 @@ public class TransactionsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name CONTAINS \"Switch Value: \"`]")
 	@AndroidFindBy(xpath="//android.widget.Switch")
 	public MobileElement switchRunningBalance;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 7 Days'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 7 Days']")
+	public MobileElement next7DaysReminderFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 14 Days'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 14 Days']")
+	public MobileElement next14DaysReminderFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 30 Days'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 30 Days']")
+	public MobileElement next30DaysReminderFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 90 Days'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 90 Days']")
+	public MobileElement next90DaysReminderFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 12 Months'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 12 Months']")
+	public MobileElement next12MonthsReminderFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"Don't show reminders\"`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Don't show reminders\"]")
+	public MobileElement dontShowReminderFilter;
 	
 	//----------------- Filter & Sort --------------
 	

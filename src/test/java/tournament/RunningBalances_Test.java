@@ -49,7 +49,7 @@ public class RunningBalances_Test extends Recovery {
 	String filterDontShowReminder = "Don't show reminders";
 	
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void RB1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -87,7 +87,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void RB2_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -134,6 +134,7 @@ public class RunningBalances_Test extends Recovery {
 		op.tapOnTransactionSummaryCard();
 		TransactionSummaryPage ts = new TransactionSummaryPage();
 		ts.payeeTab.click();
+		Verify.waitForObject(ts.firstRecordInList, 1);
 		ts.firstRecordInList.click();
 		
 		Verify.waitForObject(tp.buttonShowReminder, 1);
@@ -148,7 +149,7 @@ public class RunningBalances_Test extends Recovery {
 		}
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void RB3_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -186,7 +187,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void RB4_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -293,7 +294,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void RB5_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -396,7 +397,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void RB6_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -434,7 +435,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void RB7_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -537,7 +538,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void RB8_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -575,7 +576,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void RB9_Test() throws Exception {  
 		
 		SoftAssert sa = new SoftAssert();
@@ -638,7 +639,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void RB10_Test() throws Exception {  
 		
 		SoftAssert sa = new SoftAssert();
@@ -700,7 +701,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void RB11_Test() throws Exception {  
 		
 		SoftAssert sa = new SoftAssert();
@@ -763,7 +764,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 11, enabled = false)
+	@Test(priority = 11, enabled = true)
 	public void RB12_Test() throws Exception {  
 		
 		SoftAssert sa = new SoftAssert();
@@ -825,7 +826,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 12, enabled = false)
+	@Test(priority = 12, enabled = true)
 	public void RB13_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -925,7 +926,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 13, enabled = false)
+	@Test(priority = 13, enabled = true)
 	public void RB14_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -1025,7 +1026,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 14, enabled = false)
+	@Test(priority = 14, enabled = true)
 	public void RB15_Test() throws Exception { 
 
 		SoftAssert sa = new SoftAssert();
@@ -1118,7 +1119,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 15, enabled = false)
+	@Test(priority = 15, enabled = true)
 	public void RB16_Test() throws Exception { 
 		
 		SoftAssert sa = new SoftAssert();
@@ -1171,7 +1172,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 16, enabled = false)
+	@Test(priority = 16, enabled = true)
 	public void RB17_Test() throws Exception { 
 
 		SoftAssert sa = new SoftAssert();
@@ -1237,7 +1238,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 17, enabled = false)
+	@Test(priority = 17, enabled = true)
 	public void RB18_Test() throws Exception { 
 
 		SoftAssert sa = new SoftAssert();
@@ -1262,6 +1263,7 @@ public class RunningBalances_Test extends Recovery {
 		
 		tp.EnableRunningBalance();
 		
+		Verify.waitForObject(tp.firstBannerTransactionDate, 1);
 		dateLabel = tp.firstBannerTransactionDate.getText();
 		
 		if (firstTransactionDate.equals(dateLabel)) {
@@ -1272,7 +1274,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 18, enabled = false)
+	@Test(priority = 18, enabled = true)
 	public void RB19_Test() throws Exception { 
 
 		SoftAssert sa = new SoftAssert();
@@ -1335,7 +1337,7 @@ public class RunningBalances_Test extends Recovery {
 		td.editTransaction(tRec);
 
 		tp.tapOnFirstTransaction();
-		
+		Verify.waitForObject(td.selectedDate, 1);
 		firstTransactionDate = td.getTransactionDate();
 		firstTransactionDate = h.convertDateFormat(firstTransactionDate);
 		
@@ -1361,7 +1363,7 @@ public class RunningBalances_Test extends Recovery {
 		td.editTransaction(tRec);
 		
 		tp.tapOnFirstTransaction();
-		
+		Verify.waitForObject(td.selectedDate, 1);
 		firstTransactionDate = td.getTransactionDate();
 		firstTransactionDate = h.convertDateFormat(firstTransactionDate);
 		
@@ -1380,7 +1382,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 19, enabled = false)
+	@Test(priority = 19, enabled = true)
 	public void RB20_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -1424,7 +1426,7 @@ public class RunningBalances_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 20, enabled = false)
+	@Test(priority = 20, enabled = true)
 	public void RB21_Test() throws Exception {
 		 
 		SoftAssert sa = new SoftAssert();

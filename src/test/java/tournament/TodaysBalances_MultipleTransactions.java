@@ -30,7 +30,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TBM1_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -103,7 +103,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TBM2_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -174,7 +174,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TBM3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -244,7 +244,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TBM4_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -314,7 +314,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TBM5_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -405,7 +405,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TBM6_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -503,7 +503,7 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TBM7_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();

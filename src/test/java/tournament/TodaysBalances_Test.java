@@ -29,7 +29,7 @@ public class TodaysBalances_Test extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void TB1_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -90,7 +90,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void TB2_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -141,7 +141,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TB3_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -192,7 +192,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void TB4_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -243,7 +243,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TB5_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -294,7 +294,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TB6_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -345,7 +345,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TB7_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -396,7 +396,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TB8_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
@@ -447,7 +447,7 @@ public class TodaysBalances_Test extends Recovery {
 		sa.assertAll();		
 	}
 	
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void TB9_test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();

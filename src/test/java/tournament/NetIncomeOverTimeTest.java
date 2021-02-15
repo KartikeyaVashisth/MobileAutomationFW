@@ -23,7 +23,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 	String sDataset = "OnlineAcc_Automation";
 	String sManualSavings = "Manual_Savings";
 	
-	@Test(priority = 0, enabled = false)
+	@Test(priority = 0, enabled = true)
 	public void NIOT1_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -52,7 +52,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void NIOT2_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -78,7 +78,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void NIOT3_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -107,7 +107,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void NIOT4_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -149,7 +149,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void NIOT5_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -205,7 +205,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void NIOT6_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -262,7 +262,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void NIOT7_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -319,7 +319,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void NIOT8_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
