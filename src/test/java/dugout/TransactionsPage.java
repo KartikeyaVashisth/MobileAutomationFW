@@ -453,14 +453,14 @@ public class TransactionsPage {
 			op.scroll_down();
 		}
 		if (h.getEngine().equalsIgnoreCase("android")) {
-			
+			Verify.waitForObject(switchRunningBalance, 1);
 			if (tp.switchRunningBalance.getText().equalsIgnoreCase("ON")) {
 				return true;
 			} else {
 				return false;
 			}
 		} else { //For iOS
-			
+			Verify.waitForObject(switchRunningBalance, 1);
 			if (tp.switchRunningBalance.getAttribute("value").equals("1")) {
 				return true;
 			} else {
@@ -474,12 +474,12 @@ public class TransactionsPage {
 		if (isRunningBalanceEnabled()) {
 			Commentary.log(LogStatus.INFO, "Running Balance is already Enabled.");
 			this.buttonApply.click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		} else {
 			this.switchRunningBalance.click();
 			this.buttonApply.click();
 			Commentary.log(LogStatus.INFO, "Running Balance option is Enabled now.");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		}
 		
 	}
@@ -490,11 +490,11 @@ public class TransactionsPage {
 			this.switchRunningBalance.click();
 			this.buttonApply.click();
 			Commentary.log(LogStatus.INFO, "Running Balance option is Disabled now.");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		} else {
 			Commentary.log(LogStatus.INFO, "Running Balance option is already Disabled.");
 			this.buttonApply.click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 		}
 	}
 	
@@ -610,16 +610,22 @@ public class TransactionsPage {
 	
 	//----------------- Filter & Sort --------------
 	
-	@iOSXCUITFindBy(iOSNsPredicate="name='Not Reviewed' and type='XCUIElementTypeStaticText'")
+//	@iOSXCUITFindBy(iOSNsPredicate="name='Not Reviewed' and type='XCUIElementTypeStaticText'")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'RadioButton'`]/**/XCUIElementTypeStaticText[`name='Not Reviewed'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
 	public MobileElement filterNotReviewed;
 	
-	@iOSXCUITFindBy(iOSNsPredicate="name='NOT REVIEWED' and type='XCUIElementTypeStaticText'")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='NOT REVIEWED']")
-	public MobileElement filterNotReviewedHeader;
 	
-	@iOSXCUITFindBy(iOSNsPredicate="name='Clear filters' and type='XCUIElementTypeButton'")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='Clear filters']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Not Reviewed'`]/**/XCUIElementTypeStaticText[`name='Not Reviewed'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']/..")
+	public MobileElement filterNotReviewedButton;
+	
+//	@iOSXCUITFindBy(iOSNsPredicate="name='Clear filters' and type='XCUIElementTypeButton'")
+//	@AndroidFindBy(xpath="//android.widget.Button[@text='Clear filters']")
+//	public MobileElement buttonClearFilter;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Not Reviewed'`]/**/XCUIElementTypeButton[`name='icn cross'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']/../android.widget.ImageView[@resource-id='com.quicken.qm2014:id/btn_clear_filter']")
 	public MobileElement buttonClearFilter;
 	
 	@iOSXCUITFindBy(iOSNsPredicate="name='Mark all as Reviewed' and type='XCUIElementTypeButton'")

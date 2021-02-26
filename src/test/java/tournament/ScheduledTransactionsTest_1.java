@@ -385,7 +385,8 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		tRec.setEndAfterNumberOfReminders("5");
 
 		bi.addNewReminder(tRec);
-
+		Thread.sleep(5000);
+		
 		bi.tapOnSeriesTab();
 
 		if(Verify.objExists(bi.reminderName))

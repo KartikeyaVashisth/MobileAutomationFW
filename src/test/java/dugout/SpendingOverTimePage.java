@@ -106,7 +106,7 @@ public class SpendingOverTimePage {
 			String sXpath;
 			
 			//sXpath ="//XCUIElementTypeOther[@name='"+sMonth+"']/XCUIElementTypeOther";
-			sXpath ="**/XCUIElementTypeOther[`name='"+sMonth+"'`]/XCUIElementTypeOther";
+			sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth+"'`]/XCUIElementTypeOther";
 			Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
 		}
 		
@@ -116,7 +116,7 @@ public class SpendingOverTimePage {
 			String sXpath;
 			Helper h = new Helper();
 	
-			sXpath ="//android.widget.TextView[@text='"+sMonthUC+"']/../android.view.ViewGroup";
+			sXpath ="//android.widget.TextView[@text=' "+sMonthUC+"']/../android.view.ViewGroup";
 			
 			List <MobileElement> le = Engine.ad.findElements(By.xpath(sXpath));
 			
@@ -155,14 +155,14 @@ public class SpendingOverTimePage {
 			//String sXpath ="//XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']/XCUIElementTypeStaticText[@name='"+sMonth.toUpperCase()+"']";
 			//return Verify.objExists((MobileElement) Engine.iosd.findElement(By.xpath(sXpath)));
 			
-			String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name='"+sMonth.toUpperCase()+"'`]";
+			String sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name=' "+sMonth.toUpperCase()+"'`]";
 			//String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]";
 			return Verify.objExists((MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)));	
 		}
 		
 		protected Boolean verifyMonth_Android(String sMonth) throws Exception {
 			
-			String sXpath ="//android.widget.TextView[@text='"+sMonth.toUpperCase()+"']";
+			String sXpath ="//android.widget.TextView[@text=' "+sMonth.toUpperCase()+"']";
 			
 			return Verify.objExists((MobileElement) Engine.ad.findElement(By.xpath(sXpath)));
 		}

@@ -88,7 +88,7 @@ public class SettingsPage {
 		@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='dataSetArrow']")
 		public MobileElement datasetDDButton;
 		
-		@AndroidFindBy(xpath="//*[@text='DONE']")
+		@AndroidFindBy(xpath="//*[@text='Done']")
 //		@iOSFindBy(xpath="//*[@name='doneButton']")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
 		public MobileElement btnDone;

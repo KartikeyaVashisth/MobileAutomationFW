@@ -112,7 +112,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Double dProjectedBalance_With7DaysReminderFilter = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter);
 
 		tp.searchRecentTransaction(reminderName);
-		tp.tapOnTransation(1);
+		tp.tapOnFirstTransaction();
 
 		bi.tapOnEnterOption();
 
@@ -437,7 +437,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Double dProjectedBalance_With7DaysReminderFilter = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter);
 
 		tp.searchRecentTransaction(reminderName);
-		tp.tapOnTransation(1);
+		tp.tapOnFirstTransaction();
 
 		bi.tapOnIgnoreThisInstanceOption();
 

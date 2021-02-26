@@ -55,7 +55,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		tRec.setEndAfterNumberOfReminders("5");
 
 		bi.addNewReminder(tRec);
-		Thread.sleep(2000);
+		
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==1) {		
@@ -127,6 +128,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 
 		bi.editReminderSeries(tRec1);
 
+		Verify.waitForObject(bi.reminderSeriesFrequencyOnViewSeries, 2);
 		String editedReminderSeriesFrequencyOnViewSeries = bi.reminderSeriesFrequencyOnViewSeries.getText();
 		String editedSubstringFrequencyValue = editedReminderSeriesFrequencyOnViewSeries.substring(6);
 
@@ -138,6 +140,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		Verify.waitForObject(bi.remindersTab, 1);
 		bi.remindersTab.click();
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days_MonthlyFrequency = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days_MonthlyFrequency==1) {		
@@ -751,14 +754,14 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		Double d = Double.parseDouble(tRec.getAmount());
 
 		if(dTodaysBalance_WithReminderFilterOFF-d*3d==dTodaysBalance_WithReminderFilterOFF_AfterEntering)
-			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance with Reminders filter OFF after entering is: ["+sTodaysBalance_WithReminderFilterOFF_AfterEntering+"]");
+			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance after entering with Reminders filter OFF is: ["+sTodaysBalance_WithReminderFilterOFF_AfterEntering+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance with Reminders filter OFF after entering is NOT correct.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance after entering with Reminders filter OFF is NOT correct.");
 
 		if(dProjectedBalance_WithReminderFilterOFF-d*3d==dProjectedBalance_WithReminderFilterOFF_AfterEntering)
-			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance with Reminders filter OFF after entering is: ["+sProjectedBalance_WithReminderFilterOFF_AfterEntering+"]");
+			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance after entering with Reminders filter OFF is: ["+sProjectedBalance_WithReminderFilterOFF_AfterEntering+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance with Reminders filter OFF after entering is NOT correct.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance after entering with Reminders filter OFF is NOT correct.");
 
 		Verify.waitForObject(tp.buttonShowReminder, 1);
 		tp.buttonShowReminder.click();
@@ -1351,7 +1354,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		tRec.setFrequency("Weekly");
 
 		bi.addNewReminder(tRec);
-
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
+		
 		TransactionsPage tp = new TransactionsPage();
 		tp.tapOnTransation(2);
 
@@ -1409,6 +1413,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		tRec.setFrequency("Weekly");
 
 		bi.addNewReminder(tRec);
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 
 		TransactionsPage tp = new TransactionsPage();
 		tp.tapOnFirstTransaction();
@@ -1507,7 +1512,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		tRec.setFrequency("Weekly");
 
 		bi.addNewReminder(tRec);
-
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
+		
 		TransactionsPage tp = new TransactionsPage();
 		tp.tapOnFirstTransaction();
 
@@ -1549,7 +1555,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		tRec.setFromAccount(sManualChecking);
 
 		bi.addNewReminder(tRec);
-
+		Verify.waitForObject(bi.thisMonthHeaderText, 2);
+		
 		TransactionsPage tp = new TransactionsPage();
 		tp.tapOnFirstTransaction();
 
@@ -1601,6 +1608,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 
 		bi.tapOnSeriesTab();
 
+		Verify.waitForObject(bi.reminderDate, 1);
 		String NextDueOnDate = bi.reminderDate.getText();
 
 		LocalDate currentdate = LocalDate.now();

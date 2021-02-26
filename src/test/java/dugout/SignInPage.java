@@ -101,6 +101,10 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
 	public MobileElement navigationMenu;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")
+	public MobileElement datasetNameOnDashboard;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Cancel Icon'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc=\"Cancel Icon\"]")
@@ -307,7 +311,8 @@ public class SignInPage {
 				cancelIcon.click();
 			}
 			
-			Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")), 2);
+//			Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")), 2);
+			Verify.waitForObject(datasetNameOnDashboard, 2);
 			String datasetNameOverviewPage = Engine.ad.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")).getText();
 
 			if(Verify.objExists(cancelIcon)) {
@@ -324,7 +329,7 @@ public class SignInPage {
 				
 				Verify.waitForObject(dataSetArrow, 2);
 				dataSetArrow.click();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']")), 1);
 				MobileElement xpath_Android = (MobileElement) Engine.ad.findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
 				xpath_Android.click();
@@ -344,7 +349,8 @@ public class SignInPage {
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 			Thread.sleep(5000);
-			Verify.waitForObject((MobileElement)Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]"), 2);
+//			Verify.waitForObject((MobileElement)Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]"), 2);
+			Verify.waitForObject(datasetNameOnDashboard, 2);
 			String datasetNameOverviewPage = Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
 
 			if(Verify.objExists(cancelIcon)) {

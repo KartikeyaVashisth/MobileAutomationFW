@@ -210,9 +210,10 @@ public class AllAccountsPage {
 		return dAmount;	
 	}
 	
-	public String getTransactionDate (int transactionNumber) {
+	public String getTransactionDate (int transactionNumber) throws Exception {
 		String sTransactionAmount = null;
 		Helper h = new Helper();
+		Thread.sleep(1000);
 		
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			transactionNumber = transactionNumber-1;
