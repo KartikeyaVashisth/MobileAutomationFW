@@ -347,7 +347,8 @@ public class ReviewNotReview_Test extends Recovery {
 		tp.DisableRunningBalance();
 
 		TransactionDetailPage td = new TransactionDetailPage();
-
+		
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 1);
 		tp.tapOnFirstTransaction();
 
 		op.scroll_down();
@@ -478,16 +479,16 @@ public class ReviewNotReview_Test extends Recovery {
 		tp.selectSortFilterOption("Not Reviewed");
 		Thread.sleep(2000);
 
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED.");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
 
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters.");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filter.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
@@ -521,16 +522,16 @@ public class ReviewNotReview_Test extends Recovery {
 		tp.selectSortFilterOption("Not Reviewed");
 		Thread.sleep(2000);
 
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED.");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
 
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters.");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filters.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
@@ -541,16 +542,10 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.buttonClearFilter.click();
 
-		if (!Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Clear filter > Header not diplayed.");
+		if (!Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: After clicking cross icon of clearing filter > Not Reviewed filter button is not displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Clear filter > Header is diplayed.");
-		}
-
-		if (!Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Clear filter > Button not displayed for Clear Filter.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cler filter > Button still displayed for Clear Filter.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: After clicking cross icon of clearing filter > Not Reviewed filter button is still displayed.");
 		}
 
 		if (!Verify.objExists(tp.buttonMarkAllReviewed)) {

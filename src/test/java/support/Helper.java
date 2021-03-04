@@ -407,7 +407,7 @@ public class Helper {
 	}
 	public String getDateformat(Integer daysFromToday) {
 		Date date = DateUtils.addDays(new Date(), daysFromToday);
-		SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
 		return sdf.format(date);
 	}
 	

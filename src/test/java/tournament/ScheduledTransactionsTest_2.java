@@ -111,6 +111,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.addNewReminder(tRec);
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==1) {		
@@ -194,6 +195,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.addNewReminder(tRec);
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==1) {		
@@ -276,6 +278,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.addNewReminder(tRec);
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==2)	
@@ -353,6 +356,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.addNewReminder(tRec);
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==1) {		
@@ -436,6 +440,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.addNewReminder(tRec);
 
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		int numOfTransactionNext7Days = bi.getTransactionListSize();
 
 		if (numOfTransactionNext7Days==0) {		
@@ -555,10 +560,11 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		tRec.setEndAfterNumberOfReminders("5");
 
 		bi.addNewReminder(tRec);
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 
 		Verify.waitForObject(bi.backButton, 1);
 		bi.backButton.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 
 		op.scrollToTop();
 
@@ -737,6 +743,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		tRec.setToAccount(sManualSaving);
 
 		bi.addNewReminder(tRec);
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 
 		Verify.waitForObject(bi.backButton, 1);
 		bi.backButton.click();
@@ -929,8 +936,6 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		op.tapOnBillsAndIncomeCard();
 
-		//BillsAndIncomePage bi = new BillsAndIncomePage();
-
 		bi.addNewReminderSeries("Transfer");
 
 		String reminderName = "Reminder_"+h.getCurrentTime();
@@ -943,6 +948,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		tRec.setFrequency("Quarterly");
 
 		bi.addNewReminder(tRec);
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 
 		Verify.waitForObject(bi.backButton, 1);
 		bi.backButton.click();

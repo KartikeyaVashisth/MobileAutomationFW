@@ -648,7 +648,7 @@ public class BillsAndIncomePage {
 			if (Verify.objExists(this.buttonAddReminder)) 
 				this.buttonAddReminder.click();
 
-			Thread.sleep(3000);
+			Thread.sleep(7000);
 
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);

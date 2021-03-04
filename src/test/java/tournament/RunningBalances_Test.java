@@ -613,27 +613,27 @@ public class RunningBalances_Test extends Recovery {
 		thirdRowRunningBalance= aa.getTransactionDate(3);
 		
 		if ((firstRowRunningBalance.contains("$")) & (secondRowRunningBalance.contains("$")) & (thirdRowRunningBalance.contains("$"))) {
-			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed.");
 		} else {
-			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed.");
 		}
 		
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
 		
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filter");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 		
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed");
+			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed.");
 		}
 		
 		sa.assertAll();
@@ -675,27 +675,27 @@ public class RunningBalances_Test extends Recovery {
 		thirdRowRunningBalance= aa.getTransactionDate(3);
 		
 		if (!(firstRowRunningBalance.contains("$")) & !(secondRowRunningBalance.contains("$")) & !(thirdRowRunningBalance.contains("$"))) {
-			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed.");
 		} else {
-			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed.");
 		}
 		
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
 		
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filter");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 		
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed");
+			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed.");
 		}
 		
 		sa.assertAll();
@@ -738,27 +738,27 @@ public class RunningBalances_Test extends Recovery {
 		thirdRowRunningBalance= aa.getTransactionDate(3);
 		
 		if ((firstRowRunningBalance.contains("$")) & (secondRowRunningBalance.contains("$")) & (thirdRowRunningBalance.contains("$"))) {
-			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed.");
 		} else {
-			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed.");
 		}
 		
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
-		
+
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filter");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 		
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed");
+			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed.");
 		}
 		
 		sa.assertAll();
@@ -800,27 +800,27 @@ public class RunningBalances_Test extends Recovery {
 		thirdRowRunningBalance= aa.getTransactionDate(3);
 		
 		if (!(firstRowRunningBalance.contains("$")) & !(secondRowRunningBalance.contains("$")) & !(thirdRowRunningBalance.contains("$"))) {
-			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Running balances are displayed.");
 		} else {
-			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Running balances are NOT displayed.");
 		}
 		
-		if (Verify.objExists(tp.filterNotReviewedHeader)) {
-			Commentary.log(LogStatus.INFO, "PASS: Header displayed as NOT REVIEWED");
+		if (Verify.objExists(tp.filterNotReviewedButton)) {
+			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header is NOT displayed as NOT REVIEWED");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
 		}
-		
+
 		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Clear Filters");
+			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Clear Filter");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
 		}
 		
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
-			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed");
+			Commentary.log(LogStatus.INFO, "PASS: Button is displayed for Mark All as Reviewed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed.");
 		}
 		
 		sa.assertAll();
@@ -1258,7 +1258,7 @@ public class RunningBalances_Test extends Recovery {
 		Thread.sleep(1000);
 		
 		tp.DisableRunningBalance();
-		
+		Thread.sleep(1000);
 		firstTransactionDate = aa.getTransactionDate(1);
 		
 		tp.EnableRunningBalance();

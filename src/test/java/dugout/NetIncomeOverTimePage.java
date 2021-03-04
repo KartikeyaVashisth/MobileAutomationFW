@@ -105,7 +105,7 @@ public class NetIncomeOverTimePage {
 		
 		//sXpath ="//XCUIElementTypeOther[@name='"+sMonth+"']/XCUIElementTypeOther";
 		//Engine.iosd.findElement(By.xpath(sXpath)).click();
-		sXpath ="**/XCUIElementTypeOther[`name='"+sMonth+"'`]/XCUIElementTypeOther";
+		sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth+"'`]/XCUIElementTypeOther";
 		Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
 	}
 	
@@ -115,7 +115,7 @@ public class NetIncomeOverTimePage {
 		String sXpath;
 		Helper h = new Helper();
 
-		sXpath ="//android.widget.TextView[@text='"+sMonthUC+"']/../android.view.ViewGroup";
+		sXpath ="//android.widget.TextView[@text=' "+sMonthUC+"']/../android.view.ViewGroup";
 		
 		List <MobileElement> le = Engine.ad.findElements(By.xpath(sXpath));
 		
@@ -153,7 +153,7 @@ public class NetIncomeOverTimePage {
 		//String sXpath ="//XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']/XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']";
 		//return Verify.objExists((MobileElement) Engine.iosd.findElement(By.xpath(sXpath)));
 		
-		String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name='"+sMonth.toUpperCase()+"'`]";
+		String sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name=' "+sMonth.toUpperCase()+"'`]";
 		//String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]";
 		return Verify.objExists((MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)));
 		
@@ -161,7 +161,7 @@ public class NetIncomeOverTimePage {
 	
 	protected Boolean verifyMonth_Android(String sMonth) throws Exception {
 		
-		String sXpath ="//android.widget.TextView[@text='"+sMonth.toUpperCase()+"']";
+		String sXpath ="//android.widget.TextView[@text=' "+sMonth.toUpperCase()+"']";
 		
 		return Verify.objExists((MobileElement) Engine.ad.findElement(By.xpath(sXpath)));
 		
