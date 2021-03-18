@@ -138,7 +138,8 @@ public class AllAccountsPage {
 	
 	public List<MobileElement> getAllSearchTransactions_ios () throws Exception{
 		
-		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
+//		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
+		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[`name='topLeftLabel'`]";
 		List <MobileElement> me = null;
 		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
 		

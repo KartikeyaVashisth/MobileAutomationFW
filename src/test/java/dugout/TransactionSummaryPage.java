@@ -11,6 +11,7 @@ import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import referee.Verify;
 import support.Engine;
 import support.Helper;
 
@@ -37,6 +38,14 @@ public class TransactionSummaryPage {
 		@iOSXCUITFindBy(accessibility="Back")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']/../android.widget.ImageButton")
 		public MobileElement backButtonOnHeader;
+		
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
+		@AndroidFindBy(xpath="(//*[@class='android.widget.ImageButton'])[1]")
+		public MobileElement backButton;
+		
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText")
+		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.TextView)[1]")
+		public MobileElement monthHeader;
 		
 		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Category']")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Category'`]")
@@ -79,8 +88,25 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement transactionCategoryPayeeText;
 		
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeOther[`name contains 'Summary'`]/**/XCUIElementTypeStaticText[`name contains 'Net Income :'`]")
+		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]/../android.widget.TextView[contains(@text,'Net Income :')]")
+		public MobileElement netIncomeAmount;
+		
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeOther[`name contains 'Summary'`]/**/XCUIElementTypeStaticText[`name contains 'Earned :'`]")
+		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]/../android.widget.TextView[contains(@text,'Earned :')]")
+		public MobileElement earnedAmount;
+		
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeOther[`name contains 'Summary'`]/**/XCUIElementTypeStaticText[`name contains 'Spent :'`]")
+		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Summary')]/../android.widget.TextView[contains(@text,'Spent :')]")
+		public MobileElement spentAmount;
+		
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeButton[`name = 'fab'`]")
+		@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
+		public MobileElement addTransactionButton;
+		
 		public void navigateBackToDashboard() throws Exception{
 			
+			Verify.waitForObject(this.backButtonOnHeader, 1);
 			backButtonOnHeader.click();
 			Thread.sleep(10000);		
 		}
@@ -108,5 +134,12 @@ public class TransactionSummaryPage {
 		public String getCategoryPayeeName () {
 			return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
 			//return this.transactionCategoryPayeeText.getText();
+		}
+		
+		public void tapOnPayeeTab() throws Exception {
+
+			Verify.waitForObject(this.payeeTab, 1);
+			this.payeeTab.click();
+			Thread.sleep(1000);
 		}
 }

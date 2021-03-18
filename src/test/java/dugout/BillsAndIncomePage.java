@@ -2012,6 +2012,7 @@ public class BillsAndIncomePage {
 		Verify.waitForObject(this.deleteReminderSeriesAlertButton, 1);
 		this.deleteReminderSeriesAlertButton.click();
 		Thread.sleep(2000);
+		Verify.waitForObject(this.youHaveNoScheduledReminders, 2);
 	}
 
 	public void tapOnTags() throws Exception {
