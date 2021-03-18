@@ -747,7 +747,7 @@ public class Daily_Regression_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		AllAccountsPage aa = new AllAccountsPage();
 		bcc.selectAccount(sManualSaving);
-		
+
 		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 		Thread.sleep(1000);
@@ -941,7 +941,7 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding an expense transaction and validating that the Payee details are updated on Transaction Summary page");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding an expense transaction and validating that the Payee details are updated on Transaction Summary page.");
 
 		OverviewPage op = new OverviewPage();
 		op.tapOnTransactionSummaryCard();
@@ -951,10 +951,10 @@ public class Daily_Regression_Test extends Recovery {
 		ts.payeeTab.click();
 
 		Verify.waitForObject(ts.payeeTile, 2);
-		String sCategoryAmount_before = ts.payeeTile.getText();
-		Commentary.log(LogStatus.INFO, "CategoryAmount before adding transaction-> "+sCategoryAmount_before);
-		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("shop ", ""));
-		Commentary.log(LogStatus.INFO, "Processed Category amount is: "+dCategoryAmount_before);
+		String sPayeeAmount_before = ts.payeeTile.getText();
+		Commentary.log(LogStatus.INFO, "Payee tile amount before adding transaction-> "+sPayeeAmount_before);
+		Double dPayeeAmount_before = h.processBalanceAmount(sPayeeAmount_before.replace("shop ", ""));
+		Commentary.log(LogStatus.INFO, "Processed Payee tile amount is: "+dPayeeAmount_before);
 
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -979,12 +979,12 @@ public class Daily_Regression_Test extends Recovery {
 		ts.payeeTab.click();
 
 		Verify.waitForObject(ts.payeeTile, 2);
-		String sCategoryAmount_after = ts.payeeTile.getText();
-		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("shop ", ""));
+		String sPayeeAmount_after = ts.payeeTile.getText();
+		Double dPayeeAmount_after = h.processBalanceAmount(sPayeeAmount_after.replace("shop ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
-		Commentary.log(LogStatus.INFO, "Category amount is now: "+dCategoryAmount_after);
+		Commentary.log(LogStatus.INFO, "Payee tile amount is now: "+dPayeeAmount_after);
 
-		if (dCategoryAmount_after+d==dCategoryAmount_before)
+		if (dPayeeAmount_before-d==dPayeeAmount_after)
 			Commentary.log(LogStatus.INFO, "PASS: Payee tile is updated after adding expense transaction for selected payee.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee.");
@@ -998,7 +998,7 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding an expense transaction and validating that the Category details are updated on Transaction Summary page");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding an expense transaction and validating that the Category details are updated on Transaction Summary page.");
 
 		String payeeName = "Payee_"+h.getCurrentTime();
 
@@ -1013,7 +1013,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		String sCategoryAmount_before = ts.categoryTile.getText();
 		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
-		Commentary.log(LogStatus.INFO, "Category amount is "+dCategoryAmount_before);
+		Commentary.log(LogStatus.INFO, "Category tile amount is: "+dCategoryAmount_before);
 
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -1041,12 +1041,12 @@ public class Daily_Regression_Test extends Recovery {
 		String sCategoryAmount_after = ts.categoryTile.getText();
 		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
-		Commentary.log(LogStatus.INFO, "Category amount is "+dCategoryAmount_after);
+		Commentary.log(LogStatus.INFO, "Category tile amount is now: "+dCategoryAmount_after);
 
-		if (dCategoryAmount_after+d==dCategoryAmount_before)
-			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+		if (dCategoryAmount_before-d==dCategoryAmount_after)
+			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee");
+			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee.");
 
 		sa.assertAll();
 	}

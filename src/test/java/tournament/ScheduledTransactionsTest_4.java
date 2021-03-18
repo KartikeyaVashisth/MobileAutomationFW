@@ -75,7 +75,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		if(Verify.objExists(tp.dontShowReminderFilter)) {
 			tp.dontShowReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(7000);
+			Thread.sleep(6000);
 		}
 
 		Verify.waitForObject(bcc.txtTodaysBalanceAmount, 1);
@@ -96,7 +96,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.next7DaysReminderFilter, 1);
 		tp.next7DaysReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		sProjectedBalanceWith7DaysReminderFilter = bcc.txtProjectedBalanceAmount.getText();
 
@@ -138,7 +138,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.dontShowReminderFilter, 1);
 		tp.dontShowReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedBalance_WithReminderFilterOFF_AfterEntering = bcc.txtProjectedBalanceAmount.getText();
@@ -240,7 +240,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		if(Verify.objExists(tp.dontShowReminderFilter)) {
 			tp.dontShowReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(7000);
+			Thread.sleep(6000);
 		}
 
 		Verify.waitForObject(bcc.txtTodaysBalanceAmount, 1);
@@ -260,7 +260,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.next7DaysReminderFilter, 1);
 		tp.next7DaysReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		sProjectedBalanceWith7DaysReminderFilter = bcc.txtProjectedBalanceAmount.getText();
 
@@ -311,7 +311,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.dontShowReminderFilter, 1);
 		tp.dontShowReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedBalance_WithReminderFilterOFF_AfterEntering = bcc.txtProjectedBalanceAmount.getText();
@@ -401,7 +401,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		if(Verify.objExists(tp.dontShowReminderFilter)) {
 			tp.dontShowReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(7000);
+			Thread.sleep(6000);
 		}
 
 		Verify.waitForObject(bcc.txtTodaysBalanceAmount, 1);
@@ -421,7 +421,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.next7DaysReminderFilter, 1);
 		tp.next7DaysReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		sProjectedBalanceWith7DaysReminderFilter = bcc.txtProjectedBalanceAmount.getText();
 
@@ -472,7 +472,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.dontShowReminderFilter, 1);
 		tp.dontShowReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedBalance_WithReminderFilterOFF_AfterIgnoring = bcc.txtProjectedBalanceAmount.getText();
@@ -565,7 +565,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		if(Verify.objExists(tp.dontShowReminderFilter)) {
 			tp.dontShowReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(7000);
+			Thread.sleep(6000);
 		}
 
 		Verify.waitForObject(bcc.txtTodaysBalanceAmount, 1);
@@ -585,7 +585,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.next7DaysReminderFilter, 1);
 		tp.next7DaysReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		sProjectedBalanceWith7DaysReminderFilter = bcc.txtProjectedBalanceAmount.getText();
 
@@ -600,6 +600,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Double dTodaysBalance_With7DaysReminderFilter = h.processBalanceAmount(sTodaysBalanceWith7DaysReminderFilter);
 		Double dProjectedBalance_With7DaysReminderFilter = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter);
 
+		tp.searchRecentTransaction(reminderName);
 		tp.tapOnTransation(1);
 
 		bi.tapOnIgnoreAllPreviousInstancesOption();
@@ -634,7 +635,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		Verify.waitForObject(tp.dontShowReminderFilter, 1);
 		tp.dontShowReminderFilter.click();
 		tp.buttonApply.click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedBalance_WithReminderFilterOFF_AfterIgnoring = bcc.txtProjectedBalanceAmount.getText();
@@ -720,10 +721,11 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		if(Verify.objExists(tp.next7DaysReminderFilter)) {
 			tp.next7DaysReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		}
 
-		tp.tapOnTransation(1);
+		tp.searchRecentTransaction(reminderName);
+		tp.tapOnFirstTransaction();
 
 		bi.tapOnDeleteThisAndFutureInstances();
 

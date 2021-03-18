@@ -337,8 +337,8 @@ public class BankingAndCreditCardPage {
 
 		Dimension size = this.txtActualBalance.getSize();
 
-		int x_start=(int)(size.width*0.90);
-		int x_end=(int)(size.width*0.10);
+		int x_start=(int)(size.width*0.95);
+		int x_end=(int)(size.width*0.05);
 
 		int y=this.txtActualBalance.getRect().getY();
 		//int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
@@ -420,8 +420,8 @@ public class BankingAndCreditCardPage {
 
 		Dimension size = this.txtProjectedBalance.getSize();
 
-		int x_start=(int)(size.width*0.10);
-		int x_end=(int)(size.width*0.90);
+		int x_start=(int)(size.width*0.05);
+		int x_end=(int)(size.width*0.95);
 
 		int y=this.txtProjectedBalance.getRect().getY();
 

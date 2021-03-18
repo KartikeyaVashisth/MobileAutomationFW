@@ -62,38 +62,39 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//*[@text='Banking & Credit']")
 	public MobileElement accountsCard;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Checking']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Checking'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[3]")
 	@AndroidFindBy(xpath="//*[@text='Checking']/following-sibling::android.widget.TextView[1]")
 	public MobileElement checkingBalance;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Cash']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Cash'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
 	@AndroidFindBy(xpath="//*[@text='Cash']/following-sibling::android.widget.TextView[1]")
 	public MobileElement cashBalance;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Credit']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit'`]/XCUIElementTypeStaticText[-1]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit'`]/XCUIElementTypeStaticText[-1]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Credit'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[5]")
 	@AndroidFindBy(xpath="//*[@text='Credit']/following-sibling::android.widget.TextView[1]")
 	public MobileElement creditBalance;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Savings']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Savings'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[7]")
 	@AndroidFindBy(xpath="//*[@text='Savings']/following-sibling::android.widget.TextView[1]")
 	public MobileElement savingsBalance;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Other']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Other'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Other'`]/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Other'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[11]")
 	@AndroidFindBy(xpath="//*[@text='Other']/following-sibling::android.widget.TextView[1]")
 	public MobileElement otherBalance;
 	
-//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Total']/../XCUIElementTypeStaticText[2]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Total'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Total'`]/XCUIElementTypeStaticText[3]")
+//	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Checking'`]/XCUIElementTypeOther[`name contains 'Total'`]/XCUIElementTypeStaticText[`name contains '$'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[$name = 'Banking & Credit'$][-2]/**/XCUIElementTypeOther[`name BEGINSWITH 'Total'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[9]")
 	@AndroidFindBy(xpath="//*[@text='Total']/following-sibling::android.widget.TextView[1]")
 	public MobileElement totalBalance;
@@ -918,9 +919,41 @@ public class OverviewPage {
 	
 	public void tapOnAddTransaction() throws Exception {
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 15);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		addTransaction.click();
 		Thread.sleep(1000);
 	}
+	
+public void scrollToTransactionSummaryCard() throws Exception{
+		
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
+		Integer iCount = 0;
+		
+		Helper h = new Helper();
+		String currentMonth = h.getCurrentMonth();
+		
+		if (h.getEngine().equals("android")){
+//			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
+//			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
+			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Budget\").instance(0))"));
+			Thread.sleep(1000);
+//			Engine.ad.findElement(By.xpath(sXpath)).click();
+//			Thread.sleep(3000);
+		}
+		else {
+			String cc ="**/*[`name=='"+currentMonth+" Summary'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+			//Engine.iosd.findElement(By.name("'"+currentMonth+" Summary'")).click();
+//			transactionSummaryCard.click();
+//			Thread.sleep(1000);
+		}
+	}
+
 
 }
