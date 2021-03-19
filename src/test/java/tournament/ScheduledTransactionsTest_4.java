@@ -8,6 +8,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.BankingAndCreditCardPage;
 import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
+import dugout.SignInPage;
 import dugout.TransactionsPage;
 import referee.Commentary;
 import referee.Verify;
@@ -29,6 +30,9 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		SignInPage si = new SignInPage();
+		si.signIn(sUserName, sPassword, sDataset);
+		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Entering the Bill reminder instance from the accounts page and verifying the changes in Today's and Projected Balances of Accounts afterwards.");
 
 		String sTodaysBalance_WithReminderFilterOFF, sProjectedBalance_WithReminderFilterOFF;

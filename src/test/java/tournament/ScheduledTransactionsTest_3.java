@@ -12,6 +12,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.BankingAndCreditCardPage;
 import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
+import dugout.SignInPage;
 import dugout.TransactionsPage;
 import io.appium.java_client.MobileElement;
 import referee.Commentary;
@@ -34,6 +35,9 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		SignInPage si = new SignInPage();
+		si.signIn(sUserName, sPassword, sDataset);
+		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Editing the Bill reminder series and verifying that correct number of instances are updated with the change of frequency.");
 
 		OverviewPage op = new OverviewPage();

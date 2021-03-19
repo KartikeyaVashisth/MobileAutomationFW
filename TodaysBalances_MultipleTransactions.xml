@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BAT tests">
+    <listeners>
+		<listener class-name="referee.CustomListener"/>
+	</listeners>
+	
+  <test name="TodaysBalances_MultipleTransactions_Test">
+    <classes>
+     <class name="tournament.TodaysBalances_MultipleTransactions"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
