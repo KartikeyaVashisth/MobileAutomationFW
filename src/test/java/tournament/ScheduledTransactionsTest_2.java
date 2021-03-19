@@ -8,6 +8,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.BankingAndCreditCardPage;
 import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
+import dugout.SignInPage;
 import dugout.TransactionsPage;
 import referee.Commentary;
 import referee.Verify;
@@ -28,6 +29,9 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
+		
+		SignInPage si = new SignInPage();
+		si.signIn(sUserName, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Tapping on the search bar and enter the reminder's payee name or amount to search for the results.");
 
