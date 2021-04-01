@@ -477,7 +477,7 @@ public class ReviewNotReview_Test extends Recovery {
 		}
 
 		tp.selectSortFilterOption("Not Reviewed");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 
 		if (Verify.objExists(tp.filterNotReviewedButton)) {
 			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
@@ -520,7 +520,7 @@ public class ReviewNotReview_Test extends Recovery {
 		Thread.sleep(1000);
 
 		tp.selectSortFilterOption("Not Reviewed");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 
 		if (Verify.objExists(tp.filterNotReviewedButton)) {
 			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");

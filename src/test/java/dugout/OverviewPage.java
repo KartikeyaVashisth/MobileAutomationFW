@@ -591,6 +591,8 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.ad.findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
+			Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+			Thread.sleep(12000);
 		}
 		else {
 			String cc="**/*[`name=='Net Worth'`]";
@@ -604,6 +606,8 @@ public class OverviewPage {
 			Thread.sleep(1000);
 			Engine.iosd.findElement(By.name("Net Worth")).click();
 			Thread.sleep(2000);
+			Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
+			Thread.sleep(10000);
 		}
 	}
 	
