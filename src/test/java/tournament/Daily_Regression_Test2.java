@@ -10,6 +10,7 @@ import dugout.InvestingPage;
 import dugout.NetIncomeOverTimePage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
+import dugout.SpendingOverTimePage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
@@ -584,21 +585,35 @@ public class Daily_Regression_Test2 extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating message displayed on Net Income Over Time Card in case of no transactions");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating message displayed on Net Income Over Time Card in case of no transactions.");
 
 		OverviewPage op = new OverviewPage();
 		op.tapOnNetIncomeOverTimeCard();
 
 		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
 
-		Verify.waitForObject(not.youDontHaveAnyTxns, 2);
+		Verify.waitForObject(not.youDontHaveAnyTxns, 1);
 		String actText_notDetailsScreen = not.youDontHaveAnyTxns.getText();
 
 		if (actText_notDetailsScreen.equals("You don't have any transactions."))
-			Commentary.log(LogStatus.INFO, "PASS: Net Income Over Time page > Correct message is displayed in case user has no transactions");
+			Commentary.log(LogStatus.INFO, "PASS: Net Income Over Time page > Correct message is displayed in case user has no transactions.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Net Income Over Time page > Message is not displayed in case user has no transactions");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Net Income Over Time page > Message is not displayed in case user has no transactions.");
 
+		Verify.waitForObject(not.backButtonOnHeader, 1);
+		not.backButtonOnHeader.click();
+		
+		op.tapOnSpendingOverTimeCard();
+		
+		SpendingOverTimePage sot = new SpendingOverTimePage();
+		Verify.waitForObject(sot.youDontHaveAnyTxns, 1);
+		String actText_sotDetailsScreen = sot.youDontHaveAnyTxns.getText();
+
+		if (actText_sotDetailsScreen.equals("You don't have any transactions."))
+			Commentary.log(LogStatus.INFO, "PASS: Spending Over Time page > Correct message is displayed in case user has no transactions.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Spending Over Time page > Message is not displayed in case user has no transactions.");
+		
 		sa.assertAll();
 	}
 

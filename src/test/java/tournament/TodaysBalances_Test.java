@@ -429,6 +429,7 @@ public class TodaysBalances_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
+		Verify.waitForObject(op.savingsBalance, 1);
 		sAfter = op.savingsBalance.getText();
 		sTotal_after = op.totalBalance.getText();
 		Double dAfter = h.processBalanceAmount(sAfter);

@@ -350,6 +350,7 @@ public class NetIncomeOverTimeTest extends Recovery {
 		dBeforeAmount = not.getSelectedMonthAmount();
 		Commentary.log(LogStatus.INFO, "PASS: NetIncome OverTime > Before adding the transaction, the current month Total NetIncome shows: ["+dBeforeAmount+"]");
 		
+		Verify.waitForObject(not.backButtonOnHeader, 1);
 		not.backButtonOnHeader.click();
 		Thread.sleep(2000);
 		

@@ -564,7 +564,7 @@ public class TransactionsPage {
 	public MobileElement buttonClose;
 	
 	@iOSFindBy(id="You don't have any transactions.")
-	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_data']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_payee']")
 	public MobileElement noTransactionText;
 	
 	@iOSXCUITFindBy(id = "transactionSettings")
