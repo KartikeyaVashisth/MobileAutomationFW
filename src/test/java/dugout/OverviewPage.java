@@ -346,7 +346,7 @@ public class OverviewPage {
 		
 		//Dimension size = Engine.ad.manage().window().getSize();
 		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("ios")){
@@ -791,18 +791,18 @@ public class OverviewPage {
 			Thread.sleep(1000);
 		}
 		else {
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
-			me.click();
+//			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
+//			me.click();
 			//String sXpath="//*[@name='Banking & Credit']";
 			//String cc="**/*[`name=='Banking & Credit'`]";
-//			String cc="**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]";
-//			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
-//			String me_id = me.getId();
-//			HashMap<String, String> scrollObject = new HashMap<String, String>();
-//			scrollObject.put("element", me_id);
-//			scrollObject.put("direction", "up");
-//			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
-//			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			String cc="**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]";
+			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("direction", "up");
+			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
+			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 			
 		}

@@ -272,7 +272,7 @@ public class Helper {
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
 			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","8.1");//6.0
+			capabilities.setCapability("platformVersion","10.0");//8.1
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
@@ -291,9 +291,9 @@ public class Helper {
 			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
-			capabilities.setCapability("platformVersion", "12.1");
-			capabilities.setCapability("appiumVersion", "1.15.1"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X");
+			capabilities.setCapability("platformVersion", "13.3"); //12.1
+			capabilities.setCapability("appiumVersion", "1.17.1-1"); //1.8.0
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro Max");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);

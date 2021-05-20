@@ -50,8 +50,10 @@ public class TransactionDetailPage {
 		}	
 	}
 	
-	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='ALLOW']")
+//	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Allow While Using App'`]")
+//	@AndroidFindBy(xpath="//android.widget.Button[@text='ALLOW']")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow only while using the app']")
 	public MobileElement allowButton;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Deny'`]")
@@ -63,7 +65,7 @@ public class TransactionDetailPage {
 	public MobileElement addTransactionTxt;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeNavigationBar[@name=\"View Transaction\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='View Transaction'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='View Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='View Transaction']")
 	public MobileElement viewTransactionTxt;
 	
@@ -570,6 +572,7 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		SoftAssert sa = new SoftAssert();
+		Verify.waitForObject(this.viewTransactionTxt, 1);
 		if (Verify.objExists(this.viewTransactionTxt)) {
 			Commentary.log(LogStatus.INFO,"EditTransaction screen got displayed.");
 			
@@ -968,7 +971,8 @@ public class TransactionDetailPage {
 	
 	public void selectCategory_android (String category) throws Exception {
 		
-		String sXpath = "//android.widget.TextView[@text='"+category+"']";
+		//String sXpath = "//android.widget.TextView[@text='"+category+"']";
+		String sXpath = "//android.widget.TextView[@text='"+category+"']/../android.view.ViewGroup[@content-desc='RadioButton']";
 		
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
@@ -1001,7 +1005,7 @@ public class TransactionDetailPage {
 	public void selectCategory_ios (String category) throws Exception {
 		
 		//String sXpath = "//XCUIElementTypeOther[@name='"+category+"']";
-		String sXpath = "**/XCUIElementTypeOther[`name='"+category+"'`][-1]";
+		String sXpath = "**/XCUIElementTypeOther[`name='RadioButton "+category+"'`]/XCUIElementTypeOther[`name='RadioButton'`]";
 		//String sXpath = "**/XCUIElementTypeOther[`name=='RadioButton "+category+"'`]";
 		
 //		if (this.categories.isDisplayed()) {
@@ -1609,9 +1613,9 @@ public class TransactionDetailPage {
  	}
  	
  	public boolean VerifyTransactionCategory (String sCategory) {
+ 		SoftAssert sa = new SoftAssert();
  		
  		String sActual;
- 		
 		sActual = this.getTransactionCategory();
 		
 		if (sActual.equals(sCategory)) {
@@ -1619,7 +1623,7 @@ public class TransactionDetailPage {
 			return true;
 		}
 			
-		Commentary.log(LogStatus.FAIL, "Category verification failed. Expected ["+sCategory+"], Actual ["+sActual+"]");
+		Commentary.log(sa, LogStatus.FAIL, "Category verification failed. Expected ["+sCategory+"], Actual ["+sActual+"]");
  		
  		return false;
  	}

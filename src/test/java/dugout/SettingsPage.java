@@ -104,7 +104,7 @@ public class SettingsPage {
 		public MobileElement PasscodeTxt;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Passcode'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
 		public MobileElement PasscodeHeaderTxt;
 		
@@ -114,7 +114,7 @@ public class SettingsPage {
 		public MobileElement ManageAlertsTxt;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Manage Alerts\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Manage Alerts'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Manage Alerts'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
 		public MobileElement ManageAlertsHeaderTxt;
 		
@@ -124,7 +124,7 @@ public class SettingsPage {
 		public MobileElement HelpLegalTxt;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Help & Legal\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Help & Legal'`]")
+		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Help & Legal'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Help & Legal']")
 		public MobileElement HelpLegalHeaderTxt;
 		

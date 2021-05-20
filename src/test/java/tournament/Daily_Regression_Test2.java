@@ -232,10 +232,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.PasscodeTxt, 3);
+		Verify.waitForObject(sp.PasscodeTxt, 2);
 		sp.PasscodeTxt.click();
 
-		Verify.waitForObject(sp.getAccountElement("Use Quicken Passcode"), 3);
+		Verify.waitForObject(sp.getAccountElement("Use Quicken Passcode"), 2);
 
 		if (Verify.objExists(sp.PasscodeHeaderTxt))
 			Commentary.log(LogStatus.INFO, "PASS: Header text is displayed");
@@ -268,23 +268,23 @@ public class Daily_Regression_Test2 extends Recovery{
 		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.ManageAlertsTxt, 3);
+		Verify.waitForObject(sp.ManageAlertsTxt, 2);
 		sp.ManageAlertsTxt.click();
 
 		Verify.waitForObject(sp.ManageAlertsHeaderTxt, 2);
 		Verify.waitForObject(sp.getTextView("New Charge - Quicken Card (Mobile Only)"), 2);
 
 		if (Verify.objExists(sp.ManageAlertsHeaderTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Manage Alert Header text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manage Alerts Header text is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header Alert header text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alerts header text is NOT displayed");
 
 		if (Verify.objExists(sp.getTextView("New Charge - Quicken Card (Mobile Only)")))
 			Commentary.log(LogStatus.INFO, "PASS: New charge message text is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: New charge message text is NOT displayed");
 
-		Verify.waitForObject(sp.getTextView("Push Notification"), 3);
+		Verify.waitForObject(sp.getTextView("Push Notification"), 2);
 		if (Verify.objExists(sp.getTextView("Push Notification")))
 			Commentary.log(LogStatus.INFO, "PASS: Push Notification text is displayed");
 		else
@@ -372,7 +372,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Verify.waitForObject(ts.categoryTab, 2);
 		ts.categoryTab.click();
 
-		Verify.waitForObject(ts.categoryTile, 3);
+		Verify.waitForObject(ts.categoryTile, 2);
 		String sCategoryAmount_before = ts.categoryTile.getText();
 		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
 		Commentary.log(LogStatus.INFO, "Category amount is "+dCategoryAmount_before);
@@ -401,7 +401,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Verify.waitForObject(ts.categoryTab, 2);
 		ts.categoryTab.click();
 
-		Verify.waitForObject(ts.categoryTile, 5);
+		Verify.waitForObject(ts.categoryTile, 2);
 		String sCategoryAmount_after = ts.categoryTile.getText();
 		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
@@ -425,7 +425,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding a transaction with Payee selected from Yelp Results and later verifying the Payee Name from the added transaction.");
 
 		OverviewPage op = new OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 5);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();

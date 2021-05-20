@@ -464,6 +464,7 @@ public class BankingAndCreditCardPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
+			this.scrollToAccount(acctName);
 			Verify.waitForObject((MobileElement) Engine.ad.findElement(MobileBy.xpath(sXpath)), 2);
 			Engine.ad.findElement(MobileBy.xpath(sXpath)).click();
 			Thread.sleep(5000);

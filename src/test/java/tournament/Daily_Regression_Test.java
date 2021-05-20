@@ -284,8 +284,8 @@ public class Daily_Regression_Test extends Recovery {
 		op.tapOnTransactionSummaryCard();
 
 		TransactionSummaryPage ts = new TransactionSummaryPage();
-		Verify.waitForObject(ts.backButtonOnHeader, 3);
-		Verify.waitForObject(ts.categoryTab, 3);
+		Verify.waitForObject(ts.backButtonOnHeader, 2);
+		Verify.waitForObject(ts.categoryTab, 2);
 
 		if (Verify.objExists(ts.backButtonOnHeader))
 			Commentary.log(LogStatus.INFO, "PASS: Back button is displayed");
@@ -295,7 +295,7 @@ public class Daily_Regression_Test extends Recovery {
 		if (Verify.objExists(ts.transactionSummaryHeader))
 			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary header is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary is not displayed");
+			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary header is not displayed");
 
 		if (Verify.objExists(ts.categoryTab))
 			Commentary.log(LogStatus.INFO, "PASS: Category button is displayed");
@@ -649,7 +649,7 @@ public class Daily_Regression_Test extends Recovery {
 		if (tp.isRunningBalanceEnabled()) {
 			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
 			tp.buttonApply.click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} else {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
 			tp.buttonApply.click();
@@ -756,7 +756,7 @@ public class Daily_Regression_Test extends Recovery {
 		if (tp.isRunningBalanceEnabled()) {
 			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
 			tp.buttonApply.click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} else {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
 			tp.buttonApply.click();
@@ -897,6 +897,7 @@ public class Daily_Regression_Test extends Recovery {
 		td.backButton.click(); Thread.sleep(2000);
 
 		ts.payeeTab.click();
+		Thread.sleep(2000);
 		String payeeName = ts.getCategoryPayeeName();
 
 		ts.transactionCategoryPayeeText.click();

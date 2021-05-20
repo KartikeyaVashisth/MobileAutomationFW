@@ -32,7 +32,7 @@ public class NetWorthPage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton")
 	public MobileElement backButton;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'As of'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name BEGINSWITH 'As of'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text, 'As of')]")
 	public MobileElement dateHeaderText;
 
