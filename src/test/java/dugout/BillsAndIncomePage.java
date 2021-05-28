@@ -45,7 +45,7 @@ public class BillsAndIncomePage {
 		}
 	}
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name ='Bills & Income'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name ='Bills & Income'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Bills & Income']")
 	public MobileElement billsAndIncomeHeaderText;
 
@@ -415,7 +415,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton")
 	public MobileElement backButtonOfEditSeries;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Edit Series'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Edit Series'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit Series']")
 	public MobileElement editSeriesHeaderText;
 
@@ -425,7 +425,7 @@ public class BillsAndIncomePage {
 
 	// -------------- View Series Page --------------
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='View Series'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='View Series'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='View Series']")
 	public MobileElement viewSeriesHeaderText;
 
@@ -487,7 +487,7 @@ public class BillsAndIncomePage {
 
 	// ------------------ Enter Transaction Page & More Actions Option ---------------------
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Enter Transaction'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Enter Transaction'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Enter Transaction']")
 	public MobileElement enterTransactionHeaderText;
 
@@ -515,7 +515,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit this instance']")
 	public MobileElement editThisInstanceOption;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Edit Reminder Instance'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Edit Reminder Instance'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit Reminder Instance']")
 	public MobileElement editReminderInstanceHeaderText;
 
@@ -957,7 +957,7 @@ public class BillsAndIncomePage {
 
 	public void selectCategory_android (String category) throws Exception {
 
-		String sXpath = "//android.widget.TextView[@text='"+category+"']";
+		String sXpath = "//android.widget.TextView[@text='"+category+"']/../android.view.ViewGroup[@content-desc='RadioButton']";
 
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
@@ -977,7 +977,7 @@ public class BillsAndIncomePage {
 
 	public void selectCategory_ios (String category) throws Exception {
 
-		String sXpath = "**/XCUIElementTypeOther[`name='"+category+"'`][-1]";
+		String sXpath = "**/XCUIElementTypeOther[`name='RadioButton "+category+"'`]/XCUIElementTypeOther[`name='RadioButton'`]";
 
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
@@ -1518,8 +1518,7 @@ public class BillsAndIncomePage {
 		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
 		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(2000);
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ firstOn + "\").instance(0))"));
-
+		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ firstOn + "\").instance(0))"));
 		Thread.sleep(1000);
 		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+firstOn+"']")).click();
 
@@ -1546,9 +1545,9 @@ public class BillsAndIncomePage {
 		Thread.sleep(1000);
 
 		if (h.getEngine().equals("android"))
-			this.selectEvery2WeeksOn_android(secondOn);	
+			this.selectSecondOn_android(secondOn);	
 		else
-			this.selectEvery2WeeksOn_ios(secondOn);	
+			this.selectSecondOn_ios(secondOn);	
 
 		Thread.sleep(1000);
 	}
@@ -1558,7 +1557,7 @@ public class BillsAndIncomePage {
 		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
 		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(2000);
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ secondOn + "\").instance(0))"));
+		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ secondOn + "\").instance(0))"));
 		Thread.sleep(1000);
 		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+secondOn+"']")).click();
 

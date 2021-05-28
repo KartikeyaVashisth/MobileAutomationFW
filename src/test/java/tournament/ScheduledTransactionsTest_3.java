@@ -1294,7 +1294,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		if(Verify.objExists(tp.next7DaysReminderFilter)) {
 			tp.next7DaysReminderFilter.click();
 			tp.buttonApply.click();
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 		}
 
 		Verify.waitForObject(bcc.txtTodaysBalanceAmount, 1);

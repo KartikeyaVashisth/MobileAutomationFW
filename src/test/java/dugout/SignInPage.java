@@ -175,6 +175,8 @@ public class SignInPage {
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
+		Thread.sleep(1000);
+		userName.clear();
 		userName.sendKeys(username);//Runtime.getRuntime().exec("adb shell input text "+username+"");
 		lblPassword.click();
 		Thread.sleep(1000);

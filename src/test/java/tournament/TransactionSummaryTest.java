@@ -120,7 +120,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=3, enabled = true)
+	@Test (priority = 3, enabled = true)
 	public void TS3_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -139,6 +139,7 @@ public class TransactionSummaryTest extends Recovery {
 
 		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
+		
 		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
@@ -166,6 +167,7 @@ public class TransactionSummaryTest extends Recovery {
 		Thread.sleep(2000);
 
 		ts.payeeTab.click();
+		Thread.sleep(2000);
 		String payeeName = ts.getCategoryPayeeName();
 
 		ts.transactionCategoryPayeeText.click();

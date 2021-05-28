@@ -580,7 +580,7 @@ public class TransactionsPage {
 	public MobileElement switchShowRunningBalanceText;
 	
 	//@iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeButton' AND name == 'Switch Value: true'")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name CONTAINS \"Switch Value: \"`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSwitch[`name CONTAINS \"Switch Value: \"`]")
 	@AndroidFindBy(xpath="//android.widget.Switch")
 	public MobileElement switchRunningBalance;
 	

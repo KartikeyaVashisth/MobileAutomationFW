@@ -244,8 +244,8 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Thread.sleep(1000);
 		int numOfTransactionNext12Months = bi.getTransactionListSize();
 
-		if (numOfTransactionNext12Months==3) {		
-			Commentary.log(LogStatus.INFO, "PASS: As Expected, Only 3 transactions are seen on the Next 12 Months filter chip.");
+		if (numOfTransactionNext12Months==4) {		
+			Commentary.log(LogStatus.INFO, "PASS: As Expected, Only 4 transactions are seen on the Next 12 Months filter chip.");
 		} else {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+numOfTransactionNext12Months+" transaction is seen on the Next 12 Months filter chip.");
 		}

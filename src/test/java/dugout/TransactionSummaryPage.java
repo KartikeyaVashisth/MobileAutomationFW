@@ -29,12 +29,10 @@ public class TransactionSummaryPage {
 			}	
 		}
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='Transaction Summary']")
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Transaction Summary'`]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='Transaction Summary'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']")
 		public MobileElement transactionSummaryHeader;
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back']")
 		@iOSXCUITFindBy(accessibility="Back")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']/../android.widget.ImageButton")
 		public MobileElement backButtonOnHeader;
@@ -47,35 +45,30 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.TextView)[1]")
 		public MobileElement monthHeader;
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Category']")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Category'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Category']")
 		public MobileElement categoryTab;
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeOther[@name='button Payee']")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Payee'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Payee']")
 		public MobileElement payeeTab;
 		
-		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'shop'`]/XCUIElementTypeOther[1]")
-		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
+		//@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView[-1]/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[1]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='shop']/../android.widget.TextView[contains(@text,'$')]")
 		//@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement payeeTile;
 		
-		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Internet'`]/XCUIElementTypeOther[1]")
-		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[3]")
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[`name CONTAINS 'Internet'`][2]")
+		//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[`name CONTAINS 'Internet'`][2]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView[-1]/**/XCUIElementTypeOther[`name CONTAINS 'Internet' AND name contains '$'`][-1]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='Internet']/../android.widget.TextView[contains(@text,'$')]")
 		//@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement categoryTile;
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Category\"]")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='No Transactions by Category'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Category']")
 		public MobileElement noTransactionCategory;
 		
-		//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"No Transactions by Payee\"]")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='No Transactions by Payee'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Payee']")
 		public MobileElement noTransactionPayee;
@@ -84,7 +77,7 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'$')]")
 		public MobileElement firstRecordInList;
 		
-		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[3]")
 		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement transactionCategoryPayeeText;
 		

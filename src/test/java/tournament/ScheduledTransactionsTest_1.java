@@ -239,6 +239,7 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		bi.deleteReminderSeriesAlertButton.click();
 		Thread.sleep(2000);
 
+		Verify.waitForObject(bi.youHaveNoScheduledReminders, 1);
 		if(Verify.objExists(bi.youHaveNoScheduledReminders))
 			Commentary.log(LogStatus.INFO, "PASS: Correct message is displayed when there are no Scheduled Reminders.");
 		else 
@@ -348,6 +349,7 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		bi.deleteReminderSeriesAlertButton.click();
 		Thread.sleep(2000);
 
+		Verify.waitForObject(bi.youHaveNoScheduledReminders, 1);
 		if(Verify.objExists(bi.youHaveNoScheduledReminders))
 			Commentary.log(LogStatus.INFO, "PASS: Correct message is displayed when there are no Scheduled Reminders.");
 		else 
@@ -458,6 +460,7 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		bi.deleteReminderSeriesAlertButton.click();
 		Thread.sleep(2000);
 
+		Verify.waitForObject(bi.youHaveNoScheduledReminders, 1);
 		if(Verify.objExists(bi.youHaveNoScheduledReminders))
 			Commentary.log(LogStatus.INFO, "PASS: Correct message is displayed when there are no Scheduled Reminders.");
 		else 
