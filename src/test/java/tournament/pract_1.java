@@ -111,7 +111,7 @@ public class pract_1 extends Recovery {
 	   		quickenTest.log(LogStatus.FAIL,"Account name verification on Transaction page failed.");
 	   	
 	   	// get back to overview screen
-	   	Engine.ad.navigate().back();
+	   	//Engine.ad.navigate().back();
 	   	helper.waitForRefresh(2000);
 	   	acctListPage.backButton.click();
 	   	
@@ -399,7 +399,7 @@ public class pract_1 extends Recovery {
 		
 		try {
 			
-			Engine.ad.close();
+			//Engine.ad.close();
 			
 		}
 		catch (Exception e) {
@@ -458,7 +458,7 @@ public class pract_1 extends Recovery {
 		// overview screen
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize(); //Engine.ad.manage().window().getSize();
 //		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 //		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 		Thread.sleep(3000);
@@ -667,7 +667,7 @@ public class pract_1 extends Recovery {
 		// overview screen
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize();
 	//	Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Thread.sleep(3000);
 		
@@ -696,7 +696,7 @@ public class pract_1 extends Recovery {
 		// overview screen
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize();
 	//	Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Thread.sleep(3000);
 		
@@ -736,7 +736,7 @@ public class pract_1 extends Recovery {
 		// overview screen
 		OverviewPage o = new OverviewPage();
 		Thread.sleep(12000);
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize();
 //		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 //		Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 8, 500);
 		Thread.sleep(3000);

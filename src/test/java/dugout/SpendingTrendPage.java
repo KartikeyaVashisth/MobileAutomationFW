@@ -24,14 +24,12 @@ public class SpendingTrendPage {
 	
 	public SpendingTrendPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending by Category\"]")
@@ -119,9 +117,9 @@ public class SpendingTrendPage {
         
         int x_end=3;
        
-//      Engine.ad.swipe(x_start,y,x_end,y,4000);
+//      Engine.getDriver().swipe(x_start,y,x_end,y,4000);
 //    	Thread.sleep(1000);
-    	TouchAction touchAction = new TouchAction(Engine.ad);
+    	TouchAction touchAction = new TouchAction(Engine.getDriver());
  
 		touchAction
                 .press(point(x_start, y_start))
@@ -138,7 +136,7 @@ public class SpendingTrendPage {
         HashMap<String, String> scrollObject = new HashMap<String, String>();
         scrollObject.put("element", elementID); // Only for ‘scroll in element’
         scrollObject.put("direction", "right");
-        Engine.iosd.executeScript("mobile:scroll", scrollObject);
+        Engine.getDriver().executeScript("mobile:scroll", scrollObject);
         Thread.sleep(1000);
       
 }
@@ -205,7 +203,7 @@ public class SpendingTrendPage {
         HashMap<String, String> scrollObject = new HashMap<String, String>();
         scrollObject.put("element", elementID); // Only for ‘scroll in element’
         scrollObject.put("direction", "right");
-        Engine.iosd.executeScript("mobile:scroll", scrollObject);
+        Engine.getDriver().executeScript("mobile:scroll", scrollObject);
         Thread.sleep(1000);
 	}
 	

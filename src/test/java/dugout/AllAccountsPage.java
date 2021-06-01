@@ -22,14 +22,12 @@ public class AllAccountsPage {
 	
 	public AllAccountsPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+					
+					PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}				
 	}
 	
 	//@iOSFindBy(xpath="//*[contains(@name,'All Transactions')]")
@@ -130,8 +128,8 @@ public class AllAccountsPage {
 		String sXpath = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
 		List <MobileElement> me = null;
 
-		Engine.ad.getContext();
-		me = Engine.ad.findElements(By.xpath(sXpath));
+		Engine.getDriver().getContext();
+		me = Engine.getDriver().findElements(By.xpath(sXpath));
 		
 		return me;
 	}
@@ -141,7 +139,8 @@ public class AllAccountsPage {
 //		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[`name='topLeftLabel'`]";
 		List <MobileElement> me = null;
-		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
+		
+		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
 		
 		return me;
 	}
@@ -167,7 +166,7 @@ public class AllAccountsPage {
 		
 	}
 	
-	public Double getRunningBalancefromTransaction (int transactionNumber) {
+	public Double getRunningBalancefromTransaction (int transactionNumber) throws Exception {
 		Double dTransactionAmount = null;
 		Helper h = new Helper();
 		
@@ -175,21 +174,21 @@ public class AllAccountsPage {
 			transactionNumber = transactionNumber-1;
 			List <MobileElement> me = null;
 			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
-			me = Engine.ad.findElements(By.xpath(locator));
+			me = Engine.getDriver().findElements(By.xpath(locator));
 			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']"));
 			String sTransactionAmount = me1.getText();
 			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
 		} 
 		else {
 			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(locator));
 			String sTransactionAmount = me.getAttribute("value");
 			dTransactionAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
 		}
 		return dTransactionAmount;
 	}
 	
-	public Double getTransactionAmount(int transactionNumber) {
+	public Double getTransactionAmount(int transactionNumber) throws Exception {
 		Double dAmount = null;
 		Helper h = new Helper();
 		
@@ -197,14 +196,14 @@ public class AllAccountsPage {
 			transactionNumber = transactionNumber-1;
 			List <MobileElement> me = null;
 			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
-			me = Engine.ad.findElements(By.xpath(locator));
+			me = Engine.getDriver().findElements(By.xpath(locator));
 			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_amount']"));
 			String sTransactionAmount = me1.getText();
 			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
 		} 
 		else {
 			String locator = "**/XCUIElementTypeStaticText[`name=='topRightLabel'`]["+transactionNumber+"]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(locator));
 			String sTransactionAmount = me.getAttribute("value");
 			dAmount = h.processBalanceAmount(sTransactionAmount.replace("$", ""));
 		}
@@ -220,13 +219,13 @@ public class AllAccountsPage {
 			transactionNumber = transactionNumber-1;
 			List <MobileElement> me = null;
 			String locator = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
-			me = Engine.ad.findElements(By.xpath(locator));
+			me = Engine.getDriver().findElements(By.xpath(locator));
 			MobileElement me1 = me.get(transactionNumber).findElement(By.xpath("//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_date']"));
 			sTransactionAmount = me1.getText();
 		} 
 		else {
 			String locator = "**/XCUIElementTypeStaticText[`name=='bottomRightLabel'`]["+transactionNumber+"]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(locator));
 			sTransactionAmount = me.getText();
 		}
 		return sTransactionAmount;

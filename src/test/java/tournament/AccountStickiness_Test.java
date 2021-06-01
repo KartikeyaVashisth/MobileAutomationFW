@@ -87,10 +87,8 @@ public class AccountStickiness_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
+		
 		
 		OverviewPage op = new OverviewPage();
 		 
@@ -118,10 +116,11 @@ public class AccountStickiness_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
+//		if (h.getEngine().equals("android"))
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
 		
 		OverviewPage op = new OverviewPage();
 		 
@@ -174,10 +173,11 @@ public class AccountStickiness_Test extends Recovery {
 	SoftAssert sa = new SoftAssert();
 	
 	Helper h = new Helper();
-	if (h.getEngine().equals("android"))
-		Engine.ad.getContext();
-	else
-		Engine.iosd.getContext();
+	Engine.getDriver().getContext();
+//	if (h.getEngine().equals("android"))
+//		Engine.ad.getContext();
+//	else
+//		Engine.iosd.getContext();
 	
 	
 	OverviewPage op = new OverviewPage();
@@ -228,10 +228,11 @@ public class AccountStickiness_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
+//		if (h.getEngine().equals("android"))
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
 		
 		TransactionRecord tRec = new TransactionRecord();
 		tRec.setAccount(sOnlineChecking);
@@ -284,10 +285,11 @@ public class AccountStickiness_Test extends Recovery {
 		tRec.setTransactionType("income");
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+//		if (h.getEngine().equals("android"))
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
 		
 		Commentary.log(LogStatus.INFO, "ADD Transaction from overview screen, Verifying Account Stickiness from another account");
 		OverviewPage op = new OverviewPage(); 
@@ -317,10 +319,11 @@ public class AccountStickiness_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
+//		if (h.getEngine().equals("android"))
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
 		
 		
 		TransactionRecord tRec = new TransactionRecord();
@@ -376,10 +379,11 @@ public class AccountStickiness_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		
 		Helper h = new Helper();
-		if (h.getEngine().equals("android"))
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+		Engine.getDriver().getContext();
+//		if (h.getEngine().equals("android"))
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
 			
 
 		TransactionRecord tRec = new TransactionRecord();

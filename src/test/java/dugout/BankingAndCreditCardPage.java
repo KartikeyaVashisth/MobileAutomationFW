@@ -29,15 +29,12 @@ public class BankingAndCreditCardPage {
 
 	public BankingAndCreditCardPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+		
+		e.printStackTrace();
+		}
 	}
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar/XCUIElementTypeButton")
@@ -132,9 +129,9 @@ public class BankingAndCreditCardPage {
 
 		if (h.getEngine().equals("android")){
 			try	{
-				Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctName + "\").instance(0))"));
+				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctName + "\").instance(0))"));
 				Thread.sleep(1000);
-				return (MobileElement) Engine.ad.findElementByXPath(xPathForAcct);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct);
 			}
 			catch(Exception E){
 				return null;
@@ -144,9 +141,9 @@ public class BankingAndCreditCardPage {
 		else {
 
 			try {
-				if (!Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(xPathForAcct_IOS))))
+				if (!Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xPathForAcct_IOS))))
 					scrollToAccount(acctName);
-				return (MobileElement) Engine.iosd.findElementByXPath(xPathForAcct_IOS);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct_IOS);
 			}
 			catch(Exception E){
 				return null;
@@ -258,7 +255,7 @@ public class BankingAndCreditCardPage {
 
 		this.scrollToAccount(acct);
 
-		return Engine.ad.findElement(By.xpath(xpath)).getText();
+		return Engine.getDriver().findElement(By.xpath(xpath)).getText();
 	}
 
 	public String getAccountBalance_IOS (String acct) throws Exception {
@@ -267,7 +264,7 @@ public class BankingAndCreditCardPage {
 
 		this.scrollToAccount(acct);
 
-		return Engine.iosd.findElement(MobileBy.iOSClassChain(xpath)).getText();
+		return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).getText();
 	}
 
 	public String getAccountBalance(String acct) throws Exception {
@@ -303,18 +300,18 @@ public class BankingAndCreditCardPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctType+"']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctType + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctType + "\").instance(0))"));
 			Thread.sleep(1000);
 		}
 		else {
 			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
 			String sLabel ="name == '"+acctType+"'";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
 
@@ -362,7 +359,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", elementID); // Only for ‘scroll in element’
 		scrollObject.put("direction", "right");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 		Thread.sleep(1000);
 
 		MobileElement element1 = this.txtOnlineBalance;
@@ -370,7 +367,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
 		scrollObject1.put("direction", "right");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject1);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject1);
 		Thread.sleep(1000);
 
 		MobileElement element2 = this.txtProjectedBalance;
@@ -378,7 +375,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
 		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
 		scrollObject2.put("direction", "right");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject2);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject2);
 		Thread.sleep(1000);
 
 		//	        Helper h = new Helper();
@@ -439,7 +436,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", elementID); // Only for ‘scroll in element’
 		scrollObject.put("direction", "left");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 		Thread.sleep(1000);
 
 		MobileElement element1 = this.txtOnlineBalance;
@@ -447,7 +444,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
 		scrollObject1.put("direction", "left");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject1);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject1);
 		Thread.sleep(1000);
 
 		MobileElement element2 = this.txtActualBalance;
@@ -455,7 +452,7 @@ public class BankingAndCreditCardPage {
 		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
 		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
 		scrollObject2.put("direction", "left");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject2);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject2);
 		Thread.sleep(1000);
 	}
 
@@ -465,13 +462,13 @@ public class BankingAndCreditCardPage {
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
 			this.scrollToAccount(acctName);
-			Verify.waitForObject((MobileElement) Engine.ad.findElement(MobileBy.xpath(sXpath)), 2);
-			Engine.ad.findElement(MobileBy.xpath(sXpath)).click();
+			Verify.waitForObject((MobileElement) Engine.getDriver().findElement(MobileBy.xpath(sXpath)), 2);
+			Engine.getDriver().findElement(MobileBy.xpath(sXpath)).click();
 			Thread.sleep(5000);
 		}
 		else {
 			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctName+"'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath));
 			me.click();
 			Thread.sleep(3000);
 		}

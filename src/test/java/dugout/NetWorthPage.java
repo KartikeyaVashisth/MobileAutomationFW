@@ -18,12 +18,10 @@ public class NetWorthPage {
 
 	public NetWorthPage() {
 		try {
-			Helper h = new Helper();
-			if(h.getEngine().equals("android")) 
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad), this);
-			else 
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd), this);	
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -151,17 +149,17 @@ public class NetWorthPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='INVESTMENTS']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"INVESTMENTS\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"INVESTMENTS\").instance(0))"));
 			Thread.sleep(1000);
 		}
 		else {
 			String cc="**/*[`name=='Account Type: INVESTMENTS'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
 	}

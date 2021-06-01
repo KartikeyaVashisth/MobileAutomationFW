@@ -32,14 +32,12 @@ import support.Helper;
 public class OverviewPage {
 	public OverviewPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 	/*@iOSFindBy(xpath="//*[normalize-space(@name)='Overview']")
@@ -288,18 +286,18 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
 			
 		}
 		else {
 			//String sXpath="//*[@name='Recent Transactions']";
 			String cc="**/*[`name=='Recent Transactions'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Recent Transactions'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
 		recentTransactionsCard.click();
@@ -308,8 +306,8 @@ public class OverviewPage {
 	
 	public void tapOnPropertyDebtCard() throws Exception{
 		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		//Dimension size = Engine.getDriver().manage().window().getSize();
+		//Engine.getDriver().swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		
 		Helper h = new Helper();
@@ -317,14 +315,14 @@ public class OverviewPage {
 			
 			//String sXpath="//*[@name ='Property and Debt Account']";
 			String cc="**/*[`name =='Property and Debt Account'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
+			Engine.getDriver().findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(1000);	
 		}
 		else {
@@ -334,9 +332,9 @@ public class OverviewPage {
 			Thread.sleep(1000);	
 			*/
 			String sXpath="//android.widget.TextView[@text='Property and Debt Account']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Property and Debt Account\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Property and Debt Account\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		//}
 		}
@@ -344,8 +342,8 @@ public class OverviewPage {
 	
 	public void tapOnTrendingCard() throws Exception{
 		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		//Dimension size = Engine.getDriver().manage().window().getSize();
+		//Engine.getDriver().swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		
 		Helper h = new Helper();
@@ -353,14 +351,14 @@ public class OverviewPage {
 			
 			//String sXpath="//*[@name ='Top Trending Categories']";
 			String cc="**/*[`name =='Top Trending Categories'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Top Trending Categories")).click();
+			Engine.getDriver().findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(2000);	
 			
 		}
@@ -371,9 +369,9 @@ public class OverviewPage {
 			Thread.sleep(1000);	
 			*/
 			String sXpath="//android.widget.TextView[@text='Top Trending Categories']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Top Trending Categories\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Top Trending Categories\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
 		//}
 		}
@@ -390,17 +388,17 @@ public class OverviewPage {
 			
 			//String sXpath="//*[@name ='"+cardName+"']";
 			String cc="**/*[`name =='"+cardName+"'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
 		
 		else {
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ cardName + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ cardName + "\").instance(0))"));
 			Thread.sleep(1000);
 		}
 		
@@ -473,8 +471,8 @@ public class OverviewPage {
 //		}
 //		else {
 //			
-//			Dimension size = Engine.iosd.manage().window().getSize();
-//			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Dimension size = Engine.getDriver().manage().window().getSize();
+//			Engine.getDriver().swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
 //			Thread.sleep(2000);
 //			
 //			
@@ -486,14 +484,14 @@ public class OverviewPage {
 //		Helper h = new Helper();
 //		
 //		if (h.getEngine().equals("android")) {
-//			Dimension size = Engine.ad.manage().window().getSize();
-//			Engine.ad.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Dimension size = Engine.getDriver().manage().window().getSize();
+//			Engine.getDriver().swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
 //			Thread.sleep(1000);	
 //		}
 //		else {
 //			
-//			Dimension size = Engine.iosd.manage().window().getSize();
-//			Engine.iosd.swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
+//			Dimension size = Engine.getDriver().manage().window().getSize();
+//			Engine.getDriver().swipe(size.width - 10, size.height * 4 / 8, size.width - 10, size.height / 7, 500);
 //			Thread.sleep(1000);
 //			
 //			
@@ -502,8 +500,8 @@ public class OverviewPage {
 	
 	public void tapOnTransactionSummaryCard() throws Exception{
 		
-		//Dimension size = Engine.ad.manage().window().getSize();
-		//Engine.ad.swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
+		//Dimension size = Engine.getDriver().manage().window().getSize();
+		//Engine.getDriver().swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
 		Integer iCount = 0;
 		
@@ -531,23 +529,23 @@ public class OverviewPage {
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
 			//System.out.println(sXpath);
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(3000);
 		
 		}
 		else {
 			//String sXpath="//*[@name='"+currentMonth+" Summary']";
 			String cc ="**/*[`name=='"+currentMonth+" Summary'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			//Engine.iosd.findElement(By.name("'"+currentMonth+" Summary'")).click();
+			//Engine.getDriver().findElement(By.name("'"+currentMonth+" Summary'")).click();
 			transactionSummaryCard.click();
 			Thread.sleep(1000);
 		}
@@ -560,22 +558,22 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Bills & Income']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Bills & Income\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Bills & Income\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
 		}
 		else {
 			String cc="**/*[`name=='Bills & Income'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 //			scrollObject.put("predicateString", "label == 'Bills & Income'");
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Bills & Income")).click();
+			Engine.getDriver().findElement(By.name("Bills & Income")).click();
 			Thread.sleep(2000);
 		}
 	}
@@ -587,24 +585,24 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Net Worth']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Worth\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Worth\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
 			Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
 			Thread.sleep(12000);
 		}
 		else {
 			String cc="**/*[`name=='Net Worth'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 //			scrollObject.put("predicateString", "label == 'Net Worth'");
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Net Worth")).click();
+			Engine.getDriver().findElement(By.name("Net Worth")).click();
 			Thread.sleep(2000);
 			Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
 			Thread.sleep(10000);
@@ -618,22 +616,22 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Spending Over Time']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
 		}
 		else {
 			//String sXpath="//*[@name='Spending Over Time']";
 			String cc="**/*[`name=='Spending Over Time'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Spending Over Time'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Spending Over Time")).click();
+			Engine.getDriver().findElement(By.name("Spending Over Time")).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -645,22 +643,22 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Net Income by Month']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income by Month\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Net Income by Month\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(2000);
 		}
 		else {
 			//String sXpath="//*[@name='Net Income by Month']";
 			String cc="**/*[`name=='Net Income by Month'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Net Income by Month'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Net Income by Month")).click();
+			Engine.getDriver().findElement(By.name("Net Income by Month")).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -682,7 +680,7 @@ public class OverviewPage {
 //            	  HashMap<String, String> scrollObject = new HashMap<String, String>();
 //            	  scrollObject.put("direction", "down");
 //            	  scrollObject.put("element", elementID);
-//            	  Engine.iosd.executeScript("mobile: swipe", scrollObject); 
+//            	  Engine.getDriver().executeScript("mobile: swipe", scrollObject); 
 //            	  */ 
 //              }
             Dimension size = Engine.getDriver().manage().window().getSize();
@@ -728,22 +726,22 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+sCard+"']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 		else {
 			//String sXpath="//*[@name='"+sCard+"']";
 			String cc="**/*[`name=='"+sCard+"'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == '"+sCard+"'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name(sCard)).click();
+			Engine.getDriver().findElement(By.name(sCard)).click();
 			Thread.sleep(1000);
 		}
 		
@@ -756,22 +754,22 @@ public class OverviewPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Investing']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Investing\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Investing\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 		else {
 			//String sXpath="//*[@name='Investing']";
 			String cc="**/*[`name=='Investing'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Investing'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Investing")).click();
+			Engine.getDriver().findElement(By.name("Investing")).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -787,22 +785,22 @@ public class OverviewPage {
 
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='Banking & Credit']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Banking & Credit\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Banking & Credit\").instance(0))"));
 			Thread.sleep(1000);
 		}
 		else {
-//			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
+//			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStatusBar"));
 //			me.click();
 			//String sXpath="//*[@name='Banking & Credit']";
 			//String cc="**/*[`name=='Banking & Credit'`]";
 			String cc="**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("direction", "up");
 			scrollObject.put("predicateString", "label == 'Banking & Credit'");			
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 			
 		}
@@ -814,10 +812,10 @@ public class OverviewPage {
 //		
 //		for (iCount=0; iCount<3; iCount++) {
 //			
-//			Dimension size = Engine.iosd.manage().window().getSize();
+//			Dimension size = Engine.getDriver().manage().window().getSize();
 //			System.out.println(size.height);
 //			System.out.println(size.height/4);
-//			Engine.iosd.swipe(size.width - 10, size.height/4, size.width - 10, size.height-50, 500);
+//			Engine.getDriver().swipe(size.width - 10, size.height/4, size.width - 10, size.height-50, 500);
 //			
 //			if (Verify.objExists(this.refreshSpinnerIcon))
 //				Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
@@ -833,11 +831,11 @@ public class OverviewPage {
 //		
 //		if (h.getEngine().equalsIgnoreCase("android")) {
 //			
-//			Dimension size = Engine.ad.manage().window().getSize();
+//			Dimension size = Engine.getDriver().manage().window().getSize();
 //			int y_start = (int) (size.width * 1.20);
 //			int y_end = (int) (size.width * 0.03);
 //			int x = 380;
-//			Engine.ad.swipe(x, y_start, x, y_end, 3000);
+//			Engine.getDriver().swipe(x, y_start, x, y_end, 3000);
 //		} else {
 //			JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd ;
 //		    HashMap scrollObject = new HashMap();
@@ -865,14 +863,14 @@ public class OverviewPage {
 		String sXpath = construct_SOTmonth(shortMonth);
 		//System.out.println(sXpath);
 		sXpath = "//XCUIElementTypeOther[contains(@name,'Spending Over Time')]//XCUIElementTypeStaticText[@name ='APR']";
-		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 		String me_id = me.getId();
 		System.out.println(me_id);
 		me.click();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", me_id);
 		scrollObject.put("predicateString", "label == '"+shortMonth.toUpperCase()+"'");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		Thread.sleep(1000);	
 	}
 	
@@ -883,11 +881,11 @@ public class OverviewPage {
 		String shortMonth = h.getLastSixMonths()[0];
 		
 		String sXpath = construct_SOTmonth(shortMonth);
-		//Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
-		//Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"APR\").instance(0))"));
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+shortMonth.toUpperCase()+"\").instance(1))"));
+		//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Spending Over Time\").instance(0))"));
+		//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\"APR\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+shortMonth.toUpperCase()+"\").instance(1))"));
 		Thread.sleep(1000);
-		//System.out.println(Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath))));
+		//System.out.println(Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(sXpath))));
 		Thread.sleep(1000);	
 	}
 	
@@ -904,7 +902,7 @@ public class OverviewPage {
 		return xpath;
 	}
 	
-	public Boolean verifyMonthOnSpendingOverTime(String sMonth) {
+	public Boolean verifyMonthOnSpendingOverTime(String sMonth) throws Exception {
 		
 		Helper h = new Helper();
 		String [] shortMonths = h.getLastSixMonths();
@@ -916,9 +914,9 @@ public class OverviewPage {
 		sXpath=construct_SOTmonth(sMonth);
 		
 		if (h.getEngine().equals("android"))
-			return Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(sXpath)));
+			return Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(sXpath)));
 		else
-			return Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(sXpath)));
+			return Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(sXpath)));
 	}
 	
 	public void tapOnAddTransaction() throws Exception {
@@ -938,22 +936,22 @@ public void scrollToTransactionSummaryCard() throws Exception{
 		
 		if (h.getEngine().equals("android")){
 //			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
-//			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Budget\").instance(0))"));
+//			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Budget\").instance(0))"));
 			Thread.sleep(1000);
-//			Engine.ad.findElement(By.xpath(sXpath)).click();
+//			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 //			Thread.sleep(3000);
 		}
 		else {
 			String cc ="**/*[`name=='"+currentMonth+" Summary'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			//Engine.iosd.findElement(By.name("'"+currentMonth+" Summary'")).click();
+			//Engine.getDriver().findElement(By.name("'"+currentMonth+" Summary'")).click();
 //			transactionSummaryCard.click();
 //			Thread.sleep(1000);
 		}

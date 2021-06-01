@@ -11,6 +11,7 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
@@ -26,6 +27,9 @@ import com.saucelabs.saucerest.SauceREST;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
+import referee.EM2;
+import referee.ETM;
 import referee.ErrorUtil;
 import referee.ExtentManager;
 import referee.Verify;
@@ -50,6 +54,19 @@ public class Recovery {
 		return true;
 	}
 	
+	@BeforeSuite
+	public void testPlanEnter() throws Exception{
+		
+		/*
+		ExtentManager em = new ExtentManager();
+		em.initializeRepObject();*/
+		
+		EM2.getInstance();	
+		
+		
+			
+	}
+	/*
 	@BeforeSuite
 	@Parameters({"host","engine","test","env"})
 	public static void testPlanEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env) throws Exception{
@@ -138,150 +155,310 @@ public class Recovery {
 		System.out.println("launch done...");
 	}
 	
-	@SuppressWarnings("unchecked")
-	@BeforeMethod
-	public static void testCaseEnter(Method method) throws Exception{
-		System.out.println("Before Method started...........");
+	*/
 	
-		// reset errors
-		ErrorUtil.resetTestErrors();
-		
-		// Load properties
-		/*Helper h = new Helper();
-		h.loadProperties();*/
-	
-		// start test logs
-		String methodName = method.toString();//.replace("public", "").replace("void","").trim();
-		methodName = methodName.replace("public", "").replace("void","").replace(" throws java.lang.Exception", "").trim();
-		methodName=methodName.substring(methodName.lastIndexOf(".") + 1).trim();
-		System.out.println(methodName);
-		
-		ExtentManager em = new ExtentManager();
-		//em.quickenTest = em.initializeRepObject().startTest(methodName);
-		quickenTest = em.initializeRepObject().startTest(methodName);
-		
-		quickenTest.log(LogStatus.INFO,"StartTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
-		
-		// set driver
-		//Engine.setDriver();
-		if (Engine.ad != null) {
-			//Engine.ad.launchApp();]
-			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
-            //()Engine.getDriver()).startActivity(activity);
-            
-			Engine.ad.startActivity(activity);
+//	@SuppressWarnings("unchecked")
+//	@BeforeMethod
+//	public static void testCaseEnter(Method method) throws Exception{
+//		System.out.println("Before Method started...........");
+//	
+//		// reset errors
+//		ErrorUtil.resetTestErrors();
+//		
+//		// Load properties
+//		/*Helper h = new Helper();
+//		h.loadProperties();*/
+//	
+//		// start test logs
+//		String methodName = method.toString();//.replace("public", "").replace("void","").trim();
+//		methodName = methodName.replace("public", "").replace("void","").replace(" throws java.lang.Exception", "").trim();
+//		methodName=methodName.substring(methodName.lastIndexOf(".") + 1).trim();
+//		System.out.println(methodName);
+//		
+//		ExtentManager em = new ExtentManager();
+//		//em.quickenTest = em.initializeRepObject().startTest(methodName);
+//		quickenTest = em.initializeRepObject().startTest(methodName);
+//		
+//		quickenTest.log(LogStatus.INFO,"StartTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+//		
+//		// set driver
+//		//Engine.setDriver();
+//		if (Engine.ad != null) {
+//			//Engine.ad.launchApp();]
 //			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
-			//((AndroidDriver<MobileElement>)Engine.getDriver()).startActivity(activity);
-			//Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
-			//System.out.println(".....waiting for spinner icon to disappear.....");
-			//Verify.waitForObjectToDisappear((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.ProgressBar")), 30)	;
-			Thread.sleep(12000);
+//            //()Engine.getDriver()).startActivity(activity);
+//            
+//			Engine.ad.startActivity(activity);
+////			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+//			//((AndroidDriver<MobileElement>)Engine.getDriver()).startActivity(activity);
+//			//Engine.ad.startActivity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+//			//System.out.println(".....waiting for spinner icon to disappear.....");
+//			//Verify.waitForObjectToDisappear((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.ProgressBar")), 30)	;
+//			Thread.sleep(12000);
+//		}
+//		else {
+//			Engine.iosd.launchApp();
+//		}
+//		Thread.sleep(5000);
+//		//System.out.println("app launched.....");
+//		//System.out.println("Before Method end...........");	
+//	}
+//
+//	
+//	@AfterMethod
+//	public static void testCaseExit(ITestResult result, Method method) throws InterruptedException{
+//
+//		ExtentTest quickenTest = Recovery.quickenTest;
+//		ExtentManager em = new ExtentManager();
+//		
+//		List<String> softFails = ErrorUtil.getTestErrors();
+//		if (result.getStatus() == ITestResult.FAILURE) {
+//		      quickenTest.log(LogStatus.FAIL, result.getThrowable());
+//		   } 
+//		
+//		/*System.out.println("softFails size...."+softFails.size());
+//		System.out.println("softFails size...."+softFails.size());
+//		if (softFails.size() != 0){
+//			System.out.println("TRUEEEEEEEEEE");
+//		}
+//		System.out.println("getttt status...................");
+//		System.out.println(quickenTest.getRunStatus());
+//		System.out.println("getttt status...................");
+//		System.out.println(softFails.size() != 0);*/
+//		if ((softFails.size() != 0)){
+//			quickenTest.log(LogStatus.FAIL,method.getName());
+//			
+//			/*result.setStatus(ITestResult.FAILURE);
+//			System.out.println("set the status to failure......!");
+//	
+//			int size = softFails.size();
+//			//if there's only one failure just set that
+//			if (size == 1) {
+//				
+//				 quickenTest.log(LogStatus.FAIL, softFails.get(0));
+//				 Throwable t = new Exception(softFails.get(0));
+//				 System.out.println("Throwable is settt...........!"+softFails.get(0));
+//				result.setThrowable(t);
+//				
+//				
+//			} else {
+//				//create a failure message with all failures and stack traces (except last failure)
+//				StringBuffer failureMessage = new StringBuffer("Multiple failures (").append(size).append("):nn");
+//				for (int i = 0; i < size-1; i++) {
+//					failureMessage.append("Failure ").append(i+1).append(" of ").append(size).append(":n");
+//					Throwable t = new Exception(softFails.get(i));//verificationFailures.get(i);
+//					String fullStackTrace = Utils.stackTrace(t, false)[1];
+//					failureMessage.append(fullStackTrace).append("nn");
+//				}
+//
+//				//final failure
+//				Throwable last = new Exception(softFails.get(size-1));//verificationFailures.get(size-1);
+//				failureMessage.append("Failure ").append(size).append(" of ").append(size).append(":n");
+//				failureMessage.append(last.toString());
+//
+//				//set merged throwable
+//				Throwable merged = new Throwable(failureMessage.toString());
+//				merged.setStackTrace(last.getStackTrace());
+//
+//				result.setThrowable(merged);
+//				quickenTest.log(LogStatus.FAIL, result.getThrowable());
+//			}*/
+//		}
+//		else{
+//			quickenTest.log(LogStatus.PASS,method.getName());
+//		}
+//			
+//		em.initializeRepObject().endTest(quickenTest);
+//		em.initializeRepObject().flush();
+//		Thread.sleep(3000);
+//		
+//		if (Engine.ad != null){
+//			Engine.ad.closeApp();
+//			//Engine.ad.resetApp();
+//			Thread.sleep(2000);	
+//		}
+//		else{
+//			Engine.iosd.closeApp();
+//			//Engine.iosd.resetApp();
+//			Thread.sleep(2000);
+//		}
+//		
+//		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+//		System.out.println("");
+//		System.out.println("-----------------------------------------------------------------");
+//		System.out.println("");	
+//	}
+//	
+//	
+//	
+//	@AfterSuite
+//	public void TestPlanExit(){
+//		
+//		Helper h = new Helper();
+//		// close driver
+//		if (h.getEngine().equals("android")){
+//			//Engine.ad.close();
+//			Engine.ad.quit();
+//			System.out.println("TestPlanExit.. Executed");
+//		}
+//		else{
+//			Engine.iosd.quit();
+//		}
+//		
+//	}
+	
+	
+	
+	@BeforeTest
+	@Parameters({"host","engine","test","env"})
+	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env) throws Exception{
+		
+		System.out.println("Before Test Start");
+		Helper h = new Helper();
+		
+		// load engine and host
+		if (host.equals("readFromPropertiesFile"))
+		{
+			Globals g = new Globals();
+			h.loadProperties();
+			sEngine.set(g.testProperty.get("engine"));
+			sHost.set(g.testProperty.get("host"));
+			sTestName.set("LOCAL_"+g.testProperty.get("engine"));
+			sEnv.set(g.testProperty.get("env"));
 		}
 		else {
-			Engine.iosd.launchApp();
+			
+			sEngine.set(engine);
+			sHost.set(host);
+			sTestName.set(testName);
+			sEnv.set(env);
 		}
-		Thread.sleep(5000);
-		//System.out.println("app launched.....");
-		//System.out.println("Before Method end...........");	
+		
+		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
+//		System.out.println(sHost.get()+" BT");
+//		System.out.println("Env: "+sEnv.get());
+		// upload the build
+		if (wannaUploadTheBuild()) {
+			
+			if (sEngine.get().equals("android"))
+				h.uploadAndroidBuild();
+			else
+				h.uploadIOSBuild();
+		}
+			
+		// initializeDriver
+		try {
+			
+			Engine.setDriver();	
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		System.out.println("launch done...");
+		
+		
+	}
+	
+	@BeforeMethod
+	public void testCaseEnter(Method m) throws Exception{
+		
+		/*
+		System.out.println(m.getName());
+		
+		ExtentManager em = new ExtentManager();
+		
+		setReport(em.initializeRepObject().startTest(m.getName()));
+		
+		getRep().log(LogStatus.INFO,"StartTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));*/
+		Helper h = new Helper();
+		
+		System.out.println("BeforeMethod Starts........."+m.getName()+" ["+h.getEngine()+"] ");
+		
+		ErrorUtil.resetTestErrors();
+		
+		// start test logs
+		ETM tm = new ETM();
+		tm.startTest(m.getName());
+		tm.getTest().log(LogStatus.INFO,"StartTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		
+		// relaunch the app
+		if (this.sEngine.get().equals("android")) {
+			
+			Activity activity = new Activity("com.quicken.qm2014", "com.quicken.qm2014.MainActivity");
+//          //()Engine.getDriver()).startActivity(activity);
+//          
+//			Engine.ad.startActivity(activity);
+			//Activity activity = new Activity("com.quicken.acme", "com.quicken.qm2014.MainActivity");
+			((AndroidDriver<MobileElement>)Engine.getDriver()).startActivity(activity);
+			Thread.sleep(3000);
+
+		}
+			
+		else
+			((IOSDriver<MobileElement>)Engine.getDriver()).launchApp();
+			
+		Thread.sleep(14000);
+		System.out.println("BeforeMethod Ends........."+m.getName());
+		
 	}
 	
 	@AfterMethod
-	public static void testCaseExit(ITestResult result, Method method) throws InterruptedException{
-
-		ExtentTest quickenTest = Recovery.quickenTest;
+	public void testCaseExit(ITestResult result, Method method) throws Exception{
+		
+		Helper h = new Helper();
+		
+		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
+		
+		
+		
+		/*
 		ExtentManager em = new ExtentManager();
+		
+		em.initializeRepObject().endTest(getRep());*/
+		/*
+		List<LogEntry> logEntries = Engine.getDriver().manage().logs().get("logcat").getAll();
+		System.out.println(logEntries);
+		*/
+		
 		
 		List<String> softFails = ErrorUtil.getTestErrors();
 		if (result.getStatus() == ITestResult.FAILURE) {
-		      quickenTest.log(LogStatus.FAIL, result.getThrowable());
+			
+			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
 		   } 
 		
-		/*System.out.println("softFails size...."+softFails.size());
-		System.out.println("softFails size...."+softFails.size());
-		if (softFails.size() != 0){
-			System.out.println("TRUEEEEEEEEEE");
-		}
-		System.out.println("getttt status...................");
-		System.out.println(quickenTest.getRunStatus());
-		System.out.println("getttt status...................");
-		System.out.println(softFails.size() != 0);*/
-		if ((softFails.size() != 0)){
-			quickenTest.log(LogStatus.FAIL,method.getName());
-			
-			/*result.setStatus(ITestResult.FAILURE);
-			System.out.println("set the status to failure......!");
-	
-			int size = softFails.size();
-			//if there's only one failure just set that
-			if (size == 1) {
-				
-				 quickenTest.log(LogStatus.FAIL, softFails.get(0));
-				 Throwable t = new Exception(softFails.get(0));
-				 System.out.println("Throwable is settt...........!"+softFails.get(0));
-				result.setThrowable(t);
-				
-				
-			} else {
-				//create a failure message with all failures and stack traces (except last failure)
-				StringBuffer failureMessage = new StringBuffer("Multiple failures (").append(size).append("):nn");
-				for (int i = 0; i < size-1; i++) {
-					failureMessage.append("Failure ").append(i+1).append(" of ").append(size).append(":n");
-					Throwable t = new Exception(softFails.get(i));//verificationFailures.get(i);
-					String fullStackTrace = Utils.stackTrace(t, false)[1];
-					failureMessage.append(fullStackTrace).append("nn");
-				}
-
-				//final failure
-				Throwable last = new Exception(softFails.get(size-1));//verificationFailures.get(size-1);
-				failureMessage.append("Failure ").append(size).append(" of ").append(size).append(":n");
-				failureMessage.append(last.toString());
-
-				//set merged throwable
-				Throwable merged = new Throwable(failureMessage.toString());
-				merged.setStackTrace(last.getStackTrace());
-
-				result.setThrowable(merged);
-				quickenTest.log(LogStatus.FAIL, result.getThrowable());
-			}*/
-		}
-		else{
-			quickenTest.log(LogStatus.PASS,method.getName());
-		}
-			
-		em.initializeRepObject().endTest(quickenTest);
-		em.initializeRepObject().flush();
-		Thread.sleep(3000);
+		if ((softFails.size() != 0))
+			ETM.getTest().log(LogStatus.FAIL,method.getName());
+		else
+			ETM.getTest().log(LogStatus.PASS,method.getName());
 		
-		if (Engine.ad != null){
-			Engine.ad.closeApp();
-			//Engine.ad.resetApp();
-			Thread.sleep(2000);	
-		}
-		else{
-			Engine.iosd.closeApp();
-			//Engine.iosd.resetApp();
-			Thread.sleep(2000);
-		}
+		ETM.getTest().log(LogStatus.INFO, "EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		ETM.endTest();
+		ETM.map2.get((int)Thread.currentThread().getId()).flush();
 		
-		quickenTest.log(LogStatus.INFO,"EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		Thread.sleep(1000);
+		
+		Engine.tlDriver.get().closeApp();
+		if (this.sEngine.get().equals("android"))
+			((AndroidDriver<MobileElement>)Engine.getDriver()).closeApp();
+		else
+			((IOSDriver<MobileElement>)Engine.getDriver()).closeApp();
+		
 		System.out.println("");
 		System.out.println("-----------------------------------------------------------------");
-		System.out.println("");	
+		System.out.println("");
+		
+		
 	}
 	
-	@AfterSuite
-	public void TestPlanExit(){
+	@AfterTest
+	public void testPlanExit() throws Exception{
 		
-		Helper h = new Helper();
-		// close driver
-		if (h.getEngine().equals("android")){
-			//Engine.ad.close();
-			Engine.ad.quit();
-			System.out.println("TestPlanExit.. Executed");
-		}
-		else{
-			Engine.iosd.quit();
-		}
+		System.out.println("After test "+sHost.get());
+		
+		Engine.getDriver().quit();
 		
 	}
 	

@@ -19,12 +19,10 @@ public class TransactionSummaryPage {
 	
 		public TransactionSummaryPage () {
 			try {
-				Helper h = new Helper();
-				if (h.getEngine().equals("android"))
-					PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-				else
-					PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+				
+				PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 			} catch (Exception e) {
+				
 				e.printStackTrace();
 			}	
 		}
@@ -104,7 +102,7 @@ public class TransactionSummaryPage {
 			Thread.sleep(10000);		
 		}
 		
-		public MobileElement getCurrentMonthYear() {
+		public MobileElement getCurrentMonthYear() throws Exception {
 			Helper h = new Helper();
 			String[] monthNames = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
 			
@@ -116,10 +114,10 @@ public class TransactionSummaryPage {
 			String xPath_ANDROID = "//android.widget.TextView[@text='"+summaryMonthText+"']";
 			
 			if (h.getEngine().equalsIgnoreCase("ios")) {
-				 MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(xPath_IOS));
+				 MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(xPath_IOS));
 				 return me;
 			} else {
-				 MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(xPath_ANDROID));
+				 MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(xPath_ANDROID));
 				 return me;
 			}
 			

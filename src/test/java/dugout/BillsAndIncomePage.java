@@ -34,15 +34,13 @@ import support.TransactionRecord;
 public class BillsAndIncomePage {
 
 	public BillsAndIncomePage() {
-		try {
-			Helper h = new Helper();
-			if(h.getEngine().equals("android")) 
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad), this);
-			else 
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd), this);	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			try {
+				
+				PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+			}
 	}
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name ='Bills & Income'`]")
@@ -779,7 +777,7 @@ public class BillsAndIncomePage {
 		sa.assertAll();
 	}
 
-	public void enterAmount(String amount) throws InterruptedException {
+	public void enterAmount(String amount) throws Exception {
 
 		Helper h = new Helper();
 
@@ -789,7 +787,7 @@ public class BillsAndIncomePage {
 			enterTransactionAmount_ios(amount);			
 	}
 
-	public void enterTransactionAmount_android(String amount) throws InterruptedException {
+	public void enterTransactionAmount_android(String amount) throws Exception {
 
 		String[] s = amount.split("");
 		int iCount;
@@ -798,7 +796,7 @@ public class BillsAndIncomePage {
 			this.amount.click();
 			Thread.sleep(4000);
 			for (int i = 1; i < amount.length(); i++) {
-				Engine.ad.findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
+				Engine.getDriver().findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
 			}
 			Thread.sleep(1000);
 		}
@@ -813,7 +811,7 @@ public class BillsAndIncomePage {
 				// ignore
 			}
 			else
-				Engine.ad.findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();	
+				Engine.getDriver().findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();	
 		}
 
 		if(Verify.objExists(this.buttonDone)) 
@@ -822,7 +820,7 @@ public class BillsAndIncomePage {
 		Thread.sleep(1000);
 	}
 
-	public void enterTransactionAmount_ios(String amount) throws InterruptedException {
+	public void enterTransactionAmount_ios(String amount) throws Exception {
 
 		String[] s = amount.split("");
 		int iCount;
@@ -831,7 +829,7 @@ public class BillsAndIncomePage {
 			this.amount.click();
 			Thread.sleep(4000);
 			for (int i = 1; i < amount.length(); i++) {
-				Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
+				Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
 			}
 			Thread.sleep(1000);
 		}
@@ -846,7 +844,7 @@ public class BillsAndIncomePage {
 				// ignore
 			}
 			else
-				Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();	
+				Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();	
 		}
 
 		if(Verify.objExists(this.buttonDone))
@@ -967,10 +965,10 @@ public class BillsAndIncomePage {
 
 		this.searchCategory(category);
 
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(1000);	
 
 	}
@@ -986,7 +984,7 @@ public class BillsAndIncomePage {
 		Thread.sleep(1000);
 
 		this.searchCategory(category);
-		Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 		Thread.sleep(1000);	
 	}
 
@@ -1024,13 +1022,13 @@ public class BillsAndIncomePage {
 		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
 
 		if (Verify.objExists(createPayee)) {
-			Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(createTag_xpath)));
-			Engine.ad.findElement(By.xpath(createTag_xpath)).click();
+			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
+			Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
 		}
 		else {
 			String cc = "//android.widget.TextView[@text='"+sTag+"']";
-			Engine.ad.findElement(By.xpath(cc)).click();
+			Engine.getDriver().findElement(By.xpath(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
 		}
@@ -1053,13 +1051,13 @@ public class BillsAndIncomePage {
 		String createTag_xpath="**/XCUIElementTypeOther[`name=‘create tag’`]";
 
 		if (Verify.objExists(createTag)) {
-			Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)));
-			Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)));
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag... "+sTag);	
 		}
 		else {
 			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
-			Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
 		}
@@ -1083,7 +1081,7 @@ public class BillsAndIncomePage {
 
 		// scroll into notes
 		String sText = "Note";
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sText + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sText + "\").instance(0))"));
 		Thread.sleep(1000);
 		this.note.click();
 		this.note.clear();
@@ -1098,26 +1096,26 @@ public class BillsAndIncomePage {
 
 		// scroll into notes
 		//		String sXpath="//*[@name='Note']";
-		//		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		//		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 		//		String me_id = me.getId();
 		//		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		//		scrollObject.put("element", me_id);
 		//		scrollObject.put("name", "label == 'Note'");
-		//		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		//		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		//		Thread.sleep(1000);	
 		//		this.note.click();
 		//		this.note.clear();
 		//		this.note.sendKeys(sNote);
 
 		String cc="**/XCUIElementTypeStaticText[`name='Note'`]";
-		MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+		MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 		String me_id = me.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", me_id);
 		scrollObject.put("toVisible", "not an empty string");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		Thread.sleep(1000);
-		Engine.iosd.findElement((MobileBy.iOSClassChain(cc))).click();
+		Engine.getDriver().findElement((MobileBy.iOSClassChain(cc))).click();
 		Thread.sleep(1000);
 		this.editNotes.sendKeys(sNote);
 		Thread.sleep(1000);
@@ -1159,18 +1157,18 @@ public class BillsAndIncomePage {
 
 		if (Verify.objExists(createPayee)) {
 			try {
-				Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(createPayee_xpath)));
-				Engine.ad.findElement(By.xpath(createPayee_xpath)).click();
+				Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
+				Engine.getDriver().findElement(By.xpath(createPayee_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Payee.. "+payees);
 
 			}
 			catch (NoSuchElementException e) {
-				Engine.ad.findElement(By.xpath(sXpath)).click();
+				Engine.getDriver().findElement(By.xpath(sXpath)).click();
 				Commentary.log(LogStatus.INFO,"Selecting Payee.. "+payees);
 			}
 		}
 		else {
-			Engine.ad.findElement(By.xpath(allPayees_Xpath)).click();
+			Engine.getDriver().findElement(By.xpath(allPayees_Xpath)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 		}
@@ -1201,19 +1199,19 @@ public class BillsAndIncomePage {
 
 		if (Verify.objExists(createPayee)) {
 			try {
-				Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)));
-				Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
+				Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)));
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Payee .. "+payees);
 			}
 			catch (NoSuchElementException e){
-				Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 				Commentary.log(LogStatus.INFO,"Selecting Payee .. "+payees);		
 			}
 		}
 		else {
 			//String cc = "**/XCUIElementTypeOther[$name='All Payees'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
 			String cc = "**/XCUIElementTypeStaticText[`name='"+payees+"'`]";
-			Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 		}
@@ -1230,15 +1228,15 @@ public class BillsAndIncomePage {
 
 		if (h.getEngine().equals("android")) {
 			String xpath = "//android.widget.TextView[@text='"+acct+"']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
 			Thread.sleep(1000);
 
-			if (! Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(xpath)))) {
+			if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] is not found on Account drawer.");
 				throw new Exception("Error****** Account ["+acct+"] not found on Account drawer.");
 			}
 
-			MobileElement desiredAccount = (MobileElement)Engine.ad.findElement(By.xpath(xpath));
+			MobileElement desiredAccount = (MobileElement)Engine.getDriver().findElement(By.xpath(xpath));
 			Verify.waitForObject(desiredAccount, 2);
 			desiredAccount.click();
 
@@ -1247,11 +1245,11 @@ public class BillsAndIncomePage {
 
 		else {
 			String xpath = "**/XCUIElementTypeStaticText[`name=='"+acct+"'`][1]";
-			MobileElement me = (MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(xpath));
+			MobileElement me = (MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath));
 
 			if (! Verify.objExists(me)) {
 				try {
-					JavascriptExecutor js = (JavascriptExecutor) Engine.iosd; 
+					JavascriptExecutor js = (JavascriptExecutor) Engine.getDriver(); 
 					HashMap<String, String> scrollObject = new HashMap(); 
 					scrollObject.put("direction", "up"); 
 					scrollObject.put("xpath", xpath); 
@@ -1278,15 +1276,15 @@ public class BillsAndIncomePage {
 
 		if (h.getEngine().equals("android")) {
 			String xpath = "//android.widget.TextView[@text='"+acct+"']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
 			Thread.sleep(1000);
 
-			if (! Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(xpath)))) {
+			if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] is not found on Account drawer.");
 				throw new Exception("Error****** Account ["+acct+"] not found on Account drawer.");
 			}
 
-			MobileElement desiredAccount = (MobileElement)Engine.ad.findElement(By.xpath(xpath));
+			MobileElement desiredAccount = (MobileElement)Engine.getDriver().findElement(By.xpath(xpath));
 			Verify.waitForObject(desiredAccount, 2);
 			desiredAccount.click();
 
@@ -1295,11 +1293,11 @@ public class BillsAndIncomePage {
 
 		else {
 			String xpath = "**/XCUIElementTypeStaticText[`name=='"+acct+"'`][1]";
-			MobileElement me = (MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(xpath));
+			MobileElement me = (MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath));
 
 			if (! Verify.objExists(me)) {
 				try {
-					JavascriptExecutor js = (JavascriptExecutor) Engine.iosd; 
+					JavascriptExecutor js = (JavascriptExecutor) Engine.getDriver(); 
 					HashMap<String, String> scrollObject = new HashMap(); 
 					scrollObject.put("direction", "up"); 
 					scrollObject.put("xpath", xpath); 
@@ -1339,20 +1337,20 @@ public class BillsAndIncomePage {
 			this.closeFrequency.click();
 		}
 		else {
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ frequency + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ frequency + "\").instance(0))"));
 
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);	
 		}
 
 		if(Verify.objExists(this.editSeriesHeaderText) && frequency.equals("Monthly")) {
 			this.frequency.click();
 			Thread.sleep(2000);
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ frequency + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ frequency + "\").instance(0))"));
 
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -1365,14 +1363,14 @@ public class BillsAndIncomePage {
 			this.closeFrequency.click();
 		}
 		else {
-			Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 			Thread.sleep(1000);
 		}
 
 		if(Verify.objExists(this.editSeriesHeaderText) && frequency.equals("Monthly")) {
 			this.frequency.click();
 			Thread.sleep(2000);
-			Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -1400,11 +1398,11 @@ public class BillsAndIncomePage {
 		int iCount;
 
 		Thread.sleep(2000);
-		Engine.ad.findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
 		Thread.sleep(1000);
 
 		for(iCount=0; iCount<s.length; iCount++) {
-			Engine.ad.findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();
+			Engine.getDriver().findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();
 		}
 	}
 
@@ -1414,11 +1412,11 @@ public class BillsAndIncomePage {
 		int iCount;
 
 		Thread.sleep(2000);
-		Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
+		Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
 		Thread.sleep(1000);
 
 		for(iCount=0; iCount<s.length; iCount++) {
-			Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();
 		}
 	}
 
@@ -1439,12 +1437,12 @@ public class BillsAndIncomePage {
 
 	public void selectDay_android(String Day) throws Exception {
 
-		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
-		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
+		Verify.waitForObject((MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
+		Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(1000);
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ Day + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ Day + "\").instance(0))"));
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+Day+"']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+Day+"']")).click();
 
 		if(Verify.objExists(this.okBtn)) 
 			this.okBtn.click();
@@ -1452,7 +1450,7 @@ public class BillsAndIncomePage {
 
 	public void selectDay_ios(String Day) throws Exception {
 
-		MobileElement pickerWheel = (MobileElement) Engine.iosd.findElement(MobileBy.className("XCUIElementTypePickerWheel"));
+		MobileElement pickerWheel = (MobileElement) Engine.getDriver().findElement(MobileBy.className("XCUIElementTypePickerWheel"));
 		for(int i=0; i<=2; i++) {
 			pickerWheel.setValue(Day);
 		}
@@ -1478,10 +1476,10 @@ public class BillsAndIncomePage {
 
 	public void selectEvery2WeeksOn_android(String every2WeeksOn) throws Exception {
 
-		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
-		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
+		Verify.waitForObject((MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
+		Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(2000);
-		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+every2WeeksOn+"']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+every2WeeksOn+"']")).click();
 
 		if(Verify.objExists(this.okBtn)) 
 			this.okBtn.click();
@@ -1489,7 +1487,7 @@ public class BillsAndIncomePage {
 
 	public void selectEvery2WeeksOn_ios(String every2WeeksOn) throws Exception {
 
-		MobileElement el = (MobileElement) Engine.iosd.findElement(MobileBy.className("XCUIElementTypePickerWheel"));
+		MobileElement el = (MobileElement) Engine.getDriver().findElement(MobileBy.className("XCUIElementTypePickerWheel"));
 		for(int i=0; i<=1; i++) {
 			el.setValue(every2WeeksOn);
 		}
@@ -1515,12 +1513,12 @@ public class BillsAndIncomePage {
 
 	public void selectFirstOn_android(String firstOn) throws Exception {
 
-		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
-		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
+		Verify.waitForObject((MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
+		Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(2000);
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ firstOn + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ firstOn + "\").instance(0))"));
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+firstOn+"']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+firstOn+"']")).click();
 
 		if(Verify.objExists(this.okBtn)) 
 			this.okBtn.click();
@@ -1528,7 +1526,7 @@ public class BillsAndIncomePage {
 
 	public void selectFirstOn_ios(String firstOn) throws Exception {
 
-		MobileElement el = (MobileElement) Engine.iosd.findElement(MobileBy.className("XCUIElementTypePickerWheel"));
+		MobileElement el = (MobileElement) Engine.getDriver().findElement(MobileBy.className("XCUIElementTypePickerWheel"));
 		for(int i=0; i<=2; i++) {
 			el.setValue(firstOn);
 		}
@@ -1554,12 +1552,12 @@ public class BillsAndIncomePage {
 
 	public void selectSecondOn_android(String secondOn) throws Exception {
 
-		Verify.waitForObject((MobileElement)Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
-		Engine.ad.findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
+		Verify.waitForObject((MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")), 1);
+		Engine.getDriver().findElement(By.xpath("//android.widget.Spinner[@content-desc='pickerView']")).click();
 		Thread.sleep(2000);
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ secondOn + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().text(\""+ secondOn + "\").instance(0))"));
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath("//android.widget.CheckedTextView[@text='"+secondOn+"']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.CheckedTextView[@text='"+secondOn+"']")).click();
 
 		if(Verify.objExists(this.okBtn)) 
 			this.okBtn.click();
@@ -1567,7 +1565,7 @@ public class BillsAndIncomePage {
 
 	public void selectSecondOn_ios(String secondOn) throws Exception {
 
-		MobileElement el = (MobileElement) Engine.iosd.findElement(MobileBy.className("XCUIElementTypePickerWheel"));
+		MobileElement el = (MobileElement) Engine.getDriver().findElement(MobileBy.className("XCUIElementTypePickerWheel"));
 		for(int i=0; i<=2; i++) {
 			el.setValue(secondOn);
 		}
@@ -1895,11 +1893,11 @@ public class BillsAndIncomePage {
 		String s[] = NumberOfReminders.split("");
 		int iCount;
 
-		Engine.ad.findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
+		Engine.getDriver().findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
 		Thread.sleep(1000);
 
 		for(iCount=0; iCount<s.length; iCount++) {
-			Engine.ad.findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();
+			Engine.getDriver().findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();
 		}
 	}
 
@@ -1908,11 +1906,11 @@ public class BillsAndIncomePage {
 		String s[] = NumberOfReminders.split("");
 		int iCount;
 
-		Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
+		Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='delete'`][2]")).click();
 		Thread.sleep(1000);
 
 		for(iCount=0; iCount<s.length; iCount++) {
-			Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+s[iCount]+"'`]")).click();
 		}
 	}
 
@@ -1939,7 +1937,7 @@ public class BillsAndIncomePage {
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", elementID); // Only for ‘scroll in element’
 		scrollObject.put("direction", "right");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 		Thread.sleep(1000);
 	}
 
@@ -1973,21 +1971,21 @@ public class BillsAndIncomePage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.view.ViewGroup[@content-desc='Delete Series']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Delete Series\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Delete Series\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 		else {
 			String cc="**/XCUIElementTypeStaticText[`name='Delete Series'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement(By.name("Delete Series")).click();
+			Engine.getDriver().findElement(By.name("Delete Series")).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -2019,21 +2017,21 @@ public class BillsAndIncomePage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.view.ViewGroup[@content-desc='Tags']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Tags\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Tags\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 		else {
 			String cc="**/XCUIElementTypeStaticText[`name='Tags'`]";
-			MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
-			Engine.iosd.findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
+			Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -2138,7 +2136,7 @@ public class BillsAndIncomePage {
 		String sXpath = "//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..";
 		List <MobileElement> me = null;
 
-		me = Engine.ad.findElements(By.xpath(sXpath));
+		me = Engine.getDriver().findElements(By.xpath(sXpath));
 
 		return me;
 	}
@@ -2147,7 +2145,7 @@ public class BillsAndIncomePage {
 
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell";
 		List <MobileElement> me = null;
-		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
+		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
 
 		return me;
 	}
@@ -2166,7 +2164,7 @@ public class BillsAndIncomePage {
 		String sXpath = "//android.widget.TextView[contains(@content-desc,'Payee Name: ')]";
 		List <MobileElement> me = null;
 
-		me = Engine.ad.findElements(By.xpath(sXpath));
+		me = Engine.getDriver().findElements(By.xpath(sXpath));
 
 		return me;
 	}
@@ -2175,7 +2173,7 @@ public class BillsAndIncomePage {
 
 		String sXpath = "**/XCUIElementTypeStaticText[`name BEGINSWITH 'Payee Name: '`]";
 		List <MobileElement> me = null;
-		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
+		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
 
 		return me;
 	}
@@ -2221,7 +2219,7 @@ public class BillsAndIncomePage {
 		String sXpath = "//android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView";
 		List <MobileElement> me = null;
 
-		me = Engine.ad.findElements(By.xpath(sXpath));
+		me = Engine.getDriver().findElements(By.xpath(sXpath));
 
 		return me;
 	}
@@ -2230,7 +2228,7 @@ public class BillsAndIncomePage {
 
 		String sXpath = "**/XCUIElementTypeStaticText[`name='bottomRightLabel'`]";
 		List <MobileElement> me = null;
-		me = Engine.iosd.findElements(MobileBy.iOSClassChain(sXpath));
+		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
 
 		return me;
 	}

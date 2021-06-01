@@ -40,14 +40,12 @@ public class TransactionDetailPage {
 	
 	public TransactionDetailPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 //	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
@@ -405,7 +403,7 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
-				return (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 			}
 			catch(Exception E){
 				return null;
@@ -414,7 +412,7 @@ public class TransactionDetailPage {
 		}
 		else {
 			try{
-				return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -433,7 +431,7 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
-				return (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 			}
 			catch(Exception E){
 				return null;
@@ -442,7 +440,7 @@ public class TransactionDetailPage {
 		}
 		else {
 			try{
-				return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -462,7 +460,7 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
-				return (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -472,7 +470,7 @@ public class TransactionDetailPage {
 		}
 		else {
 			try{
-				return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -492,7 +490,7 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
-				return (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -502,7 +500,7 @@ public class TransactionDetailPage {
 		}
 		else {
 			try {
-				return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+				return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -615,7 +613,7 @@ public class TransactionDetailPage {
 	}
 	
 	
-	public void enterAmount(String amount) throws InterruptedException {
+	public void enterAmount(String amount) throws Exception {
 		
 		Helper h = new Helper();
 		
@@ -637,7 +635,7 @@ public class TransactionDetailPage {
 		}
 	}
 	
-	public void enterTransactionAmount_android(String amount) throws InterruptedException {
+	public void enterTransactionAmount_android(String amount) throws Exception {
 
 		String[] s = amount.split("");
 		int iCount;
@@ -648,7 +646,7 @@ public class TransactionDetailPage {
 			this.amount.click();
 			Thread.sleep(4000);
 			for (int i = 1; i < amount.length(); i++) {
-			Engine.ad.findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
+			Engine.getDriver().findElement(By.xpath("//android.widget.ImageView[@content-desc='delete']")).click();
 			}
 			Thread.sleep(1000);
 		}
@@ -659,7 +657,7 @@ public class TransactionDetailPage {
 				// ignore
 			}
 			else
-				Engine.ad.findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();	
+				Engine.getDriver().findElement(By.xpath("//*[@text='"+s[iCount]+"']")).click();	
 		}
 		
 		if(Verify.objExists(this.buttonDone)) {
@@ -671,7 +669,7 @@ public class TransactionDetailPage {
 		Thread.sleep(1000);
 	}
 	
-	public void enterTransactionAmount_ios(String amount) throws InterruptedException {
+	public void enterTransactionAmount_ios(String amount) throws Exception {
 
 		String[] s = amount.split("");
 		int iCount;
@@ -682,9 +680,9 @@ public class TransactionDetailPage {
 			this.amount.click();
 			Thread.sleep(4000);
 			for (int i = 1; i < amount.length(); i++) {
-			//Engine.iosd.findElement(MobileBy.AccessibilityId("assets/Quicken/App/Images/keypadbutton_delete@2x.png")).click();
-			//Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeImage[`name=='assets/Quicken/App/Images/keypadbutton_delete@2x.png'`]")).click();
-			Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name=='delete'`][2]")).click();
+			//Engine.getDriver().findElement(MobileBy.AccessibilityId("assets/Quicken/App/Images/keypadbutton_delete@2x.png")).click();
+			//Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeImage[`name=='assets/Quicken/App/Images/keypadbutton_delete@2x.png'`]")).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name=='delete'`][2]")).click();
 			}
 			Thread.sleep(1000);
 		}
@@ -695,7 +693,7 @@ public class TransactionDetailPage {
 				// ignore
 			}
 			else
-				Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
+				Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
 		}
 		
 		if(Verify.objExists(this.buttonDone)) {
@@ -721,7 +719,7 @@ public class TransactionDetailPage {
 
 	// provide date in m/dd/yyyy format
 	// Ex: 1/22/2019
-	public void enterDate_android(String mddyyyy) throws InterruptedException {
+	public void enterDate_android(String mddyyyy) throws Exception {
 		
 		String[] a = mddyyyy.split("/");
 		
@@ -796,7 +794,7 @@ public class TransactionDetailPage {
 		
 		this.buttonOK.click();
 		Thread.sleep(1000);	
-		Engine.ad.getContext();
+		Engine.getDriver().getContext();
 		
 	}
 	
@@ -847,14 +845,14 @@ public class TransactionDetailPage {
 		
 		if (h.getEngine().equals("android")) {
 			String xpath = "//android.widget.TextView[@text='"+acct+"']";
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acct + "\").instance(0))"));
 			Thread.sleep(1000);
-			if (! Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(xpath)))) {
+			if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] not found on choose account drawer");
 				throw new Exception("Error****** Account ["+acct+"] not found on choose account drawer");
 			}
 			
-			MobileElement desiredAccount = (MobileElement)Engine.ad.findElement(By.xpath(xpath));
+			MobileElement desiredAccount = (MobileElement)Engine.getDriver().findElement(By.xpath(xpath));
 			Verify.waitForObject(desiredAccount, 2);
 			desiredAccount.click();
 			
@@ -865,34 +863,34 @@ public class TransactionDetailPage {
 			//String xpath = "//XCUIElementTypeOther[@name='"+acct+"']";
 			//String xpath = "**/XCUIElementTypeOther[`name=='"+acct+"'`]";
 			String xpath = "**/XCUIElementTypeStaticText[`name=='"+acct+"'`][1]";
-			MobileElement me = (MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(xpath));
-			//MobileElement me = (MobileElement)Engine.iosd.findElement(By.name(acct));
+			MobileElement me = (MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath));
+			//MobileElement me = (MobileElement)Engine.getDriver().findElement(By.name(acct));
 			/*
-			MobileElement element = (MobileElement) Engine.iosd.findElement(By.name(acct));
+			MobileElement element = (MobileElement) Engine.getDriver().findElement(By.name(acct));
 			String elementID = element.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", elementID);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 			Thread.sleep(1000);
-			if (! Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(xpath)))) {
+			if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 				Commentary.log(LogStatus.FAIL,"Error****** Account ["+acct+"] not found on choose account");
 				throw new Exception("Error****** Account ["+acct+"] not found on choose account");
 			}
 			*/
 			
 			/*
-			MobileElement element = (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeOther[contains(@name,'Choose an Account')]//XCUIElementTypeScrollView"));
+			MobileElement element = (MobileElement) Engine.getDriver().findElement(By.xpath("//XCUIElementTypeOther[contains(@name,'Choose an Account')]//XCUIElementTypeScrollView"));
 			String parentID = element.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", parentID);
 			scrollObject.put("name", acct);
-			Engine.iosd.executeScript("mobile:scroll", scrollObject);*/
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);*/
 			
 			if (! Verify.objExists(me)) {
 				
 				try {
-					JavascriptExecutor js = (JavascriptExecutor) Engine.iosd; 
+					JavascriptExecutor js = (JavascriptExecutor) Engine.getDriver(); 
 					HashMap<String, String> scrollObject = new HashMap(); 
 					scrollObject.put("direction", "up"); 
 					scrollObject.put("xpath", xpath); 
@@ -927,15 +925,15 @@ public class TransactionDetailPage {
 		
 		this.payee.click();
 		Thread.sleep(1000);
-		System.out.println(Engine.ad.getContext());
+		System.out.println(Engine.getDriver().getContext());
 		
 		if (! Verify.objExists(this.closePayee))
 			Commentary.log(LogStatus.FAIL,"Error****** Transaction Detail > tapping on payee, did not open Payee selection screen");
 		
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ payees + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ payees + "\").instance(0))"));
 		
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(1000);	
 	}*/
 	
@@ -987,10 +985,10 @@ public class TransactionDetailPage {
 		
 		this.searchCategory(category);
 		
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 		
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(1000);	
 		
 		//With New app versions(5.21.0(19429)), no need to click close button of the drawer.
@@ -999,7 +997,7 @@ public class TransactionDetailPage {
 //			Thread.sleep(1000);
 //		}
 		
-		//System.out.println(Engine.ad.getContext());
+		//System.out.println(Engine.getDriver().getContext());
 	}
 	
 	public void selectCategory_ios (String category) throws Exception {
@@ -1016,7 +1014,7 @@ public class TransactionDetailPage {
 //
 //			this.category.click();
 //		}
-		//Engine.iosd.findElementById("assets/Quicken/App/Images/categoryIcon@2x.png").click();
+		//Engine.getDriver().findElementById("assets/Quicken/App/Images/categoryIcon@2x.png").click();
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
 		} else {
@@ -1026,7 +1024,7 @@ public class TransactionDetailPage {
 		Verify.waitForObject(this.closeCategory, 1);
 		
 		this.searchCategory(category);
-		Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 		Thread.sleep(1000);	
 		
 		//With New app versions(5.21.0(19429)), no need to click close button of the drawer.
@@ -1064,7 +1062,7 @@ public class TransactionDetailPage {
 	public void selectTags_android (String sTag) throws Exception {
 		
 		String sXpath="//android.view.ViewGroup[@content-desc='Tags']";
-		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Verify.waitForObject(this.searchTags, 1);
 		this.searchTags.sendKeys(sTag);
 		Helper h = new Helper();
@@ -1074,13 +1072,13 @@ public class TransactionDetailPage {
 		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
 		
 		if (Verify.objExists(createPayee)) {
-				Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(createTag_xpath)));
-				Engine.ad.findElement(By.xpath(createTag_xpath)).click();
+				Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
+				Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
 		}
 		else {
 			String cc = "//android.widget.TextView[@text='"+sTag+"']";
-			Engine.ad.findElement(By.xpath(cc)).click();
+			Engine.getDriver().findElement(By.xpath(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
 		}
@@ -1092,7 +1090,7 @@ public class TransactionDetailPage {
 	
 	public void selectTags_ios (String sTag) throws Exception {
 		
-		Engine.iosd.findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
+		Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
 		Verify.waitForObject(this.searchTags, 1);
 		this.searchTags.sendKeys(sTag);
 		Helper h = new Helper();
@@ -1102,13 +1100,13 @@ public class TransactionDetailPage {
 		String createTag_xpath="**/XCUIElementTypeOther[`name=‘create tag’`]";
 		
 		if (Verify.objExists(createTag)) {
-			Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)));
-				Engine.iosd.findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)));
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Tag... "+sTag);	
 		}
 		else {
 			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
-			Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
 		}
@@ -1132,7 +1130,7 @@ public class TransactionDetailPage {
 		
 		// scroll into notes
 		String sText = "Note";
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sText + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sText + "\").instance(0))"));
 		Thread.sleep(1000);
 		this.note.click();
 		this.note.clear();
@@ -1146,12 +1144,12 @@ public class TransactionDetailPage {
 		
 		// scroll into notes
 		String sXpath="//*[@name='Delete Transaction']";
-		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 		String me_id = me.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", me_id);
 		scrollObject.put("name", "label == 'Delete Transaction'");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		Thread.sleep(1000);	
 		this.note.click();
 		this.note.clear();
@@ -1182,27 +1180,27 @@ public class TransactionDetailPage {
 			
 			if (h.getEngine().equals("android")) {
 				xpath="//android.widget.TextView[@text='Create "+sTemp+"']";
-				if (! Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(xpath)))) {
+				if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 					Commentary.log(LogStatus.FAIL,"Error****** Failed to create Payee "+sPayee);
 				
 				}
 				else
 				{
 					Commentary.log(LogStatus.INFO,"Creating Payee .. "+sPayee);
-					Engine.ad.findElement(By.xpath(xpath)).click();
+					Engine.getDriver().findElement(By.xpath(xpath)).click();
 				}
 				
 			}
 			else {
 				
 				xpath="//XCUIElementTypeOther[@name='Create "+sTemp+"']";
-				if (! Verify.objExists((MobileElement)Engine.iosd.findElement(By.xpath(xpath)))) {
+				if (! Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xpath)))) {
 					Commentary.log(LogStatus.FAIL,"Error****** Failed to create Payee "+sPayee);
 				}
 				else
 				{
 					Commentary.log(LogStatus.INFO,"Creating Payee .. "+sPayee);
-					Engine.iosd.findElement(By.xpath(xpath)).click();
+					Engine.getDriver().findElement(By.xpath(xpath)).click();
 				}
 				
 			}
@@ -1229,13 +1227,13 @@ public class TransactionDetailPage {
 
 			if (Verify.objExists(createPayee)) {
 				try {
-					Verify.objExists((MobileElement)Engine.ad.findElement(By.xpath(createPayee_xpath)));
-					Engine.ad.findElement(By.xpath(createPayee_xpath)).click();
+					Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
+					Engine.getDriver().findElement(By.xpath(createPayee_xpath)).click();
 					Commentary.log(LogStatus.INFO,"Creating Payee.. "+payees);
 
 				}
 				catch (NoSuchElementException e) {
-					Engine.ad.findElement(By.xpath(sXpath)).click();
+					Engine.getDriver().findElement(By.xpath(sXpath)).click();
 					Commentary.log(LogStatus.INFO,"Selecting Payee.. "+payees);
 				}
 			}
@@ -1243,12 +1241,12 @@ public class TransactionDetailPage {
 			else {
 				//String cc = "**/XCUIElementTypeOther[`name=='"+payees+"'`]";
 				if(Verify.objExists(yelpNearByLabel)) {
-					Engine.ad.findElement(By.xpath(yelp_Payee_Xpath)).click();
+					Engine.getDriver().findElement(By.xpath(yelp_Payee_Xpath)).click();
 					Thread.sleep(500);
 					Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);
 				}
 				else {
-					Engine.ad.findElement(By.xpath(allPayees_Xpath)).click();
+					Engine.getDriver().findElement(By.xpath(allPayees_Xpath)).click();
 					Thread.sleep(1500);
 					Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 				}
@@ -1256,9 +1254,9 @@ public class TransactionDetailPage {
 			
 			Thread.sleep(1000);	
 			/*
-			Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ payees + "\").instance(0))"));
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ payees + "\").instance(0))"));
 			Thread.sleep(1000);
-			Engine.ad.findElement(By.xpath(sXpath)).click();
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);	*/	
 		}
 		
@@ -1283,14 +1281,14 @@ public class TransactionDetailPage {
 			if (Verify.objExists(createPayee)) {
 				try {
 					
-					Verify.objExists((MobileElement)Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)));
-					Engine.iosd.findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
+					Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)));
+					Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
 					Commentary.log(LogStatus.INFO,"Creating Payee .. "+payees);
 					
 				}
 				catch (NoSuchElementException e){
 					
-					Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+					Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 					Commentary.log(LogStatus.INFO,"Selecting Payee .. "+payees);		
 				}
 			}
@@ -1299,7 +1297,7 @@ public class TransactionDetailPage {
 			// **/XCUIElementTypeOther[$name='All Payees'$]/XCUIElementTypeOther[`name=='"+payees+"'`]
 //			else {
 //				String cc = "**/XCUIElementTypeOther[`name=='"+payees+"'`]";
-//				Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+//				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 //				Thread.sleep(500);
 //				Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);
 //			}
@@ -1307,14 +1305,14 @@ public class TransactionDetailPage {
 			else {
 				if(Verify.objExists(yelpNearByLabel)) {
 					String cc = "**/XCUIElementTypeOther[$name='Near by'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
-					Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+					Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 					Thread.sleep(500);
 					Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);
 				}
 				else {
 					//String cc = "**/XCUIElementTypeOther[$name='All Payees'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
 					String cc = "**/XCUIElementTypeStaticText[`name='"+payees+"'`]";
-					Engine.iosd.findElement(MobileBy.iOSClassChain(cc)).click();
+					Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 					Thread.sleep(1500);
 					Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 				}
@@ -1359,7 +1357,7 @@ public class TransactionDetailPage {
 				
 				this.status.click();
 				Thread.sleep(2500);
-				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(cc));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 				me.click();
 				Thread.sleep(1000);
 				this.buttonSave1.click();
@@ -1368,7 +1366,7 @@ public class TransactionDetailPage {
 				String sXpath = "//*[@text='"+status+"']";
 				this.status.click();
 				Thread.sleep(2500);
-				MobileElement me = (MobileElement) Engine.ad.findElement(MobileBy.xpath(sXpath));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.xpath(sXpath));
 				me.click();
 				Thread.sleep(1000);
 				this.buttonSave1.click();
@@ -1431,7 +1429,7 @@ public class TransactionDetailPage {
 	if (h.getEngine().equals("android")) {
 		
 //		String xpath = "//android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[@index='2']//android.widget.TextView";
-//		return Engine.ad.findElement(By.xpath(xpath)).getText();
+//		return Engine.getDriver().findElement(By.xpath(xpath)).getText();
 		return this.amount.getText();
 		
 	}
@@ -1478,17 +1476,17 @@ public class TransactionDetailPage {
 	 Helper h = new Helper();
 		
 	if (h.getEngine().equals("android")) 
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ "Tags" + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ "Tags" + "\").instance(0))"));
 	else {
 		
 		// scroll into tags
 		String sXpath="//XCUIElementTypeScrollView";
-		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 		String me_id = me.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", me_id);
 		scrollObject.put("predicateString", "name == 'Tags'");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		Thread.sleep(1000);	
 		
 		}
@@ -1501,18 +1499,18 @@ public class TransactionDetailPage {
 	 Helper h = new Helper();	
 		
 	if (h.getEngine().equals("android")) 
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ "Delete Transaction" + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ "Delete Transaction" + "\").instance(0))"));
 	else {
 		// scroll into notes
 		String sXpath="//XCUIElementTypeScrollView";
-		MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath(sXpath));
+		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 		String me_id = me.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", me_id);
 		scrollObject.put("direction", "down");
-		Engine.iosd.executeScript("mobile:scroll", scrollObject);
+		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 		//scrollObject.put("predicateString", "name == 'Delete Transaction'");
-		//Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+		//Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 		Thread.sleep(3000);	
 	}
 		

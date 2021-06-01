@@ -90,7 +90,7 @@ public class Smoke_test1 extends Recovery { //Used this class to test the stage 
 		signIn.signIn();
 		Thread.sleep(10000);
 		//Engine.ad.rotate(ScreenOrientation.LANDSCAPE);
-		Engine.iosd.rotate(ScreenOrientation.LANDSCAPE);
+		Engine.getDriver().rotate(ScreenOrientation.LANDSCAPE);
 	    
 		Thread.sleep(4000);
 	    OverviewPage op = new OverviewPage();

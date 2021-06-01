@@ -19,15 +19,12 @@ public class BudgetsPage {
 	
 	public BudgetsPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 	
@@ -35,7 +32,7 @@ public class BudgetsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='PERSONAL EXPENSES']")
 	public MobileElement personalExpenses;
 	
-	public boolean verify_budgetHeader() {
+	public boolean verify_budgetHeader() throws Exception {
 		
 		DateFormat date =  new SimpleDateFormat("MMMM");
 		Date date1 = new Date();
@@ -45,11 +42,11 @@ public class BudgetsPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+sCard+"']";
-			return Engine.ad.findElement(By.xpath(sXpath)).isDisplayed();
+			return Engine.getDriver().findElement(By.xpath(sXpath)).isDisplayed();
 		
 		}
 		else {
-			return Engine.iosd.findElement(By.name(sCard)).isDisplayed();
+			return Engine.getDriver().findElement(By.name(sCard)).isDisplayed();
 		}
 		
 	}

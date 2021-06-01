@@ -23,14 +23,12 @@ public class SettingsPage {
 	
 	public SettingsPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+				PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Passcode & Fingerprint\"])[3]")
@@ -148,7 +146,7 @@ public class SettingsPage {
 			Helper h = new Helper();
 			if (h.getEngine().equalsIgnoreCase("ios")) {
 				try {
-					MobileElement me =  (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+ele+"'`]"));
+					MobileElement me =  (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+ele+"'`]"));
 					return me;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -156,7 +154,7 @@ public class SettingsPage {
 				}
 			} else {
 				try {
-					MobileElement me =  (MobileElement) Engine.ad.findElement(By.xpath("//android.widget.TextView[@text='"+ele+"']"));	
+					MobileElement me =  (MobileElement) Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+ele+"']"));	
 					return me;
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -174,7 +172,7 @@ public class SettingsPage {
 		
 		if (h.getEngine().equals("android")) {
 			try{
-				 return Engine.ad.findElementByXPath(xPathForControl).isDisplayed();
+				 return Engine.getDriver().findElementByXPath(xPathForControl).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -184,8 +182,8 @@ public class SettingsPage {
 		else {
 			try{
 //				System.out.println("watch outttt...");
-//				System.out.println(Engine.iosd.findElementByXPath(xPathForIOS).isDisplayed());
-				 return Engine.iosd.findElementByXPath(xPathForIOS).isDisplayed();
+//				System.out.println(Engine.getDriver().findElementByXPath(xPathForIOS).isDisplayed());
+				 return Engine.getDriver().findElementByXPath(xPathForIOS).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -193,7 +191,7 @@ public class SettingsPage {
 		}
 	}
 	
-	public boolean verifyCloudAccountName(String cloudName){
+	public boolean verifyCloudAccountName(String cloudName) throws Exception{
 		 
 		String xPathForControl = "//android.widget.TextView[@text='"+cloudName+"']";
 		String xPathForIOS = "//XCUIElementTypeStaticText[@name='"+cloudName+"']";
@@ -205,9 +203,9 @@ public class SettingsPage {
 		if (h.getEngine().equals("android")) {
 			try{
 //				System.out.println("*******");
-//				System.out.println(Engine.ad.findElementByXPath(xPathForControl).getText());
+//				System.out.println(Engine.getDriver().findElementByXPath(xPathForControl).getText());
 //				System.out.println("*******");
-				return Engine.ad.findElementByXPath(xPathForControl).isDisplayed();
+				return Engine.getDriver().findElementByXPath(xPathForControl).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -216,9 +214,9 @@ public class SettingsPage {
 		}
 		else {
 //			System.out.println("*******");
-//			System.out.println(Engine.iosd.findElementByXPath(xPathForIOS).getText());
+//			System.out.println(Engine.getDriver().findElementByXPath(xPathForIOS).getText());
 //			System.out.println("*******");
-			return Engine.iosd.findElementByXPath(xPathForIOS).isDisplayed();	
+			return Engine.getDriver().findElementByXPath(xPathForIOS).isDisplayed();	
 		}
 	}
 	
@@ -231,7 +229,7 @@ public class SettingsPage {
 		
 		if (h.getEngine().equals("android")){
 			try{
-				MobileElement me = (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+				MobileElement me = (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 				return me;
 			}
 			catch(Exception E){
@@ -241,8 +239,8 @@ public class SettingsPage {
 		}
 		else {
 			try{
-				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(xpath_IOS));
-				return (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(xpath_IOS));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath_IOS));
+				return (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath_IOS));
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -252,15 +250,15 @@ public class SettingsPage {
 
 	}
 	@SuppressWarnings("deprecation")
-	public void selectBack (String bckButton) {
+	public void selectBack (String bckButton) throws Exception {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("android")){
-			//MobileElement backButton_android = (MobileElement) Engine.ad.findElementByXPath("//android.widget.ImageButton[@index=0]");
-			//Engine.ad.pressKeyCode(AndroidKeyCode.BACK);
-			((AndroidDriver<MobileElement>) Engine.ad).pressKeyCode(AndroidKeyCode.BACK);
+			//MobileElement backButton_android = (MobileElement) Engine.getDriver().findElementByXPath("//android.widget.ImageButton[@index=0]");
+			//Engine.getDriver().pressKeyCode(AndroidKeyCode.BACK);
+			((AndroidDriver<MobileElement>) Engine.getDriver()).pressKeyCode(AndroidKeyCode.BACK);
 			//backButton_android.click();
 		} else {
-			MobileElement backButton_ios = (MobileElement) Engine.iosd.findElementByAccessibilityId(bckButton);
+			MobileElement backButton_ios = (MobileElement) Engine.getDriver().findElementByAccessibilityId(bckButton);
 			backButton_ios.click();
 		}
 	}
@@ -270,13 +268,13 @@ public class SettingsPage {
 		
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("ios")) {
-			MobileElement me_ios = (MobileElement) Engine.iosd.findElementByIosClassChain(classChain_xpath_IOS);
+			MobileElement me_ios = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(classChain_xpath_IOS));
 			Verify.waitForObject(me_ios, 2);
 			me_ios.click();
 			Thread.sleep(500);
 			btnDone.click();
 		} else {
-			MobileElement me_android = (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+			MobileElement me_android = (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 			Verify.waitForObject(me_android, 2);
 			me_android.click();
 			Thread.sleep(500);

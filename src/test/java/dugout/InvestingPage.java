@@ -14,15 +14,12 @@ public class InvestingPage {
 	
 	public InvestingPage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}	
+		}
 	}
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Investing\"]")

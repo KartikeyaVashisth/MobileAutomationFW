@@ -14,49 +14,41 @@ import warroom.kEngine;
 
 public class Engine {
 	
-	//public static MobileDriver<MobileElement> mobilePlay;
-	public static URL serverURL;
-	public static AndroidDriver ad;
-	public static MobileDriver me;
-	public static IOSDriver iosd;
+	private ThreadLocal<String> sessionId = new ThreadLocal<String>();
+	public static ThreadLocal<AppiumDriver<MobileElement>> tlDriver = new ThreadLocal<AppiumDriver<MobileElement>>();
+	public static ThreadLocal<URL>serverURL = new ThreadLocal<URL>();
+	
+	public static AppiumDriver<MobileElement> getDriver() throws Exception {
+		  
+		  return tlDriver.get();
+
+	 }
 	
 	public static void setDriver() throws Exception{
 		
+		AppiumDriver<MobileElement> driver;
+		
 		Helper h = new Helper();
 		
-		serverURL = new URL(h.getAppiumURL());
-		
-		System.out.println(h.getEngine());
-		
-		
-		if (h.getEngine().equals("android")) {
-			
-			//mobilePlay = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
-			ad = new AndroidDriver<MobileElement>(serverURL, h.getCapabilities());
-			kEngine.ad = ad;
-			
+		serverURL.set(new URL (h.getAppiumURL()));
+		System.out.println(serverURL.get());
+		if (Recovery.sEngine.get().equals("android")) {
+			driver = new AndroidDriver<MobileElement>(serverURL.get(), h.getCapabilities());	
+			//String s="https://us1.appium.testobject.com/wd/hub";
+			//driver = new AndroidDriver<MobileElement>(new URL(s), h.getCapabilities());	
 		}
 		else
-			iosd = new IOSDriver<MobileElement>(serverURL, h.getCapabilities());
-			kEngine.id = iosd;
-				
-		//mobilePlay.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		
-		
+		{
 			
-	}
-	
-	public static MobileDriver getDriver() throws Exception{
-		
-		if (kEngine.ad==null && kEngine.id==null)
-			setDriver();
-		
-		if (kEngine.ad != null)
-			return kEngine.ad;
-		else
-			return kEngine.id;
+			driver = new IOSDriver<MobileElement>(serverURL.get(), h.getCapabilities());
+			
+
+		}
 		
 		
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		
+		Engine.tlDriver.set(driver);
 		
 		
 		

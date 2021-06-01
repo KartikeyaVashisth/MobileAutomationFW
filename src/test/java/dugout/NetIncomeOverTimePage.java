@@ -19,13 +19,10 @@ public class NetIncomeOverTimePage {
 	
 	public NetIncomeOverTimePage () {
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}	
 	}
@@ -104,9 +101,9 @@ public class NetIncomeOverTimePage {
 		String sXpath;
 		
 		//sXpath ="//XCUIElementTypeOther[@name='"+sMonth+"']/XCUIElementTypeOther";
-		//Engine.iosd.findElement(By.xpath(sXpath)).click();
+		//Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth+"'`]/XCUIElementTypeOther";
-		Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)).click();
+		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
 	}
 	
 	protected void tapOnTheMonth_Android(String sMonth) throws Exception{
@@ -117,7 +114,7 @@ public class NetIncomeOverTimePage {
 
 		sXpath ="//android.widget.TextView[@text=' "+sMonthUC+"']/../android.view.ViewGroup";
 		
-		List <MobileElement> le = Engine.ad.findElements(By.xpath(sXpath));
+		List <MobileElement> le = Engine.getDriver().findElements(By.xpath(sXpath));
 		
 		Integer iCount;
 		
@@ -151,11 +148,11 @@ public class NetIncomeOverTimePage {
 	protected Boolean verifyMonth_IOS(String sMonth) throws Exception {
 		
 		//String sXpath ="//XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']/XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']";
-		//return Verify.objExists((MobileElement) Engine.iosd.findElement(By.xpath(sXpath)));
+		//return Verify.objExists((MobileElement) Engine.getDriver().findElement(By.xpath(sXpath)));
 		
 		String sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name=' "+sMonth.toUpperCase()+"'`]";
 		//String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]";
-		return Verify.objExists((MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(sXpath)));
+		return Verify.objExists((MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)));
 		
 	}
 	
@@ -163,7 +160,7 @@ public class NetIncomeOverTimePage {
 		
 		String sXpath ="//android.widget.TextView[@text=' "+sMonth.toUpperCase()+"']";
 		
-		return Verify.objExists((MobileElement) Engine.ad.findElement(By.xpath(sXpath)));
+		return Verify.objExists((MobileElement) Engine.getDriver().findElement(By.xpath(sXpath)));
 		
 		
 	}

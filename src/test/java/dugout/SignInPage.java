@@ -33,17 +33,13 @@ public class SignInPage {
 	AndroidDriver ad;
 
 	public SignInPage () {
-		quickenTest = Recovery.quickenTest;
-		//PageFactory.initElements(Engine.getDriver(),this);
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
@@ -147,7 +143,7 @@ public class SignInPage {
 		Thread.sleep(1000);
 		this.password.sendKeys(support.getPassword());
 		if (support.getEngine().equals("android"))
-			Engine.ad.hideKeyboard();
+			Engine.getDriver().hideKeyboard();
 		Thread.sleep(1000);
 
 		btnSignIn.click();
@@ -184,7 +180,7 @@ public class SignInPage {
 		this.password.sendKeys(password); //this keyword used to differentiate between local and global variable.
 		//lbl.sendKeys(password);
 		if (support.getEngine().equals("android"))
-			Engine.ad.hideKeyboard();
+			Engine.getDriver().hideKeyboard();
 		Thread.sleep(1000);
 
 		btnSignIn.click();
@@ -215,8 +211,8 @@ public class SignInPage {
 
 			if (support.getEngine().equals("android")){
 				xpath = "//android.view.ViewGroup[@content-desc='"+bundle+"']";
-				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed());
-				Engine.ad.findElement(By.xpath(xpath)).click();
+				System.out.println(Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed());
+				Engine.getDriver().findElement(By.xpath(xpath)).click();
 
 				btnDone.click();
 				Thread.sleep(10000);
@@ -231,7 +227,7 @@ public class SignInPage {
 
 			else{
 				xpath = "//XCUIElementTypeOther[@name='"+bundle+"']";
-				Engine.iosd.findElement(By.xpath(xpath)).click();
+				Engine.getDriver().findElement(By.xpath(xpath)).click();
 				btnDone.click();
 				Thread.sleep(5000);
 				OverviewPage o = new OverviewPage();
@@ -262,14 +258,14 @@ public class SignInPage {
 
 			if (support.getEngine().equals("android")){
 
-				Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ bundle + "\").instance(0))"));
+				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ bundle + "\").instance(0))"));
 				xpath = "//android.view.ViewGroup[@content-desc='"+bundle+"']";
-				txtDataSet = (MobileElement) Engine.ad.findElement(By.xpath(xpath));
+				txtDataSet = (MobileElement) Engine.getDriver().findElement(By.xpath(xpath));
 				Thread.sleep(1000);
 
-				Commentary.log(LogStatus.INFO, Engine.ad.findElement(By.xpath(xpath)).isDisplayed()+" "+bundle); //true ProjectedBalances will be printed.
-				System.out.println(Engine.ad.findElement(By.xpath(xpath)).isDisplayed()); //true
-				Engine.ad.findElement(By.xpath(xpath)).click();
+				Commentary.log(LogStatus.INFO, Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed()+" "+bundle); //true ProjectedBalances will be printed.
+				System.out.println(Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed()); //true
+				Engine.getDriver().findElement(By.xpath(xpath)).click();
 				Commentary.log(LogStatus.INFO, "Clicked on Dataset name "+bundle);
 
 				btnDone.click();
@@ -284,16 +280,16 @@ public class SignInPage {
 			}
 
 			else{
-				MobileElement me = (MobileElement) Engine.iosd.findElement(By.xpath("//XCUIElementTypeScrollView"));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath("//XCUIElementTypeScrollView"));
 				String me_id = me.getId();
 				HashMap<String, String> scrollObject = new HashMap<String, String>();
 				scrollObject.put("element", me_id);
 				scrollObject.put("predicateString", "label == '"+bundle+"'");
-				Engine.iosd.executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+				Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 				Thread.sleep(1000);
 
 				xpath = "//XCUIElementTypeOther[@name='"+bundle+"']";
-				Engine.iosd.findElement(By.xpath(xpath)).click();
+				Engine.getDriver().findElement(By.xpath(xpath)).click();
 				btnDone.click();
 				Thread.sleep(5000);
 				OverviewPage o = new OverviewPage();
@@ -318,7 +314,7 @@ public class SignInPage {
 			}
 			
 			Verify.waitForObject(datasetNameOnDashboard, 2);
-//			String datasetNameOverviewPage = Engine.ad.findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")).getText();
+//			String datasetNameOverviewPage = Engine.getDriver().findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")).getText();
 			String datasetNameOverviewPage = this.datasetNameOnDashboard.getText();
 			
 			if(Verify.objExists(cancelIcon)) {
@@ -337,7 +333,7 @@ public class SignInPage {
 				dataSetArrow.click();
 				Thread.sleep(5000);
 				Verify.waitForObject(this.datasetSelectionListScreen, 2);
-				MobileElement xpath_Android = (MobileElement)Engine.ad.findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
+				MobileElement xpath_Android = (MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
 				xpath_Android.click();
 				Thread.sleep(500);
 				Verify.waitForObject(this.btnDone, 1);
@@ -356,7 +352,7 @@ public class SignInPage {
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 			Thread.sleep(5000);
 			Verify.waitForObject(datasetNameOnDashboard, 2);
-//			String datasetNameOverviewPage = Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
+//			String datasetNameOverviewPage = Engine.getDriver().findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
 			String datasetNameOverviewPage = this.datasetNameOnDashboard.getText();
 			
 			if(Verify.objExists(cancelIcon)) {
@@ -375,7 +371,7 @@ public class SignInPage {
 				dataSetArrow.click();
 				Thread.sleep(2000);
 				Verify.waitForObject(this.datasetSelectionListScreen, 2);
-				MobileElement xpath_ios = (MobileElement)Engine.iosd.findElementByIosClassChain("**/XCUIElementTypeOther[`name='"+bundle+"'`][2]");
+				MobileElement xpath_ios = (MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='"+bundle+"'`][2]"));
 				xpath_ios.click();
 				Thread.sleep(500);
 				Verify.waitForObject(this.btnDone, 1);

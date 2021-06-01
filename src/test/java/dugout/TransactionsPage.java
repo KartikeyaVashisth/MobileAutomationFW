@@ -39,16 +39,13 @@ public class TransactionsPage {
 	ExtentTest quickenTest = Recovery.quickenTest;
 	
 	public TransactionsPage () {
-		//PageFactory.initElements(Engine.getDriver(),this);
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-		}				
+		}			
 	}
 	
 	// coded for android. IOS behavior not clearly known
@@ -61,7 +58,7 @@ public class TransactionsPage {
 			
 			if (h.getEngine().equals("android")){
 				try{
-					Engine.ad.findElementByXPath(xPathForAcct).isDisplayed();
+					Engine.getDriver().findElementByXPath(xPathForAcct).isDisplayed();
 					return true;
 				}
 				catch(Exception E){
@@ -71,7 +68,7 @@ public class TransactionsPage {
 			}
 			else {
 				try{
-					Engine.iosd.findElementByXPath(xPathForAcct_IOS).isDisplayed();
+					Engine.getDriver().findElementByXPath(xPathForAcct_IOS).isDisplayed();
 					return true;
 				}
 				catch(Exception E){
@@ -81,7 +78,7 @@ public class TransactionsPage {
 			}
 			
 			/*try{
-				 Engine.ad.findElementByXPath(xPathForAcct).isDisplayed();
+				 Engine.getDriver().findElementByXPath(xPathForAcct).isDisplayed();
 				 return true;
 			}
 			catch(Exception E){
@@ -204,14 +201,14 @@ public class TransactionsPage {
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			swipe_android();
 		} else {
-			WebElement ele_ios = Engine.iosd.findElementByXPath("*//XCUIElementTypeCell");
+			WebElement ele_ios = Engine.getDriver().findElementByXPath("*//XCUIElementTypeCell");
 			swipe_ios(ele_ios);
 		}
 	}
 	
-	public void swipe_ios(WebElement ele) {
+	public void swipe_ios(WebElement ele) throws Exception {
 
-		JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd;
+		JavascriptExecutor js1 = (JavascriptExecutor) Engine.getDriver();
 		HashMap scrollObject = new HashMap();
 		scrollObject.put("direction", "left");
 		scrollObject.put("element", ele);
@@ -220,7 +217,7 @@ public class TransactionsPage {
 	}
 
 	public void swipe_android() throws Exception {
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize();
 		//System.out.println(size);
 		int startx = (int) (size.width * 0.80);
 		int endx = (int) (size.width * 0.20);
@@ -233,7 +230,7 @@ public class TransactionsPage {
                 .waitAction(waitOptions(ofMillis(1000)))
                 .moveTo(point(startx, starty))
                 .release().perform();
-		//Engine.ad.swipe(startx, starty, endx, starty, 2000);
+		//Engine.getDriver().swipe(startx, starty, endx, starty, 2000);
 	}
 	
 	public void selectCategorySwipe (String category) throws Exception {
@@ -252,10 +249,10 @@ public class TransactionsPage {
 		TransactionDetailPage td = new TransactionDetailPage();
 		td.searchCategory(category);
 		
-		Engine.ad.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 		
 		Thread.sleep(1000);
-		Engine.ad.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(500);	
 		
 		if (Verify.objExists(this.buttonSave)) {
@@ -263,7 +260,7 @@ public class TransactionsPage {
 			Thread.sleep(1000);
 		}
 		
-		//System.out.println(Engine.ad.getContext());
+		//System.out.println(Engine.getDriver().getContext());
 	}
 	
 	public void selectCategorySwipe_ios (String category) throws Exception {
@@ -272,7 +269,7 @@ public class TransactionsPage {
 		
 		TransactionDetailPage td = new TransactionDetailPage();
 		td.searchCategory(category);
-		Engine.iosd.findElement(By.xpath(sXpath)).click();
+		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(500);	
 		
 		if (Verify.objExists(this.buttonSave)) {
@@ -287,14 +284,14 @@ public class TransactionsPage {
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			swipe_right_android();
 		} else {
-			WebElement ele_ios = Engine.iosd.findElementByXPath("*//XCUIElementTypeCell[2]");
+			WebElement ele_ios = Engine.getDriver().findElementByXPath("*//XCUIElementTypeCell[2]");
 			swipe_right_ios(ele_ios);
 		}
 	}
 	
-	public void swipe_right_ios(WebElement ele) {
+	public void swipe_right_ios(WebElement ele) throws Exception {
 
-		JavascriptExecutor js1 = (JavascriptExecutor) Engine.iosd;
+		JavascriptExecutor js1 = (JavascriptExecutor) Engine.getDriver();
 		HashMap scrollObject = new HashMap();
 		scrollObject.put("direction", "right");
 		scrollObject.put("element", ele);
@@ -304,7 +301,7 @@ public class TransactionsPage {
 	}
 
 	public void swipe_right_android() throws Exception {
-		Dimension size = Engine.ad.manage().window().getSize();
+		Dimension size = Engine.getDriver().manage().window().getSize();
 		//System.out.println(size);
 		int startx = (int) (size.width * 0.20);
 		int endx = (int) (size.width * 0.80);
@@ -317,19 +314,19 @@ public class TransactionsPage {
                 .waitAction(waitOptions(ofMillis(1000)))
                 .moveTo(point(endx, starty))
                 .release().perform();
-		//Engine.ad.swipe(startx, starty, endx, starty, 2000);
+		//Engine.getDriver().swipe(startx, starty, endx, starty, 2000);
 	}
 	
-	public MobileElement getPayeeName() {
+	public MobileElement getPayeeName() throws Exception {
 		String xpath_IOS = "//XCUIElementTypeStaticText[@name='topLeftLabel']";
 		String xpath_Android = "//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_category']"; 
 		
 		Helper h = new Helper();
 		
 		if (h.getEngine().equalsIgnoreCase("android")) {
-			return (MobileElement) Engine.ad.findElementByXPath(xpath_Android);
+			return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
 		} else {
-			return (MobileElement) Engine.iosd.findElementByXPath(xpath_IOS);
+			return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
 
 		}
 	}
@@ -342,7 +339,7 @@ public class TransactionsPage {
 		String[] act,exp;
 		AllAccountsPage aa = new AllAccountsPage();
 		Helper h = new Helper();
-		//WebElement element = Engine.iosd.findElementByXPath(xPath_IOS);
+		//WebElement element = Engine.getDriver().findElementByXPath(xPath_IOS);
 		List<MobileElement> actList = null,expList=null;
 		try {
 			actList = aa.getAllSearchTransactions ();
@@ -363,23 +360,23 @@ public class TransactionsPage {
 		
 	}
 	
-	public WebElement getTransactionAmountValue( int i) {
+	public WebElement getTransactionAmountValue( int i) throws Exception {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("android")){
-			WebElement element = Engine.ad.findElementById("com.quicken.qm2014:id/listView");
+			WebElement element = Engine.getDriver().findElementById("com.quicken.qm2014:id/listView");
 			//element.get
 			return element;	
 		} else {
-			WebElement element = Engine.iosd.findElementByXPath("(//XCUIElementTypeStaticText[@name='topRightLabel'])["+i+"]");
+			WebElement element = Engine.getDriver().findElementByXPath("(//XCUIElementTypeStaticText[@name='topRightLabel'])["+i+"]");
 			return element;	
 		}
 		
 	}
 	
-	public WebElement getTransactionAmountValue_android() {
+	public WebElement getTransactionAmountValue_android() throws Exception {
 		Helper h = new Helper();
-//		List list1=Engine.ad.findElements(By.xpath("//android.support.v7.widget.RecyclerView[contains(@resource-id,'com.quicken.qm2014:id/listView')]"));
-		List list1=Engine.ad.findElements(By.id("com.quicken.qm2014:id/listView"));
+//		List list1=Engine.getDriver().findElements(By.xpath("//android.support.v7.widget.RecyclerView[contains(@resource-id,'com.quicken.qm2014:id/listView')]"));
+		List list1=Engine.getDriver().findElements(By.id("com.quicken.qm2014:id/listView"));
 
 		//System.out.println(list1.size());
 		//System.out.println(s.length);
@@ -400,7 +397,7 @@ public class TransactionsPage {
 			if (filterBy =="Pending to Cleared" ) {
 				Thread.sleep(1000);
 				String locator = "//XCUIElementTypeStaticText[@name=\"Pending to Cleared \"]";
-				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.xpath(locator));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.xpath(locator));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -411,7 +408,7 @@ public class TransactionsPage {
 				Thread.sleep(1000);
 				//String locator = "**/XCUIElementTypeOther[`name=="+"\"RadioButton "+filterBy+"\""+"`]";
 				String locator = "**/XCUIElementTypeStaticText[`name=="+"\""+filterBy+"\""+"`]";
-				MobileElement me = (MobileElement) Engine.iosd.findElement(MobileBy.iOSClassChain(locator));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(locator));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -422,7 +419,7 @@ public class TransactionsPage {
 			if (filterBy == "Pending to Cleared") {
 				Thread.sleep(1000);
 				String sXpath = "//android.view.ViewGroup[5]//android.widget.TextView";
-				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -431,7 +428,7 @@ public class TransactionsPage {
 			} else {
 				Thread.sleep(1000);
 				String sXpath = "//android.widget.TextView[@text="+"\""+filterBy+"\""+"]";
-				MobileElement me = (MobileElement) Engine.ad.findElement(By.xpath(sXpath));
+				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);

@@ -29,14 +29,12 @@ public class WelcomePage {
 	public WelcomePage () {
 		//PageFactory.initElements(Engine.getDriver(),this);
 		try {
-			Helper h = new Helper();
-			if (h.getEngine().equals("android"))
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.ad),this);
-			else
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.iosd),this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+			
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
+	} catch (Exception e) {
+		
+		e.printStackTrace();
+	}
 	}
 	
 	//@iOSFindBy(xpath="//*[normalize-space(@name)='Sign In']")
@@ -71,7 +69,8 @@ public class WelcomePage {
 	
 //		if (preprod.equals("prod"))
 //			return;
-
+		Commentary.log(LogStatus.INFO, "Setting Environment to "+preprod);
+		
 		this.xpath_Environment.click();
 
 		if (preprod.equals("stage")) {
@@ -95,7 +94,7 @@ public class WelcomePage {
 		if (Verify.objExists(this.xpath_chkboxStageEnvironment))
 			Engine.getDriver().navigate().back();
 
-		//System.out.println("Environment set to "+preprod);
+		System.out.println("Environment set to "+preprod);
 		Commentary.log(LogStatus.INFO, "Environment set to "+preprod);
 		Thread.sleep(500);	
 	}

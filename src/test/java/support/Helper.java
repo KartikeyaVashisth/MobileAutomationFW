@@ -26,6 +26,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
+import com.saucelabs.saucerest.SauceREST;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -92,13 +94,15 @@ public class Helper {
 	
 	public String getHost(){
 		
-		Globals globals = new Globals();
+//		Globals globals = new Globals();
+//		
+//		if (System.getProperty("host") == null) {
+//			//return globals.testProperty.get("host");
+//			return Recovery.sHost.get();
+//		}
+//		return System.getProperty("host");
 		
-		if (System.getProperty("host") == null) {
-			//return globals.testProperty.get("host");
-			return Recovery.sHost.get();
-		}
-		return System.getProperty("host");
+		return Recovery.sHost.get();
 	}
 	
 	public String getUsername(){
@@ -124,17 +128,21 @@ public class Helper {
 		
 		Globals globals = new Globals();
 		
-		if (System.getProperty("engine") == null) {
-			//return globals.testProperty.get("engine");
-			return Recovery.sEngine.get();
-		}
-		return System.getProperty("engine");
+//		if (System.getProperty("engine") == null) {
+//			//return globals.testProperty.get("engine");
+//			return Recovery.sEngine.get();
+//		}
+//		return System.getProperty("engine");
+		
+		return Recovery.sEngine.get();
 	}
 	
 	public String getEnv() {
-		Globals globals = new Globals();
-
-		// return globals.testProperty.get("env");
+//		Globals globals = new Globals();
+//
+//		// return globals.testProperty.get("env");
+//		return Recovery.sEnv.get();
+		
 		return Recovery.sEnv.get();
 	}
 	
@@ -211,6 +219,38 @@ public class Helper {
 	}
 	*/
 	
+	public void uploadAndroidBuild() throws Exception {
+		
+		System.out.println("uploading build to SAUCE storage");
+		System.out.println("build path... "+System.getProperty("buildpath"));
+		String appPath = System.getProperty("buildpath");
+		String [] a = appPath.split("/");
+		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+		
+		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f = new File(appPath);
+		String response = r.uploadFile(f, "Quicken.apk", true);
+		System.out.println("Sauce Upload Response -->> "+response);
+		System.out.println("Completed..uploading build to SAUCE storage");
+		
+	}
+	
+	public void uploadIOSBuild() throws Exception{
+		
+		System.out.println("uploading build to SAUCE storage");
+		System.out.println("build path... "+System.getProperty("buildpath"));
+		String appPath = System.getProperty("buildpath");
+		String [] a = appPath.split("/");
+		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+		
+		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f = new File(appPath);
+		String response = r.uploadFile(f, "IOSRegression.zip", true);
+		System.out.println("Sauce Upload Response -->> "+response);
+		System.out.println("Completed..uploading build to SAUCE storage");
+		
+	}
+	
 	public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -218,6 +258,7 @@ public class Helper {
 		if (getEngine().equals("android")){
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
+			capabilities.setCapability("name", this.getTestName());
 			capabilities.setCapability("appiumVersion", "1.9.1");
 			capabilities.setCapability("automationName","appium");
 			//capabilities.setCapability("deviceName","Android Emulator");
@@ -241,6 +282,7 @@ public class Helper {
 		}
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
+			capabilities.setCapability("name", this.getTestName());
 			capabilities.setCapability("deviceName", "iPhone 8 Simulator");
 			capabilities.setCapability("platformVersion", "12.0"); //9.3
 			//capabilities.setCapability("platformVersion", "11.2");
@@ -354,10 +396,12 @@ public class Helper {
 	
 	public void hideKeyBoard() throws Exception {
 		
-		if (this.getEngine().equals("android")) 
-			Engine.ad.hideKeyboard();
-		else
-			Engine.iosd.hideKeyboard();
+		Engine.getDriver().hideKeyboard();
+		
+//		if (this.getEngine().equals("android")) 
+//			Engine.ad.hideKeyboard();
+//		else
+//			Engine.iosd.hideKeyboard();
 		
 		Thread.sleep(1000);
 		
@@ -365,11 +409,12 @@ public class Helper {
 	
 	public void getContext() throws Exception {
 		
-		if (this.getEngine().equals("android")) 
-			Engine.ad.getContext();
-		else
-			Engine.iosd.getContext();
+//		if (this.getEngine().equals("android")) 
+//			Engine.ad.getContext();
+//		else
+//			Engine.iosd.getContext();
 		
+		Engine.getDriver().getContext();
 		Thread.sleep(500);	
 	}
 	
