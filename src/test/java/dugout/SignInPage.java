@@ -138,7 +138,7 @@ public class SignInPage {
 		Thread.sleep(1000);
 		userName.clear();
 
-		emailID.sendKeys(support.getUsername());
+		userName.sendKeys(support.getUsername());
 		lblPassword.click();
 		Thread.sleep(1000);
 		this.password.sendKeys(support.getPassword());

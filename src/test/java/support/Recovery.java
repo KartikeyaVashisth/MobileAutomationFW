@@ -88,7 +88,7 @@ public class Recovery {
 			sEnv.set(g.testProperty.get("env"));
 		}
 		else {
-			
+			h.loadProperties();
 			sEngine.set(engine);
 			sHost.set(host);
 			sTestName.set(testName);
