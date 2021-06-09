@@ -131,8 +131,8 @@ public class SignInPage {
 		if (!Verify.objExists(emailID))
 			Thread.sleep(35000);*/
 
-		if (!Verify.objExists(emailID))
-			quickenTest.log(LogStatus.ERROR,"emailID not identified");
+//		if (!Verify.objExists(emailID))
+//			quickenTest.log(LogStatus.ERROR,"emailID not identified");
 
 		emailID.click();
 		Thread.sleep(1000);
@@ -147,7 +147,6 @@ public class SignInPage {
 		Thread.sleep(1000);
 
 		btnSignIn.click();
-		quickenTest.log(LogStatus.INFO,"Clicked on SignIn button");
 		Thread.sleep(2000);
 
 		selectDataset(support.getDatasetName());
@@ -163,8 +162,8 @@ public class SignInPage {
 		Thread.sleep(3000);
 		w.xpath_btnWelcomeSignIn.click();
 
-		if (! Verify.waitForObject(emailID, 3))
-			quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
+//		if (! Verify.waitForObject(emailID, 3))
+//			quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 
 		//Commentary.log(LogStatus.INFO, "SignInWidget appeared");
 
@@ -341,8 +340,8 @@ public class SignInPage {
 
 				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 
-				if (! Verify.waitForObject(op.hambergerIcon, 2))
-					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
+//				if (! Verify.waitForObject(op.hambergerIcon, 2))
+//					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
 			}
 			return true;
 		} 
@@ -379,8 +378,8 @@ public class SignInPage {
 
 				Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 
-				if (! Verify.waitForObject(op.hambergerIcon, 2))
-					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
+//				if (! Verify.waitForObject(op.hambergerIcon, 2))
+//					quickenTest.log(LogStatus.ERROR,"Overview Screen did not appear after dataset selection.");
 			}
 			return true;
 		}

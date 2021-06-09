@@ -84,7 +84,7 @@ public class Recovery {
 			h.loadProperties();
 			sEngine.set(g.testProperty.get("engine"));
 			sHost.set(g.testProperty.get("host"));
-			sTestName.set("LOCAL_"+g.testProperty.get("engine"));
+			sTestName.set("LOCAL_Companion"+g.testProperty.get("engine"));
 			sEnv.set(g.testProperty.get("env"));
 		}
 		else {

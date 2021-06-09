@@ -200,16 +200,17 @@ public class Helper {
 			
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			capabilities.setCapability("name", this.getTestName());
-			capabilities.setCapability("appiumVersion", "1.9.1");
+			capabilities.setCapability("appiumVersion", "1.17.1");
 			capabilities.setCapability("automationName","appium");
+			capabilities.setCapability("platformVersion","10.0");
+			capabilities.setCapability("deviceName","Google Pixel 3 GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android Emulator");
-			capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
+			//capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
+			//capabilities.setCapability("platformVersion","8.1"); 
 			
 			capabilities.setCapability("deviceOrientation", "portrait");
 			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("platformVersion","8.1"); 
-			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("maxDuration", 4000);
@@ -224,15 +225,16 @@ public class Helper {
 		else if(getEngine().equals("ios")){
 			capabilities.setCapability("platformName", "iOS");
 			capabilities.setCapability("name", this.getTestName());
-			capabilities.setCapability("deviceName", "iPhone 8 Simulator");
-			capabilities.setCapability("platformVersion", "12.0"); //9.3
+			//capabilities.setCapability("deviceName", "iPhone 8 Simulator");
+			//capabilities.setCapability("platformVersion", "12.0"); //9.3
 			//capabilities.setCapability("platformVersion", "11.2");
+			capabilities.setCapability("appiumVersion", "1.15.0");
+			capabilities.setCapability("deviceName","iPhone Simulator");
+			capabilities.setCapability("platformVersion","13.0");
 			capabilities.setCapability("browserName", "");
 			capabilities.setCapability("deviceOrientation", "portrait");
-			capabilities.setCapability("appiumVersion", "1.9.1");// 1.5.3
-			//capabilities.setCapability("appiumVersion", "1.13.0");// 1.5.3
 			capabilities.setCapability("autoWebView", "true");
-			//capabilities.setCapability("autoAcceptAlerts", true);
+			capabilities.setCapability("autoAcceptAlerts", true);
 		    capabilities.setCapability("autoGrantPermissions", true);
 		    capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
@@ -240,6 +242,7 @@ public class Helper {
 			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","XCUITest");
+			
 			
 		}
 		return capabilities;

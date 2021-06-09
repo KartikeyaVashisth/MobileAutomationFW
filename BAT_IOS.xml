@@ -5,9 +5,9 @@
 		<listener class-name="referee.CustomListener"/>
 	</listeners>
   <test name="Only_Smoke_Test">
-      <parameter name="test" value="Companion_BAT_Android"></parameter>
+      <parameter name="test" value="Companion_BAT_IOS"></parameter>
       <parameter name="host" value="cloud"></parameter>
-      <parameter name="engine" value="android"></parameter>
+      <parameter name="engine" value="ios"></parameter>
       <parameter name="env" value="prod"></parameter>
     <classes>
       <class name="tournament.Smoke_test"/>
