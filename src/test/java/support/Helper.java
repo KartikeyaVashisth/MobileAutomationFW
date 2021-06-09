@@ -158,66 +158,7 @@ public class Helper {
 		return globals.testProperty.get("deviceName");
 	}
 	
-/*	public void initAppiumDriver(){
-		
-		try{
-			String url;
-			URL serverURL;
-			DesiredCapabilities capabilities = new DesiredCapabilities();
-			
-			
-			if (getHost().equals("cloud")){
-				
-				capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-				capabilities.setCapability("appiumVersion", "1.6"); // 1.5.3
-				capabilities.setCapability("automationName","appium");
-				capabilities.setCapability("deviceName","Android Emulator");
-				capabilities.setCapability("deviceOrientation", "portrait");
-				capabilities.setCapability("browserName", "");
-				capabilities.setCapability("platformVersion","6.0");//5.1
-				capabilities.setCapability("platformName","Android");
-				capabilities.setCapability("autoWebView", "true");
-				capabilities.setCapability("newCommandTimeout", 1120);
-				capabilities.setCapability("app", "sauce-storage:Quicken.apk");
-				capabilities.setCapability("appPackage","com.quicken.qm2014_1");
-				capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-				String USERNAME = "kalyan_grandhi";
-				String ACCESS_KEY = "10fde941-0bec-4273-bca6-c7c827f36234";
-				url = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
-	
-			}
-			
-			// local
-			else{
-				System.out.println("hhhhhhhheiii");
-				capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-				capabilities.setCapability("deviceName","emulator-5554");
-				capabilities.setCapability("platformVersion","6.0");
-				capabilities.setCapability("autoWebView", "true");
-				capabilities.setCapability("platformName","Android");
-				capabilities.setCapability("newCommandTimeout", 1120);
-				capabilities.setCapability("appPackage","com.quicken.qm2014");
-				capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-				capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
-				url = "http://127.0.0.1:4723/wd/hub";
-			}
-			
-			serverURL = new URL(url);
-			Globals globals = new Globals();
-			
-			if (getEngine().equals("android"))
-				globals.driver = new AndroidDriver(serverURL, capabilities);	
-			else if (getEngine().equals("ios"))
-				globals.driver = new IOSDriver(serverURL, capabilities);
-			else
-				throw new Exception("Invalid Engine String: ["+getEngine()+"]");
-						
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
-	*/
+
 	
 	public void uploadAndroidBuild() throws Exception {
 		
