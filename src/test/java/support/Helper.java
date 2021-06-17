@@ -284,7 +284,7 @@ public class Helper {
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
 	        capabilities.setCapability("autoWebView", "true");
-	        //capabilities.setCapability("autoAcceptAlerts", true);
+	        capabilities.setCapability("autoAcceptAlerts", true);
 	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
 	        capabilities.setCapability("browserName", "");
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
