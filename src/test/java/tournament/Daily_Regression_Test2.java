@@ -82,10 +82,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode text is NOT displayed");
 
-		if (Verify.objExists(sp.ManageAlertsTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Manage Alert text is displayed");
+		if (Verify.objExists(sp.settingsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alert text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed");
 
 		if (Verify.objExists(sp.HelpLegalTxt))
 			Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed");
@@ -256,39 +256,70 @@ public class Daily_Regression_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 22, enabled = true)
-	public void TC23_ValidateManageAlerts() throws Exception {
+	@Test(priority = -2, enabled = true)
+	public void TC23_ValidateSettingsOption() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Manage Alerts menu");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Settings menu.");
 
 		OverviewPage op = new OverviewPage();
 		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.ManageAlertsTxt, 2);
+		Verify.waitForObject(sp.settingsOption, 2);
+		sp.settingsOption.click();
+
+		Verify.waitForObject(sp.settingsHeaderText, 1);
+		if (Verify.objExists(sp.settingsHeaderText))
+			Commentary.log(LogStatus.INFO, "PASS: Settings Header text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings header text is NOT displayed.");
+		
+		if (Verify.objExists(sp.ManageAlertsTxt))
+			Commentary.log(LogStatus.INFO, "PASS: Manage Alerts option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alerts option is NOT displayed.");
+		
+		if (Verify.objExists(sp.displayYelpRecommendationsText))
+			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation text is NOT displayed.");
+		
+		if (Verify.objExists(sp.displayYelpDescription))
+			Commentary.log(LogStatus.INFO, "PASS: Display Yelp description text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp description text is NOT displayed.");
+		
+		if (Verify.objExists(sp.switchDisplayYelp))
+			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation toggle button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation toggle button is NOT displayed.");
+		
+		if (sp.isDisplayYelpEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation option is enabled by default.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation option is seen disabled by default.");
+		
 		sp.ManageAlertsTxt.click();
-
-		Verify.waitForObject(sp.ManageAlertsHeaderTxt, 2);
-		Verify.waitForObject(sp.getTextView("New Charge - Quicken Card (Mobile Only)"), 2);
-
+		
 		if (Verify.objExists(sp.ManageAlertsHeaderTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Manage Alerts Header text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manage Alerts Header text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alerts header text is NOT displayed");
-
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alerts header text is NOT displayed.");
+		
+		Verify.waitForObject(sp.getTextView("New Charge - Quicken Card (Mobile Only)"), 1);
 		if (Verify.objExists(sp.getTextView("New Charge - Quicken Card (Mobile Only)")))
-			Commentary.log(LogStatus.INFO, "PASS: New charge message text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: New charge message text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: New charge message text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: New charge message text is NOT displayed.");
 
-		Verify.waitForObject(sp.getTextView("Push Notification"), 2);
+		Verify.waitForObject(sp.getTextView("Push Notification"), 1);
 		if (Verify.objExists(sp.getTextView("Push Notification")))
-			Commentary.log(LogStatus.INFO, "PASS: Push Notification text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Push Notification text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Push Notification text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Push Notification text is NOT displayed.");
 
 		sa.assertAll();
 	}
@@ -415,18 +446,32 @@ public class Daily_Regression_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test (priority = 25, enabled = true)
+	@Test (priority = -1, enabled = true)
 	public void TC26_ValidateAddingTransactionWithYelpPayee() throws Exception {
 
 		//GPS Coordinates set on the simulator Latitude : 37.785834 Longitude: -122.406417 to search Yelp Payee "Enough Tea & Coffee".
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
-
+		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding a transaction with Payee selected from Yelp Results and later verifying the Payee Name from the added transaction.");
 
 		OverviewPage op = new OverviewPage();
+		
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		op.hambergerIcon.click();
 
+		SettingsPage sp = new SettingsPage();
+		Verify.waitForObject(sp.settingsOption, 2);
+		sp.settingsOption.click();
+		
+		Verify.waitForObject(sp.switchDisplayYelp, 1);
+		sp.enableDisplayYelpOption();
+		
+		sp.backButtonOnHeader.click();
+		Thread.sleep(2000);
+		Verify.waitForObject(sp.closeButton, 1);
+		sp.closeButton.click();
+		
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
