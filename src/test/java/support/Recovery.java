@@ -1,10 +1,13 @@
 package support;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.testng.ITestResult;
@@ -33,6 +36,8 @@ import referee.ETM;
 import referee.ErrorUtil;
 import referee.ExtentManager;
 import referee.Verify;
+import support.APIClient;
+import support.APIException;
 
 public class Recovery {
 	
@@ -42,6 +47,8 @@ public class Recovery {
 	public static ThreadLocal<String> sHost= new ThreadLocal<String>();
 	public static ThreadLocal<String> sTestName= new ThreadLocal<String>();
 	public static ThreadLocal<String> sEnv= new ThreadLocal<String>();
+	public static ThreadLocal<String> TEST_RUN_ID = new ThreadLocal<String>();
+	public static ThreadLocal<String> testCaseId = new ThreadLocal<String>();
 	
 	public Boolean wannaUploadTheBuild(){
 		
@@ -71,8 +78,8 @@ public class Recovery {
 	
 	
 	@BeforeTest
-	@Parameters({"host","engine","test","env"})
-	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env) throws Exception{
+	@Parameters({"host","engine","test","env","RUN_ID"})
+	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env, @Optional("readFromPropertiesFile")String RUN_ID) throws Exception{
 		
 		System.out.println("Before Test Start");
 		Helper h = new Helper();
@@ -93,6 +100,9 @@ public class Recovery {
 			sHost.set(host);
 			sTestName.set(testName);
 			sEnv.set(env);
+			
+			if (!RUN_ID.equals("readFromPropertiesFile"))
+				TEST_RUN_ID.set(RUN_ID);
 		}
 		
 		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
@@ -158,6 +168,10 @@ public class Recovery {
 	@AfterMethod
 	public void testCaseExit(ITestResult result, Method method) throws Exception{
 		
+		//TEST_CASE_PASSED_STATUS = 1;
+		//TEST_CASE_FAILED_STATUS = 5;
+		int testTrailStatus = 1;
+		
 		Helper h = new Helper();
 		
 		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
@@ -176,12 +190,14 @@ public class Recovery {
 		
 		List<String> softFails = ErrorUtil.getTestErrors();
 		if (result.getStatus() == ITestResult.FAILURE) {
-			
+			testTrailStatus = 5;
 			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
 		   } 
 		
-		if ((softFails.size() != 0))
+		if ((softFails.size() != 0)) {
+			testTrailStatus = 5;
 			ETM.getTest().log(LogStatus.FAIL,method.getName());
+		}
 		else
 			ETM.getTest().log(LogStatus.PASS,method.getName());
 		
@@ -197,6 +213,8 @@ public class Recovery {
 		else
 			((IOSDriver<MobileElement>)Engine.getDriver()).closeApp();
 		
+		if (! TEST_RUN_ID.get().equals("readFromPropertiesFile"))
+			this.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
 		System.out.println("");
 		System.out.println("-----------------------------------------------------------------");
 		System.out.println("");
@@ -212,5 +230,23 @@ public class Recovery {
 		Engine.getDriver().quit();
 		
 	}
+	
+	public static void addResultForTestCase(String testCaseId, int status,
+            String error) throws IOException, APIException {
+		 String TESTRAIL_USERNAME          = "kalyan.grandhi@quicken.com";
+		 String TESTRAIL_PASSWORD          = "Quicken4Win!";
+		  String RAILS_ENGINE_URL           = "https://quicken.testrail.net";
+        String testRunId = TEST_RUN_ID.get();
+
+        APIClient client = new APIClient(RAILS_ENGINE_URL);
+        client.setUser(TESTRAIL_USERNAME);
+        client.setPassword(TESTRAIL_PASSWORD);
+        Map data = new HashMap();
+        data.put("status_id", status);
+        data.put("comment", "Test Executed - Status updated automatically from Appium test automation.");
+        client.sendPost("add_result_for_case/"+testRunId+"/"+testCaseId+"",data );
+
+    }
+
 	
 }
