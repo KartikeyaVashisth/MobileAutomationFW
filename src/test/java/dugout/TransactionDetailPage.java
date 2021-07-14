@@ -1317,7 +1317,7 @@ public void selectCategoryOnDrawer (String category) throws Exception {
 		
 	}
 	
-	public void selectTags (String[] sTag) throws Exception {
+	public void selectTags (String sTag) throws Exception {
 		
 		Helper h = new Helper();
 		
@@ -1327,7 +1327,7 @@ public void selectCategoryOnDrawer (String category) throws Exception {
 			this.selectTags_ios(sTag);
 	}
 	
-	public void selectTags_android (String[] sTag) throws Exception {
+	public void selectTags_android (String sTag) throws Exception {
 		
 		String sXpath="//android.view.ViewGroup[@content-desc='Tags']";
 		Engine.getDriver().findElement(By.xpath(sXpath)).click();
@@ -1356,7 +1356,7 @@ public void selectCategoryOnDrawer (String category) throws Exception {
 		Thread.sleep(1000);	
 	}
 	
-	public void selectTags_ios (String[] sTag) throws Exception {
+	public void selectTags_ios (String sTag) throws Exception {
 		
 		Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='Tags'`]"))).click();
 		Verify.waitForObject(this.searchTags, 1);
