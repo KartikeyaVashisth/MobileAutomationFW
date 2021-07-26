@@ -54,7 +54,7 @@ public class Recovery {
 		
 		String uploadBuild = System.getProperty("buildpath");
 		
-		if (uploadBuild == null)
+		if (uploadBuild == null || uploadBuild.equals("DoNotUpload"))
 			return false;
 		
 		System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
