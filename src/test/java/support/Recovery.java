@@ -84,6 +84,9 @@ public class Recovery {
 		System.out.println("Before Test Start");
 		Helper h = new Helper();
 		
+		if (RUN_ID.equals("readFromPropertiesFile"))
+			TEST_RUN_ID.set("readFromPropertiesFile");
+		
 		// load engine and host
 		if (host.equals("readFromPropertiesFile"))
 		{
@@ -93,7 +96,6 @@ public class Recovery {
 			sHost.set(g.testProperty.get("host"));
 			sTestName.set("LOCAL_Companion"+g.testProperty.get("engine"));
 			sEnv.set(g.testProperty.get("env"));
-			TEST_RUN_ID.set("readFromPropertiesFile");
 		}
 		else {
 			h.loadProperties();
@@ -102,12 +104,14 @@ public class Recovery {
 			sTestName.set(testName);
 			sEnv.set(env);
 			
-			if (!RUN_ID.equals("readFromPropertiesFile"))
+			if (!RUN_ID.equals("readFromPropertiesFile")) {
+				System.out.println("Alert Alert!");
 				TEST_RUN_ID.set(RUN_ID);
+			}
 		}
 		
 		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
-
+		System.out.println("Before Test Run ID: "+TEST_RUN_ID.get());
 		if (wannaUploadTheBuild()) {
 			
 			if (sEngine.get().equals("android"))
@@ -214,7 +218,9 @@ public class Recovery {
 		else
 			((IOSDriver<MobileElement>)Engine.getDriver()).closeApp();
 		
-		if (! TEST_RUN_ID.get().equals("readFromPropertiesFile"))
+		System.out.println("AfterMethod: "+TEST_RUN_ID.get());
+		
+		if (!TEST_RUN_ID.get().equals("readFromPropertiesFile"))
 			this.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
 		System.out.println("");
 		System.out.println("-----------------------------------------------------------------");
