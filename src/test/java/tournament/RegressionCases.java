@@ -433,7 +433,7 @@ public class RegressionCases extends Recovery {
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Manage Alert text is NOT displayed");
 				
-				if (Verify.objExists(sp.HelpLegalTxt))
+				if (Verify.objExists(sp.HelpTxt))
 					Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed");
 				else
 					Commentary.log(sa, LogStatus.FAIL, "Help & Legal text is NOT displayed");
@@ -640,7 +640,7 @@ public class RegressionCases extends Recovery {
 		op.hambergerIcon.click();
 		
 		SettingsPage sp = new SettingsPage();
-		sp.HelpLegalTxt.click();
+		sp.HelpTxt.click();
 		Thread.sleep(2000);
 		
 		SoftAssert sa = new SoftAssert();

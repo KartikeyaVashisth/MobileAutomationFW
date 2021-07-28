@@ -27,12 +27,12 @@ public class TransactionSummaryPage {
 			}	
 		}
 		
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='Transaction Summary'`]")
-		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Transaction Summary'`]")
+		@AndroidFindBy(xpath="//android.view.View[@text='Transaction Summary']")
 		public MobileElement transactionSummaryHeader;
 		
-		@iOSXCUITFindBy(accessibility="Back")
-		@AndroidFindBy(xpath="//android.widget.TextView[@text='Transaction Summary']/../android.widget.ImageButton")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
+		@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@class='android.widget.Button']")
 		public MobileElement backButtonOnHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")

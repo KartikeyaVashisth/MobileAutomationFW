@@ -52,7 +52,8 @@ public class TransactionsPage {
 	public Boolean verifyAccount(String acctName) throws Exception{
 			
 			String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
-			String xPathForAcct_IOS ="//XCUIElementTypeNavigationBar/XCUIElementTypeOther[normalize-space(@name)='"+acctName+"']";
+//			String xPathForAcct_IOS ="//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[normalize-space(@name)='"+acctName+"']";
+			String xPathForAcct_IOS ="**/XCUIElementTypeOther[`name='"+acctName+"'`]";
 			
 			Helper h = new Helper();
 			
@@ -61,17 +62,18 @@ public class TransactionsPage {
 					Engine.getDriver().findElementByXPath(xPathForAcct).isDisplayed();
 					return true;
 				}
-				catch(Exception E){
+				catch(Exception e){
 					return false;
 				}
 				
 			}
 			else {
 				try{
-					Engine.getDriver().findElementByXPath(xPathForAcct_IOS).isDisplayed();
+//					Engine.getDriver().findElementByXPath(xPathForAcct_IOS).isDisplayed();
+					Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS)).isDisplayed();
 					return true;
 				}
-				catch(Exception E){
+				catch(Exception e){
 					return false;
 				}	
 				

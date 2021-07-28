@@ -23,26 +23,26 @@ public class InvestingPage {
 	}
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Investing\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name==\"Investing\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Investing'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investingHeader;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']/../*[@class='android.widget.ImageButton']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@class='android.widget.Button']")
 	public MobileElement backButtonOnHeader;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Securities\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Securities\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Securities'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities']")
 	public MobileElement securitiesTab;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Accounts\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Accounts\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
 	public MobileElement accountsTab;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Watch List\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=\"button Watch List\"`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Watch List'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Watch List']")
 	public MobileElement watchlistTab;
 	

@@ -32,14 +32,18 @@ public class AllAccountsPage {
 	
 	//@iOSFindBy(xpath="//*[contains(@name,'All Transactions')]")
 	//@iOSXCUITBy(iOSClassChain = "**/XCUIElementTypeNavigationBar/XCUIElementTypeOther[`name == 'All Transactions'`]")
-	@iOSXCUITFindBy(iOSNsPredicate = "name = 'All Transactions'")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='All Transactions']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'All Transactions'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='All Transactions']")
 	public MobileElement textAllTransactions;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Back' or @name=\"Banking & Credit\"]")
-	@iOSXCUITFindBy(accessibility="Back")
-	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
 	public MobileElement backButton;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'All Transactions'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='All Transactions']")
+	public MobileElement allTransactionsHeader;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name=\"Search Transactions\"]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSearchField[`name='Search Transactions'`]")

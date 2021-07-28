@@ -33,12 +33,12 @@ public class SpendingOverTimePage {
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending Over Time\"]")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name= 'Spending Over Time'`]")
-		@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
+		@AndroidFindBy(xpath="//android.view.View[@text='Spending Over Time']")
 		public MobileElement spendingOverTimeHeader;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
-		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name= 'Back'`]")
-		@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
+		@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
 		public MobileElement backButtonOnHeader;
 		
 		@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")

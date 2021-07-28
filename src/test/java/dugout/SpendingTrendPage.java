@@ -34,12 +34,12 @@ public class SpendingTrendPage {
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending by Category\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Spending by Category'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending by Category']")
+	@AndroidFindBy(xpath="//android.view.View[@text='Spending by Category']")
 	public MobileElement spendingTrendHeader;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Back'`]")
-	@AndroidFindBy(xpath="//*[@text='Spending by Category']/../*[@class='android.widget.ImageButton']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//*[@text='Spending by Category']/../*[@class='android.widget.Button']")
 	public MobileElement backButtonOnHeader;
 	
 //	@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
