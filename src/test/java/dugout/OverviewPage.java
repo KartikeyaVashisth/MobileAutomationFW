@@ -118,7 +118,7 @@ public class OverviewPage {
 	public MobileElement addTransaction;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
-	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Recent Transactions'")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Recent Transactions'`]")
 	@AndroidFindBy(xpath="//*[@text='Recent Transactions']")
 	public MobileElement recentTransactionsCard;
 	
@@ -291,16 +291,18 @@ public class OverviewPage {
 		}
 		else {
 			//String sXpath="//*[@name='Recent Transactions']";
-			String cc="**/*[`name=='Recent Transactions'`]";
+			String cc="**/XCUIElementTypeStaticText[`name='Recent Transactions'`]";
 			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
-			scrollObject.put("predicateString", "label == 'Recent Transactions'");
+//			scrollObject.put("predicateString", "label == 'Recent Transactions'");
+			scrollObject.put("toVisible", "not an empty string");
+			scrollObject.put("direction", "down");
 			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
-		recentTransactionsCard.click();
+		this.recentTransactionsCard.click();
 		Thread.sleep(2000);
 	}
 	
@@ -320,7 +322,9 @@ public class OverviewPage {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(1000);	
@@ -356,7 +360,9 @@ public class OverviewPage {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(2000);	
@@ -542,8 +548,10 @@ public class OverviewPage {
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
+			scrollObject.put("direction", "down");
 			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject); 
 			Thread.sleep(1000);
 			//Engine.getDriver().findElement(By.name("'"+currentMonth+" Summary'")).click();
 			transactionSummaryCard.click();
@@ -600,7 +608,7 @@ public class OverviewPage {
 			scrollObject.put("element", me_id);
 //			scrollObject.put("predicateString", "label == 'Net Worth'");
 			scrollObject.put("toVisible", "not an empty string");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element 
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name("Net Worth")).click();
 			Thread.sleep(2000);
@@ -629,7 +637,9 @@ public class OverviewPage {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Spending Over Time'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject); 
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name("Spending Over Time")).click();
 			Thread.sleep(1000);
@@ -638,7 +648,7 @@ public class OverviewPage {
 	
 	public void tapOnNetIncomeOverTimeCard() throws Exception{
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
@@ -656,7 +666,9 @@ public class OverviewPage {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Net Income by Month'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name("Net Income by Month")).click();
 			Thread.sleep(1000);
@@ -721,7 +733,7 @@ public class OverviewPage {
 		String sCard = date.format(date1).toString();
 		//System.out.println(date.format(date1).toString());
 		sCard = sCard +" "+"Budget";
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
@@ -739,7 +751,9 @@ public class OverviewPage {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == '"+sCard+"'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.name(sCard)).click();
 			Thread.sleep(1000);
@@ -761,15 +775,18 @@ public class OverviewPage {
 		}
 		else {
 			//String sXpath="//*[@name='Investing']";
-			String cc="**/*[`name=='Investing'`]";
+			String cc="**/XCUIElementTypeOther[`name='Investing'`]";
 			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == 'Investing'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject); 
 			Thread.sleep(1000);
-			Engine.getDriver().findElement(By.name("Investing")).click();
+//			Engine.getDriver().findElement(By.name("Investing")).click();
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -949,7 +966,9 @@ public void scrollToTransactionSummaryCard() throws Exception{
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
 			scrollObject.put("predicateString", "label == '"+currentMonth+" Summary'");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 			Thread.sleep(1000);
 			//Engine.getDriver().findElement(By.name("'"+currentMonth+" Summary'")).click();
 //			transactionSummaryCard.click();

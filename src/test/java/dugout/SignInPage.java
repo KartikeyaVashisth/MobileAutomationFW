@@ -90,8 +90,8 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='dataSetArrow'`]")
-	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc=\"dataSetArrow\"]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Cloud Account name Menu'`]/XCUIElementTypeOther[`name='Expand Icon'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']/following-sibling::android.widget.ImageView")
 	public MobileElement dataSetArrow;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
@@ -133,7 +133,8 @@ public class SignInPage {
 
 //		if (!Verify.objExists(emailID))
 //			quickenTest.log(LogStatus.ERROR,"emailID not identified");
-
+		
+		Verify.waitForObject(emailID, 2);
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
@@ -167,6 +168,7 @@ public class SignInPage {
 
 		//Commentary.log(LogStatus.INFO, "SignInWidget appeared");
 
+		Verify.waitForObject(emailID, 2);
 		emailID.click();
 		Thread.sleep(1000);
 		userName.clear();
@@ -306,7 +308,7 @@ public class SignInPage {
 		if (support.getEngine().equals("android")) {
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-			Thread.sleep(6000);
+			Thread.sleep(7000);
 			
 			if(Verify.objExists(cancelIcon)) {
 				cancelIcon.click();
@@ -349,7 +351,7 @@ public class SignInPage {
 		else {
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 			Verify.waitForObject(datasetNameOnDashboard, 2);
 //			String datasetNameOverviewPage = Engine.getDriver().findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
 			String datasetNameOverviewPage = this.datasetNameOnDashboard.getText();

@@ -216,6 +216,7 @@ public class Helper {
 			capabilities.setCapability("maxDuration", 4000);
 			capabilities.setCapability("newCommandTimeout", 1120);
 			capabilities.setCapability("noResetValue", true);
+			capabilities.setCapability("ignoreUnimportantViews", true);
 			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
 			//capabilities.setCapability("app", "sauce-storage:QuickenRelease.apk");
 			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
@@ -262,6 +263,7 @@ public class Helper {
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
+			capabilities.setCapability("ignoreUnimportantViews", true);
 			capabilities.setCapability("autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
 			capabilities.setCapability("newCommandTimeout", 1120);

@@ -122,8 +122,9 @@ public class BankingAndCreditCardPage {
 	public MobileElement getAccount(String acctName) throws Exception{
 
 		String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
-		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='Account Name: "+acctName+"']";
-		//"//android.widget.ScrollView//android.view.ViewGroup//android.widget.TextView[normalize-space(@text)='"+acctName+"']";
+//		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='Account Name: "+acctName+"']";
+		String xPathForAcct_IOS = "**/XCUIElementTypeStaticText[`name='Account Name: "+acctName+"'`]";
+		
 		Commentary.log(LogStatus.INFO, "Finding Account ["+acctName+"]");
 		Helper h = new Helper();
 
@@ -133,7 +134,7 @@ public class BankingAndCreditCardPage {
 				Thread.sleep(1000);
 				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct);
 			}
-			catch(Exception E){
+			catch(Exception e){
 				return null;
 			}
 		}
@@ -141,11 +142,14 @@ public class BankingAndCreditCardPage {
 		else {
 
 			try {
-				if (!Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xPathForAcct_IOS))))
+//				if (!Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xPathForAcct_IOS))))
+//					scrollToAccount(acctName);
+//				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct_IOS);
+				if (!Verify.objExists(Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS))))
 					scrollToAccount(acctName);
-				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct_IOS);
+				return Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS));
 			}
-			catch(Exception E){
+			catch(Exception e){
 				return null;
 			}
 		}

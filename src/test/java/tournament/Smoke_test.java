@@ -39,395 +39,365 @@ import support.Helper;
 import support.Recovery;
 
 public class Smoke_test extends Recovery {
-	
+
 	ExtentReports rep = ExtentManager.initializeRepObject();
 	Helper support = new Helper();
-	
-	@Test(priority = 0)
+
+	@Test(priority = 0, enabled = true)
 	public void verifyAccountTest() throws Exception {
-		
-		//ExtentTest quickenTest = Recovery.quickenTest;
+
 		String acctToVerify = "AllReconciledTransactions";
-		Helper helper = new Helper();
 		SoftAssert sa = new SoftAssert();
-		
-		WelcomePage w = new WelcomePage();
-		
+
 		SignInPage signIn = new SignInPage();
 		signIn.signIn();
-	    
-	    OverviewPage op = new OverviewPage();
-	    op.navigateToAcctList();
-	    
-	    // verify if checking account Exists or not
-	    BankingAndCreditCardPage acctListPage = new BankingAndCreditCardPage();
-		
+
+		OverviewPage op = new OverviewPage();
+		op.navigateToAcctList();
+
+		BankingAndCreditCardPage acctListPage = new BankingAndCreditCardPage();
+
 		if (acctListPage.getAccount(acctToVerify).getText().replace("Account Name: ", "").trim().equals(acctToVerify))
-			Commentary.log(sa, LogStatus.INFO,"Checking account exists");
+			Commentary.log(LogStatus.INFO,"PASS: Checking account exists.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Checking account verification failed");
-		
-		// tap on the account
-	   	acctListPage.getAccount(acctToVerify).click();
-	   	Thread.sleep(2000);
-	   	
-	   	// verify account name on the transactionsPage
-	   	TransactionsPage txnPage = new TransactionsPage();
-	   	if (txnPage.verifyAccount(acctToVerify) == true)
-	   		Commentary.log(sa, LogStatus.INFO,"Account name verification on Transaction page Pass.");
-	   	else
-	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
-	   	
-	   	// get back to overview screen
-	   	/*Engine.ad.navigate().back();
-	   	helper.waitForRefresh(2000);
-	   	acctListPage.backButton.click();*/
-	   	//txnPage.navigateBackToDashboard();
-	   	sa.assertAll();
-	   	 
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Checking account verification failed.");
+
+		acctListPage.getAccount(acctToVerify).click();
+		Thread.sleep(2000);
+
+		TransactionsPage txnPage = new TransactionsPage();
+		if (txnPage.verifyAccount(acctToVerify) == true)
+			Commentary.log(LogStatus.INFO,"PASS: Account name verification on Transaction page.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Account name verification on Transaction page.");
+
+		sa.assertAll();
+
 	}
-	
-	@Test(priority = 1)
-	public void settingsPageTest() throws Exception{
-		
-		//ExtentTest quickenTest = Recovery.quickenTest;
+
+	@Test(priority = 1, enabled = true)
+	public void HamburgerMenuOptionsTest() throws Exception{
+
 		String userID = support.getUsername();//"kalyan.grandhi@quicken.com";
 		String cloudName= support.getDatasetName();//"Transaction_Status";
 		SoftAssert sa = new SoftAssert();
-		
-		WelcomePage w = new WelcomePage();
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
-		
+		Helper h = new Helper();
+
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObject(op.hambergerIcon, 1);
 		op.hambergerIcon.click();
 		support.waitForRefresh(2000);
-		
-		SettingsPage settingsPage = new SettingsPage();
-		
-		/*
-		if (settingsPage.verifyQuickenID(userID))
-			Commentary.log(sa, LogStatus.INFO,"PASS: QuickenID ["+userID+"] verified successfully!");
+
+		SettingsPage sp = new SettingsPage();
+
+		Verify.waitForObject(sp.datasetDDButton, 1);
+
+		if(sp.verifyQuickenID(userID))
+			Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: QuickenID ["+userID+"] verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Quicken ID is NOT displayed.");
+
+		if (Verify.objExists(sp.closeButton))
+			Commentary.log(LogStatus.INFO, "PASS: Close button is displayed.");
+		else 
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Close button is NOT displayed.");
 		
-		if (settingsPage.verifyCloudAccountName(cloudName))
-			Commentary.log(sa, LogStatus.INFO,"PASS: CloudName ["+cloudName+"] verified successfully!");
+		Verify.waitForObject(sp.cloudAccountNameOption, 1);
+		if (Verify.objExists(sp.cloudAccountNameOption))
+			Commentary.log(LogStatus.INFO, "PASS: Cloud Account Name option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: CloudName ["+cloudName+"] verification Failed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cloud Account Name option is NOT displayed.");
+
+		if (Verify.objExists(sp.datasetDDButton))
+			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
+
+		if (Verify.objExists(sp.dashboardOption))
+			Commentary.log(LogStatus.INFO, "PASS: Dashboard option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dashboard option is NOT displayed.");
 		
+		if (Verify.objExists(sp.accountTxt))
+			Commentary.log(LogStatus.INFO, "PASS: Accounts option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Accounts option is NOT displayed.");
+
+		if (Verify.objExists(sp.allTransactionsOption))
+			Commentary.log(LogStatus.INFO, "PASS: All Transactions option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: All Transactions option is NOT displayed.");
 		
-		try {
-			System.out.println("1*******");
-			System.out.println(settingsPage.passcode.getText());
-			System.out.println("1*******");
-			System.out.println("");
+		if (Verify.objExists(sp.billsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Bills option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Bills option is NOT displayed.");
+		
+//		if (Verify.objExists(sp.budgetsOption))
+//			Commentary.log(LogStatus.INFO, "PASS: Budgets option is displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Budgets option is NOT displayed.");
+		
+		if (Verify.objExists(sp.investmentsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Investments option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investments option is NOT displayed.");
+		
+		if (Verify.objExists(sp.reportsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Reports option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Reports option is NOT displayed.");
+
+		if (Verify.objExists(sp.profileOption))
+			Commentary.log(LogStatus.INFO, "PASS: Profile option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Profile option is NOT displayed.");
+		
+		if (Verify.objExists(sp.settingsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed.");
+		
+		if (Verify.objExists(sp.versionNumber))
+			Commentary.log(LogStatus.INFO, "PASS: Version number is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Version number is NOT displayed.");
+
+		if (Verify.objExists(sp.logout))
+			Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
+
+		if (h.getEngine().equalsIgnoreCase("Android")) {
+			if (Verify.objExists(sp.FeedbackTxt))
+				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
+		} else {
+			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
 		}
-		catch (Exception e) {
-			System.out.println("tttttttttttttt "+e.getMessage());
-		}
-		
-		try {
-			System.out.println("*******");
-			System.out.println(Engine.ad.findElement(By.xpath("//android.widget.TextView[normalize-space(@text)='Passcode']")).getText());
-			System.out.println("*******");
-		}
-		catch (Exception e) {
-			System.out.println("uuuuuuuuuuuu "+e.getMessage());
-		}
-		
-		
-			
-		// verify other options on settings page
-		if (Verify.objExists(settingsPage.passcode))
-			Commentary.log(sa, LogStatus.INFO,"Passcode verified successfully!");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"Passcode verification Failed.");
-		
-		if (Verify.objExists(settingsPage.helpAndLegal))
-			Commentary.log(sa, LogStatus.INFO,"help verified successfully!");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"help verification Failed.");
-		
-		if (Verify.objExists(settingsPage.accounts))
-			Commentary.log(sa, LogStatus.INFO,"accounts verified successfully!");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"accounts verification Failed.");
-		
-		if (Verify.objExists(settingsPage.logout))
-			Commentary.log(sa, LogStatus.INFO,"logout verified successfully!");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"logout verification Failed.");*/
-		
+
 		sa.assertAll();
 	}
-	
-	@Test(priority = 2)
+
+	@Test(priority = 2, enabled = true)
 	public void RecentTransactionsTest() throws Exception{
-		
-		/*WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");*/
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
+
 		SoftAssert sa = new SoftAssert();
-		
-		// overview screen
 		OverviewPage o = new OverviewPage();
-		
+
 		o.tapOnRecentTransactionsCard();
-		
+
 		AllAccountsPage aap = new AllAccountsPage();
+		Verify.waitForObject(aap.textAllTransactions, 1);
 		if (Verify.objExists(aap.textAllTransactions))
-			Commentary.log(sa, LogStatus.INFO,"RecentTransactions card tap > All transactions screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: RecentTransactions card tap > All transactions screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"RecentTransactions card tap > All transactions screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: RecentTransactions card tap > All transactions screen did not appear.");
+
 		aap.navigateBackToDashboard();
-		
+
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"RecentTransactions card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: RecentTransactions card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"RecentTransactions card, back button tap > Overview screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: RecentTransactions card, back button tap > Overview screen did not appear.");
+
 		sa.assertAll();
 	}
-	
-	@Test(priority = 3)
+
+	@Test(priority = 3, enabled = true)
 	public void TrendingCategoriesTest() throws Exception{
-		
-		/*WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");
-		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
+
 		SoftAssert sa = new SoftAssert();
-		
-		// overview screen
 		OverviewPage o = new OverviewPage();
+		
 		o.tapOnTrendingCard();
-		
+
 		SpendingTrendPage st = new SpendingTrendPage();
+		Verify.waitForObject(st.spendingTrendHeader, 1);
 		if (Verify.objExists(st.spendingTrendHeader))
-			Commentary.log(sa, LogStatus.INFO,"SpendingTrend card tap >SpendingTrend screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: SpendingTrend card tap > SpendingTrend screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"SpendingTrend card tap > SpendingTrend screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: SpendingTrend card tap > SpendingTrend screen did not appear.");
+
 		st.navigateBackToDashboard();
-		
+
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"SpendingTrend card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: SpendingTrend card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"SpendingTrend card, back button tap > Overview screen did not appear.");	
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: SpendingTrend card, back button tap > Overview screen did not appear.");	
+
 		sa.assertAll();
 	}
-	
-	@Test(priority = 4)
-	public void TransactionwSummaryTest() throws Exception{
-		
-		/*WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");*/
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
+
+	@Test(priority = 4, enabled = true)
+	public void TransactionSummaryTest() throws Exception{
+
 		SoftAssert sa = new SoftAssert();
-		
-		// overview screen
+
 		OverviewPage o = new OverviewPage();
 		o.tapOnTransactionSummaryCard();
-		
+
 		TransactionSummaryPage cashflow = new TransactionSummaryPage();
-		
+		Verify.waitForObject(cashflow.transactionSummaryHeader, 1);
 		if (Verify.objExists(cashflow.transactionSummaryHeader))
-			Commentary.log(sa, LogStatus.INFO,"cashflow card tap >Transaction summary screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card tap > Transaction summary screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"cashflow card tap > cashflow/Transaction summary screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card tap > Transaction summary screen did not appear.");
+
 		cashflow.navigateBackToDashboard();
-		
-		System.out.println("back doneeeeeeee");
-		
+
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card, back button tap > Overview screen did not appear.");	
 		sa.assertAll();	
 	}
-	
-	@Test(priority = 5)
+
+	@Test(priority = 5, enabled = true)
 	public void SpendingOverTimeTest() throws Exception{
-		
-		/*WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");*/
+
 		SoftAssert sa = new SoftAssert();
-		
+
 		DateFormat date =  new SimpleDateFormat("MMM");
 		Date date1 = new Date();
-		//System.out.println(date.format(date1).toString());
-		
+
 		String currentMonthSpending = "Total Spending: "+date.format(date1).toString();
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
-		
-		// overview screen
+
 		OverviewPage o = new OverviewPage();
 		o.tapOnSpendingOverTimeCard();
-		
+
 		SpendingOverTimePage sot = new SpendingOverTimePage();
-		
+		Verify.waitForObject(sot.spendingOverTimeHeader, 1);
 		if (Verify.objExists(sot.spendingOverTimeHeader))
-			Commentary.log(sa, LogStatus.INFO,"SpendingOverTimeCard card tap >SpendingOverTime screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: SpendingOverTimeCard card tap > SpendingOverTime screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"SpendingOverTimeCard tap > SpendingOverTimeCard screen did not appear.");
-		
-		/*
-		if (Verify.objExists(sot.totalSpendingCurrentMonth))
-			Commentary.log(sa, LogStatus.INFO,"Total Spending text got displayed on SpendingOverTimeCard.");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"Total Spending text did not get displayed on SpendingOverTimeCard.");
-		
-		if (sot.totalSpendingCurrentMonth.getText().equals(currentMonthSpending))
-			Commentary.log(sa, LogStatus.INFO,"Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
-		else
-			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
-		*/
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: SpendingOverTimeCard tap > SpendingOverTimeCard screen did not appear.");
+	
+//		if (Verify.objExists(sot.totalSpendingCurrentMonth))
+//			Commentary.log(sa, LogStatus.INFO,"Total Spending text got displayed on SpendingOverTimeCard.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL,"Total Spending text did not get displayed on SpendingOverTimeCard.");
+//
+//		if (sot.totalSpendingCurrentMonth.getText().equals(currentMonthSpending))
+//			Commentary.log(sa, LogStatus.INFO,"Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
+//		else
+//			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
+		 
 		sot.navigateBackToDashboard();
-		
+
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: cashflow card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: cashflow card, back button tap > Overview screen did not appear.");	
+
 		sa.assertAll();		
 	}
-	
-	@Test(priority = 6)
+
+	@Test(priority = 6, enabled = true)
 	public void NetIncomeOverTimeTest() throws Exception{
-		
-		/*WelcomePage w = new WelcomePage();
-		w.setEnvironment("stage");*/
+
 		SoftAssert sa = new SoftAssert();
-		
+
 		DateFormat date =  new SimpleDateFormat("MMM");
 		Date date1 = new Date();
-		//System.out.println(date.format(date1).toString());
-		
+
 		String currentMonthIncome = "Net Income: "+date.format(date1).toString();
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
-		
-		// overview screen
+
 		OverviewPage o = new OverviewPage();
-		
+
 		o.tapOnNetIncomeOverTimeCard();
-		
+
 		NetIncomeOverTimePage not = new NetIncomeOverTimePage();
-		
+		Verify.waitForObject(not.netIncomeOverTimeHeader, 1);
 		if (Verify.objExists(not.netIncomeOverTimeHeader))
-			Commentary.log(sa, LogStatus.INFO,"NetIncomeOverTimeCard card tap >NetIncomeOverTime screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: NetIncomeOverTimeCard card tap > NetIncomeOverTime screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"NetIncomeOverTimeCard tap > NetIncomeOverTime screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: NetIncomeOverTimeCard tap > NetIncomeOverTime screen did not appear.");
+
 		if (Verify.objExists(not.netIncomeCurrentMonth))
-			Commentary.log(sa, LogStatus.INFO,"Net Income text got displayed on NetIncomeOverTime screen.");
+			Commentary.log(LogStatus.INFO,"PASS: Net Income text got displayed on NetIncomeOverTime screen.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Net Income text did not appear on NetIncomeOverTime screen.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Net Income text did not appear on NetIncomeOverTime screen.");
+
 		if (not.netIncomeCurrentMonth.getText().equals(currentMonthIncome))
-			Commentary.log(sa, LogStatus.INFO,"Net Income text for the current month ["+currentMonthIncome+"] got displayed on NetIncomeOverTimeCard.");
+			Commentary.log(LogStatus.INFO,"PASS: Net Income text for the current month ["+currentMonthIncome+"] got displayed on NetIncomeOverTimeCard.");
 		else
-			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
-		
-		/*
-		not.navigateBackToDashboard();
-			
-		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
-		*/
+			Commentary.log(sa, LogStatus.INFO,"FAIL: Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
+
+//		not.navigateBackToDashboard();
+//
+//		if (Verify.objExists(o.hambergerIcon))
+//			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+
 		sa.assertAll();	
 	}
-	
-	@Test(priority = 7)
+
+	@Test(priority = 7, enabled = true)
 	public void BudgetTest() throws Exception{
-	
+
 		SoftAssert sa = new SoftAssert();
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
-		
-		// overview screen
+
 		OverviewPage o = new OverviewPage();
 		o.tapOnBudgetCard();
-		
-		Commentary.log(sa, LogStatus.INFO,"Budgets card got dispalyed.");
-		
-		
-		
-		/*
-		BudgetsPage b = new BudgetsPage();
-		
-		if (b.verify_budgetHeader())
-			Commentary.log(sa, LogStatus.INFO,"Budgets card tap >Budgets screen got dispalyed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"Budgets card tap >Budgets screen did not appear.");
-		
-		if (Verify.objExists(b.personalExpenses))
-			Commentary.log(sa, LogStatus.INFO,"Budgets card, Personal Expenses group got dispalyed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL,"Budgets card, Personal Expenses group did not appear.");
-			*/
-		
+
+		Commentary.log(sa, LogStatus.INFO,"Budgets card got displayed.");
+
+//		BudgetsPage b = new BudgetsPage();
+//
+//		if (b.verify_budgetHeader())
+//			Commentary.log(sa, LogStatus.INFO,"Budgets card tap >Budgets screen got displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL,"Budgets card tap >Budgets screen did not appear.");
+//
+//		if (Verify.objExists(b.personalExpenses))
+//			Commentary.log(sa, LogStatus.INFO,"Budgets card, Personal Expenses group got displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL,"Budgets card, Personal Expenses group did not appear.");
+
 		sa.assertAll();	
 	}
-	
-	@Test(priority = 8)
+
+	@Test(priority = 8, enabled = true)
 	public void InvestingTest() throws Exception{
-	
+
 		SoftAssert sa = new SoftAssert();
-		
-		/*SignInPage signIn = new SignInPage();
-		signIn.signIn();*/
-		
-		// overview screen
 		OverviewPage o = new OverviewPage();
-		o.tapOnInvestingCard();
 		
+		o.tapOnInvestingCard();
+
 		InvestingPage i = new InvestingPage();
 		Verify.waitForObject(i.securitiesTab, 2);
-		
+
 		if (Verify.objExists(i.investingHeader))
-			Commentary.log(sa, LogStatus.INFO,"Investing card tap >Investments screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Investing card tap >Investments screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card tap >Investing screen did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card tap > Investing screen did not appear.");
+
 		if (Verify.objExists(i.accountsTab))
-			Commentary.log(sa, LogStatus.INFO,"Investing card > Accounts Tab got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Investing card > Accounts Tab got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card > Accounts Tab did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Accounts Tab did not appear.");
+
 		if (Verify.objExists(i.securitiesTab))
-			Commentary.log(sa, LogStatus.INFO,"Investing card > Securities Tab got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Investing card > Securities Tab got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card > Securities Tab did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Securities Tab did not appear.");
+
 		if (Verify.objExists(i.watchlistTab))
-			Commentary.log(sa, LogStatus.INFO,"Investing card > Watchlist Tab got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Investing card > Watchlist Tab got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card > Watchlist Tab did not appear.");
-		
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Watchlist Tab did not appear.");
+
 		i.navigateBackToDashboard();
-		
+
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(sa, LogStatus.INFO,"Investing card, back button tap > Overview screen got dispalyed.");
+			Commentary.log(LogStatus.INFO,"PASS: Investing card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card, back button tap > Overview screen did not appear.");	
-	
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card, back button tap > Overview screen did not appear.");	
+
 		sa.assertAll();	
 	}
 }

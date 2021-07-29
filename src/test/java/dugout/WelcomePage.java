@@ -38,7 +38,7 @@ public class WelcomePage {
 	}
 	
 	//@iOSFindBy(xpath="//*[normalize-space(@name)='Sign In']")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Sign In'`][2]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Sign In'`]")
 	@AndroidFindBy(xpath="//*[@text='Sign In']")
 	public MobileElement xpath_btnWelcomeSignIn;
 	
