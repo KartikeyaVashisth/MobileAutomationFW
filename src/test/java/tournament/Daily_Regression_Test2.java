@@ -47,7 +47,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating hamburger menu options");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating hamburger menu options.");
 
 		OverviewPage op = new OverviewPage();
 		op.hambergerIcon.click();
@@ -58,52 +58,52 @@ public class Daily_Regression_Test2 extends Recovery{
 		Verify.waitForObject(sp.accountTxt, 2);
 
 		if(sp.verifyQuickenID(sUserName))
-			Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Quicken ID is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Quicken ID is NOT displayed.");
 
 		if (Verify.objExists(sp.closeButton))
-			Commentary.log(LogStatus.INFO, "PASS: Close button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Close button is displayed.");
 		else 
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Close button is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Close button is NOT displayed.");
 
 		if (Verify.objExists(sp.datasetDDButton))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
 
 		if (Verify.objExists(sp.accountTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Account Text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Account Text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account Text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account Text is NOT displayed.");
 
 		if (Verify.objExists(sp.PasscodeTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode text is NOT displayed.");
 
 		if (Verify.objExists(sp.settingsOption))
-			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed.");
 
-		if (Verify.objExists(sp.HelpLegalTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed");
+		if (Verify.objExists(sp.HelpTxt))
+			Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help & Legal text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help & Legal text is NOT displayed.");
 
 		if (Verify.objExists(sp.logout))
-			Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
 
 		if (h.getEngine().equalsIgnoreCase("Android")) {
 			if (Verify.objExists(sp.FeedbackTxt))
-				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed");
+				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
 			else
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed");
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
 		} else {
-			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator");
+			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
 		}
 
 		sa.assertAll();
@@ -256,7 +256,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = -2, enabled = true)
+	@Test(priority = 22, enabled = true)
 	public void TC23_ValidateSettingsOption() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -335,8 +335,8 @@ public class Daily_Regression_Test2 extends Recovery{
 		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.HelpLegalTxt, 3);
-		sp.HelpLegalTxt.click();
+		Verify.waitForObject(sp.HelpTxt, 3);
+		sp.HelpTxt.click();
 		Thread.sleep(3000);
 		Verify.waitForObject(sp.getTextView("Help"), 3);
 		Verify.waitForObject(sp.getTextView("Support Website"), 3);
@@ -446,7 +446,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test (priority = -1, enabled = true)
+	@Test (priority = 25, enabled = true)
 	public void TC26_ValidateAddingTransactionWithYelpPayee() throws Exception {
 
 		//GPS Coordinates set on the simulator Latitude : 37.785834 Longitude: -122.406417 to search Yelp Payee "Enough Tea & Coffee".
