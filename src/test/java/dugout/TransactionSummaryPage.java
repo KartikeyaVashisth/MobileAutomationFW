@@ -31,12 +31,16 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.view.View[@text='Transaction Summary']")
 		public MobileElement transactionSummaryHeader;
 		
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Monthly Summary'`]")
+		@AndroidFindBy(xpath="//android.view.View[@text='Monthly Summary']")
+		public MobileElement monthlySummaryHeader;
+		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
 		@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@class='android.widget.Button']")
 		public MobileElement backButtonOnHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
-		@AndroidFindBy(xpath="(//*[@class='android.widget.ImageButton'])[1]")
+		@AndroidFindBy(xpath="//android.widget.Button")
 		public MobileElement backButton;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText")
@@ -75,7 +79,7 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'$')]")
 		public MobileElement firstRecordInList;
 		
-		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[3]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[3]/**/XCUIElementTypeStaticText[1]")
 		@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]")
 		public MobileElement transactionCategoryPayeeText;
 		
@@ -122,8 +126,21 @@ public class TransactionSummaryPage {
 			}
 			
 		}
-		public String getCategoryPayeeName () {
-			return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
+		public String getCategoryName() {
+			Helper h = new Helper();
+			if (h.getEngine().equalsIgnoreCase("android")) 
+				return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
+			else
+				return this.transactionCategoryPayeeText.getText().substring(10);
+			//return this.transactionCategoryPayeeText.getText();
+		}
+		
+		public String getPayeeName() {
+			Helper h = new Helper();
+			if (h.getEngine().equalsIgnoreCase("android")) 
+				return this.transactionCategoryPayeeText.getText().trim().split(" ")[0];
+			else
+				return this.transactionCategoryPayeeText.getText().substring(7);
 			//return this.transactionCategoryPayeeText.getText();
 		}
 		

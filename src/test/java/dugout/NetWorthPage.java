@@ -26,16 +26,16 @@ public class NetWorthPage {
 		}
 	}
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Back'`]")
-	@AndroidFindBy(xpath="//android.widget.ImageButton")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//android.widget.Button")
 	public MobileElement backButton;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name BEGINSWITH 'As of'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text, 'As of')]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'As of'`]")
+	@AndroidFindBy(xpath="//android.view.View[starts-with(@text, 'As of')]")
 	public MobileElement dateHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='NetWorthInfo Button'`]")
-	@AndroidFindBy(xpath="//androidx.appcompat.widget.LinearLayoutCompat/android.widget.TextView")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='netWorthInfo'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='netWorthInfo']")
 	public MobileElement netWorthInfoButton;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name ='NET WORTH'`]")
@@ -107,11 +107,11 @@ public class NetWorthPage {
 	public MobileElement otherLiabilitiesAmount;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Net Worth Info'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Worth Info']")
+	@AndroidFindBy(xpath="//android.view.View[@text='Net Worth Info']")
 	public MobileElement netWorthInfoHeaderText;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar[`name='Net Worth Info'`]/XCUIElementTypeButton[`name='Close Button'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Worth Info']/../android.widget.ImageButton")
+	@AndroidFindBy(xpath="//android.view.View[@text='Net Worth Info']/..//android.widget.ImageView")
 	public MobileElement netWorthInfoDrawerCloseButton;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='How do I get my actual net worth?'`]")
@@ -154,6 +154,26 @@ public class NetWorthPage {
 		}
 		else {
 			String cc="**/*[`name=='Account Type: INVESTMENTS'`]";
+			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
+			String me_id = me.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", me_id);
+			scrollObject.put("toVisible", "not an empty string");
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+			Thread.sleep(1000);
+		}
+	}
+	
+	public void scrollToOtherAssetsLabel() throws Exception {
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String sXpath="//android.widget.TextView[@text='OTHER ASSETS']";
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"OTHER ASSETS\").instance(0))"));
+			Thread.sleep(1000);
+		}
+		else {
+			String cc="**/*[`name=='Account Type: OTHER ASSETS'`]";
 			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();

@@ -49,7 +49,6 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Quicken ID (email address)'`]")
 	public MobileElement emailID;
 
-
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
 	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
@@ -90,8 +89,8 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
 	public MobileElement refreshSpinnerIcon;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Cloud Account name Menu'`]/XCUIElementTypeOther[`name='Expand Icon'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']/following-sibling::android.widget.ImageView")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']/../following-sibling::android.view.ViewGroup[1]")
 	public MobileElement dataSetArrow;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
@@ -308,10 +307,16 @@ public class SignInPage {
 		if (support.getEngine().equals("android")) {
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-			Thread.sleep(7000);
+			Thread.sleep(10000);
 			
 			if(Verify.objExists(cancelIcon)) {
 				cancelIcon.click();
+				Thread.sleep(2000);
+			}
+			
+			if(Verify.objExists(cancelIcon)) {
+				cancelIcon.click();
+				Thread.sleep(2000);
 			}
 			
 			Verify.waitForObject(datasetNameOnDashboard, 2);
@@ -320,6 +325,7 @@ public class SignInPage {
 			
 			if(Verify.objExists(cancelIcon)) {
 				cancelIcon.click();
+				Thread.sleep(1000);
 			}
 
 			if(!datasetNameOverviewPage.equals(bundle)) {
@@ -351,7 +357,7 @@ public class SignInPage {
 		else {
 			OverviewPage op = new OverviewPage();
 			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-			Thread.sleep(7000);
+			Thread.sleep(10000);
 			Verify.waitForObject(datasetNameOnDashboard, 2);
 //			String datasetNameOverviewPage = Engine.getDriver().findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
 			String datasetNameOverviewPage = this.datasetNameOnDashboard.getText();

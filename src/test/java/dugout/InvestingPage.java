@@ -24,7 +24,7 @@ public class InvestingPage {
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Investing\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Investing'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
+	@AndroidFindBy(xpath="//android.view.View[@text='Investing']")
 	public MobileElement investingHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
@@ -63,8 +63,8 @@ public class InvestingPage {
 	public MobileElement cashbalancesLabel;
 	
 	//@iOSFindBy(xpath="//*[starts-with(@name, 'Securities by Company Name')]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name==\"Securities by Company Name\"`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities by Company Name']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='SECURITIES BY COMPANY NAME'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='SECURITIES BY COMPANY NAME']")
 	public MobileElement securitiesByCompanyNameLabel;
 	
 //	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")

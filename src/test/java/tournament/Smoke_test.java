@@ -89,29 +89,8 @@ public class Smoke_test extends Recovery {
 		support.waitForRefresh(2000);
 
 		SettingsPage sp = new SettingsPage();
-
-		Verify.waitForObject(sp.datasetDDButton, 1);
-
-		if(sp.verifyQuickenID(userID))
-			Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Quicken ID is NOT displayed.");
-
-		if (Verify.objExists(sp.closeButton))
-			Commentary.log(LogStatus.INFO, "PASS: Close button is displayed.");
-		else 
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Close button is NOT displayed.");
-		
-		Verify.waitForObject(sp.cloudAccountNameOption, 1);
-		if (Verify.objExists(sp.cloudAccountNameOption))
-			Commentary.log(LogStatus.INFO, "PASS: Cloud Account Name option is displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cloud Account Name option is NOT displayed.");
-
-		if (Verify.objExists(sp.datasetDDButton))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
+		Verify.waitForObject(sp.dashboardOption, 1);
+		Verify.waitForObject(sp.versionNumber, 1);
 
 		if (Verify.objExists(sp.dashboardOption))
 			Commentary.log(LogStatus.INFO, "PASS: Dashboard option is displayed.");
@@ -138,10 +117,10 @@ public class Smoke_test extends Recovery {
 //		else
 //			Commentary.log(sa, LogStatus.FAIL, "FAIL: Budgets option is NOT displayed.");
 		
-		if (Verify.objExists(sp.investmentsOption))
-			Commentary.log(LogStatus.INFO, "PASS: Investments option is displayed.");
+		if (Verify.objExists(sp.investingOption))
+			Commentary.log(LogStatus.INFO, "PASS: Investing option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investments option is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing option is NOT displayed.");
 		
 		if (Verify.objExists(sp.reportsOption))
 			Commentary.log(LogStatus.INFO, "PASS: Reports option is displayed.");
@@ -157,6 +136,11 @@ public class Smoke_test extends Recovery {
 			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed.");
+		
+		if (Verify.objExists(sp.datasetDDButton))
+			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
 		
 		if (Verify.objExists(sp.versionNumber))
 			Commentary.log(LogStatus.INFO, "PASS: Version number is displayed.");
@@ -176,7 +160,7 @@ public class Smoke_test extends Recovery {
 		} else {
 			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
 		}
-
+		
 		sa.assertAll();
 	}
 

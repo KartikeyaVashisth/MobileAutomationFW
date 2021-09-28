@@ -363,7 +363,7 @@ public class OverviewPage {
 			scrollObject.put("direction", "down");
 //			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			Engine.getDriver().findElement(By.name("Top Trending Categories")).click();
 			Thread.sleep(2000);	
 			
@@ -508,7 +508,7 @@ public class OverviewPage {
 		
 		//Dimension size = Engine.getDriver().manage().window().getSize();
 		//Engine.getDriver().swipe(size.width - 10, size.height * 6 / 8, size.width - 10, size.height / 7, 500);
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		Integer iCount = 0;
 		
 //		while (iCount < 4) {
@@ -538,7 +538,7 @@ public class OverviewPage {
 			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.xpath(sXpath)).click();
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 		
 		}
 		else {
@@ -724,6 +724,8 @@ public class OverviewPage {
 		}	
 		accountsCard.click();
 		Thread.sleep(10000);
+		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		Verify.waitForObject(bcc.allTransactionButton, 1);
 	}
 	
 	public void tapOnBudgetCard() throws Exception {

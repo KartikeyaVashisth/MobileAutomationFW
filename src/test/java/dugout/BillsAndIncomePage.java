@@ -34,21 +34,19 @@ import support.TransactionRecord;
 public class BillsAndIncomePage {
 
 	public BillsAndIncomePage() {
-			try {
-				
-				PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
-			} catch (Exception e) {
-			
-				e.printStackTrace();
-			}
+		try {
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name ='Bills & Income'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name ='Bills & Income'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Bills & Income']")
 	public MobileElement billsAndIncomeHeaderText;
 
 	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeButton'")
-	@AndroidFindBy(xpath="//android.widget.ImageButton")
+	@AndroidFindBy(xpath="//*[@class='android.widget.Button']")
 	public MobileElement backButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='You don't have any transactions.'`]")
@@ -80,7 +78,7 @@ public class BillsAndIncomePage {
 	public MobileElement nextBtn;
 
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='ALLOW']")
+	@AndroidFindBy(xpath="//android.widget.Button[contains(@text,'using the app')]")
 	public MobileElement allowButton;
 
 	// -------------- Reminders Tab --------------
@@ -318,7 +316,7 @@ public class BillsAndIncomePage {
 	public MobileElement tagsDrawerText;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeTextField[`name = 'search tags'`]")
-	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Tags']")
+	@AndroidFindBy(xpath="//android.widget.EditText[@content-desc ='search tags']")
 	public MobileElement searchTags;
 
 	@iOSXCUITFindBy(id="create tag")
@@ -388,6 +386,10 @@ public class BillsAndIncomePage {
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Add Reminder'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='button Add Reminder']")
 	public MobileElement buttonAddReminder;
+	
+	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeButton'")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc ='backPress']")
+	public MobileElement backButtonOnAddReminderPage;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name='Delete Series'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='Delete Series']")
@@ -409,30 +411,30 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(id="android:id/button2")
 	public MobileElement cancelAlertButton;
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
-	@AndroidFindBy(xpath="//android.widget.ImageButton")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='backPress'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backPress']")
 	public MobileElement backButtonOfEditSeries;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Edit Series'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit Series']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Edit Series'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Edit Series']")
 	public MobileElement editSeriesHeaderText;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='save'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='SAVE']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement saveOptionEditSeries;
 
 	// -------------- View Series Page --------------
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='View Series'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='View Series'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='View Series']")
 	public MobileElement viewSeriesHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Bills & Income'`]")
-	@AndroidFindBy(xpath="//android.widget.ImageButton[@content-desc='Navigate Up']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='backPress'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backPress']")
 	public MobileElement backButtonOfViewSeriesPage;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='edit'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='EDIT']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit']")
 	public MobileElement editButton;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains '$'`]/XCUIElementTypeStaticText[1]")
@@ -485,9 +487,13 @@ public class BillsAndIncomePage {
 
 	// ------------------ Enter Transaction Page & More Actions Option ---------------------
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Enter Transaction'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Enter Transaction']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Enter Transaction'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Enter Transaction']")
 	public MobileElement enterTransactionHeaderText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name='Enter Transaction'`]/XCUIElementTypeButton")
+	@AndroidFindBy(xpath="//android.view.View[@text='Enter Transaction']/..//android.widget.ImageView")
+	public MobileElement backButtonOnEnterTransactionPage;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Enter'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Enter']")
@@ -513,12 +519,12 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit this instance']")
 	public MobileElement editThisInstanceOption;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Edit Reminder Instance'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit Reminder Instance']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Edit Reminder Instance'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Edit Reminder Instance']")
 	public MobileElement editReminderInstanceHeaderText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeNavigationBar[`name='Edit Reminder Instance'`]/XCUIElementTypeButton")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit Reminder Instance']/../android.widget.ImageButton")
+	@AndroidFindBy(xpath="//android.view.View[@text='Edit Reminder Instance']/..//android.widget.ImageView")
 	public MobileElement closeEditReminderInstanceButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Your changes will only be applied to this reminder instance. All future reminders will continue to use your original reminder date and amount.'`]")
@@ -668,6 +674,7 @@ public class BillsAndIncomePage {
 			Thread.sleep(1000);
 		}
 
+		Verify.waitForObject(this.editSeriesHeaderText, 1);
 		if (Verify.objExists(this.editSeriesHeaderText)) {
 			Commentary.log(LogStatus.INFO,"Edit Reminder Series Screen got displayed.");
 			Thread.sleep(2000);
@@ -2056,7 +2063,12 @@ public class BillsAndIncomePage {
 
 	public void tapOnEnterOption() throws Exception {
 
-		Verify.waitForObject(this.enterOption, 1);
+		if (Verify.objExists(this.allowButton)) {
+			this.allowButton.click();
+			Thread.sleep(1000);
+		}
+		
+		Verify.waitForObject(this.enterOption, 2);
 		this.enterOption.click();
 		Thread.sleep(2500);
 	}
@@ -2072,7 +2084,7 @@ public class BillsAndIncomePage {
 
 	public void tapOnEnterAllPreviousInstancesOption() throws Exception {
 
-		Verify.waitForObject(this.enterAllPreviousInstancesOption, 1);
+		Verify.waitForObject(this.enterAllPreviousInstancesOption, 2);
 		this.enterAllPreviousInstancesOption.click();
 		Thread.sleep(2500);
 	}
@@ -2088,6 +2100,11 @@ public class BillsAndIncomePage {
 
 	public void tapOnEditThisInstanceOption() throws Exception {
 
+		if (Verify.objExists(this.allowButton)) {
+			this.allowButton.click();
+			Thread.sleep(1000);
+		}
+		
 		Verify.waitForObject(this.moreActionsOption, 2);
 		this.moreActionsOption.click();
 		Verify.waitForObject(this.editThisInstanceOption, 1);

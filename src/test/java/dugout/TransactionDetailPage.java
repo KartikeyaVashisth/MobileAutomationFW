@@ -51,7 +51,8 @@ public class TransactionDetailPage {
 //	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Allow While Using App'`]")
 //	@AndroidFindBy(xpath="//android.widget.Button[@text='ALLOW']")
-	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow only while using the app']")
+//	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow only while using the app']")
+	@AndroidFindBy(xpath="//android.widget.Button[contains(@text,'using the app')]")
 	public MobileElement allowButton;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Deny'`]")
@@ -63,13 +64,17 @@ public class TransactionDetailPage {
 	public MobileElement addTransactionTxt;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeNavigationBar[@name=\"View Transaction\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='View Transaction'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='View Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='View Transaction']")
 	public MobileElement viewTransactionTxt;
 	
 	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeButton'")
-	@AndroidFindBy(xpath="//android.widget.ImageButton")
+	@AndroidFindBy(xpath="//android.widget.Button")
 	public MobileElement backButton;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
+	public MobileElement backButtonOnViewTransactionPage;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Money In\"]")
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'Money In'")
@@ -299,7 +304,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Note']")
 	public MobileElement note;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeImage[@name=\"assets/Quicken/App/Images/noteIcon@2x.png\"]/..//XCUIElementTypeTextView")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeTextView")
 	@AndroidFindBy(xpath="//android.widget.EditText[@index='2']")
 	public MobileElement enteredNote;
 	
@@ -332,7 +337,7 @@ public class TransactionDetailPage {
 	public MobileElement buttonSave;
 	
 	@iOSXCUITFindBy(id="save")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='SAVE']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave1;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Delete Transaction\"]")
@@ -518,6 +523,7 @@ public class TransactionDetailPage {
 			Thread.sleep(1000);
 		}
 		SoftAssert sa = new SoftAssert();
+		Verify.waitForObject(this.buttonDone, 1);
 		if (Verify.objExists(this.buttonDone) || Verify.objExists(this.addTransactionTxt)) {
 			Commentary.log(LogStatus.INFO,"Add Transaction Screen got displayed.");
 			Thread.sleep(2000);
