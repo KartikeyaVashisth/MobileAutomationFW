@@ -86,12 +86,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dChecking_before-d==dProjectedChecking_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before-d, dProjectedChecking_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before-d, dProjectedTotal_after);
+		
+//		if (dChecking_before-d==dProjectedChecking_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Checking balance was ["+dChecking_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dProjectedChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Checking balance was ["+dChecking_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dProjectedChecking_after+"]");
 		
-		if (dProjected_before-d==dProjectedTotal_after)
+//		if (dProjected_before-d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dProjectedTotal_after+"]");
@@ -153,12 +158,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dChecking_before-d==dProjectedChecking_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before-d, dProjectedChecking_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before-d, dProjectedTotal_after);
+		
+//		if (dChecking_before-d==dProjectedChecking_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Checking balance was ["+dChecking_before+"], added future dated expense transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Checking balance was ["+dChecking_before+"], added future dated expense transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		
-		if (dProjected_before-d==dProjectedTotal_after)
+//		if (dProjected_before-d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added future dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added future dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -221,12 +231,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dChecking_before+d==dProjectedChecking_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before+d, dProjectedChecking_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before+d, dProjectedTotal_after);
+		
+//		if (dChecking_before+d==dProjectedChecking_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Checking balance was ["+dChecking_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Checking balance was ["+dChecking_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		
-		if (dProjected_before+d==dProjectedTotal_after)
+//		if (dProjected_before+d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -289,12 +304,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedChecking_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dChecking_before+d==dProjectedChecking_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before+d, dProjectedChecking_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before+d, dProjectedTotal_after);
+		
+//		if (dChecking_before+d==dProjectedChecking_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Checking balance was ["+dChecking_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Checking balance was ["+dChecking_before+"], added future income expense transaction for ["+tRec.getAmount()+"], now the Projected checking balance shows ["+dProjectedChecking_after+"]");
 		
-		if (dProjected_before+d==dProjectedTotal_after)
+//		if (dProjected_before+d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -359,12 +379,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dCC_before-d==dProjectedChecking_after)
+		int cc_ProjectedBalance_Compare = Double.compare(dCC_before-d, dProjectedChecking_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before-d, dProjectedTotal_after);
+		
+//		if (dCC_before-d==dProjectedChecking_after)
+		if(cc_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected CreditCard balance was ["+dCC_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected CreditCard balance was ["+dCC_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedChecking_after+"]");
 		
-		if (dProjected_before-d==dProjectedTotal_after)
+//		if (dProjected_before-d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -430,12 +455,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dChecking_before-d==dProjectedCC_after)
+		int cc_ProjectedBalance_Compare = Double.compare(dChecking_before-d, dProjectedCC_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before-d, dProjectedTotal_after);
+		
+//		if (dChecking_before-d==dProjectedCC_after)
+		if(cc_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected CreditCard balance was ["+dChecking_before+"], added Future dated expense transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected CreditCard balance was ["+dChecking_before+"], added Future dated expense transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		
-		if (dProjected_before-d==dProjectedTotal_after)
+//		if (dProjected_before-d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added Future dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added Future dated expense transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -501,12 +531,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dCC_before+d==dProjectedCC_after)
+		int cc_ProjectedBalance_Compare = Double.compare(dCC_before+d, dProjectedCC_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before+d, dProjectedTotal_after);
+		
+//		if (dCC_before+d==dProjectedCC_after)
+		if(cc_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected CreditCard balance was ["+dCC_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected CreditCard balance was ["+dCC_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		
-		if (dProjected_before+d==dProjectedTotal_after)
+//		if (dProjected_before+d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added past dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -573,12 +608,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
 		Double dProjectedTotal_after = h.processBalanceAmount(sProjectedTotal_after);
 		
-		if (dCC_before+d==dProjectedCC_after)
+		int cc_ProjectedBalance_Compare = Double.compare(dCC_before+d, dProjectedCC_after);
+		int total_ProjectedBalance_Compare = Double.compare(dProjected_before+d, dProjectedTotal_after);
+		
+//		if (dCC_before+d==dProjectedCC_after)
+		if(cc_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected CreditCard balance was ["+dCC_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected CreditCard balance was ["+dCC_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected CreditCard balance shows ["+dProjectedCC_after+"]");
 		
-		if (dProjected_before+d==dProjectedTotal_after)
+//		if (dProjected_before+d==dProjectedTotal_after)
+		if(total_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Projected Total balance was ["+dProjected_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Total balance was ["+dProjected_before+"], added future dated income transaction for ["+tRec.getAmount()+"], now the Projected total balance shows ["+dProjectedTotal_after+"]");
@@ -642,12 +682,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedCheckingBCCScreen_after = h.processBalanceAmount(sProjectedAcctBalanceBCC_after);
 		Double dProjectedAcctBalanceTxnScreen_after = h.processBalanceAmount(sProjectedAcctBalanceTxnScreen_after);
 		
-		if (dChecking_before_txnScreen-d==dProjectedAcctBalanceTxnScreen_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before_txnScreen-d, dProjectedAcctBalanceTxnScreen_after);
+		int checking_BCCScreen_ProjectedBalance_Compare = Double.compare(dChecking_before_bccScreen-d, dProjectedCheckingBCCScreen_after);
+		
+//		if (dChecking_before_txnScreen-d==dProjectedAcctBalanceTxnScreen_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking Account's Projected balance was ["+dChecking_before_txnScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedAcctBalanceTxnScreen_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected Checking balance was ["+dChecking_before_txnScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedAcctBalanceTxnScreen_after+"]");
 		
-		if (dChecking_before_bccScreen-d==dProjectedCheckingBCCScreen_after)
+//		if (dChecking_before_bccScreen-d==dProjectedCheckingBCCScreen_after)
+		if(checking_BCCScreen_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking Account's Projected balance on BCC screen was ["+dChecking_before_bccScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedCheckingBCCScreen_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking Account's Projected balance on BCC screen was ["+dChecking_before_bccScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedCheckingBCCScreen_after+"]");
@@ -711,12 +756,17 @@ public class ProjectedBalances extends Recovery {
 		Double dProjectedCheckingBCCScreen_after = h.processBalanceAmount(sProjectedAcctBalanceBCC_after);
 		Double dProjectedAcctBalanceTxnScreen_after = h.processBalanceAmount(sProjectedAcctBalanceTxnScreen_after);
 		
-		if (dChecking_before_txnScreen-d==dProjectedAcctBalanceTxnScreen_after)
+		int checking_ProjectedBalance_Compare = Double.compare(dChecking_before_txnScreen-d, dProjectedAcctBalanceTxnScreen_after);
+		int checking_BCCScreen_ProjectedBalance_Compare = Double.compare(dChecking_before_bccScreen-d, dProjectedCheckingBCCScreen_after);
+		
+//		if (dChecking_before_txnScreen-d==dProjectedAcctBalanceTxnScreen_after)
+		if(checking_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CreditCard Account's Projected balance was ["+dChecking_before_txnScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedAcctBalanceTxnScreen_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard Account's Projected balance was ["+dChecking_before_txnScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedAcctBalanceTxnScreen_after+"]");
 		
-		if (dChecking_before_bccScreen-d==dProjectedCheckingBCCScreen_after)
+//		if (dChecking_before_bccScreen-d==dProjectedCheckingBCCScreen_after)
+		if(checking_BCCScreen_ProjectedBalance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CreditCard Account's Projected balance on BCC screen was ["+dChecking_before_bccScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedCheckingBCCScreen_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard Account's Projected balance on BCC screen was ["+dChecking_before_bccScreen+"], added past dated expense transaction for ["+tRec.getAmount()+"], now the projected balance on the screen shows ["+dProjectedCheckingBCCScreen_after+"]");

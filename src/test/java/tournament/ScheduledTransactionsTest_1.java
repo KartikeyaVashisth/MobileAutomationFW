@@ -1038,7 +1038,8 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 				bi.selectFromAccount(tRec.getFromAccount());
 		}
 
-		bi.backButton.click();
+		Verify.waitForObject(bi.backButtonOnAddReminderPage, 1);
+		bi.backButtonOnAddReminderPage.click();
 		Thread.sleep(1000);
 
 		Verify.waitForObject(bi.abortReminderSeriesWarningMessage, 1);

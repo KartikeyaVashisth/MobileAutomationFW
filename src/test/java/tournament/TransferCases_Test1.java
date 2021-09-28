@@ -88,28 +88,36 @@ public class TransferCases_Test1 extends Recovery {
 		Double dSavingAccount_after = h.processBalanceAmount(sSavingAccount_after.replace("Account Balance: ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
 		
-		if (dCheckingLabel_after+d==dCheckingLabel_before)
+		int checkingLabelCompare = Double.compare(dCheckingLabel_after+d, dCheckingLabel_before);
+		int savingLabelCompare = Double.compare(dSavingLabel_after-d, dSavingLabel_before);
+		int checkingAccountCompare = Double.compare(dCheckingAccount_after+d, dCheckingAccount_before);
+		int savingAccountCompare = Double.compare(dSavingAccount_after-d, dSavingAccount_before);
+		
+//		if (dCheckingLabel_after+d==dCheckingLabel_before)
+		if(checkingLabelCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking Label balance was ["+dCheckingLabel_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the Checking Label balance shows ["+dCheckingLabel_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking Label balance was ["+dCheckingLabel_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the Checking Label balance shows ["+dCheckingLabel_after+"]");
 		
-		if (dSavingLabel_after-d==dSavingLabel_before)
+//		if (dSavingLabel_after-d==dSavingLabel_before)
+		if(savingLabelCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings Label balance was ["+dSavingLabel_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the Savings Label balance shows ["+dSavingLabel_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Label balance was ["+dSavingLabel_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the Savings Label balance shows ["+dSavingLabel_after+"]");
 
-		if (dCheckingAccount_after+d==dCheckingAccount_before)
+//		if (dCheckingAccount_after+d==dCheckingAccount_before)
+		if(checkingAccountCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking Account balance was ["+dCheckingAccount_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the Checking Account balance shows ["+dCheckingAccount_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking Account balance was ["+dCheckingAccount_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the Checking Account balance shows ["+dCheckingAccount_after+"]");
 		
-		if (dSavingAccount_after-d==dSavingAccount_before)
+//		if (dSavingAccount_after-d==dSavingAccount_before)
+		if(savingAccountCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings Account balance was ["+dSavingAccount_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the Savings Account balance shows ["+dSavingAccount_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Account balance was ["+dSavingAccount_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the Savings Account balance shows ["+dSavingAccount_after+"]");
 
 		sa.assertAll();
-	
 	}
 	
 	@Test(priority = 1, enabled = true)
@@ -155,18 +163,23 @@ public class TransferCases_Test1 extends Recovery {
 		Double dSaving_after = h.processBalanceAmount(sSaving_after.replace("SubTotal: ", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
 		
-		if (dChecking_after+d==dChecking_before)
+		int checkingCompare = Double.compare(dChecking_after+d, dChecking_before);
+		int savingCompare = Double.compare(dSaving_after-d, dSaving_before);
+		
+//		if (dChecking_after+d==dChecking_before)
+		if(checkingCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], done expense transfer transaction of ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dSaving_after-d==dSaving_before)
+//		if (dSaving_after-d==dSaving_before)
+		if(savingCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings balance was ["+dSaving_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance was ["+dSaving_before+"], received transfer transaction of ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
 				
 		tp.searchTransaction(time);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -188,12 +201,17 @@ public class TransferCases_Test1 extends Recovery {
 		Double dSaving_after_editing = h.processBalanceAmount(sSaving_after_editing.replace("SubTotal: ", ""));
 		Double dChecking_after_editing = h.processBalanceAmount(sChecking_after_editing.replace("SubTotal: ", ""));		
 		
-		if (dChecking_after_editing+d==dChecking_after)
+		int checking_afterEditingCompare = Double.compare(dChecking_after_editing+d, dChecking_after);
+		int saving_afterEditingCompare = Double.compare(dSaving_after_editing-d, dSaving_after);
+		
+//		if (dChecking_after_editing+d==dChecking_after)
+		if(checking_afterEditingCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_after+"], edited transfer transaction to ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after_editing+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_after+"], edited transfer transaction to ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after_editing+"]");
 		
-		if (dSaving_after_editing-d==dSaving_after)
+//		if (dSaving_after_editing-d==dSaving_after)
+		if(saving_afterEditingCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings balance was ["+dSaving_after+"], received updated transfer transaction of ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after_editing+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance was ["+dSaving_after+"], received updated transfer transaction of ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after_editing+"]");
@@ -398,11 +416,11 @@ public class TransferCases_Test1 extends Recovery {
 		
 		Double firstSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
 			
-		if (firstSideAmount.equals(100.00)) {
+		if (firstSideAmount.equals(100.00))
 			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on first side of transfer.");
-		} else {
+		else 
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on first side of transfer.");
-		}
+		
 		Thread.sleep(2000);
 		op.scroll_down();
 		Verify.waitForObject(td.buttonGoToOtherSide, 2);
@@ -413,11 +431,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		Double secondSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
 		
-		if (secondSideAmount.equals(-100.00)) {
+		if (secondSideAmount.equals(-100.00))
 			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on second side of transfer.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on second side of transfer.");
-		}
 		
 		sa.assertAll();		
 	}
@@ -467,22 +484,20 @@ public class TransferCases_Test1 extends Recovery {
 		
 		String actDate = td.getTransactionDate();
 		
-		if (date.equalsIgnoreCase(actDate)) {
+		if (date.equalsIgnoreCase(actDate))
 			Commentary.log(LogStatus.INFO, "PASS: Date expected ["+date+"] and actual is ["+actDate+"]");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date expected ["+date+"] and actual is ["+actDate+"]");
-		}
 		
 		op.scroll_down();
 		td.buttonGoToOtherSide.click();
 		Verify.waitForObject(td.viewTransactionTxt, 2);
 		Verify.waitForObject(td.dateLabel, 2);
 	
-		if (date.equalsIgnoreCase(actDate)) {
+		if (date.equalsIgnoreCase(actDate))
 			Commentary.log(LogStatus.INFO, "PASS: Date expected ["+date+"] and actual is ["+actDate+"]");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Date expected ["+date+"] and actual is ["+actDate+"]");
-		}
 		
 		sa.assertAll();	
 	}
@@ -526,11 +541,10 @@ public class TransferCases_Test1 extends Recovery {
 		String actMessage = td.errorMsgText.getText().replace("\n", "");
 		String expMessage = "You cannot change the account of a transfer transaction";
 		
-		if (actMessage.equalsIgnoreCase(expMessage)) {
+		if (actMessage.equalsIgnoreCase(expMessage))
 			Commentary.log(LogStatus.INFO, "PASS: Error message is displayed and account is unchanged.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Error message is NOT displayed.");
-		}
 		
 		sa.assertAll();
 	}
@@ -579,11 +593,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		String actPayee = td.getTransactionPayee();
 		
-		if (actPayee.equalsIgnoreCase(payeeName_updated)) {
+		if (actPayee.equalsIgnoreCase(payeeName_updated))
 			Commentary.log(LogStatus.INFO, "PASS: Payee is unchanged for other side of transfer.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Test failed as payee is changed on both side of transfer.");
-		}
 		
 		op.scroll_down();
 		td.buttonGoToOtherSide.click();
@@ -592,11 +605,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		actPayee = td.getTransactionPayee();
 
-		if (actPayee.equalsIgnoreCase(payeeName)) {
+		if (actPayee.equalsIgnoreCase(payeeName))
 			Commentary.log(LogStatus.INFO, "PASS: Payee is changed only for one side of transfer.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Test failed as payee is changed on both side of transfer.");
-		}
 		
 		sa.assertAll();
 	}
@@ -657,7 +669,10 @@ public class TransferCases_Test1 extends Recovery {
 		Double dSaving_after = h.processBalanceAmount(sSaving_after.replace("SubTotal: ", ""));
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		Commentary.log(LogStatus.INFO, "d amount is "+d);
+		int savingCompare = Double.compare(dSaving_after-d, dSaving_before);
+		int totalCompare = Double.compare(dTotal_after-d, dTotal_before);
+		
+		Commentary.log(LogStatus.INFO, "diff amount is "+d);
 
 		Commentary.log(LogStatus.INFO, "after total amount "+(dTotal_after+d));
 
@@ -666,16 +681,17 @@ public class TransferCases_Test1 extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], after breaking the transfer, checking balance is changed and shows ["+dChecking_after+"]");
 		
-		if (dSaving_after-d==dSaving_before)
+//		if (dSaving_after-d==dSaving_before)
+		if(savingCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings balance was ["+dSaving_before+"], after changing the category and breaking the transfer for amount ["+d+"], now the savings balance shows ["+dSaving_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance was ["+dSaving_before+"], after changing the category and breaking the transfer for amount ["+d+"], now the savings balance shows ["+dSaving_after+"]");
 		
-		if (dTotal_after-d==dTotal_before) {
+//		if (dTotal_after-d==dTotal_before)
+		if(totalCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], after breaking the transfer, total balance shows ["+dTotal_after+"]");
-		} else {
+		else 
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], after breaking the transfer, total balance shows ["+dTotal_after+"]");
-		}
 		
 		sa.assertAll();	
 	}
@@ -721,11 +737,10 @@ public class TransferCases_Test1 extends Recovery {
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		op.scroll_down();
-		if (!(Verify.objExists(td.buttonGoToOtherSide))) {
+		if (!(Verify.objExists(td.buttonGoToOtherSide)))
 			Commentary.log(LogStatus.INFO, "PASS: Go to Other side of the transaction option is successfully removed after canceling the transfer transaction.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Go to Other side of the transaction option is NOT removed after canceling the transfer transaction.");
-		}
 		
 		sa.assertAll();
 	}
@@ -759,7 +774,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -772,21 +787,20 @@ public class TransferCases_Test1 extends Recovery {
 		tRec.setCategory(transferToAcc2);
 		td.editTransaction(tRec);
 		
-		Verify.waitForObject(td.backButton, 2);
-		td.backButton.click();
+		Verify.waitForObject(td.backButtonOnViewTransactionPage, 1);
+		td.backButtonOnViewTransactionPage.click();
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
 		String actCategory = td.getTransactionCategory();
 		
-		if (!(actCategory.equalsIgnoreCase(transferToAcc1))) {
+		if (!(actCategory.equalsIgnoreCase(transferToAcc1)))
 			Commentary.log(LogStatus.INFO, "PASS: Transfer To account is correct.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transfer To account is Incorrect.");
-		}
 		
 		op.scroll_down();
 		td.buttonGoToOtherSide.click();
@@ -795,11 +809,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		actCategory = td.getTransactionCategory();
 
-		if (!(actCategory.equalsIgnoreCase(transferToAcc1))) {
+		if (!(actCategory.equalsIgnoreCase(transferToAcc1)))
 			Commentary.log(LogStatus.INFO, "PASS: Transfer To account is correct for other side of the transfer.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transfer To account is Incorrect.");
-		}
 		
 		sa.assertAll();
 	}
@@ -846,11 +859,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		String txnAmount = td.getTransactionAmount().replace("Amount: ", "");
 		
-		if (txnAmount.contains("-$")) {
+		if (txnAmount.contains("-$"))
 			Commentary.log(LogStatus.INFO, "PASS: Amount is changed from Income to Expense value.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT changed from Income to Expense value.");
-		}
 		
 		Thread.sleep(2000);
 		op.scroll_down();
@@ -861,11 +873,10 @@ public class TransferCases_Test1 extends Recovery {
 		
 		txnAmount = td.getTransactionAmount().replace("Amount: ", "");
 
-		if (!(txnAmount.contains("-$"))) {
+		if (!(txnAmount.contains("-$")))
 			Commentary.log(LogStatus.INFO, "PASS: Amount is changed from Expense to Income value.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT changed from Expense to Income value.");
-		}
 		
 		sa.assertAll();
 	}
@@ -920,498 +931,490 @@ public class TransferCases_Test1 extends Recovery {
 		Thread.sleep(500);
 		
 		Verify.waitForObject(td.matchingTransactionAlertMessageTxt, 2);
-		if (Verify.objExists(td.matchingTransactionAlertMessageTxt)) {		
+		if (Verify.objExists(td.matchingTransactionAlertMessageTxt))		
 			Commentary.log(LogStatus.INFO, "PASS: Matching Transaction Alert message is displayed.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Matching Transaction Alert message is NOT displayed.");
-		}
 		
 		String actAlertText = td.matchingTransactionAlertMessageTxt.getText();
 		String expAlertText = "Matching transaction found";
 		
-		if (actAlertText.equals(expAlertText)) {
+		if (actAlertText.equals(expAlertText))
 			Commentary.log(LogStatus.INFO, "PASS: Matching Transaction Alert message is correct.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Matching Transaction Alert message is NOT correct.");
-		}
 		
-		if (Verify.objExists(td.buttonMatch)) {
+		if (Verify.objExists(td.buttonMatch))
 			Commentary.log(LogStatus.INFO, "PASS: MATCH button is displayed.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: MATCH button is NOT displayed.");
-		}
 		
-		if (Verify.objExists(td.buttonDontMatch)) {
+		if (Verify.objExists(td.buttonDontMatch))
 			Commentary.log(LogStatus.INFO, "PASS: DON'T MATCH button is displayed.");
-		} else {
+		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: DON'T MATCH button is NOT displayed.");
-		}
 		
 		sa.assertAll();
 	}
 	
-	@Test(priority = 13, enabled = true)
-	public void TR14_test() throws Exception{
-		
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-		
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying MATCH functionality.");
-		
-		String transferToAcc1 = "Transfer ["+sSavings+"]";
-		String payeeName = "Payee_"+h.getCurrentTime();
-		
-		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
-		
-		TransactionsPage tp = new TransactionsPage();
-		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
-		
-		//Adding one normal transaction
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setAmount("39.00");
-		tRec.setPayee(payeeName);
-		tRec.setAccount(sChecking);
-		//tRec.setCategory("");
-		tRec.setTransactionType("expense");
-		
-		td.addTransaction(tRec);
-		
-		//Adding another normal transaction
-		
-		tp.addTransaction.click();
-		tRec = new TransactionRecord();
-		tRec.setAmount("39.00");
-		tRec.setTransactionType("income");
-		tRec.setPayee(payeeName);
-		tRec.setAccount(sSavings);
-		
-		td.addTransaction(tRec);
-		
-		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
-		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		tRec = new TransactionRecord();
-		tRec.setCategory(transferToAcc1);
-		td.editTransaction(tRec);
-		Thread.sleep(500);
-		
-		Verify.waitForObject(td.buttonMatch, 2);
-		td.buttonMatch.click();
-		Thread.sleep(2000);
-		
-		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
-		
-		int numOfTransaction = tp.getTransactionListSize();
-		
-		if (numOfTransaction==2) {		
-			Commentary.log(LogStatus.INFO, "PASS: Transaction is matched with the other created transaction.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transaction is NOT matched with the other created transaction.");
-		}
-		
-		sa.assertAll();
-	}
-	
-	@Test(priority = 14, enabled = true)
-	public void TR15_test() throws Exception{
-		
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-		
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying DON'T MATCH functionality.");
-		
-		String transferToAcc1 = "Transfer ["+sSavings+"]";
-		String payeeName = "Payee_"+h.getCurrentTime();
-		
-		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
-		
-		TransactionsPage tp = new TransactionsPage();
-		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
-		
-		//Adding one normal transaction
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setAmount("55.00");
-		tRec.setPayee(payeeName);
-		tRec.setAccount(sChecking);
-		//tRec.setCategory("");
-		tRec.setTransactionType("expense");
-		
-		td.addTransaction(tRec);
-		
-		//Adding another normal transaction
-		
-		tp.addTransaction.click();
-		tRec = new TransactionRecord();
-		tRec.setAmount("55.00");
-		tRec.setTransactionType("income");
-		tRec.setPayee(payeeName);
-		tRec.setAccount(sSavings);
-		
-		td.addTransaction(tRec);
-		
-		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
-		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		tRec = new TransactionRecord();
-		tRec.setCategory(transferToAcc1);
-		td.editTransaction(tRec);
-		Thread.sleep(500);
-		
-		Verify.waitForObject(td.buttonDontMatch, 2);
-		td.buttonDontMatch.click();
-		
-		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
-		
-		int numOfTransaction = tp.getTransactionListSize();
-		
-		if (numOfTransaction==3) {		
-			Commentary.log(LogStatus.INFO, "PASS: As Expected, Transaction isn't matched with the other created transaction after choosing Don't Match option.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transaction matched with the other created transaction.");
-		}
-		
-		sa.assertAll();
-	}
-	
-	@Test(priority = 15, enabled = true)
-	public void TR16_test() throws Exception{
-
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-		
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating a transfer transaction for current date and changing to future date and verifying the Projected and Current balance.");
-		
-		String sTotal_before,sTotal_after,sProjectedBalance_before,sProjected_after ;
-		String payeeName = "Payee_"+h.getCurrentTime();
-		
-		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
-		
-		TransactionsPage tp = new TransactionsPage();
-		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
-		
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setAmount("23.00");
-		tRec.setPayee(payeeName);
-		tRec.setAccount(sChecking);
-		tRec.setCategory("Transfer ["+sSavings+"]");
-		tRec.setTransactionType("expense");
-		tRec.setDate(h.getFutureDaysDate(0));
-		
-		td.addTransaction(tRec);
-		Thread.sleep(2000);
-		Double d = Double.parseDouble(tRec.getAmount());
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		sTotal_before = bcc.getTotalBalance();
-		sProjectedBalance_before = bcc.getProjectedBalance();
-		
-		Double dTotal_before = h.processBalanceAmount(sTotal_before);
-		Double dProjected_before = h.processBalanceAmount(sProjectedBalance_before);
-		
-		bcc.allTransactionButton.click();
-		
-		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
-		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		tRec = new TransactionRecord();
-		tRec.setDate(h.getFutureDaysDate(5));
-		td.editTransaction(tRec);
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		Thread.sleep(4000);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		bcc.scrollToTotalBalance();
-		sTotal_after = bcc.getTotalBalance();
-		Thread.sleep(1000);
-		sProjected_after = bcc.getProjectedBalance();
-		
-		Double dTotal_after = h.processBalanceAmount(sTotal_after);
-		Double dProjected_after = h.processBalanceAmount(sProjected_after);
-	
-		if (dTotal_after.equals(dTotal_before))
-			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], after changing the transfer date for transaction amount ["+d+"] to future date, total balance is ["+dTotal_after+"]");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], after changing the transfer date for transaction amount ["+d+"] to future date, total balance is ["+dTotal_after+"]");
-		
-		if (dProjected_after.equals(dProjected_before))
-			Commentary.log(LogStatus.INFO, "PASS: Projected balance was ["+dProjected_before+"], after changing the transfer date for transaction amount ["+d+"], now the projected balance is ["+dProjected_after+"]");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance was ["+dProjected_before+"], after changing the transfer date for transaction amount ["+d+"], now the projected balance is ["+dProjected_after+"]");
-
-		sa.assertAll();	
-	}
-	
-	@Test (priority=16, enabled = true)
-	public void TC17_test() throws Exception {
-
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the functionality of the Online Transfer Transaction.");
-		
-		OverviewPage op = new OverviewPage();
-	
-		Verify.waitForObject(op.hambergerIcon, 2);
-		op.hambergerIcon.click();
-		Thread.sleep(3000);
-
-		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.datasetDDButton, 2);
-		sp.datasetDDButton.click();
-		Thread.sleep(4000);
-
-		sp.switchDataset(sDataset1);
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		op.navigateToAcctList();
-		
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		TransactionsPage tp = new TransactionsPage();
-		
-		bcc.selectAccount(sSaving);
-		Thread.sleep(1000);
-		
-		tp.DisableRunningBalance();
-		
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
-		
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setCategory(transferToAcc1);
-		td.editTransaction(tRec);
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		Thread.sleep(2000);
-		bcc.selectAccount(sOnlineChecking);
-		Thread.sleep(2000);
-		
-		tp.DisableRunningBalance();
-		
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		td.VerifyTransactionPayee("Kfc Personal");
-
-		String transferToAcc2 = "Transfer ["+sManualSavings+"]";
-		
-		tRec.setCategory(transferToAcc2);
-		td.editTransaction(tRec);
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		Thread.sleep(2000);
-		bcc.selectAccount(sSaving);
-		Thread.sleep(2000);
-		Verify.waitForObject(tp.thisMonthLabel, 2);
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(td.selectedCategory, 2);
-		td.VerifyTransactionCategory("Uncategorized");
-		
-		Commentary.log(LogStatus.INFO, "PASS: Category of the transaction with Payee named \"Kfc Personal\" changed to Uncategorized as Expected.");
-		
-		tRec.setCategory("Fast Food");
-		td.editTransaction(tRec);
-		
-		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		
-		bcc.selectAccount(sOnlineChecking);
-		Thread.sleep(2000);
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		op.scroll_down();
-		td.deleteTransaction.click();
-		
-		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
-		td.deleteTransactionAlertButton.click();
-		}
-		
-		if (Verify.objExists_check(td.deleteTransferTransactionWarning)) {
-			Commentary.log(LogStatus.INFO, "PASS: Warning messsage is displayed on deleting transfer transactions.");
-			td.buttonOK.click();
-		} else {
-			Commentary.log(LogStatus.FAIL, "FAIL: Warning messsage is NOT displayed on deleting transfer transactions.");
-		}
-		
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		sa.assertAll();	
-	}
-	
-	@Test (priority=17, enabled = true)
-	public void TC18_test() throws Exception {
-
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the delete warning message of the Online Transfer Transaction.");
-		
-		OverviewPage op = new OverviewPage();
-	
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		op.navigateToAcctList();
-		
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		
-		bcc.selectAccount(sSaving);
-		Thread.sleep(1000);
-		
-		TransactionsPage tp = new TransactionsPage();
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
-		
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setCategory(transferToAcc1);
-		td.editTransaction(tRec);
-		
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		op.scroll_down();
-		td.deleteTransaction.click();
-		Thread.sleep(2000);
-		
-		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
-			td.deleteTransactionAlertButton.click();
-			}
-		Verify.waitForObject(td.deleteWarningMessage, 2);
-		
-		String expWarningText = "You are deleting the transfer transaction \"Kfc Personal\". This will also delete the other side of the transfer in account "+sOnlineChecking+"";
-		String warningMessageText = td.deleteWarningMessage.getText();
-		
-		if (Verify.objExists(td.deleteTransferTransactionWarning) || warningMessageText.equalsIgnoreCase(expWarningText) ) {
-			Commentary.log(LogStatus.INFO, "PASS: Warning messsage is displayed on deleting online transfer transactions.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Warning messsage is NOT displayed on deleting online transfer transactions.");
-		}
-		
-		td.buttonCancel.click();
-		
-		tRec.setCategory("Fast Food");
-		td.editTransaction(tRec);
-		
-		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
-		
-		sa.assertAll();
-	}
-	
-	@Test (priority=18, enabled = true)
-	public void TC19_test() throws Exception {
-
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the delete warning message of the Online Transfer Transaction from the other side.");
-		
-		OverviewPage op = new OverviewPage();
-	
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		op.navigateToAcctList();
-		
-		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		
-		bcc.selectAccount(sSaving);
-		Thread.sleep(1000);
-		
-		TransactionsPage tp = new TransactionsPage();
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
-		
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setCategory(transferToAcc1);
-		td.editTransaction(tRec);
-		
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		op.scroll_down();
-		td.buttonGoToOtherSide.click();
-		Thread.sleep(2000);
-		
-		op.scroll_down();
-		td.deleteTransaction.click();
-		Thread.sleep(2000);
-		
-		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
-			td.deleteTransactionAlertButton.click();
-			}
-		Verify.waitForObject(td.deleteWarningMessage, 2);
-		
-		String expWarningText = "You are deleting the transfer transaction \"Kfc Personal\". The other side of this transfer in account [+"+sSaving+"+] is a bank downloaded transaction and will be set to \"Uncategorized\", but will not be deleted";
-		String warningMessageText = td.deleteWarningMessage.getText();
-		
-		if (Verify.objExists(td.deleteTransferTransactionWarning) || warningMessageText.equalsIgnoreCase(expWarningText) ) {
-			Commentary.log(LogStatus.INFO, "PASS: Correct Warning messsage is displayed on trying to delete from other side of online transfer transactions.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Correct Warning messsage is NOT displayed on trying to delete from other side of online transfer transactions.");
-		}
-		
-		td.buttonOK.click();
-		
-		Commentary.log(LogStatus.INFO, "PASS: Online transfer transactions has been deleted from the other side.");
-		
-		Verify.waitForObject(tp.backButton, 2);
-		tp.backButton.click();
-		
-		bcc.selectAccount(sSaving);
-		Thread.sleep(2000);
-		tp.tapOnFirstTransaction();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(td.selectedCategory, 2);
-		td.VerifyTransactionCategory("Uncategorized");
-		
-		Commentary.log(LogStatus.INFO, "PASS: Category of the transaction with Payee named \"Kfc Personal\" changed to Uncategorized as Expected.");
-		
-		tRec.setCategory("Fast Food");
-		td.editTransaction(tRec);
-		
-		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
-		
-		sa.assertAll();
-	}
+//	@Test(priority = 13, enabled = true)
+//	public void TR14_test() throws Exception{
+//		
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		
+//		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying MATCH functionality.");
+//		
+//		String transferToAcc1 = "Transfer ["+sSavings+"]";
+//		String payeeName = "Payee_"+h.getCurrentTime();
+//		
+//		OverviewPage op = new OverviewPage();
+//		op.navigateToAcctList();
+//		
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
+//		
+//		//Adding one normal transaction
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setAmount("39.00");
+//		tRec.setPayee(payeeName);
+//		tRec.setAccount(sChecking);
+//		//tRec.setCategory("");
+//		tRec.setTransactionType("expense");
+//		
+//		td.addTransaction(tRec);
+//		
+//		//Adding another normal transaction
+//		
+//		tp.addTransaction.click();
+//		tRec = new TransactionRecord();
+//		tRec.setAmount("39.00");
+//		tRec.setTransactionType("income");
+//		tRec.setPayee(payeeName);
+//		tRec.setAccount(sSavings);
+//		
+//		td.addTransaction(tRec);
+//		
+//		tp.searchRecentTransaction(payeeName);
+//		Verify.waitForObject(tp.thisMonthLabel, 3);
+//		tp.tapOnFirstTransaction();
+//		Verify.waitForObject(td.dateLabel, 2);
+//		
+//		tRec = new TransactionRecord();
+//		tRec.setCategory(transferToAcc1);
+//		td.editTransaction(tRec);
+//		Thread.sleep(500);
+//		
+//		Verify.waitForObject(td.buttonMatch, 2);
+//		td.buttonMatch.click();
+//		Thread.sleep(2000);
+//		
+//		tp.searchRecentTransaction(payeeName);
+//		Verify.waitForObject(tp.thisMonthLabel, 3);
+//		
+//		int numOfTransaction = tp.getTransactionListSize();
+//		
+//		if (numOfTransaction==2)		
+//			Commentary.log(LogStatus.INFO, "PASS: Transaction is matched with the other created transaction.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transaction is NOT matched with the other created transaction.");
+//		
+//		sa.assertAll();
+//	}
+//	
+//	@Test(priority = 14, enabled = true)
+//	public void TR15_test() throws Exception{
+//		
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		
+//		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying DON'T MATCH functionality.");
+//		
+//		String transferToAcc1 = "Transfer ["+sSavings+"]";
+//		String payeeName = "Payee_"+h.getCurrentTime();
+//		
+//		OverviewPage op = new OverviewPage();
+//		op.navigateToAcctList();
+//		
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
+//		
+//		//Adding one normal transaction
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setAmount("55.00");
+//		tRec.setPayee(payeeName);
+//		tRec.setAccount(sChecking);
+//		//tRec.setCategory("");
+//		tRec.setTransactionType("expense");
+//		
+//		td.addTransaction(tRec);
+//		
+//		//Adding another normal transaction
+//		
+//		tp.addTransaction.click();
+//		tRec = new TransactionRecord();
+//		tRec.setAmount("55.00");
+//		tRec.setTransactionType("income");
+//		tRec.setPayee(payeeName);
+//		tRec.setAccount(sSavings);
+//		
+//		td.addTransaction(tRec);
+//		
+//		tp.searchRecentTransaction(payeeName);
+//		Verify.waitForObject(tp.thisMonthLabel, 3);
+//		tp.tapOnFirstTransaction();
+//		Verify.waitForObject(td.dateLabel, 2);
+//		
+//		tRec = new TransactionRecord();
+//		tRec.setCategory(transferToAcc1);
+//		td.editTransaction(tRec);
+//		Thread.sleep(500);
+//		
+//		Verify.waitForObject(td.buttonDontMatch, 2);
+//		td.buttonDontMatch.click();
+//		
+//		tp.searchRecentTransaction(payeeName);
+//		Verify.waitForObject(tp.thisMonthLabel, 3);
+//		
+//		int numOfTransaction = tp.getTransactionListSize();
+//		
+//		if (numOfTransaction==3)		
+//			Commentary.log(LogStatus.INFO, "PASS: As Expected, Transaction isn't matched with the other created transaction after choosing Don't Match option.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transaction matched with the other created transaction.");
+//		
+//		sa.assertAll();
+//	}
+//	
+//	@Test(priority = 15, enabled = true)
+//	public void TR16_test() throws Exception{
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		
+//		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating a transfer transaction for current date and changing to future date and verifying the Projected and Current balance.");
+//		
+//		String sTotal_before,sTotal_after,sProjectedBalance_before,sProjected_after ;
+//		String payeeName = "Payee_"+h.getCurrentTime();
+//		
+//		OverviewPage op = new OverviewPage();
+//		op.navigateToAcctList();
+//		
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.tapOnAddTransactionButtonFromAllTransactionsPage();
+//		
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setAmount("23.00");
+//		tRec.setPayee(payeeName);
+//		tRec.setAccount(sChecking);
+//		tRec.setCategory("Transfer ["+sSavings+"]");
+//		tRec.setTransactionType("expense");
+//		tRec.setDate(h.getFutureDaysDate(0));
+//		
+//		td.addTransaction(tRec);
+//		Thread.sleep(2000);
+//		Double d = Double.parseDouble(tRec.getAmount());
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		
+//		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//		sTotal_before = bcc.getTotalBalance();
+//		sProjectedBalance_before = bcc.getProjectedBalance();
+//		
+//		Double dTotal_before = h.processBalanceAmount(sTotal_before);
+//		Double dProjected_before = h.processBalanceAmount(sProjectedBalance_before);
+//		
+//		bcc.allTransactionButton.click();
+//		
+//		tp.searchRecentTransaction(payeeName);
+//		Verify.waitForObject(tp.thisMonthLabel, 3);
+//		tp.tapOnFirstTransaction();
+//		Verify.waitForObject(td.dateLabel, 2);
+//		
+//		tRec = new TransactionRecord();
+//		tRec.setDate(h.getFutureDaysDate(5));
+//		td.editTransaction(tRec);
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		Thread.sleep(4000);
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		bcc.scrollToTotalBalance();
+//		sTotal_after = bcc.getTotalBalance();
+//		Thread.sleep(1000);
+//		sProjected_after = bcc.getProjectedBalance();
+//		
+//		Double dTotal_after = h.processBalanceAmount(sTotal_after);
+//		Double dProjected_after = h.processBalanceAmount(sProjected_after);
+//	
+//		if (dTotal_after.equals(dTotal_before))
+//			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], after changing the transfer date for transaction amount ["+d+"] to future date, total balance is ["+dTotal_after+"]");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], after changing the transfer date for transaction amount ["+d+"] to future date, total balance is ["+dTotal_after+"]");
+//		
+//		if (dProjected_after.equals(dProjected_before))
+//			Commentary.log(LogStatus.INFO, "PASS: Projected balance was ["+dProjected_before+"], after changing the transfer date for transaction amount ["+d+"], now the projected balance is ["+dProjected_after+"]");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance was ["+dProjected_before+"], after changing the transfer date for transaction amount ["+d+"], now the projected balance is ["+dProjected_after+"]");
+//
+//		sa.assertAll();	
+//	}
+//	
+//	@Test (priority=16, enabled = true)
+//	public void TC17_test() throws Exception {
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//
+//		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the functionality of the Online Transfer Transaction.");
+//		
+//		OverviewPage op = new OverviewPage();
+//	
+//		Verify.waitForObject(op.hambergerIcon, 2);
+//		op.hambergerIcon.click();
+//		Thread.sleep(3000);
+//
+//		SettingsPage sp = new SettingsPage();
+//		Verify.waitForObject(sp.datasetDDButton, 2);
+//		sp.datasetDDButton.click();
+//		Thread.sleep(4000);
+//
+//		sp.switchDataset(sDataset1);
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		op.navigateToAcctList();
+//		
+//		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//		TransactionsPage tp = new TransactionsPage();
+//		
+//		bcc.selectAccount(sSaving);
+//		Thread.sleep(1000);
+//		
+//		tp.DisableRunningBalance();
+//		
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
+//		
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setCategory(transferToAcc1);
+//		td.editTransaction(tRec);
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		Thread.sleep(2000);
+//		bcc.selectAccount(sOnlineChecking);
+//		Thread.sleep(2000);
+//		
+//		tp.DisableRunningBalance();
+//		
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		td.VerifyTransactionPayee("Kfc Personal");
+//
+//		String transferToAcc2 = "Transfer ["+sManualSavings+"]";
+//		
+//		tRec.setCategory(transferToAcc2);
+//		td.editTransaction(tRec);
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		Thread.sleep(2000);
+//		bcc.selectAccount(sSaving);
+//		Thread.sleep(2000);
+//		Verify.waitForObject(tp.thisMonthLabel, 2);
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		Verify.waitForObject(td.selectedCategory, 2);
+//		td.VerifyTransactionCategory("Uncategorized");
+//		
+//		Commentary.log(LogStatus.INFO, "PASS: Category of the transaction with Payee named \"Kfc Personal\" changed to Uncategorized as Expected.");
+//		
+//		tRec.setCategory("Fast Food");
+//		td.editTransaction(tRec);
+//		
+//		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		
+//		bcc.selectAccount(sOnlineChecking);
+//		Thread.sleep(2000);
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		op.scroll_down();
+//		td.deleteTransaction.click();
+//		
+//		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
+//		td.deleteTransactionAlertButton.click();
+//		}
+//		
+//		if (Verify.objExists_check(td.deleteTransferTransactionWarning)) {
+//			Commentary.log(LogStatus.INFO, "PASS: Warning messsage is displayed on deleting transfer transactions.");
+//			td.buttonOK.click();
+//		} else {
+//			Commentary.log(LogStatus.FAIL, "FAIL: Warning messsage is NOT displayed on deleting transfer transactions.");
+//		}
+//		
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		sa.assertAll();	
+//	}
+//	
+//	@Test (priority=17, enabled = true)
+//	public void TC18_test() throws Exception {
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//
+//		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the delete warning message of the Online Transfer Transaction.");
+//		
+//		OverviewPage op = new OverviewPage();
+//	
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		op.navigateToAcctList();
+//		
+//		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//		
+//		bcc.selectAccount(sSaving);
+//		Thread.sleep(1000);
+//		
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
+//		
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setCategory(transferToAcc1);
+//		td.editTransaction(tRec);
+//		
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		Verify.waitForObject(td.dateLabel, 2);
+//		
+//		op.scroll_down();
+//		td.deleteTransaction.click();
+//		Thread.sleep(2000);
+//		
+//		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
+//			td.deleteTransactionAlertButton.click();
+//		}
+//		Verify.waitForObject(td.deleteWarningMessage, 2);
+//		
+//		String expWarningText = "You are deleting the transfer transaction \"Kfc Personal\". This will also delete the other side of the transfer in account "+sOnlineChecking+"";
+//		String warningMessageText = td.deleteWarningMessage.getText();
+//		
+//		if (Verify.objExists(td.deleteTransferTransactionWarning) || warningMessageText.equalsIgnoreCase(expWarningText) )
+//			Commentary.log(LogStatus.INFO, "PASS: Warning messsage is displayed on deleting online transfer transactions.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Warning messsage is NOT displayed on deleting online transfer transactions.");
+//		
+//		td.buttonCancel.click();
+//		
+//		tRec.setCategory("Fast Food");
+//		td.editTransaction(tRec);
+//		
+//		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
+//		
+//		sa.assertAll();
+//	}
+//	
+//	@Test (priority=18, enabled = true)
+//	public void TC19_test() throws Exception {
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//
+//		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: To Verify the delete warning message of the Online Transfer Transaction from the other side.");
+//		
+//		OverviewPage op = new OverviewPage();
+//	
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		op.navigateToAcctList();
+//		
+//		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+//		
+//		bcc.selectAccount(sSaving);
+//		Thread.sleep(1000);
+//		
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		String transferToAcc1 = "Transfer ["+sOnlineChecking+"]";
+//		
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setCategory(transferToAcc1);
+//		td.editTransaction(tRec);
+//		
+//		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+//		
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		Verify.waitForObject(td.dateLabel, 2);
+//		
+//		op.scroll_down();
+//		td.buttonGoToOtherSide.click();
+//		Thread.sleep(2000);
+//		
+//		op.scroll_down();
+//		td.deleteTransaction.click();
+//		Thread.sleep(2000);
+//		
+//		if (Verify.objExists_check(td.deleteTransactionAlertButton)) {
+//			td.deleteTransactionAlertButton.click();
+//		}
+//		Verify.waitForObject(td.deleteWarningMessage, 2);
+//		
+//		String expWarningText = "You are deleting the transfer transaction \"Kfc Personal\". The other side of this transfer in account [+"+sSaving+"+] is a bank downloaded transaction and will be set to \"Uncategorized\", but will not be deleted";
+//		String warningMessageText = td.deleteWarningMessage.getText();
+//		
+//		if (Verify.objExists(td.deleteTransferTransactionWarning) || warningMessageText.equalsIgnoreCase(expWarningText) )
+//			Commentary.log(LogStatus.INFO, "PASS: Correct Warning messsage is displayed on trying to delete from other side of online transfer transactions.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Correct Warning messsage is NOT displayed on trying to delete from other side of online transfer transactions.");
+//		
+//		td.buttonOK.click();
+//		
+//		Commentary.log(LogStatus.INFO, "PASS: Online transfer transactions has been deleted from the other side.");
+//		
+//		Verify.waitForObject(tp.backButton, 2);
+//		tp.backButton.click();
+//		
+//		bcc.selectAccount(sSaving);
+//		Thread.sleep(2000);
+//		tp.tapOnFirstTransaction();
+//		Thread.sleep(2000);
+//		
+//		Verify.waitForObject(td.selectedCategory, 2);
+//		td.VerifyTransactionCategory("Uncategorized");
+//		
+//		Commentary.log(LogStatus.INFO, "PASS: Category of the transaction with Payee named \"Kfc Personal\" changed to Uncategorized as Expected.");
+//		
+//		tRec.setCategory("Fast Food");
+//		td.editTransaction(tRec);
+//		
+//		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
+//		
+//		sa.assertAll();
+//	}
 
 }

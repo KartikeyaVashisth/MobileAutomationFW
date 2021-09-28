@@ -1,5 +1,7 @@
 package tournament;
 
+import java.math.BigDecimal;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -50,47 +52,68 @@ public class Daily_Regression_Test2 extends Recovery{
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating hamburger menu options.");
 
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObject(op.hambergerIcon, 1);
 		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
 
-		Verify.waitForObject(sp.datasetDDButton, 2);
+		Verify.waitForObject(sp.dashboardOption, 2);
 		Verify.waitForObject(sp.accountTxt, 2);
 
-		if(sp.verifyQuickenID(sUserName))
-			Commentary.log(LogStatus.INFO, "PASS: Quicken ID is displayed.");
+		if (Verify.objExists(sp.dashboardOption))
+			Commentary.log(LogStatus.INFO, "PASS: Dashboard option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Quicken ID is NOT displayed.");
-
-		if (Verify.objExists(sp.closeButton))
-			Commentary.log(LogStatus.INFO, "PASS: Close button is displayed.");
-		else 
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Close button is NOT displayed.");
-
-		if (Verify.objExists(sp.datasetDDButton))
-			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
-
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dashboard option is NOT displayed.");
+		
 		if (Verify.objExists(sp.accountTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Account Text is displayed.");
+			Commentary.log(LogStatus.INFO, "PASS: Accounts option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account Text is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Accounts option is NOT displayed.");
 
-		if (Verify.objExists(sp.PasscodeTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed.");
+		if (Verify.objExists(sp.allTransactionsOption))
+			Commentary.log(LogStatus.INFO, "PASS: All Transactions option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode text is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: All Transactions option is NOT displayed.");
+		
+		if (Verify.objExists(sp.billsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Bills option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Bills option is NOT displayed.");
+		
+		if (Verify.objExists(sp.budgetsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Budgets option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Budgets option is NOT displayed.");
+		
+		if (Verify.objExists(sp.investingOption))
+			Commentary.log(LogStatus.INFO, "PASS: Investing option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing option is NOT displayed.");
+		
+		if (Verify.objExists(sp.reportsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Reports option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Reports option is NOT displayed.");
 
+		if (Verify.objExists(sp.profileOption))
+			Commentary.log(LogStatus.INFO, "PASS: Profile option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Profile option is NOT displayed.");
+		
 		if (Verify.objExists(sp.settingsOption))
 			Commentary.log(LogStatus.INFO, "PASS: Settings option is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed.");
 
-		if (Verify.objExists(sp.HelpTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Help & Legal text is displayed.");
+		if (Verify.objExists(sp.datasetDDButton))
+			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help & Legal text is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Dataset DD button button is NOT displayed.");
+		
+		if (Verify.objExists(sp.versionNumber))
+			Commentary.log(LogStatus.INFO, "PASS: Version number is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Version number is NOT displayed.");
 
 		if (Verify.objExists(sp.logout))
 			Commentary.log(LogStatus.INFO, "PASS: Logout button is displayed.");
@@ -110,36 +133,40 @@ public class Daily_Regression_Test2 extends Recovery{
 	}
 
 	@Test(priority = 20, enabled = true)
-	public void TC21_ValidateAccountMenu() throws Exception {
+	public void TC21_ValidateAccountsManagement() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating Account menu options and also verifying the details on selecting all user accounts");
 
-		OverviewPage op = new OverviewPage();
-		op.hambergerIcon.click();
-		Thread.sleep(3000);
-
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.accountTxt, 2);
-		sp.accountTxt.click();
+		
+		sp.clickOnSettingsOption();
+		
+		Verify.waitForObject(sp.accountsManagementOption, 1);
+		if(Verify.objExists(sp.accountsManagementOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Accounts Management\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Accounts Management\" option is NOT displayed under Settings.");
+	
+		sp.accountsManagementOption.click();
 
-		Verify.waitForObject(sp.getAccountElement(sManualSaving), 3);
+		Verify.waitForObject(sp.getAccountElement(sManualSaving), 1);
 
 		if (Verify.objExists(sp.getAccountElement(sManualChecking)))
-			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking account is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking account is NOT displayed.");
 
 		if (Verify.objExists(sp.getAccountElement(sManualCreditCard)))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC account is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account is NOT displayed.");
 
 		if (Verify.objExists(sp.getAccountElement(sManualSaving)))
-			Commentary.log(LogStatus.INFO, "PASS: Manual Savings account is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Savings account is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Savings account is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Savings account is NOT displayed.");
 
 		//Verify Account Details
 		sp.getAccountElement(sManualChecking).click();
@@ -150,23 +177,21 @@ public class Daily_Regression_Test2 extends Recovery{
 		MobileElement accountStatus = sp.getTextView("Active");
 
 		if (Verify.objExists(manualCheckingAccount1))
-			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking account details are NOT displayed");
-
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking account details are NOT displayed.");
 
 		if (Verify.objExists(accountType))
-			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Type details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking Account Type details are NOT displayed");
-
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking Account Type details are NOT displayed.");
 
 		if (Verify.objExists(accountStatus))
-			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual Checking Account Status is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking Account Status is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual Checking Account Status is NOT displayed.");
 
-		sp.selectBack("Accounts");
+		sp.selectBack("Accounts, back");
 		Thread.sleep(2000);
 
 		sp.getAccountElement(sManualCreditCard).click();
@@ -177,21 +202,21 @@ public class Daily_Regression_Test2 extends Recovery{
 		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
 		MobileElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account details are NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account details are NOT displayed.");
 
 		if (Verify.objExists(accountType_manual))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed.");
 
 		if (Verify.objExists(accountStatus1))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Status is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Status is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Status is NOT displayed.");
 
-		sp.selectBack("Accounts");
+		sp.selectBack("Accounts, back");
 		Thread.sleep(2000);
 
 		sp.getAccountElement(sManualSaving).click();
@@ -203,56 +228,93 @@ public class Daily_Regression_Test2 extends Recovery{
 		MobileElement accountStatus2 = sp.getTextView("Active");
 
 		if (Verify.objExists(manualSavingsAccount1))
-			Commentary.log(LogStatus.INFO, "PASS: Savings account details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings account details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings account details are NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings account details are NOT displayed.");
 
 		if (Verify.objExists(accountType_savings))
-			Commentary.log(LogStatus.INFO, "PASS: Savings Account Type details are displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings Account Type details are displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Account Type details are NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Account Type details are NOT displayed.");
 
 		if (Verify.objExists(accountStatus2))
-			Commentary.log(LogStatus.INFO, "PASS: Savings Account Status is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Savings Account Status is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Account Status is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings Account Status is NOT displayed.");
 
 		sa.assertAll();	
 	}
 
 	@Test(priority = 21, enabled = true)
-	public void TC22_ValidatePasscodeFingerprintMenu() throws Exception {
+	public void TC22_ValidateProfileMenu() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Passcode and Fingerprint menu");
-
-		OverviewPage op = new OverviewPage();
-		op.hambergerIcon.click();
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating Profile menu options.");
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.PasscodeTxt, 2);
+		
+		sp.clickOnProfileOption();
+		
+		Verify.waitForObject(sp.PasscodeTxt, 1);
+		if(Verify.objExists(sp.PasscodeTxt))
+			Commentary.log(LogStatus.INFO, "PASS: \"Passcode\" option is displayed under Profile section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Passcode\" option is NOT displayed under Profile section.");
+		
+		if(Verify.objExists(sp.HelpTxt))
+			Commentary.log(LogStatus.INFO, "PASS: \"Help\" option is displayed under Profile section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Help\" option is NOT displayed under Profile section.");
+		
+		if(Verify.objExists(sp.legalTxt))
+			Commentary.log(LogStatus.INFO, "PASS: \"Legal\" option is displayed under Profile section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Legal\" option is NOT displayed under Profile section.");
+		
+		Verify.waitForObject(sp.PasscodeTxt, 1);
 		sp.PasscodeTxt.click();
 
-		Verify.waitForObject(sp.getAccountElement("Use Quicken Passcode"), 2);
-
-		if (Verify.objExists(sp.PasscodeHeaderTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Header text is displayed");
+		Verify.waitForObject(sp.useDevicePasscodeTxt, 1);
+		if(Verify.objExists(sp.PasscodeHeaderTxt) && Verify.objExists(sp.useDevicePasscodeTxt))
+			Commentary.log(LogStatus.INFO, "PASS: Passcode page is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Header text is NOT displayed");
-
-		if (Verify.objExists(sp.getAccountElement("Use Quicken Passcode")))
-			Commentary.log(LogStatus.INFO, "PASS: Passcode text is displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode page is NOT displayed.");
+		
+		sp.backButtonOnPasscodeHeader.click();
+		Thread.sleep(2000);
+		
+		Verify.waitForObject(sp.HelpTxt, 1);
+		sp.HelpTxt.click();
+		Thread.sleep(2000);
+		
+		Verify.waitForObject(sp.supportOption, 1);
+		if(Verify.objExists(sp.supportOption))
+			Commentary.log(LogStatus.INFO, "PASS: Support Option is displayed under Help section.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Passcode text is NOT displayed");
-
-		//			if (h.getEngine().equalsIgnoreCase("ios")){
-		//				if (Verify.objExists(sp.getTextView("Use Touch ID")))
-		//					Commentary.log(LogStatus.INFO, "PASS: Touch ID text is displayed");
-		//				else
-		//					Commentary.log(sa, LogStatus.FAIL, "Touch ID text is NOT displayed");			   
-		//			}	
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Option is NOT displayed under Help section.");
+		
+		Verify.waitForObject(sp.legalTxt, 1);
+		sp.legalTxt.click();
+		Thread.sleep(2000);
+		
+		Verify.waitForObject(sp.acknowledgementsOption, 1);
+		if(Verify.objExists(sp.acknowledgementsOption))
+			Commentary.log(LogStatus.INFO, "PASS: Acknowledgements option is displayed under Legal section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Acknowledgements option is NOT displayed under Legal section.");
+		
+		if(Verify.objExists(sp.licenceAgreementOption))
+			Commentary.log(LogStatus.INFO, "PASS: Licence agreeement option is displayed under Legal section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Licence agreeement option is NOT displayed under Legal section.");
+		
+		if(Verify.objExists(sp.privacyOption))
+			Commentary.log(LogStatus.INFO, "PASS: Privacy option is displayed under Legal section.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Privacy option is NOT displayed under Legal section.");
+		
 		sa.assertAll();
 	}
 
@@ -262,40 +324,97 @@ public class Daily_Regression_Test2 extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Settings menu.");
-
-		OverviewPage op = new OverviewPage();
-		op.hambergerIcon.click();
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating Settings menu options.");
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.settingsOption, 2);
-		sp.settingsOption.click();
-
-		Verify.waitForObject(sp.settingsHeaderText, 1);
+		sp.clickOnSettingsOption();
+		
+		Verify.waitForObject(sp.settingsHeaderText, 2);
 		if (Verify.objExists(sp.settingsHeaderText))
 			Commentary.log(LogStatus.INFO, "PASS: Settings Header text is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings header text is NOT displayed.");
+		
+		Verify.waitForObject(sp.customizeDashboardOption, 1);
+		if(Verify.objExists(sp.customizeDashboardOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Customize Dashboard\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Customize Dashboard\" option is NOT displayed under Settings.");
+		
+		if(Verify.objExists(sp.accountsManagementOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Accounts Management\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Accounts Management\" option is NOT displayed under Settings.");
 		
 		if (Verify.objExists(sp.ManageAlertsTxt))
 			Commentary.log(LogStatus.INFO, "PASS: Manage Alerts option is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manage Alerts option is NOT displayed.");
 		
-		if (Verify.objExists(sp.displayYelpRecommendationsText))
-			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation text is displayed.");
+		if(Verify.objExists(sp.rulesOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Rules\" option is displayed under Settings.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation text is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Rules\" option is NOT displayed under Settings.");
+		
+		if(Verify.objExists(sp.tagsOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Tags\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Tags\" option is NOT displayed under Settings.");
+		
+		if (Verify.objExists(sp.displayYelpRecommendationsText))
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Yelp Recommendation' text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Yelp Recommendation' text is NOT displayed.");
 		
 		if (Verify.objExists(sp.displayYelpDescription))
-			Commentary.log(LogStatus.INFO, "PASS: Display Yelp description text is displayed.");
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Yelp Recommendation' description text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp description text is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Yelp Recommendation' description text is NOT displayed.");
 		
 		if (Verify.objExists(sp.switchDisplayYelp))
-			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation toggle button is displayed.");
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Yelp Recommendation' toggle button is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation toggle button is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Yelp Recommendation' toggle button is NOT displayed.");
+		
+		if (sp.isDisplayYelpEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Yelp Recommendation' option is enabled by default.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Yelp Recommendation' option is seen disabled by default.");
+		
+		if (Verify.objExists(sp.showLongCategoryNamesText))
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' text is NOT displayed.");
+		
+		if (Verify.objExists(sp.showLongCategoryNamesDescription))
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' description text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' description text is NOT displayed.");
+		
+		if (Verify.objExists(sp.switchShowLongCategoryNames))
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' toggle button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' toggle button is NOT displayed.");
+		
+		if (sp.isDisplayYelpEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' option is enabled by default.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' option is seen disabled by default.");
+		
+		if (Verify.objExists(sp.displayFavoritePayeesText))
+			Commentary.log(LogStatus.INFO, "PASS: 'Display favorite payees' Recommendation text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display favorite payees' Recommendation text is NOT displayed.");
+		
+		if (Verify.objExists(sp.displayFavoritePayeesDescription))
+			Commentary.log(LogStatus.INFO, "PASS: 'Display favorite payees' description text is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display favorite payees' description text is NOT displayed.");
+		
+		if (Verify.objExists(sp.switchDisplayFavoritePayees))
+			Commentary.log(LogStatus.INFO, "PASS: 'Display favorite payees' toggle button is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display favorite payees' toggle button is NOT displayed.");
 		
 		if (sp.isDisplayYelpEnabled())
 			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation option is enabled by default.");
@@ -324,69 +443,69 @@ public class Daily_Regression_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 23, enabled = true)
-	public void TC24_ValidateHelpLegal() throws Exception {
-
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Help and Legal menu");
-
-		OverviewPage op = new OverviewPage();
-		op.hambergerIcon.click();
-
-		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.HelpTxt, 3);
-		sp.HelpTxt.click();
-		Thread.sleep(3000);
-		Verify.waitForObject(sp.getTextView("Help"), 3);
-		Verify.waitForObject(sp.getTextView("Support Website"), 3);
-		Verify.waitForObject(sp.getTextView("Acknowledgements"), 3);
-		Verify.waitForObject(sp.getTextView("License Agreement"), 3);
-		Verify.waitForObject(sp.getTextView("Privacy"), 3);
-
-		MobileElement help = sp.getTextView("Help");
-		MobileElement link_SupportWebsite = sp.getTextView("Support Website");
-		MobileElement link_Acknowledgements = sp.getTextView("Acknowledgements");
-		MobileElement link_LicenseAgreement = sp.getTextView("License Agreement");
-		MobileElement link_Privacy = sp.getTextView("Privacy");
-
-		if (Verify.objExists(sp.HelpLegalHeaderTxt))
-			Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help Legal text is NOT displayed");
-
-		if (Verify.objExists(help))
-			Commentary.log(LogStatus.INFO, "PASS: Help text is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help text is NOT displayed");
-
-		if (Verify.objExists(link_SupportWebsite))
-			Commentary.log(LogStatus.INFO, "PASS: Support Website Link is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Website Link is NOT displayed");
-
-		if (Verify.objExists(sp.getTextView("Legal")))
-			Commentary.log(LogStatus.INFO, "PASS: Legal text is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Legal text is NOT displayed");
-
-		if (Verify.objExists(link_Acknowledgements))
-			Commentary.log(LogStatus.INFO, "PASS: Acknowledgements link is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Acknowledgements link is NOT displayed");
-
-		if (Verify.objExists(link_LicenseAgreement))
-			Commentary.log(LogStatus.INFO, "PASS: License Agreement link is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: License Agreement link is NOT displayed");
-
-		if (Verify.objExists(link_Privacy))
-			Commentary.log(LogStatus.INFO, "PASS: Privacy link is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Privacy link is NOT displayed");
-
-		sa.assertAll();
-	}
+//	@Test(priority = 23, enabled = true)
+//	public void TC24_ValidateHelpLegal() throws Exception {
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating menu options for Help and Legal menu");
+//
+//		OverviewPage op = new OverviewPage();
+//		op.hambergerIcon.click();
+//
+//		SettingsPage sp = new SettingsPage();
+//		Verify.waitForObject(sp.HelpTxt, 3);
+//		sp.HelpTxt.click();
+//		Thread.sleep(3000);
+//		Verify.waitForObject(sp.getTextView("Help"), 3);
+//		Verify.waitForObject(sp.getTextView("Support Website"), 3);
+//		Verify.waitForObject(sp.getTextView("Acknowledgements"), 3);
+//		Verify.waitForObject(sp.getTextView("License Agreement"), 3);
+//		Verify.waitForObject(sp.getTextView("Privacy"), 3);
+//
+//		MobileElement help = sp.getTextView("Help");
+//		MobileElement link_SupportWebsite = sp.getTextView("Support Website");
+//		MobileElement link_Acknowledgements = sp.getTextView("Acknowledgements");
+//		MobileElement link_LicenseAgreement = sp.getTextView("License Agreement");
+//		MobileElement link_Privacy = sp.getTextView("Privacy");
+//
+//		if (Verify.objExists(sp.HelpLegalHeaderTxt))
+//			Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help Legal text is NOT displayed");
+//
+//		if (Verify.objExists(help))
+//			Commentary.log(LogStatus.INFO, "PASS: Help text is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help text is NOT displayed");
+//
+//		if (Verify.objExists(link_SupportWebsite))
+//			Commentary.log(LogStatus.INFO, "PASS: Support Website Link is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Website Link is NOT displayed");
+//
+//		if (Verify.objExists(sp.getTextView("Legal")))
+//			Commentary.log(LogStatus.INFO, "PASS: Legal text is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Legal text is NOT displayed");
+//
+//		if (Verify.objExists(link_Acknowledgements))
+//			Commentary.log(LogStatus.INFO, "PASS: Acknowledgements link is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Acknowledgements link is NOT displayed");
+//
+//		if (Verify.objExists(link_LicenseAgreement))
+//			Commentary.log(LogStatus.INFO, "PASS: License Agreement link is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: License Agreement link is NOT displayed");
+//
+//		if (Verify.objExists(link_Privacy))
+//			Commentary.log(LogStatus.INFO, "PASS: Privacy link is displayed");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Privacy link is NOT displayed");
+//
+//		sa.assertAll();
+//	}
 
 	@Test (priority=24, enabled = true)
 	public void TC25_VerifyTransactionSummary_CategoryScreen() throws Exception {
@@ -405,8 +524,8 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(ts.categoryTile, 2);
 		String sCategoryAmount_before = ts.categoryTile.getText();
-		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
-		Commentary.log(LogStatus.INFO, "Category amount is "+dCategoryAmount_before);
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replaceAll("[^0-9.-]", ""));
+		Commentary.log(LogStatus.INFO, "Category amount is: "+dCategoryAmount_before);
 
 		TransactionDetailPage td = new TransactionDetailPage();
 		TransactionRecord tRec = new TransactionRecord();
@@ -419,11 +538,13 @@ public class Daily_Regression_Test2 extends Recovery{
 		tRec.setTransactionType("expense");
 
 		ts.backButtonOnHeader.click();
+		Thread.sleep(2000);
 
 		op.scrollToTop();
 
+		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		
 		td.addTransaction(tRec);
 
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
@@ -434,14 +555,17 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(ts.categoryTile, 2);
 		String sCategoryAmount_after = ts.categoryTile.getText();
-		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replaceAll("[^0-9.-]", ""));
+		Commentary.log(LogStatus.INFO, "Category amount now is: "+dCategoryAmount_after);
+		
 		Double d = Double.parseDouble(tRec.getAmount());
-		Commentary.log(LogStatus.INFO, "Category amount now is "+dCategoryAmount_after);
 
-		if (dCategoryAmount_after+d==dCategoryAmount_before)
-			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee");
+		int categoryAmount_Compare = Double.compare(dCategoryAmount_after+d, dCategoryAmount_before);
+		
+		if(categoryAmount_Compare == 0)
+			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category tile is NOT updated after adding expense transaction for selected payee");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category tile is NOT updated after adding expense transaction for selected payee.");
 
 		sa.assertAll();
 	}
@@ -456,21 +580,16 @@ public class Daily_Regression_Test2 extends Recovery{
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Adding a transaction with Payee selected from Yelp Results and later verifying the Payee Name from the added transaction.");
 
 		OverviewPage op = new OverviewPage();
-		
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		op.hambergerIcon.click();
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.settingsOption, 2);
-		sp.settingsOption.click();
+		sp.clickOnSettingsOption();
 		
 		Verify.waitForObject(sp.switchDisplayYelp, 1);
 		sp.enableDisplayYelpOption();
 		
-		sp.backButtonOnHeader.click();
+		sp.backButtonOnSettingsHeader.click();
 		Thread.sleep(2000);
-		Verify.waitForObject(sp.closeButton, 1);
-		sp.closeButton.click();
 		
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -485,7 +604,7 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(op.addTransaction, 2);
 		op.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		
 		td.addTransaction(tRec);
 		Thread.sleep(2000);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount()+"], Transaction Payee Name: "+tRec.getPayee());
@@ -504,7 +623,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Verify.waitForObject(td.payee, 2);
 
 		td.VerifyTransactionPayee(payeeName);
-		td.backButton.click();	
+//		td.backButton.click();	
 
 		sa.assertAll();
 	}
@@ -517,6 +636,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating Investment Card details");
 
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObject(op.hambergerIcon, 1);
 		op.hambergerIcon.click();
 		Thread.sleep(1000);
 
@@ -596,7 +716,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		Thread.sleep(3000);
 
 		SettingsPage sp = new SettingsPage();
-		Verify.waitForObject(sp.datasetDDButton, 3);
+		Verify.waitForObject(sp.datasetDDButton, 2);
 		sp.datasetDDButton.click();
 		Thread.sleep(4000);
 

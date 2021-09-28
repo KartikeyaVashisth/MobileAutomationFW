@@ -550,8 +550,6 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		op.tapOnBillsAndIncomeCard();
 
-		//BillsAndIncomePage bi = new BillsAndIncomePage();
-
 		bi.addNewReminderSeries("Bill");
 
 		String reminderName = "Reminder_"+h.getCurrentTime();
@@ -634,12 +632,17 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		Double d = Double.parseDouble(tRec.getAmount());
 
-		if(dTodaysBalance-d==dTodaysBalance_With7DaysReminderFilter)
+		int todaysBalanceCompare_With7DaysReminderFilter = Double.compare(dTodaysBalance-d, dTodaysBalance_With7DaysReminderFilter);
+		int projectedBalanceCompare_With7DaysReminderFilter = Double.compare(dProjectedBalance-d, dProjectedBalance_With7DaysReminderFilter);
+		
+//		if(dTodaysBalance-d==dTodaysBalance_With7DaysReminderFilter)
+		if(todaysBalanceCompare_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance with Next 7 Days filter is "+sTodaysBalanceWith7DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance with Next 7 Days filter is NOT correct.");
 
-		if(dProjectedBalance-d==dProjectedBalance_With7DaysReminderFilter)
+//		if(dProjectedBalance-d==dProjectedBalance_With7DaysReminderFilter)
+		if(projectedBalanceCompare_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance with Next 7 Days filter is "+sProjectedBalanceWith7DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance with Next 7 Days filter is NOT correct.");
@@ -663,12 +666,17 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dTodaysBalance_With14DaysReminderFilter = h.processBalanceAmount(sTodaysBalanceWith14DaysReminderFilter);
 		Double dProjectedBalance_With14DaysReminderFilter = h.processBalanceAmount(sProjectedBalanceWith14DaysReminderFilter);
 
-		if(dTodaysBalance-d==dTodaysBalance_With14DaysReminderFilter)
+		int todaysBalanceCompare_With14DaysReminderFilter = Double.compare(dTodaysBalance-d, dTodaysBalance_With14DaysReminderFilter);
+		int projectedBalanceCompare_With14DaysReminderFilter = Double.compare(dProjectedBalance-d*2d, dProjectedBalance_With14DaysReminderFilter);
+		
+//		if(dTodaysBalance-d==dTodaysBalance_With14DaysReminderFilter)
+		if(todaysBalanceCompare_With14DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance with Next 14 Days filter is "+sTodaysBalanceWith14DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance with Next 14 Days filter is NOT correct.");
 
-		if(dProjectedBalance-d*2d==dProjectedBalance_With14DaysReminderFilter)
+//		if(dProjectedBalance-d*2d==dProjectedBalance_With14DaysReminderFilter)
+		if(projectedBalanceCompare_With14DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance with Next 14 Days filter is "+sProjectedBalanceWith14DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance with Next 14 Days filter is NOT correct.");
@@ -816,13 +824,18 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dProjectedBalance_With7DaysReminderFilter = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter);
 
 		Double d = Double.parseDouble(tRec.getAmount());
+		
+		int todaysBalanceCompare_With7DaysReminderFilter = Double.compare(dTodaysBalance+d, dTodaysBalance_With7DaysReminderFilter);
+		int projectedBalanceCompare_With7DaysReminderFilter = Double.compare(dProjectedBalance+d, dProjectedBalance_With7DaysReminderFilter);
 
-		if(dTodaysBalance+d==dTodaysBalance_With7DaysReminderFilter)
+//		if(dTodaysBalance+d==dTodaysBalance_With7DaysReminderFilter)
+		if(todaysBalanceCompare_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance with Next 7 Days filter is "+sTodaysBalanceWith7DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance with Next 7 Days filter is NOT correct.");
 
-		if(dProjectedBalance+d==dProjectedBalance_With7DaysReminderFilter)
+//		if(dProjectedBalance+d==dProjectedBalance_With7DaysReminderFilter)
+		if(projectedBalanceCompare_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance with Next 7 Days filter is "+sProjectedBalanceWith7DaysReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance with Next 7 Days filter is NOT correct.");
@@ -845,13 +858,18 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		Double dTodaysBalance_With12MonthsReminderFilter = h.processBalanceAmount(sTodaysBalanceWith12MonthsReminderFilter);
 		Double dProjectedBalance_With12MonthsReminderFilter = h.processBalanceAmount(sProjectedBalanceWith12MonthsReminderFilter);
+		
+		int todaysBalanceCompare_With12MonthsReminderFilter = Double.compare(dTodaysBalance+d, dTodaysBalance_With12MonthsReminderFilter);
+		int projectedBalanceCompare_With12MonthsReminderFilter = Double.compare(dProjectedBalance+d*12d, dProjectedBalance_With12MonthsReminderFilter);
 
-		if(dTodaysBalance+d==dTodaysBalance_With12MonthsReminderFilter)
+//		if(dTodaysBalance+d==dTodaysBalance_With12MonthsReminderFilter)
+		if(todaysBalanceCompare_With12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance with Next 12 Months filter is "+sTodaysBalanceWith12MonthsReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance with Next 12 Months filter is NOT correct.");
 
-		if(dProjectedBalance+d*12d==dProjectedBalance_With12MonthsReminderFilter)
+//		if(dProjectedBalance+d*12d==dProjectedBalance_With12MonthsReminderFilter)
+		if(projectedBalanceCompare_With12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance with Next 12 Months filter is "+sProjectedBalanceWith12MonthsReminderFilter+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance with Next 12 Months filter is NOT correct.");
@@ -1021,13 +1039,18 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dProjectedBalanceWith7DaysReminderFilter_CheckingAccount = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter_CheckingAccount);
 
 		Double d = Double.parseDouble(tRec.getAmount());
+		
+		int todaysBalanceCompare_CheckingAccount = Double.compare(dTodaysBalance_CheckingAccount-d, dTodaysBalanceWith7DaysReminderFilter_CheckingAccount);
+		int projectedBalanceCompare_CheckingAccount = Double.compare(dProjectedBalance_CheckingAccount-d, dProjectedBalanceWith7DaysReminderFilter_CheckingAccount);
 
-		if(dTodaysBalance_CheckingAccount-d==dTodaysBalanceWith7DaysReminderFilter_CheckingAccount)
+//		if(dTodaysBalance_CheckingAccount-d==dTodaysBalanceWith7DaysReminderFilter_CheckingAccount)
+		if(todaysBalanceCompare_CheckingAccount == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance of Checking Account with Next 7 Days filter is "+sTodaysBalanceWith7DaysReminderFilter_CheckingAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance of Checking Account with Next 7 Days filter is NOT correct.");
 
-		if(dProjectedBalance_CheckingAccount-d==dProjectedBalanceWith7DaysReminderFilter_CheckingAccount)
+//		if(dProjectedBalance_CheckingAccount-d==dProjectedBalanceWith7DaysReminderFilter_CheckingAccount)
+		if(projectedBalanceCompare_CheckingAccount == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance of Checking Account with Next 7 Days filter is "+sProjectedBalanceWith7DaysReminderFilter_CheckingAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance of Checking Account with Next 7 Days filter is NOT correct.");
@@ -1051,12 +1074,17 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dTodaysBalanceWith12MonthsReminderFilter_CheckingAccount = h.processBalanceAmount(sTodaysBalanceWith12MonthsReminderFilter_CheckingAccount);
 		Double dProjectedBalanceWith12MonthsReminderFilter_CheckingAccount = h.processBalanceAmount(sProjectedBalanceWith12MonthsReminderFilter_CheckingAccount);
 
-		if(dTodaysBalance_CheckingAccount-d==dTodaysBalanceWith12MonthsReminderFilter_CheckingAccount)
+		int todaysBalanceCompare_CheckingAccount_With12MonthsReminderFilter = Double.compare(dTodaysBalance_CheckingAccount-d, dTodaysBalanceWith12MonthsReminderFilter_CheckingAccount);
+		int projectedBalanceCompare_CheckingAccount_With12MonthsReminderFilter = Double.compare(dProjectedBalance_CheckingAccount-d*4d, dProjectedBalanceWith12MonthsReminderFilter_CheckingAccount);
+
+//		if(dTodaysBalance_CheckingAccount-d==dTodaysBalanceWith12MonthsReminderFilter_CheckingAccount)
+		if(todaysBalanceCompare_CheckingAccount_With12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance of Checking Account with Next 12 Months filter is "+sTodaysBalanceWith12MonthsReminderFilter_CheckingAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance of Checking Account with Next 12 Months filter is NOT correct.");
 
-		if(dProjectedBalance_CheckingAccount-d*4d==dProjectedBalanceWith12MonthsReminderFilter_CheckingAccount)
+//		if(dProjectedBalance_CheckingAccount-d*4d==dProjectedBalanceWith12MonthsReminderFilter_CheckingAccount)
+		if(projectedBalanceCompare_CheckingAccount_With12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance of Checking Account with Next 12 Months filter is "+sProjectedBalanceWith12MonthsReminderFilter_CheckingAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance of Checking Account with Next 12 Months filter is NOT correct.");
@@ -1126,12 +1154,17 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dTodaysBalanceWith7DaysReminderFilter_SavingsAccount = h.processBalanceAmount(sTodaysBalanceWith7DaysReminderFilter_SavingsAccount);
 		Double dProjectedBalanceWith7DaysReminderFilter_SavingsAccount = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter_SavingsAccount);
 
-		if(dTodaysBalance_SavingsAccount+d==dTodaysBalanceWith7DaysReminderFilter_SavingsAccount)
+		int todaysBalanceCompare_SavingsAccount_With7DaysReminderFilter = Double.compare(dTodaysBalance_SavingsAccount+d, dTodaysBalanceWith7DaysReminderFilter_SavingsAccount);
+		int projectedBalanceCompare_SavingsAccount_With7DaysReminderFilter = Double.compare(dProjectedBalance_SavingsAccount+d, dProjectedBalanceWith7DaysReminderFilter_SavingsAccount);
+
+//		if(dTodaysBalance_SavingsAccount+d==dTodaysBalanceWith7DaysReminderFilter_SavingsAccount)
+		if(todaysBalanceCompare_SavingsAccount_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance of Savings Account with Next 7 Days filter is "+sTodaysBalanceWith7DaysReminderFilter_SavingsAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance of Savings Account with Next 7 Days filter is NOT correct.");
 
-		if(dProjectedBalance_SavingsAccount+d==dProjectedBalanceWith7DaysReminderFilter_SavingsAccount)
+//		if(dProjectedBalance_SavingsAccount+d==dProjectedBalanceWith7DaysReminderFilter_SavingsAccount)
+		if(projectedBalanceCompare_SavingsAccount_With7DaysReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance of Savings Account with Next 7 Days filter is "+sProjectedBalanceWith7DaysReminderFilter_SavingsAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance of Savings Account with Next 7 Days filter is NOT correct.");
@@ -1156,12 +1189,17 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Double dTodaysBalanceWith12MonthsReminderFilter_SavingsAccount = h.processBalanceAmount(sTodaysBalanceWith12MonthsReminderFilter_SavingsAccount);
 		Double dProjectedBalanceWith12MonthsReminderFilter_SavingsAccount = h.processBalanceAmount(sProjectedBalanceWith12MonthsReminderFilter_SavingsAccount);
 
-		if(dTodaysBalance_SavingsAccount+d==dTodaysBalanceWith12MonthsReminderFilter_SavingsAccount)
+		int todaysBalanceCompare_SavingsAccount_12MonthsReminderFilter = Double.compare(dTodaysBalance_SavingsAccount+d, dTodaysBalanceWith12MonthsReminderFilter_SavingsAccount);
+		int projectedBalanceCompare_SavingsAccount_12MonthsReminderFilter = Double.compare(dProjectedBalance_SavingsAccount+d*4d, dProjectedBalanceWith12MonthsReminderFilter_SavingsAccount);
+
+//		if(dTodaysBalance_SavingsAccount+d==dTodaysBalanceWith12MonthsReminderFilter_SavingsAccount)
+		if(todaysBalanceCompare_SavingsAccount_12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance of Savings Account with Next 12 Months filter is "+sTodaysBalanceWith12MonthsReminderFilter_SavingsAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Today's balance of Savings Account with Next 12 Months filter is NOT correct.");
 
-		if(dProjectedBalance_SavingsAccount+d*4d==dProjectedBalanceWith12MonthsReminderFilter_SavingsAccount)
+//		if(dProjectedBalance_SavingsAccount+d*4d==dProjectedBalanceWith12MonthsReminderFilter_SavingsAccount)
+		if(projectedBalanceCompare_SavingsAccount_12MonthsReminderFilter == 0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Projected balance of Savings Account with Next 12 Months filter is "+sProjectedBalanceWith12MonthsReminderFilter_SavingsAccount+".");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Projected balance of Savings Account with Next 12 Months filter is NOT correct.");

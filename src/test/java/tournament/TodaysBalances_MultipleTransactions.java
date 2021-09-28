@@ -90,12 +90,17 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dChecking_before-d;
 		System.out.println("***Expected - "+p);
 		
-		if (dChecking_before-d==dChecking_after)
+		int checking_Balance_Compare = Double.compare(dChecking_before-d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dChecking_before-d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
@@ -160,18 +165,22 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dChecking_before+d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dChecking_before+d==dChecking_after)
+		int checking_Balance_Compare = Double.compare(dChecking_before+d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dChecking_before+d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added incomje transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		
-		sa.assertAll();	
-		
+		sa.assertAll();
 	}
 	
 	@Test(priority = 3, enabled = true)
@@ -231,12 +240,17 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dBefore-d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dBefore-d==dAfter)
+		int checking_Balance_Compare = Double.compare(dBefore-d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dBefore-d==dAfter)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dBefore+"], added expense transactions for ["+d+"], now the Credit card balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dBefore+"], added expense transactions for ["+d+"], now the Credit card balance shows ["+dAfter+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
@@ -301,12 +315,17 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dBefore+d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dBefore+d==dAfter)
+		int checking_Balance_Compare = Double.compare(dBefore+d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dBefore+d==dAfter)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dBefore+"], added income transactions for ["+d+"], now the Creditcard balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dBefore+"], added income transactions for ["+d+"], now the creditcard balance shows ["+dAfter+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added Income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added Income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
@@ -387,17 +406,24 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dChecking_before-d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dAccountBalance_before-d==dAccountBalance_after)
+		int account_Balance_Compare = Double.compare(dAccountBalance_before-d, dAccountBalance_after);
+		int checking_Balance_Compare = Double.compare(dChecking_before-d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dAccountBalance_before-d==dAccountBalance_after)
+		if(account_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
-		if (dChecking_before-d==dChecking_after)
+//		if (dChecking_before-d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare ==0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
@@ -453,11 +479,11 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Verify.waitForObject(txnPage.txtTodaysBalance, 2);
+		
 		if (txnPage.verifyAccount(tRec.getAccount()) == false)
 	   		Commentary.log(sa, LogStatus.FAIL,"Account name verification on Transaction page failed.");
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type income, amount: "+tRec.getAmount());
-		
 		
 		txnPage.addTransaction.click();
 		Verify.waitForObject(td.buttonDone, 1);
@@ -481,21 +507,28 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dAccountBalance_before+d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dAccountBalance_before+d==dAccountBalance_after)
+		int account_Balance_Compare = Double.compare(dAccountBalance_before+d, dAccountBalance_after);
+		int checking_Balance_Compare = Double.compare(dChecking_before+d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dAccountBalance_before+d==dAccountBalance_after)
+		if(account_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
 		p = dChecking_before+d;
 		
-		if (dChecking_before+d==dChecking_after)
+//		if (dChecking_before+d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added income transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		p = dTotal_before+d;
 
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
@@ -575,21 +608,28 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		double p = dAccountBalance_before-d;
 		System.out.println("***Expected -> "+p);
 		
-		if (dAccountBalance_before-d==dAccountBalance_after)
+		int account_Balance_Compare = Double.compare(dAccountBalance_before-d, dAccountBalance_after);
+		int checking_Balance_Compare = Double.compare(dChecking_before-d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dAccountBalance_before-d==dAccountBalance_after)
+		if(account_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, tRec.getAccount()+ " account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: "+ tRec.getAccount()+" account balance was ["+dAccountBalance_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dAccountBalance_after+"]");
 		
 		p = dChecking_before-d;
 		
-		if (dChecking_before-d==dChecking_after)
+//		if (dChecking_before-d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CreditCard balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CreditCard balance was ["+dChecking_before+"], added expense transactions for ["+d+"], now the checking balance shows ["+dChecking_after+"]");
 		
 		p = dTotal_before-d;
 
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transactions for ["+d+"], now the total balance shows ["+dTotal_after+"]");
