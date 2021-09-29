@@ -544,7 +544,7 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
-		
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());

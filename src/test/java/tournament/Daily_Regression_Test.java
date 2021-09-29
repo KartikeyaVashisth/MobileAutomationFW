@@ -174,7 +174,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(tp.addTransaction, 2);
 		tp.addTransaction.click();
-		
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
