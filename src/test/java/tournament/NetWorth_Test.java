@@ -115,6 +115,8 @@ public class NetWorth_Test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Banking label is not displayed under Assets tab.");
 
+		nw.scrollToOtherAssetsLabel();
+		
 		if (Verify.objExists(nw.otherAssetsLabel))
 			Commentary.log(LogStatus.INFO, "PASS: Other Assets label is displayed under Assets tab.");
 		else

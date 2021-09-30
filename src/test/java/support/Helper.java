@@ -202,8 +202,8 @@ public class Helper {
 			capabilities.setCapability("name", this.getTestName());
 			capabilities.setCapability("appiumVersion", "1.17.1");
 			capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("platformVersion","10.0");
-			capabilities.setCapability("deviceName","Google Pixel 3 GoogleAPI Emulator");
+			capabilities.setCapability("platformVersion","11.0");
+			capabilities.setCapability("deviceName","Google Pixel 3 XL GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android Emulator");
 			//capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");

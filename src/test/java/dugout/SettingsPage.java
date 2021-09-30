@@ -66,21 +66,21 @@ public class SettingsPage {
 	public MobileElement closeButton;
 	
 	@iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeOther[`name contains 'logOutButton'`]/XCUIElementTypeStaticText")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'(')]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='logOutButton']/../android.widget.TextView[contains(@text,'(')]")
 	public MobileElement versionNumber;
 
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'logOutButton'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Logout']")
 	public MobileElement logoutButton;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Cloud Account name Menu'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']")
-	public MobileElement cloudAccountNameOption;
+//	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Cloud Account name Menu'`]")
+//	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']")
+//	public MobileElement cloudAccountNameOption;
 	
 //	@iOSXCUITFindBy(id = "dataSetArrow")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Cloud Account name Menu'`]/XCUIElementTypeOther[`name='Expand Icon'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
 //	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='dataSetArrow']")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']/following-sibling::android.widget.ImageView")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']/../following-sibling::android.view.ViewGroup[1]")
 	public MobileElement datasetDDButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
@@ -107,9 +107,9 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
 	public MobileElement budgetsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Investments Menu'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investments']")
-	public MobileElement investmentsOption;
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investing Menu'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
+	public MobileElement investingOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Reports'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Reports']")
@@ -124,7 +124,7 @@ public class SettingsPage {
 	public MobileElement netIncomeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Net Worth'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Worth']")
+	@AndroidFindBy(xpath="(//android.widget.TextView[@text='Net Worth'])[2]")
 	public MobileElement netWorthOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Spending by Category'`]")
@@ -134,6 +134,10 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Spending Over Time'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
 	public MobileElement spendingOverTimeOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//*[@class='android.widget.Button']")
+	public MobileElement backButtonOnHeaders;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Profile Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Profile']")
@@ -207,13 +211,13 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
 	public MobileElement settingsOption;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Settings'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Settings'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Settings']")
 	public MobileElement settingsHeaderText;
 
-	@iOSXCUITFindBy(accessibility="Back")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']/../android.widget.ImageButton")
-	public MobileElement backButtonOnHeader;
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Settings']/../android.view.ViewGroup[@content-desc='backArrow']")
+	public MobileElement backButtonOnSettingsHeader;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Yelp Recommendations'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']")
@@ -223,21 +227,37 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.TextView[1]")
 	public MobileElement displayYelpDescription;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`][-2]/XCUIElementTypeSwitch")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.Switch")
 	public MobileElement switchDisplayYelp;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Show long category names'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']")
+	public MobileElement showLongCategoryNamesText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Show long category names'`]/XCUIElementTypeStaticText[`name = 'Display long form of categories in transaction and details'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']/following::android.widget.TextView[1]")
+	public MobileElement showLongCategoryNamesDescription;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Show long category names'`]/XCUIElementTypeSwitch")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']/following::android.widget.Switch")
+	public MobileElement switchShowLongCategoryNames;
+	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Favorite Payees'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']")
-	public MobileElement favoritePayeesText;
+	public MobileElement displayFavoritePayeesText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`]/XCUIElementTypeStaticText[`name = 'Displays favorite payees when you are adding payees for your transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.TextView[1]")
 	public MobileElement displayFavoritePayeesDescription;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`][-2]/XCUIElementTypeSwitch")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
-	public MobileElement switchFavoritePayees;
+	public MobileElement switchDisplayFavoritePayees;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Customize Dashboard'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
+	public MobileElement customizeDashboardOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Accounts Management'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts Management']")
@@ -247,12 +267,12 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
 	public MobileElement ManageAlertsTxt;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Manage Alerts'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Manage Alerts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
 	public MobileElement ManageAlertsHeaderTxt;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Alerts'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Rules'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Rules']")
 	public MobileElement rulesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Renaming Rules'`]")
@@ -280,7 +300,7 @@ public class SettingsPage {
 	public MobileElement tagsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Tags'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']")
+	@AndroidFindBy(xpath="//android.view.View[@text='Tags']")
 	public MobileElement tagsHeaderText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
@@ -489,6 +509,96 @@ public class SettingsPage {
 		}
 	}
 	
+	public boolean isDisplayFavoritePayeesEnabled() throws Exception {
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			Verify.waitForObject(switchDisplayFavoritePayees, 1);
+			if (this.switchDisplayFavoritePayees.getText().equalsIgnoreCase("ON")) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { //For iOS
+			Verify.waitForObject(switchDisplayFavoritePayees, 1);
+			if (this.switchDisplayFavoritePayees.getAttribute("value").equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public void enableDisplayFavoritePayeesOption() throws Exception {
+		
+		if (isDisplayFavoritePayeesEnabled()) {
+			Commentary.log(LogStatus.INFO, "Display Favorite Payees option is already Enabled.");
+			Thread.sleep(2000);
+		} else {
+			this.switchDisplayFavoritePayees.click();
+			Commentary.log(LogStatus.INFO, "Display Favorite Payees option is Enabled now.");
+			Thread.sleep(2000);
+		}
+		
+	}
+	
+	public void disableDisplayFavoritePayeesOption() throws Exception {
+		
+		if (isDisplayFavoritePayeesEnabled()) {
+			this.switchDisplayFavoritePayees.click();
+			Commentary.log(LogStatus.INFO, "Display Favorite Payees option is Disabled now.");
+			Thread.sleep(2000);
+		} else {
+			Commentary.log(LogStatus.INFO, "Display Favorite Payees option is already Disabled.");
+			Thread.sleep(2000);
+		}
+	}
+	
+	public boolean isShowLongCategoryNamesEnabled() throws Exception {
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			Verify.waitForObject(switchShowLongCategoryNames, 1);
+			if (this.switchShowLongCategoryNames.getText().equalsIgnoreCase("ON")) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { //For iOS
+			Verify.waitForObject(switchShowLongCategoryNames, 1);
+			if (this.switchShowLongCategoryNames.getAttribute("value").equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public void enableShowLongCategoryNamesOption() throws Exception {
+		
+		if (isShowLongCategoryNamesEnabled()) {
+			Commentary.log(LogStatus.INFO, "Show Long Categories names option is already Enabled.");
+			Thread.sleep(2000);
+		} else {
+			this.switchShowLongCategoryNames.click();
+			Commentary.log(LogStatus.INFO, "Show Long Categories names option is Enabled now.");
+			Thread.sleep(2000);
+		}
+		
+	}
+	
+	public void disableShowLongCategoryNamesOption() throws Exception {
+		
+		if (isShowLongCategoryNamesEnabled()) {
+			this.switchShowLongCategoryNames.click();
+			Commentary.log(LogStatus.INFO, "Show Long Categories names option is Disabled now.");
+			Thread.sleep(2000);
+		} else {
+			Commentary.log(LogStatus.INFO, "Show Long Categories names option is already Disabled.");
+			Thread.sleep(2000);
+		}
+	}
+	
 	public void clickOnDashboardOption() throws Exception {
 		
 		OverviewPage op = new OverviewPage();
@@ -544,14 +654,14 @@ public class SettingsPage {
 		Thread.sleep(1000);
 	}
 	
-	public void clickOnInvestmentsOption() throws Exception {
+	public void clickOnInvestingOption() throws Exception {
 
 		OverviewPage op = new OverviewPage();
 		Verify.waitForObject(op.hambergerIcon, 1);
 		op.hambergerIcon.click();
 
-		Verify.waitForObject(this.investmentsOption, 1);
-		this.investmentsOption.click();
+		Verify.waitForObject(this.investingOption, 1);
+		this.investingOption.click();
 		Thread.sleep(1000);
 	}
 	

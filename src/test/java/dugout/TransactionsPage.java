@@ -51,7 +51,7 @@ public class TransactionsPage {
 	// coded for android. IOS behavior not clearly known
 	public Boolean verifyAccount(String acctName) throws Exception{
 			
-			String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
+			String xPathForAcct = "//android.view.ViewGroup/android.view.View[normalize-space(@text)='"+acctName+"']";
 //			String xPathForAcct_IOS ="//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[normalize-space(@name)='"+acctName+"']";
 			String xPathForAcct_IOS ="**/XCUIElementTypeOther[`name='"+acctName+"'`]";
 			
@@ -499,7 +499,7 @@ public class TransactionsPage {
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
-	@AndroidFindBy(xpath="(//*[@class='android.widget.ImageButton'])[1]")
+	@AndroidFindBy(xpath="//android.view.View/../android.widget.Button[contains(@content-desc,'back')]")
 	public MobileElement backButton;
 	
 	@iOSFindBy(xpath="//*[@name='All Transactions']")

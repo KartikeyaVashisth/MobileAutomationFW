@@ -583,7 +583,8 @@ public class ReviewNotReview_Test extends Recovery {
 		String currentStatus = td.getTransactionReviewStatus();
 		Commentary.log(LogStatus.INFO, "Current Transaction Status is: "+currentStatus);
 
-		td.backButton.click();
+		Verify.waitForObject(td.backButtonOnViewTransactionPage, 1);
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(2000);
 
 		tp.swipe_right();
@@ -675,7 +676,7 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter Apply > Not Reviewed > First transaction status is incorrect.");
 		}
 
-		td.backButton.click();
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(500);
 
 		//Verify that second transaction
@@ -690,7 +691,7 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter Apply > Not Reviewed > Second transaction status is incorrect.");
 		}
 
-		td.backButton.click();
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(500);
 
 		//Verify that third transaction
@@ -705,7 +706,7 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter Apply > Not Reviewed > Third transaction status is incorrect.");
 		}
 
-		td.backButton.click();
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(500);
 
 		//Verify that fourth transaction
@@ -720,7 +721,7 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter Apply > Not Reviewed > Fourth transaction status is incorrect.");
 		}
 
-		td.backButton.click();
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(500);
 
 	}

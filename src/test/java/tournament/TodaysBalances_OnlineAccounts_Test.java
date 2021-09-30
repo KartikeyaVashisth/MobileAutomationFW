@@ -128,12 +128,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dChecking_before-d==dChecking_after)
+		int checking_Balance_Compare = Double.compare(dChecking_before-d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dChecking_before-d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -180,12 +185,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dChecking_after = h.processBalanceAmount(sChecking_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dChecking_before+d==dChecking_after)
+		int checking_Balance_Compare = Double.compare(dChecking_before+d, dChecking_after);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dChecking_before+d==dChecking_after)
+		if(checking_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added income transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added income transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -232,12 +242,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dCC_after = h.processBalanceAmount(sCC_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dCC_before-d==dCC_after)
+		int cc_Balance_Compare = Double.compare(dCC_before-d, dCC_after);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dCC_before-d==dCC_after)
+		if(cc_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dCC_before+"], added expense transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added expense transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -284,12 +299,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dCC_after = h.processBalanceAmount(sCC_after);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dCC_before+d==dCC_after)
+		int cc_Balance_Compare = Double.compare(dCC_before+d, dCC_after);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dCC_before+d==dCC_after)
+		if(cc_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CC balance was ["+dCC_before+"], added income transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CC balance was ["+dCC_before+"], added income transaction for ["+tRec.getAmount()+"], now the CC balance shows ["+dCC_after+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -336,12 +356,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dAfter = h.processBalanceAmount(sAfter);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dBefore-d==dAfter)
+		int account_Balance_Compare = Double.compare(dBefore-d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dBefore-d==dAfter)
+		if(account_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now CASH balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now CASH balance shows ["+dAfter+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -388,12 +413,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dAfter = h.processBalanceAmount(sAfter);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dBefore+d==dAfter)
+		int cash_Balance_Compare = Double.compare(dBefore+d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dBefore+d==dAfter)
+		if(cash_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: CASH balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the CASH balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: CASH balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the CASH balance shows ["+dAfter+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -440,12 +470,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dAfter = h.processBalanceAmount(sAfter);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dBefore-d==dAfter)
+		int account_Balance_Compare = Double.compare(dBefore-d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before-d, dTotal_after);
+		
+//		if (dBefore-d==dAfter)
+		if(account_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now SAVINGS balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Account balance was ["+dBefore+"], added expense transaction for ["+tRec.getAmount()+"], now SAVINGS balance shows ["+dAfter+"]");
 		
-		if (dTotal_before-d==dTotal_after)
+//		if (dTotal_before-d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
@@ -492,12 +527,17 @@ public class TodaysBalances_OnlineAccounts_Test extends Recovery {
 		Double dAfter = h.processBalanceAmount(sAfter);
 		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 		
-		if (dBefore+d==dAfter)
+		int savings_Balance_Compare = Double.compare(dBefore+d, dAfter);
+		int total_Balance_Compare = Double.compare(dTotal_before+d, dTotal_after);
+		
+//		if (dBefore+d==dAfter)
+		if(savings_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: SAVINGS balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the SAVINGS balance shows ["+dAfter+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: SAVINGS balance was ["+dBefore+"], added income transaction for ["+tRec.getAmount()+"], now the SAVINGS balance shows ["+dAfter+"]");
 		
-		if (dTotal_before+d==dTotal_after)
+//		if (dTotal_before+d==dTotal_after)
+		if(total_Balance_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added income transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");

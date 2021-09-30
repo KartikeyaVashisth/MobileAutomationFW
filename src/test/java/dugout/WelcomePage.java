@@ -62,7 +62,7 @@ public class WelcomePage {
 	public MobileElement xpath_chkboxProductionEnvironment;
 	
 	//@iOSFindBy(xpath="//*[normalize-space(@name)='Done']")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='done'`][-1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='done'`]")
 	public MobileElement linkAppConfigDone;
 	
 	public void setEnvironment(String preprod) throws Exception{

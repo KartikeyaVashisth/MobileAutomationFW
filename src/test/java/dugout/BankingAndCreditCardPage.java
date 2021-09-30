@@ -38,7 +38,7 @@ public class BankingAndCreditCardPage {
 	}
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar/XCUIElementTypeButton")
-	@AndroidFindBy(xpath="//*[@class='android.widget.ImageButton']")
+	@AndroidFindBy(xpath="//*[@class='android.widget.Button']")
 	public MobileElement backButton;
 
 	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")

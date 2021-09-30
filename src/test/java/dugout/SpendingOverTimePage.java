@@ -81,9 +81,10 @@ public class SpendingOverTimePage {
 		public Double getSelectedMonthAmount() throws Exception {
 			
 			String sAmount = this.totalSpendingForSelectedMonth.getText();
+			String processedAmount = sAmount.replaceAll("[^0-9.-]", "");
 			
 			Helper h = new Helper();
-			return h.processBalanceAmount(sAmount);
+			return h.processBalanceAmount(processedAmount);
 		}
 		
 		public void tapOnTheMonth (String sMonth) throws Exception{

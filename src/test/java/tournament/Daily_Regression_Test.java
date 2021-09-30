@@ -2,6 +2,7 @@ package tournament;
 
 import support.Recovery;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 
 import org.openqa.selenium.WebElement;
@@ -94,29 +95,44 @@ public class Daily_Regression_Test extends Recovery {
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
 		Commentary.log(LogStatus.INFO, "Total balance before adding the transaction ["+sTotal_before+"]");
-		Double d = Double.parseDouble(tRec.getAmount());
-		Double dChecking_before = h.processBalanceAmount(sChecking_before);
-		Double dTotal_before = h.processBalanceAmount(sTotal_before);
+//		Double d = Double.parseDouble(tRec.getAmount());
+		
+//		Double dChecking_before = h.processBalanceAmount(sChecking_before);
+//		Double dTotal_before = h.processBalanceAmount(sTotal_before);
+		String processedChecking_before = sChecking_before.replaceAll("[^0-9.-]", "");
+		String processedTotal_before = sTotal_before.replaceAll("[^0-9.-]", "");
+		
+		BigDecimal checking_before = new BigDecimal(processedChecking_before);
+		BigDecimal total_before = new BigDecimal(processedTotal_before);
+		BigDecimal diff = new BigDecimal(tRec.getAmount());
 
 		op.addTransaction.click();
+		Thread.sleep(1000);
 		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
 
 		sChecking_after = op.checkingBalance.getText();
 		sTotal_after = op.totalBalance.getText();
-		Double dChecking_after = h.processBalanceAmount(sChecking_after);
-		Double dTotal_after = h.processBalanceAmount(sTotal_after);
+		String processedChecking_after = sChecking_after.replaceAll("[^0-9.-]", "");
+		String processedTotal_after = sTotal_after.replaceAll("[^0-9.-]", "");
+//		Double dChecking_after = h.processBalanceAmount(sChecking_after);
+//		Double dTotal_after = h.processBalanceAmount(sTotal_after);
 
-		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+		BigDecimal checking_after = new BigDecimal(processedChecking_after);
+		BigDecimal total_after = new BigDecimal(processedTotal_after);
+		
+//		if (dChecking_before-d==dChecking_after)
+		if((checking_before.subtract(diff)).equals(checking_after))
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+checking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+checking_after+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+checking_before+"], added expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+checking_after+"]");
 
-		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+//		if (dTotal_before-d==dTotal_after)
+		if((total_before.subtract(diff)).equals(total_after))
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+total_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+total_after+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+total_before+"], added expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+total_after+"]");
 
 		sa.assertAll();	
 	}
@@ -138,10 +154,11 @@ public class Daily_Regression_Test extends Recovery {
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding and editing the transaction ["+sChecking_before+"]");
 		Commentary.log(LogStatus.INFO, "Total balance before adding and editing the transaction ["+sTotal_before+"]");
-
+		
 		op.navigateToAcctList();
 
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		Verify.waitForObject(bcc.allTransactionButton, 1);
 		bcc.allTransactionButton.click();
 
 		TransactionRecord tRec = new TransactionRecord();
@@ -157,14 +174,14 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(tp.addTransaction, 2);
 		tp.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();	
 		Verify.waitForObject(td.category, 2);
-
+		
 		if(h.getEngine().equals("android")) {
 			Double txnAmount_before = h.processBalanceAmount(td.getTransactionAmount());
 			Commentary.log(LogStatus.INFO, "Original transaction amount: "+txnAmount_before+"");
@@ -182,10 +199,18 @@ public class Daily_Regression_Test extends Recovery {
 
 		td.editTransaction(tRec);
 
-		Double d = Double.parseDouble(tRec.getAmount()); //value of d = 10
-		Double dChecking_before = h.processBalanceAmount(sChecking_before);
-		Double dTotal_before = h.processBalanceAmount(sTotal_before);
+//		Double d = Double.parseDouble(tRec.getAmount()); //value of d = 10
+//		Double dChecking_before = h.processBalanceAmount(sChecking_before);
+//		Double dTotal_before = h.processBalanceAmount(sTotal_before);
 
+		String processedChecking_before = sChecking_before.replaceAll("[^0-9.-]", "");
+		String processedTotal_before = sTotal_before.replaceAll("[^0-9.-]", "");
+		
+		BigDecimal checking_before = new BigDecimal(processedChecking_before);
+		BigDecimal total_before = new BigDecimal(processedTotal_before);
+
+		BigDecimal diff = new BigDecimal(tRec.getAmount());
+		
 		//Double d_After = d+txnAmount_before; //value of d_after = 10+(-5) = 5
 
 		Commentary.log(LogStatus.INFO, "Transaction edited successfully for the account ["+tRec.getAccount()+"], transaction type Expense, amount "+ tRec.getAmount());
@@ -197,23 +222,32 @@ public class Daily_Regression_Test extends Recovery {
 		sp.selectBack("Back");
 		Thread.sleep(5000);
 
+		Verify.waitForObject(op.totalBalance, 1);
 		sChecking_after = op.checkingBalance.getText();
 		sTotal_after = op.totalBalance.getText();
-		Double dChecking_after = h.processBalanceAmount(sChecking_after);
-		Double dTotal_after = h.processBalanceAmount(sTotal_after);
+//		Double dChecking_after = h.processBalanceAmount(sChecking_after);
+//		Double dTotal_after = h.processBalanceAmount(sTotal_after);
+		
+		String processedChecking_after = sChecking_after.replaceAll("[^0-9.-]", "");
+		String processedTotal_after = sTotal_after.replaceAll("[^0-9.-]", "");
+		
+		BigDecimal checking_after = new BigDecimal(processedChecking_after);
+		BigDecimal total_after = new BigDecimal(processedTotal_after);
 
-		Commentary.log(LogStatus.INFO, "CHECKING BEFORE: "+dChecking_before);
-		Commentary.log(LogStatus.INFO, "CHECKING AFTER: "+dChecking_after);
+		Commentary.log(LogStatus.INFO, "CHECKING BEFORE: "+checking_before);
+		Commentary.log(LogStatus.INFO, "CHECKING AFTER: "+checking_after);
 
-		if (dChecking_before-d==dChecking_after)
-			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+//		if (dChecking_before-d==dChecking_after)
+		if((checking_before.subtract(diff)).equals(checking_after))
+			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+checking_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+checking_after+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+checking_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+checking_after+"]");
 
-		if (dTotal_before-d==dTotal_after)
-			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+dTotal_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+//		if (dTotal_before-d==dTotal_after)
+		if((total_before.subtract(diff)).equals(total_after))
+			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+total_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+total_after+"]");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+dTotal_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+dTotal_after+"]");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total balance was ["+total_before+"], edited expense transaction for ["+tRec.getAmount()+"], now the total balance shows ["+total_after+"]");
 
 		sa.assertAll();
 	}
@@ -231,6 +265,7 @@ public class Daily_Regression_Test extends Recovery {
 		op.navigateToAcctList();
 
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		Verify.waitForObject(bcc.allTransactionButton, 1);
 		bcc.allTransactionButton.click();
 
 		TransactionsPage tp = new TransactionsPage();
@@ -246,7 +281,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(tp.addTransaction, 2);
 		tp.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
@@ -545,11 +580,18 @@ public class Daily_Regression_Test extends Recovery {
 		Verify.waitForObject(bcc.checkingBalance, 2);
 		sChecking_before = bcc.getCheckingBalance();
 		sSaving_before = bcc.getSavingsBalance();
-		Double dChecking_before = h.processBalanceAmount(sChecking_before.replace("SubTotal: ", ""));
-		Double dSaving_before = h.processBalanceAmount(sSaving_before.replace("SubTotal: ", ""));
+		Double dChecking_before = h.processBalanceAmount(sChecking_before.replaceAll("[^0-9.-]", ""));
+		Double dSaving_before = h.processBalanceAmount(sSaving_before.replaceAll("[^0-9.-]", ""));
+		
+//		String processedChecking_before = sChecking_before.replaceAll("[^0-9.-]", "");
+//		String processedSaving_before = sSaving_before.replaceAll("[^0-9.-]", "");
+		
+//		BigDecimal checking_before = new BigDecimal(processedChecking_before);
+//		BigDecimal saving_before = new BigDecimal(processedSaving_before);
 
 		bcc.allTransactionButton.click();
 		TransactionsPage tp = new TransactionsPage();
+		
 		Verify.waitForObject(tp.addTransaction, 2);
 		tp.addTransaction.click();
 
@@ -562,28 +604,40 @@ public class Daily_Regression_Test extends Recovery {
 		tRec.setTransactionType("expense");
 
 		td.addTransaction(tRec);
-		Verify.waitForObject(tp.backButton, 3);
+		Verify.waitForObject(tp.backButton, 1);
 		tp.backButton.click();
 
 		Verify.waitForObject(bcc.checkingBalance, 2);
 		sChecking_after = bcc.getCheckingBalance();
 		sSaving_after = bcc.getSavingsBalance();
-		Double dChecking_after = h.processBalanceAmount(sChecking_after.replace("SubTotal: ", ""));
-		Double dSaving_after = h.processBalanceAmount(sSaving_after.replace("SubTotal: ", ""));
+		Double dChecking_after = h.processBalanceAmount(sChecking_after.replaceAll("[^0-9.-]", ""));
+		Double dSaving_after = h.processBalanceAmount(sSaving_after.replaceAll("[^0-9.-]", ""));
 		Double d = Double.parseDouble(tRec.getAmount());
+		
+//		String processedChecking_after = sChecking_after.replaceAll("[^0-9.-]", "");
+//		String processedSaving_after = sSaving_after.replaceAll("[^0-9.-]", "");
+		
+//		BigDecimal checking_after = new BigDecimal(processedChecking_after);
+//		BigDecimal saving_after = new BigDecimal(processedSaving_after);
+		
+//		BigDecimal diff = new BigDecimal(tRec.getAmount());
 
-		if (dChecking_after+d==dChecking_before)
+		int checking_compare = Double.compare(dChecking_after+d, dChecking_before);
+		int savings_compare = Double.compare(dSaving_after-d, dSaving_before);
+		
+//		if (dChecking_after+d==dChecking_before)
+		if(checking_compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Checking balance was ["+dChecking_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Checking balance was ["+dChecking_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the checking balance shows ["+dChecking_after+"]");
 
-		if (dSaving_after-d==dSaving_before)
+//		if (dSaving_after-d==dSaving_before)
+		if(savings_compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Savings balance was ["+dSaving_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Savings balance was ["+dSaving_before+"], added transfer transaction for ["+tRec.getAmount()+"], now the savings balance shows ["+dSaving_after+"]");
-
+		
 		sa.assertAll();
-
 	}
 
 	@Test(priority = 11, enabled = true)
@@ -634,16 +688,17 @@ public class Daily_Regression_Test extends Recovery {
 		Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
 
 		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		TransactionsPage tp = new TransactionsPage();
 		AllAccountsPage aa = new AllAccountsPage();
+		
+		op.navigateToAcctList();
 		bcc.selectAccount(sManualSaving);
+		
 		Verify.waitForObject(tp.buttonSort, 2);
-		//Thread.sleep(1000);
-		//sTotalBalance = h.processBalanceAmount(bcc.getTotalBalance().replace("$", ""));
 		tp.buttonSort.click();
 		Thread.sleep(1000);
+		
 		tp.selectSortFilterOption(filterNewToOld);
 
 		if (tp.isRunningBalanceEnabled()) {
@@ -742,15 +797,17 @@ public class Daily_Regression_Test extends Recovery {
 		Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
 
 		OverviewPage op = new OverviewPage();
-		op.navigateToAcctList();
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		TransactionsPage tp = new TransactionsPage();
 		AllAccountsPage aa = new AllAccountsPage();
+		
+		op.navigateToAcctList();
 		bcc.selectAccount(sManualSaving);
 
 		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 		Thread.sleep(1000);
+		
 		tp.selectSortFilterOption(filterNewToOld);
 
 		if (tp.isRunningBalanceEnabled()) {
@@ -848,7 +905,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 1);
+		
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
@@ -856,7 +913,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		TransactionSummaryPage ts = new TransactionSummaryPage();
 		Verify.waitForObject(ts.transactionCategoryPayeeText, 2);
-		String categoryName = ts.getCategoryPayeeName();
+		String categoryName = ts.getCategoryName();
 
 		ts.transactionCategoryPayeeText.click();
 		Thread.sleep(7000);
@@ -867,38 +924,26 @@ public class Daily_Regression_Test extends Recovery {
 		Verify.waitForObject(td.selectedCategory, 2);
 		td.VerifyTransactionCategory(categoryName);
 
-		Verify.waitForObject(td.backButton, 2);
-		td.backButton.click();
+		Verify.waitForObject(td.backButtonOnViewTransactionPage, 1);
+		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(2000);
 
 		tp.tapOnTransation(1);
 		Thread.sleep(2000);
+		
+		Verify.waitForObject(td.selectedCategory, 2);
 		td.VerifyTransactionCategory(categoryName);
 
-		td.backButton.click(); Thread.sleep(2000);
+		Verify.waitForObject(td.backButtonOnViewTransactionPage, 1);
+		td.backButtonOnViewTransactionPage.click(); 
+		Thread.sleep(2000);
 
-		//	tp.tapOnTransation(3);
-		//	Thread.sleep(2000);
-		//	td.VerifyTransactionCategory(categoryName);
-		//
-		//	td.backButton.click(); Thread.sleep(2000);
-		//
-		//	tp.tapOnTransation(4);
-		//	Thread.sleep(2000);
-		//	td.VerifyTransactionCategory(categoryName);
-		//
-		//	td.backButton.click(); Thread.sleep(2000);
-		//
-		//	tp.tapOnTransation(6);
-		//	Thread.sleep(2000);
-		//	td.VerifyTransactionCategory(categoryName);
-		//
-		//	td.backButton.click(); Thread.sleep(2000);
-		td.backButton.click(); Thread.sleep(2000);
+		td.backButton.click(); 
+		Thread.sleep(2000);
 
 		ts.payeeTab.click();
 		Thread.sleep(2000);
-		String payeeName = ts.getCategoryPayeeName();
+		String payeeName = ts.getPayeeName();
 
 		ts.transactionCategoryPayeeText.click();
 		Thread.sleep(1000);
@@ -907,31 +952,15 @@ public class Daily_Regression_Test extends Recovery {
 		Thread.sleep(1000);
 		td.VerifyTransactionPayee(payeeName);
 
-		td.backButton.click(); Thread.sleep(1000);
+		td.backButtonOnViewTransactionPage.click(); 
+		Thread.sleep(1000);
 
 		tp.tapOnTransation(1);
 		Thread.sleep(1000);
 		td.VerifyTransactionPayee(payeeName);
 
-		td.backButton.click(); Thread.sleep(1000);
-
-		//	tp.tapOnTransation(3);
-		//	Thread.sleep(1000);
-		//	td.VerifyTransactionPayee(payeeName);
-		//
-		//	td.backButton.click(); Thread.sleep(1000);
-		//
-		//	tp.tapOnTransation(4);
-		//	Thread.sleep(1000);
-		//	td.VerifyTransactionPayee(payeeName);
-		//
-		//	td.backButton.click(); Thread.sleep(1000);
-		//
-		//	tp.tapOnTransation(6);
-		//	Thread.sleep(1000);
-		//	td.VerifyTransactionPayee(payeeName);
-		//
-		//	td.backButton.click(); Thread.sleep(1000);
+		td.backButtonOnViewTransactionPage.click(); 
+		Thread.sleep(1000);
 
 		sa.assertAll();
 	}
@@ -954,7 +983,7 @@ public class Daily_Regression_Test extends Recovery {
 		Verify.waitForObject(ts.payeeTile, 2);
 		String sPayeeAmount_before = ts.payeeTile.getText();
 		Commentary.log(LogStatus.INFO, "Payee tile amount before adding transaction-> "+sPayeeAmount_before);
-		Double dPayeeAmount_before = h.processBalanceAmount(sPayeeAmount_before.replace("shop ", ""));
+		Double dPayeeAmount_before = h.processBalanceAmount(sPayeeAmount_before.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Processed Payee tile amount is: "+dPayeeAmount_before);
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -964,12 +993,14 @@ public class Daily_Regression_Test extends Recovery {
 		tRec.setPayee("shop");
 		tRec.setTransactionType("expense");
 
+		Verify.waitForObject(ts.backButtonOnHeader, 1);
 		ts.backButtonOnHeader.click();
 
 		op.scrollToTop();		
+		
 		Verify.waitForObject(op.addTransaction, 2);
 		op.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		
 		td.addTransaction(tRec);
 
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
@@ -981,11 +1012,14 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(ts.payeeTile, 2);
 		String sPayeeAmount_after = ts.payeeTile.getText();
-		Double dPayeeAmount_after = h.processBalanceAmount(sPayeeAmount_after.replace("shop ", ""));
-		Double d = Double.parseDouble(tRec.getAmount());
+		Double dPayeeAmount_after = h.processBalanceAmount(sPayeeAmount_after.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Payee tile amount is now: "+dPayeeAmount_after);
-
-		if (dPayeeAmount_before-d==dPayeeAmount_after)
+		
+		Double d = Double.parseDouble(tRec.getAmount());
+		
+		int payeeTile_Compare = Double.compare(dPayeeAmount_before-d, dPayeeAmount_after);
+		
+		if(payeeTile_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Payee tile is updated after adding expense transaction for selected payee.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Payee tile is NOT updated after adding expense transaction for selected payee.");
@@ -1013,7 +1047,7 @@ public class Daily_Regression_Test extends Recovery {
 		Verify.waitForObject(ts.categoryTile, 2);
 
 		String sCategoryAmount_before = ts.categoryTile.getText();
-		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
+		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Category tile amount is: "+dCategoryAmount_before);
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -1024,12 +1058,14 @@ public class Daily_Regression_Test extends Recovery {
 		tRec.setCategory("Internet");
 		tRec.setTransactionType("expense");
 
+		Verify.waitForObject(ts.backButtonOnHeader, 1);
 		ts.backButtonOnHeader.click();
 
 		op.scrollToTop();
 
+		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
-		Verify.waitForObject(td.buttonDone, 2);
+		
 		td.addTransaction(tRec);
 
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
@@ -1040,11 +1076,14 @@ public class Daily_Regression_Test extends Recovery {
 
 		Verify.waitForObject(ts.categoryTile, 5);
 		String sCategoryAmount_after = ts.categoryTile.getText();
-		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replace("Internet ", ""));
-		Double d = Double.parseDouble(tRec.getAmount());
+		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Category tile amount is now: "+dCategoryAmount_after);
+		
+		Double d = Double.parseDouble(tRec.getAmount());
 
-		if (dCategoryAmount_before-d==dCategoryAmount_after)
+		int categoryTile_Compare = Double.compare(dCategoryAmount_before-d, dCategoryAmount_after);
+		
+		if(categoryTile_Compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Category tile is updated after adding expense transaction for selected payee.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Category tile is NOT updated after adding expense transaction for selected payee.");

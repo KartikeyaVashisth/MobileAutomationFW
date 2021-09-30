@@ -28,8 +28,8 @@ public class TrendingCard_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+//		SignInPage signIn = new SignInPage();
+//		signIn.signIn(sUserName, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add a transaction for a category, date last 30 days and verify the amount reflects on trending card Category Total.");
 
@@ -42,8 +42,9 @@ public class TrendingCard_Test extends Recovery {
 		SpendingTrendPage st = new SpendingTrendPage();
 		Verify.waitForObject(st.last30Days, 2);
 		st.last30Days.click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 
+		Verify.waitForObject(st.youDontHaveAnyTxns, 1);
 		if (Verify.objExists(st.youDontHaveAnyTxns)) {
 			sCategory = "Auto & Transport";
 			before = h.processBalanceAmount("0.0");
@@ -83,8 +84,11 @@ public class TrendingCard_Test extends Recovery {
 		amount = h.processBalanceAmount(tRec.getAmount());
 
 		Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for last 30 days: ["+after+"]");
-
-		if (before+amount==after)
+		
+		int compare = Double.compare(before+amount, after);
+		
+//		if (before+amount==after)
+		if(compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: The Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
@@ -109,7 +113,7 @@ public class TrendingCard_Test extends Recovery {
 		SpendingTrendPage st = new SpendingTrendPage();
 		Verify.waitForObject(st.thisMonth, 2);
 		st.thisMonth.click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 
 		if (Verify.objExists(st.youDontHaveAnyTxns)) {
 			sCategory = "Auto & Transport";
@@ -150,8 +154,11 @@ public class TrendingCard_Test extends Recovery {
 		amount = h.processBalanceAmount(tRec.getAmount());
 
 		Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for This Month filter: ["+after+"]");
-
-		if (before+amount==after)
+		
+		int compare = Double.compare(before+amount, after);
+		
+//		if (before+amount==after)
+		if(compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
@@ -217,8 +224,11 @@ public class TrendingCard_Test extends Recovery {
 		amount = h.processBalanceAmount(tRec.getAmount());
 
 		Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for LastMonth Filter: ["+after+"]");
-
-		if (before+amount==after)
+		
+		int compare = Double.compare(before+amount, after);
+		
+//		if (before+amount==after)
+		if(compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
@@ -285,7 +295,10 @@ public class TrendingCard_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for MonthToDate: ["+after+"]");
 
-		if (before+amount==after)
+		int compare = Double.compare(before+amount, after);
+		
+//		if (before+amount==after)
+		if(compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
@@ -353,8 +366,11 @@ public class TrendingCard_Test extends Recovery {
 		amount = h.processBalanceAmount(tRec.getAmount());
 
 		Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for YearToDate: ["+after+"]");
-
-		if (before+amount==after)
+		
+		int compare = Double.compare(before+amount, after);
+		
+//		if (before+amount==after)
+		if(compare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"]");
@@ -421,8 +437,8 @@ public class TrendingCard_Test extends Recovery {
 
 		Integer balanceCompare = Double.compare(before, after);
 		System.out.println(balanceCompare);
-
-		if (balanceCompare==0)
+		
+		if(balanceCompare == 0)
 			Commentary.log(LogStatus.INFO, "PASS: Total balance was ["+before+"], added future dated expense transactions for ["+amount+"], now the category total balance shows ["+after+"]. MonthToDate did not include future dated transaction.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Category balance was ["+before+"], added expense transactions for ["+amount+"], now the category total balance shows ["+after+"].  MonthToDate should not include future dated transactions.");

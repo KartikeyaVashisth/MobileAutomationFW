@@ -45,6 +45,10 @@ public class AllAccountsPage {
 	@AndroidFindBy(xpath="//android.view.View[@text='All Transactions']")
 	public MobileElement allTransactionsHeader;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[`name='topLeftLabel'`]")
+	@AndroidFindBy(xpath="//android.widget.LinearLayout[contains(@resource-id,'list_row')]/android.widget.RelativeLayout/..")
+	public MobileElement allTransactions;
+	
 	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name=\"Search Transactions\"]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSearchField[`name='Search Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Transactions']")
@@ -133,6 +137,7 @@ public class AllAccountsPage {
 		List <MobileElement> me = null;
 
 		Engine.getDriver().getContext();
+		Verify.waitForObject(this.allTransactions, 2);
 		me = Engine.getDriver().findElements(By.xpath(sXpath));
 		
 		return me;
@@ -144,6 +149,7 @@ public class AllAccountsPage {
 		String sXpath = "**/XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[`name='topLeftLabel'`]";
 		List <MobileElement> me = null;
 		
+		Verify.waitForObject(this.allTransactions, 2);
 		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
 		
 		return me;

@@ -43,7 +43,8 @@ public class SpendingTrendPage {
 	public MobileElement backButtonOnHeader;
 	
 //	@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"You don't have any transactions.\"`]")
+//	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"You don't have any transactions.\"`]")
+	@iOSXCUITFindBy(iOSNsPredicate = "name = \"You don't have any transactions.\"")
 	@AndroidFindBy(xpath="//*[@text=\"You don't have any transactions.\"]")
 	public MobileElement youDontHaveAnyTxns;
 	
@@ -174,6 +175,7 @@ public class SpendingTrendPage {
 	
 	public String getCategory() throws Exception{
 		Helper h = new Helper();
+		Verify.waitForObject(this.categoryName, 1);
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			String sCategory = this.categoryName.getText();
 			sCategory = sCategory.split("Total for")[1].trim();
