@@ -978,5 +978,17 @@ public void scrollToTransactionSummaryCard() throws Exception{
 		}
 	}
 
+	public void navigateToRenamingRules() throws Exception{
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
+		
+		sp.rulesOption.click();
+		Thread.sleep(1000);
+		sp.renamingRulesOption.click();
+		Thread.sleep(1000);
+		
+	
+	}
 
 }
