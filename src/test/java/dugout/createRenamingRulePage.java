@@ -44,7 +44,7 @@ public class createRenamingRulePage {
 	@AndroidFindBy(xpath="//android.widget.EditText[2]")
 	public MobileElement downloadPayeeName;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Save'`][-1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Save' or name == 'save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Save']")
 	public MobileElement save;
 	
@@ -74,6 +74,7 @@ public class createRenamingRulePage {
 		{
 			payeeNameTo.clear();
 			payeeNameTo.sendKeys(setPayeeNameTo);
+			Engine.getDriver().hideKeyboard();
 		}
 		
 		if (! matchingCriteriaRule.equals(""))
@@ -83,7 +84,7 @@ public class createRenamingRulePage {
 			if (matchingCriteriaRule.toUpperCase().contains("PAYEE"))
 				ifPayeeContains.click();
 			else
-				ifQuickenNameIs.clear();
+				ifQuickenNameIs.click();
 			apply.click();
 			
 		}
@@ -92,6 +93,7 @@ public class createRenamingRulePage {
 		{
 			downloadPayeeName.clear();
 			downloadPayeeName.sendKeys(downloadedName);
+			Engine.getDriver().hideKeyboard();
 		}
 		
 		this.save.click();
