@@ -12,7 +12,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.OverviewPage;
 import dugout.RenamingRulesPage;
 import dugout.SignInPage;
-import dugout.TagManagementPage;
 import dugout.TransactionDetailPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileBy;
