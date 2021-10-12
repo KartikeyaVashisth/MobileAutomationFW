@@ -42,6 +42,8 @@ public class SignInSignOutFunctionalityTest extends Recovery {
 		si.emailID.click();
 		Thread.sleep(1000);
 		si.userName.clear();
+		Thread.sleep(1000);
+		si.userName.clear();
 		si.userName.sendKeys(sUserName);
 		si.lblPassword.click();
 		Thread.sleep(1000);

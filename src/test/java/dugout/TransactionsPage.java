@@ -303,19 +303,31 @@ public class TransactionsPage {
 	}
 
 	public void swipe_right_android() throws Exception {
-		Dimension size = Engine.getDriver().manage().window().getSize();
-		//System.out.println(size);
-		int startx = (int) (size.width * 0.20);
-		int endx = (int) (size.width * 0.80);
-		int starty = size.height / 2;
+//		Dimension size = Engine.getDriver().manage().window().getSize();
+//		//System.out.println(size);
+//		int startx = (int) (size.width * 0.20);
+//		int endx = (int) (size.width * 0.80);
+//		int starty = size.height / 2;
+//		
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+// 
+//		touchAction
+//                .press(point(startx, starty))
+//                .waitAction(waitOptions(ofMillis(1000)))
+//                .moveTo(point(endx, starty))
+//                .release().perform();
+		
+		int startx = Engine.getDriver().findElementByXPath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]").getLocation().getX();
+		int starty= Engine.getDriver().findElementByXPath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]").getLocation().getY();
 		
 		TouchAction touchAction = new TouchAction(Engine.getDriver());
- 
-		touchAction
-                .press(point(startx, starty))
-                .waitAction(waitOptions(ofMillis(1000)))
-                .moveTo(point(endx, starty))
-                .release().perform();
+		 
+				touchAction
+		                .press(point(startx, starty))
+		                .waitAction(waitOptions(ofMillis(1000)))
+		                .moveTo(point(startx+1200, starty))
+		                .release().perform();
+		
 		//Engine.getDriver().swipe(startx, starty, endx, starty, 2000);
 	}
 	
@@ -511,7 +523,7 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 	public MobileElement addTransaction;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"TODAY'S BALANCE\"]/../*[contains(@name, '$')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"TODAY'S BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
 	public MobileElement txtTodaysBalanceAmount;
 	
@@ -519,7 +531,7 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
 	public MobileElement txtTodaysBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
+	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
 	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
 	public MobileElement txtProjectedBalanceAmount;
 	
@@ -558,15 +570,15 @@ public class TransactionsPage {
 	public MobileElement buttonApply;
 	
 	//@iOSXCUITFindBy(iOSNsPredicate="type == 'XCUIElementTypeOther' AND name == 'close'")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='closeSort Transactions'`]")
-	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"closeSort Transactions\"]/android.widget.ImageView")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='closeReminders'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"closeReminders\"]/android.widget.ImageView")
 	public MobileElement buttonClose;
 	
 	@iOSFindBy(id="You don't have any transactions.")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_payee']")
 	public MobileElement noTransactionText;
 	
-	@iOSXCUITFindBy(id = "transactionSettings")
+	@iOSXCUITFindBy(id = "ic reminder")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/reminderBtn']")
 	public MobileElement buttonShowReminder;
 	

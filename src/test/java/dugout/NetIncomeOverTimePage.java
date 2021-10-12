@@ -77,9 +77,10 @@ public class NetIncomeOverTimePage {
 	public Double getSelectedMonthAmount() throws Exception {
 		
 		String sAmount = this.netIncomeForSelectedMonth.getText();
+		String processedAmount = sAmount.replaceAll("[^0-9.-]", "");
 		
 		Helper h = new Helper();
-		return h.processBalanceAmount(sAmount.replace("Net Income Value: ", ""));
+		return h.processBalanceAmount(processedAmount);
 		
 	}
 	

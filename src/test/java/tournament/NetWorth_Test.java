@@ -42,10 +42,11 @@ public class NetWorth_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying all the different elements of Net Worth Card.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthText, 2);
 		if (Verify.objExists(nw.netWorthText))
@@ -104,10 +105,11 @@ public class NetWorth_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that the Banking/Other Assets/Investments labels should be under Assets tab while Credit Card/Other Liabilities labels should be under Liabilities tab.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.bankingLabel, 1);
 		if (Verify.objExists(nw.bankingLabel))
@@ -177,14 +179,15 @@ public class NetWorth_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that Today's date is displayed at the top of the Net Worth card.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetWorthCard();
+		
+		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 		Date date = new Date();
 		String todaysDate = sdf.format(date.getTime());
-
-		NetWorthPage nw = new NetWorthPage();
 
 		Verify.waitForObject(nw.dateHeaderText, 1);
 		String netWorthCardDate = nw.dateHeaderText.getText();
@@ -206,10 +209,11 @@ public class NetWorth_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that NetWorth amount is calculated correctly.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount = nw.netWorthAmount.getText();
@@ -251,9 +255,10 @@ public class NetWorth_Test extends Recovery {
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that NetWorth amount is calculated correctly after adding a expense transaction into the asset account.");
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_before = nw.netWorthAmount.getText();
@@ -298,7 +303,8 @@ public class NetWorth_Test extends Recovery {
 		Verify.waitForObject(td.buttonDone, 2);
 		td.addTransaction(tRec);
 
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_after = nw.netWorthAmount.getText();
@@ -352,9 +358,10 @@ public class NetWorth_Test extends Recovery {
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that NetWorth amount is calculated correctly after adding an Income transaction into the asset account.");
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_before = nw.netWorthAmount.getText();
@@ -399,7 +406,8 @@ public class NetWorth_Test extends Recovery {
 		Verify.waitForObject(td.buttonDone, 2);
 		td.addTransaction(tRec);
 
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_after = nw.netWorthAmount.getText();
@@ -453,9 +461,10 @@ public class NetWorth_Test extends Recovery {
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that NetWorth amount is calculated correctly after adding a Transfer transaction from Asset account to the Liabilities Account.");
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_before = nw.netWorthAmount.getText();
@@ -501,7 +510,8 @@ public class NetWorth_Test extends Recovery {
 		Verify.waitForObject(td.buttonDone, 2);
 		td.addTransaction(tRec);
 
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_after = nw.netWorthAmount.getText();
@@ -606,9 +616,10 @@ public class NetWorth_Test extends Recovery {
 		Verify.waitForObject(bi.backButton, 1);
 		bi.backButton.click();
 
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_before = nw.netWorthAmount.getText();
@@ -668,7 +679,8 @@ public class NetWorth_Test extends Recovery {
 		Verify.waitForObject(bi.backButton, 1);
 		bi.backButton.click();
 
-		op.tapOnNetWorthCard();
+//		op.tapOnNetWorthCard();
+		nw.navigateToNetWorthCard();
 
 		Verify.waitForObject(nw.netWorthAmount, 1);
 		String netWorthAmount_after = nw.netWorthAmount.getText();
@@ -736,10 +748,11 @@ public class NetWorth_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that NetWorth Info Questions & Answers are correctly displayed.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnNetWorthCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnNetWorthCard();
 
 		NetWorthPage nw = new NetWorthPage();
+		nw.navigateToNetWorthCard();
 		
 		Verify.waitForObject(nw.netWorthInfoButton, 1);
 		nw.netWorthInfoButton.click();

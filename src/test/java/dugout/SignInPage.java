@@ -68,8 +68,8 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[$name=='SIGN IN'$]")
 	public MobileElement btnSignIn;
 	
-	@AndroidFindBy(xpath="//android.view.View[@text='Do you need help signing in?']/../android.view.View[@text='Invalid Quicken ID or password.']")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Invalid Quicken ID or password.'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Do you need help signing in?']/../android.view.View[@text='Invalid Credentials.']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Invalid Credentials.'`]")
 	public MobileElement invalidCredentialsText;
 	
 	@AndroidFindBy(xpath="//android.widget.EditText[@resource-id='username']")
@@ -97,7 +97,7 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
 	public MobileElement navigationMenu;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains \"navigationMenu\"`][-2]/**/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")
 	public MobileElement datasetNameOnDashboard;
 
@@ -159,7 +159,12 @@ public class SignInPage {
 		ExtentTest quickenTest = Recovery.quickenTest;
 		WelcomePage w = new WelcomePage();
 
-		Thread.sleep(3000);
+		if(Verify.objExists(w.allowButton)) {
+			w.allowButton.click();
+			Thread.sleep(2000);
+		}
+		
+		Verify.waitForObject(w.xpath_btnWelcomeSignIn, 1);
 		w.xpath_btnWelcomeSignIn.click();
 
 //		if (! Verify.waitForObject(emailID, 3))
@@ -361,6 +366,10 @@ public class SignInPage {
 			Verify.waitForObject(datasetNameOnDashboard, 2);
 //			String datasetNameOverviewPage = Engine.getDriver().findElementByIosClassChain("**/XCUIElementTypeOther[`name contains \"navigationMenu\"`]/**/XCUIElementTypeStaticText[3]").getText();
 			String datasetNameOverviewPage = this.datasetNameOnDashboard.getText();
+			
+			if(Verify.objExists(cancelIcon)) {
+				cancelIcon.click();
+			}
 			
 			if(Verify.objExists(cancelIcon)) {
 				cancelIcon.click();

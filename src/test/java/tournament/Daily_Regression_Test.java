@@ -46,7 +46,7 @@ public class Daily_Regression_Test extends Recovery {
 	String sOnlineCash="onl_cash";
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
-	String backButton1_ios = "Banking & Credit";
+	String backButton1_ios = "Banking & Credit, back";
 	String statusCleared = "Cleared";
 	String statusUnCleared = "Uncleared";
 	String filterNewToOld = "Date New to Old";
@@ -219,7 +219,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		sp.selectBack(backButton1_ios);
 		Thread.sleep(2000);
-		sp.selectBack("Back");
+		sp.selectBack("Go back");
 		Thread.sleep(5000);
 
 		Verify.waitForObject(op.totalBalance, 1);

@@ -672,7 +672,7 @@ public class ProjectedBalances extends Recovery {
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
+		Verify.waitForObject(tp.txtProjectedBalanceAmount, 1);
 		sProjectedAcctBalanceTxnScreen_after = tp.txtProjectedBalanceAmount.getText();
 		
 		tp.backButton.click();
@@ -746,7 +746,7 @@ public class ProjectedBalances extends Recovery {
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 		
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
-		
+		Verify.waitForObject(tp.txtProjectedBalanceAmount, 1);
 		sProjectedAcctBalanceTxnScreen_after = tp.txtProjectedBalanceAmount.getText();
 		
 		tp.backButton.click();

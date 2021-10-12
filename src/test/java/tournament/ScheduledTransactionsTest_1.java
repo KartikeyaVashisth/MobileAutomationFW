@@ -141,10 +141,10 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Next 12 Months chip is not displayed.");
 
-		if (Verify.objExists(bi.thisMonthHeaderText))
-			Commentary.log(LogStatus.INFO, "PASS: This Month header text is displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: This Month header text is not displayed.");
+//		if (Verify.objExists(bi.thisMonthHeaderText))
+//			Commentary.log(LogStatus.INFO, "PASS: This Month header text is displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: This Month header text is not displayed.");
 
 		if (Verify.objExists(bi.addNewReminderButton))
 			Commentary.log(LogStatus.INFO, "PASS: Add Reminder Button is displayed.");
@@ -158,7 +158,7 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Search series text field is not displayed.");
 
-		if (Verify.objExists(bi.seriesHeaderText))
+		if (Verify.objExists(bi.alphabetHeaderText))
 			Commentary.log(LogStatus.INFO, "PASS: Series header text field is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Series header text field is not displayed.");

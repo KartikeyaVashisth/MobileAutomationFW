@@ -26,7 +26,7 @@ public class TransferCases_Test1 extends Recovery {
 	String sCreditCard ="Credit Card";
 	String sManualSaving = "manual_savings";
 	String sOnlineSaving = "onl_savings";
-	String backButton1_ios = "Banking & Credit";
+	String backButton1_ios = "Banking & Credit, back";
 	String sSavings = "Savings";
 	String sDataset1 = "OnlineAcc_Automation";
 	String sOnlineChecking = "Checking1 XX8651";
@@ -74,8 +74,9 @@ public class TransferCases_Test1 extends Recovery {
 		tRec.setCategory("Transfer ["+sSavings+"]");
 		tRec.setTransactionType("expense");
 		
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
-		Verify.waitForObject(tp.backButton, 2);
+		Verify.waitForObject(tp.backButton, 1);
 		tp.backButton.click();
 		
 		sCheckingLabel_after = bcc.getCheckingBalance();
@@ -247,7 +248,7 @@ public class TransferCases_Test1 extends Recovery {
 		Thread.sleep(2000);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Thread.sleep(2000);
 		
@@ -318,7 +319,7 @@ public class TransferCases_Test1 extends Recovery {
 		
 		tp.searchRecentTransaction(payeeName);
 		
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -399,7 +400,7 @@ public class TransferCases_Test1 extends Recovery {
 		
 		tp.searchRecentTransaction(payeeName);
 		
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Thread.sleep(2000);
 		
@@ -467,7 +468,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(time);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -529,7 +530,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);		
 		
@@ -576,7 +577,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);		
 		
@@ -652,7 +653,7 @@ public class TransferCases_Test1 extends Recovery {
 		Double d = Double.parseDouble(tRec.getAmount());
 
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -724,7 +725,7 @@ public class TransferCases_Test1 extends Recovery {
 		Thread.sleep(2000);
 
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
@@ -845,7 +846,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);	
 		
@@ -921,7 +922,7 @@ public class TransferCases_Test1 extends Recovery {
 		td.addTransaction(tRec);
 		
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 3);
+		Verify.waitForObject(tp.thisMonthLabel, 2);
 		tp.tapOnFirstTransaction();
 		Verify.waitForObject(td.dateLabel, 2);
 		
