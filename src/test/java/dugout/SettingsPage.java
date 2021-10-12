@@ -223,8 +223,8 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']")
 	public MobileElement displayYelpRecommendationsText;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeStaticText[`name = 'Displays nearby payees recommended by Yelp when you are adding payees for your transactions'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.TextView[1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeStaticText[`name = \"Display Yelp's recommendations of nearby payees when you add payees to your transactions\"`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.TextView[@text=\"Display Yelp's recommendations of nearby payees when you add payees to your transactions\"]")
 	public MobileElement displayYelpDescription;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeSwitch")

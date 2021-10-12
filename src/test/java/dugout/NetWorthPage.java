@@ -110,7 +110,7 @@ public class NetWorthPage {
 	@AndroidFindBy(xpath="//android.view.View[@text='Net Worth Info']")
 	public MobileElement netWorthInfoHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar[`name='Net Worth Info'`]/XCUIElementTypeButton[`name='Close Button'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='closeNewWorthInfo'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Net Worth Info']/..//android.widget.ImageView")
 	public MobileElement netWorthInfoDrawerCloseButton;
 
@@ -182,5 +182,15 @@ public class NetWorthPage {
 			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Thread.sleep(1000);
 		}
+	}
+	
+	public void navigateToNetWorthCard() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+
+		Verify.waitForObject(sp.netWorthOption, 1);
+		sp.netWorthOption.click();
+		Thread.sleep(1000);
 	}
 }

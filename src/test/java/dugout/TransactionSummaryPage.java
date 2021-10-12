@@ -75,7 +75,7 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='No Transactions by Payee']")
 		public MobileElement noTransactionPayee;
 		
-		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[15]")
+		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView[-1]/**/XCUIElementTypeStaticText[`name CONTAINS 'payee:'`][1]")
 		@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'$')]")
 		public MobileElement firstRecordInList;
 		

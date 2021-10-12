@@ -28,8 +28,8 @@ public class TrendingCard_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-//		SignInPage signIn = new SignInPage();
-//		signIn.signIn(sUserName, sPassword, sDataset);
+		SignInPage signIn = new SignInPage();
+		signIn.signIn(sUserName, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add a transaction for a category, date last 30 days and verify the amount reflects on trending card Category Total.");
 
@@ -37,9 +37,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.last30Days, 2);
 		st.last30Days.click();
 		Thread.sleep(3000);
@@ -75,7 +77,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.last30Days, 2);
 		st.last30Days.click();
 		Thread.sleep(1000);
@@ -108,9 +112,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.thisMonth, 2);
 		st.thisMonth.click();
 		Thread.sleep(3000);
@@ -145,7 +151,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.thisMonth, 2);
 		st.thisMonth.click();
 		Thread.sleep(1000);
@@ -178,9 +186,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.lastMonth, 2);
 		st.lastMonth.click();
 		Thread.sleep(1000);
@@ -215,7 +225,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.lastMonth, 2);
 		st.lastMonth.click();
 		Thread.sleep(2000);
@@ -248,9 +260,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		st.scrollFilter();
 		Verify.waitForObject(st.monthToDate, 2);
 		st.monthToDate.click();
@@ -286,7 +300,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.monthToDate, 2);
 		st.monthToDate.click();
 		Thread.sleep(1000);
@@ -318,9 +334,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		st.scrollFilter();
 		Verify.waitForObject(st.yearToDate, 2);
 		st.yearToDate.click();
@@ -356,7 +374,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		st.scrollFilter();
 		Verify.waitForObject(st.yearToDate, 2);
 		st.yearToDate.click();
@@ -390,9 +410,11 @@ public class TrendingCard_Test extends Recovery {
 		String sCategory;
 
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		st.scrollFilter();
 		Verify.waitForObject(st.monthToDate, 2);
 		st.monthToDate.click();
@@ -426,7 +448,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount: "+tRec.getAmount());		
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.monthToDate, 2);
 		st.monthToDate.click();
 		Thread.sleep(500);
@@ -471,9 +495,11 @@ public class TrendingCard_Test extends Recovery {
 
 		// get balances from accounts card
 		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.last30Days, 2);
 		st.last30Days.click();
 		Thread.sleep(1000);
@@ -508,7 +534,9 @@ public class TrendingCard_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type INCOME, amount: "+tRec.getAmount());
 
-		op.tapOnTrendingCard();
+//		op.tapOnTrendingCard();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.last30Days, 2);
 		st.last30Days.click();
 		Thread.sleep(1000);
@@ -545,10 +573,11 @@ public class TrendingCard_Test extends Recovery {
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify Category amounts on trending screen should appear in descending order.");
 
-		OverviewPage op = new OverviewPage();
-		op.tapOnTrendingCard();
+//		OverviewPage op = new OverviewPage();
+//		op.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
 
 		Double d1 = st.getAmount();
 		st.scrollCategory();

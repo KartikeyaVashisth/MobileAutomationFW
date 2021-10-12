@@ -233,5 +233,15 @@ public class SpendingTrendPage {
 		else
 			scrollFilter_IOS();		
 	}
+	
+	public void navigateToTopTrendingCategoriesCard() throws Exception {
+
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+
+		Verify.waitForObject(sp.spendingByCategoryOption, 1);
+		sp.spendingByCategoryOption.click();
+		Thread.sleep(1000);
+	}
 
 }

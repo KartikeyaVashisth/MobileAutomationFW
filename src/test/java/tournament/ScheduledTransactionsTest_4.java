@@ -29,7 +29,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
 	
-	@Test (priority = 27, enabled = false)
+	@Test (priority = 27, enabled = true)
 	public void ST27_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -246,7 +246,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 29, enabled = false)
+	@Test (priority = 29, enabled = true)
 	public void ST29_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -345,7 +345,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 30, enabled = false)
+	@Test (priority = 30, enabled = true)
 	public void ST30_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -389,7 +389,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 31, enabled = false)
+	@Test (priority = 31, enabled = true)
 	public void ST31_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();

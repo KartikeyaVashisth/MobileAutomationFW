@@ -65,6 +65,9 @@ public class WelcomePage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='done'`]")
 	public MobileElement linkAppConfigDone;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Allow'`]")
+	public MobileElement allowButton;
+	
 	public void setEnvironment(String preprod) throws Exception{
 	
 //		if (preprod.equals("prod"))

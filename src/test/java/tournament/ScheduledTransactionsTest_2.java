@@ -63,7 +63,7 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		bi.searchRecentReminderSeries(reminderName);
 
-		Verify.waitForObject(bi.seriesHeaderText, 2);
+		Verify.waitForObject(bi.alphabetHeaderText, 2);
 
 		if(!Verify.objExists(bi.youHaveNoScheduledReminders))
 			Commentary.log(LogStatus.INFO, "PASS: Search result is displayed when searched with Reminder Name.");

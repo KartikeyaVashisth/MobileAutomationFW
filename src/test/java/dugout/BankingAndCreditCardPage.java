@@ -37,7 +37,7 @@ public class BankingAndCreditCardPage {
 		}
 	}
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeNavigationBar/XCUIElementTypeButton")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name contains 'back'`]")
 	@AndroidFindBy(xpath="//*[@class='android.widget.Button']")
 	public MobileElement backButton;
 
@@ -65,12 +65,12 @@ public class BankingAndCreditCardPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]")
 	public MobileElement txtProjectedBalance;
 
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains \"PROJECTED BALANCE\"`]/XCUIElementTypeStaticText[`name contains '$'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[contains(@text,'$')]") //android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[2]
 	public MobileElement txtProjectedBalanceAmount;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Checking\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CHECKING\"]/../android.widget.TextView[2]")
 	public MobileElement checkingBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking Account Balance'`]/XCUIElementTypeStaticText[2]")
@@ -78,15 +78,15 @@ public class BankingAndCreditCardPage {
 	public MobileElement checkingAccountBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit Cards'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Credit Cards\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CREDIT CARDS\"]/../android.widget.TextView[2]")
 	public MobileElement creditCardBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Cash\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CASH\"]/../android.widget.TextView[2]")
 	public MobileElement cashBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[2]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Savings\"]/../android.widget.TextView[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"SAVINGS\"]/../android.widget.TextView[2]")
 	public MobileElement savingsBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings Account Balance'`]/XCUIElementTypeStaticText[2]")
@@ -264,7 +264,7 @@ public class BankingAndCreditCardPage {
 
 	public String getAccountBalance_IOS (String acct) throws Exception {
 
-		String xpath = "**/XCUIElementTypeOther[`name contains 'Account Name: "+acct+"'`]/XCUIElementTypeStaticText[`name contains 'Account Balance: '`]";
+		String xpath = "**/XCUIElementTypeOther[`name contains 'Account Name: "+acct+"'`]/XCUIElementTypeStaticText[`name contains '$'`]";
 
 		this.scrollToAccount(acct);
 
@@ -342,6 +342,7 @@ public class BankingAndCreditCardPage {
 		int x_end=(int)(size.width*0.05);
 
 		int y=this.txtActualBalance.getRect().getY();
+		
 		//int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
 
 		//		Integer i;
@@ -362,24 +363,26 @@ public class BankingAndCreditCardPage {
 		String elementID = element.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", elementID); // Only for ‘scroll in element’
-		scrollObject.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
+		scrollObject.put("direction", "left");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 		Thread.sleep(1000);
 
+		Verify.waitForObject(this.txtOnlineBalance, 1);
 		MobileElement element1 = this.txtOnlineBalance;
 		String elementID1 = element1.getId();
 		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
-		scrollObject1.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject1);
+		scrollObject1.put("direction", "left");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
 		Thread.sleep(1000);
 
+		Verify.waitForObject(this.txtProjectedBalance, 1);
 		MobileElement element2 = this.txtProjectedBalance;
 		String elementID2 = element2.getId();
 		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
 		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
-		scrollObject2.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject2);
+		scrollObject2.put("direction", "left");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
 		Thread.sleep(1000);
 
 		//	        Helper h = new Helper();
@@ -439,24 +442,26 @@ public class BankingAndCreditCardPage {
 		String elementID = element.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("element", elementID); // Only for ‘scroll in element’
-		scrollObject.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject);
+		scrollObject.put("direction", "right");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
 		Thread.sleep(1000);
 
+		Verify.waitForObject(this.txtOnlineBalance, 1);
 		MobileElement element1 = this.txtOnlineBalance;
 		String elementID1 = element1.getId();
 		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
-		scrollObject1.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject1);
+		scrollObject1.put("direction", "right");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
 		Thread.sleep(1000);
 
-		MobileElement element2 = this.txtActualBalance;
+		Verify.waitForObject(this.txtTodaysBalance, 1);
+		MobileElement element2 = this.txtTodaysBalance;
 		String elementID2 = element2.getId();
 		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
 		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
-		scrollObject2.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject2);
+		scrollObject2.put("direction", "right");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
 		Thread.sleep(1000);
 	}
 

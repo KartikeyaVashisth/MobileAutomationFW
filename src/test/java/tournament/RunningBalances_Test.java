@@ -1303,6 +1303,7 @@ public class RunningBalances_Test extends Recovery {
 		Thread.sleep(1000);
 		
 		tp.addTransaction.click();
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
 		
@@ -1315,7 +1316,7 @@ public class RunningBalances_Test extends Recovery {
 		firstTransactionDate = td.getTransactionDate();
 		firstTransactionDate = h.convertDateFormat(firstTransactionDate);
 		
-		td.backButton.click(); 
+		td.backButtonOnViewTransactionPage.click(); 
 		Thread.sleep(1000);
 		
 		tp.EnableRunningBalance();
@@ -1341,7 +1342,7 @@ public class RunningBalances_Test extends Recovery {
 		firstTransactionDate = td.getTransactionDate();
 		firstTransactionDate = h.convertDateFormat(firstTransactionDate);
 		
-		td.backButton.click(); 
+		td.backButtonOnViewTransactionPage.click(); 
 		Thread.sleep(1000);
 		
 		tp.EnableRunningBalance();
@@ -1367,7 +1368,7 @@ public class RunningBalances_Test extends Recovery {
 		firstTransactionDate = td.getTransactionDate();
 		firstTransactionDate = h.convertDateFormat(firstTransactionDate);
 		
-		td.backButton.click(); 
+		td.backButtonOnViewTransactionPage.click(); 
 		Thread.sleep(1000);
 		
 		tp.EnableRunningBalance();

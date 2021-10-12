@@ -69,6 +69,7 @@ public class ReviewNotReview_Test extends Recovery {
 		tRec.setAccount(sManualSaving);
 		tRec.setTransactionType("expense");
 
+		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		
@@ -351,7 +352,7 @@ public class ReviewNotReview_Test extends Recovery {
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 1);
 		tp.tapOnFirstTransaction();
 
-		op.scroll_down();
+//		op.scroll_down();
 
 		String currentStatus = td.downloadedTransactionStatus.getText();
 		td.downloadedTransactionStatus.click();
@@ -402,7 +403,7 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.tapOnFirstTransaction();
 
-		op.scroll_down();
+//		op.scroll_down();
 
 		String currentStatus = td.downloadedTransactionStatus.getText();
 		if (currentStatus.equals(statusReviewed)) {
@@ -631,7 +632,8 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.selectSortFilterOption(statusNotReviewed);
 		tp.buttonMarkAllReviewed.click();
-		Thread.sleep(500);
+		Verify.waitForObject(tp.alertMarkAllReviewed, 1);
+		
 		if (Verify.objExists(tp.alertMarkAllReviewed)) {
 			Commentary.log(LogStatus.INFO, "PASS: Alert Message is displayed for Marking all transaction as Reviewed.");
 		} else {
