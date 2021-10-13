@@ -2233,7 +2233,7 @@ public class BillsAndIncomePage {
 
 	public List<MobileElement> getAllReminderEntriesDate_android () throws Exception{
 
-		String sXpath = "//android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView";
+		String sXpath = "//android.widget.TextView[contains(@resource-id,'list_row_date')]";
 		List <MobileElement> me = null;
 
 		me = Engine.getDriver().findElements(By.xpath(sXpath));
