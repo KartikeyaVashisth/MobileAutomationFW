@@ -288,6 +288,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 
 		op.tapOnBillsAndIncomeCard();
 
+		bi.selectingDueNewToOldOption();
+		
 		tp.tapOnFirstTransaction();
 
 		bi.tapOnEnterOption();
@@ -504,6 +506,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		bi.next14Days.click();
 		Thread.sleep(1000);
 
+		bi.selectingDueNewToOldOption();
+		
 		tp.tapOnFirstTransaction();
 
 		bi.tapOnEnterOption();
@@ -720,6 +724,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		Thread.sleep(1000);
 
 		op.tapOnBillsAndIncomeCard();
+		
+		bi.selectingDueNewToOldOption();
 
 		tp.tapOnFirstTransaction();
 
@@ -909,6 +915,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		Thread.sleep(1000);
 
 		op.tapOnBillsAndIncomeCard();
+		
+		bi.selectingDueNewToOldOption();
 
 		tp.tapOnFirstTransaction();
 
@@ -1101,6 +1109,8 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 
 		op.tapOnBillsAndIncomeCard();
 
+		bi.selectingDueNewToOldOption();
+		
 		tp.tapOnFirstTransaction();
 
 		bi.tapOnIgnoreAllPreviousInstancesOption();

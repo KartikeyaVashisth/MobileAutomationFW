@@ -20,6 +20,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.touch.offset.PointOption;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -336,24 +337,35 @@ public class BankingAndCreditCardPage {
 
 	public void scrollToProjectedBalance_android() throws Exception{
 
-		Dimension size = this.txtActualBalance.getSize();
-
-		int x_start=(int)(size.width*0.95);
-		int x_end=(int)(size.width*0.05);
-
-		int y=this.txtActualBalance.getRect().getY();
+//		Dimension size = this.txtActualBalance.getSize();
+//
+//		int x_start=(int)(size.width*0.95);
+//		int x_end=(int)(size.width*0.05);
+//
+//		int y=this.txtActualBalance.getRect().getY();
+//		
+//		//int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
+//
+//		//		Integer i;
+//		//        for (i = 0; i<2; i++) {
+//		//        	Engine.ad.swipe(x_start,y,x_end,y,4000);
+//		//        	Thread.sleep(1000);
+//		//        }	
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//
+//		for(int i=1 ;i<=2;i++) { 
+//			touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+//		}
 		
-		//int y=this.txtTodaysBalanceAmount.getRect().getY()+150;
+		int x_start=1200;
+		int x_end=225;
 
-		//		Integer i;
-		//        for (i = 0; i<2; i++) {
-		//        	Engine.ad.swipe(x_start,y,x_end,y,4000);
-		//        	Thread.sleep(1000);
-		//        }	
+		int y=550;
+		
 		TouchAction touchAction = new TouchAction(Engine.getDriver());
-
+		
 		for(int i=1 ;i<=2;i++) { 
-			touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
 		}
 	}
 
@@ -422,17 +434,28 @@ public class BankingAndCreditCardPage {
 
 	public void scrollToTotalBalance_android() throws Exception{
 
-		Dimension size = this.txtProjectedBalance.getSize();
+//		Dimension size = this.txtProjectedBalance.getSize();
+//
+//		int x_start=(int)(size.width*0.05);
+//		int x_end=(int)(size.width*0.95);
+//
+//		int y=this.txtProjectedBalance.getRect().getY();
+//
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//
+//		for(int i=1 ;i<=2;i++) { 
+//			touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+//		}
+		
+		int x_start=225;
+		int x_end=1200;
 
-		int x_start=(int)(size.width*0.05);
-		int x_end=(int)(size.width*0.95);
-
-		int y=this.txtProjectedBalance.getRect().getY();
-
+		int y=550;
+		
 		TouchAction touchAction = new TouchAction(Engine.getDriver());
-
+		
 		for(int i=1 ;i<=2;i++) { 
-			touchAction.press(point(x_start, y)).waitAction(waitOptions(ofMillis(4000))).moveTo(point(x_end, y)).release().perform();
+			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
 		}
 	}
 

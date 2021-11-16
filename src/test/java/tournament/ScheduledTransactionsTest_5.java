@@ -1,5 +1,9 @@
 package tournament;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -10,6 +14,7 @@ import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionsPage;
+import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -783,6 +788,162 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 			Commentary.log(LogStatus.INFO, "PASS: \"You have no Scheduled Reminders\" message is displayed when there is no Reminder series.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"You have no Scheduled Reminders\" message is not displayed.");
+
+		sa.assertAll();
+	}
+	
+	@Test (priority = 38, enabled = true)
+	public void ST38_Test() throws Exception {
+
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating \"Due Old to New\" and \"Due New to Old\" option.");
+
+		OverviewPage op = new OverviewPage();
+
+		op.tapOnBillsAndIncomeCard();
+
+		BillsAndIncomePage bi = new BillsAndIncomePage();
+		bi.deleteAlreadyPresentReminderSeries();
+
+		bi.addNewReminderSeries("Bill");
+
+		String reminderName = "Reminder_"+h.getCurrentTime();
+
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setPayee(reminderName);
+		tRec.setAmount("20.00");
+		tRec.setFromAccount(sManualChecking);
+		tRec.setDate(h.getPastDaysDate(60));
+		tRec.setEndAfterNumberOfReminders("3");
+
+		bi.addNewReminder(tRec);
+		
+		bi.selectingDueOldToNewOption();
+		
+		LocalDate currentdate = LocalDate.now();
+		Month currentMonth = currentdate.getMonth();
+
+		Month previousMonth = currentMonth.minus(1);
+		String previousMonthSubstring = previousMonth.toString().substring(0, 3);
+
+		Month previousToPreviousMonth = currentMonth.minus(2);
+		String previousToPreviousMonthSubstring = previousToPreviousMonth.toString().substring(0, 3);
+		
+		List<MobileElement> li = bi.getAllReminderEntriesDate();
+		Commentary.log(LogStatus.INFO, "No of Reminder instances appeared in the search .."+li.size());
+
+		String dateOfFirstReminderInstance = li.get(0).getText();
+		String monthSubstringForDateOfFirstReminderInstance = dateOfFirstReminderInstance.toString().substring(0, 3);
+
+		String dateOfSecondReminderInstance = li.get(1).getText();
+		String monthSubstringForDateOfSecondReminderInstance = dateOfSecondReminderInstance.toString().substring(0, 3);
+		
+		String dateOfThirdReminderInstance = li.get(2).getText();
+
+		if(monthSubstringForDateOfFirstReminderInstance.toString().equalsIgnoreCase(previousToPreviousMonthSubstring))
+			Commentary.log(LogStatus.INFO, "Previous to Previous month date is seen first when filter Due Old to New is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Previous to Previous month date is NOT seen first when filter Due Old to New is selected.");
+		
+		if(monthSubstringForDateOfSecondReminderInstance.toString().equalsIgnoreCase(previousMonthSubstring))
+			Commentary.log(LogStatus.INFO, "Previous month date is seen second when filter Due Old to New is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Previous month date is NOT seen second when filter Due Old to New is selected.");
+
+		if(dateOfThirdReminderInstance.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Tomorrow"))
+			Commentary.log(LogStatus.INFO, "Current month date is seen third when filter Due Old to New is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Current month date is NOT seen third when filter Due Old to New is selected.");
+		
+		bi.selectingDueNewToOldOption();
+
+		List<MobileElement> li1 = bi.getAllReminderEntriesDate();
+		
+		String dateOfFirstReminderInstance_NewToOldFilter = li1.get(0).getText();
+		
+		String dateOfSecondReminderInstance_NewToOldFilter = li1.get(1).getText();
+		String monthSubstringForDateOfSecondReminderInstance_NewToOldFilter = dateOfSecondReminderInstance_NewToOldFilter.toString().substring(0, 3);
+		
+		String dateOfThirdReminderInstance_NewToOldFilter = li1.get(2).getText();
+		String monthSubstringForDateOfThirdReminderInstance_NewToOldFilter = dateOfThirdReminderInstance_NewToOldFilter.toString().substring(0, 3);
+
+		if(dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Today") || dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Tomorrow"))
+			Commentary.log(LogStatus.INFO, "Current month date is seen first when filter Due New to Old is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Current month date is NOT seen first when filter Due New to Old is selected.");
+		
+		if(monthSubstringForDateOfSecondReminderInstance_NewToOldFilter.toString().equalsIgnoreCase(previousMonthSubstring))
+			Commentary.log(LogStatus.INFO, "Previous month date is seen second when filter Due New to Old is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Previous month date is NOT seen second when filter Due New to Old is selected.");
+		
+		if(monthSubstringForDateOfThirdReminderInstance_NewToOldFilter.toString().equalsIgnoreCase(previousToPreviousMonthSubstring))
+			Commentary.log(LogStatus.INFO, "Previous to Previous month date is seen third when filter Due New to Old is selected.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Previous to Previous month date is NOT seen third when filter Due New to Old is selected.");		
+		
+		bi.deleteSeries();
+
+		sa.assertAll();
+	}
+	
+	@Test (priority = 39, enabled = true)
+	public void ST39_Test() throws Exception {
+
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Validating \"Biller Name\" option.");
+
+		OverviewPage op = new OverviewPage();
+
+		op.tapOnBillsAndIncomeCard();
+
+		BillsAndIncomePage bi = new BillsAndIncomePage();
+		bi.deleteAlreadyPresentReminderSeries();
+
+		bi.addNewReminderSeries("Bill");
+
+		String reminderName = "Reminder_"+h.getCurrentTime();
+
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setPayee(reminderName);
+		tRec.setAmount("20.00");
+		tRec.setFromAccount(sManualChecking);
+
+		bi.addNewReminder(tRec);
+		
+		bi.addNewReminderSeries("Bill");
+		
+		String reminderName2 = "A_"+h.getCurrentTime();
+
+		TransactionRecord tRec1 = new TransactionRecord();
+		tRec1.setPayee(reminderName2);
+		tRec1.setAmount("10.00");
+		tRec1.setFromAccount(sManualChecking);
+
+		bi.addNewReminder(tRec1);
+		
+		bi.selectingBillerNameOption();
+		
+		List<MobileElement> li = bi.getAllSectionHeaders();
+		
+		String firstSectionHeaderText = li.get(0).getText();
+		String secondSectionHeaderText = li.get(1).getText();
+		
+		if(firstSectionHeaderText.equalsIgnoreCase("A")) 
+			Commentary.log(LogStatus.INFO, "As Expected, Text of First Section Header is \"A\".");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Text of First Section Header is NOT \"A\".");
+		
+		if(secondSectionHeaderText.equalsIgnoreCase("R")) 
+			Commentary.log(LogStatus.INFO, "As Expected, Text of Second Section Header is \"R\".");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "Text of Second Section Header is NOT \"R\".");
+
+		bi.deleteAlreadyPresentReminderSeries();
 
 		sa.assertAll();
 	}

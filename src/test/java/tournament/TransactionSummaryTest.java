@@ -44,11 +44,11 @@ public class TransactionSummaryTest extends Recovery {
 
 		TransactionSummaryPage ts = new TransactionSummaryPage();
 
-		Verify.waitForObject(ts.transactionSummaryHeader, 2);
-		if (Verify.objExists(ts.transactionSummaryHeader))
-			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary Header text is displayed.");
+		Verify.waitForObject(ts.monthlySummaryHeader, 2);
+		if (Verify.objExists(ts.monthlySummaryHeader))
+			Commentary.log(LogStatus.INFO, "PASS: Monthly Summary Header text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transaction Summary Header text is not displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Monthly Summary Header text is not displayed.");
 
 		if (Verify.objExists(ts.backButtonOnHeader))
 			Commentary.log(LogStatus.INFO, "PASS: Back button is displayed.");
