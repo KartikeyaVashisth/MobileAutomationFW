@@ -554,7 +554,29 @@ public class BillsAndIncomePage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Do you want to delete this and future instances? Previously recorded transactions will not be deleted.'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Do you want to delete this and future instances? Previously recorded transactions will not be deleted.']")
 	public MobileElement deleteThisAndFutureInstancesInfoPopUp;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='sortOptions'`]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='sortOptions']")
+	public MobileElement billSortingIcon;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Due New to Old'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Due New to Old']")
+	public MobileElement dueNewToOldOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Due Old to New'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Due Old to New']")
+	public MobileElement dueOldToNewOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=' Biller Name'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=' Biller Name']")
+	public MobileElement billerNameOption;
 
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Apply'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Apply']")
+	public MobileElement applyOption;
+	
+	
+	
 	public void addNewReminderSeries(String type) throws Exception {
 
 		Verify.waitForObject(this.addNewReminderButton, 2);
@@ -2016,7 +2038,7 @@ public class BillsAndIncomePage {
 		Verify.waitForObject(this.deleteReminderSeriesAlertButton, 1);
 		this.deleteReminderSeriesAlertButton.click();
 		Thread.sleep(2000);
-		Verify.waitForObject(this.youHaveNoScheduledReminders, 2);
+		Verify.waitForObject(this.youHaveNoScheduledReminders, 1);
 	}
 
 	public void tapOnTags() throws Exception {
@@ -2337,5 +2359,69 @@ public class BillsAndIncomePage {
 			else
 				Commentary.log(sa, LogStatus.FAIL, "Last Date of December Month is NOT displayed.");
 		}
+	}
+	
+	public void selectingDueNewToOldOption() throws Exception {
+
+		Verify.waitForObject(this.billSortingIcon, 1);
+		this.billSortingIcon.click();
+		Verify.waitForObject(this.dueNewToOldOption, 1);
+		this.dueNewToOldOption.click();
+		Thread.sleep(1000);
+		this.applyOption.click();
+		Thread.sleep(2000);
+		Commentary.log(LogStatus.INFO, "Filter set to sort by \"Due New to Old\" now.");
+	}
+
+	public void selectingDueOldToNewOption() throws Exception {
+
+		Verify.waitForObject(this.billSortingIcon, 1);
+		this.billSortingIcon.click();
+		Verify.waitForObject(this.dueOldToNewOption, 1);
+		this.dueOldToNewOption.click();
+		Thread.sleep(1000);
+		this.applyOption.click();
+		Thread.sleep(2000);
+		Commentary.log(LogStatus.INFO, "Filter set to sort by \"Due Old to New\" now.");
+	}
+
+	public void selectingBillerNameOption() throws Exception {
+
+		Verify.waitForObject(this.billSortingIcon, 1);
+		this.billSortingIcon.click();
+		Verify.waitForObject(this.billerNameOption, 1);
+		this.billerNameOption.click();
+		Thread.sleep(1000);
+		this.applyOption.click();
+		Thread.sleep(2000);
+		Commentary.log(LogStatus.INFO, "Filter set to sort by \"Biller Name\" now.");
+	}
+	
+	public List<MobileElement> getAllSectionHeaders() throws Exception {
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android"))
+			return getAllSectionHeaders_android();
+		else
+			return getAllSectionHeaders_ios();		
+	}
+
+	public List<MobileElement> getAllSectionHeaders_android () throws Exception {
+
+		String sXpath = "//android.widget.TextView[contains(@resource-id,'list_banner_text')]";
+		List <MobileElement> me = null;
+
+		me = Engine.getDriver().findElements(By.xpath(sXpath));
+
+		return me;
+	}
+
+	public List<MobileElement> getAllSectionHeaders_ios () throws Exception {
+
+		String sXpath = "**/XCUIElementTypeOther[`name='sectionHeader'`]";
+		List <MobileElement> me = null;
+		me = Engine.getDriver().findElements(MobileBy.iOSClassChain(sXpath));
+
+		return me;
 	}
 }

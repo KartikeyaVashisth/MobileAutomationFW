@@ -223,8 +223,8 @@ public class Smoke_test extends Recovery {
 		o.tapOnTransactionSummaryCard();
 
 		TransactionSummaryPage cashflow = new TransactionSummaryPage();
-		Verify.waitForObject(cashflow.transactionSummaryHeader, 1);
-		if (Verify.objExists(cashflow.transactionSummaryHeader))
+		Verify.waitForObject(cashflow.monthlySummaryHeader, 1);
+		if (Verify.objExists(cashflow.monthlySummaryHeader))
 			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card tap > Transaction summary screen got displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card tap > Transaction summary screen did not appear.");

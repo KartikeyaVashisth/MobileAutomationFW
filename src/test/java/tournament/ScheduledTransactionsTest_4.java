@@ -101,6 +101,8 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 
 		op.tapOnBillsAndIncomeCard();
 
+		bi.selectingDueNewToOldOption();
+		
 		tp.tapOnTransation(1); //Tapping on Next Reminder Instance.
 
 		bi.tapOnEditThisInstanceOption();
@@ -272,6 +274,8 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		tRec.setFrequency("Weekly");
 
 		bi.addNewReminder(tRec);
+		
+		bi.selectingDueNewToOldOption();
 		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 
 		TransactionsPage tp = new TransactionsPage();
@@ -371,6 +375,8 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		tRec.setFrequency("Weekly");
 
 		bi.addNewReminder(tRec);
+		
+		bi.selectingDueNewToOldOption();
 		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		
 		TransactionsPage tp = new TransactionsPage();
@@ -414,7 +420,9 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		tRec.setFromAccount(sManualChecking);
 
 		bi.addNewReminder(tRec);
-		Verify.waitForObject(bi.thisMonthHeaderText, 2);
+		
+		bi.selectingDueNewToOldOption();
+		Verify.waitForObject(bi.thisMonthHeaderText, 1);
 		
 		TransactionsPage tp = new TransactionsPage();
 		tp.tapOnFirstTransaction();
