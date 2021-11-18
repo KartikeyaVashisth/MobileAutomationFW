@@ -1,14 +1,18 @@
 package tournament;
 
+import java.util.HashMap;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
 import dugout.OverviewPage;
+import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
+import dugout.TransactionsPage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -99,9 +103,144 @@ public class TrendingCard_Test extends Recovery {
 
 		sa.assertAll();	
 	}
-
-	@Test(priority = 2, enabled = true)
+	
+	@Test (priority = 2, enabled = true)
 	public void TC2_test() throws Exception {
+
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		
+		OverviewPage op = new OverviewPage();
+		op.navigateToSpendingByCategory();
+		
+		Thread.sleep(1000);
+		
+		SpendingTrendPage st= new SpendingTrendPage();
+		st.deleteSpendingTrendTransactions();
+		Thread.sleep(1000);
+		
+	}
+	
+	
+	@Test(priority = 3, enabled = true)
+	public void TC3_test() throws Exception {
+
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		
+		SpendingTrendPage st = new SpendingTrendPage();
+		
+		Double before, after, amount1;
+		String sCategory;
+		
+
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify the split category and Split amount for trending card after adding a split transaction.");
+
+		String payeename = h.getCurrentTime();
+		
+		HashMap<Integer,String> amount = new HashMap<Integer, String>();
+		HashMap<Integer,String> cat = new HashMap<Integer, String>();
+		HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+		
+		OverviewPage op = new OverviewPage();
+		op.navigateToSpendingByCategory();
+		
+		if (Verify.objExists(st.youDontHaveAnyTxns)) {
+			sCategory = "Entertainment";
+			before = h.processBalanceAmount("0.0");
+			Commentary.log(LogStatus.INFO, "There are no transactions for [MonthToDate]. Hence adding transaction for category [Entertainment] & validating it.");	
+		}
+		else {
+			sCategory = st.getCategory();
+			before = st.getAmount();
+			Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for MonthToDate Filter is: ["+before+"]");	
+		}
+		
+		st.backButtonOnHeader.click();
+		Thread.sleep(1000);
+		
+		
+		
+		cat.put(1, sCategory);
+		cat.put(2, "Education");
+		amount.put(1, "12.00");
+		amount.put(2, "10.00");
+		tags.put(1, new String[] {"Tax Related"});
+		tags.put(2, new String[] {"Tax Related"});
+		
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setAmount("30.00");
+		//tRec.setTransactionType("expense");
+		tRec.setAccount(sManualChecking);
+		tRec.setPayee(payeename);
+		
+		
+		
+		
+		if(Verify.objExists(op.addTransaction))
+			op.addTransaction.click();
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		td.addSplit(tRec, amount, cat, tags);
+		Thread.sleep(1000);
+		
+		op.navigateToSpendingByCategory();
+	
+		String splitCategory = st.categoryName1.getText().replace("Total for ", "");
+		System.out.println(splitCategory);
+		
+		if(splitCategory.equals(sCategory))	{
+			
+			Commentary.log(LogStatus.PASS, "split category appeared");
+			
+		}
+		
+		else {
+			Commentary.log(LogStatus.FAIL, "Split category did not appear");
+		}
+		
+		if(Verify.objExists(st.amount1)) {
+			Commentary.log(LogStatus.PASS, "Split category amount is visible ["+st.amount1.getText()+"]");
+		}
+		else {
+			
+			Commentary.log(LogStatus.FAIL, "Amount  did not appear");
+			
+		}
+		
+		Thread.sleep(1000);
+		st.scrollCategory();
+		Thread.sleep(3000);
+		System.out.println(st.categoryName1.getText());
+		if(Verify.objExists(st.categoryName1)) {
+			Commentary.log(LogStatus.PASS, "Second split child category appeared");
+		}
+		else {
+			
+			Commentary.log(LogStatus.FAIL, "Second split category did not appear");
+			
+		}
+		
+		st.backButtonOnHeader.click();
+		Thread.sleep(1000);
+		
+		op.navigateToAllTransactions();
+		TransactionsPage tp = new TransactionsPage();
+		tp.searchRecentTransaction(payeename);
+		tp.tapOnFirstTransaction();
+		
+		td.scroll_down();
+		td.deleteTransaction.click();
+		td.deleteTransactionAlertButton.click();
+		Thread.sleep(1000);		
+		
+
+}
+	
+	
+
+	@Test(priority = 4, enabled = false)
+	public void TC4_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -174,8 +313,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 3, enabled = true)
-	public void TC3_test() throws Exception {
+	@Test(priority = 5, enabled = false)
+	public void TC5_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -248,8 +387,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 4, enabled = true)
-	public void TC4_test() throws Exception {
+	@Test(priority = 6, enabled = false)
+	public void TC6_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -322,8 +461,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 5, enabled = true)
-	public void TC5_test() throws Exception {
+	@Test(priority = 7, enabled = false)
+	public void TC7_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -398,8 +537,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();		
 	}
 
-	@Test(priority = 6, enabled = true)
-	public void TC6_test() throws Exception {
+	@Test(priority = 8, enabled = false)
+	public void TC8_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -470,8 +609,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 7, enabled = true)
-	public void TC7_test() throws Exception {
+	@Test(priority = 9, enabled = false)
+	public void TC9_test() throws Exception {
 
 		/*This Testcase handles two scenarios
 		 * 
@@ -565,8 +704,8 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 8, enabled = true)
-	public void TC8_test() throws Exception {
+	@Test(priority = 10, enabled = false)
+	public void TC10_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -598,5 +737,116 @@ public class TrendingCard_Test extends Recovery {
 
 		sa.assertAll();	
 	}
-
+	
+//	@Test(priority = 9, enabled = true)
+//	public void TC9_test() throws Exception {
+//
+//		SoftAssert sa = new SoftAssert();
+//		Helper h = new Helper();
+//		
+//		SpendingTrendPage st = new SpendingTrendPage();
+//		
+//		Double before, after, amount1;
+//		String sCategory;
+//		
+//
+//		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify the split category and Split amount for trending card after adding a split transaction.");
+//
+//		String payeename = h.getCurrentTime();
+//		
+//		HashMap<Integer,String> amount = new HashMap<Integer, String>();
+//		HashMap<Integer,String> cat = new HashMap<Integer, String>();
+//		HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+//		
+//		OverviewPage op = new OverviewPage();
+//		op.navigateToSpendingByCategory();
+//		
+//		if (Verify.objExists(st.youDontHaveAnyTxns)) {
+//			sCategory = "Entertainment";
+//			before = h.processBalanceAmount("0.0");
+//			Commentary.log(LogStatus.INFO, "There are no transactions for [MonthToDate]. Hence adding transaction for category [Entertainment] & validating it.");	
+//		}
+//		else {
+//			sCategory = st.getCategory();
+//			before = st.getAmount();
+//			Commentary.log(LogStatus.INFO, "Category ["+sCategory+"] total amount for MonthToDate Filter is: ["+before+"]");	
+//		}
+//		
+//		st.backButtonOnHeader.click();
+//		Thread.sleep(1000);
+//		
+//		
+//		
+//		cat.put(1, sCategory);
+//		cat.put(2, "Education");
+//		amount.put(1, "12.00");
+//		amount.put(2, "10.00");
+//		tags.put(1, new String[] {"Tax Related"});
+//		tags.put(2, new String[] {"Tax Related"});
+//		
+//		TransactionRecord tRec = new TransactionRecord();
+//		tRec.setAmount("30.00");
+//		//tRec.setTransactionType("expense");
+//		tRec.setAccount(sManualChecking);
+//		tRec.setPayee(payeename);
+//		
+//		
+//		
+//		
+//		if(Verify.objExists(op.addTransaction))
+//			op.addTransaction.click();
+//		
+//		TransactionDetailPage td = new TransactionDetailPage();
+//		td.addSplit(tRec, amount, cat, tags);
+//		Thread.sleep(1000);
+//		
+//		op.navigateToSpendingByCategory();
+//	
+//		String splitCategory = st.categoryName1.getText().replace("Total for ", "");
+//		System.out.println(splitCategory);
+//		
+//		if(splitCategory.equals(sCategory))	{
+//			
+//			Commentary.log(LogStatus.PASS, "split category appeared");
+//			
+//		}
+//		
+//		else {
+//			Commentary.log(LogStatus.FAIL, "Split category did not appear");
+//		}
+//		
+//		if(Verify.objExists(st.amount1)) {
+//			Commentary.log(LogStatus.PASS, "Split category amount is visible ["+st.amount1.getText()+"]");
+//		}
+//		else {
+//			
+//			Commentary.log(LogStatus.FAIL, "Amount  did not appear");
+//			
+//		}
+//		
+//		Thread.sleep(1000);
+//		st.scrollCategory();
+//		Thread.sleep(3000);
+//		System.out.println(st.categoryName1.getText());
+//		if(Verify.objExists(st.categoryName1)) {
+//			Commentary.log(LogStatus.PASS, "Second split child category appeared");
+//		}
+//		else {
+//			
+//			Commentary.log(LogStatus.FAIL, "Second split category did not appear");
+//			
+//		}
+//		
+//		st.backButtonOnHeader.click();
+//		Thread.sleep(1000);
+//		
+//		op.navigateToAllTransactions();
+//		TransactionsPage tp = new TransactionsPage();
+//		tp.searchRecentTransaction(payeename);
+//		tp.tapOnFirstTransaction();
+//		td.deleteTransation();
+//		Thread.sleep(1000);		
+//		
+//
+//}
 }

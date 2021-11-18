@@ -978,6 +978,141 @@ public void scrollToTransactionSummaryCard() throws Exception{
 		}
 	}
 
+
+	public void navigateToDashboard() throws Exception {
+	
+	SettingsPage sp = new SettingsPage();
+	sp.clickOnDashboardOption();
+	Thread.sleep(1000);
+		
+	}
+
+	public void navigateToAccounts() throws Exception {
+	
+	SettingsPage sp = new SettingsPage();
+	sp.clickOnAccountsOption();
+	Thread.sleep(1000);
+		
+	}
+
+	public void navigateToAllTransactions() throws Exception {
+	
+	SettingsPage sp = new SettingsPage();
+	sp.clickOnAllTransactionsOption();
+	Thread.sleep(1000);
+		
+	}
+	
+	public void navigateToBills() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnBillsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToInvesting() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnInvestingOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToReports() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToMonthlySummary() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnMonthlySummaryOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToNetIncome() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnNetIncomeOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToNetWorth() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnNetWorthOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSpendingByCategory() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSpendingByCategoryOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSpendingOverTime() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSpendingOverTimeOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToProfile() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnProfileOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSettings() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToCustomizeDashboard() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnCustomizeDashboardOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToAccountManagement() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAccountsManagementOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToManageAlerts() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnManageAlertsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	
+	
+	
+
+
+
 	public void navigateToRenamingRules() throws Exception{
 		
 		SettingsPage sp = new SettingsPage();
@@ -990,5 +1125,20 @@ public void scrollToTransactionSummaryCard() throws Exception{
 		
 	
 	}
+	
+	public void navigateToMemorizedPayees() throws Exception{
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
+		
+		sp.rulesOption.click();
+		Thread.sleep(1000);
+		sp.renamingRulesOption.click();
+		Thread.sleep(1000);
+		
+	
+	}
+	
+	
 
 }

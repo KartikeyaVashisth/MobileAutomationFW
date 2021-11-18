@@ -1,16 +1,21 @@
 package tournament;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import dugout.AllAccountsPage;
 import dugout.BankingAndCreditCardPage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -103,7 +108,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 14, enabled = true)
+	@Test(priority = 14, enabled = false)
 	public void TR15_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -168,7 +173,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 15, enabled = true)
+	@Test(priority = 15, enabled = false)
 	public void TR16_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -245,7 +250,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();	
 	}
 
-	@Test (priority=16, enabled = true)
+	@Test (priority=16, enabled = false)
 	public void TC17_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -350,7 +355,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();	
 	}
 
-	@Test (priority=17, enabled = true)
+	@Test (priority=17, enabled = false)
 	public void TC18_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -414,7 +419,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test (priority=18, enabled = true)
+	@Test (priority=18, enabled = false)
 	public void TC19_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -498,5 +503,226 @@ public class TransferCases_Test2 extends Recovery{
 		Commentary.log(LogStatus.INFO, "Changed the category same as earlier again.");
 
 		sa.assertAll();
+	}
+	
+	
+	
+	@Test (priority=19, enabled = true)
+	public void TC20_test() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add a split transfer and verify the transaction is appearing on the other account.");
+
+		OverviewPage op = new OverviewPage();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		op.navigateToAccounts();
+		
+		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+		bcc.selectAccount(sSaving);
+		Thread.sleep(1000);
+		
+		TransactionsPage tp = new TransactionsPage();
+		tp.addTransaction.click();
+		Thread.sleep(1000);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		
+		String payeename = h.getCurrentTime();
+		String transferToAcc1 = "Transfer ["+sSavings+"]";
+		
+		HashMap<Integer,String> amount = new HashMap<Integer, String>();
+		HashMap<Integer,String> cat = new HashMap<Integer, String>();
+		HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+		
+		cat.put(1, "Education");
+		cat.put(2, transferToAcc1);
+		amount.put(1, "20.00");
+		amount.put(2, "10.00");
+		tags.put(1, new String[] {"Tax Related"});
+		tags.put(2, new String[] {"Tax Related"});
+		
+		
+		
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setAmount("30.00");
+		//tRec.setTransactionType("expense");
+		tRec.setAccount(sSaving);
+		tRec.setPayee(payeename);
+		
+		td.addSplit(tRec, amount, cat, tags);
+		Thread.sleep(1000);
+		
+		
+		tp.searchRecentTransaction(payeename);
+		tp.tapOnFirstTransaction();
+		
+		td.scroll_down();
+		
+		if(Verify.objExists(td.buttonGoToOtherSide)) {
+			
+			td.buttonGoToOtherSide.click();
+			
+			Commentary.log(LogStatus.PASS, "Split transfer added successfully and tapping on go to other side navigated to ["+td.getTransactionCategory()+"] account");
+		
+		}
+	}
+		
+		
+		@Test (priority=20, enabled = true)
+		public void TC21_test() throws Exception {
+			
+			SoftAssert sa = new SoftAssert();
+			Helper h = new Helper();
+			
+			Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify the message if we try to delete the other side on the split transfer transaction");
+
+			OverviewPage op = new OverviewPage();
+
+			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+			
+			op.navigateToAccounts();
+			
+			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+			bcc.selectAccount(sSaving);
+			Thread.sleep(1000);
+			
+			TransactionsPage tp = new TransactionsPage();
+			tp.addTransaction.click();
+			Thread.sleep(1000);
+			
+			TransactionDetailPage td = new TransactionDetailPage();
+			
+			String payeename = h.getCurrentTime();
+			String transferToAcc1 = "Transfer ["+sSavings+"]";
+			
+			HashMap<Integer,String> amount = new HashMap<Integer, String>();
+			HashMap<Integer,String> cat = new HashMap<Integer, String>();
+			HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+			
+			cat.put(1, "Education");
+			cat.put(2, transferToAcc1);
+			amount.put(1, "50.00");
+			amount.put(2, "20.00");
+			tags.put(1, new String[] {"Tax Related"});
+			tags.put(2, new String[] {"Tax Related"});
+			
+			
+			
+			TransactionRecord tRec = new TransactionRecord();
+			tRec.setAmount("70.00");
+			//tRec.setTransactionType("expense");
+			tRec.setAccount(sSaving);
+			tRec.setPayee(payeename);
+			
+			td.addSplit(tRec, amount, cat, tags);
+			Thread.sleep(1000);
+			
+			tp.searchRecentTransaction(payeename);
+			tp.tapOnFirstTransaction();
+			
+			td.scroll_down();
+			
+			td.buttonGoToOtherSide.click();
+			Thread.sleep(1000);	
+			
+			td.scroll_down();
+			
+			td.deleteTransaction.click();
+			td.deleteTransactionAlertButton.click();
+			
+			if(Verify.objExists(td.deleteWarningMessage)) {
+				
+				Commentary.log(LogStatus.PASS, "deleting this side of transfer will make the other side uncategorised");
+				td.acceptAlert.click();;
+			}
+			else {
+				Commentary.log(LogStatus.FAIL, "Split delete warning message did not appear.");
+			}
+	}
+		
+		@Test (priority=21, enabled = true)
+		public void TC22_test() throws Exception {
+			
+			SoftAssert sa = new SoftAssert();
+			Helper h = new Helper();
+			
+			Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify split transaction with a child transfer , if we turn off the split ----> the transfer transaction should be deleted from other account as well.");
+
+			OverviewPage op = new OverviewPage();
+
+			Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+			
+			op.navigateToAccounts();
+			
+			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
+			bcc.selectAccount(sSaving);
+			Thread.sleep(1000);
+			
+			TransactionsPage tp = new TransactionsPage();
+			tp.addTransaction.click();
+			Thread.sleep(1000);
+			
+			TransactionDetailPage td = new TransactionDetailPage();
+			
+			String payeename = h.getCurrentTime();
+			String transferToAcc1 = "Transfer ["+sSavings+"]";
+			
+			HashMap<Integer,String> amount = new HashMap<Integer, String>();
+			HashMap<Integer,String> cat = new HashMap<Integer, String>();
+			HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+			
+			cat.put(1, "Education");
+			cat.put(2, transferToAcc1);
+			amount.put(1, "50.00");
+			amount.put(2, "20.00");
+			tags.put(1, new String[] {"Tax Related"});
+			tags.put(2, new String[] {"Tax Related"});
+			
+			
+			
+			TransactionRecord tRec = new TransactionRecord();
+			tRec.setAmount("70.00");
+			//tRec.setTransactionType("expense");
+			tRec.setAccount(sSaving);
+			tRec.setPayee(payeename);
+			
+			td.addSplit(tRec, amount, cat, tags);
+			Thread.sleep(1000);
+			
+			tp.searchRecentTransaction(payeename);
+			tp.tapOnFirstTransaction();
+			
+			td.splitSwitch.click();
+			td.buttonSave1.click();
+			
+			Thread.sleep(2000);
+			
+			tp.backButton.click();
+			
+			BankingAndCreditCardPage bc = new BankingAndCreditCardPage();
+			bc.allTransactionButton.click();
+			Thread.sleep(1000);
+			tp.searchRecentTransaction(payeename);
+			
+			
+			AllAccountsPage aa = new AllAccountsPage();
+			List<MobileElement> li = aa.getAllSearchTransactions ();
+			int a = li.size();
+			
+			
+			if(a==1) {
+				Commentary.log(LogStatus.PASS, "Other part of the split child transfer got deleted");
+			}
+			else {
+				Commentary.log(LogStatus.FAIL, "Other part of the split child transfer is not deleted");
+			}
+			
+			
+			
+		
 	}
 }

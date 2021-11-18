@@ -5,10 +5,15 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
 import java.util.HashMap;
+import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 
+import com.relevantcodes.extentreports.LogStatus;
+
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 //import io.appium.java_client.SwipeElementDirection;
@@ -16,6 +21,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -84,6 +90,15 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
 	public MobileElement categoryName;
 	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND  name BEGINSWITH[c] 'Total for'")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'Total for ')]")
+	public MobileElement categoryName1;
+	
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name BEGINSWITH[c] 'amount: '")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'amount:')]")
+	public MobileElement amount1;
+	
 //	@iOSFindBy(xpath="//XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@name, '$')]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText[`name CONTAINS '$'  AND visible == 1`]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView//android.widget.TextView[contains(@text, '$')]")
@@ -94,6 +109,23 @@ public class SpendingTrendPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='horizontalScrollView'`][1]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]")
 	public MobileElement scrollCategory;
+	
+
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'topRightLabel'")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id,'list_row_amount')]")
+	public MobileElement commonAmount;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'category: Travel'")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Travel']")
+	public MobileElement splitTravelCat;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'category: Shopping'")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Shopping']")
+	public MobileElement splitShoppingCat;
+	
+	
+	
 	
 	
 	public void navigateBackToDashboard() throws Exception {
@@ -242,6 +274,103 @@ public class SpendingTrendPage {
 		Verify.waitForObject(sp.spendingByCategoryOption, 1);
 		sp.spendingByCategoryOption.click();
 		Thread.sleep(1000);
+		//this is test
 	}
+	
+public void deleteSpendingTrendTransactions() throws Exception{
+		
+		Helper h = new Helper();
+		
+		if (h.getEngine().equals("ios"))
+			deleteSpendingTrendTransactions_ios();
+		
+		else
+			deleteSpendingTrendTransactions_android();
+			
+		
+	}
+	
+	public void deleteSpendingTrendTransactions_ios() throws Exception {
+		
+		
+		if(Verify.objExists(youDontHaveAnyTxns)) {
+			
+			Commentary.log(LogStatus.INFO, "No transaction is available");
+		}
+		else {
+			
+			Commentary.log(LogStatus.INFO, "Transactions are available and we are going to delete them.");
+			
+			int i = getNumberOfRows();
+			
+			System.out.println("Number of  Transaction Rows found "+i);
+			
+			for (int j = 1; j<=i; j++) {	
+				commonAmount.click();
+				Thread.sleep(500);
+				
+				TransactionDetailPage td = new TransactionDetailPage();
+				td.deleteTransation();
+				Thread.sleep(1000);
+
+		}
+			
+	}
+	}
+	
+	public void deleteSpendingTrendTransactions_android() throws Exception{
+		
+	
+	if(Verify.objExists(youDontHaveAnyTxns)) {
+		
+		Commentary.log(LogStatus.INFO, "No transaction is available");
+	}
+	else {
+		
+		Commentary.log(LogStatus.INFO, "Transactions are available and we are going to delete them.");
+	
+	while(getNumberOfRows() > 0) {
+			
+			Thread.sleep(2000);
+			commonAmount.click();
+			
+			Thread.sleep(3000);
+			
+			TransactionDetailPage td = new TransactionDetailPage();
+			td.scroll_down();
+			td.deleteTransaction.click();
+			//td.deleteTransation();
+			Thread.sleep(1000);
+			td.deleteTransactionAlertButton.click();
+			Thread.sleep(1000);
+		}
+	}	
+			
+		}
+		
+		
+		
+		public int getNumberOfRows() throws Exception {
+			
+			Helper h = new Helper();
+			
+			
+			if (h.getEngine().equals("ios")){
+				
+				List <MobileElement> me = Engine.getDriver().findElements(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'topRightLabel'`]"));
+				
+				return me.size();
+				
+			}
+			else {
+				
+				List <MobileElement> me = Engine.getDriver().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'list_row_amount')]"));
+				
+				return me.size();
+				
+			}
+				
+			
+		}
 
 }

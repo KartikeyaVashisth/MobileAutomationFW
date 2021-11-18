@@ -607,7 +607,7 @@ public class SettingsPage {
 		
 		Verify.waitForObject(this.dashboardOption, 1);
 		this.dashboardOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnAccountsOption() throws Exception {
@@ -618,7 +618,7 @@ public class SettingsPage {
 		
 		Verify.waitForObject(this.accountTxt, 1);
 		this.accountTxt.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 
 	public void clickOnAllTransactionsOption() throws Exception {
@@ -629,7 +629,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.allTransactionsOption, 1);
 		this.allTransactionsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnBillsOption() throws Exception {
@@ -640,7 +640,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.billsOption, 1);
 		this.billsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnBudgetsOption() throws Exception {
@@ -651,7 +651,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.budgetsOption, 1);
 		this.budgetsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnInvestingOption() throws Exception {
@@ -662,7 +662,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.investingOption, 1);
 		this.investingOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnReportsOption() throws Exception {
@@ -673,8 +673,10 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.reportsOption, 1);
 		this.reportsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
+	
+	
 	
 	public void clickOnProfileOption() throws Exception {
 
@@ -684,7 +686,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.profileOption, 1);
 		this.profileOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnSettingsOption() throws Exception {
@@ -695,7 +697,85 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.settingsOption, 1);
 		this.settingsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
+	
+	public void clickOnSpendingByCategoryOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.spendingByCategoryOption, 1);
+		sp.spendingByCategoryOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnMonthlySummaryOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.monthlySummaryOption, 1);
+		sp.monthlySummaryOption.click();
+		Thread.sleep(2000);
+	}
+	
+	
+	public void clickOnNetIncomeOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.netIncomeOption, 1);
+		sp.netIncomeOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnNetWorthOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.netWorthOption, 1);
+		sp.netWorthOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnSpendingOverTimeOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.spendingOverTimeOption, 1);
+		sp.spendingOverTimeOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnCustomizeDashboardOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.accountIDUnderProfileOption, 1);
+		sp.customizeDashboardOption.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	public void clickOnAccountsManagementOption() throws Exception {
+		
+		SettingsPage st = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(st.accountsManagementOption, 1);
+		st.accountsManagementOption.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	public void clickOnManageAlertsOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.manageAlerts, 1);
+		sp.manageAlerts.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	
 
 }
