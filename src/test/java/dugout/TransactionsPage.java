@@ -128,6 +128,27 @@ public class TransactionsPage {
 		Thread.sleep(1000);
 	}
 	
+    public void searchTransactionInAccount(String searchString) throws Exception {
+		
+		Verify.waitForObject(searchTransactionTxtField, 2);
+		searchTransactionTxtField.click();
+		searchTransactionTxtField.clear();
+		searchTransactionTxtField.sendKeys(searchString);
+		
+		Helper h = new Helper();
+		h.hideKeyBoard();
+		Thread.sleep(1000);
+	}
+    
+   public void taponClearSearchButton() throws Exception{
+		
+		buttonClearSearch.click();
+		Thread.sleep(3000);
+	}
+	
+
+
+	
 	public void tapOnFirstTransaction() throws Exception {
 		AllAccountsPage aa = new AllAccountsPage();
 				
@@ -672,4 +693,11 @@ public class TransactionsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`value='THIS MONTH'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='THIS MONTH']")
 	public MobileElement thisMonthLabel;
+	
+	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Cancel'`]")
+	@iOSXCUITFindBy(accessibility = "Clear text")
+	@AndroidFindBy(id="android:id/search_close_btn")
+	public MobileElement buttonClearSearch;
+
+	
 }
