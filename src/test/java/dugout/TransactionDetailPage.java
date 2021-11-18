@@ -2,6 +2,8 @@ package dugout;
 
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 
 import java.awt.RenderingHints.Key;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -430,6 +433,83 @@ public class TransactionDetailPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name=='OK'`]")
 	@AndroidFindBy(xpath="//android.widget.Button(@text='OK')")
 	public MobileElement acceptAlert;
+	
+	//---------- Category On The Fly -------------
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Create New Category'")
+	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Create New Category')")
+	public MobileElement createNewCatLabel;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Category Name'")
+	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Category Name')")
+	public MobileElement categoryNameLabel;
+	
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Category Type'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Expense')")
+	public MobileElement createType;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Subcategory of'`]")
+	@AndroidFindBy(xpath="//*[@text='Subcategory of']/../android.widget.ImageView")
+	public MobileElement subCategoryOf;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Cancel'`][1]")
+	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Cancel')")
+	public MobileElement cancelbutton;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Create'`][1]")
+	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Create')")
+	public MobileElement createButton;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Category Name'`]/**/XCUIElementTypeTextField")
+	@AndroidFindBy(xpath="//*[@text='Category Name']/../android.widget.EditText")
+	public MobileElement categoryNameTxtField;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Category already exists'")
+	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Category already exists')")
+	public MobileElement categoryExistsLabel;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'OK'")
+	@AndroidFindBy(xpath = "//android.widget.Button(@text='OK')")
+	public MobileElement okButton;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Discard Changes?'")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Discard Changes?')")
+	public MobileElement discardChangesLabel;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'Discard'")
+	@AndroidFindBy(xpath="//android.widget.Button(@text = 'DISCARD')")
+	public MobileElement discardButton;
+	
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Select Type'")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Select Type')")
+	public MobileElement selectTypeLabel;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Expense'")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Expense')")
+	public MobileElement expenseTypeOption;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Income'")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Income')")
+	public MobileElement incomeTypeOption;
+	
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][1]")
+	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Apply')")
+	public MobileElement applyButton;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public MobileElement getPayeeElement (String payee) {
 
@@ -547,8 +627,36 @@ public class TransactionDetailPage {
 
 	}
 
-	public void addSplit(HashMap<Integer,String> amount, HashMap<Integer,String> cat, HashMap<Integer,String[]> tags) throws Exception{
+	public void addSplit(TransactionRecord tr, HashMap<Integer,String> amount, HashMap<Integer,String> cat, HashMap<Integer,String[]> tags) throws Exception{
 
+		
+		
+		// Allow Quicken to access this device's location?
+		if (Verify.objExists(this.allowButton)) {
+			this.allowButton.click();
+			Thread.sleep(1000);
+		}
+		
+		
+		
+		if (Verify.objExists(this.buttonDone)||Verify.objExists(this.viewTransactionTxt)) {
+			Commentary.log(LogStatus.INFO,"AddTransaction screen got dispalyed.");
+			
+
+			if (tr.getTransactionType() != null)
+				this.enterTransactionType(tr.getTransactionType());
+			
+			if (tr.getAmount() != null) 
+				this.enterAmount(tr.getAmount());
+			
+			if (tr.getAccount() != null)
+				this.selectAccount(tr.getAccount());
+			
+			if (tr.getPayee() != null)
+				this.selectPayee(tr.getPayee());
+			
+			
+			
 		this.splitSwitch.click();
 		Thread.sleep(1000);
 
@@ -564,8 +672,10 @@ public class TransactionDetailPage {
 			}
 
 		}
-		this.buttonSave1.click();
+		this.buttonSave.click();
 		Thread.sleep(1000);
+		
+	}
 	}
 
 	public void tapOnSplitTag(Integer index) throws Exception{	
@@ -1945,5 +2055,45 @@ public class TransactionDetailPage {
 		deleteTransaction.click();
 		deleteTransactionAlertButton.click();
 	} 
+	
+	
+	public void scroll_down() throws Exception {
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			/*
+			Dimension size = Engine.getDriver().manage().window().getSize();
+			int y_start = (int) (size.width * 1.20);
+			int y_end = (int) (size.width * 0.03);
+			int x = 380;
+			Engine.getDriver().swipe(x, y_start, x, y_end, 3000);
+			*/
+			verticalScrollDownAndroid();
+			
+		} else {
+			JavascriptExecutor js1 = (JavascriptExecutor) Engine.getDriver() ;
+		    HashMap scrollObject = new HashMap();
+		    scrollObject.put("direction", "down");
+		    js1.executeScript("mobile: scroll", scrollObject);
+		}
+		
+	}
+	
+    public void verticalScrollDownAndroid() throws Exception {
+        Dimension size = Engine.getDriver().manage().window().getSize();
+        int y_start = (int) (size.width * 1.20);
+		int y_end = (int) (size.width * 0.03);
+		int x = 380;
+		
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+ 
+		touchAction
+                .press(point(x, y_start))
+                .waitAction(waitOptions(ofMillis(2000)))
+                .moveTo(point(x, y_end))
+                .release().perform();
+    }
+
+	
 
 }

@@ -99,6 +99,14 @@ public class TransactionSummaryPage {
 		@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 		public MobileElement addTransactionButton;
 		
+		@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name  CONTAINS 'Shopping'")
+		@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Shopping']")
+		public MobileElement splitCatShop;
+		
+		@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name  CONTAINS 'Travel'")
+		@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Travel']")
+		public MobileElement splitCatTravel;
+		
 		public void navigateBackToDashboard() throws Exception{
 			
 			Verify.waitForObject(this.backButtonOnHeader, 1);
