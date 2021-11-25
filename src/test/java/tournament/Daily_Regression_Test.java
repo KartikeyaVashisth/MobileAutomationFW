@@ -38,6 +38,8 @@ public class Daily_Regression_Test extends Recovery {
 	//String sUserName = "yuvaraju.boligorla@quicken.com";
 	String sPassword = "Intuit!1";
 	String sDataset = "ProjectedBalances";
+	String sPassword_stage = "Quicken@01";
+	String sDataset_stage = "CompanionRegressionSuite";
 	String sManualChecking = "Manual_Checking";
 	String sOnlineChecking ="onl_checking1";
 	String sManualCreditCard = "Manual_CC";
@@ -55,8 +57,8 @@ public class Daily_Regression_Test extends Recovery {
 	public String getUsername_basedOnEnv() throws Exception{
 
 		UserName un = new UserName();
-		un.stage_ios = "";
-		un.stage_android = "";
+		un.stage_ios = "companionregression++@stage.com";
+		un.stage_android = "companionregression++@stage.com";
 		un.prod_ios = "yuvaraju.boligorla@quicken.com";
 		un.prod_android = "yuvaraju.boligorla@quicken.com";
 		return un.getUserName();	
@@ -73,7 +75,10 @@ public class Daily_Regression_Test extends Recovery {
 		w.setEnvironment(h.getEnv());
 
 		SignInPage si = new SignInPage();
-		si.signIn(sUsername, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword_stage, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add an expense transaction for an manual checking account, verify checking & total balance on overview screen accounts card");
 
@@ -327,10 +332,10 @@ public class Daily_Regression_Test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Back button is not displayed");
 
-		if (Verify.objExists(ts.transactionSummaryHeader))
-			Commentary.log(LogStatus.INFO, "PASS: Transaction Summary header is displayed");
+		if (Verify.objExists(ts.monthlySummaryHeader))
+			Commentary.log(LogStatus.INFO, "PASS: Monthly Summary header is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Transaction Summary header is not displayed");
+			Commentary.log(sa, LogStatus.FAIL, "Monthly Summary header is not displayed");
 
 		if (Verify.objExists(ts.categoryTab))
 			Commentary.log(LogStatus.INFO, "PASS: Category button is displayed");
