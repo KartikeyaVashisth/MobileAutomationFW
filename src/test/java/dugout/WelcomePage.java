@@ -72,6 +72,11 @@ public class WelcomePage {
 	
 //		if (preprod.equals("prod"))
 //			return;
+		if(Verify.objExists(this.allowButton)) {
+			this.allowButton.click();
+			Thread.sleep(2000);
+		}
+		
 		Commentary.log(LogStatus.INFO, "Setting Environment to "+preprod);
 		
 		this.xpath_Environment.click();

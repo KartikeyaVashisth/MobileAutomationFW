@@ -645,8 +645,11 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.datasetDDButton.click();
 		Thread.sleep(4000);
 
-		sp.switchDataset("InvestmentDataset_Automation");
-
+		if(h.getEnv().contentEquals("prod"))
+			sp.switchDataset("InvestmentDataset_Automation");
+		else
+			sp.switchDataset("InvestmentDataset_Automation_Stage");
+		
 		op.tapOnInvestingCard();
 
 		InvestingPage ip = new InvestingPage();
@@ -720,7 +723,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.datasetDDButton.click();
 		Thread.sleep(4000);
 
-		sp.switchDataset("ZeroDataSet");
+		if(h.getEnv().contentEquals("prod"))
+			sp.switchDataset("ZeroDataSet");
+		else
+			sp.switchDataset("ZeroDataSet_Stage");
 
 		op.scrollTillCard("Recent Transactions");
 
