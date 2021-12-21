@@ -159,8 +159,6 @@ public class TrendingCard_Test extends Recovery {
 		st.backButtonOnHeader.click();
 		Thread.sleep(1000);
 		
-		
-		
 		cat.put(1, sCategory);
 		cat.put(2, "Education");
 		amount.put(1, "12.00");
@@ -173,9 +171,6 @@ public class TrendingCard_Test extends Recovery {
 		//tRec.setTransactionType("expense");
 		tRec.setAccount(sManualChecking);
 		tRec.setPayee(payeename);
-		
-		
-		
 		
 		if(Verify.objExists(op.addTransaction))
 			op.addTransaction.click();
@@ -190,9 +185,7 @@ public class TrendingCard_Test extends Recovery {
 		System.out.println(splitCategory);
 		
 		if(splitCategory.equals(sCategory))	{
-			
 			Commentary.log(LogStatus.PASS, "split category appeared");
-			
 		}
 		
 		else {
@@ -205,7 +198,6 @@ public class TrendingCard_Test extends Recovery {
 		else {
 			
 			Commentary.log(LogStatus.FAIL, "Amount  did not appear");
-			
 		}
 		
 		Thread.sleep(1000);
@@ -216,9 +208,7 @@ public class TrendingCard_Test extends Recovery {
 			Commentary.log(LogStatus.PASS, "Second split child category appeared");
 		}
 		else {
-			
 			Commentary.log(LogStatus.FAIL, "Second split category did not appear");
-			
 		}
 		
 		st.backButtonOnHeader.click();
@@ -233,13 +223,9 @@ public class TrendingCard_Test extends Recovery {
 		td.deleteTransaction.click();
 		td.deleteTransactionAlertButton.click();
 		Thread.sleep(1000);		
-		
-
 }
 	
-	
-
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void TC4_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -313,7 +299,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 5, enabled = false)
+	@Test(priority = 5, enabled = true)
 	public void TC5_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -387,7 +373,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TC6_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -461,7 +447,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 7, enabled = false)
+	@Test(priority = 7, enabled = true)
 	public void TC7_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -537,7 +523,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();		
 	}
 
-	@Test(priority = 8, enabled = false)
+	@Test(priority = 8, enabled = true)
 	public void TC8_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -609,7 +595,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 9, enabled = false)
+	@Test(priority = 9, enabled = true)
 	public void TC9_test() throws Exception {
 
 		/*This Testcase handles two scenarios
@@ -704,7 +690,7 @@ public class TrendingCard_Test extends Recovery {
 		sa.assertAll();	
 	}
 	
-	@Test(priority = 10, enabled = false)
+	@Test(priority = 10, enabled = true)
 	public void TC10_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();

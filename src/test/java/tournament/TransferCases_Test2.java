@@ -108,7 +108,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 14, enabled = false)
+	@Test(priority = 14, enabled = true)
 	public void TR15_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -173,7 +173,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test(priority = 15, enabled = false)
+	@Test(priority = 15, enabled = true)
 	public void TR16_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -250,7 +250,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();	
 	}
 
-	@Test (priority=16, enabled = false)
+	@Test (priority=16, enabled = true)
 	public void TC17_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -355,7 +355,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();	
 	}
 
-	@Test (priority=17, enabled = false)
+	@Test (priority=17, enabled = true)
 	public void TC18_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -419,7 +419,7 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 
-	@Test (priority=18, enabled = false)
+	@Test (priority=18, enabled = true)
 	public void TC19_test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -566,7 +566,7 @@ public class TransferCases_Test2 extends Recovery{
 			
 			td.buttonGoToOtherSide.click();
 			
-			Commentary.log(LogStatus.PASS, "Split transfer added successfully and tapping on go to other side navigated to ["+td.getTransactionCategory()+"] account");
+			Commentary.log(LogStatus.PASS, "PASS: Split transfer added successfully and tapping on go to other side navigated to ["+td.getTransactionCategory()+"] account");
 		
 		}
 	}
