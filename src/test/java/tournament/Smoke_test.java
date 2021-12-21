@@ -152,14 +152,14 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
 
-		if (h.getEngine().equalsIgnoreCase("Android")) {
-			if (Verify.objExists(sp.FeedbackTxt))
-				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
-			else
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
-		} else {
-			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
-		}
+//		if (h.getEngine().equalsIgnoreCase("Android")) {
+//			if (Verify.objExists(sp.FeedbackTxt))
+//				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
+//			else
+//				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
+//		} else {
+//			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
+//		}
 		
 		sa.assertAll();
 	}
@@ -232,9 +232,9 @@ public class Smoke_test extends Recovery {
 		cashflow.navigateBackToDashboard();
 
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card, back button tap > Overview screen got displayed.");
+			Commentary.log(LogStatus.INFO,"PASS: Monthly summary card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Monthly summary card, back button tap > Overview screen did not appear.");	
 		sa.assertAll();	
 	}
 
