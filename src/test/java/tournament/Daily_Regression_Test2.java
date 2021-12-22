@@ -120,14 +120,14 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
 
-		if (h.getEngine().equalsIgnoreCase("Android")) {
-			if (Verify.objExists(sp.FeedbackTxt))
-				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
-			else
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
-		} else {
-			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
-		}
+//		if (h.getEngine().equalsIgnoreCase("Android")) {
+//			if (Verify.objExists(sp.FeedbackTxt))
+//				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
+//			else
+//				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
+//		} else {
+//			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
+//		}
 
 		sa.assertAll();
 	}
@@ -199,17 +199,17 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(sp.getAccountElement(sManualCreditCard), 3);
 		MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
-		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
+//		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
 		MobileElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account details are NOT displayed.");
 
-		if (Verify.objExists(accountType_manual))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed.");
+//		if (Verify.objExists(accountType_manual))
+//			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed.");
 
 		if (Verify.objExists(accountStatus1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Status is displayed.");
