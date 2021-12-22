@@ -6,8 +6,11 @@
 	</listeners>
 	
   <test name="Regression_Test">
+    <parameter name="test" value="Companion_IOS_Regression"></parameter>
+      <parameter name="host" value="cloud"></parameter>
+      <parameter name="engine" value="ios"></parameter>
+      <parameter name="env" value="stage"></parameter>
     <classes>
-     <!--  <class name="tournament.RegressionCases"/> -->
      <class name="tournament.Daily_Regression_Test"/>
      <class name="tournament.Daily_Regression_Test2"/>
     </classes>

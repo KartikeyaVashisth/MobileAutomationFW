@@ -8,7 +8,7 @@
       <parameter name="test" value="Companion_BAT_Android"></parameter>
       <parameter name="host" value="cloud"></parameter>
       <parameter name="engine" value="android"></parameter>
-      <parameter name="env" value="prod"></parameter>
+      <parameter name="env" value="stage"></parameter>
     <classes>
       <class name="tournament.Smoke_test"/>
     </classes>
