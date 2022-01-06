@@ -26,6 +26,15 @@ public class TransactionRecord {
 	String note;
 	String transactionType;
 	String mddyyyy;
+	CategoryRecord categoryRecord;
+	
+	
+	
+	
+	public void setCategoryRecord(CategoryRecord categoryRecord) {
+		this.categoryRecord = categoryRecord;
+	}
+
 	
 	public void setCategoryType(String category) {
 		
@@ -266,4 +275,10 @@ public class TransactionRecord {
 	
 		return this.note;
 	}
+	
+	public CategoryRecord getCategoryRecord() {
+		
+		return this.categoryRecord;
+	}
+
 }
