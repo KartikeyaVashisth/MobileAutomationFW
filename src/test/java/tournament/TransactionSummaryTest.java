@@ -33,7 +33,7 @@ public class TransactionSummaryTest extends Recovery {
 	String sManualChecking = "Checking";
 	
 
-	@Test (priority = 1, enabled = false)
+	@Test (priority = 1, enabled = true)
 	public void TS1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -95,7 +95,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 2, enabled = false)
+	@Test (priority = 2, enabled = true)
 	public void TS2_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -125,7 +125,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 3, enabled = false)
+	@Test (priority = 3, enabled = true)
 	public void TS3_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -188,7 +188,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 4, enabled = false)
+	@Test (priority = 4, enabled = true)
 	public void TS4_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -249,7 +249,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=5, enabled = false)
+	@Test (priority=5, enabled = true)
 	public void TS5_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -313,7 +313,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 6, enabled = false)
+	@Test (priority = 6, enabled = true)
 	public void TS6_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -406,7 +406,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 7, enabled = false)
+	@Test (priority = 7, enabled = true)
 	public void TS7_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -500,7 +500,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority = 8, enabled = false)
+	@Test (priority = 8, enabled = true)
 	public void TS8_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -593,7 +593,7 @@ public class TransactionSummaryTest extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=9, enabled = false)
+	@Test (priority=9, enabled = true)
 	public void TS9_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();

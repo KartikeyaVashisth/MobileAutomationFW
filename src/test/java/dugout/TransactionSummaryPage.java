@@ -36,7 +36,7 @@ public class TransactionSummaryPage {
 		public MobileElement monthlySummaryHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
-		@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@class='android.widget.Button']")
+		@AndroidFindBy(xpath="//*[@text='Monthly Summary']/../*[@class='android.widget.Button']")
 		public MobileElement backButtonOnHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
