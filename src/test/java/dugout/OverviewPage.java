@@ -1091,6 +1091,15 @@ public void scrollToTransactionSummaryCard() throws Exception{
 			
 		}
 	
+	public void navigateToManageCategories() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnManageCategoriesOption();
+		Thread.sleep(1000);
+			
+		}
+
+	
 	public void navigateToAccountManagement() throws Exception {
 		
 		SettingsPage sp = new SettingsPage();
