@@ -103,12 +103,12 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Bills']")
 	public MobileElement billsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets Menu'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
 	public MobileElement budgetsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investing Menu'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investments Menu'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investments Menu']")
 	public MobileElement investingOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Reports'`]")
@@ -255,6 +255,10 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
 	public MobileElement switchDisplayFavoritePayees;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account Balance Preference']")
+	public MobileElement accountBalancePreferenceOption;
+	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Customize Dashboard'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
 	public MobileElement customizeDashboardOption;
@@ -294,6 +298,10 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[-4]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@resource-id='addRenameRule']")
 	public MobileElement addRenamingRulesButton;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Memorized Payees'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Memorized Payees']")
+	public MobileElement memorizedPayeesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Tags'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']")

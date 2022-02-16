@@ -33,7 +33,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 	
-	@Test (priority = 1, enabled = false)
+	@Test (priority = 1, enabled = true)
 	public void sf1_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -71,7 +71,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 
-	@Test (priority = 2, enabled = false)
+	@Test (priority = 2, enabled = true)
 	public void sf2_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -119,7 +119,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 	
-	@Test (priority = 3, enabled = false)
+	@Test (priority = 3, enabled = true)
 	public void sf3_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -145,7 +145,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 	
-	@Test (priority = 4, enabled = false)
+	@Test (priority = 4, enabled = true)
 	public void sf4_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -170,7 +170,7 @@ public class SearchFunctionality_Test extends Recovery{
 	}
 	
 	
-	@Test (priority = 5, enabled = false)
+	@Test (priority = 5, enabled = true)
 	public void sf5_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -205,7 +205,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 	
-	@Test (priority = 6, enabled = false)
+	@Test (priority = 6, enabled = true)
 	public void sf6_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -237,7 +237,7 @@ public class SearchFunctionality_Test extends Recovery{
 	}
 	
 	
-	@Test (priority = 7, enabled = false)
+	@Test (priority = 7, enabled = true)
 	public void sf7_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -302,7 +302,7 @@ public class SearchFunctionality_Test extends Recovery{
 	}
 	
 	
-	@Test (priority = 9, enabled = false)
+	@Test (priority = 9, enabled = true)
 	public void sf9_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -345,7 +345,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	
 	
-	@Test (priority = 10, enabled = false)
+	@Test (priority = 10, enabled = true)
 	public void sf10_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -379,7 +379,7 @@ public class SearchFunctionality_Test extends Recovery{
 	}
 	
 	
-	@Test (priority = 11, enabled = false)
+	@Test (priority = 11, enabled = true)
 	public void sf11_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -414,7 +414,7 @@ public class SearchFunctionality_Test extends Recovery{
 	
 
 	
-	@Test (priority = 12, enabled = false)
+	@Test (priority = 12, enabled = true)
 	public void sf13_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();

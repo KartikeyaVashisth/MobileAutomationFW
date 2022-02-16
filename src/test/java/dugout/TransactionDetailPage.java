@@ -266,7 +266,7 @@ public class TransactionDetailPage {
 
 	//@iOSFindBy(xpath="//XCUIElementTypeTextField[@name=\"search tags\"]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name='search tags'`]")
-	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Tags']")
+	@AndroidFindBy(xpath="//android.widget.EditText[@content-desc='search tags']")
 	public MobileElement searchTags;
 
 	//@iOSFindBy(xpath="//XCUIElementTypeTextField")
@@ -274,8 +274,8 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//*[@class='android.widget.EditText']")
 	public MobileElement getTagSearchText;
 
-	@iOSXCUITFindBy(id="create tag")
-	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create tag\"]")
+	@iOSXCUITFindBy(id="create item")
+	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create item\"]")
 	public MobileElement createTag;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][-1]")
@@ -311,15 +311,16 @@ public class TransactionDetailPage {
 	// ------------------ Category SCREEN ------------------
 
 	// for android getText attribute will return the entered notes
-	@iOSFindBy(xpath="//XCUIElementTypeTextView[@name=\"Note\"]")
-	@AndroidFindBy(xpath="//android.widget.EditText[@text='Note']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextView")
+//	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']/../../following-sibling::android.view.ViewGroup[2]//android.widget.EditText")
+	@AndroidFindBy(xpath="(//android.widget.EditText)[2]")
 	public MobileElement note;
 
 	@iOSFindBy(xpath="//XCUIElementTypeImage[@name=\"assets/Quicken/App/Images/noteIcon@2x.png\"]/..//XCUIElementTypeTextView")
 	@AndroidFindBy(xpath="//android.widget.EditText[@index='2']")
 	public MobileElement enteredNote;
 
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Done\"])")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='button Done'`][2]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	public MobileElement buttonDone_OSKeyBoard;
 
@@ -431,7 +432,7 @@ public class TransactionDetailPage {
 	public MobileElement savingsText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name=='OK'`]")
-	@AndroidFindBy(xpath="//android.widget.Button(@text='OK')")
+	@AndroidFindBy(xpath="//android.widget.Button[@text='OK']")
 	public MobileElement acceptAlert;
 	
 	//---------- Category On The Fly -------------
@@ -713,34 +714,92 @@ public class TransactionDetailPage {
 
 	private void selectTags_ios_new_split (String[] sTags) throws Exception {
 
-		for  (String tag:sTags){
-			String sXpath = "**/XCUIElementTypeOther[`name ENDSWITH '"+tag+"' AND visible==true`][-1]";
-			this.searchTag(tag);
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
-			Thread.sleep(500);
-		}
+//		for  (String tag:sTags){
+//			String sXpath = "**/XCUIElementTypeOther[`name ENDSWITH '"+tag+"' AND visible==true`][-1]";
+//			this.searchTag(tag);
+//			Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+//			Thread.sleep(500);
+//		}
+//
+//		this.applyTags.click();
+		
+		for(String tag:sTags){
+			Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='Tags'`]"))).click();
+			Verify.waitForObject(this.searchTags, 1);
+			this.searchTags.sendKeys(tag);
+			Helper h = new Helper();
+			h.hideKeyBoard();
+			Thread.sleep(1000);
 
-		this.applyTags.click();
+			String createTag_xpath="**/XCUIElementTypeOther[`name='create item'`]";
+			String cc = "**/XCUIElementTypeStaticText[`name='"+tag+"'`]";
+
+			if (Verify.objExists(createTag)) {
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+				Commentary.log(LogStatus.INFO,"Creating Tag... "+tag);
+
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+				Thread.sleep(500);
+				Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+tag);
+				h.hideKeyBoard();
+				Thread.sleep(1000);
+			}
+			else {
+				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+				Thread.sleep(500);
+				Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+tag);
+				h.hideKeyBoard();
+				Thread.sleep(1000);
+			}
+			Thread.sleep(1000);
+		}
+		this.tagsApplyButton.click();
+		Thread.sleep(1000);	
 	}
 
 	private void selectTags_android_new_split (String[] sTags) throws Exception {
 
 		//String sXpath;// = "//android.widget.TextView[@text='"+category+"']";
-		Integer iCount;
-
-		for  (String tag:sTags){
-			String sXpath = "//android.widget.TextView[@text='"+tag+"']";
+//		Integer iCount;
+//
+//		for  (String tag:sTags){
+//			String sXpath = "//android.widget.TextView[@text='"+tag+"']";
+//			this.searchTag(tag);
+//			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ tag + "\").instance(0))"));
+//			Thread.sleep(1000);
+//			Engine.getDriver().findElement(By.xpath(sXpath)).click();
+//			Thread.sleep(1000);	
+//		}
+//
+//		System.out.println(Engine.getDriver().getContext());
+//		this.applyTags.click();
+//		Thread.sleep(1000);
+//		System.out.println(Engine.getDriver().getContext());	
+		
+		for(String tag:sTags){
 			this.searchTag(tag);
 			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ tag + "\").instance(0))"));
-			Thread.sleep(1000);
-			Engine.getDriver().findElement(By.xpath(sXpath)).click();
-			Thread.sleep(1000);	
-		}
 
-		System.out.println(Engine.getDriver().getContext());
-		this.applyTags.click();
+			String createTag_xpath = "//android.widget.TextView[@content-desc='create item']";
+			String cc = "//android.widget.TextView[@text='"+tag+"']";
+
+			if (Verify.objExists(createTag)) {
+				Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
+				Commentary.log(LogStatus.INFO,"Creating Tag... "+tag);
+				Thread.sleep(2000);
+
+				Engine.getDriver().findElement(By.xpath(cc)).click();
+				Thread.sleep(1000);
+				Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+tag);
+			}
+			else {
+				Engine.getDriver().findElement(By.xpath(cc)).click();
+				Thread.sleep(500);
+				Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+tag);
+			}
+		}
+		this.tagsApplyButton.click();
 		Thread.sleep(1000);
-		System.out.println(Engine.getDriver().getContext());	
 
 	}
 
@@ -784,9 +843,9 @@ public class TransactionDetailPage {
 		String[] s = sAmount.split("");
 		int iCount;
 
-		index++;
+//		index++;
 
-		String xpath = "(//android.view.ViewGroup[contains(@resource-id,'Amount:')]//android.widget.TextView)["+index+"]";
+		String xpath = "(//android.view.ViewGroup[contains(@resource-id,'Amount:')]//android.widget.TextView)["+index+" +1]";
 		Engine.getDriver().findElement(By.xpath(xpath)).click();
 
 
@@ -1428,7 +1487,7 @@ public class TransactionDetailPage {
 
 	public void selectTags_android (String sTag) throws Exception {
 
-		String sXpath="//android.view.ViewGroup[@content-desc='Tags']";
+		String sXpath="//android.widget.TextView[@content-desc='Tags']";
 		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Verify.waitForObject(this.searchTags, 1);
 		this.searchTags.sendKeys(sTag);
@@ -1436,15 +1495,19 @@ public class TransactionDetailPage {
 		h.hideKeyBoard();
 		Thread.sleep(1000);
 
-		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
+		String createTag_xpath="//android.widget.TextView[@content-desc='create item']";
+		String cc = "//android.widget.TextView[@text='"+sTag+"']";
 
-		if (Verify.objExists(createPayee)) {
+		if (Verify.objExists(createTag)) {
 			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
 			Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
+			
+			Engine.getDriver().findElement(By.xpath(cc)).click();
+			Thread.sleep(500);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+sTag);
 		}
 		else {
-			String cc = "//android.widget.TextView[@text='"+sTag+"']";
 			Engine.getDriver().findElement(By.xpath(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
@@ -1464,15 +1527,21 @@ public class TransactionDetailPage {
 		h.hideKeyBoard();
 		Thread.sleep(1000);
 
-		String createTag_xpath="**/XCUIElementTypeOther[`name=‘create tag’`]";
+		String createTag_xpath="**/XCUIElementTypeOther[`name='create item'`]";
+		String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
 
 		if (Verify.objExists(createTag)) {
 			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)));
 			Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating Tag... "+sTag);	
+			
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+			Thread.sleep(500);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+sTag);
+			h.hideKeyBoard();
+			Thread.sleep(1000);
 		}
 		else {
-			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
 			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
@@ -1495,35 +1564,28 @@ public class TransactionDetailPage {
 
 	public void enterNotes_android (String sNote) throws Exception {
 
-		// scroll into notes
-		String sText = "Note";
-		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sText + "\").instance(0))"));
-		Thread.sleep(1000);
+		Verify.waitForObject(this.note, 1);
 		this.note.click();
+		this.note.clear();
+		Thread.sleep(1000);
 		this.note.clear();
 		this.note.sendKeys(sNote);
 
-		Helper h = new Helper();
-		h.hideKeyBoard();
+		this.buttonDone_OSKeyBoard.click();
+		Thread.sleep(1000);
 	}
 
 	public void enterNotes_ios (String sNote) throws Exception {
 
-		// scroll into notes
-		String sXpath="//*[@name='Delete Transaction']";
-		MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
-		String me_id = me.getId();
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("element", me_id);
-		scrollObject.put("name", "label == 'Delete Transaction'");
-		Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
-		Thread.sleep(1000);	
+		Verify.waitForObject(this.note, 1);
 		this.note.click();
+		this.note.clear();
+		Thread.sleep(1000);
 		this.note.clear();
 		this.note.sendKeys(sNote);
 
-		Helper h = new Helper();
-		h.hideKeyBoard();
+		this.buttonDone_OSKeyBoard.click();
+		Thread.sleep(1000);
 	}
 
 	public void enterCheckNumber (String sCheck) throws Exception {

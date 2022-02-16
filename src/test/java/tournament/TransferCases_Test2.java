@@ -484,8 +484,8 @@ public class TransferCases_Test2 extends Recovery{
 
 		Commentary.log(LogStatus.INFO, "PASS: Online transfer transactions has been deleted from the other side.");
 
-		Verify.waitForObject(td.backButtonOnViewTransactionPage, 2);
-		td.backButtonOnViewTransactionPage.click();
+//		Verify.waitForObject(td.backButtonOnViewTransactionPage, 2);
+//		td.backButtonOnViewTransactionPage.click();
 
 //		bcc.selectAccount(sSaving);
 		Thread.sleep(2000);
@@ -505,8 +505,6 @@ public class TransferCases_Test2 extends Recovery{
 		sa.assertAll();
 	}
 	
-	
-	
 	@Test (priority=19, enabled = true)
 	public void TC20_test() throws Exception {
 		
@@ -522,7 +520,7 @@ public class TransferCases_Test2 extends Recovery{
 		op.navigateToAccounts();
 		
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-		bcc.selectAccount(sSaving);
+		bcc.selectAccount(sOnlineChecking);
 		Thread.sleep(1000);
 		
 		TransactionsPage tp = new TransactionsPage();
@@ -532,7 +530,7 @@ public class TransferCases_Test2 extends Recovery{
 		TransactionDetailPage td = new TransactionDetailPage();
 		
 		String payeename = h.getCurrentTime();
-		String transferToAcc1 = "Transfer ["+sSavings+"]";
+		String transferToAcc1 = "Transfer ["+sManualSavings+"]";
 		
 		HashMap<Integer,String> amount = new HashMap<Integer, String>();
 		HashMap<Integer,String> cat = new HashMap<Integer, String>();
@@ -545,17 +543,14 @@ public class TransferCases_Test2 extends Recovery{
 		tags.put(1, new String[] {"Tax Related"});
 		tags.put(2, new String[] {"Tax Related"});
 		
-		
-		
 		TransactionRecord tRec = new TransactionRecord();
 		tRec.setAmount("30.00");
 		//tRec.setTransactionType("expense");
-		tRec.setAccount(sSaving);
+		tRec.setAccount(sOnlineChecking);
 		tRec.setPayee(payeename);
 		
 		td.addSplit(tRec, amount, cat, tags);
 		Thread.sleep(1000);
-		
 		
 		tp.searchRecentTransaction(payeename);
 		tp.tapOnFirstTransaction();
@@ -570,7 +565,6 @@ public class TransferCases_Test2 extends Recovery{
 		
 		}
 	}
-		
 		
 		@Test (priority=20, enabled = true)
 		public void TC21_test() throws Exception {
@@ -587,7 +581,7 @@ public class TransferCases_Test2 extends Recovery{
 			op.navigateToAccounts();
 			
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-			bcc.selectAccount(sSaving);
+			bcc.selectAccount(sOnlineChecking);
 			Thread.sleep(1000);
 			
 			TransactionsPage tp = new TransactionsPage();
@@ -597,7 +591,7 @@ public class TransferCases_Test2 extends Recovery{
 			TransactionDetailPage td = new TransactionDetailPage();
 			
 			String payeename = h.getCurrentTime();
-			String transferToAcc1 = "Transfer ["+sSavings+"]";
+			String transferToAcc1 = "Transfer ["+sManualSavings+"]";
 			
 			HashMap<Integer,String> amount = new HashMap<Integer, String>();
 			HashMap<Integer,String> cat = new HashMap<Integer, String>();
@@ -610,12 +604,10 @@ public class TransferCases_Test2 extends Recovery{
 			tags.put(1, new String[] {"Tax Related"});
 			tags.put(2, new String[] {"Tax Related"});
 			
-			
-			
 			TransactionRecord tRec = new TransactionRecord();
 			tRec.setAmount("70.00");
 			//tRec.setTransactionType("expense");
-			tRec.setAccount(sSaving);
+			tRec.setAccount(sOnlineChecking);
 			tRec.setPayee(payeename);
 			
 			td.addSplit(tRec, amount, cat, tags);
@@ -640,8 +632,10 @@ public class TransferCases_Test2 extends Recovery{
 				td.acceptAlert.click();;
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Split delete warning message did not appear.");
+				Commentary.log(sa, LogStatus.FAIL, "Split delete warning message did not appear.");
 			}
+			
+			sa.assertAll();
 	}
 		
 		@Test (priority=21, enabled = true)
@@ -650,7 +644,7 @@ public class TransferCases_Test2 extends Recovery{
 			SoftAssert sa = new SoftAssert();
 			Helper h = new Helper();
 			
-			Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify split transaction with a child transfer , if we turn off the split ----> the transfer transaction should be deleted from other account as well.");
+			Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify split transaction with a child transfer, if we turn off the split ----> the transfer transaction should be deleted from other account as well.");
 
 			OverviewPage op = new OverviewPage();
 
@@ -659,7 +653,7 @@ public class TransferCases_Test2 extends Recovery{
 			op.navigateToAccounts();
 			
 			BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
-			bcc.selectAccount(sSaving);
+			bcc.selectAccount(sOnlineChecking);
 			Thread.sleep(1000);
 			
 			TransactionsPage tp = new TransactionsPage();
@@ -669,7 +663,7 @@ public class TransferCases_Test2 extends Recovery{
 			TransactionDetailPage td = new TransactionDetailPage();
 			
 			String payeename = h.getCurrentTime();
-			String transferToAcc1 = "Transfer ["+sSavings+"]";
+			String transferToAcc1 = "Transfer ["+sManualSavings+"]";
 			
 			HashMap<Integer,String> amount = new HashMap<Integer, String>();
 			HashMap<Integer,String> cat = new HashMap<Integer, String>();
@@ -682,12 +676,10 @@ public class TransferCases_Test2 extends Recovery{
 			tags.put(1, new String[] {"Tax Related"});
 			tags.put(2, new String[] {"Tax Related"});
 			
-			
-			
 			TransactionRecord tRec = new TransactionRecord();
 			tRec.setAmount("70.00");
 			//tRec.setTransactionType("expense");
-			tRec.setAccount(sSaving);
+			tRec.setAccount(sOnlineChecking);
 			tRec.setPayee(payeename);
 			
 			td.addSplit(tRec, amount, cat, tags);
@@ -708,21 +700,17 @@ public class TransferCases_Test2 extends Recovery{
 			Thread.sleep(1000);
 			tp.searchRecentTransaction(payeename);
 			
-			
 			AllAccountsPage aa = new AllAccountsPage();
 			List<MobileElement> li = aa.getAllSearchTransactions ();
 			int a = li.size();
-			
 			
 			if(a==1) {
 				Commentary.log(LogStatus.PASS, "Other part of the split child transfer got deleted");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Other part of the split child transfer is not deleted");
+				Commentary.log(sa, LogStatus.FAIL, "Other part of the split child transfer is not deleted");
 			}
-			
-			
-			
-		
+	
+			sa.assertAll();
 	}
 }

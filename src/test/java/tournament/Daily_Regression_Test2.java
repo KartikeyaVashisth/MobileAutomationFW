@@ -120,14 +120,14 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
 
-//		if (h.getEngine().equalsIgnoreCase("Android")) {
-//			if (Verify.objExists(sp.FeedbackTxt))
-//				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
-//			else
-//				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
-//		} else {
-//			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
-//		}
+		if (h.getEngine().equalsIgnoreCase("Android")) {
+			if (Verify.objExists(sp.FeedbackTxt))
+				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
+		} else {
+			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
+		}
 
 		sa.assertAll();
 	}
