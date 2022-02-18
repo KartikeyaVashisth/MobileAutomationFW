@@ -945,7 +945,7 @@ public class OverviewPage {
 		Thread.sleep(1000);
 	}
 	
-public void scrollToTransactionSummaryCard() throws Exception{
+	public void scrollToTransactionSummaryCard() throws Exception{
 		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		Integer iCount = 0;
@@ -979,139 +979,161 @@ public void scrollToTransactionSummaryCard() throws Exception{
 	}
 
 
-public void navigateToDashboard() throws Exception {
+	public void navigateToDashboard() throws Exception {
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnDashboardOption();
-	Thread.sleep(1000);
-}
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnDashboardOption();
+		Thread.sleep(1000);
+	}
 
-public void navigateToAccounts() throws Exception {
+	public void navigateToAccounts() throws Exception {
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnAccountsOption();
-	Thread.sleep(1000);
-}
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAccountsOption();
+		Thread.sleep(1000);
+	}
 
-public void navigateToAllTransactions() throws Exception {
+	public void navigateToAllTransactions() throws Exception {
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnAllTransactionsOption();
-	Thread.sleep(1000);
-}
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAllTransactionsOption();
+		Thread.sleep(1000);
 
-public void navigateToBills() throws Exception {
+	}
+	
+	public void navigateToBills() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnBillsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToInvesting() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnInvestingOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToReports() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToMonthlySummary() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnMonthlySummaryOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToNetIncome() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnNetIncomeOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToNetWorth() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnNetWorthOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSpendingByCategory() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSpendingByCategoryOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSpendingOverTime() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSpendingOverTimeOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToProfile() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnProfileOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToSettings() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToCustomizeDashboard() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnCustomizeDashboardOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToManageCategories() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnManageCategoriesOption();
+		Thread.sleep(1000);
+			
+		}
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnBillsOption();
-	Thread.sleep(1000);
-}
+	public void navigateToAccountManagement() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAccountsManagementOption();
+		Thread.sleep(1000);
+			
+		}
+	
+	public void navigateToManageAlerts() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnManageAlertsOption();
+		Thread.sleep(1000);
+			
+		}
 
-public void navigateToInvesting() throws Exception {
+	public void navigateToRenamingRules() throws Exception{
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnInvestingOption();
-	Thread.sleep(1000);
-}
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
 
-public void navigateToReports() throws Exception {
+		sp.rulesOption.click();
+		Thread.sleep(1000);
+		sp.renamingRulesOption.click();
+		Thread.sleep(1000);
+	}
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnReportsOption();
-	Thread.sleep(1000);
-}
+	public void navigateToMemorizedPayees() throws Exception{
 
-public void navigateToMonthlySummary() throws Exception {
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnSettingsOption();
 
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnMonthlySummaryOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToNetIncome() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnNetIncomeOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToNetWorth() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnNetWorthOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToSpendingByCategory() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnSpendingByCategoryOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToSpendingOverTime() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnSpendingOverTimeOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToProfile() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnProfileOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToSettings() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnSettingsOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToCustomizeDashboard() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnCustomizeDashboardOption();
-	Thread.sleep(1000);	
-}
-
-public void navigateToAccountManagement() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnAccountsManagementOption();
-	Thread.sleep(1000);	
-}
-
-public void navigateToManageAlerts() throws Exception {
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnManageAlertsOption();
-	Thread.sleep(1000);
-}
-
-public void navigateToRenamingRules() throws Exception{
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnSettingsOption();
-
-	sp.rulesOption.click();
-	Thread.sleep(1000);
-	sp.renamingRulesOption.click();
-	Thread.sleep(1000);
-}
-
-public void navigateToMemorizedPayees() throws Exception{
-
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnSettingsOption();
-
-	sp.rulesOption.click();
-	Thread.sleep(1000);
-	sp.memorizedPayeesOption.click();
-	Thread.sleep(1000);
-}
+		sp.rulesOption.click();
+		Thread.sleep(1000);
+		sp.memorizedPayeesOption.click();
+		Thread.sleep(1000);
+	}
 
 
 

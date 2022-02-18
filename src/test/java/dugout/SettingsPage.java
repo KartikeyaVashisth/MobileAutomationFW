@@ -330,6 +330,16 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Feedback'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Feedback']")
 	public MobileElement FeedbackTxt;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
+	public MobileElement manageCategoriesOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
+	public MobileElement manageCategories;
+
+
 
 
 	public MobileElement getTextView(String ele) {
@@ -783,6 +793,17 @@ public class SettingsPage {
 		Thread.sleep(1000);
 	
 	}
+	
+	public void clickOnManageCategoriesOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.accountIDUnderProfileOption, 1);
+		sp.manageCategoriesOption.click();
+		Thread.sleep(1000);
+	
+	}
+
 	
 	
 

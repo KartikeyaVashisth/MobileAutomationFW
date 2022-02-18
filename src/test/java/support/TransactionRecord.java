@@ -28,6 +28,12 @@ public class TransactionRecord {
 	String mddyyyy;
 	String markAsClearedValue;
 	String lockPayeeValue;
+	CategoryRecord categoryRecord;
+	
+	
+	public void setCategoryRecord(CategoryRecord categoryRecord) {
+		this.categoryRecord = categoryRecord;
+	}
 	
 	public void setCategoryType(String category) {
 		
@@ -288,4 +294,10 @@ public class TransactionRecord {
 
 		return this.lockPayeeValue;
 	}
+
+	public CategoryRecord getCategoryRecord() {
+		
+		return this.categoryRecord;
+	}
+
 }

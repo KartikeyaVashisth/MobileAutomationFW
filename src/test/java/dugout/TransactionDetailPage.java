@@ -38,6 +38,8 @@ import referee.Verify;
 import support.Engine;
 import support.Helper;
 import support.TransactionRecord;
+import support.CategoryRecord;
+
 
 public class TransactionDetailPage {
 
@@ -447,19 +449,20 @@ public class TransactionDetailPage {
 	
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Category Type'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Expense')")
-	public MobileElement createType;
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Expense')]")
+	public MobileElement createCategoryType;
+
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Subcategory of'`]")
 	@AndroidFindBy(xpath="//*[@text='Subcategory of']/../android.widget.ImageView")
 	public MobileElement subCategoryOf;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Cancel'`][1]")
-	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Cancel')")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Cancel')]")
 	public MobileElement cancelbutton;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Create'`][1]")
-	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Create')")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Create']")
 	public MobileElement createButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Category Name'`]/**/XCUIElementTypeTextField")
@@ -467,7 +470,7 @@ public class TransactionDetailPage {
 	public MobileElement categoryNameTxtField;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Category already exists'")
-	@AndroidFindBy(xpath = "//android.widget.TextView(@text='Category already exists')")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Category already exists')]")
 	public MobileElement categoryExistsLabel;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'OK'")
@@ -475,8 +478,9 @@ public class TransactionDetailPage {
 	public MobileElement okButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Discard Changes?'")
-	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Discard Changes?')")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Discard Changes')]")
 	public MobileElement discardChangesLabel;
+
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'Discard'")
 	@AndroidFindBy(xpath="//android.widget.Button(@text = 'DISCARD')")
@@ -488,18 +492,60 @@ public class TransactionDetailPage {
 	public MobileElement selectTypeLabel;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Expense'")
-	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Expense')")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Expense')]")
 	public MobileElement expenseTypeOption;
+
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Income'")
-	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Income')")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Income')]")
 	public MobileElement incomeTypeOption;
+
 	
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][1]")
-	@AndroidFindBy(xpath="//android.widget.TextView(@text = 'Apply')")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Apply')]")
 	public MobileElement applyButton;
+
 	
+	//@iOSXCUITFindBy(id="closeCategory") 
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'closeCategory' OR name = 'closeSubcategory of'")
+	@AndroidFindBy(xpath="//*[@content-desc='closeCategory']/android.widget.ImageView")
+	public MobileElement closeCategorySubcategoryOfIcon;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name=='search category'`]")
+	@AndroidFindBy(xpath="//android.widget.EditText")
+	public MobileElement searchCategoryTextField1;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'create category'")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='create category']")
+	public MobileElement createCategory;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
+	@AndroidFindBy(xpath="//android.widget.EditText")
+	public MobileElement categoryNameTxtField1;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Auto and Travel (Rental)'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Advertising (Rental)')]")
+	public MobileElement subcategoryOfCategory;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name ='Category Type Expense'")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Expense')]")
+	public MobileElement selectedCategoryTypeEx;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name ='Category Type Income'")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Income')]")
+	public MobileElement selectedCategoryTypeIn;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name ='Subcategory of None'")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'None')]")
+	public MobileElement subcategoryNone;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton Cash & ATM'`]/XCUIElementTypeOther[`name='RadioButton'`]")
+	public MobileElement radiobuttonCashATM;
+
+
+
+
 	
 	
 	
@@ -966,6 +1012,12 @@ public class TransactionDetailPage {
 
 			if (tr.getCategory() != null)
 				this.selectCategory(tr.getCategory());
+			
+			if (tr.getCategoryRecord() != null) {
+				this.selectCategoryOnTheFly(tr.getCategoryRecord());
+				
+			}
+
 
 			if (tr.getTags() != null)
 				this.selectTags(tr.getTags());
@@ -1018,6 +1070,11 @@ public class TransactionDetailPage {
 
 			if (tr.getCategory() != null)
 				this.selectCategory(tr.getCategory());
+			
+			if (tr.getCategoryRecord() != null) {
+				this.selectCategoryOnTheFly(tr.getCategoryRecord());	
+			}	
+
 
 			if (tr.getTags() != null)
 				this.selectTags(tr.getTags());
@@ -1400,13 +1457,22 @@ public class TransactionDetailPage {
 
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
-		} else {
+		} 
+		else if(Verify.objExists_check(this.subCategoryOf)) {
+			Thread.sleep(1000);
+			this.subCategoryOf.click();	
+			Thread.sleep(1000);
+		}
+		else {
 			this.categories.click();
 		}
 
-		Verify.waitForObject(this.closeCategory, 1);
 
-		if (! Verify.objExists(this.closeCategory))
+		//Verify.waitForObject(this.closeCategory, 1);
+		Verify.waitForObject(this.closeCategorySubcategoryOfIcon, 1);
+
+
+		if (! Verify.objExists(this.closeCategorySubcategoryOfIcon))
 			Commentary.log(LogStatus.FAIL,"Error****** Transaction Detail > tapping on payee, did not open Payee selection screen");
 
 		this.searchCategory(category);
@@ -1443,11 +1509,19 @@ public class TransactionDetailPage {
 		//Engine.getDriver().findElementById("assets/Quicken/App/Images/categoryIcon@2x.png").click();
 		if (Verify.objExists_check(this.category)) {
 			this.category.click();
-		} else {
+		} 
+		else if(Verify.objExists_check(this.subCategoryOf)) {
+			Thread.sleep(1000);
+			this.subCategoryOf.click();	
+			Thread.sleep(1000);
+		}
+		else {
 			this.categories.click();
 		}
 
-		Verify.waitForObject(this.closeCategory, 1);
+		//Verify.waitForObject(this.closeCategory, 1);
+		Verify.waitForObject(this.closeCategorySubcategoryOfIcon, 1);
+
 
 		this.searchCategory(category);
 		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
@@ -1469,9 +1543,19 @@ public class TransactionDetailPage {
 
 		this.searchCategoryTextField.click();
 		this.searchCategoryTextField.sendKeys(category);
+		
+		Thread.sleep(1000);
 
 		Helper h = new Helper();
+		
+		if(h.getEngine().equals("ios")) {
+		
 		h.hideKeyBoard();
+		}
+		else {
+			Commentary.log(LogStatus.INFO, "hide keyboard not required");
+		}
+
 
 	}
 
@@ -2155,7 +2239,156 @@ public class TransactionDetailPage {
                 .moveTo(point(x, y_end))
                 .release().perform();
     }
+    
+    public void selectCategoryOnTheFly(CategoryRecord categoryRecord) throws Exception {
+    	
+  	  
+  	  Helper h = new Helper();
+  	 
+  	  
+  	
+  	if (Verify.objExists_check(this.category)) {
+  		this.category.click();
+  	} else {
+  		this.categories.click();
+  	}
+
+  	Verify.waitForObject(this.closeCategory, 1);
+
+  	this.searchCategory(categoryRecord.getCategoryName());
+  	
+  	
+  	Thread.sleep(2000);
+  	Verify.waitForObject(this.createCategory, 1);
+  	this.createCategory.click();
+  	Thread.sleep(1000);
+  	
+  	if (categoryRecord.getUpdate()) {
+  		// Verify if user can change values on the category creation alert.
+  		
+  		if(categoryRecord.getUpdateCategoryName()) {
+  			String categoryName = h.getCurrentTime();
+  			categoryRecord.setCategoryName(categoryName);
+  		}
+  		
+  		if(categoryRecord.getUpdateCategoryType()) {
+  		//String type = categoryRecord.getCategoryType().equalsIgnoreCase("Income") ? "Expense" : "Income";
+  			String type = "Income";	
+  			if (categoryRecord.getCategoryType().equalsIgnoreCase("Income")) {
+  				type = "Expense";
+  			}
+
+  			
+			categoryRecord.setCategoryType(type);
+		}
+		
+		
+		this.updateCategoryOnTheFlyCreation(categoryRecord);
+	}
+		
+		if(Verify.objExists(createButton))
+			Thread.sleep(1000);
+		createButton.click();
+		
+		
+		this.searchCategoryTextField1.click();
+		Thread.sleep(1000);
+		this.searchCategoryTextField1.clear();
+		
+		
+		Thread.sleep(2000);
+		this.searchCategory(categoryRecord.getCategoryName());
+		
+		
+		if(h.getEngine().equals("android")) {
+			
+			String sCat = categoryRecord.getCategoryName();
+			Thread.sleep(2000);
+
+			String ss = "//android.widget.TextView[@text='"+sCat+"']";
+			
+			//String ss = "//android.view.ViewGroup[@content-desc='RadioButton']/android.widget.TextView[@name = '"+sCat+"']";
+			
+			Engine.getDriver().findElementByXPath(ss).click();
+			Thread.sleep(1000);
+			
+			
+		}
+		
+		else {
+			
+			String sCat = categoryRecord.getCategoryName();
+			Thread.sleep(2000);
+		
+		String cc = "**/XCUIElementTypeStaticText[`name CONTAINS '"+sCat+"'`]";
+		
+		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		}
+			
+	// needs to revisit cleaning whenever category managementfeature is implemented for the execution
+		
+}
+    public void updateCategoryOnTheFlyCreation(CategoryRecord categoryRecord) throws Exception {
+ 	   
+    	
+  	  if (categoryRecord.getUpdateCategoryName()) {
+  		  this.categoryNameTxtField.click();
+  		  this.categoryNameTxtField1.clear();
+  		  Thread.sleep(1000);
+  		  Commentary.log(LogStatus.INFO, "Updating Category name");
+  		  this.categoryNameTxtField1.sendKeys(categoryRecord.getCategoryName());
+  		  
+  			//Engine.getDriver().hideKeyboard();	
+  			Thread.sleep(2000);
+  	  }
+  	 
+  	  
+  	  if (categoryRecord.getUpdateCategoryType()) {
+  		  this.createCategoryType.click();
+  		  
+  	
+  		  if(categoryRecord.getCategoryType().equalsIgnoreCase("Income")) {
+  			  
+  			  // expense type radio button will be selected
+  			  Thread.sleep(2000);
+  			  this.expenseTypeOption.click();
+  			  
+  		  }
+  		  else {
+  			// income type radio button will be selected
+  			  Thread.sleep(2000);
+  			  this.incomeTypeOption.click();
+  		  }
+  		  
+  		  this.applyButton.click();
+  		  Thread.sleep(1000);
+  			  
+  	  }
+  	  // && !categoryRecord.getSubCategoryOf().isEmpty()
+  	  
+  	  if(categoryRecord.getUpdateSubcategoryOf()) {
+  		  
+  		  Helper h = new Helper();
+  		  
+  		  if(h.getEngine().equals("ios")) {
+  		
+  			this.subCategoryOf.click();
+  			Thread.sleep(1000);
+  			//this.searchCategory(categoryRecord.getSubCategoryOf());
+  			this.selectCategory(categoryRecord.getSubCategoryOf());
+  		  }
+  		  else {
+  			  this.selectCategory(categoryRecord.getSubCategoryOf());
+  		  }
+  		
+  		
+  		}
+  	  
+    }
+	//	return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
+
+ 	
+}
 
 	
 
-}
