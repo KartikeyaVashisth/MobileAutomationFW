@@ -23,8 +23,8 @@ public class InvestingPage {
 	}
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Investing\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Investing'`]")
-	@AndroidFindBy(xpath="//android.view.View[@text='Investing']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Investments'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Investments']")
 	public MobileElement investingHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")

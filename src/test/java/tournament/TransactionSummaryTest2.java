@@ -98,7 +98,7 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test (priority=11, enabled = false)
+	@Test (priority=11, enabled = true)
 	public void TS11_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -163,7 +163,7 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=12, enabled = false)
+	@Test (priority=12, enabled = true)
 	public void TS12_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -247,7 +247,7 @@ public class TransactionSummaryTest2 extends Recovery {
 	}
 
 	
-	@Test (priority=13, enabled = false)
+	@Test (priority=13, enabled = true)
 	public void TS13_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -337,7 +337,7 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=14, enabled = false)
+	@Test (priority=14, enabled = true)
 	public void TS14_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -408,7 +408,7 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=15, enabled = false)
+	@Test (priority=15, enabled = true)
 	public void TC15_ValidateForZeroDataset_TransactionSummaryCard() throws Exception {
 
 		SoftAssert sa = new SoftAssert();

@@ -824,6 +824,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		
 		LocalDate currentdate = LocalDate.now();
 		Month currentMonth = currentdate.getMonth();
+		String currentMonthSubstring = currentMonth.toString().substring(0,3);
 
 		Month previousMonth = currentMonth.minus(1);
 		String previousMonthSubstring = previousMonth.toString().substring(0, 3);
@@ -841,18 +842,19 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		String monthSubstringForDateOfSecondReminderInstance = dateOfSecondReminderInstance.toString().substring(0, 3);
 		
 		String dateOfThirdReminderInstance = li.get(2).getText();
+		String monthSubstringForDateOfThirdReminderInstance = dateOfThirdReminderInstance.toString().substring(0, 3);
 
-		if(monthSubstringForDateOfFirstReminderInstance.toString().equalsIgnoreCase(previousToPreviousMonthSubstring))
+		if(monthSubstringForDateOfFirstReminderInstance.equalsIgnoreCase(previousToPreviousMonthSubstring))
 			Commentary.log(LogStatus.INFO, "Previous to Previous month date is seen first when filter Due Old to New is selected.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Previous to Previous month date is NOT seen first when filter Due Old to New is selected.");
 		
-		if(monthSubstringForDateOfSecondReminderInstance.toString().equalsIgnoreCase(previousMonthSubstring))
+		if(monthSubstringForDateOfSecondReminderInstance.equalsIgnoreCase(previousMonthSubstring))
 			Commentary.log(LogStatus.INFO, "Previous month date is seen second when filter Due Old to New is selected.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Previous month date is NOT seen second when filter Due Old to New is selected.");
 
-		if(dateOfThirdReminderInstance.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Tomorrow"))
+		if(monthSubstringForDateOfThirdReminderInstance.equalsIgnoreCase(currentMonthSubstring) || dateOfThirdReminderInstance.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Tomorrow"))
 			Commentary.log(LogStatus.INFO, "Current month date is seen third when filter Due Old to New is selected.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Current month date is NOT seen third when filter Due Old to New is selected.");
