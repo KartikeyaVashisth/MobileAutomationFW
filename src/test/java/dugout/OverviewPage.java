@@ -773,24 +773,24 @@ public class OverviewPage {
 	
 	public void tapOnInvestingCard() throws Exception {
 		
-		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 3);
+		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
-			String sXpath="//android.widget.TextView[@text='Investing']";
-			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Investing\").instance(0))"));
+			String sXpath="//android.widget.TextView[@text='Investments']";
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Investments\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.xpath(sXpath)).click();
 			Thread.sleep(1000);
 		}
 		else {
 			//String sXpath="//*[@name='Investing']";
-			String cc="**/XCUIElementTypeOther[`name='Investing'`]";
+			String cc="**/XCUIElementTypeOther[`name='Investments'`]";
 			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(cc));
 			String me_id = me.getId();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			scrollObject.put("element", me_id);
-			scrollObject.put("predicateString", "label == 'Investing'");
+			scrollObject.put("predicateString", "label == 'Investments'");
 			scrollObject.put("direction", "down");
 //			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Engine.getDriver().executeScript("mobile:swipe", scrollObject); 
@@ -953,7 +953,7 @@ public class OverviewPage {
 		Thread.sleep(1000);
 	}
 	
-public void scrollToTransactionSummaryCard() throws Exception{
+	public void scrollToTransactionSummaryCard() throws Exception{
 		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 2);
 		Integer iCount = 0;
@@ -988,27 +988,25 @@ public void scrollToTransactionSummaryCard() throws Exception{
 
 
 	public void navigateToDashboard() throws Exception {
-	
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnDashboardOption();
-	Thread.sleep(1000);
-		
+
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnDashboardOption();
+		Thread.sleep(1000);
 	}
 
 	public void navigateToAccounts() throws Exception {
-	
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnAccountsOption();
-	Thread.sleep(1000);
-		
+
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAccountsOption();
+		Thread.sleep(1000);
 	}
 
 	public void navigateToAllTransactions() throws Exception {
-	
-	SettingsPage sp = new SettingsPage();
-	sp.clickOnAllTransactionsOption();
-	Thread.sleep(1000);
-		
+
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnAllTransactionsOption();
+		Thread.sleep(1000);
+
 	}
 	
 	public void navigateToBills() throws Exception {
@@ -1107,7 +1105,6 @@ public void scrollToTransactionSummaryCard() throws Exception{
 			
 		}
 
-	
 	public void navigateToAccountManagement() throws Exception {
 		
 		SettingsPage sp = new SettingsPage();
@@ -1123,38 +1120,29 @@ public void scrollToTransactionSummaryCard() throws Exception{
 		Thread.sleep(1000);
 			
 		}
-	
-	
-	
-	
-
-
 
 	public void navigateToRenamingRules() throws Exception{
-		
+
 		SettingsPage sp = new SettingsPage();
 		sp.clickOnSettingsOption();
-		
+
 		sp.rulesOption.click();
 		Thread.sleep(1000);
 		sp.renamingRulesOption.click();
 		Thread.sleep(1000);
-		
-	
 	}
-	
+
 	public void navigateToMemorizedPayees() throws Exception{
-		
+
 		SettingsPage sp = new SettingsPage();
 		sp.clickOnSettingsOption();
-		
+
 		sp.rulesOption.click();
 		Thread.sleep(1000);
-		sp.renamingRulesOption.click();
+		sp.memorizedPayeesOption.click();
 		Thread.sleep(1000);
-		
-	
 	}
+
 	
 	public boolean isEmpty (String s) {
 		   return s == null || s.length() == 0;
@@ -1185,5 +1173,6 @@ public void scrollToTransactionSummaryCard() throws Exception{
 	}
 	
 	
+
 
 }
