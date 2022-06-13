@@ -199,17 +199,17 @@ public class Daily_Regression_Test2 extends Recovery{
 
 		Verify.waitForObject(sp.getAccountElement(sManualCreditCard), 3);
 		MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
-		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
+//		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
 		MobileElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC account details are NOT displayed.");
 
-		if (Verify.objExists(accountType_manual))
-			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed.");
+//		if (Verify.objExists(accountType_manual))
+//			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Type details are displayed.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Manual CC Account Type details are NOT displayed.");
 
 		if (Verify.objExists(accountStatus1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC Account Status is displayed.");
@@ -645,8 +645,11 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.datasetDDButton.click();
 		Thread.sleep(4000);
 
-		sp.switchDataset("InvestmentDataset_Automation");
-
+		if(h.getEnv().contentEquals("prod"))
+			sp.switchDataset("InvestmentDataset_Automation");
+		else
+			sp.switchDataset("InvestmentDataset_Automation_Stage");
+		
 		op.tapOnInvestingCard();
 
 		InvestingPage ip = new InvestingPage();
@@ -720,7 +723,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.datasetDDButton.click();
 		Thread.sleep(4000);
 
-		sp.switchDataset("ZeroDataSet");
+		if(h.getEnv().contentEquals("prod"))
+			sp.switchDataset("ZeroDataSet");
+		else
+			sp.switchDataset("ZeroDataSet_Stage");
 
 		op.scrollTillCard("Recent Transactions");
 

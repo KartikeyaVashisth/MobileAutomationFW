@@ -36,7 +36,7 @@ public class TransactionSummaryPage {
 		public MobileElement monthlySummaryHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
-		@AndroidFindBy(xpath="//*[@text='Transaction Summary']/../*[@class='android.widget.Button']")
+		@AndroidFindBy(xpath="//*[@text='Monthly Summary']/../*[@class='android.widget.Button']")
 		public MobileElement backButtonOnHeader;
 		
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
@@ -98,6 +98,14 @@ public class TransactionSummaryPage {
 		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeButton[`name = 'fab'`]")
 		@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
 		public MobileElement addTransactionButton;
+		
+		@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name  CONTAINS 'Shopping'")
+		@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Shopping']")
+		public MobileElement splitCatShop;
+		
+		@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name  CONTAINS 'Travel'")
+		@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Travel']")
+		public MobileElement splitCatTravel;
 		
 		public void navigateBackToDashboard() throws Exception{
 			

@@ -26,6 +26,14 @@ public class TransactionRecord {
 	String note;
 	String transactionType;
 	String mddyyyy;
+	String markAsClearedValue;
+	String lockPayeeValue;
+	CategoryRecord categoryRecord;
+	
+	
+	public void setCategoryRecord(CategoryRecord categoryRecord) {
+		this.categoryRecord = categoryRecord;
+	}
 	
 	public void setCategoryType(String category) {
 		
@@ -147,6 +155,16 @@ public class TransactionRecord {
 		this.mddyyyy = mddyyyy;
 	}
 	
+	public void setmarkAsClearedValue(String value) {
+		
+		this.markAsClearedValue = value;
+	}
+	
+	public void setLockPayeeValue(String value) {
+
+		this.lockPayeeValue = value;
+	}
+	
 	public String getCategoryType() {
 		
 		return categoryType;
@@ -266,4 +284,20 @@ public class TransactionRecord {
 	
 		return this.note;
 	}
+	
+	public String getMarkAsClearedValue() {
+		
+		return this.markAsClearedValue;
+	}
+	
+	public String getLockPayeeValue() {
+
+		return this.lockPayeeValue;
+	}
+
+	public CategoryRecord getCategoryRecord() {
+		
+		return this.categoryRecord;
+	}
+
 }

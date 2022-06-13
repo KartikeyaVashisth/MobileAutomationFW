@@ -1,13 +1,17 @@
 package tournament;
 
+import java.util.HashMap;
+
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import dugout.BankingAndCreditCardPage;
 import dugout.OverviewPage;
 import dugout.SettingsPage;
 import dugout.SignInPage;
+import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
@@ -448,5 +452,98 @@ public class TransactionSummaryTest2 extends Recovery {
 
 		sa.assertAll();
 	}
+	
+	@Test (priority=16, enabled = true)
+	public void TC15_TransactionSummaryCard() throws Exception {
+		
+		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
+		
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify split category under transaction summary by adding a split transaction.");
 
+		OverviewPage op = new OverviewPage();
+
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
+		
+		op.navigateToAllTransactions();
+		
+		TransactionsPage tp = new TransactionsPage();
+		tp.addTransaction.click();
+		Thread.sleep(1000);
+		
+		TransactionDetailPage td = new TransactionDetailPage();
+		
+		String payeename = h.getCurrentTime();
+		//String transferToAcc1 = "Transfer ["+sManualSaving+"]";
+		
+		HashMap<Integer,String> amount = new HashMap<Integer, String>();
+		HashMap<Integer,String> cat = new HashMap<Integer, String>();
+		HashMap<Integer,String[]> tags = new HashMap<Integer, String[]>();
+		
+		cat.put(1, "Shopping");
+		cat.put(2, "Travel");
+		amount.put(1, "50.00");
+		amount.put(2, "20.00");
+		tags.put(1, new String[] {"Tax Related"});
+		tags.put(2, new String[] {"Tax Related"});
+		
+		
+		
+		TransactionRecord tRec = new TransactionRecord();
+		tRec.setAmount("70.00");
+		//tRec.setTransactionType("expense");
+		tRec.setAccount(sManualSaving);
+		tRec.setPayee(payeename);
+		
+		td.addSplit(tRec, amount, cat, tags);
+		Thread.sleep(3000);
+		
+		BankingAndCreditCardPage bc = new BankingAndCreditCardPage();
+		tp.backButton.click();
+		Thread.sleep(1000);
+		//bc.backButton.click();
+		
+		op.navigateToMonthlySummary();
+		
+		TransactionSummaryPage ts = new TransactionSummaryPage();
+		
+		if(Verify.objExists(ts.splitCatShop)) {
+			
+			
+			
+		}
+		else {
+			Commentary.log(LogStatus.FAIL, "Split category is not visible");
+		}
+		
+		if(Verify.objExists(ts.splitCatTravel)) {
+			
+			Commentary.log(LogStatus.PASS, "Splt category exists");
+			
+			Commentary.log(LogStatus.PASS, "Splt category exists");
+			ts.splitCatShop.click();
+			tp.tapOnFirstTransaction();
+			Thread.sleep(1000);	
+			td.scroll_down();
+			
+			td.deleteTransaction.click();
+			td.deleteTransactionAlertButton.click();
+			Thread.sleep(1000);
+			
+			
+		}
+		else {
+			Commentary.log(LogStatus.FAIL, "Split category is not visible");
+		}
+		
+		
+		
+		
+		
+	}
 }
+
+	
+			
+
+	

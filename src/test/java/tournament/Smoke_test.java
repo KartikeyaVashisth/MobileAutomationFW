@@ -37,20 +37,47 @@ import referee.Verify;
 import support.Engine;
 import support.Helper;
 import support.Recovery;
+import support.UserName;
 
 public class Smoke_test extends Recovery {
 
 	ExtentReports rep = ExtentManager.initializeRepObject();
 	Helper support = new Helper();
+	
+	String sPassword_prod = "Intuit!1";
+	String sDataset_prod = "Transaction_Status";
+	String sPassword_stage = "Quicken@01";
+	String sDataset_stage = "SmokeTest_Stage";
+	
+	public String getUsername_basedOnEnv() throws Exception {
+
+		UserName un = new UserName();
+		un.stage_ios = "companionregression++@stage.com";
+		un.stage_android = "companionregression++@stage.com";
+		un.prod_ios = "kalyan.grandhi@quicken.com";
+		un.prod_android = "kalyan.grandhi@quicken.com";
+		return un.getUserName();	
+	}
 
 	@Test(priority = 0, enabled = true)
 	public void verifyAccountTest() throws Exception {
 
 		String acctToVerify = "AllReconciledTransactions";
 		SoftAssert sa = new SoftAssert();
+		Helper h = new Helper();
 
-		SignInPage signIn = new SignInPage();
-		signIn.signIn();
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
+		SignInPage si = new SignInPage();
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword_stage, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword_prod, sDataset_prod);
+		
+//		SignInPage signIn = new SignInPage();
+//		signIn.signIn();
 
 		OverviewPage op = new OverviewPage();
 		op.navigateToAcctList();
@@ -152,14 +179,14 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Logout button is NOT displayed.");
 
-		if (h.getEngine().equalsIgnoreCase("Android")) {
-			if (Verify.objExists(sp.FeedbackTxt))
-				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
-			else
-				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
-		} else {
-			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
-		}
+//		if (h.getEngine().equalsIgnoreCase("Android")) {
+//			if (Verify.objExists(sp.FeedbackTxt))
+//				Commentary.log(LogStatus.INFO, "PASS: Feedback Text is displayed.");
+//			else
+//				Commentary.log(sa, LogStatus.FAIL, "FAIL: Feedback Text is NOT displayed.");
+//		} else {
+//			Commentary.log(LogStatus.INFO, "PASS: Feedback options is not supported for IOS Simulator.");
+//		}
 		
 		sa.assertAll();
 	}
@@ -225,16 +252,16 @@ public class Smoke_test extends Recovery {
 		TransactionSummaryPage cashflow = new TransactionSummaryPage();
 		Verify.waitForObject(cashflow.monthlySummaryHeader, 1);
 		if (Verify.objExists(cashflow.monthlySummaryHeader))
-			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card tap > Transaction summary screen got displayed.");
+			Commentary.log(LogStatus.INFO,"PASS: Monthly summary card tap > Monthly summary screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card tap > Transaction summary screen did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Monthly summary card tap > Monthly summary screen did not appear.");
 
 		cashflow.navigateBackToDashboard();
 
 		if (Verify.objExists(o.hambergerIcon))
-			Commentary.log(LogStatus.INFO,"PASS: Transaction summary card, back button tap > Overview screen got displayed.");
+			Commentary.log(LogStatus.INFO,"PASS: Monthly summary card, back button tap > Overview screen got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: Transaction summary card, back button tap > Overview screen did not appear.");	
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Monthly summary card, back button tap > Overview screen did not appear.");	
 		sa.assertAll();	
 	}
 
@@ -258,15 +285,15 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: SpendingOverTimeCard tap > SpendingOverTimeCard screen did not appear.");
 	
-//		if (Verify.objExists(sot.totalSpendingCurrentMonth))
-//			Commentary.log(sa, LogStatus.INFO,"Total Spending text got displayed on SpendingOverTimeCard.");
-//		else
-//			Commentary.log(sa, LogStatus.FAIL,"Total Spending text did not get displayed on SpendingOverTimeCard.");
-//
-//		if (sot.totalSpendingCurrentMonth.getText().equals(currentMonthSpending))
-//			Commentary.log(sa, LogStatus.INFO,"Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
-//		else
-//			Commentary.log(sa, LogStatus.INFO,"Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
+		if (Verify.objExists(sot.totalSpendingCurrentMonth))
+			Commentary.log(LogStatus.INFO,"PASS: Total Spending text got displayed on SpendingOverTimeCard.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Total Spending text did not get displayed on SpendingOverTimeCard.");
+
+		if (sot.totalSpendingCurrentMonth.getText().equals(currentMonthSpending))
+			Commentary.log(LogStatus.INFO,"PASS: Total Spending text for the current month ["+currentMonthSpending+"] got displayed on SpendingOverTimeCard.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Text ["+currentMonthSpending+"] not displayed on SpendingOverTimeCard.");
 		 
 		sot.navigateBackToDashboard();
 
@@ -307,14 +334,14 @@ public class Smoke_test extends Recovery {
 		if (not.netIncomeCurrentMonth.getText().equals(currentMonthIncome))
 			Commentary.log(LogStatus.INFO,"PASS: Net Income text for the current month ["+currentMonthIncome+"] got displayed on NetIncomeOverTimeCard.");
 		else
-			Commentary.log(sa, LogStatus.INFO,"FAIL: Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Text ["+currentMonthIncome+"] not displayed on NetIncomeOverTimeCard.");
 
-//		not.navigateBackToDashboard();
-//
-//		if (Verify.objExists(o.hambergerIcon))
-//			Commentary.log(sa, LogStatus.INFO,"cashflow card, back button tap > Overview screen got dispalyed.");
-//		else
-//			Commentary.log(sa, LogStatus.FAIL,"cashflow card, back button tap > Overview screen did not appear.");	
+		not.navigateBackToDashboard();
+
+		if (Verify.objExists(o.hambergerIcon))
+			Commentary.log(LogStatus.INFO,"PASS: cashflow card, back button tap > Overview screen got displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: cashflow card, back button tap > Overview screen did not appear.");	
 
 		sa.assertAll();	
 	}

@@ -91,6 +91,7 @@ public class TransactionsPage {
 	
 	public void navigateBackToDashboard() throws Exception{
 		
+		Verify.waitForObject(this.backButton, 1);
 		backButton.click();
 		Thread.sleep(3000);
 		

@@ -103,12 +103,12 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Bills']")
 	public MobileElement billsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets Menu'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
 	public MobileElement budgetsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investing Menu'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investments Menu'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investments Menu']")
 	public MobileElement investingOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Reports'`]")
@@ -255,6 +255,10 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
 	public MobileElement switchDisplayFavoritePayees;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account Balance Preference']")
+	public MobileElement accountBalancePreferenceOption;
+	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Customize Dashboard'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
 	public MobileElement customizeDashboardOption;
@@ -295,6 +299,10 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.ImageView[@resource-id='addRenameRule']")
 	public MobileElement addRenamingRulesButton;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Memorized Payees'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Memorized Payees']")
+	public MobileElement memorizedPayeesOption;
+	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Tags'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']")
 	public MobileElement tagsOption;
@@ -322,6 +330,16 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Feedback'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Feedback']")
 	public MobileElement FeedbackTxt;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
+	public MobileElement manageCategoriesOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
+	public MobileElement manageCategories;
+
+
 
 
 	public MobileElement getTextView(String ele) {
@@ -607,7 +625,7 @@ public class SettingsPage {
 		
 		Verify.waitForObject(this.dashboardOption, 1);
 		this.dashboardOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnAccountsOption() throws Exception {
@@ -618,7 +636,7 @@ public class SettingsPage {
 		
 		Verify.waitForObject(this.accountTxt, 1);
 		this.accountTxt.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 
 	public void clickOnAllTransactionsOption() throws Exception {
@@ -629,7 +647,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.allTransactionsOption, 1);
 		this.allTransactionsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnBillsOption() throws Exception {
@@ -640,7 +658,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.billsOption, 1);
 		this.billsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnBudgetsOption() throws Exception {
@@ -651,7 +669,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.budgetsOption, 1);
 		this.budgetsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnInvestingOption() throws Exception {
@@ -662,7 +680,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.investingOption, 1);
 		this.investingOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnReportsOption() throws Exception {
@@ -673,8 +691,10 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.reportsOption, 1);
 		this.reportsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
+	
+	
 	
 	public void clickOnProfileOption() throws Exception {
 
@@ -684,7 +704,7 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.profileOption, 1);
 		this.profileOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnSettingsOption() throws Exception {
@@ -695,7 +715,96 @@ public class SettingsPage {
 
 		Verify.waitForObject(this.settingsOption, 1);
 		this.settingsOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
+	
+	public void clickOnSpendingByCategoryOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.spendingByCategoryOption, 1);
+		sp.spendingByCategoryOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnMonthlySummaryOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.monthlySummaryOption, 1);
+		sp.monthlySummaryOption.click();
+		Thread.sleep(2000);
+	}
+	
+	
+	public void clickOnNetIncomeOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.netIncomeOption, 1);
+		sp.netIncomeOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnNetWorthOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.netWorthOption, 1);
+		sp.netWorthOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnSpendingOverTimeOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		sp.clickOnReportsOption();
+		Verify.waitForObject(sp.spendingOverTimeOption, 1);
+		sp.spendingOverTimeOption.click();
+		Thread.sleep(2000);
+	}
+	
+	public void clickOnCustomizeDashboardOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.accountIDUnderProfileOption, 1);
+		sp.customizeDashboardOption.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	public void clickOnAccountsManagementOption() throws Exception {
+		
+		SettingsPage st = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(st.accountsManagementOption, 1);
+		st.accountsManagementOption.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	public void clickOnManageAlertsOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.manageAlerts, 1);
+		sp.manageAlerts.click();
+		Thread.sleep(1000);
+	
+	}
+	
+	public void clickOnManageCategoriesOption() throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.accountIDUnderProfileOption, 1);
+		sp.manageCategoriesOption.click();
+		Thread.sleep(1000);
+	
+	}
+
+	
+	
 
 }

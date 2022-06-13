@@ -9,7 +9,6 @@ import org.testng.asserts.SoftAssert;
 import com.relevantcodes.extentreports.LogStatus;
 
 import dugout.OverviewPage;
-import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
@@ -27,6 +26,11 @@ public class TransactionSummaryTest extends Recovery {
 	String sDataset = "ProjectedBalances";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
+//	String sUserName = "kalyan.grandhi@quicken.com";
+//	String sPassword = "Intuit!1";
+//	String sDataset = "Budget_RollOver_Income";
+//	String sManualChecking = "Checking";
+	
 
 	@Test (priority = 1, enabled = true)
 	public void TS1_Test() throws Exception {
@@ -255,9 +259,23 @@ public class TransactionSummaryTest extends Recovery {
 		String payeeName = "Payee_"+h.getCurrentTime();
 
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObject(op.addTransaction, 1);
+		op.addTransaction.click();
+		
+		TransactionRecord tRec = new TransactionRecord();
+		TransactionSummaryPage ts = new TransactionSummaryPage();
+		TransactionDetailPage td = new TransactionDetailPage();
+		tRec.setAmount("5.00");
+		tRec.setAccount(sManualChecking);
+		tRec.setPayee(payeeName);
+		tRec.setCategory("Internet");
+		tRec.setTransactionType("expense");
+
+		Verify.waitForObject(td.buttonDone, 2);
+		td.addTransaction(tRec);
+		
 		op.tapOnTransactionSummaryCard();
 
-		TransactionSummaryPage ts = new TransactionSummaryPage();
 		Verify.waitForObject(ts.categoryTab, 1);
 		ts.categoryTab.click();
 		Thread.sleep(1000);
@@ -267,14 +285,14 @@ public class TransactionSummaryTest extends Recovery {
 //		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replace("Internet ", ""));
 		Double processedCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Category amount is: "+processedCategoryAmount_before);
-
-		TransactionDetailPage td = new TransactionDetailPage();
-		TransactionRecord tRec = new TransactionRecord();
-		tRec.setAmount("10.00");
-		tRec.setAccount(sManualChecking);
-		tRec.setPayee(payeeName);
-		tRec.setCategory("Internet");
-		tRec.setTransactionType("expense");
+		
+		String payeeName1 = "Payee_"+h.getCurrentTime();
+		TransactionRecord tRec1 = new TransactionRecord();
+		tRec1.setAmount("10.00");
+		tRec1.setAccount(sManualChecking);
+		tRec1.setPayee(payeeName1);
+		tRec1.setCategory("Internet");
+		tRec1.setTransactionType("expense");
 
 		ts.backButton.click();
 
@@ -282,9 +300,9 @@ public class TransactionSummaryTest extends Recovery {
 
 		op.addTransaction.click();
 		Verify.waitForObject(td.buttonDone, 2);
-		td.addTransaction(tRec);
+		td.addTransaction(tRec1);
 
-		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
+		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec1.getAccount()+"], transaction type expense, amount "+tRec1.getAmount());
 
 		op.tapOnTransactionSummaryCard();
 		Verify.waitForObject(ts.categoryTab, 2);
@@ -296,7 +314,7 @@ public class TransactionSummaryTest extends Recovery {
 		Double processedCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Category amount is now: "+processedCategoryAmount_after);
 		
-		Double d = Double.parseDouble(tRec.getAmount());
+		Double d = Double.parseDouble(tRec1.getAmount());
 
 		int compare = Double.compare(processedCategoryAmount_before-d, processedCategoryAmount_after);
 		
