@@ -90,7 +90,7 @@ public class SignInPage {
 	public MobileElement refreshSpinnerIcon;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']/../following-sibling::android.view.ViewGroup[1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']/../following-sibling::android.view.ViewGroup[1]")
 	public MobileElement dataSetArrow;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")

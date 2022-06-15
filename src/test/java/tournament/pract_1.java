@@ -474,10 +474,10 @@ public class pract_1 extends Recovery {
 		else
 			quickenTest.log(LogStatus.FAIL,"investing card tap > Investing page did not appear.");
 		
-		if (Verify.objExists(inv.securitiesTab))
-			quickenTest.log(LogStatus.INFO,"investing card, securities tab got dispalyed.");
+		if (Verify.objExists(inv.holdingsTab))
+			quickenTest.log(LogStatus.INFO,"investing card, Holdings tab got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"investing card, securities tab did not appear.");
+			quickenTest.log(LogStatus.FAIL,"investing card, Holdings tab did not appear.");
 		
 		if (Verify.objExists(inv.accountsTab))
 			quickenTest.log(LogStatus.INFO,"investing card, accounts tab got dispalyed.");

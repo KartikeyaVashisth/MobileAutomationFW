@@ -32,9 +32,9 @@ public class InvestingPage {
 	public MobileElement backButtonOnHeader;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Securities\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Securities'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Securities']")
-	public MobileElement securitiesTab;
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Holdings'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Holdings']")
+	public MobileElement holdingsTab;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Accounts\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Accounts'`]")

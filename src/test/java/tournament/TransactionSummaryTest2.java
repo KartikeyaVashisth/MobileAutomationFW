@@ -454,7 +454,7 @@ public class TransactionSummaryTest2 extends Recovery {
 	}
 	
 	@Test (priority=16, enabled = true)
-	public void TC15_TransactionSummaryCard() throws Exception {
+	public void TC16_TransactionSummaryCard() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();

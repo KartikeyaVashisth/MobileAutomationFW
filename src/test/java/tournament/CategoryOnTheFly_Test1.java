@@ -123,7 +123,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			
 }
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void TR2_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -309,7 +309,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 		}	
 	}
 	
-	@Test(priority = 6, enabled = false)
+	@Test(priority = 6, enabled = true)
 	public void TR6_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -359,7 +359,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 		
 	}
 		
-		@Test(priority = 7, enabled = false)
+		@Test(priority = 7, enabled = true)
 		public void TR7_test() throws Exception{
 
 			SoftAssert sa = new SoftAssert();
@@ -469,7 +469,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			}
 		}
 		
-		@Test(priority = 9, enabled = false)
+		@Test(priority = 9, enabled = true)
 		public void TR9_test() throws Exception{
 
 			SoftAssert sa = new SoftAssert();
@@ -623,7 +623,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 		}
 		
 		
-//		@Test(priority = 11, enabled = false)
+//		@Test(priority = 11, enabled = true)
 //		public void TR11_test() throws Exception{
 //
 //			SoftAssert sa = new SoftAssert();
@@ -689,7 +689,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 //			}
 //	}
 //		
-//		@Test(priority = 12, enabled = false)
+//		@Test(priority = 12, enabled = true)
 //		public void TR12_test() throws Exception{
 //
 //			SoftAssert sa = new SoftAssert();

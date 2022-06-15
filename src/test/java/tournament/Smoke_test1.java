@@ -460,10 +460,10 @@ public class Smoke_test1 extends Recovery { //Used this class to test the stage 
 		else
 			Commentary.log(sa, LogStatus.FAIL,"Investing card > Accounts Tab did not appear.");
 		
-		if (Verify.objExists(i.securitiesTab))
-			Commentary.log(sa, LogStatus.INFO,"Investing card > Securities Tab got dispalyed.");
+		if (Verify.objExists(i.holdingsTab))
+			Commentary.log(sa, LogStatus.INFO,"Investing card > Holdings Tab got dispalyed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"Investing card > Securities Tab did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"Investing card > Holdings Tab did not appear.");
 		
 		if (Verify.objExists(i.watchlistTab))
 			Commentary.log(sa, LogStatus.INFO,"Investing card > Watchlist Tab got dispalyed.");

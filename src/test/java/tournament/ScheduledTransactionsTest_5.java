@@ -854,7 +854,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Previous month date is NOT seen second when filter Due Old to New is selected.");
 
-		if(monthSubstringForDateOfThirdReminderInstance.equalsIgnoreCase(currentMonthSubstring) || dateOfThirdReminderInstance.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Tomorrow"))
+		if(monthSubstringForDateOfThirdReminderInstance.equalsIgnoreCase(currentMonthSubstring) || dateOfThirdReminderInstance.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Yesterday") || dateOfThirdReminderInstance.equalsIgnoreCase("Tomorrow"))
 			Commentary.log(LogStatus.INFO, "Current month date is seen third when filter Due Old to New is selected.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Current month date is NOT seen third when filter Due Old to New is selected.");
@@ -871,7 +871,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		String dateOfThirdReminderInstance_NewToOldFilter = li1.get(2).getText();
 		String monthSubstringForDateOfThirdReminderInstance_NewToOldFilter = dateOfThirdReminderInstance_NewToOldFilter.toString().substring(0, 3);
 
-		if(dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Today") || dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Tomorrow"))
+		if(dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Today") || dateOfThirdReminderInstance.equalsIgnoreCase("Yesterday") || dateOfFirstReminderInstance_NewToOldFilter.equalsIgnoreCase("Tomorrow"))
 			Commentary.log(LogStatus.INFO, "Current month date is seen first when filter Due New to Old is selected.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Current month date is NOT seen first when filter Due New to Old is selected.");

@@ -34,7 +34,7 @@ public class NetWorthPage {
 	@AndroidFindBy(xpath="//android.view.View[starts-with(@text, 'As of')]")
 	public MobileElement dateHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='netWorthInfo'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='netWorthInfo'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='netWorthInfo']")
 	public MobileElement netWorthInfoButton;
 

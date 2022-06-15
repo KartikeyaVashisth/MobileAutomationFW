@@ -164,6 +164,11 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings option is NOT displayed.");
 		
+		if (Verify.objExists(sp.helpOption))
+			Commentary.log(LogStatus.INFO, "PASS: Help option is displayed.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Help option is NOT displayed.");
+		
 		if (Verify.objExists(sp.datasetDDButton))
 			Commentary.log(LogStatus.INFO, "PASS: Dataset DD button button is displayed.");
 		else
@@ -380,7 +385,7 @@ public class Smoke_test extends Recovery {
 		o.tapOnInvestingCard();
 
 		InvestingPage i = new InvestingPage();
-		Verify.waitForObject(i.securitiesTab, 2);
+		Verify.waitForObject(i.holdingsTab, 2);
 
 		if (Verify.objExists(i.investingHeader))
 			Commentary.log(LogStatus.INFO,"PASS: Investing card tap >Investments screen got displayed.");
@@ -392,10 +397,10 @@ public class Smoke_test extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Accounts Tab did not appear.");
 
-		if (Verify.objExists(i.securitiesTab))
-			Commentary.log(LogStatus.INFO,"PASS: Investing card > Securities Tab got displayed.");
+		if (Verify.objExists(i.holdingsTab))
+			Commentary.log(LogStatus.INFO,"PASS: Investing card > Holdings Tab got displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Securities Tab did not appear.");
+			Commentary.log(sa, LogStatus.FAIL,"FAIL: Investing card > Holdings Tab did not appear.");
 
 		if (Verify.objExists(i.watchlistTab))
 			Commentary.log(LogStatus.INFO,"PASS: Investing card > Watchlist Tab got displayed.");

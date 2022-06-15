@@ -69,6 +69,11 @@ public class ScheduledTransactionsTest_1 extends Recovery {
 			Commentary.log(LogStatus.INFO, "PASS: Correct message is displayed when there are no Scheduled Reminders for Next 7 Days.");
 		else 
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Correct message is NOT displayed when there are no Scheduled Reminders.");
+		
+		if(! Verify.objExists(bi.searchRemindersBar))
+			Commentary.log(LogStatus.INFO, "PASS: Search Reminders bar is Not displayed which is expected on the Reminders tab.");
+		else 
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Search Reminders bar is displayed which is Not expected on the Reminders tab.");
 
 		bi.tapOnSeriesTab();
 

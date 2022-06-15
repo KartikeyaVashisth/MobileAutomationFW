@@ -248,8 +248,8 @@ public class HamburgerMenuTest extends Recovery {
 		InvestingPage ip = new InvestingPage();
 		OverviewPage op = new OverviewPage();
 		
-		Verify.waitForObject(ip.securitiesTab, 1);
-		if(Verify.objExists(ip.investingHeader) && Verify.objExists(ip.securitiesTab) && Verify.objExists(ip.accountsTab) && !Verify.objExists(op.hambergerIcon))
+		Verify.waitForObject(ip.holdingsTab, 1);
+		if(Verify.objExists(ip.investingHeader) && Verify.objExists(ip.holdingsTab) && Verify.objExists(ip.accountsTab) && !Verify.objExists(op.hambergerIcon))
 			Commentary.log(LogStatus.INFO, "PASS: Investments page is displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investments page is NOT displayed.");
@@ -386,11 +386,6 @@ public class HamburgerMenuTest extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Passcode\" option is NOT displayed under Profile section.");
 		
-		if(Verify.objExists(sp.HelpTxt))
-			Commentary.log(LogStatus.INFO, "PASS: \"Help\" option is displayed under Profile section.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Help\" option is NOT displayed under Profile section.");
-		
 		if(Verify.objExists(sp.legalTxt))
 			Commentary.log(LogStatus.INFO, "PASS: \"Legal\" option is displayed under Profile section.");
 		else
@@ -409,16 +404,6 @@ public class HamburgerMenuTest extends Recovery {
 		
 		sp.backButtonOnPasscodeHeader.click();
 		Thread.sleep(2000);
-		
-		Verify.waitForObject(sp.HelpTxt, 1);
-		sp.HelpTxt.click();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(sp.supportOption, 1);
-		if(Verify.objExists(sp.supportOption))
-			Commentary.log(LogStatus.INFO, "PASS: Support Option is displayed under Help section.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Option is NOT displayed under Help section.");
 		
 		Verify.waitForObject(sp.legalTxt, 1);
 		sp.legalTxt.click();

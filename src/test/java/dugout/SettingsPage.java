@@ -80,7 +80,7 @@ public class SettingsPage {
 //	@iOSXCUITFindBy(id = "dataSetArrow")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
 //	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='dataSetArrow']")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']/../following-sibling::android.view.ViewGroup[1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']/../following-sibling::android.view.ViewGroup[1]")
 	public MobileElement datasetDDButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
@@ -179,14 +179,6 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Use Quicken Passcode']")
 	public MobileElement useDevicePasscodeTxt;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Help'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']")
-	public MobileElement HelpTxt;
-	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Support'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Support']")
-	public MobileElement supportOption;
-	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Legal'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Legal']")
 	public MobileElement legalTxt;
@@ -210,6 +202,26 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Settings Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
 	public MobileElement settingsOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Help'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']")
+	public MobileElement helpOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Chat with support'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Chat with support']")
+	public MobileElement chatWithsupportOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'FAQ'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='FAQ']")
+	public MobileElement FAQOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Report an issue'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Report an issue']")
+	public MobileElement reportAnIssueOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Visit support site'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Visit support site']")
+	public MobileElement visitSupportSiteOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Settings'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Settings']")
@@ -254,6 +266,10 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
 	public MobileElement switchDisplayFavoritePayees;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.']")
+	public MobileElement refreshData;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account Balance Preference']")

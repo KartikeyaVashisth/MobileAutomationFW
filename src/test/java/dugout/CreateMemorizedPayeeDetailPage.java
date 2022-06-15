@@ -167,7 +167,7 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//android.widget.Switch[@content-desc='Switch Value: true']")
 	public MobileElement enabledSplitSwitch;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
 	public MobileElement backButtonOnAddTransactionPage;
 	
