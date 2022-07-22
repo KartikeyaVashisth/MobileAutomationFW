@@ -330,7 +330,12 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings header text is NOT displayed.");
 		
-		Verify.waitForObject(sp.customizeDashboardOption, 1);
+		Verify.waitForObject(sp.accountBalancePreferenceOption, 1);
+		if(Verify.objExists(sp.accountBalancePreferenceOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Account Balance Preference\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Account Balance Preference\" option is NOT displayed under Settings.");
+		
 		if(Verify.objExists(sp.customizeDashboardOption))
 			Commentary.log(LogStatus.INFO, "PASS: \"Customize Dashboard\" option is displayed under Settings.");
 		else
@@ -391,10 +396,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' toggle button is NOT displayed.");
 		
-		if (sp.isShowLongCategoryNamesEnabled())
-			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' option is enabled by default.");
+		if (!sp.isShowLongCategoryNamesEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' option is disabled by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' option is seen disabled by default.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' option is enabled by default.");
 		
 		if (Verify.objExists(sp.displayFavoritePayeesText))
 			Commentary.log(LogStatus.INFO, "PASS: 'Display favorite payees' Recommendation text is displayed.");
@@ -411,10 +416,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display favorite payees' toggle button is NOT displayed.");
 		
-		if (sp.isDisplayYelpEnabled())
-			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation option is enabled by default.");
+		if (sp.isDisplayFavoritePayeesEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Favorite Payees' option is enabled by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation option is seen disabled by default.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Favorite Payees' option is seen disabled by default.");
 		
 		if (Verify.objExists(sp.refreshData))
 			Commentary.log(LogStatus.INFO, "PASS: 'Refresh Data' option is present.");

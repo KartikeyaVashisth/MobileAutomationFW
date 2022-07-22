@@ -25,8 +25,8 @@ import support.Recovery;
 
 public class HamburgerMenuTest extends Recovery {
 	
-	String sUserName = "varsha.h@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUserName = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
 	
 	@Test(priority=1, enabled = true)
@@ -434,12 +434,20 @@ public class HamburgerMenuTest extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
+		SignInPage si = new SignInPage();
+		si.signIn(sUserName, sPassword, sDataset);
+		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying Settings option on the Hamburger Menu.");
 		
 		SettingsPage sp = new SettingsPage();
 		sp.clickOnSettingsOption();
 		
-		Verify.waitForObject(sp.customizeDashboardOption, 1);
+		Verify.waitForObject(sp.accountBalancePreferenceOption, 1);
+		if(Verify.objExists(sp.accountBalancePreferenceOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Account Balance Preference\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Account Balance Preference\" option is NOT displayed under Settings.");
+		
 		if(Verify.objExists(sp.customizeDashboardOption))
 			Commentary.log(LogStatus.INFO, "PASS: \"Customize Dashboard\" option is displayed under Settings.");
 		else
@@ -479,6 +487,13 @@ public class HamburgerMenuTest extends Recovery {
 			Commentary.log(LogStatus.INFO, "PASS: \"Display Favorite Payees\" option is displayed under Settings.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Display Favorite Payees\" option is NOT displayed under Settings.");
+		
+		sp.scrollToRefreshDataOption();
+		
+		if(Verify.objExists(sp.refreshData))
+			Commentary.log(LogStatus.INFO, "PASS: \"Refresh Data\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Refresh Data\" option is NOT displayed under Settings.");
 		
 		sa.assertAll();
 	}

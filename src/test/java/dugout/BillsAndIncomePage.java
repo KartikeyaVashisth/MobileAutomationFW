@@ -433,7 +433,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='View Series']")
 	public MobileElement viewSeriesHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='backPress'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='backPress'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backPress']")
 	public MobileElement backButtonOfViewSeriesPage;
 

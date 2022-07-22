@@ -49,7 +49,7 @@ public class TransferCases_Test2 extends Recovery{
 
 		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying MATCH functionality.");
 
-		String transferToAcc1 = "Transfer ["+sSavings+"]";
+		String transferToAcc1 = "Transfer ["+sChecking+"]";
 		String payeeName = "Payee_"+h.getCurrentTime();
 
 		OverviewPage op = new OverviewPage();
@@ -82,9 +82,9 @@ public class TransferCases_Test2 extends Recovery{
 		td.addTransaction(tRec);
 
 		tp.searchRecentTransaction(payeeName);
-		Verify.waitForObject(tp.thisMonthLabel, 2);
+		Verify.waitForObject(tp.thisMonthLabel, 1);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		tRec = new TransactionRecord();
 		tRec.setCategory(transferToAcc1);

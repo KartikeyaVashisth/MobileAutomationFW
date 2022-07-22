@@ -145,9 +145,9 @@ public class Smoke_test extends Recovery {
 //			Commentary.log(sa, LogStatus.FAIL, "FAIL: Budgets option is NOT displayed.");
 		
 		if (Verify.objExists(sp.investingOption))
-			Commentary.log(LogStatus.INFO, "PASS: Investing option is displayed.");
+			Commentary.log(LogStatus.INFO, "PASS: Investments option is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing option is NOT displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investments option is NOT displayed.");
 		
 		if (Verify.objExists(sp.reportsOption))
 			Commentary.log(LogStatus.INFO, "PASS: Reports option is displayed.");

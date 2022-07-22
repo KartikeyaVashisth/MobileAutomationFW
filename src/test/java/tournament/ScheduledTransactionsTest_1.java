@@ -16,8 +16,8 @@ import support.TransactionRecord;
 
 public class ScheduledTransactionsTest_1 extends Recovery {
 
-	String sUserName = "varsha.h@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUserName = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";

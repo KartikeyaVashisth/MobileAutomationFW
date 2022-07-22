@@ -1,5 +1,7 @@
 package dugout;
 
+import java.util.HashMap;
+
 //import org.eclipse.jetty.util.annotation.ManagedObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
@@ -103,12 +105,12 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Bills']")
 	public MobileElement billsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
 	public MobileElement budgetsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investments Menu'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investments Menu']")
+	@AndroidFindBy(accessibility = "Investments Menu")
 	public MobileElement investingOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Reports'`]")
@@ -124,7 +126,7 @@ public class SettingsPage {
 	public MobileElement netIncomeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Net Worth'`]")
-	@AndroidFindBy(xpath="(//android.widget.TextView[@text='Net Worth'])[2]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Worth']")
 	public MobileElement netWorthOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Spending by Category'`]")
@@ -268,12 +270,36 @@ public class SettingsPage {
 	public MobileElement switchDisplayFavoritePayees;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Refresh Data']/following-sibling::android.widget.TextView[@text='Use Refresh Data to resolve issues with missing transactions, categories and other data.']")
 	public MobileElement refreshData;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account Balance Preference']")
 	public MobileElement accountBalancePreferenceOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`][-1]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Account Balance Preference']")
+	private MobileElement accountBalancePreferenceHeaderText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Choose the default balance to use on the dashboard cards.'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Choose the default balance to use on the dashboard cards.']")
+	private MobileElement accountBalancePreferenceDescriptionText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
+	@AndroidFindBy(xpath="//android.view.View[@text='Account Balance Preference']/..//android.widget.ImageView")
+	private MobileElement backButtonOnAccountBalancePreferenceHeader;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = \"RadioButton Today's Balance\"`][-1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Today's Balance\"]")
+	private MobileElement todaysBalanceOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'RadioButton Online Balance'`][-1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Online Balance']")
+	private MobileElement onlineBalanceOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'RadioButton Projected Balance'`][-1]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Projected Balance']")
+	private MobileElement projectedBalanceOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Customize Dashboard'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
@@ -282,6 +308,10 @@ public class SettingsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Accounts Management'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts Management']")
 	public MobileElement accountsManagementOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
+	public MobileElement manageCategoriesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Alerts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
@@ -347,13 +377,6 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Feedback']")
 	public MobileElement FeedbackTxt;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
-	public MobileElement manageCategoriesOption;
-	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
-	public MobileElement manageCategories;
 
 
 
@@ -819,8 +842,65 @@ public class SettingsPage {
 		Thread.sleep(1000);
 	
 	}
+	
+	/**
+	 * This method will help setting the Account Balance Preference.
+	 * @param preferenceOption
+	 * @throws Exception
+	 */
+		
+	public void setDefaultAccountBalancePreference(String preferenceOption) throws Exception {
+		
+		SettingsPage sp = new SettingsPage();
+		clickOnSettingsOption();
+		Verify.waitForObject(sp.accountBalancePreferenceOption, 1);
+		sp.accountBalancePreferenceOption.click();
+		Thread.sleep(1000);
 
+		if(preferenceOption.equalsIgnoreCase("Today's")) {
+			sp.todaysBalanceOption.click();
+			Thread.sleep(500);
+		}
+		
+		if(preferenceOption.equalsIgnoreCase("Online")) {
+			sp.onlineBalanceOption.click();
+			Thread.sleep(500);
+		}
+		
+		if(preferenceOption.equalsIgnoreCase("Projected")) {
+			sp.projectedBalanceOption.click();
+			Thread.sleep(500);
+		}
+		
+		sp.backButtonOnAccountBalancePreferenceHeader.click();
+		Verify.waitForObject(sp.settingsHeaderText, 1);
+		
+		sp.backButtonOnSettingsHeader.click();
+		Thread.sleep(1000);
+	}
 	
-	
+	/** 
+	 * This method will scroll down the page to make Refresh Data option visible.
+	 * @throws Exception
+	 */
+	public void scrollToRefreshDataOption() throws Exception {
+		
+		Helper h = new Helper();
+		OverviewPage op = new OverviewPage();
+		
+		if(h.getEngine().equalsIgnoreCase("android")) {
+			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Refresh Data\").instance(0))"));
+			op.verticalScrollDownAndroid();
+		} else {
+			String id = this.refreshData.getId();
+			HashMap<String, String> scrollObject = new HashMap<String, String>();
+			scrollObject.put("element", id);
+			scrollObject.put("toVisible", "not an empty string");
+			scrollObject.put("direction", "down");
+			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+			Thread.sleep(1000);
+			
+		}
+	}
 
 }

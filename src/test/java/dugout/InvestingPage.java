@@ -28,7 +28,7 @@ public class InvestingPage {
 	public MobileElement investingHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
-	@AndroidFindBy(xpath="//*[@text='Investing']/../*[@class='android.widget.Button']")
+	@AndroidFindBy(xpath="//*[@text='Investments']/../*[@class='android.widget.Button']")
 	public MobileElement backButtonOnHeader;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"button Securities\"]")
