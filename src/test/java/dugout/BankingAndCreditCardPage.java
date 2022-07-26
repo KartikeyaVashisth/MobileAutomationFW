@@ -20,6 +20,9 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 import referee.Commentary;
 import referee.Verify;
@@ -368,7 +371,22 @@ public class BankingAndCreditCardPage {
 			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
 		}
 	}
-
+	
+//    For Drag And Drop
+//	public void dragAndDrop() throws Exception { 
+//		
+//		Engine.getDriver().findElementByAccessibilityId("Drag and Drop").click(); //AccessibilityId is same as content-desc in Android.
+//		MobileElement source = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_1");
+//		MobileElement target = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_2");
+//		
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//		touchAction.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(source)))
+//				.waitAction(WaitOptions.waitOptions(ofMillis(2000)))
+//				.moveTo(ElementOption.element(target))
+//				.release()
+//				.perform();
+//	}
+		
 	public void scrollToProjectedBalance_ios() throws Exception{
 
 		MobileElement element = this.txtTodaysBalance;

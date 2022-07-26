@@ -374,6 +374,8 @@ public class ProjectedBalances extends Recovery {
 		Thread.sleep(1000);
 		op.navigateToAcctList();
 		
+		bcc.scrollToProjectedBalance();
+		
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		Double dProjectedChecking_after = h.processBalanceAmount(sProjectedCC_after);
@@ -448,6 +450,8 @@ public class ProjectedBalances extends Recovery {
 		bcc.backButton.click();
 		Thread.sleep(1000);
 		op.navigateToAcctList();
+		
+		bcc.scrollToProjectedBalance();
 		
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
@@ -526,6 +530,8 @@ public class ProjectedBalances extends Recovery {
 		Thread.sleep(1000);
 		op.navigateToAcctList();
 		
+		bcc.scrollToProjectedBalance();
+		
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
 		Double dProjectedCC_after = h.processBalanceAmount(sProjectedCC_after);
@@ -601,6 +607,8 @@ public class ProjectedBalances extends Recovery {
 		bcc.backButton.click();
 		Thread.sleep(1000);
 		op.navigateToAcctList();
+		
+		bcc.scrollToProjectedBalance();
 		
 		Verify.waitForObject(bcc.txtProjectedBalanceAmount, 1);
 		sProjectedTotal_after = bcc.txtProjectedBalanceAmount.getText();
@@ -728,6 +736,8 @@ public class ProjectedBalances extends Recovery {
 		
 		bcc.getAccount(tRec.getAccount()).click();
 		Thread.sleep(2000);
+		
+		bcc.scrollToProjectedBalance();
 		
 		TransactionsPage tp = new TransactionsPage();
 		Verify.waitForObject(tp.txtProjectedBalanceAmount, 1);

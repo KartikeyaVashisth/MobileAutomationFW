@@ -263,11 +263,6 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Passcode\" option is NOT displayed under Profile section.");
 		
-		if(Verify.objExists(sp.HelpTxt))
-			Commentary.log(LogStatus.INFO, "PASS: \"Help\" option is displayed under Profile section.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Help\" option is NOT displayed under Profile section.");
-		
 		if(Verify.objExists(sp.legalTxt))
 			Commentary.log(LogStatus.INFO, "PASS: \"Legal\" option is displayed under Profile section.");
 		else
@@ -285,15 +280,15 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.backButtonOnPasscodeHeader.click();
 		Thread.sleep(2000);
 		
-		Verify.waitForObject(sp.HelpTxt, 1);
-		sp.HelpTxt.click();
-		Thread.sleep(2000);
-		
-		Verify.waitForObject(sp.supportOption, 1);
-		if(Verify.objExists(sp.supportOption))
-			Commentary.log(LogStatus.INFO, "PASS: Support Option is displayed under Help section.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Option is NOT displayed under Help section.");
+//		Verify.waitForObject(sp.HelpTxt, 1);
+//		sp.HelpTxt.click();
+//		Thread.sleep(2000);
+//		
+//		Verify.waitForObject(sp.supportOption, 1);
+//		if(Verify.objExists(sp.supportOption))
+//			Commentary.log(LogStatus.INFO, "PASS: Support Option is displayed under Help section.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: Support Option is NOT displayed under Help section.");
 		
 		Verify.waitForObject(sp.legalTxt, 1);
 		sp.legalTxt.click();
@@ -335,7 +330,12 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Settings header text is NOT displayed.");
 		
-		Verify.waitForObject(sp.customizeDashboardOption, 1);
+		Verify.waitForObject(sp.accountBalancePreferenceOption, 1);
+		if(Verify.objExists(sp.accountBalancePreferenceOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Account Balance Preference\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Account Balance Preference\" option is NOT displayed under Settings.");
+		
 		if(Verify.objExists(sp.customizeDashboardOption))
 			Commentary.log(LogStatus.INFO, "PASS: \"Customize Dashboard\" option is displayed under Settings.");
 		else
@@ -396,10 +396,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' toggle button is NOT displayed.");
 		
-		if (sp.isDisplayYelpEnabled())
-			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' option is enabled by default.");
+		if (!sp.isShowLongCategoryNamesEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Show Long Category Names' option is disabled by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' option is seen disabled by default.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Show Long Category Names' option is enabled by default.");
 		
 		if (Verify.objExists(sp.displayFavoritePayeesText))
 			Commentary.log(LogStatus.INFO, "PASS: 'Display favorite payees' Recommendation text is displayed.");
@@ -416,10 +416,15 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display favorite payees' toggle button is NOT displayed.");
 		
-		if (sp.isDisplayYelpEnabled())
-			Commentary.log(LogStatus.INFO, "PASS: Display Yelp Recommendation option is enabled by default.");
+		if (sp.isDisplayFavoritePayeesEnabled())
+			Commentary.log(LogStatus.INFO, "PASS: 'Display Favorite Payees' option is enabled by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Display Yelp Recommendation option is seen disabled by default.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Favorite Payees' option is seen disabled by default.");
+		
+		if (Verify.objExists(sp.refreshData))
+			Commentary.log(LogStatus.INFO, "PASS: 'Refresh Data' option is present.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Refresh Data' option is not present.");
 		
 		sp.ManageAlertsTxt.click();
 		
@@ -653,7 +658,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		op.tapOnInvestingCard();
 
 		InvestingPage ip = new InvestingPage();
-		Verify.waitForObject(ip.securitiesTab, 2);
+		Verify.waitForObject(ip.holdingsTab, 2);
 		Verify.waitForObject(ip.watchlistTab, 2);
 		Verify.waitForObject(ip.lastSyncedFooter, 2);
 
@@ -662,10 +667,10 @@ public class Daily_Regression_Test2 extends Recovery{
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing Header text is NOT displayed");
 
-		if (Verify.objExists(ip.securitiesTab))
-			Commentary.log(LogStatus.INFO, "PASS: Securities Tab is displayed");
+		if (Verify.objExists(ip.holdingsTab))
+			Commentary.log(LogStatus.INFO, "PASS: Holdings Tab is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Securities Tab is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Holdings Tab is NOT displayed");
 
 		if (Verify.objExists(ip.accountsTab))
 			Commentary.log(LogStatus.INFO, "PASS: Accounts Tab is displayed");
