@@ -153,9 +153,9 @@ public class CategoryOnTheFly_Test2 extends Recovery{
 		td.createCategory.click();
 		
 		td.subCategoryOf.click();
-		td.searchCategory("Cash & ATM");
+		td.searchCategory("Entertainment");
 		
-		if(Verify.objExists(td.radiobuttonCashATM)) {
+		if(Verify.objExists(td.cashAtmParentCat)) {
 			Commentary.log(LogStatus.FAIL, "Expense category is vivisble");
 		}
 		else {

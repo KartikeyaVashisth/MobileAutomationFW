@@ -48,10 +48,16 @@ public class SignInPage {
 	//@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Quicken ID (email address)'`]")
 	public MobileElement emailID;
+	
+	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Sign in'")
+	@AndroidFindBy(xpath = "//android.view.View[4]")
+	public MobileElement signInTextLabel;
 
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
-	@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
-	@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
+	//@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
+	@AndroidFindBy(xpath="//android.widget.EditText[@resource-id='username']")
+	//@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Quicken'`]/**/XCUIElementTypeTextField")	
 	public MobileElement userName;
 
 	@AndroidFindBy(xpath="//*[@content-desc ='Password' or @text ='Password']")
@@ -60,12 +66,15 @@ public class SignInPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name=='Password'$]")
 	public MobileElement lblPassword;
 
-	@AndroidFindBy(xpath="//android.widget.EditText[2]")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField")
-	public MobileElement password;
+	//@AndroidFindBy(xpath="//android.widget.EditText[2]")
+	@AndroidFindBy(xpath="//*[@resource-id ='password' or @text ='Password']")
+	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Quicken'`]/**/XCUIElementTypeSecureTextField")
+	public MobileElement userPassword;
 
-	@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='SIGN IN']")
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[$name=='SIGN IN'$]")
+	//@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='Sign in'][-1]")
+	@AndroidFindBy(xpath = "//android.widget.Button[@text = 'Sign in']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[$name=='Sign in'$]")
 	public MobileElement btnSignIn;
 	
 	@AndroidFindBy(xpath="//android.view.View[@text='Do you need help signing in?']/../android.view.View[@text='Invalid Credentials.']")
@@ -97,7 +106,7 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
 	public MobileElement navigationMenu;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains \"navigationMenu\"`][-2]/**/XCUIElementTypeStaticText")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'navigationMenu'`][-2]/**/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")
 	public MobileElement datasetNameOnDashboard;
 
@@ -119,7 +128,8 @@ public class SignInPage {
 		//System.out.println("Waiting for SignInWidget");
 		//((JavascriptExecutor)Engine.ad).executeScript("sauce: break"); 
 
-		if (! Verify.waitForObject(emailID, 8))
+		//if (! Verify.waitForObject(emailID, 8))
+			if (! Verify.waitForObject(signInTextLabel, 8))
 			Commentary.log(LogStatus.ERROR, "SignIn widget not loaded");
 		//quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 		//System.out.println("SignInWidget appeared");
@@ -133,15 +143,18 @@ public class SignInPage {
 //		if (!Verify.objExists(emailID))
 //			quickenTest.log(LogStatus.ERROR,"emailID not identified");
 		
-		Verify.waitForObject(emailID, 2);
-		emailID.click();
+		//Verify.waitForObject(emailID, 2);
+		Verify.waitForObject(signInTextLabel, 2);
+		//emailID.click();
+		userName.click();
 		Thread.sleep(1000);
 		userName.clear();
 
 		userName.sendKeys(support.getUsername());
-		lblPassword.click();
+		//lblPassword.click();
+		userPassword.click();
 		Thread.sleep(1000);
-		this.password.sendKeys(support.getPassword());
+		this.userPassword.sendKeys(support.getPassword());
 		if (support.getEngine().equals("android"))
 			Engine.getDriver().hideKeyboard();
 		Thread.sleep(1000);
@@ -172,17 +185,21 @@ public class SignInPage {
 
 		//Commentary.log(LogStatus.INFO, "SignInWidget appeared");
 
-		Verify.waitForObject(emailID, 2);
-		emailID.click();
+		//Verify.waitForObject(emailID, 2);
+		Verify.waitForObject(signInTextLabel, 2);
+		//emailID.click();
+		userName.click();
 		Thread.sleep(1000);
 		userName.clear();
 		Thread.sleep(1000);
 		userName.clear();
 		userName.sendKeys(username);//Runtime.getRuntime().exec("adb shell input text "+username+"");
-		lblPassword.click();
+		//lblPassword.click();
+		Thread.sleep(1000);
+		userPassword.click();
 		Thread.sleep(1000);
 
-		this.password.sendKeys(password); //this keyword used to differentiate between local and global variable.
+		this.userPassword.sendKeys(password); //this keyword used to differentiate between local and global variable.
 		//lbl.sendKeys(password);
 		if (support.getEngine().equals("android"))
 			Engine.getDriver().hideKeyboard();
