@@ -77,7 +77,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.Button")
 	public MobileElement backButton;
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
 	public MobileElement backButtonOnViewTransactionPage;
 
@@ -350,7 +350,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave;
 
-	@iOSXCUITFindBy(id="save")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave1;
 

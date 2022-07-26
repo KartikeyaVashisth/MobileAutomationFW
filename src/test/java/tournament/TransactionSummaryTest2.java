@@ -408,8 +408,8 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test (priority=15, enabled = true)
-	public void TC15_ValidateForZeroDataset_TransactionSummaryCard() throws Exception {
+	@Test (priority=16, enabled = true)
+	public void TC16_ValidateForZeroDataset_TransactionSummaryCard() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -453,7 +453,7 @@ public class TransactionSummaryTest2 extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test (priority=16, enabled = true)
+	@Test (priority=15, enabled = true)
 	public void TC15_TransactionSummaryCard() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -487,8 +487,6 @@ public class TransactionSummaryTest2 extends Recovery {
 		tags.put(1, new String[] {"Tax Related"});
 		tags.put(2, new String[] {"Tax Related"});
 		
-		
-		
 		TransactionRecord tRec = new TransactionRecord();
 		tRec.setAmount("70.00");
 		//tRec.setTransactionType("expense");
@@ -509,8 +507,6 @@ public class TransactionSummaryTest2 extends Recovery {
 		
 		if(Verify.objExists(ts.splitCatShop)) {
 			
-			
-			
 		}
 		else {
 			Commentary.log(LogStatus.FAIL, "Split category is not visible");
@@ -530,16 +526,10 @@ public class TransactionSummaryTest2 extends Recovery {
 			td.deleteTransactionAlertButton.click();
 			Thread.sleep(1000);
 			
-			
 		}
 		else {
 			Commentary.log(LogStatus.FAIL, "Split category is not visible");
 		}
-		
-		
-		
-		
-		
 	}
 }
 

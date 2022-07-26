@@ -416,26 +416,44 @@ public class TransferCases_Test1 extends Recovery {
 		Verify.waitForObject(td.dateLabel, 2);
 		
 		Double firstSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
-			
-		if (firstSideAmount.equals(100.00))
-			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on first side of transfer.");
-		else 
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on first side of transfer.");
 		
-		Thread.sleep(2000);
-		op.scroll_down();
-		Verify.waitForObject(td.buttonGoToOtherSide, 2);
-		td.buttonGoToOtherSide.click();
+		if (firstSideAmount.equals(-100.00)) {
+			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on first side(expense side) of the transfer transaction.");
+
+			Thread.sleep(2000);
+			op.scroll_down();
+			Verify.waitForObject(td.buttonGoToOtherSide, 1);
+			td.buttonGoToOtherSide.click();
+
+			Verify.waitForObject(td.viewTransactionTxt, 1);
+			Verify.waitForObject(td.dateLabel, 1);
+
+			Double secondSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
+
+			if (secondSideAmount.equals(100.00))
+				Commentary.log(LogStatus.INFO, "PASS: Amount is updated on second side(income side) of the transfer transaction.");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on second side(income side) of transfer transaction.");
+		}
 		
-		Verify.waitForObject(td.viewTransactionTxt, 2);
-		Verify.waitForObject(td.dateLabel, 2);
-		
-		Double secondSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
-		
-		if (secondSideAmount.equals(-100.00))
-			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on second side of transfer.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on second side of transfer.");
+		else if (firstSideAmount.equals(100.00)) {
+			Commentary.log(LogStatus.INFO, "PASS: Amount is updated on first side(income side) of the transfer transaction.");
+
+			Thread.sleep(2000);
+			op.scroll_down();
+			Verify.waitForObject(td.buttonGoToOtherSide, 1);
+			td.buttonGoToOtherSide.click();
+
+			Verify.waitForObject(td.viewTransactionTxt, 1);
+			Verify.waitForObject(td.dateLabel, 1);
+
+			Double secondSideAmount = h.processBalanceAmount(td.getTransactionAmount().replace("Amount: ", ""));
+
+			if (secondSideAmount.equals(-100.00))
+				Commentary.log(LogStatus.INFO, "PASS: Amount is updated on second side(expense side) of the transfer transaction.");
+			else
+				Commentary.log(sa, LogStatus.FAIL, "FAIL: Amount is NOT updated on second side(expense side) of transfer transaction.");
+		}
 		
 		sa.assertAll();		
 	}

@@ -114,6 +114,10 @@ public class BillsAndIncomePage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='noReminderText'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='noReminderDataImage']/following-sibling::android.widget.TextView")
 	public MobileElement noRemindersDueNext7Days;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name='Search Bar'`]")
+	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Reminders']")
+	public MobileElement searchRemindersBar;
 
 	// -------------- Series Tab --------------
 
@@ -387,7 +391,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='button Add Reminder']")
 	public MobileElement buttonAddReminder;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'backPress'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'backPress'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc ='backPress']")
 	public MobileElement backButtonOnAddReminderPage;
 
@@ -419,7 +423,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.view.View[@text='Edit Series']")
 	public MobileElement editSeriesHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement saveOptionEditSeries;
 
@@ -429,11 +433,11 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='View Series']")
 	public MobileElement viewSeriesHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='backPress'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='backPress'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backPress']")
 	public MobileElement backButtonOfViewSeriesPage;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='edit'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='edit'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Edit']")
 	public MobileElement editButton;
 
@@ -491,7 +495,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.view.View[@text='Enter Transaction']")
 	public MobileElement enterTransactionHeaderText;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Enter Transaction'`]/XCUIElementTypeOther[`name='pop'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Enter Transaction'`]/**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Enter Transaction']/..//android.widget.ImageView")
 	public MobileElement backButtonOnEnterTransactionPage;
 
@@ -523,7 +527,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.view.View[@text='Edit Reminder Instance']")
 	public MobileElement editReminderInstanceHeaderText;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Edit Reminder Instance'`]/XCUIElementTypeOther[`name='backPress'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Edit Reminder Instance'`]/**/XCUIElementTypeOther[`name='backPress'`][-1]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Edit Reminder Instance']/..//android.widget.ImageView")
 	public MobileElement closeEditReminderInstanceButton;
 
@@ -555,7 +559,7 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Do you want to delete this and future instances? Previously recorded transactions will not be deleted.']")
 	public MobileElement deleteThisAndFutureInstancesInfoPopUp;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='sortOptions'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='sortOptions'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='sortOptions']")
 	public MobileElement billSortingIcon;
 	

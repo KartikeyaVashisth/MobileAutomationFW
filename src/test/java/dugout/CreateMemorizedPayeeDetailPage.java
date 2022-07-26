@@ -167,7 +167,7 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//android.widget.Switch[@content-desc='Switch Value: true']")
 	public MobileElement enabledSplitSwitch;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
 	public MobileElement backButtonOnAddTransactionPage;
 	
@@ -179,7 +179,7 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//*[@text='Status']/../android.widget.TextView[@index=2]")
 	public MobileElement transactionStatus;
 	
-	@iOSXCUITFindBy(id="save")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave1;
 	

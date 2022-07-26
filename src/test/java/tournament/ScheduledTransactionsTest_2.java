@@ -8,6 +8,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.BankingAndCreditCardPage;
 import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
+import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionsPage;
 import referee.Commentary;
@@ -18,8 +19,8 @@ import support.TransactionRecord;
 
 public class ScheduledTransactionsTest_2 extends Recovery {
 
-	String sUserName = "varsha.h@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUserName = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
@@ -526,6 +527,9 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Thread.sleep(1000);
 
 		op.scrollToTop();
+		
+		SettingsPage sp = new SettingsPage();
+		sp.setDefaultAccountBalancePreference("Today's");
 		op.navigateToAcctList();
 
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
@@ -720,6 +724,9 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 		Thread.sleep(1000);
 
 		op.scrollToTop();
+		
+		SettingsPage sp = new SettingsPage();
+		sp.setDefaultAccountBalancePreference("Today's");
 
 		op.navigateToAcctList();
 
@@ -917,6 +924,9 @@ public class ScheduledTransactionsTest_2 extends Recovery {
 
 		op.scrollToTop();
 
+		SettingsPage sp = new SettingsPage();
+		sp.setDefaultAccountBalancePreference("Today's");
+		
 		op.navigateToAcctList();
 
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();

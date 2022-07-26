@@ -96,6 +96,7 @@ public class Daily_Regression_Test extends Recovery {
 		tRec.setDate(h.getFutureDaysDate(0));
 
 		OverviewPage op = new OverviewPage();
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 1);
 		sChecking_before = op.checkingBalance.getText();
 		sTotal_before = op.totalBalance.getText();
 		Commentary.log(LogStatus.INFO, "Checking balance before adding the transaction ["+sChecking_before+"]");
