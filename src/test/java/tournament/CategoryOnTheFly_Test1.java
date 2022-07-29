@@ -117,10 +117,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 		if (li.isEmpty())
 			Commentary.log(LogStatus.FAIL, "Category was not created successfully");
 		else
-			Commentary.log(LogStatus.PASS, "Category got created successfully");
+			Commentary.log(sa, LogStatus.PASS, "Category got created successfully");
 		
 		
-			
+			sa.assertAll();
 }
 	
 	@Test(priority = 2, enabled = true)
@@ -156,10 +156,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			Commentary.log(LogStatus.PASS, "Crete category '+' button appearing.");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Create category button did not appear.");
+			Commentary.log(sa, LogStatus.FAIL, "Create category button did not appear.");
 		}
 		
-		
+		sa.assertAll();
 		
 	}
 	
@@ -208,10 +208,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			Commentary.log(LogStatus.PASS, "Category type is showing Expense");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category type is not showing Expense");
+			Commentary.log(sa, LogStatus.FAIL, "Category type is not showing Expense");
 		}
 		
-		
+		sa.assertAll();
 		Thread.sleep(2000);
 		
 
@@ -261,10 +261,11 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			Commentary.log(LogStatus.PASS, "Category type is showing Income");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category type is not showing Income");
+			Commentary.log(sa, LogStatus.FAIL, "Category type is not showing Income");
 		}
 		
 		
+		sa.assertAll();
 		Thread.sleep(2000);
 		
 
@@ -305,8 +306,9 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			Commentary.log(LogStatus.PASS, "Subcategory is showing 'None'");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Subcategory is not showing 'None'");
-		}	
+			Commentary.log(sa, LogStatus.FAIL, "Subcategory is not showing 'None'");
+		}
+		sa.assertAll();
 	}
 	
 	@Test(priority = 6, enabled = true)
@@ -354,8 +356,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			Commentary.log(LogStatus.PASS, "Subcategory appeared under parent category");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Subcategory did not appear under parent category");
+			Commentary.log(sa, LogStatus.FAIL, "Subcategory did not appear under parent category");
 		}
+		
+		sa.assertAll();
 		
 	}
 		
@@ -413,8 +417,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 				Commentary.log(LogStatus.PASS, "Subcategory of third level got created");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Subcategory of third level not created");
+				Commentary.log(sa, LogStatus.FAIL, "Subcategory of third level not created");
 			}
+			
+			sa.assertAll();
 			
 		}
 		
@@ -465,8 +471,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 				Commentary.log(LogStatus.PASS, "Duplicate category can not be created");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Duplicate category got created.");
+				Commentary.log(sa, LogStatus.FAIL, "Duplicate category got created.");
 			}
+			
+			sa.assertAll();
 		}
 		
 		@Test(priority = 9, enabled = true)
@@ -543,8 +551,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 			}
 			
 			else {
-				Commentary.log(LogStatus.FAIL, "Category not created with the expected updated text");
+				Commentary.log(sa,LogStatus.FAIL, "Category not created with the expected updated text");
 			}
+			
+			sa.assertAll();
 			
 		}
 		
@@ -617,8 +627,10 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 				Commentary.log(LogStatus.INFO, "Discard button clicked");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Discard changes label not appeared.");
+				Commentary.log(sa, LogStatus.FAIL, "Discard changes label not appeared.");
 			}
+			
+			sa.assertAll();
 			
 		}
 		

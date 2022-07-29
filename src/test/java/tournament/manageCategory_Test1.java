@@ -63,15 +63,6 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		Thread.sleep(1000);
 		
-		Commentary.log(LogStatus.INFO, "Sign in is successfull");
-		
-	}
-	
-	@Test(priority = 2 , enabled = true)
-	public void TR20_test() throws Exception{
-		
-		SoftAssert sa = new SoftAssert();
-		Helper h = new Helper();
 		
 		Commentary.log(LogStatus.INFO, "Verify that Manage category option under setting section");
 		
@@ -81,20 +72,22 @@ public String getUsername_basedOnEnv() throws Exception {
 		op.navigateToSettings();
 		SettingsPage sp = new SettingsPage();
 		
-		if(Verify.objExists(sp.manageCategories)) {
+		if(Verify.objExists(sp.manageCategoriesOption)) {
 			
 			Commentary.log(LogStatus.PASS, "Manage category option is available under the settings section");
 			
 		}
 		else {
 			
-			Commentary.log(LogStatus.FAIL, "manage category option is not available under settings section");
+			Commentary.log(sa, LogStatus.FAIL, "manage category option is not available under settings section");
 		}
+		
+		sa.assertAll();
 		
 	}
 	
-	@Test(priority = 3, enabled = true)
-	public void TR3_test() throws Exception {
+	@Test(priority = 2, enabled = true)
+	public void TR2_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -120,13 +113,13 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 	}
 	
 	
-	@Test(priority = 4, enabled = true)
-	public void TR4_test() throws Exception {
+	@Test(priority = 3, enabled = true)
+	public void TR3_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -152,24 +145,25 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 		mgc.deleteCategory();
 		Thread.sleep(1000);
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		if(Verify.objExists(mgc.createCategoryLabel)) {
+		if(Verify.objExists(mgc.createCategory)) {
 			Commentary.log(LogStatus.PASS, "Category got deleted");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category still visible");
+			Commentary.log(sa, LogStatus.FAIL, "Category still visible");
 		}
 		
+		sa.assertAll();
 	}
 	
-	@Test(priority = 5, enabled = true)
-	public void TR5_test() throws Exception {
+	@Test(priority = 4, enabled = true)
+	public void TR4_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -218,23 +212,25 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 		mgc.reassignAndDeleteCategory(cr);
 		Thread.sleep(1000);
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		if(Verify.objExists(mgc.createCategoryLabel)) {
-			Commentary.log(LogStatus.PASS, "Category got deleted");
+		if(Verify.objExists(mgc.createCategory)) {
+			Commentary.log( LogStatus.PASS, "Category got deleted");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category still visible");
+			Commentary.log(sa, LogStatus.FAIL, "Category still visible");
 		}
+		
+		sa.assertAll();
 		}
 	
-	@Test(priority = 6, enabled = true)
-	public void TR6_test() throws Exception {
+	@Test(priority = 5, enabled = true)
+	public void TR5_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -261,7 +257,7 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 	 mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 		CategoryRecord cr1 = new CategoryRecord();
 		cr1.setCategoryName(catName);
@@ -274,12 +270,12 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		mgc.searchCategoryTextField.sendKeys(cr1.getCategoryName());
 		
-		mgc.CategoryAvailability(cr1.getCategoryName());
+		mgc.categoryAvailability(cr1.getCategoryName());
 		
 	}
 	
-	@Test(priority = 7, enabled = true)
-	public void TR7_test() throws Exception {
+	@Test(priority = 6, enabled = true)
+	public void TR6_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -305,20 +301,22 @@ public String getUsername_basedOnEnv() throws Exception {
 		
 		 mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 			
-		 mgc.CategoryAvailability(cr.getCategoryName());
+		 mgc.categoryAvailability(cr.getCategoryName());
 		 
 	 if(Verify.objExists(mgc.cashAtmParentCat)) {
 		 Commentary.log(LogStatus.PASS, "Child and Parent category is visible");
 	 }
 	 else {
-		 Commentary.log(LogStatus.FAIL, "Parent category is not visible");
+		 Commentary.log(sa, LogStatus.FAIL, "Parent category is not visible");
 	 }
+	 
+	 sa.assertAll();
 		
 		}
 	
 	
-	@Test(priority = 8, enabled = true)
-	public void TR8_test() throws Exception {
+	@Test(priority = 7, enabled = true)
+	public void TR7_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -339,8 +337,10 @@ public String getUsername_basedOnEnv() throws Exception {
 			Commentary.log(LogStatus.PASS, "Create category pop-up appeared with required fields");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Create category pop-up did not appeared");
+			Commentary.log(sa, LogStatus.FAIL, "Create category pop-up did not appeared");
 		}
+		
+		sa.assertAll();
 	
 	}
 	

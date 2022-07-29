@@ -50,7 +50,7 @@ public class SignInPage {
 	public MobileElement emailID;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Sign in'")
-	@AndroidFindBy(xpath = "//android.view.View[4]")
+	@AndroidFindBy(xpath = "//android.view.View[@text=‘Sign in’]")
 	public MobileElement signInTextLabel;
 
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
@@ -129,7 +129,7 @@ public class SignInPage {
 		//((JavascriptExecutor)Engine.ad).executeScript("sauce: break"); 
 
 		//if (! Verify.waitForObject(emailID, 8))
-			if (! Verify.waitForObject(signInTextLabel, 8))
+			if (! Verify.waitForObject(signInTextLabel, 2))
 			Commentary.log(LogStatus.ERROR, "SignIn widget not loaded");
 		//quickenTest.log(LogStatus.ERROR,"SignIn widget not loaded");
 		//System.out.println("SignInWidget appeared");

@@ -5,44 +5,44 @@
 		<listener class-name="referee.CustomListener" />
 	</listeners>
 
-	<test name="categoryOnFly_IOS">
+	<test name="manageCategories_IOS">
 		<parameter name="test" value="Companion_Regression_IOS"></parameter>
 		<parameter name="host" value="cloud"></parameter>
 		<parameter name="engine" value="ios"></parameter>
 		<parameter name="env" value="stage">
 		</parameter>
 			<classes>
-				<class name="tournament.CategoryOnTheFly_Test1" />
+				<class name="tournament.manageCategory_Test1" />
 			</classes>
 	</test> <!-- Test -->
 
-	<test name="categoryonFly_Android">
+	<test name="manageCategories_Android">
 		<parameter name="test" value="Companion_Regression_Android"></parameter>
 		<parameter name="host" value="cloud"></parameter>
 		<parameter name="engine" value="android"></parameter>
 		<parameter name="env" value="stage"></parameter>
 		<classes>
-			<class name="tournament.CategoryOnTheFly_Test1" />
+			<class name="tournament.manageCategory_Test1" />
 		</classes>
 	</test> <!-- Test -->
 
-	<test name="categoryOnFly_IOS1">
+	<test name="manageCategories_IOS1">
 		<parameter name="test" value="Companion_Regression_IOS1"></parameter>
 		<parameter name="host" value="cloud"></parameter>
 		<parameter name="engine" value="ios"></parameter>
 		<parameter name="env" value="stage"></parameter>
 		<classes>
-			<class name="tournament.CategoryOnTheFly_Test2" />
+			<class name="tournament.manageCategory_Test2" />
 		</classes>
 	</test> <!-- Test -->
 
-	<test name="categoryOnFly_Android1">
+	<test name="manageCategories_Android1">
 		<parameter name="test" value="Companion_Regression_Android1"></parameter>
 		<parameter name="host" value="cloud"></parameter>
 		<parameter name="engine" value="ios"></parameter>
 		<parameter name="env" value="stage"></parameter>
 		<classes>
-			<class name="tournament.CategoryOnTheFly_Test2" />
+			<class name="tournament.manageCategory_Test2" />
 		</classes>
 	</test> <!-- Test -->
 

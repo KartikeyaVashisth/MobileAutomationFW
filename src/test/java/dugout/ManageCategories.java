@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -44,7 +45,8 @@ public class ManageCategories {
 	
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton parentcatCategory'`][-1]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton parentcatCategory'`]/XCUIElementTypeOther[`name='RadioButton'`]")
-	@AndroidFindBy(xpath="//*[@text='Parentcat']")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'parentcatCategory']/../android.view.ViewGroup[@content-desc = 'RadioButton']")
+	//@AndroidFindBy(xpath="//*[@text='Parentcat']")
 	public MobileElement parentcatCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Firstlevelcat'`]")
@@ -67,7 +69,8 @@ public class ManageCategories {
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Settings, back']")
 	public MobileElement backButton;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'edit'`][-1]")
+	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'edit'`][-1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='edit'`]/**/XCUIElementTypeOther")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc = 'edit']")
 	public MobileElement editbutton;
 	
@@ -76,20 +79,20 @@ public class ManageCategories {
 	public MobileElement editCategoryLabel;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Category Type'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Expense')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Expense']")
 	public MobileElement createCategoryType;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Expense'")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Expense')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Expense']")
 	public MobileElement expenseTypeOption;
 
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Income'")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Income')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Income']")
 	public MobileElement incomeTypeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][1]")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Apply')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text= 'Apply']")
 	public MobileElement applyButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
@@ -212,6 +215,7 @@ public class ManageCategories {
 		categoryNameTxtField1.sendKeys(cr.getCategoryName());
 		Thread.sleep(1000);
 		
+		Verify.waitForObject(createCategoryType, 2);
 		createCategoryType.click();
 		
 		if(cr.getCategoryType()=="Expense") {
@@ -222,7 +226,7 @@ public class ManageCategories {
 			incomeTypeOption.click();
 		}
 		
-		Thread.sleep(1000);
+		Verify.waitForObject(applyButton, 2);
 		applyButton.click();
 		
 		
@@ -268,9 +272,10 @@ public class ManageCategories {
 	
 	
 	
-	public void CategoryAvailability(String category) throws Exception {
+	public void categoryAvailability(String category) throws Exception {
 
 		Helper h = new Helper();
+		SoftAssert sa = new SoftAssert();
 
 		if (h.getEngine().equals("android")) {
 			
@@ -291,7 +296,7 @@ public class ManageCategories {
 				Commentary.log(LogStatus.PASS, "Category got created or updated");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Category did not get created or updated");
+				Commentary.log(sa, LogStatus.FAIL, "Category did not get created or updated");
 			}
 						
 				
@@ -320,11 +325,12 @@ public class ManageCategories {
 	Commentary.log(LogStatus.PASS, "Category got created or updated");
 			}
 			else {
-				Commentary.log(LogStatus.FAIL, "Category did not get created or updated");
+				Commentary.log(sa, LogStatus.FAIL, "Category did not get created or updated");
 			}
 				
 		}
 		
+		sa.assertAll();
 }	
 	
 	

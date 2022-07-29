@@ -63,14 +63,6 @@ public void TR8_test() throws Exception {
 	
 	Thread.sleep(1000);
 	
-	Commentary.log(LogStatus.INFO, "Sign in successfull");
-}
-
-@Test(priority = 9, enabled = true)
-public void TR9_test() throws Exception {
-	
-	SoftAssert sa = new SoftAssert();
-	Helper h = new Helper();
 	
 	Commentary.log(LogStatus.INFO, "Verify that Manage category option under setting section");
 	
@@ -88,7 +80,7 @@ public void TR9_test() throws Exception {
 	mgc.addCategoryButton.click();
 	Thread.sleep(1000);
 	
-	if(!Verify.objExists(mgc.createCategory)) {
+	if(mgc.createButton.isDisplayed()) {
 		
 		Commentary.log(LogStatus.PASS, "Create category option is not enabled");
 	}
@@ -96,20 +88,26 @@ public void TR9_test() throws Exception {
 		Commentary.log(LogStatus.FAIL, "Create category option is enabled");
 	}
 	
-	mgc.categoryNameTxtField1.sendKeys(catName);
+	Thread.sleep(1000);
 	
-	if(Verify.objExists(mgc.createCategory)) {
+	mgc.categoryNameTxtField1.sendKeys(catName);
+	h.hideKeyBoard();
+
+	
+	if(mgc.createButton.isDisplayed()) {
 		
 		Commentary.log(LogStatus.PASS, "After enatering Category name Create button got enabled");
 	}
 	else {
-		Commentary.log(LogStatus.FAIL, "Create button is still disabled");
+		Commentary.log(sa, LogStatus.FAIL, "Create button is still disabled");
 	}
+	
+	sa.assertAll();
 	
 }
 
-@Test(priority = 10, enabled = true)
-public void TR10_test() throws Exception {
+@Test(priority = 9, enabled = false)
+public void TR9_test() throws Exception {
 	
 	SoftAssert sa = new SoftAssert();
 	Helper h = new Helper();
@@ -122,6 +120,8 @@ public void TR10_test() throws Exception {
 	cr.setCategoryName(catName);
 	cr.setCategoryType("Expense");
 	cr.setSubCategoryOf(null);
+	
+	
 	
 	OverviewPage op = new OverviewPage();
 	op.navigateToManageCategories();
@@ -136,7 +136,7 @@ public void TR10_test() throws Exception {
 	
 	Thread.sleep(1000);
 	mgc.categoryNameTxtField1.sendKeys(cr.getCategoryName());
-	
+	h.hideKeyBoard();
 	Thread.sleep(1000);
 	
 	mgc.createButton.click();
@@ -147,13 +147,15 @@ public void TR10_test() throws Exception {
 	}
 	else {
 		
-		Commentary.log(LogStatus.FAIL, "Duplicate category got created");
+		Commentary.log(sa, LogStatus.FAIL, "Duplicate category got created");
 	}
+	
+	sa.assertAll();
 	
 }
 
-@Test(priority = 11, enabled = true)
-public void TR11_test() throws Exception {
+@Test(priority = 10, enabled = false)
+public void TR10_test() throws Exception {
 	
 	SoftAssert sa = new SoftAssert();
 	Helper h = new Helper();
@@ -180,7 +182,7 @@ public void TR11_test() throws Exception {
 	
 	mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 	
-	mgc.CategoryAvailability(cr.getCategoryName());
+	mgc.categoryAvailability(cr.getCategoryName());
 	
 	Thread.sleep(1000);
 	mgc.editbutton.click();
@@ -194,13 +196,14 @@ public void TR11_test() throws Exception {
 	}
 	else
 	{
-		Commentary.log(LogStatus.FAIL, "Delete warning message did not appeared.");
+		Commentary.log(sa, LogStatus.FAIL, "Delete warning message did not appeared.");
 	}
 
+	sa.assertAll();
 }
 
-@Test(priority = 12, enabled = true)
-public void TR12_test() throws Exception {
+@Test(priority = 11, enabled = false)
+public void TR11_test() throws Exception {
 	
 	SoftAssert sa = new SoftAssert();
 	Helper h = new Helper();
@@ -220,16 +223,16 @@ public void TR12_test() throws Exception {
 		Commentary.log(LogStatus.PASS, "Default value for subcategoryOf is 'None'");
 	}
 	else {
-		Commentary.log(LogStatus.FAIL, "Default value for subcategoryOf is not showing 'None'");
+		Commentary.log(sa, LogStatus.FAIL, "Default value for subcategoryOf is not showing 'None'");
 	}
 
-	
+	sa.assertAll();
 	
 }
 
 
-@Test(priority = 13, enabled = true)
-public void TR13_test() throws Exception {
+@Test(priority = 12, enabled = false)
+public void TR12_test() throws Exception {
 	
 	SoftAssert sa = new SoftAssert();
 	Helper h = new Helper();
@@ -252,7 +255,7 @@ public void TR13_test() throws Exception {
 	
 	mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 	
-	mgc.CategoryAvailability(cr.getCategoryName());
+	mgc.categoryAvailability(cr.getCategoryName());
 	
 	mgc.editbutton.click();
 	Thread.sleep(1000);
@@ -277,7 +280,7 @@ public void TR13_test() throws Exception {
 	
 	mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 	
-	mgc.CategoryAvailability(cr.getCategoryName());
+	mgc.categoryAvailability(cr.getCategoryName());
 	
 	mgc.editbutton.click();
 	Thread.sleep(1000);
@@ -286,13 +289,15 @@ public void TR13_test() throws Exception {
 		Commentary.log(LogStatus.PASS, "Category Type got updated from expense to income");
 	}
 	else {
-		Commentary.log(LogStatus.FAIL, "Category Type did not get updated");
+		Commentary.log(sa, LogStatus.FAIL, "Category Type did not get updated");
 	}
+	
+	sa.assertAll();
 	
 }	
 	
-	@Test(priority = 14, enabled = true)
-	public void TR14_test() throws Exception {
+	@Test(priority = 13, enabled = false)
+	public void TR13_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -315,24 +320,27 @@ public void TR13_test() throws Exception {
 		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 		mgc.editbutton.click();
 		Thread.sleep(1000);
 		
 		
-		
-		if(!Verify.objExists(mgc.categoryTypeValueIncome)) {
+		if(mgc.categoryTypeValueIncome.isDisplayed()) {
 			Commentary.log(LogStatus.PASS, "Category Type option is disabled");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category Type option is enabled");
+			Commentary.log(sa, LogStatus.FAIL, "Category Type option is enabled");
 		}
+		
+
+		
+		sa.assertAll();
 		
 }
 	
-	@Test(priority = 15, enabled = true)
-	public void TR15_test() throws Exception {
+	@Test(priority = 14, enabled = true)
+	public void TR14_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -369,19 +377,57 @@ public void TR13_test() throws Exception {
 		Thread.sleep(1000);
 		mgc.continueButton.click();
 		
+		Thread.sleep(1000);
+		
 		mgc.searchCategoryTextField.sendKeys(cr.getCategoryName());
 		
-		mgc.CategoryAvailability(cr.getCategoryName());
+		mgc.categoryAvailability(cr.getCategoryName());
 		
 		mgc.editbutton.click();
 		Thread.sleep(1000);
 		
 		if(Verify.objExists(mgc.categoryTypeValueIncome)) {
 			Commentary.log(LogStatus.PASS, "Category Type got updated from expense to income with the Parent category type changed");
+			
+			
+			
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "Category Type did not get updated after updating the Parent category ");
+			Commentary.log(sa, LogStatus.FAIL, "Category Type did not get updated after updating the Parent category ");
 		}
+		
+		Thread.sleep(1000);
+		
+		mgc.deleteButton.click();
+		Thread.sleep(1000);
+		mgc.continueButton.click();
+		Thread.sleep(1000);
+		mgc.searchCategoryTextField.sendKeys(cr.getSubCategoryOf());
+		
+		mgc.parentcatCategory.click();
+		
+		mgc.editbutton.click();
+		
+		mgc.incomeTypeOption.click();
+		Thread.sleep(1000);
+		mgc.expenseTypeOption.click();
+		Thread.sleep(1000);
+		mgc.applyButton.click();
+		
+		mgc.updateButton.click();
+		Thread.sleep(1000);
+		mgc.continueButton.click();
+		
+		Thread.sleep(1000);
+		
+
+		sa.assertAll();
+		
+	
+		
+		
+		
+		
 		
 }
 
