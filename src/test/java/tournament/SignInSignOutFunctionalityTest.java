@@ -48,7 +48,7 @@ public class SignInSignOutFunctionalityTest extends Recovery {
 		si.lblPassword.click();
 		Thread.sleep(1000);
 
-		si.password.sendKeys(sWrongPassword);
+		si.userPassword.sendKeys(sWrongPassword);
 
 		si.btnSignIn.click();
 		Thread.sleep(2000);

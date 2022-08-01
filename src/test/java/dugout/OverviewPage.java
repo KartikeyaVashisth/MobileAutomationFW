@@ -259,6 +259,14 @@ public class OverviewPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Investing']")
 	public MobileElement investmentCard;
 	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`label contains 'Payee Name:'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Payee Name:')]")
+	public MobileElement payeeNameText;
+	
+	@iOSXCUITFindBy(iOSClassChain="(**/XCUIElementTypeStaticText[`name contains 'Transaction Date:'`])")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Transaction Date:')]")
+	public MobileElement transactionDateText;
+	
 //	public void scrollUptoAccountsCard() throws Exception {
 //		
 //		Integer iCount;
@@ -1135,6 +1143,36 @@ public class OverviewPage {
 		Thread.sleep(1000);
 	}
 
+	
+	public boolean isEmpty (String s) {
+		   return s == null || s.length() == 0;
+	}
+	
+	public int listRecentTransactions(String sText, String sString) {
+		
+		 if (isEmpty(sText) || isEmpty(sString)) {
+	            return 0;
+	        }
+
+	        int i = 0, count = 0;
+	        while (true)
+	        {
+	            i = sText.indexOf(sString, i);
+	            if (i != -1)
+	            {
+	                count ++;
+	                i += sString.length();
+	            }
+	            else {
+	                break;
+	            }
+	        }	
+			
+			return count;
+			
+	}
+	
+	
 
 
 }
