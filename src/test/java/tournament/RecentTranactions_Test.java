@@ -90,7 +90,7 @@ public class RecentTranactions_Test extends Recovery {
 			
 		}
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Sort button does not appear on All transactions screen.");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Sort button does not appear on All transactions screen.");
 		
 		sa.assertAll();
 	}
@@ -179,7 +179,7 @@ public class RecentTranactions_Test extends Recovery {
 		if (sPayeeRT.contains(sPayee))
 			Commentary.log(LogStatus.PASS, "PASS: Transaction with current date is shown on Recent Transactions card");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Transaction with current date is not shown on Recent Transactions card");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Transaction with current date is not shown on Recent Transactions card");
 		
 		//Delete transaction..
 
@@ -259,7 +259,7 @@ public class RecentTranactions_Test extends Recovery {
 		if (sPayeeRT.contains(sPayee))
 			Commentary.log(LogStatus.PASS, "PASS: Transaction with past (4) date is shown on Recent Transactions card");
 		else
-			Commentary.log(LogStatus.FAIL, "FAIL: Transaction with past (4) date is not shown on Recent Transactions card");
+			Commentary.log(sa,LogStatus.FAIL, "FAIL: Transaction with past (4) date is not shown on Recent Transactions card");
 				
 		//Delete transaction..
 
@@ -336,7 +336,7 @@ public class RecentTranactions_Test extends Recovery {
 			Commentary.log(LogStatus.INFO, "Date is: ["+sDate+"]");
 			
 			if (sPayeeRT.contains(sPayee)) {
-				Commentary.log(LogStatus.FAIL, "FAIL: Future dated transaction is showing up in Recent Transactions card");	
+				Commentary.log(sa,LogStatus.FAIL, "FAIL: Future dated transaction is showing up in Recent Transactions card");	
 			}						
 		}
 		else {
