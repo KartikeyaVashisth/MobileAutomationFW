@@ -110,6 +110,8 @@ public class RecentTransactions_Test1 extends Recovery{
 			
 		}
 		
+		sa.assertAll();
+		
 	}
 	
 	
@@ -291,7 +293,7 @@ public class RecentTransactions_Test1 extends Recovery{
 			}
 	
 	
-	
+        sa.assertAll();
 	
 	}
 }
