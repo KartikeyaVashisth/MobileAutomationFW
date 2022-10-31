@@ -114,7 +114,7 @@ public class OverviewPage {
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Add Transaction\"]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Add Transaction'`]")
-	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Add Transaction']")
 	public MobileElement addTransaction;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Recent Transactions\"]")
@@ -260,10 +260,11 @@ public class OverviewPage {
 	public MobileElement investmentCard;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`label contains 'Payee Name:'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Payee Name:')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Payee Name')]")
 	public MobileElement payeeNameText;
 	
-	@iOSXCUITFindBy(iOSClassChain="(**/XCUIElementTypeStaticText[`name contains 'Transaction Date:'`])")
+	//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name contains 'Transaction Date:'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Transaction Date:'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Transaction Date:')]")
 	public MobileElement transactionDateText;
 	

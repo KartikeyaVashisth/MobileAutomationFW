@@ -21,6 +21,7 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -196,14 +197,30 @@ public class Helper {
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		
+		//**** LambdaTest changes
+//		String buildName = System.getenv("buildtag");
+//		if(buildName==null) {
+//			buildName = "LOCAL_"+Recovery.sEngine.get();
+//		}
+		//****
+		
 		if (getEngine().equals("android")){
 			
+			//*** lambdaTest requirement - build
+			//capabilities.setCapability("build", buildName);
+			//****
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			capabilities.setCapability("name", this.getTestName());
 			capabilities.setCapability("appiumVersion", "1.17.1");
 			capabilities.setCapability("automationName","appium");
 			capabilities.setCapability("platformVersion","11.0");
+			//*****Lambdatest cahnges - platform version***
+			//capabilities.setCapability("platformVersion","12.0");
 			capabilities.setCapability("deviceName","Google Pixel 3 XL GoogleAPI Emulator");
+			//*****Lambdatest cahnges - device***
+			//capabilities.setCapability("deviceName","Pixel.*");
+			//capabilities.setCapability("app", this.getLambdaTestAppUrl());
+			//****
 			//capabilities.setCapability("deviceName","Android Emulator");
 			//capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
@@ -248,6 +265,7 @@ public class Helper {
 		}
 		return capabilities;
 		
+		
 	}
 	
 	public DesiredCapabilities getLocalCapabilities() throws Exception{
@@ -259,7 +277,7 @@ public class Helper {
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
 			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","10.0");//8.1
+			capabilities.setCapability("platformVersion","13.0");//8.1
 			//capabilities.setCapability("platformVersion","7.0");
 			capabilities.setCapability("noReset", true);
 			capabilities.setCapability("autoGrantPermissions", true);
@@ -272,16 +290,16 @@ public class Helper {
 			//capabilities.setCapability("appWaitPackage","com.android.settings, com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
-			capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
+			capabilities.setCapability("chromedriverExecutable","/Users/kdas/chromedriver");
 			
 		}
 		else if(getEngine().equals("ios")){
 			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
-			capabilities.setCapability("platformVersion", "13.3"); //12.1
-			capabilities.setCapability("appiumVersion", "1.17.1-1"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro Max");
+			capabilities.setCapability("platformVersion", "15.5"); //12.1
+			capabilities.setCapability("appiumVersion", "1.22.3"); //1.8.0
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
@@ -292,15 +310,15 @@ public class Helper {
 	        capabilities.setCapability("simpleIsVisibleCheck", true);
 	        //capabilities.setCapability("newCommandTimeout",0);
 	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
-	        capabilities.setCapability("app", "/Users/kvashisth/Downloads/companion.zip");
+	        capabilities.setCapability("app", "/Users/kdas/Downloads/Quickencompanion.zip");
 	        	
 		}
 		
 		return capabilities;
 		
 	}
-	
-	public String getAppiumURL(){
+	// **** Appium url - Sauce Labs
+	 public String getAppiumURL(){
 		String USERNAME = "kalyan_grandhi";
 		String ACCESS_KEY = "10fde941-0bec-4273-bca6-c7c827f36234";
 		
@@ -310,6 +328,40 @@ public class Helper {
 		else
 			return "http://127.0.0.1:4723/wd/hub";		
 	}
+	
+	//**** LambdaTest Appium URL
+	
+//	public String getAppiumURL(){
+//		String USERNAME = "robert.jauregui";
+//		String ACCESS_KEY = "eWgy3CbXd4sB7AtpHqlurFn44IbNwgx4H9apZjDR3wxAFtCmts";
+//		
+//		if (getHost().equals("cloud")){
+//			return "https://" + USERNAME + ":" + ACCESS_KEY + "@mobile-hub.lambdatest.com/wd/hub";	
+//		}
+//		else
+//			return "http://127.0.0.1:4723/wd/hub";	
+//	
+//	}
+	//***** LambdaTest Get appURL method for cloud and local
+	
+	/*public String getLambdaTestAppUrl() {
+		String app_url = System.getProperty("LambdaTest_response");
+		if(app_url=="null") {
+			
+		}else {
+			if(getEngine().equals("ios")) {
+				app_url = "";
+			}
+			else {
+				app_url = "";
+			}
+			
+		}
+		
+		
+		return app_url;
+	}*/
+	//************
 	
 	public DesiredCapabilities getCapabilities() throws Exception{
 		
