@@ -56,7 +56,7 @@ public class TransactionSummaryPage {
 		public MobileElement payeeTab;
 		
 		//@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[2]")
-		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView[-1]/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[1]")
+		@iOSXCUITFindBy(iOSClassChain ="**/XCUIElementTypeScrollView[-1]/XCUIElementTypeOther[`name CONTAINS '$'`]/XCUIElementTypeOther[`name contains 'payee: shop'`]/**/XCUIElementTypeStaticText[`name contains 'amount:'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text='shop']/../android.widget.TextView[contains(@text,'$')]")
 		//@AndroidFindBy(xpath="(//android.widget.ScrollView//android.widget.ImageView/../android.widget.TextView)[1]/../android.widget.TextView[contains(@text,'$')]")
 		public MobileElement payeeTile;

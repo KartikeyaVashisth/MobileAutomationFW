@@ -20,8 +20,8 @@ import support.TransactionRecord;
 
 public class SearchFunctionality_Test extends Recovery{
 	
-	String sUsername = "varsha.h@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUsername = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
 	String sAccountName = "checkings account XX8123";
 	String sManualChecking = "Checking";

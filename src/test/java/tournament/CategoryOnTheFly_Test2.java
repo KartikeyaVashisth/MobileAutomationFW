@@ -116,8 +116,10 @@ public class CategoryOnTheFly_Test2 extends Recovery{
 			Commentary.log(LogStatus.PASS, "New category created while editing the transaction");
 		}
 		else {
-			Commentary.log(LogStatus.FAIL, "New category did not get created");
+			Commentary.log(sa, LogStatus.FAIL, "New category did not get created");
 		}
+		
+		sa.assertAll();
 }
 	
 	@Test(priority = 2, enabled = true)
@@ -153,16 +155,16 @@ public class CategoryOnTheFly_Test2 extends Recovery{
 		td.createCategory.click();
 		
 		td.subCategoryOf.click();
-		td.searchCategory("Cash & ATM");
+		td.searchCategory("Entertainment");
 		
-		if(Verify.objExists(td.radiobuttonCashATM)) {
-			Commentary.log(LogStatus.FAIL, "Expense category is vivisble");
+		if(Verify.objExists(td.cashAtmParentCat)) {
+			Commentary.log(sa, LogStatus.FAIL, "Expense category is vivisble");
 		}
 		else {
 			Commentary.log(LogStatus.PASS, "Expense category is not visible for Income type Transaction");
 		}
 
-
+		sa.assertAll();
 
 	}
 }

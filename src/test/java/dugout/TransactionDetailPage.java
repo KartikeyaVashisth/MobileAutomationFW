@@ -77,7 +77,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.Button")
 	public MobileElement backButton;
 
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
 	public MobileElement backButtonOnViewTransactionPage;
 
@@ -350,7 +350,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave;
 
-	@iOSXCUITFindBy(id="save")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement buttonSave1;
 
@@ -540,8 +540,10 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'None')]")
 	public MobileElement subcategoryNone;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton Cash & ATM'`]/XCUIElementTypeOther[`name='RadioButton'`]")
-	public MobileElement radiobuttonCashATM;
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Entertainment'`]")
+	//@AndroidFindBy(xpath="//*[@text='Cash & ATM']")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Entertainment']")
+	public MobileElement cashAtmParentCat;
 
 
 

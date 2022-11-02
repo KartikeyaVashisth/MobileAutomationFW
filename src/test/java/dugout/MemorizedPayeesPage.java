@@ -95,7 +95,7 @@ public class MemorizedPayeesPage {
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Memorized Payees, back']")
 	public MobileElement backButtonOnViewMemorizedPayeePage;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='save'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
 	public MobileElement saveButtonOnViewMemorizedPayeePage;
 

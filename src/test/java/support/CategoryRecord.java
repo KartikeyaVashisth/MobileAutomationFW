@@ -8,6 +8,7 @@ public class CategoryRecord {
 	Boolean updateCategoryName;
 	Boolean updateCategoryType;
 	Boolean updateSubcategoryOf;
+	Boolean reassignTo;
 	//Boolean update;
 	
 	
@@ -42,8 +43,16 @@ public class CategoryRecord {
 		this.updateSubcategoryOf = update;
 	}
 	
+	public void setreassignTo(Boolean reassignTo) {
+		this.reassignTo = reassignTo;
+	}
+	
 	public String getCategoryName() {
 		return this.categoryName;
+	}
+	
+	public Boolean getreassignTo() {
+		return this.reassignTo;
 	}
 	
 	public String getCategoryType() {
