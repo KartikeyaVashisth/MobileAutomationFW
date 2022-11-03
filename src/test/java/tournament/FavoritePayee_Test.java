@@ -31,7 +31,7 @@ public class FavoritePayee_Test extends Recovery {
 		Helper h = new Helper();
 		
 		SignInPage si = new SignInPage();
-		//si.signIn(sUsername, sPassword, sDataset);
+		si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that the Display Favorite Payees option is present under the Settings section of the Hamburger menu.");
 		
@@ -41,8 +41,7 @@ public class FavoritePayee_Test extends Recovery {
 		fp.hambergerIcon.click();
 		Thread.sleep(3000);
 		fp.scrollDownToSettings();
-
-	    fp.settingsOption.click();
+        fp.settingsOption.click();
 		Thread.sleep(2000);
 		
 		
@@ -69,8 +68,7 @@ public class FavoritePayee_Test extends Recovery {
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
     	TransactionDetailPage td = new TransactionDetailPage();
     	
-
-    	fp.EnablefavoritPayee();
+        fp.EnablefavoritPayee();
     	op.addTransaction.click();
     	td.enterAmount("10.00");
       	Thread.sleep(3000);
@@ -132,7 +130,7 @@ public class FavoritePayee_Test extends Recovery {
 		OverviewPage op = new  OverviewPage();
         TransactionDetailPage td = new TransactionDetailPage();
     	
-    	Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+        Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
     	op.addTransaction.click();
     	td.enterAmount("10.00");
       	Thread.sleep(3000);
@@ -178,8 +176,7 @@ public class FavoritePayee_Test extends Recovery {
 		TransactionDetailPage td = new TransactionDetailPage();
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
 		fp.DisablefavoritPayee();
-
-		op.addTransaction.click();
+        op.addTransaction.click();
     	td.enterAmount("10.00");
       	Thread.sleep(3000);
     	fp.payee.click();
@@ -225,6 +222,7 @@ public class FavoritePayee_Test extends Recovery {
 		
 	}
 	
+	
 	@Test (priority = 7, enabled = true)
 	public void FP7_Test() throws Exception {
 		SoftAssert sa = new SoftAssert();
@@ -237,25 +235,21 @@ public class FavoritePayee_Test extends Recovery {
 		OverviewPage op = new  OverviewPage();
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
 		fp.EnablefavoritPayee();
-
- 		TransactionDetailPage td = new TransactionDetailPage();
+        TransactionDetailPage td = new TransactionDetailPage();
         
     	op.addTransaction.click();
         td.enterAmount("10.00");
     	Thread.sleep(1000);
     	fp.payee.click();
-      
-    	Thread.sleep(1000);
-		
-		
+        Thread.sleep(1000);
 		fp.AddPayeeAsFavPayee("Axis");
 		fp.verifyFavPayee("Axis");
-	
-	
-		Thread.sleep(1000);
+	    Thread.sleep(1000);
+	    
 		sa.assertAll();
 		
 	}
+	
 	
 	@Test (priority = 8, enabled = true)
 	public void FP9_Test() throws Exception {
@@ -268,13 +262,11 @@ public class FavoritePayee_Test extends Recovery {
         FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 6);
-
- 		TransactionDetailPage td = new TransactionDetailPage();
+        TransactionDetailPage td = new TransactionDetailPage();
         
     	op.addTransaction.click();
         td.enterAmount("10.00");
     	Thread.sleep(1000);
-
     	fp.payee.click();
         Thread.sleep(1000);
 	    td.searchPayee.sendKeys("Axis");
@@ -310,22 +302,19 @@ public class FavoritePayee_Test extends Recovery {
 
  		TransactionDetailPage td = new TransactionDetailPage();
  		fp.EnablefavoritPayee();
-        
-    	op.addTransaction.click();
+        op.addTransaction.click();
         td.enterAmount("10.00");
     	Thread.sleep(1000);
         fp.payee.click();
-      
-    	Thread.sleep(1000);
-		
-		
+        Thread.sleep(1000);
 		fp.RemoveFavPayee("Axis");
 		fp.verifyRemoveFavPayee("Axis");
-	
-		Thread.sleep(1000);
+	    Thread.sleep(1000);
+	    
 		sa.assertAll();
 		
 	}
+	
 	
 	@Test (priority = 10, enabled = true)
 	public void FP12_Test() throws Exception {
@@ -339,8 +328,7 @@ public class FavoritePayee_Test extends Recovery {
 		OverviewPage op = new  OverviewPage();
 		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
 		BillsAndIncomePage bi = new BillsAndIncomePage();
-		fp.DisablefavoritPayee();
-		
+	    fp.DisablefavoritPayee();
 		op.tapOnBillsAndIncomeCard();
 		bi.addNewReminderSeries("Bill");
 		bi.payeeName.click();
