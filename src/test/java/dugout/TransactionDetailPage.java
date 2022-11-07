@@ -1654,8 +1654,8 @@ public class TransactionDetailPage {
 		this.note.click();
 		this.note.clear();
 		Thread.sleep(1000);
-		this.note.clear();
 		this.note.sendKeys(sNote);
+		Thread.sleep(1000);
 
 		this.buttonDone_OSKeyBoard.click();
 		Thread.sleep(1000);

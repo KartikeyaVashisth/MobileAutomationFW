@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import dugout.AllAccountsPage;
 import dugout.BankingAndCreditCardPage;
+import dugout.FiltersPage;
 import dugout.InvestingPage;
 import dugout.NetIncomeOverTimePage;
 import dugout.OverviewPage;
@@ -652,7 +653,7 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that by default the Show Running balance toggle should be ON and \"Date New to old\" should be selected.");
+		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that by default the Show Running balance toggle should be ON and \"Newest to Oldest\" should be selected.");
 
 		OverviewPage op = new OverviewPage();
 		op.navigateToAcctList();
@@ -666,19 +667,19 @@ public class Daily_Regression_Test extends Recovery {
 		// Verify Show running balance options is displayed in Account detail screen.
 
 		if (tp.isRunningBalanceEnabled())
-			Commentary.log(LogStatus.INFO, "PASS: Running Balance is enabled by default");
+			Commentary.log(LogStatus.INFO, "PASS: Running Balance is enabled by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running Balance is NOT enabled by default");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running Balance is NOT enabled by default.");
 
 		tp.buttonClose.click();
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 
 		//Verify that default filter is set to Date New to Old
-		if (Verify.objExists(tp.defaultfilterSelected))
-			Commentary.log(LogStatus.INFO, "PASS: Filter as \"Date New to old\" is selected by default");
+		if (Verify.objExists(tp.defaultSortByFilterSelected))
+			Commentary.log(LogStatus.INFO, "PASS: Filter as \"Newest to Oldest\" is selected by default.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter as \"Date New to old\" is NOT selected by default");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter as \"Newest to Oldest\" is NOT selected by default.");
 
 		sa.assertAll();
 	}
@@ -689,7 +690,7 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Balance calculation for filter combination \"Date new to old\" + \"Show Running Balance\" set to ON");
+		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Balance calculation for filter combination \"Newest to Oldest\" + \"Show Running Balance\" set to ON");
 
 		Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
 
@@ -705,14 +706,17 @@ public class Daily_Regression_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		
-		tp.selectSortFilterOption(filterNewToOld);
+		FiltersPage fp = new FiltersPage();
+
+		fp.selectFilter("Newest to Oldest");
+		fp.clickShowResultsButton();
 
 		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+			Commentary.log(LogStatus.INFO, "Running balance is enabled by default.");
 			tp.buttonApply.click();
 			Thread.sleep(2000);
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default.");
 			tp.buttonApply.click();
 			Thread.sleep(1000);
 		}
@@ -814,14 +818,17 @@ public class Daily_Regression_Test extends Recovery {
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 		
-		tp.selectSortFilterOption(filterNewToOld);
+		FiltersPage fp = new FiltersPage();
+
+		fp.selectFilter("Newest to Oldest");
+		fp.clickShowResultsButton();
 
 		if (tp.isRunningBalanceEnabled()) {
-			Commentary.log(LogStatus.INFO, "Running balance is enabled by default");
+			Commentary.log(LogStatus.INFO, "Running balance is enabled by default.");
 			tp.buttonApply.click();
 			Thread.sleep(2000);
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Running balance is NOT enabled by default.");
 			tp.buttonApply.click();
 			Thread.sleep(1000);
 		}
@@ -983,10 +990,10 @@ public class Daily_Regression_Test extends Recovery {
 		op.tapOnTransactionSummaryCard();
 
 		TransactionSummaryPage ts = new TransactionSummaryPage();
-		Verify.waitForObject(ts.payeeTab, 2);
+		Verify.waitForObject(ts.payeeTab, 1);
 		ts.payeeTab.click();
 
-		Verify.waitForObject(ts.payeeTile, 2);
+		Verify.waitForObject(ts.payeeTile, 1);
 		String sPayeeAmount_before = ts.payeeTile.getText();
 		Commentary.log(LogStatus.INFO, "Payee tile amount before adding transaction-> "+sPayeeAmount_before);
 		Double dPayeeAmount_before = h.processBalanceAmount(sPayeeAmount_before.replaceAll("[^0-9.-]", ""));
@@ -1004,7 +1011,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		op.scrollToTop();		
 		
-		Verify.waitForObject(op.addTransaction, 2);
+		Verify.waitForObject(op.addTransaction, 1);
 		op.addTransaction.click();
 		
 		td.addTransaction(tRec);
@@ -1013,10 +1020,10 @@ public class Daily_Regression_Test extends Recovery {
 
 		Thread.sleep(3000);
 		op.tapOnTransactionSummaryCard();
-		Verify.waitForObject(ts.payeeTab, 2);
+		Verify.waitForObject(ts.payeeTab, 1);
 		ts.payeeTab.click();
 
-		Verify.waitForObject(ts.payeeTile, 2);
+		Verify.waitForObject(ts.payeeTile, 1);
 		String sPayeeAmount_after = ts.payeeTile.getText();
 		Double dPayeeAmount_after = h.processBalanceAmount(sPayeeAmount_after.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Payee tile amount is now: "+dPayeeAmount_after);
@@ -1050,7 +1057,7 @@ public class Daily_Regression_Test extends Recovery {
 		Thread.sleep(4000);
 		ts.categoryTab.click();
 		Thread.sleep(1000);
-		Verify.waitForObject(ts.categoryTile, 2);
+		Verify.waitForObject(ts.categoryTile, 1);
 
 		String sCategoryAmount_before = ts.categoryTile.getText();
 		Double dCategoryAmount_before = h.processBalanceAmount(sCategoryAmount_before.replaceAll("[^0-9.-]", ""));
@@ -1077,10 +1084,10 @@ public class Daily_Regression_Test extends Recovery {
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
 
 		op.tapOnTransactionSummaryCard();
-		Verify.waitForObject(ts.categoryTab, 5);
+		Verify.waitForObject(ts.categoryTab, 1);
 		ts.categoryTab.click();
 
-		Verify.waitForObject(ts.categoryTile, 5);
+		Verify.waitForObject(ts.categoryTile, 1);
 		String sCategoryAmount_after = ts.categoryTile.getText();
 		Double dCategoryAmount_after = h.processBalanceAmount(sCategoryAmount_after.replaceAll("[^0-9.-]", ""));
 		Commentary.log(LogStatus.INFO, "Category tile amount is now: "+dCategoryAmount_after);

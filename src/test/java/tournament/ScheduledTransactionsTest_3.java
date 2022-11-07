@@ -585,7 +585,7 @@ public class ScheduledTransactionsTest_3 extends Recovery {
 		Double dProjectedBalance_With7DaysReminderFilter_AfterEntering = h.processBalanceAmount(sProjectedBalanceWith7DaysReminderFilter_AfterEntering);
 
 		Integer todaysBalanceCompare_With7DaysReminderFilter_AfterEntering = Double.compare(dTodaysBalance_With7DaysReminderFilter, dTodaysBalance_With7DaysReminderFilter_AfterEntering);
-		Integer projectedBalanceCompare_With7DaysReminderFilter_AfterEntering = Double.compare(dProjectedBalance_With7DaysReminderFilter-d, dProjectedBalance_With7DaysReminderFilter_AfterEntering);
+		Integer projectedBalanceCompare_With7DaysReminderFilter_AfterEntering = Double.compare(dProjectedBalance_With7DaysReminderFilter, dProjectedBalance_With7DaysReminderFilter_AfterEntering);
 		
 		if(todaysBalanceCompare_With7DaysReminderFilter_AfterEntering==0)
 			Commentary.log(LogStatus.INFO, "PASS: As Expected, Today's balance after entering the reminder with Next 7 Days filter is: "+sTodaysBalanceWith7DaysReminderFilter_AfterEntering+".");

@@ -270,7 +270,7 @@ public class Smoke_test extends Recovery {
 		sa.assertAll();	
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = false)
 	public void SpendingOverTimeTest() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
@@ -310,7 +310,7 @@ public class Smoke_test extends Recovery {
 		sa.assertAll();		
 	}
 
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 6, enabled = false)
 	public void NetIncomeOverTimeTest() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
