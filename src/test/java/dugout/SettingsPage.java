@@ -305,8 +305,8 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
 	public MobileElement customizeDashboardOption;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Accounts Management'`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts Management']")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Accounts'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Accounts']")
 	public MobileElement accountsManagementOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")

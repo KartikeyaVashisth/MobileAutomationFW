@@ -8,28 +8,48 @@ import com.relevantcodes.extentreports.LogStatus;
 import dugout.BillsAndIncomePage;
 import dugout.OverviewPage;
 import dugout.SignInPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class ScheduledTransactionsTest_1 extends Recovery {
 
 	String sUserName = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
+	String sDataset_stage = "ST_1";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
 
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "st_ios++@stage.com";
+		un.stage_android = "st_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
+	
 	@Test (priority = 1, enabled = true)
 	public void ST1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying all the different elements of Bills and Income Card without any reminder series.");
 

@@ -434,9 +434,6 @@ public class HamburgerMenuTest extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
-		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying Settings option on the Hamburger Menu.");
 		
 		SettingsPage sp = new SettingsPage();
@@ -454,9 +451,9 @@ public class HamburgerMenuTest extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Customize Dashboard\" option is NOT displayed under Settings.");
 		
 		if(Verify.objExists(sp.accountsManagementOption))
-			Commentary.log(LogStatus.INFO, "PASS: \"Accounts Management\" option is displayed under Settings.");
+			Commentary.log(LogStatus.INFO, "PASS: \"Manage Accounts\" option is displayed under Settings.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Accounts Management\" option is NOT displayed under Settings.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Manage Accounts\" option is NOT displayed under Settings.");
 		
 		if(Verify.objExists(sp.manageAlerts))
 			Commentary.log(LogStatus.INFO, "PASS: \"Manage Alerts\" option is displayed under Settings.");
@@ -488,12 +485,12 @@ public class HamburgerMenuTest extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Display Favorite Payees\" option is NOT displayed under Settings.");
 		
-		sp.scrollToRefreshDataOption();
-		
-		if(Verify.objExists(sp.refreshData))
-			Commentary.log(LogStatus.INFO, "PASS: \"Refresh Data\" option is displayed under Settings.");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Refresh Data\" option is NOT displayed under Settings.");
+//		sp.scrollToRefreshDataOption();
+//		
+//		if(Verify.objExists(sp.refreshData))
+//			Commentary.log(LogStatus.INFO, "PASS: \"Refresh Data\" option is displayed under Settings.");
+//		else
+//			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Refresh Data\" option is NOT displayed under Settings.");
 		
 		sa.assertAll();
 	}

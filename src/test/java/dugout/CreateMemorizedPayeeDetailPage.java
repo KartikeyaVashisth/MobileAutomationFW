@@ -109,6 +109,10 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Memo']")
 	public MobileElement memo;
 	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Done'`][2]")
+	@AndroidFindBy(xpath="//*[@text='Done']")
+	public MobileElement doneButton;
+	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Amount']/following-sibling::android.widget.TextView")
 	public MobileElement amount;
@@ -490,7 +494,7 @@ public class CreateMemorizedPayeeDetailPage {
 //		Helper h = new Helper();
 //		h.hideKeyBoard();
 //		Thread.sleep(1000);
-		this.amount.click();
+		this.doneButton.click();
 	}
 
 	private void enterNotes_ios (String sNote) throws Exception {
@@ -501,7 +505,7 @@ public class CreateMemorizedPayeeDetailPage {
 		this.memo.sendKeys(sNote);
 		Thread.sleep(1000);
 		
-		this.amount.click(); //To hide the keyboard since 'Done' button above the keyboard is not present when tapped on the Notes field.
+		this.doneButton.click();
 	}
 
 	public void enterAmount(String amount) throws Exception {

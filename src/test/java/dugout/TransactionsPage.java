@@ -677,11 +677,11 @@ public class TransactionsPage {
 	@AndroidFindBy(xpath="//*[@text='No']")
 	public MobileElement buttonNo;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Date New to Old'`]/XCUIElementTypeOther[`name CONTAINS 'RadioButton : true'`][-1]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name = 'Chip : true Newest to Oldest'`]")
 	//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='RadioButton : true Date New to Old'`]")
 	//@AndroidFindBy(xpath="//android.widget.TextView[@text = 'Date New to Old']/../android.widget.ImageView[@content-desc = 'CheckIcon']")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text = 'Date New to Old']/..//android.widget.ImageView")
-	public MobileElement defaultfilterSelected;
+	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc = 'Chip : true Newest to Oldest']")
+	public MobileElement defaultSortByFilterSelected;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeCell[1]/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_banner_date_sub_header']")
