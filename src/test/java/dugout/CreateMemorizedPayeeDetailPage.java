@@ -109,7 +109,7 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Memo']")
 	public MobileElement memo;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Done'`][2]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Done'`]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	public MobileElement doneButton;
 	

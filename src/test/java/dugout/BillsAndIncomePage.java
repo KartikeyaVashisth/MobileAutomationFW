@@ -323,8 +323,8 @@ public class BillsAndIncomePage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@content-desc ='search tags']")
 	public MobileElement searchTags;
 
-	@iOSXCUITFindBy(id="create tag")
-	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create tag\"]")
+	@iOSXCUITFindBy(id="create item")
+	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create item\"]")
 	public MobileElement createTag;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][-1]")
@@ -1053,14 +1053,18 @@ public class BillsAndIncomePage {
 		Thread.sleep(1000);
 
 		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
+		String cc = "//android.widget.TextView[@text='"+sTag+"']";
 
 		if (Verify.objExists(createPayee)) {
 			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
 			Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
+			
+			Engine.getDriver().findElement(By.xpath(cc)).click();
+			Thread.sleep(1000);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+sTag);
 		}
 		else {
-			String cc = "//android.widget.TextView[@text='"+sTag+"']";
 			Engine.getDriver().findElement(By.xpath(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
@@ -1081,15 +1085,20 @@ public class BillsAndIncomePage {
 		h.hideKeyBoard();
 		Thread.sleep(1000);
 
-		String createTag_xpath="**/XCUIElementTypeOther[`name=‘create tag’`]";
+		String createTag_xpath="**/XCUIElementTypeOther[`name='create item'`]";
+		String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
 
 		if (Verify.objExists(createTag)) {
 			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)));
 			Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag... "+sTag);	
+
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+			Thread.sleep(500);
+			Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+sTag);
+			Thread.sleep(1000);
 		}
 		else {
-			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
 			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);

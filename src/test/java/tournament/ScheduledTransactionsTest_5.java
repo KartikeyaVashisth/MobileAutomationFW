@@ -15,20 +15,33 @@ import dugout.OverviewPage;
 import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class ScheduledTransactionsTest_5 extends Recovery {
 
 	String sUserName = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
+	String sDataset_stage = "ST_5";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
+
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "st_5_ios++@stage.com";
+		un.stage_android = "st_5_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 
 	@Test (priority = 33, enabled = true)
 	public void ST33_Test() throws Exception {
@@ -36,8 +49,15 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Entering the Bill reminder instance from the accounts page and verifying the changes in Today's and Projected Balances of Accounts afterwards.");
 
