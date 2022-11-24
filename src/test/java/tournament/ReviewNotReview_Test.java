@@ -7,6 +7,7 @@ import org.testng.asserts.SoftAssert;
 import com.relevantcodes.extentreports.LogStatus;
 
 import dugout.BankingAndCreditCardPage;
+import dugout.FiltersPage;
 import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
@@ -39,7 +40,7 @@ public class ReviewNotReview_Test extends Recovery {
 	String statusReviewed = "Reviewed";
 	String statusNotReviewed = "Not Reviewed";
 
-	@Test(priority = 0, enabled = true)
+	@Test(priority = 1, enabled = true)
 	public void TR1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -59,7 +60,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
 		tp.DisableRunningBalance();
-		Verify.waitForObject(tp.addTransaction, 2);
+		Verify.waitForObject(tp.addTransaction, 1);
 		tp.addTransaction.click();
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -75,13 +76,13 @@ public class ReviewNotReview_Test extends Recovery {
 		
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		td.selectStatus(statusCleared);
 		
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		String actStatus = td.getTransactionStatus();
 
@@ -96,7 +97,7 @@ public class ReviewNotReview_Test extends Recovery {
 		
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		actStatus = td.getTransactionStatus();
 
@@ -109,7 +110,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 2, enabled = true)
 	public void TR2_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -126,7 +127,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
 		tp.DisableRunningBalance();
-		Verify.waitForObject(tp.addTransaction, 2);
+		Verify.waitForObject(tp.addTransaction, 1);
 		tp.addTransaction.click();
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -141,13 +142,13 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		td.selectStatus(statusReconciled);
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		String actStatus = td.getTransactionStatus();
 
@@ -162,7 +163,7 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		actStatus = td.getTransactionStatus();
 
@@ -175,7 +176,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 3, enabled = true)
 	public void TR3_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -192,7 +193,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
 		tp.DisableRunningBalance();
-		Verify.waitForObject(tp.addTransaction, 2);
+		Verify.waitForObject(tp.addTransaction, 1);
 		tp.addTransaction.click();
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -207,13 +208,13 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		td.selectStatus(statusReconciled);
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		String actStatus = td.getTransactionStatus();
 
@@ -228,7 +229,7 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		actStatus = td.getTransactionStatus();
 
@@ -241,7 +242,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 4, enabled = true)
 	public void TR4_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -258,7 +259,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
 		tp.DisableRunningBalance();
-		Verify.waitForObject(tp.addTransaction, 2);
+		Verify.waitForObject(tp.addTransaction, 1);
 		tp.addTransaction.click();
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -273,7 +274,7 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		String actTransactionStatus = td.getTransactionStatus();
 
@@ -286,7 +287,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 5, enabled = true)
 	public void TR5_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -303,7 +304,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sManualSaving);
 		tp.DisableRunningBalance();
-		Verify.waitForObject(tp.addTransaction, 2);
+		Verify.waitForObject(tp.addTransaction, 1);
 		tp.addTransaction.click();
 
 		TransactionDetailPage td = new TransactionDetailPage();
@@ -318,20 +319,20 @@ public class ReviewNotReview_Test extends Recovery {
 
 		tp.searchRecentTransaction(payeeName);
 		tp.tapOnFirstTransaction();
-		Verify.waitForObject(td.dateLabel, 2);
+		Verify.waitForObject(td.dateLabel, 1);
 
 		op.scroll_down();
 
-		if (!Verify.objExists(td.downloadedTransactionStatus)) {
-			Commentary.log(LogStatus.INFO, "PASS: Review/Not-review option is not displayed for manually entered transaction.");
+		if (Verify.objExists(td.downloadedTransactionStatus)) {
+			Commentary.log(LogStatus.INFO, "PASS: Review/Not-review option is displayed for manually entered transaction.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Review/Not-review option is displayed for manually entered transaction.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Review/Not-review option is NOT displayed for manually entered transaction.");
 		}
 		
 		sa.assertAll();
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 6, enabled = true)
 	public void TR6_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -357,7 +358,7 @@ public class ReviewNotReview_Test extends Recovery {
 		String currentStatus = td.downloadedTransactionStatus.getText();
 		td.downloadedTransactionStatus.click();
 		Thread.sleep(3000);
-		Verify.waitForObject(td.downloadedTransactionStatus, 2);
+		Verify.waitForObject(td.downloadedTransactionStatus, 1);
 		String actStatus = td.downloadedTransactionStatus.getText();
 
 		if (currentStatus.equals(statusNotReviewed)) {
@@ -381,7 +382,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 7, enabled = true)
 	public void TR7_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -426,7 +427,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 7, enabled = true)
+	@Test(priority = 8, enabled = true)
 	public void TR8_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -441,7 +442,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sSaving);
 		
-		Verify.waitForObject(tp.buttonSort, 2);
+		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 
 		if (Verify.objExists(tp.filterNotReviewed)) {
@@ -453,7 +454,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 9, enabled = true)
 	public void TR9_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -468,7 +469,7 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sSaving);
 		
-		Verify.waitForObject(tp.buttonSort, 2);
+		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 
 		if (Verify.objExists(tp.filterNotReviewed)) {
@@ -477,19 +478,14 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(LogStatus.FAIL, "FAIL: Filter By option is NOT displayed for viewing Not Reviewed transactions.");
 		}
 
-		tp.selectSortFilterOption("Not Reviewed");
-		Thread.sleep(3000);
+		FiltersPage fp = new FiltersPage();
+		fp.selectFilter("Not Reviewed");
+		fp.clickShowResultsButton();
 
-		if (Verify.objExists(tp.filterNotReviewedButton)) {
-			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
+		if (fp.isClearFiltersButtonDisplayed()) {
+			Commentary.log(LogStatus.INFO, "PASS: Clear filters button is present to Clear the Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
-		}
-
-		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Clear filters button is NOT present to Clear the Filters.");
 		}
 
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
@@ -501,7 +497,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 	
-	@Test(priority = 9, enabled = true)
+	@Test(priority = 10, enabled = true)
 	public void TR10_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -516,23 +512,18 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sSaving);
 		
-		Verify.waitForObject(tp.buttonSort, 2);
+		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 		Thread.sleep(1000);
 
-		tp.selectSortFilterOption("Not Reviewed");
-		Thread.sleep(3000);
+		FiltersPage fp = new FiltersPage();
+		fp.selectFilter("Not Reviewed");
+		fp.clickShowResultsButton();
 
-		if (Verify.objExists(tp.filterNotReviewedButton)) {
-			Commentary.log(LogStatus.INFO, "PASS: NOT Reviewed filter button is displayed.");
+		if (fp.isClearFiltersButtonDisplayed()) {
+			Commentary.log(LogStatus.INFO, "PASS: Clear filters button is present to Clear the Filters.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: NOT Reviewed filter button is NOT displayed.");
-		}
-
-		if (Verify.objExists(tp.buttonClearFilter)) {
-			Commentary.log(LogStatus.INFO, "PASS: Cross icon is present on the Button to Clear Filters.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cross icon is NOT present on the Button to Clear Filters.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Clear filters button is NOT present to Clear the Filters.");
 		}
 
 		if (Verify.objExists(tp.buttonMarkAllReviewed)) {
@@ -541,12 +532,12 @@ public class ReviewNotReview_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Button is NOT displayed for Mark All as Reviewed.");
 		}
 
-		tp.buttonClearFilter.click();
+		fp.clickClearFilters();
 
-		if (!Verify.objExists(tp.filterNotReviewedButton)) {
-			Commentary.log(LogStatus.INFO, "PASS: After clicking cross icon of clearing filter > Not Reviewed filter button is not displayed.");
+		if (!fp.isClearFiltersButtonDisplayed()) {
+			Commentary.log(LogStatus.INFO, "PASS: After clicking clear filters button > Clear filter button is not displayed.");
 		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: After clicking cross icon of clearing filter > Not Reviewed filter button is still displayed.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: After clicking clear filters button > Clear filter button is still displayed.");
 		}
 
 		if (!Verify.objExists(tp.buttonMarkAllReviewed)) {
@@ -558,7 +549,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 10, enabled = true)
+	@Test(priority = 11, enabled = true)
 	public void TR11_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -606,7 +597,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 11, enabled = true)
+	@Test(priority = 12, enabled = true)
 	public void TR12_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -621,16 +612,13 @@ public class ReviewNotReview_Test extends Recovery {
 		TransactionsPage tp = new TransactionsPage();
 		bcc.selectAccount(sSaving);
 		
-		Verify.waitForObject(tp.buttonSort, 2);
+		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
+		
+		FiltersPage fp = new FiltersPage();
+		fp.selectFilter("Not Reviewed");
+		fp.clickShowResultsButton();
 
-		if (Verify.objExists(tp.filterNotReviewed)) {
-			Commentary.log(LogStatus.INFO, "PASS: Filter By option is displayed for viewing Not Reviewed transactions.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter By option is NOT displayed for viewing Not Reviewed transactions.");
-		}
-
-		tp.selectSortFilterOption(statusNotReviewed);
 		tp.buttonMarkAllReviewed.click();
 		Verify.waitForObject(tp.alertMarkAllReviewed, 1);
 		
@@ -642,7 +630,7 @@ public class ReviewNotReview_Test extends Recovery {
 		sa.assertAll();
 	}
 
-	@Test(priority = 12, enabled = true)
+	@Test(priority = 13, enabled = true)
 	public void TR13_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
@@ -658,13 +646,15 @@ public class ReviewNotReview_Test extends Recovery {
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		TransactionsPage tp = new TransactionsPage();
 		TransactionDetailPage td = new TransactionDetailPage();
-		bcc.allTransactionButton.click();
-		Thread.sleep(1000);
+		bcc.selectAccount(sSaving);
 		
-		Verify.waitForObject(tp.buttonSort, 2);
+		Verify.waitForObject(tp.buttonSort, 1);
 		tp.buttonSort.click();
 		Thread.sleep(1000);
-		tp.selectSortFilterOption(notReviewedText);
+		
+		FiltersPage fp = new FiltersPage();
+		fp.selectFilter("Not Reviewed");
+		fp.clickShowResultsButton();
 
 		//Verify that first transaction
 		tp.tapOnTransation(0);
@@ -710,21 +700,7 @@ public class ReviewNotReview_Test extends Recovery {
 
 		td.backButtonOnViewTransactionPage.click();
 		Thread.sleep(500);
-
-		//Verify that fourth transaction
-		tp.tapOnTransation(3);
-
-		op.scroll_down();
-		actTrxStatus = td.getTransactionReviewStatus();
-
-		if (actTrxStatus.equalsIgnoreCase(notReviewedText)) {
-			Commentary.log(LogStatus.INFO, "PASS: Filter Apply > Not Reviewed > Fourth transaction status correct.");
-		} else {
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Filter Apply > Not Reviewed > Fourth transaction status is incorrect.");
-		}
-
-		td.backButtonOnViewTransactionPage.click();
-		Thread.sleep(500);
-
+		
+		sa.assertAll();
 	}
 }
