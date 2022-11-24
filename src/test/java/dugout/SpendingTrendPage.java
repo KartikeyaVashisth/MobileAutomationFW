@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -21,6 +22,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.touch.offset.PointOption;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -69,6 +71,14 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//*[@text=\"Last Month\"]")
 	public MobileElement lastMonth;
 	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 3 Months'`]")
+	@AndroidFindBy(xpath="//*[@text=\"Last 3 Months\"]")
+	public MobileElement last3Months;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 6 Months'`]")
+	@AndroidFindBy(xpath="//*[@text=\"Last 6 Months\"]")
+	public MobileElement last6Months;
+	
 //	@iOSFindBy(xpath="//*[@name=\"Month to Date\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Month to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Month to Date\"]")
@@ -78,6 +88,10 @@ public class SpendingTrendPage {
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Year to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Year to Date\"]")
 	public MobileElement yearToDate;
+	
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Custom'`]")
+	@AndroidFindBy(xpath="//*[@text=\"Custom\"]")
+	public MobileElement custom;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeActivityIndicator[`name == 'In progress'`]")
@@ -94,7 +108,6 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'Total for ')]")
 	public MobileElement categoryName1;
 	
-	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name BEGINSWITH[c] 'amount: '")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'amount:')]")
 	public MobileElement amount1;
@@ -110,8 +123,6 @@ public class SpendingTrendPage {
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]")
 	public MobileElement scrollCategory;
 	
-
-	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'topRightLabel'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id,'list_row_amount')]")
 	public MobileElement commonAmount;
@@ -125,42 +136,29 @@ public class SpendingTrendPage {
 	public MobileElement splitShoppingCat;
 	
 	
-	
-	
-	
 	public void navigateBackToDashboard() throws Exception {
 		
 		this.backButtonOnHeader.click();
 		Thread.sleep(3000);
-		
-		/*
-		OverviewPage op = new OverviewPage();
-		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);
-		op.scrollView.swipe(SwipeElementDirection.DOWN, 10, 10, 1000);
-		Thread.sleep(3000);*/
 	}
 	
 	public void scrollCategory_android() throws Exception{
-		
+
 		Dimension size = this.scrollCategory.getSize();
-	//	System.out.println("Size is "+size);
+
 		int y_start=(int)(size.width*0.90);        
-        int x_start=(int)(size.width*0.46);//668
-        
-        int x_end=3;
-       
-//      Engine.getDriver().swipe(x_start,y,x_end,y,4000);
-//    	Thread.sleep(1000);
-    	TouchAction touchAction = new TouchAction(Engine.getDriver());
- 
+		int x_start=(int)(size.width*0.46);//668
+		int x_end=3;
+
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+
 		touchAction
-                .press(point(x_start, y_start))
-                .waitAction(waitOptions(ofMillis(1000)))
-                .moveTo(point(x_end, y_start))
-                .release().perform();
+		.press(point(x_start, y_start))
+		.waitAction(waitOptions(ofMillis(1000)))
+		.moveTo(point(x_end, y_start))
+		.release().perform();
 	}
-	
+
 	public void scrollCategory_ios() throws Exception{
 		
 //	 	MobileElement element = this.categoryName;
@@ -172,7 +170,7 @@ public class SpendingTrendPage {
         Engine.getDriver().executeScript("mobile:scroll", scrollObject);
         Thread.sleep(1000);
       
-}
+	}
 	
 	public void scrollCategory() throws Exception{
 		
@@ -217,55 +215,55 @@ public class SpendingTrendPage {
 			return sCategory;
 		}
 	}
-	
+
 	public Double getAmount() throws Exception{
-		
+
 		Helper h = new Helper();
-		
+
 		if (Verify.objExists_check(this.youDontHaveAnyTxns))
 			return 0.0;
-		
+
 		Verify.waitForObject(amount, 2);
 		return h.processBalanceAmount(this.amount.getText());
-	
+
 	}
-	
+
 	public void scrollFilter_IOS() throws Exception{
-		
-		MobileElement element = this.lastMonth;
-        String elementID = element.getId();
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("element", elementID); // Only for ‘scroll in element’
-        scrollObject.put("direction", "right");
-        Engine.getDriver().executeScript("mobile:scroll", scrollObject);
-        Thread.sleep(1000);
+
+		MobileElement element = this.last3Months;
+		String elementID = element.getId();
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("element", elementID);
+		scrollObject.put("direction", "left");
+		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+		Thread.sleep(1000);
 	}
-	
+
 	public void scrollFilter_android() throws Exception{
-    	
-    	Dimension size = this.lastMonth.getSize();
-    	int x_start=(int)(size.width*0.99);
-    	int x_end=(int)(size.width*0.01);
-    	int y=this.lastMonth.getRect().getY();
-    	
-  		TouchAction touchAction = new TouchAction(Engine.getDriver());
-   	
-  		touchAction
-                  .press(point(x_start, y))
-                  .waitAction(waitOptions(ofMillis(1000)))
-                  .moveTo(point(x_end, y))
-                  .release().perform();
+
+		Verify.waitForObject(this.last3Months, 1);
+		Point location = this.last3Months.getLocation();
+
+		int x_start=location.getX();
+		int x_end=100;
+		int y=location.getY();
+
+		TouchAction touchAction = new TouchAction(Engine.getDriver());
+
+		for(int i=1 ;i<=2;i++) { 
+			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+		}
 	}
 	
 	public void scrollFilter() throws Exception{
-		
+
 		Helper h = new Helper();
 		if (h.getEngine().equals("android"))
 			scrollFilter_android();
 		else
 			scrollFilter_IOS();		
 	}
-	
+
 	public void navigateToTopTrendingCategoriesCard() throws Exception {
 
 		SettingsPage sp = new SettingsPage();
@@ -274,103 +272,78 @@ public class SpendingTrendPage {
 		Verify.waitForObject(sp.spendingByCategoryOption, 1);
 		sp.spendingByCategoryOption.click();
 		Thread.sleep(1000);
-		//this is test
 	}
-	
-public void deleteSpendingTrendTransactions() throws Exception{
-		
+
+	public void deleteSpendingTrendTransactions() throws Exception{
+
 		Helper h = new Helper();
-		
+
 		if (h.getEngine().equals("ios"))
 			deleteSpendingTrendTransactions_ios();
-		
 		else
 			deleteSpendingTrendTransactions_android();
-			
-		
 	}
-	
+
 	public void deleteSpendingTrendTransactions_ios() throws Exception {
-		
-		
-		if(Verify.objExists(youDontHaveAnyTxns)) {
-			
+
+
+		if(Verify.objExists(youDontHaveAnyTxns))
 			Commentary.log(LogStatus.INFO, "No transaction is available");
-		}
 		else {
-			
 			Commentary.log(LogStatus.INFO, "Transactions are available and we are going to delete them.");
-			
+
 			int i = getNumberOfRows();
-			
+
 			System.out.println("Number of  Transaction Rows found "+i);
-			
+
 			for (int j = 1; j<=i; j++) {	
 				commonAmount.click();
 				Thread.sleep(500);
-				
+
 				TransactionDetailPage td = new TransactionDetailPage();
 				td.deleteTransation();
 				Thread.sleep(1000);
+			}
+		}
+	}
 
-		}
-			
-	}
-	}
-	
 	public void deleteSpendingTrendTransactions_android() throws Exception{
-		
-	
-	if(Verify.objExists(youDontHaveAnyTxns)) {
-		
-		Commentary.log(LogStatus.INFO, "No transaction is available");
+
+
+		if(Verify.objExists(youDontHaveAnyTxns))
+			Commentary.log(LogStatus.INFO, "No transaction is available");
+		else {
+			Commentary.log(LogStatus.INFO, "Transactions are available and we are going to delete them.");
+
+			while(getNumberOfRows() > 0) {
+
+				Thread.sleep(2000);
+				commonAmount.click();
+				Thread.sleep(3000);
+
+				TransactionDetailPage td = new TransactionDetailPage();
+				td.scroll_down();
+				td.deleteTransaction.click();
+				Thread.sleep(1000);
+				td.deleteTransactionAlertButton.click();
+				Thread.sleep(1000);
+			}
+		}	
+
 	}
-	else {
-		
-		Commentary.log(LogStatus.INFO, "Transactions are available and we are going to delete them.");
-	
-	while(getNumberOfRows() > 0) {
-			
-			Thread.sleep(2000);
-			commonAmount.click();
-			
-			Thread.sleep(3000);
-			
-			TransactionDetailPage td = new TransactionDetailPage();
-			td.scroll_down();
-			td.deleteTransaction.click();
-			//td.deleteTransation();
-			Thread.sleep(1000);
-			td.deleteTransactionAlertButton.click();
-			Thread.sleep(1000);
+
+	public int getNumberOfRows() throws Exception {
+
+		Helper h = new Helper();
+
+		if (h.getEngine().equals("ios")){
+			List <MobileElement> me = Engine.getDriver().findElements(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'topRightLabel'`]"));
+			return me.size();
 		}
-	}	
-			
+		else {
+			List <MobileElement> me = Engine.getDriver().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'list_row_amount')]"));
+			return me.size();
 		}
-		
-		
-		
-		public int getNumberOfRows() throws Exception {
-			
-			Helper h = new Helper();
-			
-			
-			if (h.getEngine().equals("ios")){
-				
-				List <MobileElement> me = Engine.getDriver().findElements(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'topRightLabel'`]"));
-				
-				return me.size();
-				
-			}
-			else {
-				
-				List <MobileElement> me = Engine.getDriver().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'list_row_amount')]"));
-				
-				return me.size();
-				
-			}
-				
-			
-		}
+	}
 
 }
