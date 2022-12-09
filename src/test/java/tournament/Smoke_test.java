@@ -227,9 +227,11 @@ public class Smoke_test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		OverviewPage o = new OverviewPage();
 		
-		o.tapOnTrendingCard();
+//		o.tapOnTrendingCard();
 
 		SpendingTrendPage st = new SpendingTrendPage();
+		st.navigateToTopTrendingCategoriesCard();
+		
 		Verify.waitForObject(st.spendingTrendHeader, 1);
 		if (Verify.objExists(st.spendingTrendHeader))
 			Commentary.log(LogStatus.INFO,"PASS: SpendingTrend card tap > SpendingTrend screen got displayed.");
