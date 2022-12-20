@@ -59,7 +59,7 @@ public class Daily_Regression_Test extends Recovery {
 
 		UserName un = new UserName();
 		un.stage_ios = "companionregression++@stage.com";
-		un.stage_android = "companionregression++@stage.com";
+		un.stage_android = "dailyregression_android++@stage.com";
 		un.prod_ios = "yuvaraju.boligorla@quicken.com";
 		un.prod_android = "yuvaraju.boligorla@quicken.com";
 		return un.getUserName();	
@@ -810,7 +810,7 @@ public class Daily_Regression_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Balance calculation for filter combination \"Date new to old\" + \"Show Running Balance\" set to ON");
+		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Balance calculation for filter combination \"Newest to Oldest\" + \"Show Running Balance\" set to ON");
 
 		Double dFirstRunningBalance, dSecondRunningBalance, dThirdRunningBalance, dFourthRunningBalance, dFirstTxnAmount, dSecondTxnAmount, dThirdTxnAmount;
 

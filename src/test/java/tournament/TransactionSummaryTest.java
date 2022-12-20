@@ -13,33 +13,48 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class TransactionSummaryTest extends Recovery {
 
 	String sUserName = "yuvaraju.boligorla@quicken.com";
-	String sPassword = "Intuit!1";
+	String sPassword = "Quicken@01";
 	String sDataset = "ProjectedBalances";
+	String sDataset_stage = "TS_Test1";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
-//	String sUserName = "kalyan.grandhi@quicken.com";
-//	String sPassword = "Intuit!1";
-//	String sDataset = "Budget_RollOver_Income";
-//	String sManualChecking = "Checking";
 	
+	public String getUsername_basedOnEnv() throws Exception{
 
+		UserName un = new UserName();
+		un.stage_ios = "transactionsummary_ios++@stage.com";
+		un.stage_android = "transactionsummary_android++@stage.com";
+		un.prod_ios = "";
+		un.prod_android = "";
+		return un.getUserName();	
+	}
+	
 	@Test (priority = 1, enabled = true)
 	public void TS1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying all the different elements of Transaction Summary Card.");
 

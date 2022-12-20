@@ -247,7 +247,7 @@ public class Helper {
 			//capabilities.setCapability("platformVersion", "12.0"); //9.3
 			//capabilities.setCapability("platformVersion", "11.2");
 			capabilities.setCapability("appiumVersion", "1.15.0");
-			capabilities.setCapability("deviceName","iPhone Simulator");
+			capabilities.setCapability("deviceName","iPhone 11 Pro Max");//iPhone Simulator
 			capabilities.setCapability("platformVersion","13.0");
 			capabilities.setCapability("browserName", "");
 			capabilities.setCapability("deviceOrientation", "portrait");
@@ -299,7 +299,7 @@ public class Helper {
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
 			capabilities.setCapability("platformVersion", "15.5"); //12.1
 			capabilities.setCapability("appiumVersion", "1.22.3"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro");
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro Max");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);

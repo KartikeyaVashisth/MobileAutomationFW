@@ -171,9 +171,9 @@ public class Daily_Regression_Test2 extends Recovery{
 		//Verify Account Details
 		sp.getAccountElement(sManualChecking).click();
 
-		Verify.waitForObject(sp.getAccountElement(sManualChecking), 3);
+		Verify.waitForObject(sp.getAccountElement(sManualChecking), 2);
 		MobileElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
-		MobileElement accountType = sp.getAccountElement("CHECKING");
+		MobileElement accountType = sp.getAccountElement("Checking");
 		MobileElement accountStatus = sp.getTextView("Active");
 
 		if (Verify.objExists(manualCheckingAccount1))
@@ -197,7 +197,7 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.getAccountElement(sManualCreditCard).click();
 		Thread.sleep(2000);
 
-		Verify.waitForObject(sp.getAccountElement(sManualCreditCard), 3);
+		Verify.waitForObject(sp.getAccountElement(sManualCreditCard), 2);
 		MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
 //		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
 		MobileElement accountStatus1 = sp.getTextView("Active");
@@ -222,9 +222,9 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.getAccountElement(sManualSaving).click();
 		Thread.sleep(2000);
 
-		Verify.waitForObject(sp.getAccountElement(sManualSaving), 3);
+		Verify.waitForObject(sp.getAccountElement(sManualSaving), 2);
 		MobileElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
-		MobileElement accountType_savings = sp.getAccountElement("SAVINGS");
+		MobileElement accountType_savings = sp.getAccountElement("Savings");
 		MobileElement accountStatus2 = sp.getTextView("Active");
 
 		if (Verify.objExists(manualSavingsAccount1))
@@ -420,6 +420,8 @@ public class Daily_Regression_Test2 extends Recovery{
 			Commentary.log(LogStatus.INFO, "PASS: 'Display Favorite Payees' option is enabled by default.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: 'Display Favorite Payees' option is seen disabled by default.");
+		
+		sp.scrollToRefreshDataOption();
 		
 		if (Verify.objExists(sp.refreshData))
 			Commentary.log(LogStatus.INFO, "PASS: 'Refresh Data' option is present.");
@@ -663,49 +665,44 @@ public class Daily_Regression_Test2 extends Recovery{
 		Verify.waitForObject(ip.lastSyncedFooter, 2);
 
 		if (Verify.objExists(ip.investingHeader))
-			Commentary.log(LogStatus.INFO, "PASS: Investing Header text is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Investing Header text is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing Header text is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Investing Header text is NOT displayed.");
 
 		if (Verify.objExists(ip.holdingsTab))
-			Commentary.log(LogStatus.INFO, "PASS: Holdings Tab is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Holdings Tab is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Holdings Tab is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Holdings Tab is NOT displayed.");
 
 		if (Verify.objExists(ip.accountsTab))
-			Commentary.log(LogStatus.INFO, "PASS: Accounts Tab is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Accounts Tab is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Accounts Tab is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Accounts Tab is NOT displayed.");
 
 		if (Verify.objExists(ip.watchlistTab))
-			Commentary.log(LogStatus.INFO, "PASS: Watch List Tab is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Watch List Tab is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Watch List Tab is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Watch List Tab is NOT displayed.");
 
-		if (Verify.objExists(ip.totalValueLabel))
-			Commentary.log(LogStatus.INFO, "PASS: Total Value label is displayed");
+		if (Verify.objExists(ip.marketValueLabel))
+			Commentary.log(LogStatus.INFO, "PASS: Market Value & Today's Change label is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Total Value label is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Market Value & Today's Change label is NOT displayed.");
 
 		if (Verify.objExists(ip.cashbalancesLabel))
-			Commentary.log(LogStatus.INFO, "PASS: Cash Balances label is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Cash Balances label is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cash Balances label is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Cash Balances label is NOT displayed.");
 
 		if (Verify.objExists(ip.backButtonOnHeader))
-			Commentary.log(LogStatus.INFO, "PASS: Back Button is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Back Button is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Back Button is NOT displayed");
-
-		if (Verify.objExists(ip.securitiesByCompanyNameLabel))
-			Commentary.log(LogStatus.INFO, "PASS: Security by company label is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Security by company label is NOT displayed");
-
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Back Button is NOT displayed.");
+		
 		if (Verify.objExists(ip.lastSyncedFooter))
-			Commentary.log(LogStatus.INFO, "PASS: Last Synced Footer is displayed");
+			Commentary.log(LogStatus.INFO, "PASS: Last Synced Footer is displayed.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: Last Synced Footer is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Last Synced Footer is NOT displayed.");
 
 		sa.assertAll();
 	}

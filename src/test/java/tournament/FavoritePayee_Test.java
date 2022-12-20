@@ -13,17 +13,30 @@ import dugout.SignInPage;
 import dugout.TagManagementPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class FavoritePayee_Test extends Recovery {
 	String sUsername = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
+	String sDataset_stage = "FavoritePayee";
+	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "favoritepayee_ios++@stage.com";
+		un.stage_android = "favoritepayee_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 
 	@Test (priority = 1, enabled = true)
 	public void FP1_Test() throws Exception {
@@ -31,8 +44,15 @@ public class FavoritePayee_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUsername, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that the Display Favorite Payees option is present under the Settings section of the Hamburger menu.");
 
@@ -66,7 +86,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		TransactionDetailPage td = new TransactionDetailPage();
 
 		fp.EnablefavoritPayee();
@@ -99,7 +119,7 @@ public class FavoritePayee_Test extends Recovery {
 		BankingAndCreditCardPage bcc = new BankingAndCreditCardPage();
 		TransactionsPage tp = new TransactionsPage();
 
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		op.navigateToAcctList();
 		bcc.allTransactionButton.click();
 		tp.tapOnFirstTransaction();
@@ -129,7 +149,7 @@ public class FavoritePayee_Test extends Recovery {
 		OverviewPage op = new  OverviewPage();
 		TransactionDetailPage td = new TransactionDetailPage();
 
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		op.addTransaction.click();
 		td.enterAmount("10.00");
 		Thread.sleep(3000);
@@ -170,7 +190,7 @@ public class FavoritePayee_Test extends Recovery {
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
 		TransactionDetailPage td = new TransactionDetailPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		fp.DisablefavoritPayee();
 		op.addTransaction.click();
 		td.enterAmount("10.00");
@@ -198,7 +218,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
 		fp.EnablefavoritPayee();
 		fp.HideFavoritePayeeFromPayeeDrawer();
@@ -226,7 +246,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		fp.EnablefavoritPayee();
 		TransactionDetailPage td = new TransactionDetailPage();
 
@@ -254,7 +274,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 6);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		TransactionDetailPage td = new TransactionDetailPage();
 
 		op.addTransaction.click();
@@ -291,7 +311,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 6);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 
 		TransactionDetailPage td = new TransactionDetailPage();
 		fp.EnablefavoritPayee();
@@ -319,7 +339,7 @@ public class FavoritePayee_Test extends Recovery {
 
 		FavoritePayeePage fp = new FavoritePayeePage();
 		OverviewPage op = new  OverviewPage();
-		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 4);
+		Verify.waitForObjectToDisappear(op.refreshSpinnerIcon, 2);
 		BillsAndIncomePage bi = new BillsAndIncomePage();
 		fp.DisablefavoritPayee();
 		op.tapOnBillsAndIncomeCard();

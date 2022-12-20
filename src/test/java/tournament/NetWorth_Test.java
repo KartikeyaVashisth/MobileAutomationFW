@@ -16,20 +16,33 @@ import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class NetWorth_Test extends Recovery {
 
 	String sUserName = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
+	String sDataset_stage = "NW_Test";
 	String sManualChecking = "Manual_Checking";
 	String sManualSaving = "Manual_Savings";
 	String sManualCreditCard = "Manual_CreditCard";
+	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "networth_ios++@stage.com";
+		un.stage_android = "networth_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 
 	@Test (priority = 1, enabled = true)
 	public void NW1_Test() throws Exception {
@@ -37,8 +50,15 @@ public class NetWorth_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying all the different elements of Net Worth Card.");
 

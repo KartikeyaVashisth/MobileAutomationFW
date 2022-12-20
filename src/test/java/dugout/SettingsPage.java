@@ -105,7 +105,7 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Bills']")
 	public MobileElement billsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Budgets Menu'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Budgets'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
 	public MobileElement budgetsOption;
 	

@@ -10,17 +10,20 @@ import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class TodaysBalances_MultipleTransactions extends Recovery {
 	
-	String sUserName = "yuvaraju.boligorla@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUserName = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "TodaysBalancesTest";
+	String sDataset_stage = "Todaysbalances_mt";
 	String sManualChecking = "Manual_Checking";
 	String sOnlineChecking ="onl_checking1";
 	String sManualCreditCard = "Manual_CC";
@@ -29,6 +32,16 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 	String sOnlineCash="onl_cash";
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
+	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "todaysbalances_mt_ios++@stage.com";
+		un.stage_android = "todaysbalances_mt_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 
 	@Test(priority = 1, enabled = true)
 	public void TBM1_test() throws Exception{
@@ -36,8 +49,15 @@ public class TodaysBalances_MultipleTransactions extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
+		SignInPage si = new SignInPage();
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add multiple[two] expense transactions for an online checking account, verify checking & total balance on overview screen accounts card.");
 		

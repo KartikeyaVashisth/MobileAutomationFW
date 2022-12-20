@@ -489,10 +489,10 @@ public class pract_1 extends Recovery {
 		else
 			quickenTest.log(LogStatus.FAIL,"investing card, today's change label did not appear.");
 		
-		if (Verify.objExists(inv.totalValueLabel))
-			quickenTest.log(LogStatus.INFO,"investing card, total value label got dispalyed.");
+		if (Verify.objExists(inv.marketValueLabel))
+			quickenTest.log(LogStatus.INFO,"investing card, Market Value & Today's Change label got dispalyed.");
 		else
-			quickenTest.log(LogStatus.FAIL,"investing card, total value label did not appear.");
+			quickenTest.log(LogStatus.FAIL,"investing card, Market Value & Today's Change label did not appear.");
 		
 		if (Verify.objExists(inv.cashbalancesLabel))
 			quickenTest.log(LogStatus.INFO,"investing card, cash balances label got dispalyed.");
