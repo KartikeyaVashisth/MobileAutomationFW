@@ -1277,10 +1277,10 @@ public class RegressionCases extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Watchlist Tab is NOT displayed");
 		
-		if (Verify.objExists(ip.totalValueLabel))
-			Commentary.log(LogStatus.INFO, "Total Value label is displayed");
+		if (Verify.objExists(ip.marketValueLabel))
+			Commentary.log(LogStatus.INFO, "Market Value & Today's Change label is displayed");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "Total Value label is NOT displayed");
+			Commentary.log(sa, LogStatus.FAIL, "Market Value & Today's Change label is NOT displayed");
 		
 		if (Verify.objExists(ip.cashbalancesLabel))
 			Commentary.log(LogStatus.INFO, "Cash Balances label is displayed");
@@ -1291,11 +1291,6 @@ public class RegressionCases extends Recovery {
 			Commentary.log(LogStatus.INFO, "Back Button is displayed");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "Back Button is NOT displayed");
-		
-		if (Verify.objExists(ip.securitiesByCompanyNameLabel))
-			Commentary.log(LogStatus.INFO, "Security by company label is displayed");
-		else
-			Commentary.log(sa, LogStatus.FAIL, "Security by company label is NOT displayed");
 		
 		if (Verify.objExists(ip.lastSyncedFooter))
 			Commentary.log(LogStatus.INFO, "Last Synced Footer is displayed");

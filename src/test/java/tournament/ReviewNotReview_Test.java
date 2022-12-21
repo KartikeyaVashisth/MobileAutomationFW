@@ -12,11 +12,13 @@ import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 /**
  * @author Kartik
@@ -30,6 +32,7 @@ public class ReviewNotReview_Test extends Recovery {
 	String sUserName = "mobileautomation1@quicken.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "OnlineAcc_Automation";
+	String sDataset_stage = "ReviewNotReview_test";
 	String sOnlineChecking = "Checking1 XX8651";
 	String sSaving = "Saving XX3867";
 	String sManualSaving = "Manual_Savings";
@@ -40,14 +43,30 @@ public class ReviewNotReview_Test extends Recovery {
 	String statusReviewed = "Reviewed";
 	String statusNotReviewed = "Not Reviewed";
 
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "reviewnotreview_ios++@stage.com";
+		un.stage_android = "reviewnotreview_android++@stage.com";
+		un.prod_ios = "mobileautomation1@quicken.com";
+		un.prod_android = "mobileautomation1@quicken.com";
+		return un.getUserName();	
+	}
 	@Test(priority = 1, enabled = true)
 	public void TR1_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
+		SignInPage si = new SignInPage();
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Verify Transaction status on changing from Uncleared to Cleared and vice-versa.");
 		

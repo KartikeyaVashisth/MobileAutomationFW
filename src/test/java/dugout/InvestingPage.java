@@ -53,13 +53,13 @@ public class InvestingPage {
 	public MobileElement todaysChangeLabel;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Total Value\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name==\"Total Value\"`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Total Value']")
-	public MobileElement totalValueLabel;
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name = \"Market Value & Today's Change\"`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Market Value & Today's Change\"]")
+	public MobileElement marketValueLabel;
 	
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"Cash Balances\"]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name==\"Cash Balances\"`]")
-	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cash Balances']")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name contains 'Cash Balances'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Cash Balances')]")
 	public MobileElement cashbalancesLabel;
 	
 	//@iOSFindBy(xpath="//*[starts-with(@name, 'Securities by Company Name')]")

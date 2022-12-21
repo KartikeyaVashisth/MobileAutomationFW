@@ -13,26 +13,45 @@ import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TagManagementPage;
 import dugout.TransactionDetailPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
-
+import support.UserName;
 
 public class TagManagement_Test extends Recovery {
 	
-	String sUsername = "varsha.h@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUsername = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
+	String sDataset_stage = "TagManagement";
+	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "tagmanagement_ios++@stage.com";
+		un.stage_android = "tagmanagement_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 	
 	@Test (priority = 1, enabled = true)
 	public void tm1_Test() throws Exception {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		//si.signIn(sUsername, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that tag should appear under settings");
 		

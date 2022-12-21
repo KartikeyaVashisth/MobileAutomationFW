@@ -35,8 +35,8 @@ public class MemorizedPayeesTest2 extends Recovery {
 	public String getUsername_basedOnEnv() throws Exception {
 
 		UserName un = new UserName();
-		un.stage_ios = "companionregression++@stage.com";
-		un.stage_android = "companionregression++@stage.com";
+		un.stage_ios = "memorizedpayees2_ios++@stage.com";
+		un.stage_android = "memorizedpayees2_android++@stage.com";
 		return un.getUserName();
 	}
 

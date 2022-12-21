@@ -11,11 +11,13 @@ import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 
 public class SearchFunctionality_Test extends Recovery{
@@ -23,15 +25,22 @@ public class SearchFunctionality_Test extends Recovery{
 	String sUsername = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
+	String sDataset_stage = "SearchFunctionality";
 	String sAccountName = "checkings account XX8123";
 	String sManualChecking = "Checking";
 	String sPayeeName = "Nordstrom";
 	String sCategoryname = "fast food";
 	String sTag = "test tag";
 
-	
-	
-	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "searchfunctionality_ios++@stage.com";
+		un.stage_android = "searchfunctionality_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 	
 	@Test (priority = 1, enabled = true)
 	public void sf1_Test() throws Exception {
@@ -39,8 +48,15 @@ public class SearchFunctionality_Test extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUsername, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]:Search by payee name in the all accounts.");
 		
@@ -54,7 +70,6 @@ public class SearchFunctionality_Test extends Recovery{
 				Commentary.log(LogStatus.PASS, "PASS: Transactions found with Payee name as  "+sPayeeName+" ");
 		
 			    tp.tapOnFirstTransaction();
-				//tp.tapOnTransation(0);
 			    TransactionDetailPage td = new TransactionDetailPage();
 			    String sPayeeName_after = td.getTransactionPayee();
 			    if(sPayeeName.equalsIgnoreCase(sPayeeName_after))
@@ -62,15 +77,10 @@ public class SearchFunctionality_Test extends Recovery{
 			    else
 				     Commentary.log(sa, LogStatus.FAIL, "FAIL: Searched payeename "+sPayeeName+"  is not matching with searched transaction payeename "+sPayeeName_after+"  ");
 			}
-			
-		
-		
 		sa.assertAll();
 	
 	}
 	
-	
-
 	@Test (priority = 2, enabled = true)
 	public void sf2_Test() throws Exception {
 		
@@ -94,14 +104,11 @@ public class SearchFunctionality_Test extends Recovery{
 		tRec.setTransactionType("expense");
 		tRec.setDate(h.getFutureDaysDate(0));
 		
-
 		op.addTransaction.click();
 		Verify.waitForObject(td.buttonDone, 1);
 		td.addTransaction(tRec);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());
 		
-	
-
 	    TransactionsPage tp = new TransactionsPage();
 		BankingAndCreditCardPage bc = new BankingAndCreditCardPage();
 		op.navigateToAcctList();
@@ -112,11 +119,9 @@ public class SearchFunctionality_Test extends Recovery{
 		else 
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transactions found with Payee Payee of one account in some other account =  "+payeeName+" ");
 	
-	
 		sa.assertAll();
 	
 	}
-	
 	
 	
 	@Test (priority = 3, enabled = true)
@@ -125,7 +130,6 @@ public class SearchFunctionality_Test extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		String sPayeespace = "   ";
-	
 	
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]:Apply space and tap on search for result.");
 		
@@ -141,9 +145,6 @@ public class SearchFunctionality_Test extends Recovery{
 		sa.assertAll();
 	
 	}
-	
-	
-	
 	
 	@Test (priority = 4, enabled = true)
 	public void sf4_Test() throws Exception {
@@ -162,8 +163,6 @@ public class SearchFunctionality_Test extends Recovery{
 			Commentary.log( LogStatus.PASS, "PASS: NO Transactions found with Invalid payee name = "+sInvalidPayee+" ");
 		else 
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: Transactions found with Invalid payee name = "+sInvalidPayee+" ");
-            
-	
 		
 		sa.assertAll();
 	
@@ -176,7 +175,6 @@ public class SearchFunctionality_Test extends Recovery{
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 	
-		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Search by Payee in the Particular account.");
 		
 		OverviewPage op = new OverviewPage();
@@ -203,15 +201,12 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	}
 	
-	
-	
 	@Test (priority = 6, enabled = true)
 	public void sf6_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 	
-		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]:Search by category should work.");
 		
 		OverviewPage op = new OverviewPage();
@@ -236,13 +231,11 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	}
 	
-	
 	@Test (priority = 7, enabled = true)
 	public void sf7_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
-		
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]:Search by tag should work.");
 		
@@ -262,13 +255,10 @@ public class SearchFunctionality_Test extends Recovery{
 			     Commentary.log(LogStatus.PASS, "PASS: Searched tag "+sTag+"  is matching with search transaction tag "+sTag_after+" ");
 		    else
 			     Commentary.log(sa, LogStatus.FAIL, "FAIL: Searched tag "+sTag+"  is not matching with search transaction tag "+sTag_after+"  ");
-		
 		}
 		sa.assertAll();
 	
 	}
-	
-	
 	
 	@Test (priority = 8, enabled = true)
 	public void sf8_Test() throws Exception {
@@ -295,7 +285,6 @@ public class SearchFunctionality_Test extends Recovery{
 			   Commentary.log(LogStatus.PASS, "PASS: Searched memo "+sMemo+"  is matching with search transaction category "+sMemo_after+" ");
 		    else
 			   Commentary.log(sa, LogStatus.FAIL, "FAIL: Searched memo "+sMemo+"  is not matching with search transaction category "+sMemo_after+"  ");
-		
 		}
 		sa.assertAll();
 	
@@ -343,8 +332,6 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	}
 	
-	
-	
 	@Test (priority = 10, enabled = true)
 	public void sf10_Test() throws Exception {
 		
@@ -352,7 +339,6 @@ public class SearchFunctionality_Test extends Recovery{
 		Helper h = new Helper();
 		String sNoPayee = "no Payee";
 
-		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Search by No Payee should provide the list of only No payee transactions.");
 		
 		OverviewPage op = new OverviewPage();
@@ -371,7 +357,6 @@ public class SearchFunctionality_Test extends Recovery{
 				   Commentary.log(LogStatus.PASS, "PASS: Searched category "+sNoPayee+"  is matching with search transaction category "+sNoPayee_after+" ");
 			    else
 				   Commentary.log(sa, LogStatus.FAIL, "FAIL:Searched category "+sNoPayee+"  is not matching with search transaction category "+sNoPayee_after+"  ");
-			
 			}
 		
 		sa.assertAll();
@@ -412,14 +397,11 @@ public class SearchFunctionality_Test extends Recovery{
 	
 	}
 	
-
-	
 	@Test (priority = 12, enabled = true)
 	public void sf13_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
-	
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: After searching with a keyword if user tap on cancel the App should navigate to the normal Transaction list screen.");
 		
@@ -434,13 +416,9 @@ public class SearchFunctionality_Test extends Recovery{
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: App is not navigating to transaction list screen after tapping on the cancel button. ");
 		else
 			Commentary.log(LogStatus.PASS, "PASS: App is navigating to transaction list screen after tapping on the cancel button. ");
-	
-	
+		
 		sa.assertAll();
 	
 	}
-	
-	
-	
 	
 }

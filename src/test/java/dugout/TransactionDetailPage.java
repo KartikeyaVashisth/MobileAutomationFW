@@ -228,7 +228,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='All Payees']")
 	public MobileElement allPayeesLabel;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Near by'`][1]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Near by'`][1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Near by']")
 	public MobileElement yelpNearByLabel;
 
@@ -1819,7 +1819,7 @@ public class TransactionDetailPage {
 
 		else {
 			if(Verify.objExists(yelpNearByLabel)) {
-				String cc = "**/XCUIElementTypeOther[$name='Near by'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
+				String cc = "**/XCUIElementTypeOther[$name contains 'Near by'$]/XCUIElementTypeOther[`name=='RadioButton "+payees+"'`]";
 				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
 				Thread.sleep(500);
 				Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);

@@ -18,16 +18,29 @@ import dugout.SignInPage;
 import dugout.SpendingOverTimePage;
 import dugout.SpendingTrendPage;
 import dugout.TransactionSummaryPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
+import support.UserName;
 
 public class HamburgerMenuTest extends Recovery {
 	
 	String sUserName = "quicken789@gmail.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "ST Phase 2";
+	String sDataset_stage = "HM_Test";
+	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "hamburgermenu_ios++@stage.com";
+		un.stage_android = "hamburgermenu_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
 	
 	@Test(priority=1, enabled = true)
 	public void HM1_Test() throws Exception {
@@ -35,8 +48,15 @@ public class HamburgerMenuTest extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
 		SignInPage si = new SignInPage();
-		si.signIn(sUserName, sPassword, sDataset);
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying all the different elements of Hamburger Menu.");
 

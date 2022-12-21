@@ -34,7 +34,7 @@ public class MemorizedPayeesTest1 extends Recovery {
 
 		UserName un = new UserName();
 		un.stage_ios = "companionregression++@stage.com";
-		un.stage_android = "companionregression++@stage.com";
+		un.stage_android = "memorizedpayees_android++@stage.com";
 		return un.getUserName();
 	}
 

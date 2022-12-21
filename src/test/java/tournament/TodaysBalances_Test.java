@@ -9,17 +9,20 @@ import dugout.BankingAndCreditCardPage;
 import dugout.OverviewPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class TodaysBalances_Test extends Recovery {
 	
-	String sUserName = "yuvaraju.boligorla@quicken.com";
-	String sPassword = "Intuit!1";
+	String sUserName = "quicken789@gmail.com";
+	String sPassword = "Quicken@01";
 	String sDataset = "TodaysBalancesTest";
+	String sDataset_stage = "Todaysbalances_Test";
 	String sManualChecking = "Manual_Checking";
 	String sOnlineChecking ="onl_checking1";
 	String sManualCreditCard = "Manual_CC";
@@ -29,14 +32,31 @@ public class TodaysBalances_Test extends Recovery {
 	String sManualSaving = "Manual_Savings";
 	String sOnlineSaving = "onl_savings1";
 	
+	public String getUsername_basedOnEnv() throws Exception{
+
+		UserName un = new UserName();
+		un.stage_ios = "todaysbalances_test_ios++@stage.com";
+		un.stage_android = "todaysbalances_test_android++@stage.com";
+		un.prod_ios = "quicken789@gmail.com";
+		un.prod_android = "quicken789@gmail.com";
+		return un.getUserName();	
+	}
+	
 	@Test(priority = 0, enabled = true)
 	public void TB1_test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
-		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+
+		SignInPage si = new SignInPage();
+		if(h.getEnv().contentEquals("stage"))
+			si.signIn(sUsername, sPassword, sDataset_stage);
+		else
+			si.signIn(sUsername, sPassword, sDataset);
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying balances on accounts card matching with account list screen.");
 		
