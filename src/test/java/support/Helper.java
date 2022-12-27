@@ -159,6 +159,22 @@ public class Helper {
 		return globals.testProperty.get("deviceName");
 	}
 	
+	public String getAppiumURL(){
+		
+		String appiumURL;
+		if(Recovery.sCloudService.get().equals("lambdaTest")) {
+			LambdaTest lambdaTest = new LambdaTest();
+			appiumURL = lambdaTest.getAppiumURL();
+		} 
+		
+		else {
+			SauceLabs sauceLabs = new SauceLabs();
+			appiumURL = sauceLabs.getAppiumURL();
+		}
+		
+		return appiumURL;
+	}
+	
 
 	
 	public void uploadAndroidBuild() throws Exception {
@@ -193,34 +209,46 @@ public class Helper {
 		
 	}
 	
-	public DesiredCapabilities getCloudCapabilities(){
+public DesiredCapabilities getCloudCapabilities(){
+		
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		if(Recovery.sCloudService.get().equals("lambdaTest")) {
+			LambdaTest lambdaTest = new LambdaTest();
+			capabilities = lambdaTest.getCloudCapabilities();
+		} else {
+			SauceLabs sauceLabs = new SauceLabs();
+			capabilities = sauceLabs.getCloudCapabilities();
+		}
+			
+		return capabilities;
+		
+	}
+	
+	
+	
+	/* public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		
 		//**** LambdaTest changes
-//		String buildName = System.getenv("buildtag");
-//		if(buildName==null) {
-//			buildName = "LOCAL_"+Recovery.sEngine.get();
-//		}
+		String buildName = System.getenv("buildtag");
+		if(buildName==null) {
+			buildName = "LOCAL_"+Recovery.sEngine.get();
+		}
 		//****
 		
-		if (getEngine().equals("android")){
+		
+		//if (getEngine().equals("android")){ 
 			
-			//*** lambdaTest requirement - build
-			//capabilities.setCapability("build", buildName);
-			//****
+			// ** SauceLab related desired capabilities for cloud android **
+			
+			/*
 			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			capabilities.setCapability("name", this.getTestName());
 			capabilities.setCapability("appiumVersion", "1.17.1");
 			capabilities.setCapability("automationName","appium");
 			capabilities.setCapability("platformVersion","11.0");
-			//*****Lambdatest cahnges - platform version***
-			//capabilities.setCapability("platformVersion","12.0");
 			capabilities.setCapability("deviceName","Google Pixel 3 XL GoogleAPI Emulator");
-			//*****Lambdatest cahnges - device***
-			//capabilities.setCapability("deviceName","Pixel.*");
-			//capabilities.setCapability("app", this.getLambdaTestAppUrl());
-			//****
 			//capabilities.setCapability("deviceName","Android Emulator");
 			//capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
 			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
@@ -239,8 +267,33 @@ public class Helper {
 			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
 			capabilities.setCapability("appPackage","com.quicken.qm2014");
 			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-		}
-		else if(getEngine().equals("ios")){
+			*/
+			
+			
+			 //**LambdaTest related desired capabilities**
+			
+//			capabilities.setCapability("build", buildName);
+//			capabilities.setCapability("name", this.getTestName());
+//			capabilities.setCapability("deviceName", "Pixel.*");
+//			capabilities.setCapability("platformVersion","12");
+//			capabilities.setCapability("platformName", "Android");
+//			capabilities.setCapability("isRealMobile", true);
+//			capabilities.setCapability("app", this.getLambdaTestAppUrl());
+//			capabilities.setCapability("deviceOrientation", "PORTRAIT");
+//			capabilities.setCapability("console", true);
+//			capabilities.setCapability("network", false);
+//			capabilities.setCapability("video", true);
+//			capabilities.setCapability("devicelog", true);
+//			capabilities.setCapability("newCommandTimeout", 1500);
+//			capabilities.setCapability("waitForIdleTimeout", 0);
+//			capabilities.setCapability("ignoreUnimportantViews", true);
+//			 
+			
+		//}
+		//else if(getEngine().equals("ios")){
+			
+			// ** SauceLab related desired capabilities for cloud android **
+			/*
 			capabilities.setCapability("platformName", "iOS");
 			capabilities.setCapability("name", this.getTestName());
 			//capabilities.setCapability("deviceName", "iPhone 8 Simulator");
@@ -260,13 +313,34 @@ public class Helper {
 			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
 			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
 			capabilities.setCapability("automationName","XCUITest");
+			*/
 			
 			
-		}
-		return capabilities;
+			// **LambdaTest related desired capabilities**
+			
+//			capabilities.setCapability("build", buildName);
+//			capabilities.setCapability("name", this.getTestName());
+//			capabilities.setCapability("deviceName", "iPhone.*");
+//			capabilities.setCapability("platformVersion","15.0");
+//			capabilities.setCapability("platformName", "iOS");
+//			capabilities.setCapability("isRealMobile", true);
+//			capabilities.setCapability("app", this.getLambdaTestAppUrl());
+//			capabilities.setCapability("deviceOrientation", "PORTRAIT");
+//			capabilities.setCapability("console", true);
+//			capabilities.setCapability("network", false);
+//			capabilities.setCapability("video", true);
+//			capabilities.setCapability("devicelog", true);
+//			capabilities.setCapability("newCommandTimeout", 1500);
+//			capabilities.setCapability("waitForIdleTimeout", 0);
+//			capabilities.setCapability("autoAcceptAlerts", true);
+			 
+			
+//		}
+//		return capabilities;
+//		
+//		
+//	} 
 		
-		
-	}
 	
 	public DesiredCapabilities getLocalCapabilities() throws Exception{
 		
@@ -318,7 +392,7 @@ public class Helper {
 		
 	}
 	// **** Appium url - Sauce Labs
-	 public String getAppiumURL(){
+	/* public String getAppiumURL(){
 		String USERNAME = "kalyan_grandhi";
 		String ACCESS_KEY = "10fde941-0bec-4273-bca6-c7c827f36234";
 		
@@ -327,33 +401,36 @@ public class Helper {
 		}
 		else
 			return "http://127.0.0.1:4723/wd/hub";		
-	}
+	}*/
 	
 	//**** LambdaTest Appium URL
 	
-//	public String getAppiumURL(){
-//		String USERNAME = "robert.jauregui";
-//		String ACCESS_KEY = "eWgy3CbXd4sB7AtpHqlurFn44IbNwgx4H9apZjDR3wxAFtCmts";
-//		
-//		if (getHost().equals("cloud")){
-//			return "https://" + USERNAME + ":" + ACCESS_KEY + "@mobile-hub.lambdatest.com/wd/hub";	
-//		}
-//		else
-//			return "http://127.0.0.1:4723/wd/hub";	
-//	
-//	}
+/*	public String getAppiumURL(){
+		String USERNAME = "kallol.das";
+		String ACCESS_KEY = "5duuN311efP6Nhuhj9kJYn8JfACxznRdlEnFSxW8ju9YgR1hlr";
+		
+		if (getHost().equals("cloud")){
+			return "https://" + USERNAME + ":" + ACCESS_KEY + "@mobile-hub.lambdatest.com/wd/hub";	
+		}
+		else
+			return "http://127.0.0.1:4723/wd/hub";	
+	
+	}
 	//***** LambdaTest Get appURL method for cloud and local
 	
-	/*public String getLambdaTestAppUrl() {
+	public String getLambdaTestAppUrl() {
 		String app_url = System.getProperty("LambdaTest_response");
 		if(app_url=="null") {
 			
+			//JSONObject lambdaTestResponseData = new JSONObject(app_url);
+			//app_url = lambdaTestResponseData.getString("app_url");		// this is set in Jenkins
+			
 		}else {
 			if(getEngine().equals("ios")) {
-				app_url = "";
+				app_url = "lt://APP10160551841667721056744760";
 			}
 			else {
-				app_url = "";
+				app_url = "lt://APP10160532421667661979627588";
 			}
 			
 		}
@@ -364,6 +441,12 @@ public class Helper {
 	//************
 	
 	public DesiredCapabilities getCapabilities() throws Exception{
+		
+		String textToDisplay = "";
+		if(Recovery.sHost.get().equals("cloud")) {
+			 textToDisplay="Service:["+Recovery.sCloudService.get()+ "]";
+		}
+		System.out.println("Host:["+Recovery.sHost.get()+"], Engine:["+Recovery.sEngine.get()+"] "+textToDisplay);
 		
 		if (getHost().equals("cloud"))
 			return getCloudCapabilities();

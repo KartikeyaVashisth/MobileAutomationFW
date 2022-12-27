@@ -60,20 +60,40 @@
 <plugins>
       <plugin>
       <artifactId>maven-surefire-plugin</artifactId>
+      <version>2.21.0</version>
       <configuration>
+      <redirectTestOutputToFile>false</redirectTestOutputToFile>
        <suiteXmlFiles>
               <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
             </suiteXmlFiles>
       	<systemPropertyVariables>
-         <buildpath>${env.BUILD}</buildpath> 
+      	<buildpath>${env.BUILD}</buildpath>
+        		 	<buildtag>${env.BUILD_TAG}</buildtag>
+      		 		<lambdatest_response>${env.buildLambdaTestResponse}</lambdatest_response>
+         <!--<buildpath>${env.BUILD}</buildpath> 
          <engine>${env.ENGINE}</engine>
-         <host>${env.HOST}</host>
+         <host>${env.HOST}</host>-->
           
       	</systemPropertyVariables>  
+      	<testFailureIgnore>true</testFailureIgnore>
       </configuration>
       </plugin>
+      
+       <plugin>
+          	<version>3.8.1</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+      
     </plugins>
     
+   
+    
+     
 <!--
 <plugins>
   

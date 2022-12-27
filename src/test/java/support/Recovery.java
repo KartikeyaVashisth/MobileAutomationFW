@@ -46,6 +46,7 @@ public class Recovery {
 	public static ThreadLocal<String> sEngine = new ThreadLocal<String>();
 	public static ThreadLocal<String> sHost= new ThreadLocal<String>();
 	public static ThreadLocal<String> sTestName= new ThreadLocal<String>();
+	public static ThreadLocal<String> sCloudService= new ThreadLocal<String>();
 	public static ThreadLocal<String> sEnv= new ThreadLocal<String>();
 	public static ThreadLocal<String> TEST_RUN_ID = new ThreadLocal<String>();
 	public static ThreadLocal<String> testCaseId = new ThreadLocal<String>();
@@ -240,8 +241,8 @@ public class Recovery {
 	
 	public static void addResultForTestCase(String testCaseId, int status,
             String error) throws IOException, APIException {
-		 String TESTRAIL_USERNAME          = "kalyan.grandhi@quicken.com";
-		 String TESTRAIL_PASSWORD          = "Quicken4Win!";
+		 String TESTRAIL_USERNAME          = "kallol.das@quicken.com";
+		 String TESTRAIL_PASSWORD          = "Quicken@01";
 		  String RAILS_ENGINE_URL           = "https://quicken.testrail.net";
         String testRunId = TEST_RUN_ID.get();
 
