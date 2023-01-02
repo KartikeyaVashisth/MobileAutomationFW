@@ -109,7 +109,7 @@ public class CreateMemorizedPayeeDetailPage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Memo']")
 	public MobileElement memo;
 	
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='button Done'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Done'`]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	public MobileElement doneButton;
 	
@@ -491,10 +491,11 @@ public class CreateMemorizedPayeeDetailPage {
 		this.memo.sendKeys(sNote);
 		Thread.sleep(1000);
 		
-//		Helper h = new Helper();
-//		h.hideKeyBoard();
-//		Thread.sleep(1000);
-		this.doneButton.click();
+		Helper h = new Helper();
+		h.hideKeyBoard();
+		Thread.sleep(1000);
+//		this.doneButton.click();
+		this.amount.click();
 	}
 
 	private void enterNotes_ios (String sNote) throws Exception {

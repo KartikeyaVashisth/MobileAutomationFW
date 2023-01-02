@@ -470,10 +470,15 @@ public class HamburgerMenuTest extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Customize Dashboard\" option is NOT displayed under Settings.");
 		
-		if(Verify.objExists(sp.accountsManagementOption))
+		if(Verify.objExists(sp.manageAccountsOption))
 			Commentary.log(LogStatus.INFO, "PASS: \"Manage Accounts\" option is displayed under Settings.");
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Manage Accounts\" option is NOT displayed under Settings.");
+		
+		if(Verify.objExists(sp.manageCategoriesOption))
+			Commentary.log(LogStatus.INFO, "PASS: \"Manage Categories\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Manage Categories \" option is NOT displayed under Settings.");
 		
 		if(Verify.objExists(sp.manageAlerts))
 			Commentary.log(LogStatus.INFO, "PASS: \"Manage Alerts\" option is displayed under Settings.");
@@ -505,12 +510,17 @@ public class HamburgerMenuTest extends Recovery {
 		else
 			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Display Favorite Payees\" option is NOT displayed under Settings.");
 		
-//		sp.scrollToRefreshDataOption();
-//		
-//		if(Verify.objExists(sp.refreshData))
-//			Commentary.log(LogStatus.INFO, "PASS: \"Refresh Data\" option is displayed under Settings.");
-//		else
-//			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Refresh Data\" option is NOT displayed under Settings.");
+		sp.scrollToRefreshDataOption();
+		
+		if(Verify.objExists(sp.displayRealTimeQuotesText) && Verify.objExists(sp.switchDisplayRealTimeQuotes))
+			Commentary.log(LogStatus.INFO, "PASS: \"Display Real-Time Quotes\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Display Real-Time Quotes\" option is NOT displayed under Settings.");
+		
+		if(Verify.objExists(sp.refreshData))
+			Commentary.log(LogStatus.INFO, "PASS: \"Refresh Data\" option is displayed under Settings.");
+		else
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: \"Refresh Data\" option is NOT displayed under Settings.");
 		
 		sa.assertAll();
 	}

@@ -138,7 +138,7 @@ public class SettingsPage {
 	public MobileElement spendingOverTimeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
-	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backArrow']")
+	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
 	public MobileElement backButtonOnHeaders;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Profile Menu'`]")
@@ -269,6 +269,18 @@ public class SettingsPage {
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
 	public MobileElement switchDisplayFavoritePayees;
 	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Real-Time Quotes'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']")
+	public MobileElement displayRealTimeQuotesText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Real-Time Quotes'`]/XCUIElementTypeStaticText[`name = 'Displays real-time quotes for your investments'`]")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']/following::android.widget.TextView[1]")
+	public MobileElement displayRealTimeQuotesDescription;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Real-Time Quotes'`]/XCUIElementTypeSwitch")
+	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']/following::android.widget.Switch")
+	public MobileElement switchDisplayRealTimeQuotes;
+	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Refresh Data']/following-sibling::android.widget.TextView[@text='Use Refresh Data to resolve issues with missing transactions, categories and other data.']")
 	public MobileElement refreshData;
@@ -307,9 +319,9 @@ public class SettingsPage {
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Accounts']")
-	public MobileElement accountsManagementOption;
+	public MobileElement manageAccountsOption;
 	
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Manage Categories'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
 	public MobileElement manageCategoriesOption;
 	
@@ -611,6 +623,51 @@ public class SettingsPage {
 		}
 	}
 	
+	public boolean isDisplayRealTimeQuotesEnabled() throws Exception {
+		Helper h = new Helper();
+		
+		if (h.getEngine().equalsIgnoreCase("android")) {
+			Verify.waitForObject(switchDisplayRealTimeQuotes, 1);
+			if (this.switchDisplayRealTimeQuotes.getText().equalsIgnoreCase("ON")) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { //For iOS
+			Verify.waitForObject(switchDisplayRealTimeQuotes, 1);
+			if (this.switchDisplayRealTimeQuotes.getAttribute("value").equals("1")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public void enableDisplayRealTimeQuotesOption() throws Exception {
+		
+		if (isDisplayRealTimeQuotesEnabled()) {
+			Commentary.log(LogStatus.INFO, "Display Real-Time Quotes option is already Enabled.");
+			Thread.sleep(2000);
+		} else {
+			this.switchDisplayRealTimeQuotes.click();
+			Commentary.log(LogStatus.INFO, "Display Real-Time Quotes option is Enabled now.");
+			Thread.sleep(2000);
+		}
+		
+	}
+	
+	public void disableDisplayRealTimeQuotesOption() throws Exception {
+		
+		if (isDisplayRealTimeQuotesEnabled()) {
+			this.switchDisplayRealTimeQuotes.click();
+			Commentary.log(LogStatus.INFO, "Display Real-Time Quotes option is Disabled now.");
+			Thread.sleep(2000);
+		} else {
+			Commentary.log(LogStatus.INFO, "Display Real-Time Quotes option is already Disabled.");
+			Thread.sleep(2000);
+		}
+	}
+	
 	public boolean isShowLongCategoryNamesEnabled() throws Exception {
 		Helper h = new Helper();
 		
@@ -817,8 +874,8 @@ public class SettingsPage {
 		
 		SettingsPage st = new SettingsPage();
 		clickOnSettingsOption();
-		Verify.waitForObject(st.accountsManagementOption, 1);
-		st.accountsManagementOption.click();
+		Verify.waitForObject(st.manageAccountsOption, 1);
+		st.manageAccountsOption.click();
 		Thread.sleep(1000);
 	
 	}
@@ -837,7 +894,7 @@ public class SettingsPage {
 		
 		SettingsPage sp = new SettingsPage();
 		clickOnSettingsOption();
-		Verify.waitForObject(sp.accountIDUnderProfileOption, 1);
+		Verify.waitForObject(sp.manageCategoriesOption, 1);
 		sp.manageCategoriesOption.click();
 		Thread.sleep(1000);
 	
@@ -897,7 +954,7 @@ public class SettingsPage {
 			scrollObject.put("element", id);
 			scrollObject.put("toVisible", "not an empty string");
 			scrollObject.put("direction", "down");
-			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+			Engine.getDriver().executeScript("mobile:scroll", scrollObject);
 			Thread.sleep(1000);
 			
 		}

@@ -1055,7 +1055,7 @@ public class BillsAndIncomePage {
 		String createTag_xpath="//android.widget.TextView[@content-desc='create tag']";
 		String cc = "//android.widget.TextView[@text='"+sTag+"']";
 
-		if (Verify.objExists(createPayee)) {
+		if (Verify.objExists(createTag)) {
 			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
 			Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
@@ -2242,7 +2242,8 @@ public class BillsAndIncomePage {
 		Commentary.log(LogStatus.INFO, "No of Reminder Series appeared in the search .."+li.size());
 		int listSize = li.size();
 
-		if (li.isEmpty())
+//		if (li.isEmpty()) //Commenting it because the background page source hierarchy is captured where the matching element is present.
+		if(Verify.objExists(this.youHaveNoScheduledReminders))
 			Commentary.log(LogStatus.INFO, "No Reminder Series present.");
 		else {
 			for(int i=1; i<=listSize; i++) {
