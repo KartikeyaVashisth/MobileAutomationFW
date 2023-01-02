@@ -15,37 +15,58 @@ import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class TransferCases_Test2 extends Recovery{
 
-	String sUserName = "mobileautomation1@quicken.com";
-	String sPassword = "Quicken@01";
-	String sDataset = "Transfers_automation";
-	String sChecking = "Checking";
-	String sCreditCard ="Credit Card";
-	String sManualSaving = "manual_savings";
-	String sOnlineSaving = "onl_savings";
-	String backButton1_ios = "Banking & Credit, back";
-	String sSavings = "Savings";
-	String sDataset1 = "OnlineAcc_Automation";
-	String sOnlineChecking = "Checking1 XX8651";
-	String sSaving = "Saving XX3867";
-	String sManualSavings = "Manual_Savings";
+	//String sUserName = "mobileautomation1@quicken.com";
+		String sPassword = "Quicken@01";
+		String sDataset = "Transfers_automation";
+		String sDataset1 = "stg-transfer-automation1";
+		String sChecking = "manual_Checking";
+		String sCreditCard ="manual_Credit Card";
+		String sManualSaving = "manual_savings";
+		//String sOnlineSaving = "onl_savings";
+		String backButton1_ios = "Banking & Credit, back";
+		String sSavings = "Savings";
+		//String sDataset1 = "OnlineAcc_Automation";
+		//String sOnlineChecking = "Checking1 XX8651";
+		String sOnlineChecking = "QChecking_LongAccountNameTest_Simplifi";
+		//String sSaving = "Saving XX3867";
+		String sSaving = "Savings_Simplifi_Test";
+		String sManualSavings = "Savings";
+		
+		
+	public String getUsername_basedOnEnv() throws Exception {
+			
+			UserName un = new UserName();
+			un.stage_ios = "stg-transfer-ios1++@stage.com";
+			un.stage_android = "stg-transfer-android1++@stage.com";
+			un.prod_ios = "";
+			un.prod_android = "";
+			return un.getUserName();
+			
+		}
 
 	@Test(priority = 13, enabled = true)
 	public void TR14_test() throws Exception{
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
+		
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
 
 		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		signIn.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO,	"["+h.getEngine()+"]: Creating two normal transaction and editing the category to transfer account and verifying MATCH functionality.");
 

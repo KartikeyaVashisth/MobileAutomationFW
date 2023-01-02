@@ -39,7 +39,7 @@ public class PracticeMatch extends Recovery  {
 	public static void main(String[] args) {
 		
 		// To upload Release build to Sauce, Run this main block.
-//		String appPath ="/Users/kvashisth/Downloads/CompanionApk/Quicken.5.22.0.19923.google.apk";
+//		String appPath ="/Users/kdas/Downloads/Quicken.6.22.0.27357.debug.apk";
 //		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
 //		File f = new File(appPath);
 //		try {
@@ -51,7 +51,7 @@ public class PracticeMatch extends Recovery  {
 //		}
 		
 		//For iOS.
-		String appPath1 ="/Users/kvashisth/Downloads/companion.zip";
+		String appPath1 ="/Users/kdas/Downloads/Quickencompanion.app.zip";
 		SauceREST r1 = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
 		File f1 = new File(appPath1);
 		try {
