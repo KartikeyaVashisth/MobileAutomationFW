@@ -322,7 +322,7 @@ public class TransactionDetailPage {
 	@AndroidFindBy(xpath="//android.widget.EditText[@index='2']")
 	public MobileElement enteredNote;
 
-	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='button Done'`][2]")
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Done'`]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	public MobileElement buttonDone_OSKeyBoard;
 
@@ -1657,7 +1657,11 @@ public class TransactionDetailPage {
 		this.note.sendKeys(sNote);
 		Thread.sleep(1000);
 
-		this.buttonDone_OSKeyBoard.click();
+//		this.buttonDone_OSKeyBoard.click();
+//		Thread.sleep(1000);
+		
+		Helper h = new Helper();
+		h.hideKeyBoard();
 		Thread.sleep(1000);
 	}
 
@@ -1669,6 +1673,7 @@ public class TransactionDetailPage {
 		Thread.sleep(1000);
 		this.note.clear();
 		this.note.sendKeys(sNote);
+		Thread.sleep(1000);
 
 		this.buttonDone_OSKeyBoard.click();
 		Thread.sleep(1000);

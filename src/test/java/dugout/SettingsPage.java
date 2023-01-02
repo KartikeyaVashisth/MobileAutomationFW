@@ -138,7 +138,7 @@ public class SettingsPage {
 	public MobileElement spendingOverTimeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
-	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backArrow']")
+	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
 	public MobileElement backButtonOnHeaders;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Profile Menu'`]")
