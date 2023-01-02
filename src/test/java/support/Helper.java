@@ -58,10 +58,17 @@ public class Helper {
 		
 		try{
 		
-		getFileNames();
+		//getFileNames();
 		Enumeration readProps;
+		String propFilePath = this.getClass().getClassLoader().getResource("").getPath();
 		
-		String propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
+		if(propFilePath.contains("/Users/administrator/workspace/")) {
+			propFilePath = System.getProperty("buildpath").split("Quicken")[0]+"src/test/java/props/test.properties";
+		} else {
+			propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
+		}
+		
+		//String propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
 		
 		System.out.println("Path: "+propFilePath);
 		
