@@ -56,13 +56,11 @@ public class LambdaTest {
 
 	public DesiredCapabilities getCloudCapabilities(){
 		
+		// LambdaTest cloud capabilities
 		
 		Helper h = new Helper();
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		
-		
-		//**** LambdaTest changes
 		String buildName = System.getenv("buildtag");
 		if(buildName==null) {
 			buildName = "LOCAL_"+Recovery.sEngine.get();
@@ -70,8 +68,6 @@ public class LambdaTest {
 		
 		if (Recovery.sEngine.get().equals("android")){ 
 		
-			 //**LambdaTest related desired capabilities**
-			
 			capabilities.setCapability("build", buildName);
 			capabilities.setCapability("name", h.getTestName());
 			capabilities.setCapability("deviceName", "Pixel.*");
@@ -91,8 +87,6 @@ public class LambdaTest {
 			
 		}
 		else if(Recovery.sEngine.get().equals("ios")) {
-		
-			// **LambdaTest related desired capabilities**
 			
 			capabilities.setCapability("build", buildName);
 			capabilities.setCapability("name", h.getTestName());

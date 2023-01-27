@@ -58,17 +58,15 @@ public class Helper {
 		
 		try{
 		
-		//getFileNames();
+		//getFileNames();  // This is just to check whether the file is existing in the desired location or not.
 		Enumeration readProps;
 		String propFilePath = this.getClass().getClassLoader().getResource("").getPath();
 		
 		if(propFilePath.contains("/Users/administrator/workspace/")) {
-			propFilePath = System.getProperty("buildpath").split("Quicken")[0]+"src/test/java/props/test.properties";
+			propFilePath = System.getProperty("buildpath").split("Quicken")[0]+"src/test/resources/props/test.properties";
 		} else {
 			propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
 		}
-		
-		//String propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
 		
 		System.out.println("Path: "+propFilePath);
 		
@@ -216,7 +214,7 @@ public class Helper {
 		
 	}
 	
-public DesiredCapabilities getCloudCapabilities(){
+	public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		if(Recovery.sCloudService.get().equals("lambdaTest")) {
