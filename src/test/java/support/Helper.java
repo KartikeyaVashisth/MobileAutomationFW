@@ -36,7 +36,8 @@ import io.appium.java_client.remote.MobileCapabilityType;
 public class Helper {
 	
 	
-	public void getFileNames() throws Exception{
+	// This Methos we have commented for now as this method is to check whether the build is available on the dropbox or not. Generally it will be available.
+	/*public void getFileNames() throws Exception{
 		
 		//Creating a File object for directory
 	      File directoryPath = new File(this.getClass().getClassLoader().getResource("").getPath());
@@ -53,15 +54,53 @@ public class Helper {
 	      System.out.println(f.exists());
 	      System.out.println(f.isDirectory());
 	      System.out.println("********* under**********");
+	}*/
+	
+	
+public void uploadAndroidBuild() throws Exception {
+		
+		System.out.println("uploading build to SAUCE storage");
+		System.out.println("build path... "+System.getProperty("buildpath"));
+		String appPath = System.getProperty("buildpath");
+		String [] a = appPath.split("/");
+		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+		
+		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f = new File(appPath);
+		String response = r.uploadFile(f, "Quicken.apk", true);
+		System.out.println("Sauce Upload Response -->> "+response);
+		System.out.println("Completed..uploading build to SAUCE storage");
+		
+	}
+	
+	public void uploadIOSBuild() throws Exception{
+		
+		System.out.println("uploading build to SAUCE storage");
+		System.out.println("build path... "+System.getProperty("buildpath"));
+		String appPath = System.getProperty("buildpath");
+		String [] a = appPath.split("/");
+		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+		
+		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
+		File f = new File(appPath);
+		String response = r.uploadFile(f, "IOSRegression.zip", true);
+		System.out.println("Sauce Upload Response -->> "+response);
+		System.out.println("Completed..uploading build to SAUCE storage");
+		
 	}
 	public void loadProperties(){
 		
 		try{
 		
-		getFileNames();
+		//getFileNames();  // This is just to check whether the file is existing in the desired location or not.
 		Enumeration readProps;
+		String propFilePath = this.getClass().getClassLoader().getResource("").getPath();
 		
-		String propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
+		if(propFilePath.contains("/Users/administrator/workspace/")) {
+			propFilePath = System.getProperty("buildpath").split("Quicken")[0]+"src/test/resources/props/test.properties";
+		} else {
+			propFilePath = this.getClass().getClassLoader().getResource("").getPath()+"/props/test.properties";
+		}
 		
 		System.out.println("Path: "+propFilePath);
 		
@@ -159,114 +198,42 @@ public class Helper {
 		return globals.testProperty.get("deviceName");
 	}
 	
-
-	
-	public void uploadAndroidBuild() throws Exception {
+	public String getAppiumURL(){
 		
-		System.out.println("uploading build to SAUCE storage");
-		System.out.println("build path... "+System.getProperty("buildpath"));
-		String appPath = System.getProperty("buildpath");
-		String [] a = appPath.split("/");
-		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
+		String appiumURL;
+		if(Recovery.sCloudService.get().equals("lambdaTest")) {
+			LambdaTest lambdaTest = new LambdaTest();
+			appiumURL = lambdaTest.getAppiumURL();
+		} 
 		
-		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-		File f = new File(appPath);
-		String response = r.uploadFile(f, "Quicken.apk", true);
-		System.out.println("Sauce Upload Response -->> "+response);
-		System.out.println("Completed..uploading build to SAUCE storage");
+		else {
+			SauceLabs sauceLabs = new SauceLabs();
+			appiumURL = sauceLabs.getAppiumURL();
+		}
 		
+		return appiumURL;
 	}
 	
-	public void uploadIOSBuild() throws Exception{
-		
-		System.out.println("uploading build to SAUCE storage");
-		System.out.println("build path... "+System.getProperty("buildpath"));
-		String appPath = System.getProperty("buildpath");
-		String [] a = appPath.split("/");
-		System.out.println("Quicken Build Version from the path..."+a[a.length-1]);
-		
-		SauceREST r = new SauceREST("kalyan_grandhi", "10fde941-0bec-4273-bca6-c7c827f36234");
-		File f = new File(appPath);
-		String response = r.uploadFile(f, "IOSRegression.zip", true);
-		System.out.println("Sauce Upload Response -->> "+response);
-		System.out.println("Completed..uploading build to SAUCE storage");
-		
-	}
 	
 	public DesiredCapabilities getCloudCapabilities(){
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		
-		//**** LambdaTest changes
-//		String buildName = System.getenv("buildtag");
-//		if(buildName==null) {
-//			buildName = "LOCAL_"+Recovery.sEngine.get();
-//		}
-		//****
-		
-		if (getEngine().equals("android")){
-			
-			//*** lambdaTest requirement - build
-			//capabilities.setCapability("build", buildName);
-			//****
-			capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
-			capabilities.setCapability("name", this.getTestName());
-			capabilities.setCapability("appiumVersion", "1.17.1");
-			capabilities.setCapability("automationName","appium");
-			capabilities.setCapability("platformVersion","11.0");
-			//*****Lambdatest cahnges - platform version***
-			//capabilities.setCapability("platformVersion","12.0");
-			capabilities.setCapability("deviceName","Google Pixel 3 XL GoogleAPI Emulator");
-			//*****Lambdatest cahnges - device***
-			//capabilities.setCapability("deviceName","Pixel.*");
-			//capabilities.setCapability("app", this.getLambdaTestAppUrl());
-			//****
-			//capabilities.setCapability("deviceName","Android Emulator");
-			//capabilities.setCapability("deviceName","Samsung Galaxy S9 Plus HD GoogleAPI Emulator");
-			//capabilities.setCapability("deviceName","Android GoogleAPI Emulator");
-			//capabilities.setCapability("platformVersion","8.1"); 
-			
-			capabilities.setCapability("deviceOrientation", "portrait");
-			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("platformName","Android");
-			capabilities.setCapability("autoWebView", "true");
-			capabilities.setCapability("maxDuration", 4000);
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("noResetValue", true);
-			capabilities.setCapability("ignoreUnimportantViews", true);
-			//capabilities.setCapability("chromedriverExecutable","/Users/kgrandhi/Documents/ChromeDriver/2.18/chromedriver");
-			//capabilities.setCapability("app", "sauce-storage:QuickenRelease.apk");
-			capabilities.setCapability("app", "sauce-storage:Quicken.apk");
-			capabilities.setCapability("appPackage","com.quicken.qm2014");
-			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
+		if(Recovery.sCloudService.get().equals("lambdaTest")) {
+			LambdaTest lambdaTest = new LambdaTest();
+			capabilities = lambdaTest.getCloudCapabilities();
+		} else {
+			SauceLabs sauceLabs = new SauceLabs();
+			capabilities = sauceLabs.getCloudCapabilities();
 		}
-		else if(getEngine().equals("ios")){
-			capabilities.setCapability("platformName", "iOS");
-			capabilities.setCapability("name", this.getTestName());
-			//capabilities.setCapability("deviceName", "iPhone 8 Simulator");
-			//capabilities.setCapability("platformVersion", "12.0"); //9.3
-			//capabilities.setCapability("platformVersion", "11.2");
-			capabilities.setCapability("appiumVersion", "1.15.0");
-			capabilities.setCapability("deviceName","iPhone 11 Pro Max");//iPhone Simulator
-			capabilities.setCapability("platformVersion","13.0");
-			capabilities.setCapability("browserName", "");
-			capabilities.setCapability("deviceOrientation", "portrait");
-			capabilities.setCapability("autoWebView", "true");
-//			capabilities.setCapability("autoAcceptAlerts", true);
-		    capabilities.setCapability("autoGrantPermissions", true);
-		    capabilities.setCapability("maxDuration", 4000);
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("noResetValue", true);
-			capabilities.setCapability("app", "sauce-storage:IOSRegression.zip");			
-			capabilities.setCapability("appPackage","com.intuit.quickencompanion.ios");
-			capabilities.setCapability("automationName","XCUITest");
 			
-			
-		}
 		return capabilities;
 		
-		
 	}
+	
+	
+	
+	
+		
 	
 	public DesiredCapabilities getLocalCapabilities() throws Exception{
 		
@@ -299,7 +266,7 @@ public class Helper {
 			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
 			capabilities.setCapability("platformVersion", "15.5"); //12.1
 			capabilities.setCapability("appiumVersion", "1.22.3"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro Max");
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro");
 			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
 	        capabilities.setCapability("automationName","XCUITest");
 	        capabilities.setCapability("noReset", true);
@@ -317,53 +284,15 @@ public class Helper {
 		return capabilities;
 		
 	}
-	// **** Appium url - Sauce Labs
-	 public String getAppiumURL(){
-		String USERNAME = "kalyan_grandhi";
-		String ACCESS_KEY = "10fde941-0bec-4273-bca6-c7c827f36234";
-		
-		if (getHost().equals("cloud")){
-			return "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";	
-		}
-		else
-			return "http://127.0.0.1:4723/wd/hub";		
-	}
-	
-	//**** LambdaTest Appium URL
-	
-//	public String getAppiumURL(){
-//		String USERNAME = "robert.jauregui";
-//		String ACCESS_KEY = "eWgy3CbXd4sB7AtpHqlurFn44IbNwgx4H9apZjDR3wxAFtCmts";
-//		
-//		if (getHost().equals("cloud")){
-//			return "https://" + USERNAME + ":" + ACCESS_KEY + "@mobile-hub.lambdatest.com/wd/hub";	
-//		}
-//		else
-//			return "http://127.0.0.1:4723/wd/hub";	
-//	
-//	}
-	//***** LambdaTest Get appURL method for cloud and local
-	
-	/*public String getLambdaTestAppUrl() {
-		String app_url = System.getProperty("LambdaTest_response");
-		if(app_url=="null") {
-			
-		}else {
-			if(getEngine().equals("ios")) {
-				app_url = "";
-			}
-			else {
-				app_url = "";
-			}
-			
-		}
-		
-		
-		return app_url;
-	}*/
-	//************
+
 	
 	public DesiredCapabilities getCapabilities() throws Exception{
+		
+		String textToDisplay = "";
+		if(Recovery.sHost.get().equals("cloud")) {
+			 textToDisplay="Service:["+Recovery.sCloudService.get()+ "]";
+		}
+		System.out.println("Host:["+Recovery.sHost.get()+"], Engine:["+Recovery.sEngine.get()+"] "+textToDisplay);
 		
 		if (getHost().equals("cloud"))
 			return getCloudCapabilities();

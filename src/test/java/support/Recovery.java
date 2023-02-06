@@ -46,19 +46,27 @@ public class Recovery {
 	public static ThreadLocal<String> sEngine = new ThreadLocal<String>();
 	public static ThreadLocal<String> sHost= new ThreadLocal<String>();
 	public static ThreadLocal<String> sTestName= new ThreadLocal<String>();
+	public static ThreadLocal<String> sCloudService= new ThreadLocal<String>();
 	public static ThreadLocal<String> sEnv= new ThreadLocal<String>();
 	public static ThreadLocal<String> TEST_RUN_ID = new ThreadLocal<String>();
 	public static ThreadLocal<String> testCaseId = new ThreadLocal<String>();
 	
 	public Boolean wannaUploadTheBuild(){
 		
-		String uploadBuild = System.getProperty("buildpath");
+		if(this.sCloudService.get().equals("sauceLabs")) {
 		
-		if (uploadBuild == null || uploadBuild.equals("DoNotUpload"))
+			String uploadBuild = System.getProperty("buildpath");
+			
+			if (uploadBuild == null || uploadBuild.equals("DoNotUpload"))
 			return false;
-		
-		System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
-		return true;
+			
+			System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
+			return true;
+			
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@BeforeSuite
@@ -72,7 +80,7 @@ public class Recovery {
 		
 		
 			
-	}
+	} 
 	
 	
 	
@@ -96,6 +104,7 @@ public class Recovery {
 			sHost.set(g.testProperty.get("host"));
 			sTestName.set("LOCAL_Companion"+g.testProperty.get("engine"));
 			sEnv.set(g.testProperty.get("env"));
+			
 		}
 		else {
 			h.loadProperties();
@@ -110,8 +119,13 @@ public class Recovery {
 			}
 		}
 		
+		sCloudService.set(Globals.testProperty.get("cloud_service"));
+		
 		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
 		System.out.println("Before Test Run ID: "+TEST_RUN_ID.get());
+		
+		
+		
 		if (wannaUploadTheBuild()) {
 			
 			if (sEngine.get().equals("android"))
@@ -134,6 +148,8 @@ public class Recovery {
 		
 		
 	}
+	
+	
 	
 	@BeforeMethod
 	public void testCaseEnter(Method m) throws Exception{
@@ -240,8 +256,8 @@ public class Recovery {
 	
 	public static void addResultForTestCase(String testCaseId, int status,
             String error) throws IOException, APIException {
-		 String TESTRAIL_USERNAME          = "kalyan.grandhi@quicken.com";
-		 String TESTRAIL_PASSWORD          = "Quicken4Win!";
+		 String TESTRAIL_USERNAME          = "kallol.das@quicken.com";
+		 String TESTRAIL_PASSWORD          = "Quicken@01";
 		  String RAILS_ENGINE_URL           = "https://quicken.testrail.net";
         String testRunId = TEST_RUN_ID.get();
 

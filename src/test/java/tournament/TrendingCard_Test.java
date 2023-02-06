@@ -13,18 +13,37 @@ import dugout.SignInPage;
 import dugout.SpendingTrendPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
+import dugout.WelcomePage;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
 import support.Recovery;
 import support.TransactionRecord;
+import support.UserName;
 
 public class TrendingCard_Test extends Recovery {
 
-	String sUserName = "kalyan.grandhi@quicken.com";
-	String sPassword = "Intuit!1";
-	String sDataset = "Budget_RollOver_Income";
-	String sManualChecking = "Checking";
+	//String sUserName = "kalyan.grandhi@quicken.com";
+	//String sPassword = "Intuit!1";
+	//String sDataset = "Budget_RollOver_Income";
+	String sPassword = "Quicken@01";
+	String sDataset = "topTrending-automation";
+	String sManualChecking = "manual_Checking";
+	String sSavings = "manual_Savings";
+	String sCredit = "manual_Credit";
+	
+	
+	
+public String getUsername_basedOnEnv() throws Exception {
+		
+		UserName un = new UserName();
+		un.stage_ios = "stg-toptrending-ios++@stage.com";
+		un.stage_android = "stg-toptrending-android++@stage.com";
+		un.prod_ios = "";
+		un.prod_android = "";
+		return un.getUserName();
+		
+	}
 
 	@Test(priority = 1, enabled = true)
 	public void TC1_test() throws Exception {
@@ -32,8 +51,12 @@ public class TrendingCard_Test extends Recovery {
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		
+		String sUsername = getUsername_basedOnEnv();
+		WelcomePage w = new WelcomePage();
+		w.setEnvironment(h.getEnv());
+		
 		SignInPage signIn = new SignInPage();
-		signIn.signIn(sUserName, sPassword, sDataset);
+		signIn.signIn(sUsername, sPassword, sDataset);
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Add a transaction for a category, date last 30 days and verify the amount reflects on trending card Category Total.");
 
