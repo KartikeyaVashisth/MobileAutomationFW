@@ -53,13 +53,20 @@ public class Recovery {
 	
 	public Boolean wannaUploadTheBuild(){
 		
-		String uploadBuild = System.getProperty("buildpath");
+		if(this.sCloudService.get().equals("sauceLabs")) {
 		
-		if (uploadBuild == null || uploadBuild.equals("DoNotUpload"))
+			String uploadBuild = System.getProperty("buildpath");
+			
+			if (uploadBuild == null || uploadBuild.equals("DoNotUpload"))
 			return false;
-		
-		System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
-		return true;
+			
+			System.out.println("UPLOADING BUILD TO SAUCE > TRUE");
+			return true;
+			
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@BeforeSuite
@@ -73,7 +80,7 @@ public class Recovery {
 		
 		
 			
-	}
+	} 
 	
 	
 	
@@ -97,6 +104,7 @@ public class Recovery {
 			sHost.set(g.testProperty.get("host"));
 			sTestName.set("LOCAL_Companion"+g.testProperty.get("engine"));
 			sEnv.set(g.testProperty.get("env"));
+			
 		}
 		else {
 			h.loadProperties();
@@ -111,8 +119,13 @@ public class Recovery {
 			}
 		}
 		
+		sCloudService.set(Globals.testProperty.get("cloud_service"));
+		
 		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
 		System.out.println("Before Test Run ID: "+TEST_RUN_ID.get());
+		
+		
+		
 		if (wannaUploadTheBuild()) {
 			
 			if (sEngine.get().equals("android"))
@@ -135,6 +148,8 @@ public class Recovery {
 		
 		
 	}
+	
+	
 	
 	@BeforeMethod
 	public void testCaseEnter(Method m) throws Exception{
