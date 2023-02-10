@@ -61,7 +61,7 @@ public class LambdaTest {
 		Helper h = new Helper();
 		
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		String buildName = System.getenv("buildtag");
+		String buildName = System.getProperty("buildtag");
 		if(buildName==null) {
 			buildName = "LOCAL_"+Recovery.sEngine.get();
 		}
