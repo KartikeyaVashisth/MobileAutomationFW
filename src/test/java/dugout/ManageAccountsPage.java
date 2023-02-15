@@ -1,0 +1,169 @@
+package dugout;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
+
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import referee.Verify;
+import support.Engine;
+import support.Helper;
+
+public class ManageAccountsPage {
+
+	public ManageAccountsPage() {
+
+		try {
+			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()), this);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Manage Accounts'`]")
+	@AndroidFindBy(xpath = "//android.view.View[@text='Manage Accounts']")
+	private MobileElement manageAccountsText;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'FI three dot menu'`][-1]")
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[contains(@content-desc,'FI three dot menu')]")
+	private MobileElement FIThreeDotsMenu;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Delete financial institution'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete financial institution']")
+	private MobileElement deleteFIOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Cancel'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Cancel']")
+	private MobileElement cancelOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Rename account'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Rename account']")
+	private MobileElement renameAccountOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Keep this account separate'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep this account separate']")
+	private MobileElement keepAccountSeparateOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Hide in account list'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide in account list']")
+	private MobileElement hideInAccountListOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Delete account'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete account']")
+	private MobileElement deleteAccountOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Account Name'`]/**/XCUIElementTypeTextField")
+	@AndroidFindBy(xpath = "")
+	private MobileElement renameAccountNameTextField;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Update'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Update']")
+	private MobileElement updateOption;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'closeRename account'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='closeRename account']")
+	private MobileElement closeRenameAccountButton;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Keep account separate'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep account separate']")
+	private MobileElement keepAccountSeparatePopUpText;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Keep Separate'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep Separate']")
+	private MobileElement keepSeparateButton;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Hide account'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide account']")
+	private MobileElement hideAccountPopUpText;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Hide'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide']")
+	private MobileElement hideButton;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Delete account'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete account']")
+	private MobileElement deleteAccountPopUpText;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Delete financial institution'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete financial institution']")
+	private MobileElement deleteFinancialInstitutionPopUpText;
+
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Delete'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete']")
+	private MobileElement deleteButton;
+
+
+	public void chooseOption(String optionName) throws Exception {
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String xpath = "//android.widget.TextView[@text='"+optionName+"']";
+			Engine.getDriver().findElement(By.xpath(xpath)).click();
+			Thread.sleep(1000);
+		}
+		else {
+			String xpath = "**/XCUIElementTypeOther[`name='"+optionName+"'`]";
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+			Thread.sleep(1000);
+		}
+	}
+
+	public void renameAccount(String newAccountName) throws Exception {
+
+		this.renameAccountNameTextField.click();
+		this.renameAccountNameTextField.clear();
+		this.renameAccountNameTextField.sendKeys(newAccountName);
+		this.updateOption.click();
+		Thread.sleep(1000);
+
+	}
+
+	public String getPreviousAccountNameText() {
+		return renameAccountNameTextField.getText();
+	}
+
+	public void keepAccountSeparate() throws Exception {
+
+		Verify.waitForObject(keepAccountSeparatePopUpText, 1);
+		this.keepSeparateButton.click();
+		Thread.sleep(1000);	
+	}
+
+	public void hideAccount() throws Exception {
+
+		Verify.waitForObject(hideAccountPopUpText, 1);
+		this.hideButton.click();
+		Thread.sleep(1000);	
+	}
+
+	public void deleteAccount() throws Exception {
+
+		Verify.waitForObject(deleteAccountPopUpText, 1);
+		this.deleteButton.click();
+		Thread.sleep(1000);	
+	}
+
+	public void deleteFIInstitution() throws Exception {
+
+		Verify.waitForObject(deleteFinancialInstitutionPopUpText, 1);
+		this.deleteButton.click();
+		Thread.sleep(1000);	
+	}
+
+	public void optionsForParticularAccount(String accountName) throws Exception {
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String xpath = "//android.widget.TextView[@text='Account three dot menu: "+accountName+"']";
+			Engine.getDriver().findElement(By.xpath(xpath)).click();
+		}
+		else {
+			String xpath = "**/XCUIElementTypeOther[`name = 'Account three dot menu: "+accountName+"'`]";
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+		}
+	}
+}
