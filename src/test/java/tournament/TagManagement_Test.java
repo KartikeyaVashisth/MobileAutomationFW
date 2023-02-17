@@ -23,7 +23,7 @@ import support.UserName;
 
 public class TagManagement_Test extends Recovery {
 	
-	String sUsername = "quicken789@gmail.com";
+	String sUsername = "indrajit.deshmukh+prod@quickendev.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
 	String sDataset_stage = "TagManagement";
@@ -144,7 +144,7 @@ public class TagManagement_Test extends Recovery {
 		if (Verify.objExists(tp.copyNumber))
 			Commentary.log(sa,LogStatus.PASS, "Pass: Copy number field is appeared.");
 		else
-			Commentary.log(sa, LogStatus.FAIL, "FAIL: opy number field is not appeared.");
+			Commentary.log(sa, LogStatus.FAIL, "FAIL: Copy number field is not appeared.");
 
 		sa.assertAll();
 		
@@ -386,7 +386,7 @@ public class TagManagement_Test extends Recovery {
 
 	
 	@Test (priority = 11, enabled = true)
-	public void tm12_Test10() throws Exception{
+	public void tm12_Test() throws Exception{
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -394,7 +394,7 @@ public class TagManagement_Test extends Recovery {
 		
 		String sStamp = new SimpleDateFormat("HH-mm-ss").format(new Date());
 		String sTag1= "auto_"+sStamp;
-		String sTag2= "auto_1"+sStamp;
+		String sTag2= "auto-"+sStamp;
 		
 		TagManagementPage tp = new TagManagementPage();
 		Verify.waitForObjectToDisappear(tp.refreshSpinnerIcon, 4);

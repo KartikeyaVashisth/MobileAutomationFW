@@ -23,7 +23,7 @@ import support.TransactionRecord;
 import support.UserName;
 
 public class FavoritePayee_Test extends Recovery {
-	String sUsername = "quicken789@gmail.com";
+	String sUsername = "indrajit.deshmukh+prod@quickendev.com";
 	String sPassword = "Quicken@01";
 	String sDataset = "Search_functionality_test";
 	String sDataset_stage = "FavoritePayee";
