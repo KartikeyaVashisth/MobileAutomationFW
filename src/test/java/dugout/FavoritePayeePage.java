@@ -127,7 +127,7 @@ public class FavoritePayeePage {
 		
 		hambergerIcon.click();
 		Thread.sleep(2000);
-		this.scrollDownToSettings();
+		//this.scrollDownToSettings();
 		Helper h = new Helper();
 		
 		settingsOption.click();
@@ -152,7 +152,7 @@ public class FavoritePayeePage {
 		
 		hambergerIcon.click();
 		Thread.sleep(2000);
-		this.scrollDownToSettings();
+		//this.scrollDownToSettings();
 		Helper h = new Helper();
 		
 		settingsOption.click();
@@ -176,7 +176,7 @@ public class FavoritePayeePage {
 		
  		hambergerIcon.click();
  		Thread.sleep(2000);
- 		this.scrollDownToSettings();
+ 		//this.scrollDownToSettings();
  		
  		settingsOption.click();
  		Thread.sleep(1000);
@@ -367,11 +367,11 @@ public class FavoritePayeePage {
 			Engine.getDriver().findElementByXPath(cc).isDisplayed();
 			
 			Thread.sleep(500);
-			Commentary.log(LogStatus.FAIL,"FAIL: Showing Payee "+payee+" as Favorite Payee ");
+			Commentary.log(LogStatus.PASS,"PASS: Showing Payee "+payee+" as Favorite Payee ");
 		}
 		else {
 
-			Commentary.log(LogStatus.PASS,"PASS: Not showing Payee "+payee+" as Favorite Payee. ");
+			Commentary.log(LogStatus.FAIL,"FAIL: Not showing Payee "+payee+" as Favorite Payee. ");
 		}
 	   
    }
@@ -408,9 +408,9 @@ public class FavoritePayeePage {
 				Helper h = new Helper();
 				
 				if (h.getEngine().equals("ios"))
-					verifyFavPayee_ios(payee);
+					verifyRemoveFavPayee_ios(payee);
 				else
-					verifyFavPayee_android(payee);
+					verifyRemoveFavPayee_android(payee);
 				
 			}
 
