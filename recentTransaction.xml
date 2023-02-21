@@ -17,8 +17,8 @@
 			</classes>
 	</test> <!-- Test -->
 
-	<test name="recentTransaction_IOS">
-		<parameter name="test" value="recentTransaction_IOS"></parameter>
+	<test name="recentTransaction_IOS1">
+		<parameter name="test" value="recentTransaction_IOS1"></parameter>
 		<parameter name="host" value="cloud"></parameter>
 		<parameter name="engine" value="ios"></parameter>
 		<parameter name="env" value="stage"></parameter>
