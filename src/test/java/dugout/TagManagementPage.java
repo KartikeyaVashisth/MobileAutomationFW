@@ -164,7 +164,7 @@ public class TagManagementPage {
 		
 		hambergerIcon.click();
 		Thread.sleep(2000);
-		this.scrollDownToSettings();
+		//this.scrollDownToSettings();
 		
 		settingsOption.click();
 		Thread.sleep(1000);
@@ -177,7 +177,7 @@ public class TagManagementPage {
 		
 		hambergerIcon.click();
 		Thread.sleep(2000);
-		this.scrollDownToSettings();
+		//this.scrollDownToSettings();
 		
 		settingsOption.click();
 		Thread.sleep(1000);
