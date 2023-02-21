@@ -13,11 +13,19 @@
 		</parameter>
 			<classes>
 				<class name="tournament.RecentTranactions_Test" />
-				<class name="tournament.RecentTranactions_Test1" />
+				
 			</classes>
 	</test> <!-- Test -->
 
-	
+	<test name="recentTransaction_IOS">
+		<parameter name="test" value="recentTransaction_IOS"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.RecentTranactions_Test1" />
+		</classes>
+	</test> <!-- Test -->
 
 </suite>
 
