@@ -17,13 +17,13 @@
 			</classes>
 	</test> <!-- Test -->
 
-	<test name="recentTransaction_IOS">
-		<parameter name="test" value="recentTransaction_IOS"></parameter>
+	<test name="recentTransaction_Android">
+		<parameter name="test" value="recentTransaction_Android"></parameter>
 		<parameter name="host" value="cloud"></parameter>
-		<parameter name="engine" value="ios"></parameter>
+		<parameter name="engine" value="android"></parameter>
 		<parameter name="env" value="stage"></parameter>
 		<classes>
-			<class name="tournament.RecentTranactions_Test1" />
+			<class name="tournament.RecentTranactions_Test" />
 		</classes>
 	</test> <!-- Test -->
 
