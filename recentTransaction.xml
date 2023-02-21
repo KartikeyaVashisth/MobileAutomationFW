@@ -23,7 +23,7 @@
 		<parameter name="engine" value="android"></parameter>
 		<parameter name="env" value="stage"></parameter>
 		<classes>
-			<class name="tournament.RecentTransactions_Test" />
+			<class name="tournament.RecentTransactions_Test1" />
 		</classes>
 	</test> <!-- Test -->
 
