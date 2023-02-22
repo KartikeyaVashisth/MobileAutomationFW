@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Daily Regression tests">
+    <listeners>
+		<listener class-name="referee.CustomListener"/>
+	</listeners>
+  <test name="Daily_Regression_iOS">
+      <parameter name="test" value="Companion_iOS_daily_Regression"></parameter>
+      <parameter name="host" value="cloud"></parameter>
+      <parameter name="engine" value="ios"></parameter>
+      <parameter name="env" value="stage"></parameter>
+    <classes>
+      <class name="tournament.Daily_Regression_Test"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
