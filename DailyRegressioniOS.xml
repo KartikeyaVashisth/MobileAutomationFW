@@ -4,10 +4,10 @@
     <listeners>
 		<listener class-name="referee.CustomListener"/>
 	</listeners>
-  <test name="Daily_Regression">
-      <parameter name="test" value="Companion_Android_Regression"></parameter>
+  <test name="Daily_Regression_iOS">
+      <parameter name="test" value="Companion_iOS_daily_Regression"></parameter>
       <parameter name="host" value="cloud"></parameter>
-      <parameter name="engine" value="android"></parameter>
+      <parameter name="engine" value="ios"></parameter>
       <parameter name="env" value="stage"></parameter>
     <classes>
       <class name="tournament.Daily_Regression_Test"/>
@@ -15,15 +15,14 @@
     </classes>
   </test> <!-- Test -->
   
-   <!-- <test name="Daily_Regression">
-      <parameter name="test" value="Companion_iOS_Regression"></parameter>
+   <!-- <test name="Daily_Regression_iOS1">
+      <parameter name="test" value="Companion_iOS_daily_Regression1"></parameter>
       <parameter name="host" value="cloud"></parameter>
       <parameter name="engine" value="ios"></parameter>
       <parameter name="env" value="stage"></parameter>
     <classes>
-   	  <class name="tournament.Daily_Regression_Test"/>
       <class name="tournament.Daily_Regression_Test2"/>
     </classes>
-  </test>  --> <!-- Test -->
+  </test> -->  <!-- Test -->
   
 </suite> <!-- Suite -->

@@ -5,27 +5,27 @@
 		<listener class-name="referee.CustomListener" />
 	</listeners>
 
-	<test name="recentTransaction_IOS">
-		<parameter name="test" value="recent_Transaction_IOS"></parameter>
+	<test name="recentTransaction_Android">
+		<parameter name="test" value="recentTransaction_Android"></parameter>
 		<parameter name="host" value="cloud"></parameter>
-		<parameter name="engine" value="ios"></parameter>
+		<parameter name="engine" value="android"></parameter>
 		<parameter name="env" value="stage">
 		</parameter>
 			<classes>
 				<class name="tournament.RecentTranactions_Test" />
 				<class name="tournament.RecentTransactions_Test1" />
-				
 			</classes>
 	</test> <!-- Test -->
-
-	<!--<test name="recentTransaction_IOS1">
-		<parameter name="test" value="recentTransaction_IOS1"></parameter>
+	
+	<!--<test name="recentTransaction_Android1">
+		<parameter name="test" value="recentTransaction_Android1"></parameter>
 		<parameter name="host" value="cloud"></parameter>
-		<parameter name="engine" value="ios"></parameter>
-		<parameter name="env" value="stage"></parameter>
-		<classes>
-			<class name="tournament.RecentTransactions_Test1" />
-		</classes>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage">
+		</parameter>
+			<classes>
+				<class name="tournament.RecentTransactions_Test1" />
+			</classes>
 	</test> --> <!-- Test -->
 
 </suite>

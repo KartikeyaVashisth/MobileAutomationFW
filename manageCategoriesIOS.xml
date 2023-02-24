@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite	 name="QE_Companion_IOS_manageCategories" parallel="tests" thread-count="8">
+	<listeners>
+		<listener class-name="referee.CustomListener" />
+	</listeners>
+
+	<test name="manageCategories_IOS">
+		<parameter name="test" value="QE_Companion_IOS_manageCategories"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage">
+		</parameter>
+			<classes>
+				<class name="tournament.manageCategory_Test1" />
+				<class name="tournament.manageCategory_Test2" />
+			</classes>
+	</test> <!-- Test -->
+
+	<!--<test name="manageCategories_Android">
+		<parameter name="test" value="Companion_Regression_Android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.manageCategory_Test1" />
+		</classes>
+	</test> --><!-- Test -->
+
+
+	<!--<test name="manageCategories_Android1">
+		<parameter name="test" value="Companion_Regression_Android1"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.manageCategory_Test2" />
+		</classes>
+	</test>--> <!-- Test -->
+
+</suite>
+
+ <!-- Suite -->
+
