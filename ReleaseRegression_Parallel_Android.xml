@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="20">
+	<listeners>
+		<listener class-name="referee.CustomListener" />
+	</listeners>
+
+ 	<test name="android_Regression1">
+		<parameter name="test" value="Companion_MemorizedPayeesTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.MemorizedPayeesTest1" />
+			<class name="tournament.MemorizedPayeesTest2" />
+		</classes>
+	</test>
+
+	<test name="android_Regression3">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_1" />
+			<class name="tournament.ScheduledTransactionsTest_2" />
+			<class name="tournament.ScheduledTransactionsTest_3" />
+			<class name="tournament.ScheduledTransactionsTest_4" />
+			<class name="tournament.ScheduledTransactionsTest_5" />
+		</classes>
+	</test>
+	
+	
+	
+	<test name="android_Regression7">
+		<parameter name="test" value="Companion_TodaysBalances_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_Test" />
+		</classes>
+	</test>
+
+	<test name="android_Regression8">
+		<parameter name="test" value="Companion_TodaysBalances_MultipleTransactions_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_MultipleTransactions" />
+		</classes>
+	</test>
+
+	<test name="android_Regression9">
+		<parameter name="test" value="Companion_TodaysBalances_OnlineAccounts_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_OnlineAccounts_Test" />
+		</classes>
+	</test>
+
+	<test name="android_Regression10">
+		<parameter name="test" value="Companion_TodaysBalances_FutureDatedTransactions_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_FutureDatedTransactions" />
+		</classes>
+	</test>
+	
+	<test name="android_Regression11">
+		<parameter name="test" value="Companion_HamburgerMenuTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.HamburgerMenuTest" />
+		</classes>
+	</test>
+	
+	<test name="android_Regression12">
+		<parameter name="test" value="Companion_TransactionSummaryTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TransactionSummaryTest" />
+			<class name="tournament.TransactionSummaryTest2" />
+		</classes>
+	</test>
+	
+	
+	<test name="android_Regression14">
+		<parameter name="test" value="Companion_NetWorth_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.NetWorth_Test" />
+		</classes>
+	</test>
+	
+	<test name="android_Regression15">
+		<parameter name="test" value="Companion_ProjectedBalances_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ProjectedBalances" />
+		</classes>
+	</test>
+	
+	<test name="android_Regression16">
+		<parameter name="test" value="Companion_ReviewNotReview_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ReviewNotReview_Test" />
+		</classes>
+	</test>
+	
+
+	<test name="android_Regression17">
+		<parameter name="test" value="Companion_Transfer_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TransferCases_Test1" />
+			<class name="tournament.TransferCases_Test2" />
+		</classes>
+	</test>
+	
+	<test name="android_Regression18">
+		<parameter name="test" value="Companion_RunningBalance_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.RunningBalances_Test" />
+		</classes>
+	</test>
+
+	<!-- <test name="android_Regression18">
+		<parameter name="test" value="Companion_SpendingOverTimeTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.SpendingOverTimeTest" />
+		</classes>
+	</test> -->
+
+	<!-- <test name="android_Regression19">
+		<parameter name="test" value="Companion_NetIncomeOverTimeTest_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.NetIncomeOverTimeTest" />
+		</classes>
+	</test> -->
+
+	<!-- <test name="android_Regression20">
+		<parameter name="test" value="Companion_TrendingCard_Test_android"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="android"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TrendingCard_Test" />
+		</classes>
+	</test> -->
+
+</suite>
+

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="20">
+	<listeners>
+		<listener class-name="referee.CustomListener" />
+	</listeners>
+
+ 	<test name="ios_Regression1">
+		<parameter name="test" value="Companion_MemorizedPayeesTest1_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.MemorizedPayeesTest1" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression2">
+		<parameter name="test" value="Companion_MemorizedPayeesTest2_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.MemorizedPayeesTest2" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression3">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_1_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_1" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression4">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_2_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_2" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression5">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_3_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_3" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression4">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_4_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_4" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression6">
+		<parameter name="test" value="Companion_ScheduledTransactionsTest_5_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ScheduledTransactionsTest_5" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression7">
+		<parameter name="test" value="Companion_TodaysBalances_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_Test" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression8">
+		<parameter name="test" value="Companion_TodaysBalances_MultipleTransactions_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_MultipleTransactions" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression9">
+		<parameter name="test" value="Companion_TodaysBalances_OnlineAccounts_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_OnlineAccounts_Test" />
+		</classes>
+	</test>
+
+	<test name="ios_Regression10">
+		<parameter name="test" value="Companion_TodaysBalances_FutureDatedTransactions_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TodaysBalances_FutureDatedTransactions" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression11">
+		<parameter name="test" value="Companion_HamburgerMenuTest_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.HamburgerMenuTest" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression12">
+		<parameter name="test" value="Companion_TransactionSummaryTest_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TransactionSummaryTest" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression13">
+		<parameter name="test" value="Companion_TransactionSummaryTest2_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TransactionSummaryTest2" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression14">
+		<parameter name="test" value="Companion_NetWorth_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.NetWorth_Test" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression15">
+		<parameter name="test" value="Companion_ProjectedBalances_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ProjectedBalances" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression16">
+		<parameter name="test" value="Companion_ReviewNotReview_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.ReviewNotReview_Test" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression17">
+		<parameter name="test" value="Companion_RunningBalances_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.RunningBalances_Test" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression17">
+		<parameter name="test" value="Companion_Transfer_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.RunningBalances_Test" />
+		</classes>
+	</test>
+	
+	<test name="ios_Regression17">
+		<parameter name="test" value="Companion_Transfer_Test_1_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.RunningBalances_Test" />
+		</classes>
+	</test>
+
+	<!-- <test name="ios_Regression18">
+		<parameter name="test" value="Companion_SpendingOverTimeTest_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.SpendingOverTimeTest" />
+		</classes>
+	</test> -->
+
+	<!-- <test name="ios_Regression19">
+		<parameter name="test" value="Companion_NetIncomeOverTimeTest_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.NetIncomeOverTimeTest" />
+		</classes>
+	</test> -->
+
+	<!-- <test name="ios_Regression20">
+		<parameter name="test" value="Companion_TrendingCard_Test_ios"></parameter>
+		<parameter name="host" value="cloud"></parameter>
+		<parameter name="engine" value="ios"></parameter>
+		<parameter name="env" value="stage"></parameter>
+		<classes>
+			<class name="tournament.TrendingCard_Test" />
+		</classes>
+	</test> -->
+
+</suite>
+
