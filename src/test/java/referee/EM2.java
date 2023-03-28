@@ -14,7 +14,8 @@ public class EM2 {
 	public static ThreadLocal<String> fname = new ThreadLocal<String>();
 	public static String filename = ""+date.getTime()+".html";
 	public static ThreadLocal<String> rPath = new ThreadLocal<String>();
-	public static String reportPath= "./Reports/extent_reports/"+ (date.getMonth()+1) +"/"+date.getDate()+"/"+filename;
+	//public static String reportPath= "./Reports/extent_reports/"+ (date.getMonth()+1) +"/"+date.getDate()+"/"+filename;
+	public static String reportPath= "./Reports/extent_reports/"+filename;
 	
 	public synchronized static ExtentReports getInstance()
 	{
