@@ -57,12 +57,16 @@ public class ManageAccountsPage {
 	private MobileElement deleteAccountOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Account Name'`]/**/XCUIElementTypeTextField")
-	@AndroidFindBy(xpath = "")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Account Name']/following-sibling::android.widget.EditText")
 	private MobileElement renameAccountNameTextField;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Update'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Update']")
 	private MobileElement updateOption;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Other'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Other']")
+	public MobileElement otherFIText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'closeRename account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='closeRename account']")
@@ -95,6 +99,10 @@ public class ManageAccountsPage {
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Delete'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete']")
 	private MobileElement deleteButton;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
+	@AndroidFindBy(xpath = "//android.widget.Button[@content-desc='Go back']")
+	private MobileElement backButtonOnManageAccountsPage;
 
 
 	public void chooseOption(String optionName) throws Exception {
@@ -118,7 +126,7 @@ public class ManageAccountsPage {
 		this.renameAccountNameTextField.clear();
 		this.renameAccountNameTextField.sendKeys(newAccountName);
 		this.updateOption.click();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 
 	}
 
@@ -154,7 +162,7 @@ public class ManageAccountsPage {
 		Thread.sleep(1000);	
 	}
 
-	public void optionsForParticularAccount(String accountName) throws Exception {
+	public void clickingThreeDotsOfParticularAccount(String accountName) throws Exception {
 
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
@@ -164,6 +172,56 @@ public class ManageAccountsPage {
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name = 'Account three dot menu: "+accountName+"'`]";
 			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+		}
+	}
+	
+	public void clickingThreeDotsOfParticularFI(String FIName) throws Exception {
+
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String xpath = "//android.widget.TextView[@text='FI three dot menu: "+FIName+"']";
+			Engine.getDriver().findElement(By.xpath(xpath)).click();
+		}
+		else {
+			String xpath = "**/XCUIElementTypeOther[`name = 'FI three dot menu: "+FIName+"'`]";
+			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+		}
+	}
+	
+	public String accountNameGetText() {
+		
+		String accountName = renameAccountNameTextField.getText();
+		return accountName;
+	}
+	
+	public void goBack() throws Exception {
+		Verify.waitForObject(backButtonOnManageAccountsPage, 1);
+		backButtonOnManageAccountsPage.click();
+	}
+	
+	public boolean isAccountSeparated(String accountName) throws Exception {
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String xpath = "(//android.widget.TextView[@text='Separate'])[1]/..//android.widget.TextView[@text='"+accountName+"']";
+			return Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+		}
+		else {
+			String xpath = "**/XCUIElementTypeOther[`name contains 'Separate'`]/**/XCUIElementTypeOther[`name='"+accountName+"'`]";
+			return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).isDisplayed();
+		}
+	}
+	
+	public boolean isAccountHidden(String accountName) throws Exception {
+		
+		Helper h = new Helper();
+		if (h.getEngine().equals("android")){
+			String xpath = "//android.widget.TextView[@text='"+accountName+"']/../android.widget.ImageView";
+			return Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+		}
+		else {
+			String xpath = "**/XCUIElementTypeOther[`name='"+accountName+"'`]/**/XCUIElementTypeImage";
+			return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).isDisplayed();
 		}
 	}
 }
