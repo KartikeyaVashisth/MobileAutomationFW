@@ -92,7 +92,7 @@ public class OverviewPage {
 	
 //	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Total'`]/XCUIElementTypeStaticText[3]")
 //	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Checking'`]/XCUIElementTypeOther[`name contains 'Total'`]/XCUIElementTypeStaticText[`name contains '$'`]")
-	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[$name = 'Banking & Credit'$][-2]/**/XCUIElementTypeOther[`name BEGINSWITH 'Total'`]/XCUIElementTypeStaticText[`name contains '$'`]")
+	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains 'Banking & Credit'`][-2]/**/XCUIElementTypeOther[`name contains 'Total'`][-1]/XCUIElementTypeStaticText[`name contains '$'`]")
 //	@AndroidFindBy(xpath="//*[@text='Banking & Credit']/../android.widget.TextView[9]")
 	@AndroidFindBy(xpath="//*[@text='Total']/following-sibling::android.widget.TextView[1]")
 	public MobileElement totalBalance;

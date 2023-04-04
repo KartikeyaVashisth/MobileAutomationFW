@@ -41,6 +41,10 @@ public class NetWorthPage {
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name ='NET WORTH'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='NET WORTH']")
 	public MobileElement netWorthText;
+	
+	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Net Worth:'`]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Net Worth:')]")
+	public MobileElement netWorthAmountOnDashboard;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'NET WORTH'`]/XCUIElementTypeStaticText[`name contains '$'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='NET WORTH']/../android.widget.TextView[contains(@text,'$')]")
