@@ -45,7 +45,7 @@ public class RecentTransactions_Test1 extends Recovery{
 	}
 	
 
-	@Test (priority = 1, enabled = true)
+	@Test (priority = 7, enabled = true)
 	public void RT7_Test() throws Exception {
 		
 		SoftAssert sa = new SoftAssert();
@@ -115,7 +115,7 @@ public class RecentTransactions_Test1 extends Recovery{
 	}
 	
 	
-	@Test (priority = 2, enabled = true)
+	@Test (priority = 8, enabled = true)
 	public void RT8_Test() throws Exception {
 
 		SoftAssert sa = new SoftAssert();
