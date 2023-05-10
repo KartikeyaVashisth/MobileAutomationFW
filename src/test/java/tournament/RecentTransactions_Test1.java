@@ -62,7 +62,8 @@ public class RecentTransactions_Test1 extends Recovery{
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying that separate account transaction should not appear under recent transaction");
 		
-		String sPayee = "Saffire";
+		
+		String sPayee =  h.getCurrentTime();
 		String sCard = "Recent Transactions";
 				
 		OverviewPage op = new OverviewPage();
@@ -81,24 +82,24 @@ public class RecentTransactions_Test1 extends Recovery{
 		td.addTransaction(tRec);
 		Thread.sleep(2000);
 		Commentary.log(LogStatus.INFO, "Transaction added successfully for the account ["+tRec.getAccount()+"], transaction type expense, amount "+tRec.getAmount());		
+		Thread.sleep(1000);
 		
-		
-		if (h.getEngine().equals("android")){
-			
-			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
-			//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\" Recent Transactions \").instance(0))"));
-			
-			
-		}
-		else {
-			
-			op.scroll_down();
-			
-		}
+//		if (h.getEngine().equals("android")){
+//			
+//			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+//			//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\" Recent Transactions \").instance(0))"));
+//			
+//			
+//		}
+//		else {
+//			
+//			op.scroll_down();
+//			
+//		}
 		//op.tapOnRecentTransactionsCard();
 		
 		
-		TransactionsPage tp = new TransactionsPage();
+	//	TransactionsPage tp = new TransactionsPage();
 		
 		if(Verify.objExists(op.recentTxns_NoTxnsAvailable)) {
 			
@@ -150,16 +151,16 @@ public class RecentTransactions_Test1 extends Recovery{
 				
 			//Verify if the transaction appears on the recent transaction card..
 			
-			String sCard = "Recent Transactions";
-			
-			//Count of recent transactions on the card..
-			
-			if (h.getEngine().equals("android")){
-				
-				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
-				//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\" Recent Transactions \").instance(0))"));
-			
-			}
+//			String sCard = "Recent Transactions";
+//			
+//			//Count of recent transactions on the card..
+//			
+//			if (h.getEngine().equals("android")){
+//				
+//				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
+//				//Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\" Recent Transactions \").instance(0))"));
+//			
+//			}
 			
 			String sText = op.payeeNameText.getText();
 			String sString = payees[i];
