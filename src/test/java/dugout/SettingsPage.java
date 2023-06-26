@@ -1,17 +1,25 @@
 package dugout;
 
+import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
 
 //import org.eclipse.jetty.util.annotation.ManagedObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -32,372 +40,372 @@ public class SettingsPage {
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Passcode'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Passcode']")
-	public MobileElement passcode;
+	public WebElement passcode;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Help & Legal'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Help & Legal']")
-	public MobileElement helpAndLegal;
+	public WebElement helpAndLegal;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Accounts']")
-	public MobileElement accounts;
+	public WebElement accounts;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Manage Alerts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Manage Alerts']")
-	public MobileElement manageAlerts;
+	public WebElement manageAlerts;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='logOutButton'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Sign Out']")
-	public MobileElement logout;
+	public WebElement logout;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Sign Out'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Sign Out']")
-	public MobileElement signOutConfirmationBtn;
+	public WebElement signOutConfirmationBtn;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Cancel'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Cancel']")
-	public MobileElement cancelBtn;
+	public WebElement cancelBtn;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='closeButton'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='backButton']//*[@class='android.widget.ImageView']")
-	public MobileElement close;
+	public WebElement close;
 
 	//Hamburger menu options
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'closeButton'")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='closeButton']")
-	public MobileElement closeButton;
+	public WebElement closeButton;
 	
 	@iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeOther[`name contains 'logOutButton'`]/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='logOutButton']/../android.widget.TextView[contains(@text,'(')]")
-	public MobileElement versionNumber;
+	public WebElement versionNumber;
 
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'logOutButton'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Logout']")
-	public MobileElement logoutButton;
+	public WebElement logoutButton;
 
 //	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Cloud Account name Menu'`]")
 //	@AndroidFindBy(xpath="//android.widget.TextView[@text='Cloud Account name']")
-//	public MobileElement cloudAccountNameOption;
+//	public WebElement cloudAccountNameOption;
 	
 //	@iOSXCUITFindBy(id = "dataSetArrow")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
 //	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='dataSetArrow']")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']/../following-sibling::android.view.ViewGroup[1]")
-	public MobileElement datasetDDButton;
+	public WebElement datasetDDButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
-	public MobileElement btnDone;
+	public WebElement btnDone;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name ='Dashboard Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Dashboard']")
-	public MobileElement dashboardOption;
+	public WebElement dashboardOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Accounts Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Accounts']")
-	public MobileElement accountTxt;
+	public WebElement accountTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'All Transactions Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='All Transactions']")
-	public MobileElement allTransactionsOption;
+	public WebElement allTransactionsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Bills Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Bills']")
-	public MobileElement billsOption;
+	public WebElement billsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Budgets'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Budgets']")
-	public MobileElement budgetsOption;
+	public WebElement budgetsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Investments Menu'`]")
 	@AndroidFindBy(accessibility = "Investments Menu")
-	public MobileElement investingOption;
+	public WebElement investingOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Reports'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Reports']")
-	public MobileElement reportsOption;
+	public WebElement reportsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Monthly Summary'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Monthly Summary']")
-	public MobileElement monthlySummaryOption;
+	public WebElement monthlySummaryOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Net Income'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Income']")
-	public MobileElement netIncomeOption;
+	public WebElement netIncomeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Net Worth'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Net Worth']")
-	public MobileElement netWorthOption;
+	public WebElement netWorthOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Spending by Category'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending by Category']")
-	public MobileElement spendingByCategoryOption;
+	public WebElement spendingByCategoryOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Spending Over Time'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Spending Over Time']")
-	public MobileElement spendingOverTimeOption;
+	public WebElement spendingOverTimeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
-	public MobileElement backButtonOnHeaders;
+	public WebElement backButtonOnHeaders;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Profile Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Profile']")
-	public MobileElement profileOption;
+	public WebElement profileOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Profile'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Profile']")
-	public MobileElement ProfileHeaderTxt;
+	public WebElement ProfileHeaderTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Go back Profile'`][-1]/**/XCUIElementTypeButton[`name='Go back'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Profile']/../android.widget.Button[@content-desc='Go back']")
-	public MobileElement backButtonOnProfileHeader;
+	public WebElement backButtonOnProfileHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Your name:'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Your name:')]")
-	public MobileElement accountNameUnderProfileOption;
+	public WebElement accountNameUnderProfileOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Your email:'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Your email:')]")
-	public MobileElement accountIDUnderProfileOption;
+	public WebElement accountIDUnderProfileOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name contains 'Subscription Expires on :'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@content-desc,'Subscription Expires on :')]")
-	public MobileElement subscriptionDetailsUnderProfileOption;
+	public WebElement subscriptionDetailsUnderProfileOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Passcode Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Passcode']")
-	public MobileElement PasscodeTxt;
+	public WebElement PasscodeTxt;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Passcode'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Passcode']")
-	public MobileElement PasscodeHeaderTxt;
+	public WebElement PasscodeHeaderTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Profile, back'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Profile, back']")
-	public MobileElement backButtonOnPasscodeHeader;
+	public WebElement backButtonOnPasscodeHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Use Device Passcode'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Use Quicken Passcode']")
-	public MobileElement useDevicePasscodeTxt;
+	public WebElement useDevicePasscodeTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Legal'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Legal']")
-	public MobileElement legalTxt;
+	public WebElement legalTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Acknowledgements'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Acknowledgements']")
-	public MobileElement acknowledgementsOption;
+	public WebElement acknowledgementsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'License Agreement'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='License Agreement']")
-	public MobileElement licenceAgreementOption;
+	public WebElement licenceAgreementOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Privacy'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Privacy']")
-	public MobileElement privacyOption;
+	public WebElement privacyOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Help & Legal'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help & Legal']")
-	public MobileElement HelpLegalHeaderTxt;
+	public WebElement HelpLegalHeaderTxt;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Settings Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
-	public MobileElement settingsOption;
+	public WebElement settingsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Help'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']")
-	public MobileElement helpOption;
+	public WebElement helpOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Chat with support'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Chat with support']")
-	public MobileElement chatWithsupportOption;
+	public WebElement chatWithsupportOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'FAQ'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='FAQ']")
-	public MobileElement FAQOption;
+	public WebElement FAQOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Report an issue'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Report an issue']")
-	public MobileElement reportAnIssueOption;
+	public WebElement reportAnIssueOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Visit support site'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Visit support site']")
-	public MobileElement visitSupportSiteOption;
+	public WebElement visitSupportSiteOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Settings'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Settings']")
-	public MobileElement settingsHeaderText;
+	public WebElement settingsHeaderText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Go back'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Settings']/../android.view.ViewGroup[@content-desc='backArrow']")
-	public MobileElement backButtonOnSettingsHeader;
+	public WebElement backButtonOnSettingsHeader;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Yelp Recommendations'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']")
-	public MobileElement displayYelpRecommendationsText;
+	public WebElement displayYelpRecommendationsText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeStaticText[`name = \"Display Yelp's recommendations of nearby payees when you add payees to your transactions\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.TextView[@text=\"Display Yelp's recommendations of nearby payees when you add payees to your transactions\"]")
-	public MobileElement displayYelpDescription;
+	public WebElement displayYelpDescription;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Yelp Recommendations'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Yelp Recommendations']/following::android.widget.Switch")
-	public MobileElement switchDisplayYelp;
+	public WebElement switchDisplayYelp;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Show long category names'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']")
-	public MobileElement showLongCategoryNamesText;
+	public WebElement showLongCategoryNamesText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Show long category names'`]/XCUIElementTypeStaticText[`name = 'Display long form of categories in transaction and details'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']/following::android.widget.TextView[1]")
-	public MobileElement showLongCategoryNamesDescription;
+	public WebElement showLongCategoryNamesDescription;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Show long category names'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']/following::android.widget.Switch")
-	public MobileElement switchShowLongCategoryNames;
+	public WebElement switchShowLongCategoryNames;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Favorite Payees'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']")
-	public MobileElement displayFavoritePayeesText;
+	public WebElement displayFavoritePayeesText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`]/XCUIElementTypeStaticText[`name = 'Displays favorite payees when you are adding payees for your transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.TextView[1]")
-	public MobileElement displayFavoritePayeesDescription;
+	public WebElement displayFavoritePayeesDescription;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Favorite Payees'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']/following::android.widget.Switch")
-	public MobileElement switchDisplayFavoritePayees;
+	public WebElement switchDisplayFavoritePayees;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Display Real-Time Quotes'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']")
-	public MobileElement displayRealTimeQuotesText;
+	public WebElement displayRealTimeQuotesText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Real-Time Quotes'`]/XCUIElementTypeStaticText[`name = 'Displays real-time quotes for your investments'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']/following::android.widget.TextView[1]")
-	public MobileElement displayRealTimeQuotesDescription;
+	public WebElement displayRealTimeQuotesDescription;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Display Real-Time Quotes'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Real-Time Quotes']/following::android.widget.Switch")
-	public MobileElement switchDisplayRealTimeQuotes;
+	public WebElement switchDisplayRealTimeQuotes;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Refresh Data Use Refresh Data to resolve issues with missing transactions, categories and other data.'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Refresh Data']/following-sibling::android.widget.TextView[@text='Use Refresh Data to resolve issues with missing transactions, categories and other data.']")
-	public MobileElement refreshData;
+	public WebElement refreshData;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account Balance Preference']")
-	public MobileElement accountBalancePreferenceOption;
+	public WebElement accountBalancePreferenceOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Account Balance Preference'`][-1]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Account Balance Preference']")
-	private MobileElement accountBalancePreferenceHeaderText;
+	private WebElement accountBalancePreferenceHeaderText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Choose the default balance to use on the dashboard cards.'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Choose the default balance to use on the dashboard cards.']")
-	private MobileElement accountBalancePreferenceDescriptionText;
+	private WebElement accountBalancePreferenceDescriptionText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Account Balance Preference']/..//android.widget.ImageView")
-	private MobileElement backButtonOnAccountBalancePreferenceHeader;
+	private WebElement backButtonOnAccountBalancePreferenceHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = \"RadioButton Today's Balance\"`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Today's Balance\"]")
-	private MobileElement todaysBalanceOption;
+	private WebElement todaysBalanceOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'RadioButton Online Balance'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Online Balance']")
-	private MobileElement onlineBalanceOption;
+	private WebElement onlineBalanceOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'RadioButton Projected Balance'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Projected Balance']")
-	private MobileElement projectedBalanceOption;
+	private WebElement projectedBalanceOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Customize Dashboard'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Customize Dashboard']")
-	public MobileElement customizeDashboardOption;
+	public WebElement customizeDashboardOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Accounts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Accounts']")
-	public MobileElement manageAccountsOption;
+	public WebElement manageAccountsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Manage Categories'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Categories']")
-	public MobileElement manageCategoriesOption;
+	public WebElement manageCategoriesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Alerts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
-	public MobileElement ManageAlertsTxt;
+	public WebElement ManageAlertsTxt;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Manage Alerts'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Manage Alerts']")
-	public MobileElement ManageAlertsHeaderTxt;
+	public WebElement ManageAlertsHeaderTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Rules'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Rules']")
-	public MobileElement rulesOption;
+	public WebElement rulesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Renaming Rules'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Renaming Rules']")
-	public MobileElement renamingRulesOption;
+	public WebElement renamingRulesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Renaming Rules'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Renaming Rules']")
-	public MobileElement renamingRulesHeaderText;
+	public WebElement renamingRulesHeaderText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'No renaming rules added yet'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='No renaming rules added yet']")
-	public MobileElement noRenamingRulesText;
+	public WebElement noRenamingRulesText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Renaming Rules']/../android.widget.ImageButton")
-	public MobileElement backButtonOnRenamingRulesHeader;
+	public WebElement backButtonOnRenamingRulesHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[-4]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@resource-id='addRenameRule']")
-	public MobileElement addRenamingRulesButton;
+	public WebElement addRenamingRulesButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Memorized Payees'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Memorized Payees']")
-	public MobileElement memorizedPayeesOption;
+	public WebElement memorizedPayeesOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Tags'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']")
-	public MobileElement tagsOption;
+	public WebElement tagsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Tags'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Tags']")
-	public MobileElement tagsHeaderText;
+	public WebElement tagsHeaderText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']/../android.widget.ImageButton")
-	public MobileElement backButtonOnTagsHeader;
+	public WebElement backButtonOnTagsHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Create New Tag'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Create New Tag']")
-	public MobileElement createNewTagOption;
+	public WebElement createNewTagOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Use Quicken Passcode'`]")
 	@AndroidFindBy(xpath="//android.widget.Switch/../android.widget.TextView[@text=\"Use Quicken Passcode\"]")
-	public MobileElement quickenPasscodeTxt;
+	public WebElement quickenPasscodeTxt;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Use Touch ID'`]")
 	@AndroidFindBy(xpath="TBD")
-	public MobileElement useTouchIDTxt;
+	public WebElement useTouchIDTxt;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Feedback'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Feedback']")
-	public MobileElement FeedbackTxt;
+	public WebElement FeedbackTxt;
 	
 
 
 
 
-	public MobileElement getTextView(String ele) {
+	public WebElement getTextView(String ele) {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("ios")) {
 			try {
-				MobileElement me =  (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+ele+"'`]"));
+				WebElement me =  (WebElement) Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name='"+ele+"'`]"));
 				return me;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -405,7 +413,7 @@ public class SettingsPage {
 			}
 		} else {
 			try {
-				MobileElement me =  (MobileElement) Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+ele+"']"));	
+				WebElement me =  (WebElement) Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+ele+"']"));	
 				return me;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -423,7 +431,7 @@ public class SettingsPage {
 
 		if (h.getEngine().equals("android")) {
 			try{
-				return Engine.getDriver().findElementByXPath(xPathForControl).isDisplayed();
+				return Engine.getDriver().findElement(By.xpath(xPathForControl)).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -432,7 +440,7 @@ public class SettingsPage {
 		}
 		else {
 			try{
-				return Engine.getDriver().findElementByXPath(xPathForIOS).isDisplayed();
+				return Engine.getDriver().findElement(By.xpath(xPathForIOS)).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -454,7 +462,7 @@ public class SettingsPage {
 				//				System.out.println("*******");
 				//				System.out.println(Engine.getDriver().findElementByXPath(xPathForControl).getText());
 				//				System.out.println("*******");
-				return Engine.getDriver().findElementByXPath(xPathForControl).isDisplayed();
+				return Engine.getDriver().findElement(By.xpath(xPathForControl)).isDisplayed();
 			}
 			catch(Exception E){
 				return false;
@@ -465,11 +473,11 @@ public class SettingsPage {
 			//			System.out.println("*******");
 			//			System.out.println(Engine.getDriver().findElementByXPath(xPathForIOS).getText());
 			//			System.out.println("*******");
-			return Engine.getDriver().findElementByXPath(xPathForIOS).isDisplayed();	
+			return Engine.getDriver().findElement(By.xpath(xPathForIOS)).isDisplayed();	
 		}
 	}
 
-	public MobileElement getAccountElement (String accountName) {
+	public WebElement getAccountElement (String accountName) {
 
 		String xpath_Android = "//android.widget.TextView[@text='"+accountName+"']";
 		String xpath_IOS = "**/XCUIElementTypeStaticText[`name=='"+accountName+"'`]" ;
@@ -478,7 +486,7 @@ public class SettingsPage {
 
 		if (h.getEngine().equals("android")){
 			try{
-				MobileElement me = (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
+				WebElement me = Engine.getDriver().findElement(By.xpath(xpath_Android));
 				return me;
 			}
 			catch(Exception E){
@@ -488,8 +496,8 @@ public class SettingsPage {
 		}
 		else {
 			try{
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath_IOS));
-				return (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath_IOS));
+				WebElement me = Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath_IOS));
+				return me;
 			}
 			catch(Exception E){
 				Commentary.log(LogStatus.INFO, E.getMessage());
@@ -502,12 +510,12 @@ public class SettingsPage {
 	public void selectBack (String bckButton) throws Exception {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("android")){
-			//MobileElement backButton_android = (MobileElement) Engine.getDriver().findElementByXPath("//android.widget.ImageButton[@index=0]");
+			WebElement backButton_android = Engine.getDriver().findElement(By.xpath("//android.widget.ImageButton[@index=0]"));
 			//Engine.getDriver().pressKeyCode(AndroidKeyCode.BACK);
-			((AndroidDriver<MobileElement>) Engine.getDriver()).pressKeyCode(AndroidKeyCode.BACK);
-			//backButton_android.click();
+//			Engine.getDriver().pressKeyCodeCommand(AndroidKeyCode.BACK);
+			backButton_android.click();
 		} else {
-			MobileElement backButton_ios = (MobileElement) Engine.getDriver().findElementByAccessibilityId(bckButton);
+			WebElement backButton_ios = Engine.getDriver().findElement(By.xpath(bckButton));
 			backButton_ios.click();
 		}
 	}
@@ -518,13 +526,13 @@ public class SettingsPage {
 
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("ios")) {
-			MobileElement me_ios = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(classChain_xpath_IOS));
+			WebElement me_ios = Engine.getDriver().findElement(AppiumBy.iOSClassChain(classChain_xpath_IOS));
 			Verify.waitForObject(me_ios, 2);
 			me_ios.click();
 			Thread.sleep(500);
 			btnDone.click();
 		} else {
-			MobileElement me_android = (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
+			WebElement me_android = Engine.getDriver().findElement(By.xpath(xpath_Android));
 			Verify.waitForObject(me_android, 2);
 			me_android.click();
 			Thread.sleep(500);
@@ -946,16 +954,34 @@ public class SettingsPage {
 		OverviewPage op = new OverviewPage();
 		
 		if(h.getEngine().equalsIgnoreCase("android")) {
-			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Refresh Data\").instance(0))"));
+			Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Refresh Data\").instance(0))"));
 			op.verticalScrollDownAndroid();
 		} else {
-			String id = this.refreshData.getId();
-			HashMap<String, String> scrollObject = new HashMap<String, String>();
-			scrollObject.put("element", id);
-			scrollObject.put("toVisible", "not an empty string");
-			scrollObject.put("direction", "down");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);
-			Thread.sleep(1000);
+//			String id = this.refreshData.getId();
+//			HashMap<String, String> scrollObject = new HashMap<String, String>();
+//			scrollObject.put("element", id);
+//			scrollObject.put("toVisible", "not an empty string");
+//			scrollObject.put("direction", "down");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);
+//			Thread.sleep(1000);
+			
+			Verify.waitForObject(this.displayFavoritePayeesText, 1);
+			Point location = this.displayFavoritePayeesText.getLocation();
+
+			int x_start=location.getX();
+			int y_start=location.getY();
+			int y_end=300;
+			
+			PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+			Sequence sequence = new Sequence(finger1, 1)
+					.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), x_start, y_start)) 
+					.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+					.addAction(new Pause(finger1, Duration.ofMillis(200)))
+					.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), x_start, y_end)) 
+					.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+			
+			Engine.getDriver().perform(Collections.singletonList(sequence));
+			Thread.sleep(2000);
 			
 		}
 	}

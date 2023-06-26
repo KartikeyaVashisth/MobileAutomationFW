@@ -31,7 +31,6 @@ import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.ExtentManager;
 import referee.Verify;
@@ -90,7 +89,7 @@ public class Smoke_test1 extends Recovery { //Used this class to test the stage 
 		signIn.signIn();
 		Thread.sleep(10000);
 		//Engine.ad.rotate(ScreenOrientation.LANDSCAPE);
-		Engine.getDriver().rotate(ScreenOrientation.LANDSCAPE);
+		//Engine.getDriver().rotate(ScreenOrientation.LANDSCAPE);
 	    
 		Thread.sleep(4000);
 	    OverviewPage op = new OverviewPage();

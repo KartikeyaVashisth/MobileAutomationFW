@@ -1,10 +1,10 @@
 package dugout;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -25,32 +25,32 @@ public class RenamingRulesPage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == 'Settings, back'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Settings, back']/android.widget.ImageView")
-	public MobileElement back;
+	public WebElement back;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Renaming Rules'`]")
 	@AndroidFindBy(xpath="//android.view.View[normalize-space(@text)='Renaming Rules']")
-	public MobileElement renamingRulesHeader;
+	public WebElement renamingRulesHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'No renaming rules added yet'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='No renaming rules added yet']")
-	public MobileElement noRenamingRulesAddedYet;
+	public WebElement noRenamingRulesAddedYet;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"addRenameRule\"`][-1]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@resource-id='addRenameRule']")
-	public MobileElement add;
+	public WebElement add;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name BEGINSWITH 'If '`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, 'contains') or contains(@text,'Quicken name')]")
-	public MobileElement firstRuleOnTheScreen;
+	public WebElement firstRuleOnTheScreen;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'If '`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, 'contains') or contains(@text,'Quicken name')]")
-	public MobileElement firstRuleUnderMultiple;
+	public WebElement firstRuleUnderMultiple;
 	
 	//android.widget.TextView[contains(@text,'Multiple')]
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name BEGINSWITH 'Multiple'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Multiple')]")
-	public MobileElement firstMultipleRule;
+	public WebElement firstMultipleRule;
 	
 	public boolean verifyRule(String sRenamePayeeTo) throws Exception{
 		
@@ -71,7 +71,7 @@ public class RenamingRulesPage {
 		String xPath = "//android.widget.TextView[@text='"+sRenamePayeeTo+"']";
 		
 		try {
-			return Engine.getDriver().findElementByXPath(xPath).isDisplayed();
+			return Engine.getDriver().findElement(By.xpath(xPath)).isDisplayed();
 		}
 		catch (Exception e) {
 			return false;
@@ -83,7 +83,7 @@ public class RenamingRulesPage {
 		String iosClassChain = "**/XCUIElementTypeStaticText[`name='"+sRenamePayeeTo+"'`]";
 		
 		try {
-			return Engine.getDriver().findElement(MobileBy.iOSClassChain(iosClassChain)).isDisplayed();
+			return Engine.getDriver().findElement(AppiumBy.iOSClassChain(iosClassChain)).isDisplayed();
 		}
 		catch (Exception e) {
 			return false;
@@ -91,7 +91,7 @@ public class RenamingRulesPage {
 	}
 	
 	
-	public MobileElement getRule (String sRenamePayeeTo) throws Exception{
+	public WebElement getRule (String sRenamePayeeTo) throws Exception{
 		
 		Helper h = new Helper();
 
@@ -105,17 +105,17 @@ public class RenamingRulesPage {
 	}
 	
 	
-	public MobileElement getRule_android (String sRenamePayeeTo) throws Exception{
+	public WebElement getRule_android (String sRenamePayeeTo) throws Exception{
 		
 		String xPath = "//android.widget.TextView[@text='"+sRenamePayeeTo+"']";
 		return Engine.getDriver().findElement(By.xpath(xPath));
 		
 	}
 	
-	public MobileElement getRule_ios (String sRenamePayeeTo) throws Exception{
+	public WebElement getRule_ios (String sRenamePayeeTo) throws Exception{
 		
 		String iosClassChain = "**/XCUIElementTypeStaticText[`name='"+sRenamePayeeTo+"'`]";
-		return Engine.getDriver().findElement(MobileBy.iOSClassChain(iosClassChain));
+		return Engine.getDriver().findElement(AppiumBy.iOSClassChain(iosClassChain));
 		
 	}
 	
@@ -142,7 +142,7 @@ public class RenamingRulesPage {
 	private void deleteRule_ios(String sRenamePayeeTo) throws Exception{
 		
 		String iosClassChain = "**/XCUIElementTypeStaticText[`name='"+sRenamePayeeTo+"'`]";
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(iosClassChain)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(iosClassChain)).click();
 		Thread.sleep(2000);
 		
 		ViewRenamingRulesPage vrp = new ViewRenamingRulesPage();
@@ -207,7 +207,7 @@ public class RenamingRulesPage {
 	private void expand_rule_ios(String sRenamePayeeTo) throws Exception{
 		//String cc = "**/XCUIElementTypeOther[`name='"+sRenamePayeeTo+"'`]/XCUIElementTypeOther/XCUIElementTypeImage";
 		String cc = "**/XCUIElementTypeOther[`name='"+sRenamePayeeTo+"'`][-1]";
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 		Thread.sleep(1000);
 		
 	}
@@ -234,7 +234,7 @@ public class RenamingRulesPage {
 		String cc = "**/XCUIElementTypeOther[`name contains'"+sDownloadedName+"'`][-1]";
 		
 		try {
-			return Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).isDisplayed();
+			return Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).isDisplayed();
 			
 		}
 		catch(Exception e) {
@@ -285,7 +285,7 @@ public class RenamingRulesPage {
 		
 		String cc = "**/XCUIElementTypeOther[`name contains'"+sRenamePayeeTo+" If'`][-1]";
 		
-		if (Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).getText().toUpperCase().contains("PAYEE NAME"))
+		if (Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).getText().toUpperCase().contains("PAYEE NAME"))
 			return "Payee".toUpperCase();
 		else
 			return "Quicken".toUpperCase();	
@@ -318,7 +318,7 @@ public class RenamingRulesPage {
 		
 		String cc = "**/XCUIElementTypeOther[`name contains'"+sRenamePayeeTo+" If'`]/XCUIElementTypeStaticText";
 		
-		String sActual = Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).getText();
+		String sActual = Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).getText();
 		
 		String[] arr = sActual.split("\"");
 		
@@ -364,7 +364,7 @@ public class RenamingRulesPage {
 		String cc = "**/XCUIElementTypeOther[`name contains '"+sCriteria+"'`][-1]";
 		
 		this.expand_rule(sRenamePayeeTo);
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 		
 		ViewRenamingRulesPage vrp = new ViewRenamingRulesPage();
 		vrp.deleteTheRule();	

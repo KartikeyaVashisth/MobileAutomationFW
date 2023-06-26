@@ -1,14 +1,13 @@
 package dugout;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Verify;
 import support.Engine;
-import support.Helper;
 
 public class MFApage {
 	
@@ -23,17 +22,17 @@ public class MFApage {
 	}
 	
 	@AndroidFindBy(xpath="//*[@content-desc='Email or Quicken ID']") 
-	@iOSFindBy(xpath="//XCUIElementTypeTextField") // RN updated
-	public MobileElement inputMFA;
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeTextField") // RN updated
+	public WebElement inputMFA;
 	
 	//XCUIElementTypeStaticText[@name="We sent you a code to verify your identity. This helps keep your account safe."]
 	@AndroidFindBy(xpath="//*[@content-desc='Email or Quicken ID']") 
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='We sent you a code to verify your identity. This helps keep your account safe.']") // RN updated
-	public MobileElement txtWeSentYouACode;
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[@name='We sent you a code to verify your identity. This helps keep your account safe.']") // RN updated
+	public WebElement txtWeSentYouACode;
 	
 	@AndroidFindBy(xpath="//*[@content-desc='Email or Quicken ID']") 
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name='SUBMIT']") // RN updated
-	public MobileElement btnSubmit;
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeButton[@name='SUBMIT']") // RN updated
+	public WebElement btnSubmit;
 	
 	public boolean handleMFA() throws InterruptedException{
 		

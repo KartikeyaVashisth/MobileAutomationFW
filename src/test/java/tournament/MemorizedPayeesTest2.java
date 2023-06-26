@@ -3,6 +3,7 @@ package tournament;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +18,6 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -492,7 +492,7 @@ public class MemorizedPayeesTest2 extends Recovery {
 		
 		op.navigateToMemorizedPayees();
 		
-		List<MobileElement> li = mp.getAllSearchMemorizedPayees();
+		List<WebElement> li = mp.getAllSearchMemorizedPayees();
 		Commentary.log(LogStatus.INFO, "No of Memorized Payees appeared in the search..."+li.size());
 		int listSize = li.size();
 		

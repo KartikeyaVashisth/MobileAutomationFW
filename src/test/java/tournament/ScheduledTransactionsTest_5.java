@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +17,6 @@ import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -868,7 +868,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		Month previousToPreviousMonth = currentMonth.minus(2);
 		String previousToPreviousMonthSubstring = previousToPreviousMonth.toString().substring(0, 3);
 		
-		List<MobileElement> li = bi.getAllReminderEntriesDate();
+		List<WebElement> li = bi.getAllReminderEntriesDate();
 		Commentary.log(LogStatus.INFO, "No of Reminder instances appeared in the search .."+li.size());
 
 		String dateOfFirstReminderInstance = li.get(0).getText();
@@ -897,7 +897,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		
 		bi.selectingDueNewToOldOption();
 
-		List<MobileElement> li1 = bi.getAllReminderEntriesDate();
+		List<WebElement> li1 = bi.getAllReminderEntriesDate();
 		
 		String dateOfFirstReminderInstance_NewToOldFilter = li1.get(0).getText();
 		
@@ -966,7 +966,7 @@ public class ScheduledTransactionsTest_5 extends Recovery {
 		
 		bi.selectingBillerNameOption();
 		
-		List<MobileElement> li = bi.getAllSectionHeaders();
+		List<WebElement> li = bi.getAllSectionHeaders();
 		
 		String firstSectionHeaderText = li.get(0).getText();
 		String secondSectionHeaderText = li.get(1).getText();

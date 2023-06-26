@@ -5,11 +5,14 @@ import java.util.HashMap;
 
 import org.openqa.selenium.WebElement;
 
-import io.appium.java_client.MobileDriver;
+import io.appium.java_client.AppiumDriver;
+
+//import io.appium.java_client.MobileDriver;
 
 public class Globals {
 	
-	public static MobileDriver<WebElement> driver;
+//	public static MobileDriver<WebElement> driver;
+	public static AppiumDriver driver;
 	public static String serverURL;
 	
 	public static HashMap<String, String>testProperty;

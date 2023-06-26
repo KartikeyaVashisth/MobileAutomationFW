@@ -27,7 +27,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.saucelabs.saucerest.SauceREST;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -173,15 +172,17 @@ public class Recovery {
 //          
 //			Engine.ad.startActivity(activity);
 			//Activity activity = new Activity("com.quicken.acme", "com.quicken.qm2014.MainActivity");
-			((AndroidDriver<MobileElement>)Engine.getDriver()).startActivity(activity);
-			Thread.sleep(3000);
+//			((AndroidDriver<WebElement>)Engine.getDriver()).startActivity(activity);
+			((AndroidDriver)Engine.getDriver()).activateApp("com.quicken.qm2014");
+			Thread.sleep(2000);
 
 		}
 			
 		else
-			((IOSDriver<MobileElement>)Engine.getDriver()).launchApp();
+//			((IOSDriver<WebElement>)Engine.getDriver()).launchApp();
+			((IOSDriver)Engine.getDriver()).activateApp("com.intuit.quickencompanion.ios");
 			
-		Thread.sleep(14000);
+		Thread.sleep(10000);
 		System.out.println("BeforeMethod Ends........."+m.getName());
 		
 	}
@@ -228,11 +229,13 @@ public class Recovery {
 		
 		Thread.sleep(1000);
 		
-		Engine.tlDriver.get().closeApp();
+//		Engine.tlDriver.get().closeApp();
 		if (this.sEngine.get().equals("android"))
-			((AndroidDriver<MobileElement>)Engine.getDriver()).closeApp();
+//			((AndroidDriver<WebElement>)Engine.getDriver()).closeApp();
+			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
 		else
-			((IOSDriver<MobileElement>)Engine.getDriver()).closeApp();
+//			((IOSDriver<WebElement>)Engine.getDriver()).closeApp();
+			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
 		
 		System.out.println("AfterMethod: "+TEST_RUN_ID.get());
 		

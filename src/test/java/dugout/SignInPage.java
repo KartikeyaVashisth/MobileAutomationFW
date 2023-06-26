@@ -1,25 +1,17 @@
 package dugout;
 
-import java.util.HashMap;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.HidesKeyboard;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
@@ -47,76 +39,76 @@ public class SignInPage {
 	@AndroidFindBy(xpath="//*[@content-desc='Quicken ID (email address)' or @text='Quicken ID (email address)']") 
 	//@iOSFindBy(xpath="//*[@name='Quicken ID (email address)']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=='Quicken ID (email address)'`]")
-	public MobileElement emailID;
+	public WebElement emailID;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Sign in'")
 	@AndroidFindBy(xpath = "//android.view.View[@text=‘Sign in’]")
-	public MobileElement signInTextLabel;
+	public WebElement signInTextLabel;
 
 	//@AndroidFindBy(xpath="//*[@content-desc='Quicken ID or Email']") // RN updated
 	//@AndroidFindBy(xpath="//android.widget.EditText[@password='false']")
 	@AndroidFindBy(xpath="//android.widget.EditText[@resource-id='username']")
 	//@iOSXCUITFindBy(className = "XCUIElementTypeTextField")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Quicken'`]/**/XCUIElementTypeTextField")	
-	public MobileElement userName;
+	public WebElement userName;
 
 	@AndroidFindBy(xpath="//*[@content-desc ='Password' or @text ='Password']")
 	//@AndroidFindBy(xpath="//*[@text='Password']")
 	//@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='Password']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[$name=='Password'$]")
-	public MobileElement lblPassword;
+	public WebElement lblPassword;
 
 	//@AndroidFindBy(xpath="//android.widget.EditText[2]")
 	@AndroidFindBy(xpath="//*[@resource-id ='password' or @text ='Password']")
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSecureTextField")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Quicken'`]/**/XCUIElementTypeSecureTextField")
-	public MobileElement userPassword;
+	public WebElement userPassword;
 
 	//@AndroidFindBy(xpath="//*[@content-desc='SIGN IN' or @text='Sign in'][-1]")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text = 'Sign in']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[$name=='Sign in'$]")
-	public MobileElement btnSignIn;
+	public WebElement btnSignIn;
 	
 	@AndroidFindBy(xpath="//android.view.View[@text='Do you need help signing in?']/../android.view.View[@text='Invalid Credentials.']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Invalid Credentials.'`]")
-	public MobileElement invalidCredentialsText;
+	public WebElement invalidCredentialsText;
 	
 	@AndroidFindBy(xpath="//android.widget.EditText[@resource-id='username']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[$name='Quicken ID (email address)'$]/**/XCUIElementTypeTextField")
-	public MobileElement usernameTextField;
+	public WebElement usernameTextField;
 
 	@AndroidFindBy(xpath="//*[@text='Done']")
 	//	@iOSFindBy(xpath="//*[@name='doneButton']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'doneButton'`]")
-	public MobileElement btnDone;
+	public WebElement btnDone;
 
 	@AndroidFindBy(xpath="//*[contains(@text,'synced more than one')]")
-	@iOSFindBy(xpath="//*[contains(@name,'synced more than one')]")
-	public MobileElement txtYouHaveSynced;
+	@iOSXCUITFindBy(xpath="//*[contains(@name,'synced more than one')]")
+	public WebElement txtYouHaveSynced;
 
-	@iOSFindBy(xpath="//*[contains(@name,'synced more than one')]")
+	@iOSXCUITFindBy(xpath="//*[contains(@name,'synced more than one')]")
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
-	public MobileElement refreshSpinnerIcon;
+	public WebElement refreshSpinnerIcon;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Expand Icon'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Help']/../following-sibling::android.view.ViewGroup[1]")
-	public MobileElement dataSetArrow;
+	public WebElement dataSetArrow;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
-	public MobileElement navigationMenu;
+	public WebElement navigationMenu;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'navigationMenu'`][-2]/**/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]/../android.widget.TextView")
-	public MobileElement datasetNameOnDashboard;
+	public WebElement datasetNameOnDashboard;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Cancel Icon'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc=\"Cancel Icon\"]")
-	public MobileElement cancelIcon;
+	public WebElement cancelIcon;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeScrollView[1]")
 	@AndroidFindBy(xpath="//android.widget.ScrollView//android.view.ViewGroup/android.widget.ImageView")
-	public MobileElement datasetSelectionListScreen;
+	public WebElement datasetSelectionListScreen;
 	
 	public boolean signIn() throws Exception{
 
@@ -156,7 +148,7 @@ public class SignInPage {
 		Thread.sleep(1000);
 		this.userPassword.sendKeys(support.getPassword());
 		if (support.getEngine().equals("android"))
-			Engine.getDriver().hideKeyboard();
+			((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		Thread.sleep(1000);
 
 		btnSignIn.click();
@@ -201,9 +193,9 @@ public class SignInPage {
 
 		this.userPassword.sendKeys(password); //this keyword used to differentiate between local and global variable.
 		//lbl.sendKeys(password);
-		if (support.getEngine().equals("android"))
-			Engine.getDriver().hideKeyboard();
-		Thread.sleep(1000);
+//		if (support.getEngine().equals("android"))
+//			((HidesKeyboard) Engine.getDriver()).hideKeyboard();
+//		Thread.sleep(1000);
 
 		btnSignIn.click();
 		//quickenTest.log(LogStatus.INFO,"Clicked on SignIn button");
@@ -266,7 +258,7 @@ public class SignInPage {
 		ExtentTest quickenTest = Recovery.quickenTest;
 		String xpath;
 		Integer iCount;
-		MobileElement txtDataSet;
+		WebElement txtDataSet;
 
 		if (! Verify.waitForObject(txtYouHaveSynced, 4))
 		{
@@ -280,9 +272,9 @@ public class SignInPage {
 
 			if (support.getEngine().equals("android")){
 
-				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ bundle + "\").instance(0))"));
+				Engine.getDriver().findElement(MobileBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ bundle + "\").instance(0))"));
 				xpath = "//android.view.ViewGroup[@content-desc='"+bundle+"']";
-				txtDataSet = (MobileElement) Engine.getDriver().findElement(By.xpath(xpath));
+				txtDataSet = (WebElement) Engine.getDriver().findElement(By.xpath(xpath));
 				Thread.sleep(1000);
 
 				Commentary.log(LogStatus.INFO, Engine.getDriver().findElement(By.xpath(xpath)).isDisplayed()+" "+bundle); //true ProjectedBalances will be printed.
@@ -302,7 +294,7 @@ public class SignInPage {
 			}
 
 			else{
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath("//XCUIElementTypeScrollView"));
+				WebElement me = (WebElement) Engine.getDriver().findElement(By.xpath("//XCUIElementTypeScrollView"));
 				String me_id = me.getId();
 				HashMap<String, String> scrollObject = new HashMap<String, String>();
 				scrollObject.put("element", me_id);
@@ -362,7 +354,7 @@ public class SignInPage {
 				dataSetArrow.click();
 				Thread.sleep(5000);
 				Verify.waitForObject(this.datasetSelectionListScreen, 2);
-				MobileElement xpath_Android = (MobileElement)Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
+				WebElement xpath_Android = (WebElement)Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+bundle+"']"));
 				xpath_Android.click();
 				Thread.sleep(500);
 				Verify.waitForObject(this.btnDone, 1);
@@ -404,7 +396,7 @@ public class SignInPage {
 				dataSetArrow.click();
 				Thread.sleep(2000);
 				Verify.waitForObject(this.datasetSelectionListScreen, 2);
-				MobileElement xpath_ios = (MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='"+bundle+"'`][2]"));
+				WebElement xpath_ios = (WebElement)Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name='"+bundle+"'`][2]"));
 				xpath_ios.click();
 				Thread.sleep(500);
 				Verify.waitForObject(this.btnDone, 1);

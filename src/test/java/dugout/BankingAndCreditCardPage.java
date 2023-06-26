@@ -4,21 +4,29 @@ import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
+import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.events.api.general.AlertEventListener;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
@@ -43,63 +51,63 @@ public class BankingAndCreditCardPage {
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name contains 'back'`]")
 	@AndroidFindBy(xpath="//*[@class='android.widget.Button']")
-	public MobileElement backButton;
+	public WebElement backButton;
 
-	@iOSFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
+	@iOSXCUITFindBy(xpath="//*[starts-with(@name, 'Bank Account Balances Checking Accounts')]")
 	@AndroidFindBy(xpath="//*[@text='Checking']")
-	public MobileElement checkingAccount;
+	public WebElement checkingAccount;
 
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 0\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 0\"]")
 	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 0\"]")
-	public MobileElement select_todaysBalance;
+	public WebElement select_todaysBalance;
 
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 1\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 1\"]")
 	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 1\"]")
-	public MobileElement select_OnlineBalance;
+	public WebElement select_OnlineBalance;
 
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"TODAY'S BALANCE\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[@name=\"TODAY'S BALANCE\"]")
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
-	public MobileElement txtTodaysBalance;
+	public WebElement txtTodaysBalance;
 
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"ONLINE BALANCE\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[@name=\"ONLINE BALANCE\"]")
 	@AndroidFindBy(xpath="//*[@text=\"ONLINE BALANCE\"]")
-	public MobileElement txtOnlineBalance;
+	public WebElement txtOnlineBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='PROJECTED BALANCE'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]")
-	public MobileElement txtProjectedBalance;
+	public WebElement txtProjectedBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name contains \"PROJECTED BALANCE\"`]/XCUIElementTypeStaticText[`name contains '$'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[contains(@text,'$')]") //android.widget.TextView[@text=\"PROJECTED BALANCE\"]/../android.widget.TextView[2]
-	public MobileElement txtProjectedBalanceAmount;
+	public WebElement txtProjectedBalanceAmount;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CHECKING\"]/../android.widget.TextView[2]")
-	public MobileElement checkingBalance;
+	public WebElement checkingBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Checking Account Balance'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Checking\"]/../android.widget.TextView[2]")
-	public MobileElement checkingAccountBalance;
+	public WebElement checkingAccountBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Credit Cards'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CREDIT CARDS\"]/../android.widget.TextView[2]")
-	public MobileElement creditCardBalance;
+	public WebElement creditCardBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Cash'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"CASH\"]/../android.widget.TextView[2]")
-	public MobileElement cashBalance;
+	public WebElement cashBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"SAVINGS\"]/../android.widget.TextView[2]")
-	public MobileElement savingsBalance;
+	public WebElement savingsBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name CONTAINS 'Savings Account Balance'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Savings\"]/../android.widget.TextView[2]")
-	public MobileElement savingsAccountBalance;
+	public WebElement savingsAccountBalance;
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name=='All Transactions'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"All Transactions\"]")
-	public MobileElement allTransactionButton;
+	public WebElement allTransactionButton;
 
 	//ONLINE BALANCE
 	//\"TODAY'S BALANCE\
@@ -107,23 +115,23 @@ public class BankingAndCreditCardPage {
 	//	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains \"TODAY'S BALANCE\"`]/XCUIElementTypeStaticText[`name contains '$'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"TODAY'S BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
-	public MobileElement txtTodaysBalanceAmount;
+	public WebElement txtTodaysBalanceAmount;
 
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]/../XCUIElementTypeStaticText[contains(@name,'$')]")
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
-	public MobileElement txtActualBalance;
+	public WebElement txtActualBalance;
 
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 2\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"scroller 2\"]")
 	@AndroidFindBy(xpath="//*[@content-desc=\"scroller 2\"]")
-	public MobileElement select_ProjectedBalance;
+	public WebElement select_ProjectedBalance;
 
 
-	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
-	public MobileElement addTransaction;
+	public WebElement addTransaction;
 
 
-	public MobileElement getAccount(String acctName) throws Exception{
+	public WebElement getAccount(String acctName) throws Exception{
 
 		String xPathForAcct = "//android.view.ViewGroup/android.widget.TextView[normalize-space(@text)='"+acctName+"']";
 //		String xPathForAcct_IOS = "//XCUIElementTypeStaticText[normalize-space(@name)='Account Name: "+acctName+"']";
@@ -134,9 +142,9 @@ public class BankingAndCreditCardPage {
 
 		if (h.getEngine().equals("android")){
 			try	{
-				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctName + "\").instance(0))"));
+				Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctName + "\").instance(0))"));
 				Thread.sleep(1000);
-				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct);
+				return (WebElement) Engine.getDriver().findElement(By.xpath(xPathForAcct));
 			}
 			catch(Exception e){
 				return null;
@@ -149,9 +157,9 @@ public class BankingAndCreditCardPage {
 //				if (!Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(xPathForAcct_IOS))))
 //					scrollToAccount(acctName);
 //				return (MobileElement) Engine.getDriver().findElementByXPath(xPathForAcct_IOS);
-				if (!Verify.objExists(Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS))))
+				if (!Verify.objExists(Engine.getDriver().findElement(AppiumBy.iOSClassChain(xPathForAcct_IOS))))
 					scrollToAccount(acctName);
-				return Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS));
+				return Engine.getDriver().findElement(AppiumBy.iOSClassChain(xPathForAcct_IOS));
 			}
 			catch(Exception e){
 				return null;
@@ -272,7 +280,7 @@ public class BankingAndCreditCardPage {
 
 		this.scrollToAccount(acct);
 
-		return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).getText();
+		return Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).getText();
 	}
 
 	public String getAccountBalance(String acct) throws Exception {
@@ -308,19 +316,26 @@ public class BankingAndCreditCardPage {
 		Helper h = new Helper();
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctType+"']";
-			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctType + "\").instance(0))"));
+			Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ acctType + "\").instance(0))"));
 			Thread.sleep(1000);
 		}
 		else {
-			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
-			String sLabel ="name == '"+acctType+"'";
-			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath));
-			String me_id = me.getId();
+//			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctType+"'`]";
+//			String sLabel ="name == '"+acctType+"'";
+//			WebElement me = Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath));
+//			String me_id = me.getId();
+//			HashMap<String, String> scrollObject = new HashMap<String, String>();
+//			scrollObject.put("element", me_id);
+//			scrollObject.put("toVisible", "not an empty string");
+//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
+//			Thread.sleep(1000);
+			
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
-			scrollObject.put("element", me_id);
-			scrollObject.put("toVisible", "not an empty string");
-			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
-			Thread.sleep(1000);
+            scrollObject.put("predicateString", "value contains '"+acctType+"'");
+            scrollObject.put("toVisible", "true");
+            scrollObject.put("direction", "up");
+            ((IOSDriver) Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
+            Thread.sleep(1000);
 		}
 
 	}
@@ -365,10 +380,21 @@ public class BankingAndCreditCardPage {
 
 		int y=550;
 		
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
 		
 		for(int i=1 ;i<=2;i++) { 
-			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+//			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+			
+			PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+			Sequence sequence = new Sequence(finger1, 1)
+					.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), x_start, y)) 
+					.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+					.addAction(new Pause(finger1, Duration.ofMillis(200)))
+					.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), x_end, y)) 
+					.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+			
+			Engine.getDriver().perform(Collections.singletonList(sequence));
+			Thread.sleep(2000);
 		}
 	}
 	
@@ -376,8 +402,8 @@ public class BankingAndCreditCardPage {
 //	public void dragAndDrop() throws Exception { 
 //		
 //		Engine.getDriver().findElementByAccessibilityId("Drag and Drop").click(); //AccessibilityId is same as content-desc in Android.
-//		MobileElement source = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_1");
-//		MobileElement target = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_2");
+//		WebElement source = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_1");
+//		WebElement target = Engine.getDriver().findElementById("io.appium.android.apis:id/drag_dot_2");
 //		
 //		TouchAction touchAction = new TouchAction(Engine.getDriver());
 //		touchAction.longPress(LongPressOptions.longPressOptions().withElement(ElementOption.element(source)))
@@ -389,31 +415,50 @@ public class BankingAndCreditCardPage {
 		
 	public void scrollToProjectedBalance_ios() throws Exception{
 
-		MobileElement element = this.txtTodaysBalance;
-		String elementID = element.getId();
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("element", elementID); // Only for ‘scroll in element’
-		scrollObject.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
-		Thread.sleep(1000);
+//		WebElement element = this.txtTodaysBalance;
+//		String elementID = element.getId();
+//		HashMap<String, String> scrollObject = new HashMap<String, String>();
+//		scrollObject.put("element", elementID); // Only for ‘scroll in element’
+//		scrollObject.put("direction", "left");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+//		Thread.sleep(1000);
+//
+//		Verify.waitForObject(this.txtOnlineBalance, 1);
+//		WebElement element1 = this.txtOnlineBalance;
+//		String elementID1 = element1.getId();
+//		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+//		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
+//		scrollObject1.put("direction", "left");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
+//		Thread.sleep(1000);
+//
+//		Verify.waitForObject(this.txtProjectedBalance, 1);
+//		WebElement element2 = this.txtProjectedBalance;
+//		String elementID2 = element2.getId();
+//		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
+//		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
+//		scrollObject2.put("direction", "left");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
+//		Thread.sleep(1000);
+		
+		int x_start=390;
+		int x_end=5;
 
-		Verify.waitForObject(this.txtOnlineBalance, 1);
-		MobileElement element1 = this.txtOnlineBalance;
-		String elementID1 = element1.getId();
-		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
-		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
-		scrollObject1.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
-		Thread.sleep(1000);
-
-		Verify.waitForObject(this.txtProjectedBalance, 1);
-		MobileElement element2 = this.txtProjectedBalance;
-		String elementID2 = element2.getId();
-		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
-		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
-		scrollObject2.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
-		Thread.sleep(1000);
+		int y=159;
+		
+		for(int i=1 ;i<=2;i++) { 
+			
+			PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+			Sequence sequence = new Sequence(finger1, 1)
+					.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), x_start, y)) 
+					.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+					.addAction(new Pause(finger1, Duration.ofMillis(200)))
+					.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), x_end, y)) 
+					.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+			
+			Engine.getDriver().perform(Collections.singletonList(sequence));
+			Thread.sleep(2000);
+		}
 
 		//	        Helper h = new Helper();
 		//	        h.getContext();
@@ -424,14 +469,14 @@ public class BankingAndCreditCardPage {
 		//        	Thread.sleep(1000);
 
 		/*
-			MobileElement element = (MobileElement)Engine.iosd.findElement(By.name("TODAY'S BALANCE"));
+			WebElement element = (WebElement)Engine.iosd.findElement(By.name("TODAY'S BALANCE"));
 	        String elementID = element.getId();
 	        HashMap<String, String> scrollObject = new HashMap<String, String>();
 	        scrollObject.put("element", elementID); // Only for ‘scroll in element’
 	        scrollObject.put("direction", "right");
 	        Engine.iosd.executeScript("mobile:scroll", scrollObject);
 
-	        MobileElement element1 = (MobileElement)Engine.iosd.findElement(By.name("ONLINE BALANCE"));
+	        WebElement element1 = (WebElement)Engine.iosd.findElement(By.name("ONLINE BALANCE"));
 	        String elementID1 = element1.getId();
 	        HashMap<String, String> scrollObject1 = new HashMap<String, String>();
 	        scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
@@ -470,40 +515,71 @@ public class BankingAndCreditCardPage {
 
 		int y=550;
 		
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
 		
 		for(int i=1 ;i<=2;i++) { 
-			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+//			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+				
+				PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+				Sequence sequence = new Sequence(finger1, 1)
+						.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), x_start, y)) 
+						.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+						.addAction(new Pause(finger1, Duration.ofMillis(200)))
+						.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), x_end, y)) 
+						.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+				
+				Engine.getDriver().perform(Collections.singletonList(sequence));
+				Thread.sleep(2000);
 		}
 	}
 
 	public void scrollToTotalBalance_ios() throws Exception{		
 
-		MobileElement element = this.txtProjectedBalance;
-		String elementID = element.getId();
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("element", elementID); // Only for ‘scroll in element’
-		scrollObject.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
-		Thread.sleep(1000);
+//		WebElement element = this.txtProjectedBalance;
+//		String elementID = element.getId();
+//		HashMap<String, String> scrollObject = new HashMap<String, String>();
+//		scrollObject.put("element", elementID); // Only for ‘scroll in element’
+//		scrollObject.put("direction", "right");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+//		Thread.sleep(1000);
+//
+//		Verify.waitForObject(this.txtOnlineBalance, 1);
+//		WebElement element1 = this.txtOnlineBalance;
+//		String elementID1 = element1.getId();
+//		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+//		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
+//		scrollObject1.put("direction", "right");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
+//		Thread.sleep(1000);
+//
+//		Verify.waitForObject(this.txtTodaysBalance, 1);
+//		WebElement element2 = this.txtTodaysBalance;
+//		String elementID2 = element2.getId();
+//		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
+//		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
+//		scrollObject2.put("direction", "right");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
+//		Thread.sleep(1000);
+		
+		int x_start=5;
+		int x_end=390;
 
-		Verify.waitForObject(this.txtOnlineBalance, 1);
-		MobileElement element1 = this.txtOnlineBalance;
-		String elementID1 = element1.getId();
-		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
-		scrollObject1.put("element", elementID1); // Only for ‘scroll in element’
-		scrollObject1.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject1);
-		Thread.sleep(1000);
-
-		Verify.waitForObject(this.txtTodaysBalance, 1);
-		MobileElement element2 = this.txtTodaysBalance;
-		String elementID2 = element2.getId();
-		HashMap<String, String> scrollObject2 = new HashMap<String, String>();
-		scrollObject2.put("element", elementID2); // Only for ‘scroll in element’
-		scrollObject2.put("direction", "right");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject2);
-		Thread.sleep(1000);
+		int y=159;
+		
+		for(int i=1 ;i<=2;i++) { 
+			
+			PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+			Sequence sequence = new Sequence(finger1, 1)
+					.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), x_start, y)) 
+					.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+					.addAction(new Pause(finger1, Duration.ofMillis(200)))
+					.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), x_end, y)) 
+					.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+			
+			Engine.getDriver().perform(Collections.singletonList(sequence));
+			Thread.sleep(2000);
+		}
+		
 	}
 
 	public void selectAccount(String acctName) throws Exception {
@@ -512,13 +588,13 @@ public class BankingAndCreditCardPage {
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+acctName+"']";
 			this.scrollToAccount(acctName);
-			Verify.waitForObject((MobileElement) Engine.getDriver().findElement(MobileBy.xpath(sXpath)), 2);
+			Verify.waitForObject((WebElement) Engine.getDriver().findElement(MobileBy.xpath(sXpath)), 2);
 			Engine.getDriver().findElement(MobileBy.xpath(sXpath)).click();
 			Thread.sleep(5000);
 		}
 		else {
 			String sXpath="**/XCUIElementTypeStaticText[`name CONTAINS '"+acctName+"'`]";
-			MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath));
+			WebElement me = (WebElement) Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath));
 			me.click();
 			Thread.sleep(3000);
 		}

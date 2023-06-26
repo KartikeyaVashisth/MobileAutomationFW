@@ -1,10 +1,11 @@
 package dugout;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -26,83 +27,83 @@ public class ManageAccountsPage {
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Manage Accounts'`]")
 	@AndroidFindBy(xpath = "//android.view.View[@text='Manage Accounts']")
-	private MobileElement manageAccountsText;
+	private WebElement manageAccountsText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'FI three dot menu'`][-1]")
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[contains(@content-desc,'FI three dot menu')]")
-	private MobileElement FIThreeDotsMenu;
+	private WebElement FIThreeDotsMenu;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Delete financial institution'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete financial institution']")
-	private MobileElement deleteFIOption;
+	private WebElement deleteFIOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Cancel'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Cancel']")
-	private MobileElement cancelOption;
+	private WebElement cancelOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Rename account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Rename account']")
-	private MobileElement renameAccountOption;
+	private WebElement renameAccountOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Keep this account separate'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep this account separate']")
-	private MobileElement keepAccountSeparateOption;
+	private WebElement keepAccountSeparateOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Hide in account list'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide in account list']")
-	private MobileElement hideInAccountListOption;
+	private WebElement hideInAccountListOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Delete account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete account']")
-	private MobileElement deleteAccountOption;
+	private WebElement deleteAccountOption;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Account Name'`]/**/XCUIElementTypeTextField")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Account Name']/following-sibling::android.widget.EditText")
-	private MobileElement renameAccountNameTextField;
+	private WebElement renameAccountNameTextField;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Update'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Update']")
-	private MobileElement updateOption;
+	private WebElement updateOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Other'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Other']")
-	public MobileElement otherFIText;
+	public WebElement otherFIText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'closeRename account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='closeRename account']")
-	private MobileElement closeRenameAccountButton;
+	private WebElement closeRenameAccountButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Keep account separate'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep account separate']")
-	private MobileElement keepAccountSeparatePopUpText;
+	private WebElement keepAccountSeparatePopUpText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Keep Separate'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Keep Separate']")
-	private MobileElement keepSeparateButton;
+	private WebElement keepSeparateButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Hide account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide account']")
-	private MobileElement hideAccountPopUpText;
+	private WebElement hideAccountPopUpText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Hide'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hide']")
-	private MobileElement hideButton;
+	private WebElement hideButton;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Delete account'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete account']")
-	private MobileElement deleteAccountPopUpText;
+	private WebElement deleteAccountPopUpText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Delete financial institution'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete financial institution']")
-	private MobileElement deleteFinancialInstitutionPopUpText;
+	private WebElement deleteFinancialInstitutionPopUpText;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Delete'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete']")
-	private MobileElement deleteButton;
+	private WebElement deleteButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Settings, back'`]")
 	@AndroidFindBy(xpath = "//android.widget.Button[@content-desc='Go back']")
-	private MobileElement backButtonOnManageAccountsPage;
+	private WebElement backButtonOnManageAccountsPage;
 
 
 	public void chooseOption(String optionName) throws Exception {
@@ -115,7 +116,7 @@ public class ManageAccountsPage {
 		}
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name='"+optionName+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).click();
 			Thread.sleep(1000);
 		}
 	}
@@ -171,7 +172,7 @@ public class ManageAccountsPage {
 		}
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name = 'Account three dot menu: "+accountName+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).click();
 		}
 	}
 	
@@ -184,7 +185,7 @@ public class ManageAccountsPage {
 		}
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name = 'FI three dot menu: "+FIName+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).click();
 		}
 	}
 	
@@ -208,7 +209,7 @@ public class ManageAccountsPage {
 		}
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name contains 'Separate'`]/**/XCUIElementTypeOther[`name='"+accountName+"'`]";
-			return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).isDisplayed();
+			return Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).isDisplayed();
 		}
 	}
 	
@@ -221,7 +222,7 @@ public class ManageAccountsPage {
 		}
 		else {
 			String xpath = "**/XCUIElementTypeOther[`name='"+accountName+"'`]/**/XCUIElementTypeImage";
-			return Engine.getDriver().findElement(MobileBy.iOSClassChain(xpath)).isDisplayed();
+			return Engine.getDriver().findElement(AppiumBy.iOSClassChain(xpath)).isDisplayed();
 		}
 	}
 }

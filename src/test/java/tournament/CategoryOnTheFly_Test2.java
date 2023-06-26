@@ -2,6 +2,7 @@ package tournament;
 
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -14,7 +15,6 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.CategoryRecord;
@@ -110,7 +110,7 @@ public class CategoryOnTheFly_Test2 extends Recovery{
 		
 		AllAccountsPage aa = new AllAccountsPage();
 		
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		
 		if(li.size() >= 1) {
 			Commentary.log(LogStatus.PASS, "New category created while editing the transaction");

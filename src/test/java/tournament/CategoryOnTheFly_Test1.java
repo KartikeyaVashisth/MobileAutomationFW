@@ -3,6 +3,7 @@ package tournament;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +17,6 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.CategoryRecord;
@@ -111,7 +111,7 @@ public class CategoryOnTheFly_Test1 extends Recovery{
 		
 		AllAccountsPage aa = new AllAccountsPage();
 		
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
 		
 		if (li.isEmpty())

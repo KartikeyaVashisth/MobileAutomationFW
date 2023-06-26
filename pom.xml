@@ -19,39 +19,52 @@
   <dependencies>
   
  	<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
+		<groupId>com.googlecode.json-simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1.1</version>
 	</dependency>
+	
      <dependency>
     	<groupId>io.appium</groupId>
     	<artifactId>java-client</artifactId>
-    	<version>6.1.0</version>
+    	<version>8.5.0</version>
     	<scope>test</scope>	
-   </dependency>
-	<dependency>				
+   	</dependency>
+   
+	 <dependency>				
          <groupId>org.testng</groupId>								
          <artifactId>testng</artifactId>								
-         <version>6.8</version>								
+         <version>7.7.1</version>								
          <scope>test</scope>							  			
      </dependency>
+     
      <dependency>
     	<groupId>com.saucelabs</groupId>
     	<artifactId>saucerest</artifactId>
     	<version>1.0.39</version>
     	<scope>test</scope>
-  </dependency>
+  	</dependency>
   
-   <dependency>
-    <groupId>com.relevantcodes</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>2.40.2</version>
+   	<dependency>
+	    <groupId>com.relevantcodes</groupId>
+	    <artifactId>extentreports</artifactId>
+	    <version>2.40.2</version>
 	</dependency>
-<dependency>
-  <groupId>org.freemarker</groupId>
-  <artifactId>freemarker</artifactId>
-  <version>2.3.23</version>
-</dependency>
+	
+	<dependency>
+  		<groupId>org.freemarker</groupId>
+		<artifactId>freemarker</artifactId>
+ 		<version>2.3.23</version>
+	</dependency>
+	
+	
+	<dependency>
+	    <groupId>com.codeborne</groupId>
+	    <artifactId>selenide-appium</artifactId>
+	    <version>6.15.0</version>
+	</dependency>
+
+
 </dependencies>
 
 
@@ -67,9 +80,9 @@
               <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
             </suiteXmlFiles>
       	<systemPropertyVariables>
-      	<buildpath>${env.BUILD}</buildpath>
+      	<!--<buildpath>${env.BUILD}</buildpath>
         		 	<buildtag>${env.BUILD_TAG}</buildtag>
-      		 		<lambdatest_response>${env.buildLambdaTestResponse}</lambdatest_response>
+      		 		<lambdatest_response>${env.buildLambdaTestResponse}</lambdatest_response>-->
          <!--<buildpath>${env.BUILD}</buildpath> 
          <engine>${env.ENGINE}</engine>
          <host>${env.HOST}</host>-->

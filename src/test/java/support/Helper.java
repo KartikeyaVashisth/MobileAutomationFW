@@ -22,16 +22,20 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.ContextAware;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
 import com.saucelabs.saucerest.SauceREST;
 
+import io.appium.java_client.HidesKeyboard;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.remote.SupportsContextSwitching;
 
 public class Helper {
 	
@@ -215,9 +219,10 @@ public void uploadAndroidBuild() throws Exception {
 	}
 	
 	
-	public DesiredCapabilities getCloudCapabilities(){
+	public MutableCapabilities getCloudCapabilities(){
 		
-		DesiredCapabilities capabilities = new DesiredCapabilities();
+//		DesiredCapabilities capabilities = new DesiredCapabilities();
+		MutableCapabilities capabilities = new MutableCapabilities();
 		if(Recovery.sCloudService.get().equals("lambdaTest")) {
 			LambdaTest lambdaTest = new LambdaTest();
 			capabilities = lambdaTest.getCloudCapabilities();
@@ -227,57 +232,67 @@ public void uploadAndroidBuild() throws Exception {
 		}
 			
 		return capabilities;
-		
 	}
-	
-	
-	
-	
 		
 	
-	public DesiredCapabilities getLocalCapabilities() throws Exception{
+	public MutableCapabilities getLocalCapabilities() throws Exception{
 		
-		DesiredCapabilities capabilities = new DesiredCapabilities();
+//		DesiredCapabilities capabilities = new DesiredCapabilities();
+		MutableCapabilities capabilities = new MutableCapabilities();
 		
 		if (getEngine().equals("android")){
 			
 			//capabilities.setCapability(CapabilityType.BROWSER_NAME,"Android");
 			//capabilities.setCapability("deviceName","emulator-5556");
-			capabilities.setCapability("deviceName","emulator-5554");
-			capabilities.setCapability("platformVersion","13.0");//8.1
+			capabilities.setCapability("appium:deviceName","emulator-5554");
+			capabilities.setCapability("appium:platformVersion","13.0");//8.1
 			//capabilities.setCapability("platformVersion","7.0");
-			capabilities.setCapability("noReset", true);
-			capabilities.setCapability("autoGrantPermissions", true);
-			capabilities.setCapability("ignoreUnimportantViews", true);
-			capabilities.setCapability("autoWebView", "true");
+			capabilities.setCapability("appium:noReset", true);
+			capabilities.setCapability("appium:autoGrantPermissions", true);
+			capabilities.setCapability("appium:ignoreUnimportantViews", true);
+			capabilities.setCapability("appium:autoWebView", "true");
 			capabilities.setCapability("platformName","Android");
-			capabilities.setCapability("newCommandTimeout", 1120);
-			capabilities.setCapability("automationName", "Appium");
+			capabilities.setCapability("appium:newCommandTimeout", 1120);
+			capabilities.setCapability("appium:automationName", "UiAutomator2");
 			//capabilities.setCapability("appWaitActivity","com.android.settings.Settings$OverlaySettingsActivity, com.quicken.qm2014.MainActivity");
 			//capabilities.setCapability("appWaitPackage","com.android.settings, com.quicken.qm2014");
-			capabilities.setCapability("appActivity","com.quicken.qm2014.MainActivity");
-			capabilities.setCapability("appPackage","com.quicken.qm2014");
-			capabilities.setCapability("chromedriverExecutable","/Users/kdas/chromedriver");
+			capabilities.setCapability("appium:appActivity","com.quicken.qm2014.MainActivity");
+			capabilities.setCapability("appium:appPackage","com.quicken.qm2014");
+			//capabilities.setCapability("chromedriverExecutable","/Users/kdas/chromedriver");
 			
 		}
 		else if(getEngine().equals("ios")){
 			
+//			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+//			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
+//			capabilities.setCapability("platformVersion", "15.5"); //12.1
+//			capabilities.setCapability("appiumVersion", "1.22.3"); //1.8.0
+//			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro");
+//			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
+//	        capabilities.setCapability("automationName","XCUITest");
+//	        capabilities.setCapability("noReset", true);
+//	        capabilities.setCapability("autoWebView", "true");
+////	        capabilities.setCapability("autoAcceptAlerts", true);
+//	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
+//	        capabilities.setCapability("browserName", "");
+//	        capabilities.setCapability("simpleIsVisibleCheck", true);
+//	        //capabilities.setCapability("newCommandTimeout",0);
+//	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
+//	        capabilities.setCapability("app", "/Users/kdas/Downloads/Quickencompanion.zip");
+			
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-			//capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.1"); //7.1//11.4
-			capabilities.setCapability("platformVersion", "15.5"); //12.1
-			capabilities.setCapability("appiumVersion", "1.22.3"); //1.8.0
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11 Pro");
-			capabilities.setCapability("bundleId","com.intuit.quickencompanion.ios");
-	        capabilities.setCapability("automationName","XCUITest");
-	        capabilities.setCapability("noReset", true);
-	        capabilities.setCapability("autoWebView", "true");
-//	        capabilities.setCapability("autoAcceptAlerts", true);
-	        capabilities.setCapability("autoGrantPermissions", true); //autoAcceptAlerts
-	        capabilities.setCapability("browserName", "");
-	        capabilities.setCapability("simpleIsVisibleCheck", true);
-	        //capabilities.setCapability("newCommandTimeout",0);
-	        //capabilities.setCapability("app", "/Users/kgrandhi/Downloads/QuickenRN_IOS.zip");
-	        capabilities.setCapability("app", "/Users/kdas/Downloads/Quickencompanion.zip");
+			capabilities.setCapability("platformVersion", "16.4"); //12.1
+			capabilities.setCapability("appiumVersion", "2.0.0-beta.71"); //1.8.0
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 14 Pro");
+			capabilities.setCapability("appium:bundleId","com.intuit.quickencompanion.ios");
+	        capabilities.setCapability("appium:automationName","XCUITest");
+	        capabilities.setCapability("appium:noReset", true);
+	        capabilities.setCapability("appium:autoWebView", "true");
+//	        capabilities.setCapability("autoAcceptAlerts", true); //autoAcceptAlerts
+	        capabilities.setCapability("appium:autoGrantPermissions", true); 
+	        capabilities.setCapability("appium:browserName", "");
+	        capabilities.setCapability("appium:simpleIsVisibleCheck", true);
+	        capabilities.setCapability("appium:app", "/Users/kvashisth/Downloads/companion.zip");
 	        	
 		}
 		
@@ -286,7 +301,8 @@ public void uploadAndroidBuild() throws Exception {
 	}
 
 	
-	public DesiredCapabilities getCapabilities() throws Exception{
+//	public DesiredCapabilities getCapabilities() throws Exception{
+	public MutableCapabilities getCapabilities() throws Exception{
 		
 		String textToDisplay = "";
 		if(Recovery.sHost.get().equals("cloud")) {
@@ -323,7 +339,7 @@ public void uploadAndroidBuild() throws Exception {
 	
 	public void hideKeyBoard() throws Exception {
 		
-		Engine.getDriver().hideKeyboard();
+		((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		
 //		if (this.getEngine().equals("android")) 
 //			Engine.ad.hideKeyboard();
@@ -341,7 +357,7 @@ public void uploadAndroidBuild() throws Exception {
 //		else
 //			Engine.iosd.getContext();
 		
-		Engine.getDriver().getContext();
+		((ContextAware) Engine.getDriver()).getContext();
 		Thread.sleep(500);	
 	}
 	

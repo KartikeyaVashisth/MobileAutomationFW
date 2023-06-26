@@ -18,7 +18,6 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.CategoryRecord;

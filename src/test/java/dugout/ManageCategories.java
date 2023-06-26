@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -36,160 +37,160 @@ public class ManageCategories {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name=='search category'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Category']")
-	public MobileElement searchCategoryTextField;
+	public WebElement searchCategoryTextField;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Entertainment'`]")
 	//@AndroidFindBy(xpath="//*[@text='Cash & ATM']")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Entertainment']")
-	public MobileElement cashAtmParentCat;
+	public WebElement cashAtmParentCat;
 	
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton parentcatCategory'`][-1]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='RadioButton parentcatCategory'`]/XCUIElementTypeOther[`name='RadioButton'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'parentcatCategory']/../android.view.ViewGroup[@content-desc = 'RadioButton']")
 	//@AndroidFindBy(xpath="//*[@text='Parentcat']")
-	public MobileElement parentcatCategory;
+	public WebElement parentcatCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Firstlevelcat'`]")
 	@AndroidFindBy(xpath="//*[@text='Firstlevelcat']")
-	public MobileElement firstLevelCatCategory;
+	public WebElement firstLevelCatCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'addCategoryButton'`][-1]")
 	@AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc='addCategoryButton']")
-	public MobileElement addCategoryButton;
+	public WebElement addCategoryButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Manage Categories'`]")
 	@AndroidFindBy(xpath = "//android.view.View[contains(@text,'Manage Categories')]")
-	public MobileElement manageCategoriesLabel;
+	public WebElement manageCategoriesLabel;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'create category'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='create category']")
-	public MobileElement createCategory;
+	public WebElement createCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Settings, back'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Settings, back']")
-	public MobileElement backButton;
+	public WebElement backButton;
 	
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'edit'`][-1]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='edit'`]/**/XCUIElementTypeOther")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc = 'edit']")
-	public MobileElement editbutton;
+	public WebElement editbutton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Edit Category'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='Edit Category']")
-	public MobileElement editCategoryLabel;
+	public WebElement editCategoryLabel;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Category Type'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Expense']")
-	public MobileElement createCategoryType;
+	public WebElement createCategoryType;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Expense'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Expense']")
-	public MobileElement expenseTypeOption;
+	public WebElement expenseTypeOption;
 
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeOther' AND name = 'Income'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Income']")
-	public MobileElement incomeTypeOption;
+	public WebElement incomeTypeOption;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text= 'Apply']")
-	public MobileElement applyButton;
+	public WebElement applyButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
 	@AndroidFindBy(xpath="//android.widget.EditText")
-	public MobileElement categoryNameTxtField1;
+	public WebElement categoryNameTxtField1;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name=='search category'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText")
-	public MobileElement searchCategoryTextField1;
+	public WebElement searchCategoryTextField1;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Category Name'`]/**/XCUIElementTypeTextField")
 	@AndroidFindBy(xpath="//*[@text='Category Name']/../android.widget.EditText")
-	public MobileElement categoryNameTxtField;
+	public WebElement categoryNameTxtField;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Delete'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Delete']")
-	public MobileElement deleteButton;
+	public WebElement deleteButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Update'`][-1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Update']")
-	public MobileElement updateButton;
+	public WebElement updateButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Category already exists'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Category already exists')]")
-	public MobileElement categoryExistsLabel;
+	public WebElement categoryExistsLabel;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'OK'")
 	@AndroidFindBy(xpath = "//android.widget.Button(@text='OK')")
-	public MobileElement okButton;
+	public WebElement okButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name CONTAINS 'Delete'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Delete')]")
-	public MobileElement deleteCategorylabel;
+	public WebElement deleteCategorylabel;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name = 'Continue'`]")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='CONTINUE']")
-	public MobileElement continueButton;
+	public WebElement continueButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name CONTAINS 'This category is currently in use'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'This category is currently in use.')]")
-	public MobileElement catCurrentlyInUseText;
+	public WebElement catCurrentlyInUseText;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Reassign & delete'`][-1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Reassign & delete']")
-	public MobileElement reassignDeleteButton;
+	public WebElement reassignDeleteButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Cancel Reassign & delete'`][-1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Cancel']")
-	public MobileElement cancelReassignDeleteButton;
+	public WebElement cancelReassignDeleteButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Reassigning to'`][-1]")
 	//@AndroidFindBy(xpath="//android.widget.ImageView[@index=2]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Reassigning to']/../android.widget.TextView[2]")
-	public MobileElement reassigningTo;
+	public WebElement reassigningTo;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Subcategory of'`][-1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Subcategory of']/../android.widget.TextView[2]")
-	public MobileElement subCategoryOf;
+	public WebElement subCategoryOf;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Create'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Create']")
-	public MobileElement createButton;
+	public WebElement createButton;
 	
 	// check this xpath
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'create'`][-1]")
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'Create New Category'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text, 'Create')]")
-	public MobileElement createCategoryLabel;
+	public WebElement createCategoryLabel;
 	
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'closeChoose Category'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc = 'closeChoose Category']")
-	public MobileElement closeChooseCategory;
+	public WebElement closeChooseCategory;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'A-test-reassignCategory'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'A-test-reassignCategory']")
-	public MobileElement sampleReassignCategory;
+	public WebElement sampleReassignCategory;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'Continue'")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text = 'CONTINUE']")
-	public MobileElement continueUpdateButton;
+	public WebElement continueUpdateButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeButton' AND name = 'Cancel'")
 	@AndroidFindBy(xpath = "//android.widget.Button[@text = 'CANCEL']")
-	public MobileElement cancelUpdateButton;
+	public WebElement cancelUpdateButton;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name contains 'Previous transactions'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Previous transactions')]")
-	public MobileElement updateTextlabel;
+	public WebElement updateTextlabel;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Subcategory of None'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'None']")
-	public MobileElement defaultSubcategoryValue;
+	public WebElement defaultSubcategoryValue;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Category Type Income'`]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text = 'Income']")
-	public MobileElement categoryTypeValueIncome;
+	public WebElement categoryTypeValueIncome;
 	
 	
 	
@@ -259,7 +260,7 @@ public class ManageCategories {
 		
 	      AllAccountsPage aa = new AllAccountsPage();
 			
-			List<MobileElement> li = aa.getAllSearchTransactions ();
+			List<WebElement> li = aa.getAllSearchTransactions ();
 			Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
 			
 			if (li.isEmpty())
@@ -281,7 +282,7 @@ public class ManageCategories {
 			
 			String sXpath = "//android.widget.TextView[@text = '"+category+"']";
 			
-			if (Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(sXpath)))) {
+			if (Verify.objExists((WebElement)Engine.getDriver().findElement(By.xpath(sXpath)))) {
 				
 			
 				Engine.getDriver().findElement(By.xpath(sXpath)).click();
@@ -308,17 +309,17 @@ public class ManageCategories {
 		else {
 			String sXpath = "**/XCUIElementTypeOther[`name='RadioButton "+category+"'`]";
 			
-			if(Verify.objExists(Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)))) {
+			if(Verify.objExists(Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)))) {
 				
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 				
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 				
 				if(Verify.objExists(editbutton)) {
 					Commentary.log(LogStatus.INFO, "Edit button is visible");
 				}
 				else {
-					Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+					Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 				}
 				
 				
@@ -376,7 +377,7 @@ public void reassignAndDeleteCategory(CategoryRecord cr) throws Exception {
 			
 			if (h.getEngine().equals("android")) {
 				
-				Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"A-test-reassignCategory\").instance(0))"));
+				Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"A-test-reassignCategory\").instance(0))"));
 				
 				Thread.sleep(1000);
 				sampleReassignCategory.click();

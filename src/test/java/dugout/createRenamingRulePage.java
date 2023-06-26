@@ -1,8 +1,9 @@
 package dugout;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.HidesKeyboard;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -22,51 +23,51 @@ public class createRenamingRulePage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Create Renaming Rule'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Create Renaming Rule']")
-	public MobileElement createRenamingRuleHeader;
+	public WebElement createRenamingRuleHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == 'Renaming Rules, back'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Renaming Rules, back']")
-	public MobileElement back;
+	public WebElement back;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'TIP : Rule shall be applied if downloaded payee name contains all strings in the same order.'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='TIP : Rule shall be applied if downloaded payee name contains all strings in the same order.']")
-	public MobileElement ruleShallBeApplied;
+	public WebElement ruleShallBeApplied;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField")
 	@AndroidFindBy(xpath="//android.widget.EditText")
-	public MobileElement payeeNameTo;
+	public WebElement payeeNameTo;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name BEGINSWITH 'Matching criteria'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='closeRule']")
-	public MobileElement matchingCriteria;
+	public WebElement matchingCriteria;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[-1]")
 	@AndroidFindBy(xpath="//android.widget.EditText[2]")
-	public MobileElement downloadPayeeName;
+	public WebElement downloadPayeeName;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Save' or name == 'save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Save']")
-	public MobileElement save;
+	public WebElement save;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == 'Rule'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[normalize-space(@text)='Rule']")
-	public MobileElement ruleDrawerHeader;
+	public WebElement ruleDrawerHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'closeRule'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='closeRule']")
-	public MobileElement closeRule;
+	public WebElement closeRule;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'Apply'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Apply']")
-	public MobileElement apply;
+	public WebElement apply;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'If Quicken Name is'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='If Quicken Name is']")
-	public MobileElement ifQuickenNameIs;
+	public WebElement ifQuickenNameIs;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'If Payee contains'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@content-desc='If Payee contains']")
-	public MobileElement ifPayeeContains;
+	public WebElement ifPayeeContains;
 	
 	public void addRule (String setPayeeNameTo, String matchingCriteriaRule, String downloadedName) throws Exception{
 		
@@ -74,7 +75,7 @@ public class createRenamingRulePage {
 		{
 			payeeNameTo.clear();
 			payeeNameTo.sendKeys(setPayeeNameTo);
-			Engine.getDriver().hideKeyboard();
+			((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		}
 		
 		if (! matchingCriteriaRule.equals(""))
@@ -93,7 +94,7 @@ public class createRenamingRulePage {
 		{
 			downloadPayeeName.clear();
 			downloadPayeeName.sendKeys(downloadedName);
-			Engine.getDriver().hideKeyboard();
+			((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		}
 		
 		this.save.click();
