@@ -22,7 +22,6 @@ import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 //import dugout.RecentTransactionsPage;
 
 

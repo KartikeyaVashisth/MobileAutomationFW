@@ -19,7 +19,6 @@ import dugout.SpendingTrendPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import referee.Commentary;
 import referee.ExtentManager;
@@ -34,7 +33,7 @@ public class pract2_Test extends Recovery {
 	ExtentTest quickenTest = Recovery.quickenTest;
 	
 	 @AndroidFindBy(xpath="//*[@class='android.widget.ScrollView']")
-	 private MobileElement scrollView;
+	 private WebElement scrollView;
 	
 	
 	

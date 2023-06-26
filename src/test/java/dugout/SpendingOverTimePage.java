@@ -6,13 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Verify;
 import support.Engine;
@@ -34,36 +33,36 @@ public class SpendingOverTimePage {
 //		@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending Over Time\"]")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name= 'Spending Over Time'`]")
 		@AndroidFindBy(xpath="//android.view.View[@text='Spending Over Time']")
-		public MobileElement spendingOverTimeHeader;
+		public WebElement spendingOverTimeHeader;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
 		@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
 		@AndroidFindBy(xpath="//android.widget.Button[@content-desc='Go back']")
-		public MobileElement backButtonOnHeader;
+		public WebElement backButtonOnHeader;
 		
-		@iOSFindBy(xpath="//*[normalize-space(@name)='Back']")
+		@iOSXCUITFindBy(xpath="//*[normalize-space(@name)='Back']")
 		@AndroidFindBy(xpath="//*[@resource-id='com.quicken.qm2014:id/list_row']")
-		public MobileElement transactionList;
+		public WebElement transactionList;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeStaticText[starts-with(@name,'Total Spending: ')]")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name BEGINSWITH \"Total Spending: \"`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Total Spending: ')]")
-		public MobileElement totalSpendingCurrentMonth;
+		public WebElement totalSpendingCurrentMonth;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeStaticText[starts-with(@name,'Total Spending: ')]/../XCUIElementTypeStaticText[contains (@name,'$')]")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name CONTAINS 'Total Spending: '`]/XCUIElementTypeStaticText[`name contains '$'`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[starts-with(@text,'Total Spending: ')]/../android.widget.TextView[contains(@text,'$')]")
-		public MobileElement totalSpendingForSelectedMonth;
+		public WebElement totalSpendingForSelectedMonth;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='bottomRightLabel']")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell/XCUIElementTypeStaticText[`name= 'bottomRightLabel'`]")
 		@AndroidFindBy(xpath="//*[@resource-id='com.quicken.qm2014:id/list_row_date']")
-		public MobileElement firstTransactionDate;
+		public WebElement firstTransactionDate;
 		
 //		@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name=\"You don't have any transactions.\"]")
 		@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"You don't have any transactions.\"`]")
 		@AndroidFindBy(xpath="//android.widget.TextView[@text=\"You don't have any transactions.\"]")
-		public MobileElement youDontHaveAnyTxns;
+		public WebElement youDontHaveAnyTxns;
 
 		public void navigateBackToDashboard() throws Exception{
 			
@@ -106,7 +105,7 @@ public class SpendingOverTimePage {
 			
 			//sXpath ="//XCUIElementTypeOther[@name='"+sMonth+"']/XCUIElementTypeOther";
 			sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth+"'`]/XCUIElementTypeOther";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 		}
 		
 		protected void tapOnTheMonth_Android(String sMonth) throws Exception{
@@ -117,7 +116,7 @@ public class SpendingOverTimePage {
 	
 			sXpath ="//android.widget.TextView[@text=' "+sMonthUC+"']/../android.view.ViewGroup";
 			
-			List <MobileElement> le = Engine.getDriver().findElements(By.xpath(sXpath));
+			List <WebElement> le = Engine.getDriver().findElements(By.xpath(sXpath));
 			
 			Integer iCount;
 			
@@ -152,18 +151,18 @@ public class SpendingOverTimePage {
 		protected Boolean verifyMonth_IOS(String sMonth) throws Exception {
 			
 			//String sXpath ="//XCUIElementTypeOther[@name='"+sMonth.toUpperCase()+"']/XCUIElementTypeStaticText[@name='"+sMonth.toUpperCase()+"']";
-			//return Verify.objExists((MobileElement) Engine.getDriver().findElement(By.xpath(sXpath)));
+			//return Verify.objExists((WebElement) Engine.getDriver().findElement(By.xpath(sXpath)));
 			
 			String sXpath ="**/XCUIElementTypeOther[`name=' "+sMonth.toUpperCase()+"'`]/XCUIElementTypeStaticText[`name=' "+sMonth.toUpperCase()+"'`]";
 			//String sXpath ="**/XCUIElementTypeOther[`name='"+sMonth.toUpperCase()+"'`]";
-			return Verify.objExists((MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)));	
+			return Verify.objExists((WebElement) Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)));	
 		}
 		
 		protected Boolean verifyMonth_Android(String sMonth) throws Exception {
 			
 			String sXpath ="//android.widget.TextView[@text=' "+sMonth.toUpperCase()+"']";
 			
-			return Verify.objExists((MobileElement) Engine.getDriver().findElement(By.xpath(sXpath)));
+			return Verify.objExists((WebElement) Engine.getDriver().findElement(By.xpath(sXpath)));
 		}
 		
 		public Boolean verifyMonth (String sMonth) throws Exception {

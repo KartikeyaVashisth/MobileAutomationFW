@@ -5,13 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import support.Engine;
 import support.Helper;
 
@@ -28,9 +28,9 @@ public class BudgetsPage {
 	}
 	
 	
-	@iOSFindBy(xpath="//*[starts-with(@name, 'PERSONAL EXPENSES')]")
+	@iOSXCUITFindBy(xpath="//*[starts-with(@name, 'PERSONAL EXPENSES')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='PERSONAL EXPENSES']")
-	public MobileElement personalExpenses;
+	public WebElement personalExpenses;
 	
 	public boolean verify_budgetHeader() throws Exception {
 		

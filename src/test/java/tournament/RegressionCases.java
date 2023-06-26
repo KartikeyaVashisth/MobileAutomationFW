@@ -31,9 +31,7 @@ import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import referee.Commentary;
 import referee.*;
 import support.Engine;
@@ -468,9 +466,9 @@ public class RegressionCases extends Recovery {
 		sp.accountTxt.click();
 		Thread.sleep(2000);
 		
-		MobileElement manualCheckingAccount = sp.getAccountElement(sManualChecking);
-		MobileElement manualCCAccount = sp.getAccountElement(sManualCreditCard);
-		MobileElement manualSavingsAccount = sp.getAccountElement(sManualSaving);
+		WebElement manualCheckingAccount = sp.getAccountElement(sManualChecking);
+		WebElement manualCCAccount = sp.getAccountElement(sManualCreditCard);
+		WebElement manualSavingsAccount = sp.getAccountElement(sManualSaving);
 		
 		SoftAssert sa = new SoftAssert();
 		if (Verify.objExists(manualCheckingAccount))
@@ -492,9 +490,9 @@ public class RegressionCases extends Recovery {
 		//Verify Account Details
 		manualCheckingAccount.click();
 		Thread.sleep(2000);
-		MobileElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
-		MobileElement accountType = sp.getAccountElement("CHECKING");
-		MobileElement accountStatus = sp.getTextView("Active");
+		WebElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
+		WebElement accountType = sp.getAccountElement("CHECKING");
+		WebElement accountStatus = sp.getTextView("Active");
 	
 		if (Verify.objExists(manualCheckingAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed");
@@ -520,9 +518,9 @@ public class RegressionCases extends Recovery {
 		
 		manualCCAccount.click();
 		Thread.sleep(2000);
-		MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
-		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
-		MobileElement accountStatus1 = sp.getTextView("Active");
+		WebElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
+		WebElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
+		WebElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed");
 		else
@@ -544,9 +542,9 @@ public class RegressionCases extends Recovery {
 		
 		manualSavingsAccount.click();
 		Thread.sleep(2000);
-		MobileElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
-		MobileElement accountType_savings = sp.getAccountElement("SAVINGS");
-		MobileElement accountStatus2 = sp.getTextView("Active");
+		WebElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
+		WebElement accountType_savings = sp.getAccountElement("SAVINGS");
+		WebElement accountStatus2 = sp.getTextView("Active");
 
 		
 		if (Verify.objExists(manualSavingsAccount1))
@@ -645,11 +643,11 @@ public class RegressionCases extends Recovery {
 		
 		SoftAssert sa = new SoftAssert();
 		
-		MobileElement help = sp.getTextView("Help");
-		MobileElement link_SupportWebsite = sp.getTextView("Support Website");
-		MobileElement link_Acknowledgements = sp.getTextView("Acknowledgements");
-		MobileElement link_LicenseAgreement = sp.getTextView("License Agreement");
-		MobileElement link_Privacy = sp.getTextView("Privacy");
+		WebElement help = sp.getTextView("Help");
+		WebElement link_SupportWebsite = sp.getTextView("Support Website");
+		WebElement link_Acknowledgements = sp.getTextView("Acknowledgements");
+		WebElement link_LicenseAgreement = sp.getTextView("License Agreement");
+		WebElement link_Privacy = sp.getTextView("Privacy");
 		
 		if (Verify.objExists(sp.HelpLegalHeaderTxt))
 			Commentary.log(LogStatus.INFO, "PASS: Help Legal text is displayed");
@@ -694,7 +692,7 @@ public class RegressionCases extends Recovery {
 		
 		sa.assertAll();
 	
-		MobileElement menuOptionButton = (MobileElement) Engine.ad.findElementById("support-nav-toggle");
+		WebElement menuOptionButton = (WebElement) Engine.ad.findElementById("support-nav-toggle");
 		referee.Verify.waitForObject(menuOptionButton, 10000);
 		menuOptionButton.click();
 		
@@ -703,7 +701,7 @@ public class RegressionCases extends Recovery {
 		link_Acknowledgements.click();
 		Thread.sleep(5000);
 		
-		MobileElement menuOptionButton1 = (MobileElement) Engine.ad.findElementsByClassName("navbar-toggle collapsed");
+		WebElement menuOptionButton1 = (WebElement) Engine.ad.findElementsByClassName("navbar-toggle collapsed");
 		referee.Verify.waitForObject(menuOptionButton1, 10000);
 		menuOptionButton1.click();
 
@@ -723,12 +721,12 @@ public class RegressionCases extends Recovery {
 //		sp.datasetDDButton.click();
 //		Thread.sleep(1000);
 //		
-//		MobileElement dataset1 = sp.getTextView("Appium_TodaysBalanceTest");
-//		MobileElement dataset2 = sp.getTextView("TodaysBalancesTest");
-//		MobileElement dataset3 = sp.getTextView("budgets");
-//		MobileElement dataset4 = sp.getTextView("account_stickiness");
-//		MobileElement dataset5 = sp.getTextView("lab2_1_yuv");
-//		MobileElement dataset6 = sp.getTextView("yuv_123");
+//		WebElement dataset1 = sp.getTextView("Appium_TodaysBalanceTest");
+//		WebElement dataset2 = sp.getTextView("TodaysBalancesTest");
+//		WebElement dataset3 = sp.getTextView("budgets");
+//		WebElement dataset4 = sp.getTextView("account_stickiness");
+//		WebElement dataset5 = sp.getTextView("lab2_1_yuv");
+//		WebElement dataset6 = sp.getTextView("yuv_123");
 //		
 //		
 //		SoftAssert sa = new SoftAssert();
@@ -774,7 +772,7 @@ public class RegressionCases extends Recovery {
 //		
 //		sa.assertTrue(sp.verifyCloudAccountName("Appium_TodaysBalanceTest"), "Incorrect dataset is selected");
 //		sp.datasetDDButton.click();
-//		MobileElement dataset7 = sp.getTextView("ProjectedBalances");
+//		WebElement dataset7 = sp.getTextView("ProjectedBalances");
 //
 //		Thread.sleep(2000);	
 //
@@ -1248,7 +1246,7 @@ public class RegressionCases extends Recovery {
 		
 		SettingsPage sp = new SettingsPage();
 		sp.datasetDDButton.click();
-		MobileElement investmentDataset = sp.getTextView("investment_auto");
+		WebElement investmentDataset = sp.getTextView("investment_auto");
 		investmentDataset.click();
 		Thread.sleep(3000);
 		
@@ -1311,7 +1309,7 @@ public class RegressionCases extends Recovery {
 		
 		SettingsPage sp = new SettingsPage();
 		sp.datasetDDButton.click();
-		MobileElement investmentDataset = sp.getTextView("ZeroDataSet");
+		WebElement investmentDataset = sp.getTextView("ZeroDataSet");
 		investmentDataset.click();
 		Thread.sleep(3000);
 		

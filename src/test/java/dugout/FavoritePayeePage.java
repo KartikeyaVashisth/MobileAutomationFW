@@ -1,18 +1,23 @@
 package dugout;
 
-import java.security.PublicKey;
+import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -22,7 +27,6 @@ import referee.Commentary;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
-import support.TransactionRecord;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
@@ -42,84 +46,84 @@ public class FavoritePayeePage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Display Favorite Payees'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Display Favorite Payees']")
-    public MobileElement DisplayFavoritePayee;
+    public WebElement DisplayFavoritePayee;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSwitch[3]")
 	@AndroidFindBy(xpath="//android.widget.Switch[3]")
-    public MobileElement FavoritePayeeSwitch;
+    public WebElement FavoritePayeeSwitch;
 	
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='navigationMenu']")
-    public MobileElement hambergerIcon;
+    public WebElement hambergerIcon;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Settings Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
-	public MobileElement settingsOption;
+	public WebElement settingsOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='favoriteHeaderMoreAction'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='favoriteHeaderMoreAction']")
-    public MobileElement MoreOptionInPayeeDrawer;
+    public WebElement MoreOptionInPayeeDrawer;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='moreAction'`]")
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='moreAction']")
-    public MobileElement YelpInPayeeDrawer;
+    public WebElement YelpInPayeeDrawer;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label ='disableYelpPayeeView'`][3]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Turn off Yelp recommendations']")
-    public MobileElement TurnOffYelp;
+    public WebElement TurnOffYelp;
 
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Favorite Payee'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Favorite Payee']")
-    public MobileElement FavoritePayeeLabel;
+    public WebElement FavoritePayeeLabel;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label ='hideFavoritePayeeView'`][3]")
     @AndroidFindBy(xpath="//android.widget.TextView[@text='Hide favorites']")
-    public MobileElement HideFavorite;
+    public WebElement HideFavorite;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Favorite Payee'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Favorite Payee']")
-    public MobileElement btnEnableFavoritePayee;
+    public WebElement btnEnableFavoritePayee;
 
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementStaticText[`name='Payee'`]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label = 'Payee'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Payee']")
-    public MobileElement payee;
+    public WebElement payee;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='All Payees'`][1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='All Payees']")
-	public MobileElement allPayeesLabel;
+	public WebElement allPayeesLabel;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Near by'`][1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Near by']")
-	public MobileElement yelpNearByLabel;
+	public WebElement yelpNearByLabel;
 	
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name CONTAINS 'Turn off Favorite Payee recommendations?'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'Turn off Favorite Payee recommendations?')]")
-	public MobileElement HideFavoritePayeeConfMessage;
+	public WebElement HideFavoritePayeeConfMessage;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Yes'`]")
 	@AndroidFindBy(xpath="//*[@text='YES']")
-	public MobileElement buttonYES;
+	public WebElement buttonYES;
 	
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='No'`]")
 	@AndroidFindBy(xpath="//*[@text='NO']")
-	public MobileElement buttonNO;
+	public WebElement buttonNO;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name contains 'back'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backArrow']")
-	public MobileElement backButton;
+	public WebElement backButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name ='Remove'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='REMOVE']")
-	public MobileElement removeBtn;
+	public WebElement removeBtn;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name ='Cancel'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='CANCEL']")
-	public MobileElement cancelBtn;
+	public WebElement cancelBtn;
 
 
 	
@@ -190,7 +194,7 @@ public class FavoritePayeePage {
 	    Helper h = new Helper();
 	
 	    if (h.getEngine().equals("android")) {
-		    Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Settings\").instance(0))"));
+		    Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Settings\").instance(0))"));
 		    Thread.sleep(1000);
 	     }
 	
@@ -239,7 +243,7 @@ public class FavoritePayeePage {
     
    public void AddPayeeAsFavPayee_ios(String payee) throws Exception{
     	
-    	MobileElement ele_ios = Engine.getDriver().findElementByXPath("//XCUIElementTypeStaticText[@name='"+payee+"']/..");
+    	WebElement ele_ios = Engine.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+payee+"']/.."));
 	
 				JavascriptExecutor js = (JavascriptExecutor)Engine.getDriver();
 				HashMap scrollObject = new HashMap();
@@ -248,7 +252,7 @@ public class FavoritePayeePage {
 				js.executeScript("mobile: swipe", scrollObject);
 				Thread.sleep(500);
 				
-		MobileElement fav_icon = Engine.getDriver().findElementByXPath("(//XCUIElementTypeStaticText[@name='"+payee+"']/../../../XCUIElementTypeOther/XCUIElementTypeOther)[2]");
+		WebElement fav_icon = Engine.getDriver().findElement(By.xpath("(//XCUIElementTypeStaticText[@name='"+payee+"']/../../../XCUIElementTypeOther/XCUIElementTypeOther)[2]"));
 			
 			fav_icon.click();
 			
@@ -258,20 +262,30 @@ public class FavoritePayeePage {
 	    
    	
    
-       MobileElement startElement = Engine.getDriver().findElementByXPath("//android.widget.TextView[@text='"+payee+"']/../..");
+       WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
 		
 	   int startX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 2);
        int startY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
        int endX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 3);
        int endY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
-       new TouchAction(Engine.getDriver())
-           .press(point(startX,startY))
-           .waitAction(waitOptions(ofMillis(1000)))
-           .moveTo(point(endX, endY))
-           .release().perform();
+//       new TouchAction(Engine.getDriver())
+//           .press(point(startX,startY))
+//           .waitAction(waitOptions(ofMillis(1000)))
+//           .moveTo(point(endX, endY))
+//           .release().perform();
+       
+       PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+       Sequence sequence = new Sequence(finger1, 1)
+				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
+				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
+				.addAction(new Pause(finger1, Duration.ofMillis(200)))
+				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
+				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+		
+		Engine.getDriver().perform(Collections.singletonList(sequence));
+		Thread.sleep(2000);
    	
- 
-		MobileElement fav_icon = Engine.getDriver().findElementByXPath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView");
+		WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
 			
 			fav_icon.click();
 		  	//Thread.sleep(3000);
@@ -287,57 +301,60 @@ public class FavoritePayeePage {
 			RemoveFavPayee_ios(payee);
 		else
 			RemoveFavPayee_android(payee);
-		
 	}
 
-    
-   
-    public void RemoveFavPayee_ios(String payee) throws Exception{
-    	
-    	
-    	MobileElement ele_ios = Engine.getDriver().findElementByXPath("//XCUIElementTypeStaticText[@name='"+payee+"']/..");
-	
-				JavascriptExecutor js = (JavascriptExecutor)Engine.getDriver();
-				HashMap scrollObject = new HashMap();
-				scrollObject.put("direction", "left"); 
-				scrollObject.put("element", ele_ios); 
-				js.executeScript("mobile: swipe", scrollObject);
-				Thread.sleep(500);
-				
-		MobileElement fav_icon = Engine.getDriver().findElementByXPath("(//XCUIElementTypeStaticText[@name='"+payee+"']/../../../XCUIElementTypeOther/XCUIElementTypeOther)[2]");
-			
-			fav_icon.click();
-			Thread.sleep(500);
-			this.removeBtn.click();
-			Thread.sleep(3000);
-			
-		}
-    
- 
- 
+   public void RemoveFavPayee_ios(String payee) throws Exception{
+
+
+	   WebElement ele_ios = Engine.getDriver().findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+payee+"']/.."));
+
+	   JavascriptExecutor js = (JavascriptExecutor)Engine.getDriver();
+	   HashMap scrollObject = new HashMap();
+	   scrollObject.put("direction", "left"); 
+	   scrollObject.put("element", ele_ios); 
+	   js.executeScript("mobile: swipe", scrollObject);
+	   Thread.sleep(500);
+
+	   WebElement fav_icon = Engine.getDriver().findElement(By.xpath("(//XCUIElementTypeStaticText[@name='"+payee+"']/../../../XCUIElementTypeOther/XCUIElementTypeOther)[2]"));
+
+	   fav_icon.click();
+	   Thread.sleep(500);
+	   this.removeBtn.click();
+	   Thread.sleep(3000);
+   }
+
    public void RemoveFavPayee_android(String payee) throws Exception{
  	
  
-        MobileElement startElement = Engine.getDriver().findElementByXPath("//android.widget.TextView[@text='"+payee+"']/../..");
+        WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
 		
 		int startX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 2);
         int startY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
         int endX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 3);
         int endY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
-        new TouchAction(Engine.getDriver())
-         .press(point(startX,startY))
-         .waitAction(waitOptions(ofMillis(1000)))
-         .moveTo(point(endX, endY))
-         .release().perform();
- 	
+//        new TouchAction(Engine.getDriver())
+//         .press(point(startX,startY))
+//         .waitAction(waitOptions(ofMillis(1000)))
+//         .moveTo(point(endX, endY))
+//         .release().perform();
+        
+        PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+		Sequence sequence = new Sequence(finger1, 1)
+				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
+				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
+				.addAction(new Pause(finger1, Duration.ofMillis(200)))
+				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
+				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+		
+		Engine.getDriver().perform(Collections.singletonList(sequence));
+		Thread.sleep(2000);
 
-		MobileElement fav_icon = Engine.getDriver().findElementByXPath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView");
+		WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
 			
 			fav_icon.click();
 			Thread.sleep(2000);
 			this.removeBtn.click();
-			Thread.sleep(3000);
-						
+			Thread.sleep(3000);				
 		}
    
    public void verifyFavPayee(String payee) throws Exception{
@@ -364,7 +381,7 @@ public class FavoritePayeePage {
 	   
 	   if(Verify.objExists(FavoritePayeeLabel)) {
 			String cc = "//XCUIElementTypeStaticText[@name='"+payee+"']/..";
-			Engine.getDriver().findElementByXPath(cc).isDisplayed();
+			Engine.getDriver().findElement(By.xpath(cc)).isDisplayed();
 			
 			Thread.sleep(500);
 			Commentary.log(LogStatus.PASS,"PASS: Showing Payee "+payee+" as Favorite Payee ");
@@ -390,7 +407,7 @@ public class FavoritePayeePage {
 		   
 		   if(Verify.objExists(FavoritePayeeLabel)) {
 				String cc = "//android.widget.TextView[@text='"+payee+"']/../..";
-				Engine.getDriver().findElementByXPath(cc).isDisplayed();
+				Engine.getDriver().findElement(By.xpath(cc)).isDisplayed();
 				
 				Thread.sleep(500);
 				Commentary.log(LogStatus.PASS,"PASS: Showing Payee "+payee+" as Favorite Payee ");
@@ -427,7 +444,7 @@ public class FavoritePayeePage {
 			   
 			   if(Verify.objExists(FavoritePayeeLabel)) {
 					String cc = "//XCUIElementTypeStaticText[@name='"+payee+"']/..";
-					Engine.getDriver().findElementByXPath(cc).isDisplayed();
+					Engine.getDriver().findElement(By.xpath(cc)).isDisplayed();
 					
 					Thread.sleep(500);
 					Commentary.log(LogStatus.FAIL,"FAIL: Unable to remove Payee "+payee+" as Favorite Payee ");
@@ -453,7 +470,7 @@ public class FavoritePayeePage {
 				   
 				   if(Verify.objExists(FavoritePayeeLabel)) {
 						String cc = "//android.widget.TextView[@text='"+payee+"']/../..";
-						Engine.getDriver().findElementByXPath(cc).isDisplayed();
+						Engine.getDriver().findElement(By.xpath(cc)).isDisplayed();
 						
 						Thread.sleep(500);
 						Commentary.log(LogStatus.FAIL,"FAIL: Unable to remove Payee "+payee+" as Favorite Payee ");

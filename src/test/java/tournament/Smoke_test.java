@@ -30,7 +30,6 @@ import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.ExtentManager;
 import referee.Verify;

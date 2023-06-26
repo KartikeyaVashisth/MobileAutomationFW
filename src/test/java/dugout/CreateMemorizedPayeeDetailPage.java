@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.HidesKeyboard;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
@@ -35,157 +35,157 @@ public class CreateMemorizedPayeeDetailPage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Create Memorized Payee'`]")
 	@AndroidFindBy(xpath="//android.view.View[normalize-space(@text)='Create Memorized Payee']")
-	public MobileElement createMemorizedPayeeHeader;
+	public WebElement createMemorizedPayeeHeader;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name = 'Add Memorized Payee'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Add Memorized Payee']")
-	public MobileElement addMemorizedPayeeButton;
+	public WebElement addMemorizedPayeeButton;
 	
 	@iOSXCUITFindBy(id="Payee Name")
 	@AndroidFindBy(xpath="//*[@text='Payee Name']")
-	public MobileElement payeeName;
+	public WebElement payeeName;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeTextField[`name = 'search payee'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Payee']")
-	public MobileElement searchPayee;
+	public WebElement searchPayee;
 	
 	@iOSXCUITFindBy(id="create payee")
 	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc=\"create payee\"]")
-	public MobileElement createPayee;
+	public WebElement createPayee;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='All Payees'`][1]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='All Payees']")
-	public MobileElement allPayeesLabel;
+	public WebElement allPayeesLabel;
 	
 	@iOSXCUITFindBy(id="closePayee")
 	@AndroidFindBy(xpath="//*[@content-desc='closePayee']/android.widget.ImageView")
-	public MobileElement closePayee;
+	public WebElement closePayee;
 	
 	@iOSXCUITFindBy(id="Type")
 	@AndroidFindBy(xpath="//*[@text='Type']")
-	public MobileElement type;
+	public WebElement type;
 
 	@iOSXCUITFindBy(id="Deposit")
 	@AndroidFindBy(xpath="//*[@text='Deposit']")
-	public MobileElement deposit;
+	public WebElement deposit;
 	
 	@iOSXCUITFindBy(id="Payment")
 	@AndroidFindBy(xpath="//*[@text='Payment']")
-	public MobileElement payment;
+	public WebElement payment;
 	
 	@iOSXCUITFindBy(id="Apply")
 	@AndroidFindBy(xpath="//*[@text='Apply']")
-	public MobileElement applyButton;
+	public WebElement applyButton;
 	
 	@iOSXCUITFindBy(id="closeTransaction Type")
 	@AndroidFindBy(xpath="//*[@content-desc='closeTransaction Type']/android.widget.ImageView")
-	public MobileElement closeTransactionTypeDrawer;
+	public WebElement closeTransactionTypeDrawer;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Category'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Category']")
-	public MobileElement category;
+	public WebElement category;
 	
 	@iOSXCUITFindBy(id="closeCategory")
 	@AndroidFindBy(xpath="//*[@content-desc='closeCategory']/android.widget.ImageView")
-	public MobileElement closeCategory;
+	public WebElement closeCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name='search category'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Search Category']")
-	public MobileElement searchCategoryTextField;
+	public WebElement searchCategoryTextField;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name='search tags'`]")
 	@AndroidFindBy(xpath="//android.widget.EditText[@content-desc='search tags']")
-	public MobileElement searchTags;
+	public WebElement searchTags;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name = 'Apply'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Apply']")
-	public MobileElement tagsApplyButton;
+	public WebElement tagsApplyButton;
 	
 	@iOSXCUITFindBy(id="create item")
 	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc='create item']")
-	public MobileElement createTag;
+	public WebElement createTag;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTextView[@name='Memo']")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeTextView[@name='Memo']")
 	@AndroidFindBy(xpath="//android.widget.EditText[@text='Memo']")
-	public MobileElement memo;
+	public WebElement memo;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Done'`]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
-	public MobileElement doneButton;
+	public WebElement doneButton;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Amount'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Amount']/following-sibling::android.widget.TextView")
-	public MobileElement amount;
+	public WebElement amount;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Done'`][2]")
 	@AndroidFindBy(xpath="//*[@text='Done']")
-	public MobileElement buttonDone;
+	public WebElement buttonDone;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name beginswith 'Split'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Split']/following::android.widget.Switch")
-	public MobileElement switchSplit;
+	public WebElement switchSplit;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Mark as Cleared'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Mark as Cleared']/following::android.widget.Switch")
-	public MobileElement switchMarkAsCleared;
+	public WebElement switchMarkAsCleared;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Lock Payee'`]/XCUIElementTypeSwitch")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Lock Payee']/following::android.widget.Switch")
-	public MobileElement switchLockPayee;
+	public WebElement switchLockPayee;
 	
 	// -------------- Add Transaction Page -------------------------
 	
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Allow While Using App'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[contains(@text,'using the app')]")
-	public MobileElement allowButton;
+	public WebElement allowButton;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='Add Transaction'`]")
 	@AndroidFindBy(xpath="//*[@text='Add Transaction']")
-	public MobileElement addTransactionTxt;
+	public WebElement addTransactionTxt;
 	
 	@iOSXCUITFindBy(id="Payee")
 	@AndroidFindBy(xpath="//*[@text='Payee']")
-	public MobileElement payeeOnAddTransactionPage;
+	public WebElement payeeOnAddTransactionPage;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Amount: '`][-1]")
 	@AndroidFindBy(xpath="(//android.widget.TextView[contains(@text,'$')])[1]")
-	public MobileElement enteredAmount;
+	public WebElement enteredAmount;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Account'`][-1]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Account']/../android.widget.TextView[@index=2]")
-	public MobileElement enteredAccount;
+	public WebElement enteredAccount;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Categories'`][-1]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Categories']/../android.widget.TextView[@index=2]")
-	public MobileElement enteredCategory;
+	public WebElement enteredCategory;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Tags'`][-1]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Tags']/../android.widget.TextView[@index=2]")
-	public MobileElement enteredTags;
+	public WebElement enteredTags;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextView")
 	@AndroidFindBy(xpath="//android.widget.EditText")
-	public MobileElement enteredNotes;
+	public WebElement enteredNotes;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSwitch[`name='Switch Value: true'`]")
 	@AndroidFindBy(xpath="//android.widget.Switch[@content-desc='Switch Value: true']")
-	public MobileElement enabledSplitSwitch;
+	public WebElement enabledSplitSwitch;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='pop'`][-1]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='pop']")
-	public MobileElement backButtonOnAddTransactionPage;
+	public WebElement backButtonOnAddTransactionPage;
 	
 	@iOSXCUITFindBy(id="button Save")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
-	public MobileElement buttonSave;
+	public WebElement buttonSave;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name BEGINSWITH 'Status'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//*[@text='Status']/../android.widget.TextView[@index=2]")
-	public MobileElement transactionStatus;
+	public WebElement transactionStatus;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='save'`][-1]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
-	public MobileElement buttonSave1;
+	public WebElement buttonSave1;
 	
 	public void createMemorizedPayee (TransactionRecord tr) throws Exception {
 
@@ -263,7 +263,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		if (Verify.objExists(createPayee)) {
 			try {
-				Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
+				Verify.objExists(Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
 				Engine.getDriver().findElement(By.xpath(createPayee_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Payee.. "+payees);
 			}
@@ -298,8 +298,8 @@ public class CreateMemorizedPayeeDetailPage {
 
 		if (Verify.objExists(createPayee)) {
 			try {
-				Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)));
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
+				Verify.objExists(Engine.getDriver().findElement(AppiumBy.iOSClassChain(createPayee_xpath)));
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(createPayee_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Payee .. "+payees);
 
 			}
@@ -310,7 +310,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		else {
 			String cc = "**/XCUIElementTypeStaticText[`name='"+payees+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 			Thread.sleep(1500);
 			Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 		}
@@ -359,7 +359,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		this.searchCategory(category);
 
-		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 
 		Thread.sleep(1000);
 		Engine.getDriver().findElement(By.xpath(sXpath)).click();
@@ -375,7 +375,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		Verify.waitForObject(this.closeCategory, 1);
 		this.searchCategory(category);
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 		Thread.sleep(1000);	
 	}
 	
@@ -411,7 +411,7 @@ public class CreateMemorizedPayeeDetailPage {
 		String createTag_xpath="//android.widget.TextView[@content-desc='create item']";
 
 		if (Verify.objExists(createTag)) {
-			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createTag_xpath)));
+			Verify.objExists(Engine.getDriver().findElement(By.xpath(createTag_xpath)));
 			Engine.getDriver().findElement(By.xpath(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating new Tag.. "+sTag);
 			
@@ -438,7 +438,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 	private void selectTags_ios (String sTag) throws Exception {
 
-		Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='Tags'`]"))).click();
+		Engine.getDriver().findElement((AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name='Tags'`]"))).click();
 		Verify.waitForObject(this.searchTags, 1);
 		this.searchTags.sendKeys(sTag);
 		Helper h = new Helper();
@@ -448,12 +448,12 @@ public class CreateMemorizedPayeeDetailPage {
 		String createTag_xpath="**/XCUIElementTypeOther[`name='create item'`]";
 
 		if (Verify.objExists(createTag)) {
-//			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)));
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+//			Verify.objExists((WebElement)Engine.getDriver().findElement(AppiumBy.iOSClassChain(createTag_xpath)));
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(createTag_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Creating Tag... "+sTag);
 			
 			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+sTag);
 			h.hideKeyBoard();
@@ -461,7 +461,7 @@ public class CreateMemorizedPayeeDetailPage {
 		}
 		else {
 			String cc = "**/XCUIElementTypeStaticText[`name='"+sTag+"'`]";
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 			Thread.sleep(500);
 			Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+sTag);
 			h.hideKeyBoard();
@@ -560,7 +560,7 @@ public class CreateMemorizedPayeeDetailPage {
 		Thread.sleep(1000);
 		
 		for (int i = 1; i < amount.length(); i++) {
-			Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name=='delete'`][2]")).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name=='delete'`][2]")).click();
 		}
 		Thread.sleep(1000);
 
@@ -570,7 +570,7 @@ public class CreateMemorizedPayeeDetailPage {
 				// ignore
 			}
 			else
-				Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
 		}
 
 		if(Verify.objExists(this.buttonDone))
@@ -634,12 +634,12 @@ public class CreateMemorizedPayeeDetailPage {
 		String allPayees = "**/XCUIElementTypeStaticText[`name='"+payeeName+"'`]";
 
 		if (Verify.objExists(createPayee)) {
-			Verify.objExists((MobileElement)Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)));
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(createPayee_xpath)).click();
+			Verify.objExists((WebElement)Engine.getDriver().findElement(AppiumBy.iOSClassChain(createPayee_xpath)));
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(createPayee_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Entered Payee.. "+payeeName);
 		}
 		else {
-			Engine.getDriver().findElement(MobileBy.iOSClassChain(allPayees)).click();
+			Engine.getDriver().findElement(AppiumBy.iOSClassChain(allPayees)).click();
 			Thread.sleep(1500);
 			Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payeeName);
 		}
@@ -677,7 +677,7 @@ public class CreateMemorizedPayeeDetailPage {
 		String allPayees_Xpath = "//android.widget.ScrollView/android.view.ViewGroup//android.widget.TextView[@text=\"All Payees\"]/../../../android.view.ViewGroup//android.widget.TextView[@text='"+payeeName+"']";
 
 		if (Verify.objExists(createPayee)) {
-			Verify.objExists((MobileElement)Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
+			Verify.objExists((WebElement)Engine.getDriver().findElement(By.xpath(createPayee_xpath)));
 			Engine.getDriver().findElement(By.xpath(createPayee_xpath)).click();
 			Commentary.log(LogStatus.INFO,"Entered Payee.. "+payeeName);
 		}
@@ -744,7 +744,7 @@ public class CreateMemorizedPayeeDetailPage {
 		String cc = "**/XCUIElementTypeOther[`name BEGINSWITH 'Tags:'`]["+index+"]/**/XCUIElementTypeStaticText";
 
 		Thread.sleep(1000);
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 	}
 
 	private void tapOnSplitTag_android(Integer index) throws Exception{
@@ -765,7 +765,7 @@ public class CreateMemorizedPayeeDetailPage {
 	private void selectTags_ios_new_split(String[] sTags) throws Exception {
 
 		for(String tag:sTags){
-			Engine.getDriver().findElement((MobileBy.iOSClassChain("**/XCUIElementTypeOther[`name='Tags'`]"))).click();
+			Engine.getDriver().findElement((AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name='Tags'`]"))).click();
 			Verify.waitForObject(this.searchTags, 1);
 			this.searchTags.sendKeys(tag);
 			Helper h = new Helper();
@@ -776,17 +776,17 @@ public class CreateMemorizedPayeeDetailPage {
 			String cc = "**/XCUIElementTypeStaticText[`name='"+tag+"'`]";
 
 			if (Verify.objExists(createTag)) {
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(createTag_xpath)).click();
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(createTag_xpath)).click();
 				Commentary.log(LogStatus.INFO,"Creating Tag... "+tag);
 
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 				Thread.sleep(500);
 				Commentary.log(LogStatus.INFO,"Selected Tag which is just now created.. "+tag);
 				h.hideKeyBoard();
 				Thread.sleep(1000);
 			}
 			else {
-				Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 				Thread.sleep(500);
 				Commentary.log(LogStatus.INFO,"Selected Tag which is already present.. "+tag);
 				h.hideKeyBoard();
@@ -802,7 +802,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		for(String tag:sTags){
 			this.searchTag(tag);
-			Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ tag + "\").instance(0))"));
+			Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ tag + "\").instance(0))"));
 
 			String createTag_xpath = "//android.widget.TextView[@content-desc='create item']";
 			String cc = "//android.widget.TextView[@text='"+tag+"']";
@@ -830,7 +830,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		this.searchTags.clear();
 		this.searchTags.sendKeys(sTag);
-		Engine.getDriver().hideKeyboard();
+		((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 	}
 
 	public void tapOnSplitCategory(Integer index) throws Exception{	
@@ -845,7 +845,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 	private void tapOnSplitCategory_ios(Integer index) throws Exception{
 		String cc = "**/XCUIElementTypeOther[`name BEGINSWITH 'Category:'`]["+index+"]/**/XCUIElementTypeStaticText[1]";
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 	}
 
 	private void tapOnSplitCategory_android(Integer index) throws Exception{
@@ -897,13 +897,13 @@ public class CreateMemorizedPayeeDetailPage {
 		Helper h = new Helper();
 
 		String cc = "**/XCUIElementTypeOther[`name BEGINSWITH 'Amount:'`]/**/XCUIElementTypeStaticText[`name CONTAINS '$'`]["+index+"]";
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).click();
 
 		for (int i = 0; i < 6; i++) {
 			if (h.getEngine().equals("android"))
 				Engine.getDriver().findElement(By.id("assets/Quicken/App/Images/keypadbutton_delete@2x.png")).click();
 			else
-				Engine.getDriver().findElement(MobileBy.iOSNsPredicateString("name = 'delete'")).click();	
+				Engine.getDriver().findElement(AppiumBy.iOSNsPredicateString("name = 'delete'")).click();	
 		}
 		Thread.sleep(1000);
 
@@ -913,7 +913,7 @@ public class CreateMemorizedPayeeDetailPage {
 				// ignore
 			}
 			else	
-				Engine.getDriver().findElement(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
+				Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name=='"+s[iCount]+"'`]")).click();	
 		}
 
 		if (Verify.objExists(this.buttonDone))
@@ -936,7 +936,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		String sXpath = "**/XCUIElementTypeOther[`name='RadioButton "+category+"'`]/**/XCUIElementTypeOther[`name='RadioButton'`]";
 		this.searchCategory(category);
-		Engine.getDriver().findElement(MobileBy.iOSClassChain(sXpath)).click();
+		Engine.getDriver().findElement(AppiumBy.iOSClassChain(sXpath)).click();
 		Thread.sleep(500);
 	}
 
@@ -944,7 +944,7 @@ public class CreateMemorizedPayeeDetailPage {
 
 		String sXpath = "//android.view.ViewGroup[android.widget.TextView[@text='"+category+"']]/android.view.ViewGroup[@content-desc='RadioButton']";
 		this.searchCategory(category);
-		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 		Thread.sleep(1000);
 		Engine.getDriver().findElement(By.xpath(sXpath)).click();
 		Thread.sleep(500);

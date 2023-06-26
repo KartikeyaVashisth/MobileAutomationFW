@@ -10,17 +10,15 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumBy;
 //import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.touch.offset.PointOption;
 import referee.Commentary;
@@ -43,97 +41,97 @@ public class SpendingTrendPage {
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"Spending by Category\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name='Spending by Category'`]")
 	@AndroidFindBy(xpath="//android.view.View[@text='Spending by Category']")
-	public MobileElement spendingTrendHeader;
+	public WebElement spendingTrendHeader;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"Back\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name='Go back'`]")
 	@AndroidFindBy(xpath="//*[@text='Spending by Category']/../*[@class='android.widget.Button']")
-	public MobileElement backButtonOnHeader;
+	public WebElement backButtonOnHeader;
 	
 //	@iOSFindBy(xpath="//*[@name=\"You don't have any transactions.\"]")
 //	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"You don't have any transactions.\"`]")
 	@iOSXCUITFindBy(iOSNsPredicate = "name = \"You don't have any transactions.\"")
 	@AndroidFindBy(xpath="//*[@text=\"You don't have any transactions.\"]")
-	public MobileElement youDontHaveAnyTxns;
+	public WebElement youDontHaveAnyTxns;
 	
 //	@iOSFindBy(xpath="//*[@name=\"Last 30 Days\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 30 Days'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last 30 Days\"]")
-	public MobileElement last30Days;
+	public WebElement last30Days;
 	
 //	@iOSFindBy(xpath="//*[@name=\"This Month\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'This Month'`]")
 	@AndroidFindBy(xpath="//*[@text=\"This Month\"]")
-	public MobileElement thisMonth;
+	public WebElement thisMonth;
 	
 //	@iOSFindBy(xpath="//*[@name=\"Last Month\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last Month'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last Month\"]")
-	public MobileElement lastMonth;
+	public WebElement lastMonth;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 3 Months'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last 3 Months\"]")
-	public MobileElement last3Months;
+	public WebElement last3Months;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Last 6 Months'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Last 6 Months\"]")
-	public MobileElement last6Months;
+	public WebElement last6Months;
 	
 //	@iOSFindBy(xpath="//*[@name=\"Month to Date\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Month to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Month to Date\"]")
-	public MobileElement monthToDate;
+	public WebElement monthToDate;
 	
 //	@iOSFindBy(xpath="//*[@name=\"Year to Date\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Year to Date'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Year to Date\"]")
-	public MobileElement yearToDate;
+	public WebElement yearToDate;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name == 'Custom'`]")
 	@AndroidFindBy(xpath="//*[@text=\"Custom\"]")
-	public MobileElement custom;
+	public WebElement custom;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeActivityIndicator[@name=\"In progress\"]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeActivityIndicator[`name == 'In progress'`]")
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
-	public MobileElement progressBar;
+	public WebElement progressBar;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeScrollView[descendant::XCUIElementTypeStaticText[contains(@name,'$')]]//XCUIElementTypeStaticText[not(contains(@name, '$'))]")
 //	@iOSFindBy(xpath="//XCUIElementTypeOther[@name='horizontalScrollView']//XCUIElementTypeStaticText[not(contains(@name, '$')) and @visible='true']")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name== 'bottomLeftLabel'`][1]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]//android.widget.TextView[not(contains(@text, '$'))]")
-	public MobileElement categoryName;
+	public WebElement categoryName;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND  name BEGINSWITH[c] 'Total for'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'Total for ')]")
-	public MobileElement categoryName1;
+	public WebElement categoryName1;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name BEGINSWITH[c] 'amount: '")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@content-desc,'amount:')]")
-	public MobileElement amount1;
+	public WebElement amount1;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeScrollView//XCUIElementTypeStaticText[contains(@name, '$')]")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeScrollView/**/XCUIElementTypeStaticText[`name CONTAINS '$'  AND visible == 1`]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView//android.widget.TextView[contains(@text, '$')]")
-	public MobileElement amount;
+	public WebElement amount;
 	
 //	@iOSFindBy(xpath="//XCUIElementTypeScrollView[descendant::XCUIElementTypeStaticText[contains(@name, '$')]]")
 //	@iOSFindBy(xpath="(//XCUIElementTypeOther[@name='horizontalScrollView'])[1]")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='horizontalScrollView'`][1]")
 	@AndroidFindBy(xpath="//android.widget.HorizontalScrollView[descendant::android.widget.TextView[contains(@text,'$')]]")
-	public MobileElement scrollCategory;
+	public WebElement scrollCategory;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'topRightLabel'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@resource-id,'list_row_amount')]")
-	public MobileElement commonAmount;
+	public WebElement commonAmount;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'category: Travel'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Travel']")
-	public MobileElement splitTravelCat;
+	public WebElement splitTravelCat;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "type = 'XCUIElementTypeStaticText' AND name = 'category: Shopping'")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='category: Shopping']")
-	public MobileElement splitShoppingCat;
+	public WebElement splitShoppingCat;
 	
 	
 	public void navigateBackToDashboard() throws Exception {
@@ -150,25 +148,25 @@ public class SpendingTrendPage {
 		int x_start=(int)(size.width*0.46);//668
 		int x_end=3;
 
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
-
-		touchAction
-		.press(point(x_start, y_start))
-		.waitAction(waitOptions(ofMillis(1000)))
-		.moveTo(point(x_end, y_start))
-		.release().perform();
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//
+//		touchAction
+//		.press(point(x_start, y_start))
+//		.waitAction(waitOptions(ofMillis(1000)))
+//		.moveTo(point(x_end, y_start))
+//		.release().perform();
 	}
 
 	public void scrollCategory_ios() throws Exception{
 		
-//	 	MobileElement element = this.categoryName;
-		MobileElement element = this.scrollCategory;
-        String elementID = element.getId();
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("element", elementID); // Only for ‘scroll in element’
-        scrollObject.put("direction", "right");
-        Engine.getDriver().executeScript("mobile:scroll", scrollObject);
-        Thread.sleep(1000);
+//	 	WebElement element = this.categoryName;
+//		WebElement element = this.scrollCategory;
+//        String elementID = element.getId();
+//        HashMap<String, String> scrollObject = new HashMap<String, String>();
+//        scrollObject.put("element", elementID); // Only for ‘scroll in element’
+//        scrollObject.put("direction", "right");
+//        Engine.getDriver().executeScript("mobile:scroll", scrollObject);
+//        Thread.sleep(1000);
       
 	}
 	
@@ -230,13 +228,13 @@ public class SpendingTrendPage {
 
 	public void scrollFilter_IOS() throws Exception{
 
-		MobileElement element = this.last3Months;
-		String elementID = element.getId();
-		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("element", elementID);
-		scrollObject.put("direction", "left");
-		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
-		Thread.sleep(1000);
+//		WebElement element = this.last3Months;
+//		String elementID = element.getId();
+//		HashMap<String, String> scrollObject = new HashMap<String, String>();
+//		scrollObject.put("element", elementID);
+//		scrollObject.put("direction", "left");
+//		Engine.getDriver().executeScript("mobile:swipe", scrollObject);
+//		Thread.sleep(1000);
 	}
 
 	public void scrollFilter_android() throws Exception{
@@ -248,11 +246,11 @@ public class SpendingTrendPage {
 		int x_end=100;
 		int y=location.getY();
 
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
-
-		for(int i=1 ;i<=2;i++) { 
-			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
-		}
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//
+//		for(int i=1 ;i<=2;i++) { 
+//			touchAction.press(PointOption.point(x_start, y)).waitAction(waitOptions(ofMillis(3000))).moveTo(PointOption.point(x_end, y)).release().perform();
+//		}
 	}
 	
 	public void scrollFilter() throws Exception{
@@ -337,11 +335,11 @@ public class SpendingTrendPage {
 		Helper h = new Helper();
 
 		if (h.getEngine().equals("ios")){
-			List <MobileElement> me = Engine.getDriver().findElements(MobileBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'topRightLabel'`]"));
+			List <WebElement> me = Engine.getDriver().findElements(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'topRightLabel'`]"));
 			return me.size();
 		}
 		else {
-			List <MobileElement> me = Engine.getDriver().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'list_row_amount')]"));
+			List <WebElement> me = Engine.getDriver().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'list_row_amount')]"));
 			return me.size();
 		}
 	}

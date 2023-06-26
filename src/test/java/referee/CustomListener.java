@@ -54,8 +54,10 @@ public class CustomListener extends TestListenerAdapter implements IInvokedMetho
 					for (int i = 0; i < size-1; i++) {
 						failureMessage.append("Failure ").append(i+1).append(" of ").append(size).append(":n");
 						Throwable t = verificationFailures.get(i);
-						String fullStackTrace = Utils.stackTrace(t, false)[1];
-						failureMessage.append(fullStackTrace).append("nn");
+//						String fullStackTrace = Utils.stackTrace(t, false)[1]; //Used with testng dependency version 6.8
+//						failureMessage.append(fullStackTrace).append("nn");
+						String shortStackTrace = Utils.shortStackTrace(t, false); 
+						failureMessage.append(shortStackTrace).append("nn");
 					}
  
 					//final failure

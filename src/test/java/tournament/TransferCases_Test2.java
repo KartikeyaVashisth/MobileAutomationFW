@@ -3,6 +3,7 @@ package tournament;
 import java.util.HashMap;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +17,6 @@ import dugout.SignInPage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -722,7 +722,7 @@ public class TransferCases_Test2 extends Recovery{
 			tp.searchRecentTransaction(payeename);
 			
 			AllAccountsPage aa = new AllAccountsPage();
-			List<MobileElement> li = aa.getAllSearchTransactions ();
+			List<WebElement> li = aa.getAllSearchTransactions ();
 			int a = li.size();
 			
 			if(a==1) {

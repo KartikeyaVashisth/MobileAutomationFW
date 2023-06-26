@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +17,6 @@ import dugout.SettingsPage;
 import dugout.SignInPage;
 import dugout.TransactionsPage;
 import dugout.WelcomePage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Helper;
@@ -604,7 +604,7 @@ public class ScheduledTransactionsTest_4 extends Recovery {
 		bi.next90Days.click();
 		Thread.sleep(2000);
 
-		List<MobileElement> allReminderEntriesDate = bi.getAllReminderEntriesDate();
+		List<WebElement> allReminderEntriesDate = bi.getAllReminderEntriesDate();
 
 		if(allReminderEntriesDate.get(0).getText().toUpperCase().contains(nextToNextMonthSubstring))
 			bi.validateLastDayOfMonth(nextToNextMonthSubstring, 0);

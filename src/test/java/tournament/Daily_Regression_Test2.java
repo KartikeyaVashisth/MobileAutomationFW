@@ -2,6 +2,7 @@ package tournament;
 
 import java.math.BigDecimal;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -16,7 +17,6 @@ import dugout.SpendingOverTimePage;
 import dugout.TransactionDetailPage;
 import dugout.TransactionSummaryPage;
 import dugout.TransactionsPage;
-import io.appium.java_client.MobileElement;
 import referee.Commentary;
 import referee.Verify;
 import support.Engine;
@@ -172,9 +172,9 @@ public class Daily_Regression_Test2 extends Recovery{
 		sp.getAccountElement(sManualChecking).click();
 
 		Verify.waitForObject(sp.getAccountElement(sManualChecking), 2);
-		MobileElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
-		MobileElement accountType = sp.getAccountElement("Checking");
-		MobileElement accountStatus = sp.getTextView("Active");
+		WebElement manualCheckingAccount1 = sp.getAccountElement(sManualChecking);
+		WebElement accountType = sp.getAccountElement("Checking");
+		WebElement accountStatus = sp.getTextView("Active");
 
 		if (Verify.objExists(manualCheckingAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual Checking account details are displayed.");
@@ -198,9 +198,9 @@ public class Daily_Regression_Test2 extends Recovery{
 		Thread.sleep(2000);
 
 		Verify.waitForObject(sp.getAccountElement(sManualCreditCard), 2);
-		MobileElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
-//		MobileElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
-		MobileElement accountStatus1 = sp.getTextView("Active");
+		WebElement manualCCAccount1 = sp.getAccountElement(sManualCreditCard);
+//		WebElement accountType_manual = sp.getAccountElement("CREDIT_CARD");
+		WebElement accountStatus1 = sp.getTextView("Active");
 		if (Verify.objExists(manualCCAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Manual CC account details are displayed.");
 		else
@@ -223,9 +223,9 @@ public class Daily_Regression_Test2 extends Recovery{
 		Thread.sleep(2000);
 
 		Verify.waitForObject(sp.getAccountElement(sManualSaving), 2);
-		MobileElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
-		MobileElement accountType_savings = sp.getAccountElement("Savings");
-		MobileElement accountStatus2 = sp.getTextView("Active");
+		WebElement manualSavingsAccount1 = sp.getAccountElement(sManualSaving);
+		WebElement accountType_savings = sp.getAccountElement("Savings");
+		WebElement accountStatus2 = sp.getTextView("Active");
 
 		if (Verify.objExists(manualSavingsAccount1))
 			Commentary.log(LogStatus.INFO, "PASS: Savings account details are displayed.");

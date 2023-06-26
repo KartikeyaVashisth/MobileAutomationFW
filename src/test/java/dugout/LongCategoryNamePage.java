@@ -4,17 +4,16 @@ import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.tools.ant.taskdefs.Exit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -45,34 +44,34 @@ public class LongCategoryNamePage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Show long category names'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Show long category names']")
-    public MobileElement Showlongcategorynames;
+    public WebElement Showlongcategorynames;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSwitch[2]")
 	@AndroidFindBy(xpath="//android.widget.Switch[2]")
-    public MobileElement LongCategorySwitch;
+    public WebElement LongCategorySwitch;
 	
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='navigationMenu']")
-    public MobileElement hambergerIcon;
+    public WebElement hambergerIcon;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name = 'Settings Menu'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Settings']")
-	public MobileElement settingsOption;
+	public WebElement settingsOption;
 
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[`name contains 'back'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='backArrow']")
-	public MobileElement backButton;
+	public WebElement backButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Category'`]/XCUIElementTypeStaticText[2]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Category']/../android.widget.TextView[@index=2]")
-	public MobileElement selectedCategory;
+	public WebElement selectedCategory;
 	
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'Category'`][1]/**/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Category']/../android.widget.TextView[@index=2]")
-	public MobileElement selectedSplitCategory;
+	public WebElement selectedSplitCategory;
 	
 	
     public void EnableLongCategory() throws Exception{
@@ -144,7 +143,7 @@ public class LongCategoryNamePage {
 	    Helper h = new Helper();
 	
 	    if (h.getEngine().equals("android")) {
-		    Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Settings\").instance(0))"));
+		    Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Settings\").instance(0))"));
 		    Thread.sleep(1000);
 	     }
 	
@@ -204,7 +203,7 @@ public class LongCategoryNamePage {
  		SoftAssert sa = new SoftAssert();
  		String cc = "**/XCUIElementTypeOther[`name BEGINSWITH 'Category:'`]["+index+"]/**/XCUIElementTypeStaticText";
  		String sActual;
-		sActual = Engine.getDriver().findElement(MobileBy.iOSClassChain(cc)).getText();
+		sActual = Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc)).getText();
 		
 		if (sActual.equals(sCategory)) {
 			Commentary.log(LogStatus.INFO, "Category verified successfully ["+sCategory+"]");

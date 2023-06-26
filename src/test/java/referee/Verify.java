@@ -1,11 +1,11 @@
 package referee;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileElement;
 import support.Recovery;
 
 public class Verify {
@@ -29,7 +29,7 @@ public class Verify {
 		
 	}*/
 	
-	public static boolean objExists (MobileElement me){
+	public static boolean objExists (WebElement me){
 		ExtentTest quickenTest = Recovery.quickenTest;
 		
 		try{
@@ -48,7 +48,7 @@ public class Verify {
 		
 	}
 	
-	public static boolean objExists_check (MobileElement me){
+	public static boolean objExists_check (WebElement me){
 		ExtentTest quickenTest = Recovery.quickenTest;
 		
 		try{	
@@ -65,7 +65,7 @@ public class Verify {
 		
 	}
 	
-	public static boolean waitForObject (MobileElement me, Integer wttime) throws Exception{
+	public static boolean waitForObject (WebElement me, Integer wttime) throws Exception{
 		
 		Integer iCount = 0;
 		
@@ -85,7 +85,7 @@ public class Verify {
 		
 	}
 	
-	public static boolean waitForObjectToDisappear (MobileElement me, Integer wttime) throws Exception{
+	public static boolean waitForObjectToDisappear (WebElement me, Integer wttime) throws Exception{
 		
 		Integer iCount = 0;
 		

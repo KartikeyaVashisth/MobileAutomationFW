@@ -5,6 +5,7 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
 import java.lang.reflect.Array;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,18 +17,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.support.PageFactory;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.pagefactory.iOSFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import referee.Commentary;
 import referee.Verify;
@@ -59,7 +62,7 @@ public class TransactionsPage {
 			
 			if (h.getEngine().equals("android")){
 				try{
-					Engine.getDriver().findElementByXPath(xPathForAcct).isDisplayed();
+					Engine.getDriver().findElement(By.xpath(xPathForAcct)).isDisplayed();
 					return true;
 				}
 				catch(Exception e){
@@ -70,7 +73,7 @@ public class TransactionsPage {
 			else {
 				try{
 //					Engine.getDriver().findElementByXPath(xPathForAcct_IOS).isDisplayed();
-					Engine.getDriver().findElement(MobileBy.iOSClassChain(xPathForAcct_IOS)).isDisplayed();
+					Engine.getDriver().findElement(AppiumBy.iOSClassChain(xPathForAcct_IOS)).isDisplayed();
 					return true;
 				}
 				catch(Exception e){
@@ -153,7 +156,7 @@ public class TransactionsPage {
 	public void tapOnFirstTransaction() throws Exception {
 		AllAccountsPage aa = new AllAccountsPage();
 				
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
 		
 		if (li.isEmpty())
@@ -172,7 +175,7 @@ public class TransactionsPage {
 
 		AllAccountsPage aa = new AllAccountsPage();
 				
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		//Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
 		
 		if (li.isEmpty())
@@ -187,7 +190,7 @@ public class TransactionsPage {
 	public void tapOnRandomTransation() throws Exception {
 		AllAccountsPage aa = new AllAccountsPage();
 				
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		Random random = new Random();
 		int randomInteger = 0;
 		if (li.isEmpty())
@@ -212,7 +215,7 @@ public class TransactionsPage {
 	public int getTransactionListSize() throws Exception {
 		AllAccountsPage aa = new AllAccountsPage();
 		
-		List<MobileElement> li = aa.getAllSearchTransactions ();
+		List<WebElement> li = aa.getAllSearchTransactions ();
 		Commentary.log(LogStatus.INFO, "No of Transactions appeared in the search .."+li.size());
 		int listSize = li.size();
 		return listSize;
@@ -225,7 +228,7 @@ public class TransactionsPage {
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			swipe_android();
 		} else {
-			WebElement ele_ios = Engine.getDriver().findElementByXPath("*//XCUIElementTypeCell");
+			WebElement ele_ios = Engine.getDriver().findElement(By.xpath("*//XCUIElementTypeCell"));
 			swipe_ios(ele_ios);
 		}
 	}
@@ -247,14 +250,23 @@ public class TransactionsPage {
 		int endx = (int) (size.width * 0.20);
 		int starty = size.height / 2;
 		
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
- 
-		touchAction
-                .press(point(startx, starty))
-                .waitAction(waitOptions(ofMillis(1000)))
-                .moveTo(point(startx, starty))
-                .release().perform();
-		//Engine.getDriver().swipe(startx, starty, endx, starty, 2000);
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+// 
+//		touchAction
+//                .press(point(startx, starty))
+//                .waitAction(waitOptions(ofMillis(1000)))
+//                .moveTo(point(startx, starty))
+//                .release().perform();
+		
+		PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+		Sequence sequence = new Sequence(finger1, 1)
+				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startx, starty)) 
+				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+				.addAction(new Pause(finger1, Duration.ofMillis(200)))
+				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endx, starty)) 
+				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+		
+		Engine.getDriver().perform(Collections.singletonList(sequence));
 	}
 	
 	public void selectCategorySwipe (String category) throws Exception {
@@ -273,7 +285,7 @@ public class TransactionsPage {
 		TransactionDetailPage td = new TransactionDetailPage();
 		td.searchCategory(category);
 		
-		Engine.getDriver().findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
+		Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ category + "\").instance(0))"));
 		
 		Thread.sleep(1000);
 		Engine.getDriver().findElement(By.xpath(sXpath)).click();
@@ -308,7 +320,7 @@ public class TransactionsPage {
 		if (h.getEngine().equalsIgnoreCase("android")) {
 			swipe_right_android();
 		} else {
-			WebElement ele_ios = Engine.getDriver().findElementByXPath("*//XCUIElementTypeCell[2]");
+			WebElement ele_ios = Engine.getDriver().findElement(By.xpath("*//XCUIElementTypeCell[2]"));
 			swipe_right_ios(ele_ios);
 		}
 	}
@@ -339,30 +351,39 @@ public class TransactionsPage {
 //                .moveTo(point(endx, starty))
 //                .release().perform();
 		
-		int startx = Engine.getDriver().findElementByXPath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]").getLocation().getX();
-		int starty= Engine.getDriver().findElementByXPath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]").getLocation().getY();
+		int startx = Engine.getDriver().findElement(By.xpath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]")).getLocation().getX();
+		int starty= Engine.getDriver().findElement(By.xpath("(//android.widget.LinearLayout[contains(@resource-id,'com.quicken.qm2014:id/list_row')]/android.widget.RelativeLayout)[2]")).getLocation().getY();
 		
-		TouchAction touchAction = new TouchAction(Engine.getDriver());
-		 
-				touchAction
-		                .press(point(startx, starty))
-		                .waitAction(waitOptions(ofMillis(1000)))
-		                .moveTo(point(startx+1200, starty))
-		                .release().perform();
+//		TouchAction touchAction = new TouchAction(Engine.getDriver());
+//		 
+//				touchAction
+//		                .press(point(startx, starty))
+//		                .waitAction(waitOptions(ofMillis(1000)))
+//		                .moveTo(point(startx+1200, starty))
+//		                .release().perform();
 		
-		//Engine.getDriver().swipe(startx, starty, endx, starty, 2000);
+		PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
+		Sequence sequence = new Sequence(finger1, 1)
+				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startx, starty)) 
+				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg())) 
+				.addAction(new Pause(finger1, Duration.ofMillis(200)))
+				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), startx+1200, starty)) 
+				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+		
+		Engine.getDriver().perform(Collections.singletonList(sequence));
+		Thread.sleep(1000);
 	}
 	
-	public MobileElement getPayeeName() throws Exception {
+	public WebElement getPayeeName() throws Exception {
 		String xpath_IOS = "//XCUIElementTypeStaticText[@name='topLeftLabel']";
 		String xpath_Android = "//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_row_category']"; 
 		
 		Helper h = new Helper();
 		
 		if (h.getEngine().equalsIgnoreCase("android")) {
-			return (MobileElement) Engine.getDriver().findElementByXPath(xpath_Android);
+			return (WebElement) Engine.getDriver().findElement(By.xpath(xpath_Android));
 		} else {
-			return (MobileElement) Engine.getDriver().findElementByXPath(xpath_IOS);
+			return (WebElement) Engine.getDriver().findElement(By.xpath(xpath_IOS));
 
 		}
 	}
@@ -376,7 +397,7 @@ public class TransactionsPage {
 		AllAccountsPage aa = new AllAccountsPage();
 		Helper h = new Helper();
 		//WebElement element = Engine.getDriver().findElementByXPath(xPath_IOS);
-		List<MobileElement> actList = null,expList=null;
+		List<WebElement> actList = null,expList=null;
 		try {
 			actList = aa.getAllSearchTransactions ();
 			String[] actRes = new String[actList.size()];
@@ -399,11 +420,11 @@ public class TransactionsPage {
 	public WebElement getTransactionAmountValue( int i) throws Exception {
 		Helper h = new Helper();
 		if (h.getEngine().equalsIgnoreCase("android")){
-			WebElement element = Engine.getDriver().findElementById("com.quicken.qm2014:id/listView");
+			WebElement element = Engine.getDriver().findElement(By.id("com.quicken.qm2014:id/listView"));
 			//element.get
 			return element;	
 		} else {
-			WebElement element = Engine.getDriver().findElementByXPath("(//XCUIElementTypeStaticText[@name='topRightLabel'])["+i+"]");
+			WebElement element = Engine.getDriver().findElement(By.xpath("(//XCUIElementTypeStaticText[@name='topRightLabel'])["+i+"]"));
 			return element;	
 		}
 		
@@ -433,7 +454,7 @@ public class TransactionsPage {
 			if (filterBy =="Pending to Cleared" ) {
 				Thread.sleep(1000);
 				String locator = "//XCUIElementTypeStaticText[@name=\"Pending to Cleared \"]";
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.xpath(locator));
+				WebElement me = (WebElement) Engine.getDriver().findElement(AppiumBy.xpath(locator));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -444,7 +465,7 @@ public class TransactionsPage {
 				Thread.sleep(1000);
 				//String locator = "**/XCUIElementTypeOther[`name=="+"\"RadioButton "+filterBy+"\""+"`]";
 				String locator = "**/XCUIElementTypeStaticText[`name=="+"\""+filterBy+"\""+"`]";
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(MobileBy.iOSClassChain(locator));
+				WebElement me = (WebElement) Engine.getDriver().findElement(AppiumBy.iOSClassChain(locator));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -455,7 +476,7 @@ public class TransactionsPage {
 			if (filterBy == "Pending to Cleared") {
 				Thread.sleep(1000);
 				String sXpath = "//android.view.ViewGroup[5]//android.widget.TextView";
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
+				WebElement me = (WebElement) Engine.getDriver().findElement(By.xpath(sXpath));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -464,7 +485,7 @@ public class TransactionsPage {
 			} else {
 				Thread.sleep(1000);
 				String sXpath = "//android.widget.TextView[@text="+"\""+filterBy+"\""+"]";
-				MobileElement me = (MobileElement) Engine.getDriver().findElement(By.xpath(sXpath));
+				WebElement me = (WebElement) Engine.getDriver().findElement(By.xpath(sXpath));
 				Verify.waitForObject(me, 1);
 				me.click();
 				Thread.sleep(1000);
@@ -531,174 +552,174 @@ public class TransactionsPage {
 		}
 	}
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
+	//@iOSXCUITFindBy(xpath="//XCUIElementTypeButton[@name='Banking & Credit']")
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeButton[1]")
 	@AndroidFindBy(xpath="//android.view.View/../android.widget.Button[contains(@content-desc,'back')]")
-	public MobileElement backButton;
+	public WebElement backButton;
 	
-	@iOSFindBy(xpath="//*[@name='All Transactions']")
+	@iOSXCUITFindBy(xpath="//*[@name='All Transactions']")
 	@AndroidFindBy(xpath="//*[@text='All Transactions']")
-	public MobileElement txtAllTransactions;
+	public WebElement txtAllTransactions;
 	
-	//@iOSFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
+	//@iOSXCUITFindBy(xpath="//XCUIElementTypeButton[@name=\"fab\"]")
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'fab'")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/fab']")
-	public MobileElement addTransaction;
+	public WebElement addTransaction;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"TODAY'S BALANCE\"]/../*[contains(@name, '$')]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"TODAY'S BALANCE\"]/../*[contains(@name, '$')]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"TODAY'S BALANCE\"]/../android.widget.TextView[contains(@text,'$')]")
-	public MobileElement txtTodaysBalanceAmount;
+	public WebElement txtTodaysBalanceAmount;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[contains(@name,\"TODAY'S BALANCE\")]")
 	@AndroidFindBy(xpath="//*[@text=\"TODAY'S BALANCE\"]")
-	public MobileElement txtTodaysBalance;
+	public WebElement txtTodaysBalance;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeOther[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"PROJECTED BALANCE\"]/../*[contains(@name, '$')]")
 	@AndroidFindBy(xpath="//*[@text=\"PROJECTED BALANCE\"]/../*[contains(@text, '$')]")
-	public MobileElement txtProjectedBalanceAmount;
+	public WebElement txtProjectedBalanceAmount;
 	
 	@AndroidFindBy(id="android:id/search_src_text")
 	@iOSXCUITFindBy(iOSNsPredicate= "name = 'Search Transactions'")
-	//@iOSFindBy(xpath="//XCUIElementTypeSearchField[@name='Search Transactions']")
-	public MobileElement searchTransactionTxtField;
+	//@iOSXCUITFindBy(xpath="//XCUIElementTypeSearchField[@name='Search Transactions']")
+	public WebElement searchTransactionTxtField;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[1]")
 	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
-	public MobileElement btnCategorize;
+	public WebElement btnCategorize;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[2]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[2]")
 	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
-	public MobileElement btnSplit;
+	public WebElement btnSplit;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[3]")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeButton[3]")
 	@AndroidFindBy(xpath="@text='NotTaken'")//TBD
-	public MobileElement btnDelete;
+	public WebElement btnDelete;
 	
-	@iOSFindBy(xpath="//XCUIElementTypeStaticText[@name='No Results Found']")
+	@iOSXCUITFindBy(xpath="//XCUIElementTypeStaticText[@name='No Results Found']")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='No Results Found']")
-	public MobileElement txtNoResultFound;
+	public WebElement txtNoResultFound;
 	
-	@iOSFindBy(id="Save")
+	@iOSXCUITFindBy(id="Save")
 	@AndroidFindBy(id="@text='NotTaken'")//TBD
-	public MobileElement buttonSave;
+	public WebElement buttonSave;
 	
-	@iOSFindBy(id="sort icon")
+	@iOSXCUITFindBy(id="sort icon")
 	@AndroidFindBy(id="com.quicken.qm2014:id/sortBtn")
-	public MobileElement buttonSort;
+	public WebElement buttonSort;
 	
 	@iOSXCUITFindBy(iOSNsPredicate ="name='Apply'")
 	@AndroidFindBy(xpath="//*[@text='Apply']")
-	public MobileElement buttonApply;
+	public WebElement buttonApply;
 	
 	//@iOSXCUITFindBy(iOSNsPredicate="type == 'XCUIElementTypeOther' AND name == 'close'")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='closeReminders'`]")
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"closeReminders\"]/android.widget.ImageView")
-	public MobileElement buttonClose;
+	public WebElement buttonClose;
 	
-	@iOSFindBy(id="You don't have any transactions.")
+	@iOSXCUITFindBy(id="You don't have any transactions.")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/no_payee']")
-	public MobileElement noTransactionText;
+	public WebElement noTransactionText;
 	
 	@iOSXCUITFindBy(id = "ic reminder")
 	@AndroidFindBy(xpath="//android.widget.ImageButton[@resource-id='com.quicken.qm2014:id/reminderBtn']")
-	public MobileElement buttonShowReminder;
+	public WebElement buttonShowReminder;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Transaction Detail'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Transaction Detail']")
-	public MobileElement headerTransactionDetail;
+	public WebElement headerTransactionDetail;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'Show Running Balance'")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text ='Show Running Balance']")
-	public MobileElement switchShowRunningBalanceText;
+	public WebElement switchShowRunningBalanceText;
 	
 	//@iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeButton' AND name == 'Switch Value: true'")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSwitch[`name CONTAINS \"Switch Value: \"`]")
 	@AndroidFindBy(xpath="//android.widget.Switch")
-	public MobileElement switchRunningBalance;
+	public WebElement switchRunningBalance;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 7 Days'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 7 Days']")
-	public MobileElement next7DaysReminderFilter;
+	public WebElement next7DaysReminderFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 14 Days'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 14 Days']")
-	public MobileElement next14DaysReminderFilter;
+	public WebElement next14DaysReminderFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 30 Days'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 30 Days']")
-	public MobileElement next30DaysReminderFilter;
+	public WebElement next30DaysReminderFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 90 Days'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 90 Days']")
-	public MobileElement next90DaysReminderFilter;
+	public WebElement next90DaysReminderFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Next 12 Months'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Next 12 Months']")
-	public MobileElement next12MonthsReminderFilter;
+	public WebElement next12MonthsReminderFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name=\"Don't show reminders\"`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text=\"Don't show reminders\"]")
-	public MobileElement dontShowReminderFilter;
+	public WebElement dontShowReminderFilter;
 	
 	//----------------- Filter & Sort --------------
 	
 //	@iOSXCUITFindBy(iOSNsPredicate="name='Not Reviewed' and type='XCUIElementTypeStaticText'")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'RadioButton'`]/**/XCUIElementTypeStaticText[`name='Not Reviewed'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']")
-	public MobileElement filterNotReviewed;
+	public WebElement filterNotReviewed;
 	
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Not Reviewed'`]/**/XCUIElementTypeStaticText[`name='Not Reviewed'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']/..")
-	public MobileElement filterNotReviewedButton;
+	public WebElement filterNotReviewedButton;
 	
 //	@iOSXCUITFindBy(iOSNsPredicate="name='Clear filters' and type='XCUIElementTypeButton'")
 //	@AndroidFindBy(xpath="//android.widget.Button[@text='Clear filters']")
-//	public MobileElement buttonClearFilter;
+//	public WebElement buttonClearFilter;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Not Reviewed'`]/**/XCUIElementTypeButton[`name='icn cross'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Not Reviewed']/../android.widget.ImageView[@resource-id='com.quicken.qm2014:id/btn_clear_filter']")
-	public MobileElement buttonClearFilter;
+	public WebElement buttonClearFilter;
 	
 	@iOSXCUITFindBy(iOSNsPredicate="name='Mark all as Reviewed' and type='XCUIElementTypeButton'")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='Mark all as Reviewed']")
-	public MobileElement buttonMarkAllReviewed;
+	public WebElement buttonMarkAllReviewed;
 	
 	@iOSXCUITFindBy(iOSNsPredicate="name BEGINSWITH 'Are you sure you want to mark' and type='XCUIElementTypeStaticText'")
 	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text, 'Are you sure you want to mark')]")
-	public MobileElement alertMarkAllReviewed;
+	public WebElement alertMarkAllReviewed;
 	
-	@iOSFindBy(xpath="//*[@name='Yes']")
+	@iOSXCUITFindBy(xpath="//*[@name='Yes']")
 	@AndroidFindBy(xpath="//*[@text='Yes']")
-	public MobileElement buttonYes;
+	public WebElement buttonYes;
 	
-	@iOSFindBy(xpath="//*[@name='No']")
+	@iOSXCUITFindBy(xpath="//*[@name='No']")
 	@AndroidFindBy(xpath="//*[@text='No']")
-	public MobileElement buttonNo;
+	public WebElement buttonNo;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeStaticText[`name = 'Chip : true Newest to Oldest'`]")
 	//@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name=='RadioButton : true Date New to Old'`]")
 	//@AndroidFindBy(xpath="//android.widget.TextView[@text = 'Date New to Old']/../android.widget.ImageView[@content-desc = 'CheckIcon']")
 	@AndroidFindBy(xpath="//android.widget.TextView[@content-desc = 'Chip : true Newest to Oldest']")
-	public MobileElement defaultSortByFilterSelected;
+	public WebElement defaultSortByFilterSelected;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeCell[1]/XCUIElementTypeStaticText")
 	@AndroidFindBy(xpath="//android.widget.TextView[@resource-id='com.quicken.qm2014:id/list_banner_date_sub_header']")
-	public MobileElement firstBannerTransactionDate;
+	public WebElement firstBannerTransactionDate;
 	
 	@iOSXCUITFindBy(iOSClassChain="**/*[`name=='Always Allow'`]")
 	@AndroidFindBy(xpath="//android.widget.Button[@text='Allow']")
-	public MobileElement allowButton;
+	public WebElement allowButton;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`value='THIS MONTH'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='THIS MONTH']")
-	public MobileElement thisMonthLabel;
+	public WebElement thisMonthLabel;
 	
 	//@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name='Cancel'`]")
 	@iOSXCUITFindBy(accessibility = "Clear text")
 	@AndroidFindBy(id="android:id/search_close_btn")
-	public MobileElement buttonClearSearch;
+	public WebElement buttonClearSearch;
 
 	
 }
