@@ -76,7 +76,7 @@ public class LambdaTest {
 			capabilities.setCapability("appium:name", h.getTestName());
 			capabilities.setCapability("appium:deviceName", "Pixel.*");
 			capabilities.setCapability("appium:automationName", "UiAutomator2");
-			capabilities.setCapability("appium:platformVersion","12");
+			capabilities.setCapability("appium:platformVersion","13");
 			capabilities.setCapability("platformName", "Android");
 			capabilities.setCapability("appium:appiumVersion", "2.0");
 			capabilities.setCapability("appium:isRealMobile", true);
@@ -133,10 +133,10 @@ public class LambdaTest {
 			
 		}else {
 			if(h.getEngine().equals("ios")) {
-				app_url = "lt://APP1016046941678856666515501";
+				app_url = "lt://APP10160631101688108356272199";
 			}
 			else {
-				app_url = "lt://APP10160532421667661979627588";
+				app_url = "lt://APP10160631101688109130310836";
 			}
 			
 		}
