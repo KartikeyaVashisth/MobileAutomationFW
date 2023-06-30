@@ -24,7 +24,7 @@ public class SignInPage {
 	Helper support = new Helper();
 	AndroidDriver ad;
 
-	public SignInPage () {
+	public SignInPage() {
 		try {
 			
 			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);

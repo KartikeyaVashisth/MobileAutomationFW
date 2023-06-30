@@ -15,7 +15,7 @@ import support.Helper;
 
 public class WelcomePage {
 
-	public WelcomePage () {
+	public WelcomePage() {
 		
 		try {
 			PageFactory.initElements(new AppiumFieldDecorator(Engine.getDriver()),this);
@@ -24,7 +24,6 @@ public class WelcomePage {
 		}
 	}
 
-	//@iOSFindBy(xpath="//*[normalize-space(@name)='Sign In']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Sign In'`]")
 	@AndroidFindBy(xpath="//*[@text='Sign In']")
 	public WebElement xpath_btnWelcomeSignIn;
@@ -33,22 +32,18 @@ public class WelcomePage {
 	@AndroidFindBy(xpath="//android.widget.ImageView[@content-desc='signupTutorialImage 0']/../android.widget.TextView[@text='See everything in one place']/following-sibling::android.widget.TextView[@text='Connect your banks to see transactions and balances for all your accounts.']")
 	public WebElement welcomePageText;
 
-	//@iOSFindBy(xpath="//*[normalize-space(@name)='testEnvironment']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='testEnvironment'`]")
 	@AndroidFindBy(xpath="//*[@content-desc='testEnvironment']")
 	public WebElement xpath_Environment;
 
-	//@iOSFindBy(xpath="//*[normalize-space(@name)='Stage']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Stage'`][2]")
 	@AndroidFindBy(xpath="//*[@text='Stage']")
 	public WebElement xpath_chkboxStageEnvironment;
 
-	//@iOSFindBy(xpath="//*[normalize-space(@name)='Production']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Production'`][2]")
 	@AndroidFindBy(xpath="//*[@text='Production']")
 	public WebElement xpath_chkboxProductionEnvironment;
 
-	//@iOSFindBy(xpath="//*[normalize-space(@name)='Done']")
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='done'`][-1]")
 	public WebElement linkAppConfigDone;
 
