@@ -47,7 +47,7 @@ public class Recovery {
 	public static ThreadLocal<String> sTestName= new ThreadLocal<String>();
 	public static ThreadLocal<String> sCloudService= new ThreadLocal<String>();
 	public static ThreadLocal<String> sEnv= new ThreadLocal<String>();
-	public static ThreadLocal<String> TEST_RUN_ID = new ThreadLocal<String>();
+	public static ThreadLocal<String> testRunId = new ThreadLocal<String>();
 	public static ThreadLocal<String> testCaseId = new ThreadLocal<String>();
 	
 	public Boolean wannaUploadTheBuild(){
@@ -67,6 +67,10 @@ public class Recovery {
 			return false;
 		}
 	}
+	
+	
+	
+	
 	
 	@BeforeSuite
 	public void testPlanEnter() throws Exception{
@@ -91,8 +95,14 @@ public class Recovery {
 		System.out.println("Before Test Start");
 		Helper h = new Helper();
 		
-		if (RUN_ID.equals("readFromPropertiesFile"))
-			TEST_RUN_ID.set("readFromPropertiesFile");
+		
+	
+		
+		/* ******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
+		 if (RUN_ID.equals("readFromPropertiesFile"))
+			 testRunId.set("readFromPropertiesFile");
+		 */
+		
 		
 		// load engine and host
 		if (host.equals("readFromPropertiesFile"))
@@ -112,16 +122,17 @@ public class Recovery {
 			sTestName.set(testName);
 			sEnv.set(env);
 			
-			if (!RUN_ID.equals("readFromPropertiesFile")) {
+//	******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
+			/* if (!RUN_ID.equals("readFromPropertiesFile")) {
 				System.out.println("Alert Alert!");
-				TEST_RUN_ID.set(RUN_ID);
-			}
+				testRunId.set(RUN_ID);
+		}*/
 		}
 		
 		sCloudService.set(Globals.testProperty.get("cloud_service"));
 		
 		System.out.println("Engine: ["+sEngine.get()+"], Host: ["+sHost.get()+"], Env: ["+sEnv.get()+"]");
-		System.out.println("Before Test Run ID: "+TEST_RUN_ID.get());
+		System.out.println("Before Test Run ID: "+this.testRunId.get());
 		
 		
 		
@@ -188,65 +199,78 @@ public class Recovery {
 	}
 	
 	@AfterMethod
-	public void testCaseExit(ITestResult result, Method method) throws Exception{
-		
-		//TEST_CASE_PASSED_STATUS = 1;
-		//TEST_CASE_FAILED_STATUS = 5;
-		int testTrailStatus = 1;
-		
-		Helper h = new Helper();
-		
-		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
-		
-		
-		
-		/*
-		ExtentManager em = new ExtentManager();
-		
-		em.initializeRepObject().endTest(getRep());*/
-		/*
-		List<LogEntry> logEntries = Engine.getDriver().manage().logs().get("logcat").getAll();
-		System.out.println(logEntries);
-		*/
-		
-		
-		List<String> softFails = ErrorUtil.getTestErrors();
-		if (result.getStatus() == ITestResult.FAILURE) {
-			testTrailStatus = 5;
-			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
-		   } 
-		
-		if ((softFails.size() != 0)) {
-			testTrailStatus = 5;
-			ETM.getTest().log(LogStatus.FAIL,method.getName());
+	
+//	******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
+//	public void testCaseExit(ITestResult result, Method method) throws Exception{
+//		
+//		//TEST_CASE_PASSED_STATUS = 1;
+//		//TEST_CASE_FAILED_STATUS = 5;
+//		int testTrailStatus = 1;
+//		
+//		Helper h = new Helper();
+//		
+//		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
+//		
+//		
+//		
+//		/*
+//		ExtentManager em = new ExtentManager();
+//		
+//		em.initializeRepObject().endTest(getRep());*/
+//		/*
+//		List<LogEntry> logEntries = Engine.getDriver().manage().logs().get("logcat").getAll();
+//		System.out.println(logEntries);
+//		*/
+//		
+//		
+//		List<String> softFails = ErrorUtil.getTestErrors();
+//		if (result.getStatus() == ITestResult.FAILURE) {
+//			testTrailStatus = 5;
+//			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
+//		   } 
+//		
+//		if ((softFails.size() != 0)) {
+//			testTrailStatus = 5;
+//			ETM.getTest().log(LogStatus.FAIL,method.getName());
+//		}
+//		else
+//			ETM.getTest().log(LogStatus.PASS,method.getName());
+//		
+//		ETM.getTest().log(LogStatus.INFO, "EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+//		ETM.endTest();
+//		ETM.map2.get((int)Thread.currentThread().getId()).flush();
+//		
+//		Thread.sleep(1000);
+//		
+////		Engine.tlDriver.get().closeApp();
+//		if (this.sEngine.get().equals("android"))
+////			((AndroidDriver<WebElement>)Engine.getDriver()).closeApp();
+//			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
+//		else
+////			((IOSDriver<WebElement>)Engine.getDriver()).closeApp();
+//			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
+//		
+//		System.out.println("AfterMethod: "+TEST_RUN_ID.get());
+//		
+//		if (!TEST_RUN_ID.get().equals("readFromPropertiesFile"))
+//			this.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
+//		System.out.println("");
+//		System.out.println("-----------------------------------------------------------------");
+//		System.out.println("");
+//		
+//	}
+	public void tearDown(ITestResult result) throws Throwable {
+		//TestRailManager.TEST_RUN_ID = this.TEST_RUN_ID.get();
+		if(result.getStatus()==ITestResult.SUCCESS) {
+			TestRailManager.addResultForTestCase(this.testRunId.get(),this.testCaseId.get(), TestRailManager.TEST_CASE_PASSED_STATUS, result.getThrowable());
 		}
-		else
-			ETM.getTest().log(LogStatus.PASS,method.getName());
-		
-		ETM.getTest().log(LogStatus.INFO, "EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
-		ETM.endTest();
-		ETM.map2.get((int)Thread.currentThread().getId()).flush();
-		
-		Thread.sleep(1000);
-		
-//		Engine.tlDriver.get().closeApp();
-		if (this.sEngine.get().equals("android"))
-//			((AndroidDriver<WebElement>)Engine.getDriver()).closeApp();
-			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
-		else
-//			((IOSDriver<WebElement>)Engine.getDriver()).closeApp();
-			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
-		
-		System.out.println("AfterMethod: "+TEST_RUN_ID.get());
-		
-		if (!TEST_RUN_ID.get().equals("readFromPropertiesFile"))
-			this.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
-		System.out.println("");
-		System.out.println("-----------------------------------------------------------------");
-		System.out.println("");
-		
+		else if(result.getStatus()==ITestResult.FAILURE) {
+			
+			TestRailManager.addResultForTestCase(this.testRunId.get(),this.testCaseId.get(), TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable());
+		}
 		
 	}
+
 	
 	@AfterTest
 	public void testPlanExit() throws Exception{
@@ -257,22 +281,23 @@ public class Recovery {
 		
 	}
 	
-	public static void addResultForTestCase(String testCaseId, int status,
-            String error) throws IOException, APIException {
-		 String TESTRAIL_USERNAME          = "kallol.das@quicken.com";
-		 String TESTRAIL_PASSWORD          = "Quicken@01";
-		  String RAILS_ENGINE_URL           = "https://quicken.testrail.net";
-        String testRunId = TEST_RUN_ID.get();
-
-        APIClient client = new APIClient(RAILS_ENGINE_URL);
-        client.setUser(TESTRAIL_USERNAME);
-        client.setPassword(TESTRAIL_PASSWORD);
-        Map data = new HashMap();
-        data.put("status_id", status);
-        data.put("comment", "Test Executed - Status updated automatically from Appium test automation.");
-        client.sendPost("add_result_for_case/"+testRunId+"/"+testCaseId+"",data );
-
-    }
+//	******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
+//	public static void addResultForTestCase(String testCaseId, int status,
+//            String error) throws IOException, APIException {
+//		 String TESTRAIL_USERNAME          = "kallol.das@quicken.com";
+//		 String TESTRAIL_PASSWORD          = "Quicken@01";
+//		  String RAILS_ENGINE_URL           = "https://quicken.testrail.net";
+//        String testRunId = TEST_RUN_ID.get();
+//
+//        APIClient client = new APIClient(RAILS_ENGINE_URL);
+//        client.setUser(TESTRAIL_USERNAME);
+//        client.setPassword(TESTRAIL_PASSWORD);
+//        Map data = new HashMap();
+//        data.put("status_id", status);
+//        data.put("comment", "Test Executed - Status updated automatically from Appium test automation.");
+//        client.sendPost("add_result_for_case/"+testRunId+"/"+testCaseId+"",data );
+//
+//    }
 
 	
 }
