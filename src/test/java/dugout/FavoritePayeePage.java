@@ -260,14 +260,13 @@ public class FavoritePayeePage {
  
    public void AddPayeeAsFavPayee_android(String payee) throws Exception{
 	    
-   	
-   
-       WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
-		
-	   int startX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 2);
-       int startY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
-       int endX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 3);
-       int endY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
+       WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']"));
+       
+       int startX = startElement.getLocation().getX()+1000;
+       int startY = startElement.getLocation().getY();
+       int endX = startElement.getLocation().getX();
+       int endY = startElement.getLocation().getY();
+       
 //       new TouchAction(Engine.getDriver())
 //           .press(point(startX,startY))
 //           .waitAction(waitOptions(ofMillis(1000)))
@@ -276,22 +275,18 @@ public class FavoritePayeePage {
        
        PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
        Sequence sequence = new Sequence(finger1, 1)
-				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
-				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
-				.addAction(new Pause(finger1, Duration.ofMillis(200)))
-				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
-				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
-		
-		Engine.getDriver().perform(Collections.singletonList(sequence));
-		Thread.sleep(2000);
-   	
-		WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
-			
-			fav_icon.click();
-		  	//Thread.sleep(3000);
-			
-		}
-   
+    		   .addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
+    		   .addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
+    		   .addAction(new Pause(finger1, Duration.ofMillis(200)))
+    		   .addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
+    		   .addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
+
+       Engine.getDriver().perform(Collections.singletonList(sequence));
+       Thread.sleep(2000);
+
+       WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
+       fav_icon.click();
+   }
    
    public void RemoveFavPayee(String payee) throws Exception{
 		
@@ -327,11 +322,12 @@ public class FavoritePayeePage {
  	
  
         WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
-		
-		int startX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 2);
-        int startY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
-        int endX = startElement.getLocation().getX() + (startElement.getSize().getWidth() / 3);
-        int endY = startElement.getLocation().getY() + (startElement.getSize().getHeight() / 2);
+        
+        int startX = startElement.getLocation().getX()+1000;
+        int startY = startElement.getLocation().getY();
+        int endX = startElement.getLocation().getX();
+        int endY = startElement.getLocation().getY();
+        
 //        new TouchAction(Engine.getDriver())
 //         .press(point(startX,startY))
 //         .waitAction(waitOptions(ofMillis(1000)))
@@ -339,23 +335,24 @@ public class FavoritePayeePage {
 //         .release().perform();
         
         PointerInput finger1 = new PointerInput(Kind.TOUCH, "finger1");
-		Sequence sequence = new Sequence(finger1, 1)
-				.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
-				.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
-				.addAction(new Pause(finger1, Duration.ofMillis(200)))
-				.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
-				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
-		
-		Engine.getDriver().perform(Collections.singletonList(sequence));
-		Thread.sleep(2000);
+        Sequence sequence = new Sequence(finger1, 1)
+        		.addAction(finger1.createPointerMove(Duration.ZERO, Origin.viewport(), startX, startY))
+        		.addAction(finger1.createPointerDown(MouseButton.LEFT.asArg()))
+        		.addAction(new Pause(finger1, Duration.ofMillis(200)))
+        		.addAction(finger1.createPointerMove(Duration.ofMillis(100), Origin.viewport(), endX, endY))
+        		.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
 
-		WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
-			
-			fav_icon.click();
-			Thread.sleep(2000);
-			this.removeBtn.click();
-			Thread.sleep(3000);				
-		}
+        Engine.getDriver().perform(Collections.singletonList(sequence));
+        Thread.sleep(2000);
+
+        WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
+
+        fav_icon.click();
+        Thread.sleep(2000);
+        
+        this.removeBtn.click();
+        Thread.sleep(3000);				
+   }
    
    public void verifyFavPayee(String payee) throws Exception{
 		
