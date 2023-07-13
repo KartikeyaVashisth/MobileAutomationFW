@@ -3,6 +3,9 @@ package tournament;
 
 import java.util.List;
 
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -42,6 +45,8 @@ public class RecentTranactions_Test extends Recovery {
 	private String[] categories;
 	
 	
+	
+	
 	public String getUsername_basedOnEnv() throws Exception {
 		
 		UserName un = new UserName();
@@ -52,9 +57,27 @@ public class RecentTranactions_Test extends Recovery {
 		return un.getUserName();
 		
 	}
+	
+	
+	
+//****** This piece of code we can enable when we want to use the Testrail integration with our project . Based on test case status the status on Testrail will get update for each testcase ******	
+//	@Override
+//	@BeforeTest
+//	@Parameters({"host","engine","test","env","RUN_ID"})
+//	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env, @Optional("readFromPropertiesFile")String RUN_ID) throws Exception{
+//		this.testRunId.set("2330");
+//		super.beforeTestEnter(host, engine, testName, env, RUN_ID);
+//		
+//	}
+	
+
 
 	@Test (priority = 1, enabled = true)
 	public void RT1_Test() throws Exception {
+		
+		
+		//this.testRunId.set("2330");
+		this.testCaseId.set("534433") ;
 
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -65,6 +88,7 @@ public class RecentTranactions_Test extends Recovery {
 
 		SignInPage si = new SignInPage();
 		si.signIn(sUsername, sPassword, sDataset);
+		
 
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verifying Recent Transactions card appears on dashboard.");
 
@@ -92,12 +116,17 @@ public class RecentTranactions_Test extends Recovery {
 			Commentary.log(sa,LogStatus.FAIL, "FAIL: Sort button does not appear on All transactions screen.");
 		
 		sa.assertAll();
+		tn.backButton.click();
 	}
 	
 	//-----------------------------------------------------
 	
 	@Test (priority = 2, enabled = true)
 	public void RT2_Test() throws Exception {
+		
+		
+		//this.testRunId.set("2330");
+		this.testCaseId.set("953193");
 		
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
@@ -137,6 +166,8 @@ public class RecentTranactions_Test extends Recovery {
 	@Test (priority = 3, enabled = true)
 	public void RT3_Test() throws Exception {
 		
+		//this.testRunId.set("2330");
+		this.testCaseId.set("C534437");
 		SoftAssert sa = new SoftAssert();
 		Helper h = new Helper();
 		

@@ -39,6 +39,17 @@ public class RenamingRulesTest1 extends Recovery {
 		r.prod_android = "kalyan.grandhi@quicken.com";
 		return r.getUserName();
 	}
+	
+	
+	//****** This piece of code we can enable when we want to use the Testrail integration with our project . Based on test case status the status on Testrail will get update for each testcase ******	
+//	@Override
+//	@BeforeTest
+//	@Parameters({"host","engine","test","env","RUN_ID"})
+//	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env, @Optional("readFromPropertiesFile")String RUN_ID) throws Exception{
+//		this.testRunId.set("2330");
+//		super.beforeTestEnter(host, engine, testName, env, RUN_ID);
+//		
+//	}
 
 	@Test(priority = 0)
 	public void RR1_VerifyMenu() throws Exception {
