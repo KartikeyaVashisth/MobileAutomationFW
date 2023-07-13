@@ -531,7 +531,6 @@ public class OverviewPage {
 		
 		if (h.getEngine().equals("android")){
 			String sXpath="//android.widget.TextView[@text='"+currentMonth+" Summary']";
-			//System.out.println(sXpath);
 			Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Summary\").instance(0))"));
 			Thread.sleep(1000);
 			Engine.getDriver().findElement(By.xpath(sXpath)).click();
@@ -545,7 +544,6 @@ public class OverviewPage {
 			scrollObject.put("direction", "up");
 			(Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
 			Thread.sleep(1000);
-			//Engine.getDriver().findElement(By.name("'"+currentMonth+" Summary'")).click();
 			transactionSummaryCard.click();
 			Thread.sleep(1000);
 		}
@@ -573,16 +571,19 @@ public class OverviewPage {
 //			scrollObject.put("toVisible", "not an empty string");
 //			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 //			Thread.sleep(1000);
-			
-                HashMap<String, String> scrollObject = new HashMap<String, String>();
-                scrollObject.put("predicateString", "value ='Bills & Income'");
-                scrollObject.put("toVisible", "true");
-                scrollObject.put("direction", "up");
-                (Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
-                Thread.sleep(1000);
-                
-                Engine.getDriver().findElement(By.name("Bills & Income")).click();
-    			Thread.sleep(2000);
+			if(Engine.getDriver().findElement(By.name("Bills & Income")).isDisplayed()) {
+				Engine.getDriver().findElement(By.name("Bills & Income")).click();
+			}else {
+				HashMap<String, String> scrollObject = new HashMap<String, String>();
+				scrollObject.put("predicateString", "value ='Bills & Income'");
+				scrollObject.put("toVisible", "true");
+				scrollObject.put("direction", "up");
+				(Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
+				Thread.sleep(1000);
+
+				Engine.getDriver().findElement(By.name("Bills & Income")).click();
+				Thread.sleep(2000);
+			}
 		}
 	}
 	
@@ -601,8 +602,12 @@ public class OverviewPage {
 			Thread.sleep(12000);
 		}
 		else {
+			
+			if(Engine.getDriver().findElement(By.name("Net Worth")).isDisplayed()) {
+				Engine.getDriver().findElement(By.name("Net Worth")).click();
+			}else {
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
-			scrollObject.put("predicateString", "value ='Bills & Income'");
+			scrollObject.put("predicateString", "value ='Net Worth'");
 			scrollObject.put("toVisible", "true");
 			scrollObject.put("direction", "up");
 			(Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
@@ -612,6 +617,7 @@ public class OverviewPage {
 			Thread.sleep(2000);
 			Verify.waitForObjectToDisappear(this.refreshSpinnerIcon, 1);
 			Thread.sleep(10000);
+			}
 		}
 	}
 

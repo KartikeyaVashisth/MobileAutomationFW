@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -22,9 +23,14 @@ import org.openqa.selenium.interactions.PointerInput.Kind;
 import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
+import com.google.common.collect.ImmutableMap;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumBy;
@@ -48,7 +54,7 @@ public class BillsAndIncomePage {
 	}
 
 	@iOSXCUITFindBy(iOSClassChain="**/XCUIElementTypeOther[`name ='Bills & Income'`]")
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Bills & Income']")
+	@AndroidFindBy(xpath = "//android.view.View[@text='Bills & Income']")
 	public WebElement billsAndIncomeHeaderText;
 
 	@iOSXCUITFindBy(iOSNsPredicate="type = 'XCUIElementTypeButton'")
@@ -2026,6 +2032,9 @@ public class BillsAndIncomePage {
 				.addAction(finger1.createPointerUp(MouseButton.LEFT.asArg()));
 		
 		Engine.getDriver().perform(Collections.singletonList(sequence));
+		
+//		RemoteWebElement chipBar = (RemoteWebElement) Engine.getDriver().findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name = 'Next 30 Days'`]"));
+//		Engine.getDriver().executeScript("gesture: swipe", ImmutableMap.of("elementId", chipBar.getId(), "percentage", 50, "direction", "left"));
 	}
 
 	public void scrollFilter_android() throws Exception {

@@ -95,7 +95,7 @@ public class SignInPage {
 	public WebElement dataSetArrow;
 
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='navigationMenu'`]")
-	@AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"navigationMenu\"]//*[@class='android.widget.ImageView']")
+	@AndroidFindBy(accessibility  = "navigationMenu")
 	public WebElement navigationMenu;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name contains 'navigationMenu'`][-2]/**/XCUIElementTypeStaticText")
