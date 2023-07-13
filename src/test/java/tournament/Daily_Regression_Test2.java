@@ -42,7 +42,17 @@ public class Daily_Regression_Test2 extends Recovery{
 	String statusUnCleared = "Uncleared";
 	String filterNewToOld = "Date New to Old";
 	String filterOldToNew = "Date Old to New";
-
+	
+	
+	//****** This piece of code we can enable when we want to use the Testrail integration with our project . Based on test case status the status on Testrail will get update for each testcase ******	
+//	@Override
+//	@BeforeTest
+//	@Parameters({"host","engine","test","env","RUN_ID"})
+//	public void beforeTestEnter(@Optional("readFromPropertiesFile")String host, @Optional("readFromPropertiesFile")String engine, @Optional("readFromPropertiesFile")String testName, @Optional("readFromPropertiesFile")String env, @Optional("readFromPropertiesFile")String RUN_ID) throws Exception{
+//		this.testRunId.set("2330");
+//		super.beforeTestEnter(host, engine, testName, env, RUN_ID);
+//		
+//	}
 	@Test (priority = 20, enabled = true)
 	public void TC20_ValidateHamburgerMenuOptions ()throws Exception {
 

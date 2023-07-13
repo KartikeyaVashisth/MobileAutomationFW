@@ -200,67 +200,67 @@ public class Recovery {
 	
 	@AfterMethod
 	
-//	******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
-//	public void testCaseExit(ITestResult result, Method method) throws Exception{
-//		
-//		//TEST_CASE_PASSED_STATUS = 1;
-//		//TEST_CASE_FAILED_STATUS = 5;
-//		int testTrailStatus = 1;
-//		
-//		Helper h = new Helper();
-//		
-//		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
-//		
-//		
-//		
-//		/*
-//		ExtentManager em = new ExtentManager();
-//		
-//		em.initializeRepObject().endTest(getRep());*/
-//		/*
-//		List<LogEntry> logEntries = Engine.getDriver().manage().logs().get("logcat").getAll();
-//		System.out.println(logEntries);
-//		*/
-//		
-//		
-//		List<String> softFails = ErrorUtil.getTestErrors();
-//		if (result.getStatus() == ITestResult.FAILURE) {
-//			testTrailStatus = 5;
-//			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
-//		   } 
-//		
-//		if ((softFails.size() != 0)) {
-//			testTrailStatus = 5;
-//			ETM.getTest().log(LogStatus.FAIL,method.getName());
-//		}
-//		else
-//			ETM.getTest().log(LogStatus.PASS,method.getName());
-//		
-//		ETM.getTest().log(LogStatus.INFO, "EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
-//		ETM.endTest();
-//		ETM.map2.get((int)Thread.currentThread().getId()).flush();
-//		
-//		Thread.sleep(1000);
-//		
-////		Engine.tlDriver.get().closeApp();
-//		if (this.sEngine.get().equals("android"))
-////			((AndroidDriver<WebElement>)Engine.getDriver()).closeApp();
-//			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
-//		else
-////			((IOSDriver<WebElement>)Engine.getDriver()).closeApp();
-//			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
-//		
-//		System.out.println("AfterMethod: "+TEST_RUN_ID.get());
-//		
-//		if (!TEST_RUN_ID.get().equals("readFromPropertiesFile"))
-//			this.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
-//		System.out.println("");
-//		System.out.println("-----------------------------------------------------------------");
-//		System.out.println("");
-//		
-//	}
-	public void tearDown(ITestResult result) throws Throwable {
-		//TestRailManager.TEST_RUN_ID = this.TEST_RUN_ID.get();
+//	******  You can comment this method and enablke the below commented method if you want the testRail integration with your project ****
+	public void testCaseExit(ITestResult result, Method method) throws Exception{
+		
+		//TEST_CASE_PASSED_STATUS = 1;
+		//TEST_CASE_FAILED_STATUS = 5;
+		int testTrailStatus = 1;
+		
+		Helper h = new Helper();
+		
+		System.out.println("AfterMethod start...."+method.getName()+" ["+h.getEngine()+"] ");
+		
+		
+		
+		/*
+		ExtentManager em = new ExtentManager();
+		
+		em.initializeRepObject().endTest(getRep());*/
+		/*
+		List<LogEntry> logEntries = Engine.getDriver().manage().logs().get("logcat").getAll();
+		System.out.println(logEntries);
+		*/
+		
+		
+		List<String> softFails = ErrorUtil.getTestErrors();
+		if (result.getStatus() == ITestResult.FAILURE) {
+			testTrailStatus = 5;
+			ETM.getTest().log(LogStatus.FAIL, result.getThrowable());
+		   } 
+		
+		if ((softFails.size() != 0)) {
+			testTrailStatus = 5;
+			ETM.getTest().log(LogStatus.FAIL,method.getName());
+		}
+		else
+			ETM.getTest().log(LogStatus.PASS,method.getName());
+		
+		ETM.getTest().log(LogStatus.INFO, "EndTime "+new SimpleDateFormat("HH.mm.ss").format(new Date()));
+		ETM.endTest();
+		ETM.map2.get((int)Thread.currentThread().getId()).flush();
+		
+		Thread.sleep(1000);
+		
+//		Engine.tlDriver.get().closeApp();
+		if (this.sEngine.get().equals("android"))
+//			((AndroidDriver<WebElement>)Engine.getDriver()).closeApp();
+			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
+		else
+//			((IOSDriver<WebElement>)Engine.getDriver()).closeApp();
+			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
+		
+		System.out.println("AfterMethod: "+testRunId.get());
+		
+		if (!testRunId.get().equals("readFromPropertiesFile"))
+			//TestRailManager.addResultForTestCase(testCaseId.get(), testTrailStatus, "");
+		System.out.println("");
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("");
+		
+	}
+	/*   You can  enable below piece of code if you want to integrate testrail with your project. based on your test case result it will update the status on TestRail for each test cases.
+	 * public void tearDown(ITestResult result) throws Throwable {
 		if(result.getStatus()==ITestResult.SUCCESS) {
 			TestRailManager.addResultForTestCase(this.testRunId.get(),this.testCaseId.get(), TestRailManager.TEST_CASE_PASSED_STATUS, result.getThrowable());
 		}
@@ -269,7 +269,14 @@ public class Recovery {
 			TestRailManager.addResultForTestCase(this.testRunId.get(),this.testCaseId.get(), TestRailManager.TEST_CASE_FAILED_STATUS, result.getThrowable());
 		}
 		
-	}
+		if (this.sEngine.get().equals("android"))
+
+			((AndroidDriver)Engine.getDriver()).terminateApp("com.quicken.qm2014");
+		else
+
+			((IOSDriver)Engine.getDriver()).terminateApp("com.intuit.quickencompanion.ios");
+		
+	}*/
 
 	
 	@AfterTest

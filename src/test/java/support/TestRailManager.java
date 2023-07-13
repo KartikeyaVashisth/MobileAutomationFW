@@ -33,3 +33,12 @@ public class TestRailManager {
 
 
 }
+
+
+/*
+ * Information: For the Testrail integration with our automation project We need this file. Along with this file we have API client , API exception file under Support
+ * Which are ready made file given by Java. 
+ * Also Under recovery there is a commented method that we have uncomment and the above another methid is there which we need to comment to enable the testrail integrarion.
+ * Lastly Under each test class we have to mention the Test caseid for each test case compare to the test rail.
+ * Run ID we have to mention only once. We will get the run id from the Testrail 'test reult & execution' tab.
+ */
