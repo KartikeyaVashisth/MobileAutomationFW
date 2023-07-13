@@ -98,10 +98,10 @@ public class Recovery {
 		
 	
 		
-		/* ******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
+		// ******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
 		 if (RUN_ID.equals("readFromPropertiesFile"))
 			 testRunId.set("readFromPropertiesFile");
-		 */
+		 
 		
 		
 		// load engine and host
@@ -123,10 +123,10 @@ public class Recovery {
 			sEnv.set(env);
 			
 //	******  Commenting for now as we are not using this piece of code, For testrail integration we have written separate code ****
-			/* if (!RUN_ID.equals("readFromPropertiesFile")) {
+			if (!RUN_ID.equals("readFromPropertiesFile")) {
 				System.out.println("Alert Alert!");
 				testRunId.set(RUN_ID);
-		}*/
+		}
 		}
 		
 		sCloudService.set(Globals.testProperty.get("cloud_service"));
