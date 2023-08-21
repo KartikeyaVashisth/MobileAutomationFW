@@ -192,7 +192,7 @@ public class TagManagement_Test extends Recovery {
 		
 		Commentary.log(LogStatus.INFO, "["+h.getEngine()+"]: Verify that user should be able to edit a tag by selecting the tag and tapping on edit button");
 		String sTag= "auto_"+new SimpleDateFormat("HH-mm-ss").format(new Date());
-		String sRenametag = "new";
+		String sRenametag = "auto";
 		
 		
 		TagManagementPage tp = new TagManagementPage();
@@ -321,7 +321,7 @@ public class TagManagement_Test extends Recovery {
 		
 
 		tp.deleteMultipleAutomationTags();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 
 		
 		//Verify.waitForObjectToDisappear(tp.refreshSpinnerIcon, 3);

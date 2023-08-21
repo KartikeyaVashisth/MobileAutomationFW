@@ -12,6 +12,7 @@ import io.appium.java_client.HidesKeyboard;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.remote.HideKeyboardStrategy;
 import referee.Verify;
 import support.Engine;
 import support.Helper;
@@ -232,7 +233,7 @@ public class TagManagementPage {
 			if(Verify.objExists_check(areYouSureYouWant)) 
 				this.deleteConfirmationBtn.click();
 
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		}
 	}
 
@@ -253,7 +254,7 @@ public class TagManagementPage {
 		if(Verify.objExists_check(areYouSureYouWant)) 
 			this.deleteConfirmationBtn.click();
 
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	}
 
 	public WebElement getAutomationTags() throws Exception{
@@ -270,7 +271,7 @@ public class TagManagementPage {
 	private WebElement getAutomationTag_ios() throws Exception{
 
 
-		String cc = "**/XCUIElementTypeOther[`name contains 'auto_'`][-1]";
+		String cc = "**/XCUIElementTypeOther[`name contains 'auto'`][-1]";
 
 		try {
 			return Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc));
@@ -284,7 +285,7 @@ public class TagManagementPage {
 	private WebElement getAutoTag_android() throws Exception{
 
 
-		String cc = "//android.widget.TextView[contains(@text,'auto_')]";
+		String cc = "//android.widget.TextView[contains(@text,'auto')]";
 
 		try {
 			return Engine.getDriver().findElement(By.xpath(cc));
@@ -311,7 +312,7 @@ public class TagManagementPage {
 		if(Verify.objExists_check(areYouSureYouWant)) 
 			this.deleteConfirmationBtn.click();
 
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	}
 
 
@@ -370,13 +371,14 @@ public class TagManagementPage {
 	public void deleteTag (String tag) throws Exception{
 
 		this.getTag(tag).click();
-
+		Thread.sleep(2000);
 		this.deleteBtn.click();
 
 		if(Verify.objExists_check(areYouSureYouWant)) 
 			this.deleteConfirmationBtn.click();
 
 		Verify.waitForObjectToDisappear(this.tagDeleted, 4);
+		Thread.sleep(5000);
 	}
 
 	public void deleteUsedTag (String tag) throws Exception{
@@ -385,7 +387,7 @@ public class TagManagementPage {
 
 		this.deleteBtn.click();
 
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 
 		if(Verify.objExists_check(areYouSureYouWant)) 
 			this.deleteConfirmationBtn.click();
@@ -399,32 +401,47 @@ public class TagManagementPage {
 
 	public void createTag (String tag) throws Exception{
 
+		
 		Verify.waitForObjectToDisappear(refreshSpinnerIcon, 4);
 		this.createNewTagBtn.click();
 		this.tagTextField.sendKeys(tag);
-		((HidesKeyboard) Engine.getDriver()).hideKeyboard();
+		Thread.sleep(1000);
+		this.advancedoption.click();
+		//Helper h = new Helper();
+		//h.hideKeyBoard();
+		//((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		Thread.sleep(500);
 		this.createBtn.click();
 		Verify.waitForObjectToDisappear(tagCreated, 4);
-		//Thread.sleep(4000);
+		Thread.sleep(3000);
 
 	}
 
 	public void createTagwithAdvanced (String tag, String tagDescri, String number) throws Exception{
 
 		this.createNewTagBtn.click();
-		this.tagTextField.sendKeys(tag);
-		((HidesKeyboard) Engine.getDriver()).hideKeyboard();
-		Thread.sleep(2000);
-		this.advancedoption.click();;
 		Thread.sleep(1000);
+		this.tagTextField.sendKeys(tag);
+		//((HidesKeyboard) Engine.getDriver()).hideKeyboard();
+		Thread.sleep(1000);
+		Helper h = new Helper();
+		if (h.getEngine().equals("ios")) {
+		    this.advancedoption.click();
+		    Thread.sleep(1000);
+		    this.advancedoption.click();
+		}
+		
+		else {
+			Thread.sleep(1000);
+			this.advancedoption.click();
+		}
 		this.tagDescription.sendKeys(tagDescri);
-		((HidesKeyboard) Engine.getDriver()).hideKeyboard();
+		//((HidesKeyboard) Engine.getDriver()).hideKeyboard();
 		this.copyNumber.sendKeys(number);
 		this.tagDescriptionText.click();
 		Thread.sleep(500);
 		this.createBtn.click();
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 
 	}
 
@@ -470,7 +487,7 @@ public class TagManagementPage {
 			Thread.sleep(2000);
 			this.editTagTextField.clear();
 			this.editTagTextField.sendKeys(renameTo);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 
 		}
 
@@ -527,7 +544,7 @@ public class TagManagementPage {
 		}
 
 		this.updateBtn.click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 
 	}
 
@@ -552,7 +569,7 @@ public class TagManagementPage {
 
 		for (WebElement me:listOfEle) {
 			me.click();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		}
 
 		this.deleteBtn.click();
@@ -561,7 +578,7 @@ public class TagManagementPage {
 		if(Verify.objExists_check(multipletagdeletealert)) 
 			this.deleteConfirmationBtn.click();
 
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 
 	}
 
@@ -578,7 +595,7 @@ public class TagManagementPage {
 
 	private List<WebElement> getAllAutomationTag_ios() throws Exception{
 
-		String cc = "**/XCUIElementTypeStaticText[`name contains 'auto_'`]";
+		String cc = "**/XCUIElementTypeStaticText[`name contains 'auto'`]";
 		try {
 			return Engine.getDriver().findElements(AppiumBy.iOSClassChain(cc));
 
@@ -590,7 +607,7 @@ public class TagManagementPage {
 
 	private List<WebElement> getAllAutoTag_android() throws Exception{
 
-		String cc = "//android.widget.TextView[contains(@content-desc,'Tag name: auto_')]";
+		String cc = "//android.widget.TextView[contains(@content-desc,'Tag name: auto')]";
 
 		try {
 			return Engine.getDriver().findElements(By.xpath(cc));
