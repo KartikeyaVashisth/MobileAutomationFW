@@ -98,7 +98,7 @@ public class Budget_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Current month budget screen did not appear.");
 		
 		
-		if (Verify.objExists(b.BudgetViewOption))
+		if (Verify.objExists(b.budgetViewOption))
 			Commentary.log(sa, LogStatus.PASS,"PASS: Budget view option got displayed.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Budget view option did not displayed.");
@@ -316,7 +316,7 @@ public class Budget_Test extends Recovery {
 		b.clickonBudgetCategory(category);
 
 		 
-		if (Verify.objExists(b.HomePhoneCategory))
+		if (Verify.objExists(b.homePhoneCategory))
 			Commentary.log(sa, LogStatus.PASS,"PASS: Child category got displayed after clicking on the parent category name.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Child category did not got displayed after clicking on the  parent category name.");
@@ -698,7 +698,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		
 		if (Verify.objExists(b.monthlyView))
 			Commentary.log(sa, LogStatus.PASS,"PASS: Monthly view option got displayed on the budget view option screen.");
@@ -733,7 +733,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.monthlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -744,7 +744,7 @@ public class Budget_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Current month budget screen did not appear.");
 		
 		Thread.sleep(1000);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -755,7 +755,7 @@ public class Budget_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Quarterly view option didnot got displayed on the budget view option screen.");
 		
 		Thread.sleep(1000);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.yeartoDateView.click();
 		b.applybudgetView.click();
 		
@@ -783,7 +783,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.monthlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -794,7 +794,7 @@ public class Budget_Test extends Recovery {
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Current month budget screen did not appear.");
 		
 
-		if (Verify.objExists(b.BudgetViewOption))
+		if (Verify.objExists(b.budgetViewOption))
 			Commentary.log(sa, LogStatus.PASS,"PASS: Budget view icon is shown only in 'Month View'.");
 		else
 			Commentary.log(sa, LogStatus.FAIL,"FAIL: Budget view icon is not showing  in the 'Month View'.");
@@ -830,7 +830,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.yeartoDateView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -864,7 +864,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -909,7 +909,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.monthlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -932,7 +932,7 @@ public class Budget_Test extends Recovery {
 		
 		
 		Thread.sleep(1000);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -955,7 +955,7 @@ public class Budget_Test extends Recovery {
 		
 		
 		Thread.sleep(1000);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.yeartoDateView.click();
 		b.applybudgetView.click();
 		
@@ -1017,7 +1017,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		b.personalExpenses.click();
@@ -1088,7 +1088,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		b.personalExpenses.click();
@@ -1182,7 +1182,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 2);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 2);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		b.personalExpenses.click();
@@ -1230,7 +1230,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -1295,7 +1295,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.yeartoDateView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -1360,7 +1360,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.quarterlyView.click();
 		b.applybudgetView.click();
 		Thread.sleep(1000);
@@ -1570,7 +1570,7 @@ public class Budget_Test extends Recovery {
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
 		b.tapOnBudgetCard();
 		Verify.waitForObjectToDisappear(b.refreshSpinnerIcon, 4);
-		b.BudgetViewOption.click();
+		b.budgetViewOption.click();
 		b.yeartoDateView.click();
 		b.applybudgetView.click();
 		b.personalExpenses.click();

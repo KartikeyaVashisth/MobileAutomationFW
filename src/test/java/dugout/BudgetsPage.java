@@ -75,7 +75,7 @@ public class BudgetsPage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Home Phone'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Home Phone']")
-	public WebElement HomePhoneCategory;
+	public WebElement homePhoneCategory;
 	
 	@iOSXCUITFindBy(iOSNsPredicate = "name = 'In progress'")
 	@AndroidFindBy(xpath="//android.widget.ProgressBar")
@@ -83,7 +83,7 @@ public class BudgetsPage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label ='calendar'`][3]")
     @AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='calendar']")
-    public WebElement BudgetViewOption;
+    public WebElement budgetViewOption;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label ='closeBudgets'`][3]")
     @AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc='closeBudgets']")
@@ -135,7 +135,7 @@ public class BudgetsPage {
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name='Update Budget Amount'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Update Budget Amount']")
-    public WebElement UpdateBudgetAmountscreen;
+    public WebElement updateBudgetAmountscreen;
 	
 	@iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name='Save'`]")
 	@AndroidFindBy(xpath="//android.widget.TextView[@text='Save']")
