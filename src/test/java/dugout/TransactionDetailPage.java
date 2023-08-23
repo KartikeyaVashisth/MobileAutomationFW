@@ -1726,8 +1726,16 @@ public class TransactionDetailPage {
 
 		String sXpath = "//android.widget.TextView[@text='"+payees+"']";
 		String createPayee_xpath="//android.widget.TextView[@content-desc='create payee']";
-		String yelp_Payee_Xpath = "(//android.widget.ScrollView//android.view.ViewGroup/android.view.ViewGroup)[1]//following-sibling::android.view.ViewGroup//android.widget.TextView[@text='"+payees+"']";
-		String allPayees_Xpath = "//android.widget.ScrollView/android.view.ViewGroup//android.widget.TextView[@text=\"All Payees\"]/../../../android.view.ViewGroup//android.widget.TextView[@text='"+payees+"']";
+		//String yelp_Payee_Xpath = "(//android.widget.ScrollView//android.view.ViewGroup/android.view.ViewGroup)[1]//following-sibling::android.view.ViewGroup//android.widget.TextView[@text='"+payees+"']";
+		//String allPayees_Xpath = "//android.widget.ScrollView/android.view.ViewGroup//android.widget.TextView[@text=\"All Payees\"]/../../../android.view.ViewGroup//android.widget.TextView[@text='"+payees+"']";
+		//String yelp_Payee_Xpath = "//android.widget.TextView[@text='"+payees+"']/../android.view.ViewGroup[contains (@content-desc,'RadioButton')]/../../android.widget.TextView[@text='All Payees']";
+		String allPayees_Xpath = "//android.widget.TextView[@text='All Payees']/../../..//android.view.ViewGroup[contains(@content-desc,'RadioButton')]/../android.widget.TextView[@text='"+payees+"']";
+		String yelp_Payee_Xpath = "//android.widget.TextView[@text='Near by']/../android.view.ViewGroup[@content-desc = 'RadioButton']/..//android.widget.TextView[@content-desc = '"+payees+"']";
+		
+		
+		
+		
+	
 
 		this.payee.click();
 		Thread.sleep(1000);
@@ -1739,6 +1747,8 @@ public class TransactionDetailPage {
 		Helper h = new Helper();
 		h.hideKeyBoard();
 		Thread.sleep(3000);
+		Verify.waitForObject(yelpNearByLabel, 2);
+		
 
 		if (Verify.objExists(createPayee)) {
 			try {
@@ -1753,18 +1763,34 @@ public class TransactionDetailPage {
 			}
 		}
 
-		else {
-			//String cc = "**/XCUIElementTypeOther[`name=='"+payees+"'`]";
-			if(Verify.objExists(yelpNearByLabel)) {
-				Engine.getDriver().findElement(By.xpath(yelp_Payee_Xpath)).click();
-				Thread.sleep(500);
-				Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);
-			}
+//	** Commenting the condition as I have updated it below - kallol**	
+//		else {
+//			//String cc = "**/XCUIElementTypeOther[`name=='"+payees+"'`]";
+//			if(Verify.objExists(yelpNearByLabel)) {
+//				Engine.getDriver().findElement(By.xpath(yelp_Payee_Xpath)).click();
+//				Thread.sleep(2000);
+//				Commentary.log(LogStatus.INFO,"Selected Yelp Payee.. "+payees);
+//			}
+//			else {
+//				Engine.getDriver().findElement(By.xpath(allPayees_Xpath)).click();
+//				Thread.sleep(2000);
+//				Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
+//			}
+			
+			
 			else {
+				Thread.sleep(2000);
+			if(Verify.objExists(allPayeesLabel)) {
 				Engine.getDriver().findElement(By.xpath(allPayees_Xpath)).click();
-				Thread.sleep(1500);
+				Thread.sleep(2000);
 				Commentary.log(LogStatus.INFO,"Selected Payee from All Payees List.. "+payees);
 			}
+			else {
+				Engine.getDriver().findElement(By.xpath(yelp_Payee_Xpath)).click();
+				Thread.sleep(2000);
+				Commentary.log(LogStatus.INFO,"Selected Yelp Payee... "+payees);
+			}
+			
 		}
 
 		Thread.sleep(1000);	

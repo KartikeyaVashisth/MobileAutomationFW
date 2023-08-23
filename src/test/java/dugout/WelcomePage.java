@@ -61,6 +61,8 @@ public class WelcomePage {
 
 		Verify.waitForObject(this.xpath_Environment, 1);
 		this.xpath_Environment.click();
+		
+		Thread.sleep(2000); // Added this wait time so that on that screen appium can select properly the environment - Kallol das
 
 		if (preprod.equals("stage")) {
 			this.xpath_chkboxStageEnvironment.click();
