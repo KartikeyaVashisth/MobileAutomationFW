@@ -261,8 +261,9 @@ public class FavoritePayeePage {
    public void AddPayeeAsFavPayee_android(String payee) throws Exception{
 	    
        WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']"));
+	   
        
-       int startX = startElement.getLocation().getX()+1000;
+       int startX = startElement.getLocation().getX()+750;
        int startY = startElement.getLocation().getY();
        int endX = startElement.getLocation().getX();
        int endY = startElement.getLocation().getY();
@@ -284,7 +285,8 @@ public class FavoritePayeePage {
        Engine.getDriver().perform(Collections.singletonList(sequence));
        Thread.sleep(2000);
 
-       WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
+       //WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.view.ViewGroup"));
+       WebElement fav_icon = Engine.getDriver().findElement(By.xpath("(//android.widget.TextView[@text='"+payee+"']/../following-sibling::android.view.ViewGroup)[1]"));
        fav_icon.click();
    }
    
@@ -321,7 +323,8 @@ public class FavoritePayeePage {
    public void RemoveFavPayee_android(String payee) throws Exception{
  	
  
-        WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
+        //WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../.."));
+	   WebElement startElement = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']"));
         
         int startX = startElement.getLocation().getX()+1000;
         int startY = startElement.getLocation().getY();
@@ -345,7 +348,9 @@ public class FavoritePayeePage {
         Engine.getDriver().perform(Collections.singletonList(sequence));
         Thread.sleep(2000);
 
-        WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../../..//android.widget.ImageView"));
+        //WebElement fav_icon = Engine.getDriver().findElement(By.xpath("//android.widget.TextView[@text='"+payee+"']/../android.view.ViewGroup"));
+        WebElement fav_icon = Engine.getDriver().findElement(By.xpath("(//android.widget.TextView[@text='"+payee+"']/../following-sibling::android.view.ViewGroup)[1]"));
+        
 
         fav_icon.click();
         Thread.sleep(2000);

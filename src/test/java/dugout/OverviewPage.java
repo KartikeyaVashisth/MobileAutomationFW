@@ -306,27 +306,23 @@ public class OverviewPage {
 			Engine.getDriver().findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+ sCard + "\").instance(0))"));
 			
 		}
-		else {
-			//String sXpath="//*[@name='Recent Transactions']";
-//			String cc="**/XCUIElementTypeStaticText[`name='Recent Transactions'`]";
-//			WebElement me = Engine.getDriver().findElement(AppiumBy.iOSClassChain(cc));
-//			String me_id = me.getId();
-//			HashMap<String, String> scrollObject = new HashMap<String, String>();
-//			scrollObject.put("element", me_id);
-////			scrollObject.put("predicateString", "label == 'Recent Transactions'");
-//			scrollObject.put("toVisible", "not an empty string");
-//			scrollObject.put("direction", "down");
-//			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
-//			Thread.sleep(1000);
+		
+		
+		else {	
 			
+/* ***** --- Below method for scroll will work fine on Lambda and local. If we uncomment the line 317, 318 it wont work on Lambda but will work on 
+ *            local. Because lambda expects {"required":["direction"],"optional":["velocity","elementId","sessionId","id"]} --- Kallol Das  */
 			 if(Engine.getDriver() instanceof IOSDriver){
-	                HashMap<String, String> scrollObject = new HashMap<String, String>();
-	                scrollObject.put("predicateString", "value ='Recent Transactions'");
-	                scrollObject.put("toVisible", "true");
-	                scrollObject.put("direction", "up");
-	                (Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
-	                Thread.sleep(1000);
+				  
+				 HashMap<String, String> scrollObject = new HashMap<String, String>();
+		            //scrollObject.put("predicateString", "value ='"+sCard+"'");
+		            //scrollObject.put("toVisible", "true");
+		            scrollObject.put("direction", "down");
+		            ((IOSDriver) Engine.getDriver()).executeScript("mobile: swipe", scrollObject);
+		            Thread.sleep(1000);
 	            }
+			
+		
 		}
 		this.recentTransactionsCard.click();
 		Thread.sleep(2000);

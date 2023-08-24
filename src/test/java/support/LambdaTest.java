@@ -43,8 +43,8 @@ public class LambdaTest {
 	 */
 	
 	public String getAppiumURL(){
-		String USERNAME = "kartikeya.vashisth";
-		String ACCESS_KEY = "mcl9GENb6qziWlaREjLUaaIlLsqkqtPG1bsc5hIWQTzdaeuNVS";
+		String USERNAME = "kallol.das";
+		String ACCESS_KEY = "5duuN311efP6Nhuhj9kJYn8JfACxznRdlEnFSxW8ju9YgR1hlr";
 		
 		if (Recovery.sHost.get().equals("cloud")){
 			return "https://" + USERNAME + ":" + ACCESS_KEY + "@mobile-hub.lambdatest.com/wd/hub";	
@@ -74,7 +74,7 @@ public class LambdaTest {
 		
 			capabilities.setCapability("appium:build", buildName);
 			capabilities.setCapability("appium:name", h.getTestName());
-			capabilities.setCapability("appium:deviceName", "Pixel.*");
+			capabilities.setCapability("appium:deviceName", "Pixel 6");// Pixel.*
 			capabilities.setCapability("appium:automationName", "UiAutomator2");
 			capabilities.setCapability("appium:platformVersion","13");
 			capabilities.setCapability("platformName", "Android");
@@ -136,7 +136,7 @@ public class LambdaTest {
 				app_url = "lt://APP10160631101688108356272199";
 			}
 			else {
-				app_url = "lt://APP10160631101688109130310836";
+				app_url = "lt://APP1016039251686124385288360";
 			}
 			
 		}
