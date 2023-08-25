@@ -238,7 +238,7 @@ public class BudgetsPage {
 			//String me_id = me.getid();
 			HashMap<String, String> scrollObject = new HashMap<String, String>();
 			//scrollObject.put("element", me_id);
-			scrollObject.put("predicateString", "label == '"+sCard+"'");
+			//scrollObject.put("predicateString", "label == '"+sCard+"'");
 			scrollObject.put("direction", "down");
 //			Engine.getDriver().executeScript("mobile:scroll", scrollObject);  // scroll to the target element
 			Engine.getDriver().executeScript("mobile:swipe", scrollObject);
@@ -397,6 +397,38 @@ public class BudgetsPage {
 			
 		}
 		
+	public void selectHamMenuBudget (String budgetName) throws Exception {
+		
+		Helper h = new Helper();
+			
+		if (h.getEngine().equals("android"))
+			this.selectHamMenuBudget_android(budgetName);
+		else
+			this.selectHamMenuBudget_ios(budgetName);
+		}
+	   
+		
+	public void selectHamMenuBudget_android (String budgetName) throws Exception {
+			
+		   String sXpath = "//android.widget.TextView[@text='"+budgetName+"']";
+	
+		   Thread.sleep(1000);
+		   Engine.getDriver().findElement(By.xpath(sXpath)).click();
+		   Thread.sleep(500);	
+
+	   }
+		
+		
+	public void selectHamMenuBudget_ios (String budgetName) throws Exception {
+			
+			String sXpath = "(//XCUIElementTypeOther[@name='"+budgetName+"'])[3]";
+			
+			Thread.sleep(1000);
+			Engine.getDriver().findElement(By.xpath(sXpath)).click();
+			Thread.sleep(500);	
+			
+			
+		}
 	
    public void changeBudgetAmount (String category, String amount ) throws Exception {
 				
