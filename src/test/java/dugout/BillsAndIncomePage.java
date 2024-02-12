@@ -1322,7 +1322,7 @@ public class BillsAndIncomePage {
 			if (! Verify.objExists(me)) {
 				try {
 					JavascriptExecutor js = (JavascriptExecutor) Engine.getDriver(); 
-					HashMap<String, String> scrollObject = new HashMap<>();
+					HashMap<String, String> scrollObject = new HashMap<String, String>();
 					scrollObject.put("direction", "up"); 
 					scrollObject.put("xpath", xpath); 
 					js.executeScript("mobile: swipe", scrollObject);
@@ -1370,7 +1370,7 @@ public class BillsAndIncomePage {
 			if (! Verify.objExists(me)) {
 				try {
 					JavascriptExecutor js = (JavascriptExecutor) Engine.getDriver(); 
-					HashMap<String, String> scrollObject = new HashMap<>(); 
+					Map<String, String> scrollObject = new HashMap<String, String>(); 
 					scrollObject.put("direction", "up"); 
 					scrollObject.put("xpath", xpath); 
 					js.executeScript("mobile: swipe", scrollObject);
